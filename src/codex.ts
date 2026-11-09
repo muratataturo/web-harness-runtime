@@ -122,6 +122,9 @@ export class CodexAgent {
       if (!this.stopped)
         this.fail(new Error(`Codex App Serverが終了しました (${code})`));
     });
+    this.child.stdin.on("error", (error) =>
+      this.fail(new Error(`Codex stdio接続が切断されました: ${error.message}`)),
+    );
     // Do not persist raw stderr: the official CLI may log local paths or authentication diagnostics.
     this.child.stderr.on("data", () => {});
     this.child.stdout.on("data", (chunk) => {
@@ -240,7 +243,8 @@ export class CodexAgent {
         tool.parameters as unknown as import("@sinclair/typebox").TSchema,
         params.arguments,
       )
-    )
+    ) {
+      await this.options.onStep("invalid_tool_call", { tool: params.tool });
       return {
         success: false,
         contentItems: [
@@ -250,6 +254,7 @@ export class CodexAgent {
           },
         ],
       };
+    }
     try {
       const result = await tool.execute(
         params.callId,

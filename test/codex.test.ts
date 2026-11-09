@@ -82,6 +82,7 @@ for (const mode of ["invalid", "unknown", "forbidden", "wrong-thread"])
       await f.client.start([f.tool], "Use lookup");
       await f.client.prompt("look up");
       assert.equal(f.calls(), 0);
+      if (mode === "invalid" || mode === "unknown") assert.equal(f.steps(), 2);
     } finally {
       await f.client.close();
     }
