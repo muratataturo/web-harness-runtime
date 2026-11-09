@@ -1,0 +1,23 @@
+# Derived from NVIDIA's official Run Pi with OpenRouter tutorial.
+# Import once into the gateway; credentials stay in the gateway's credential store.
+id: web-harness-openrouter
+display_name: Web Harness OpenRouter
+description: Endpoint-bound OpenRouter inference for the Node.js Pi runtime
+category: inference
+inference_capable: true
+credentials:
+  - name: api_key
+    description: OpenRouter API key
+    env_vars: [OPENROUTER_API_KEY]
+    required: true
+    auth_style: bearer
+    header_name: authorization
+discovery:
+  credentials: [api_key]
+endpoints:
+  - host: openrouter.ai
+    port: 443
+    protocol: rest
+    access: read-write
+    enforcement: enforce
+binaries: [/usr/local/bin/node]

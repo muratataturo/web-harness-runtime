@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101110" />
+    <title>Relay — あなたと、頼れるチーム</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="チームとスレッド">
+        <a class="brand" href="/" aria-label="Relay ホーム"
+          ><span class="brand-mark">r<span>↗</span></span
+          ><span>relay<span class="brand-dot">.</span></span
+          ><span class="preview-tag">PREVIEW</span></a
+        >
+        <button class="new-thread" id="new-thread">
+          <span>＋</span> 新しい相談 <span class="key-hint">N</span>
+        </button>
+        <div class="sidebar-label">YOUR SPACE <span>···</span></div>
+        <button class="team-row selected" data-action="all-agents">
+          <span class="team-symbol">✳</span
+          ><span
+            ><strong>あなたのチーム</strong
+            ><small>得意なことを、持ち寄って。</small></span
+          ><span class="tiny-count" id="team-count">5</span>
+        </button>
+        <div class="roster" id="roster"></div>
+        <div class="sidebar-label history-label">
+          RECENT <span id="history-count"></span>
+        </div>
+        <nav id="history" class="history" aria-label="最近の相談"></nav>
+        <div class="sidebar-bottom">
+          <button id="environment-button" class="environment-button">
+            <span class="environment-icon">▣</span
+            ><span
+              >実行環境<small id="environment-status"
+                >ローカル · 体験モード</small
+              ></span
+            ><span>↗</span>
+          </button>
+          <div class="profile">
+            <span class="user-avatar">Y</span>
+            <div>あなたのワークスペース<small>Pi × OpenRouter</small></div>
+            <span class="status-dot"></span>
+          </div>
+        </div>
+      </aside>
+      <main class="conversation">
+        <header class="thread-header">
+          <button
+            id="mobile-menu"
+            class="icon-button mobile-menu"
+            aria-label="メニューを開く"
+          >
+            ☰
+          </button>
+          <div class="header-avatar-stack">
+            <span class="mini-avatar concierge">✳</span
+            ><span class="mini-avatar stay">⌂</span
+            ><span class="mini-avatar food">◕</span>
+          </div>
+          <div class="thread-heading">
+            <h1 id="thread-title">あなたのチーム</h1>
+            <span id="thread-subtitle">一緒に考えて、いい選択を。</span>
+          </div>
+          <span id="goal-status" class="header-status">相談をはじめる</span
+          ><button id="stop-task" class="stop-task" hidden>停止</button
+          ><button
+            id="computer-toggle"
+            class="computer-toggle"
+            aria-expanded="true"
+          >
+            <span>▣</span> Computer
+          </button>
+        </header>
+        <div class="mode-banner">
+          <span class="mode-indicator"></span
+          ><span id="mode-label">体験モード</span
+          ><span id="mode-description"
+            >架空のデータで、チームとの進め方を試せます</span
+          ><button id="mode-button">実調査に切り替え ↗</button>
+        </div>
+        <nav id="phase-bar" class="phase-bar" aria-label="相談の進み具合"></nav>
+        <div class="thread-scroll" id="thread-scroll">
+          <div id="thread" class="thread-content"></div>
+        </div>
+        <footer class="composer-area">
+          <form id="composer-form" class="composer">
+            <button
+              type="button"
+              id="composer-plus"
+              aria-label="新しい相談を開く"
+            >
+              ＋</button
+            ><textarea
+              id="composer-input"
+              rows="1"
+              placeholder="チームに、かなえたいことを伝える…"
+              aria-label="目標や見直したいこと"
+            ></textarea
+            ><button
+              class="send-button"
+              type="submit"
+              aria-label="チームに送る"
+            >
+              ↑
+            </button>
+          </form>
+          <div class="composer-caption">
+            <span id="composer-hint">小さなこだわりから、大きな計画まで。</span
+            ><span>Enter で送信 · Shift + Enter で改行</span>
+          </div>
+        </footer>
+      </main>
+      <aside
+        class="computer-panel"
+        id="computer-panel"
+        aria-label="チームのComputerとプラン"
+      >
+        <header class="computer-header">
+          <span class="computer-logo">▣</span><strong>Team Computer</strong
+          ><span class="computer-state" id="computer-state"><i></i> 体験用</span
+          ><button
+            id="close-computer"
+            class="icon-button"
+            aria-label="Computerを閉じる"
+          >
+            ×
+          </button>
+        </header>
+        <div class="computer-tabs" role="tablist" aria-label="Computerの表示">
+          <button role="tab" aria-selected="true" data-tab="plan">
+            プラン<span id="plan-count"></span></button
+          ><button role="tab" aria-selected="false" data-tab="tasks">
+            チームの作業</button
+          ><button role="tab" aria-selected="false" data-tab="activity">
+            引き継ぎ
+          </button>
+        </div>
+        <div id="computer-content" class="computer-content"></div>
+        <div class="computer-footer">
+          <span class="status-dot"></span
+          ><span id="computer-footer-label">シミュレーション · VM未接続</span
+          ><button id="export-button" aria-label="プランをJSONで保存">
+            ↓ 保存
+          </button>
+        </div>
+      </aside>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="environment-dialog">
+      <div class="dialog-header">
+        <h2>チームの実行環境</h2>
+        <button data-close-dialog class="icon-button" aria-label="閉じる">
+          ×
+        </button>
+      </div>
+      <div id="environment-content"></div>
+    </dialog>
+    <dialog id="new-dialog">
+      <div class="dialog-header">
+        <h2>どんなことを、一緒に考えますか？</h2>
+        <button data-close-dialog class="icon-button" aria-label="閉じる">
+          ×
+        </button>
+      </div>
+      <p class="dialog-description">
+        まずは、2つの体験から。途中でこだわりを選びながら進められます。
+      </p>
+      <div class="scenario-picker">
+        <button data-scenario="travel">
+          <span>↗</span><strong>旅をつくる</strong
+          ><small>箱根で、余白のある2泊3日</small></button
+        ><button data-scenario="life">
+          <span>⌂</span><strong>暮らしを考える</strong
+          ><small>仕事・家・車を、ひとつの計画に</small>
+        </button>
+      </div>
+      <div class="dialog-note">
+        体験モードの施設・金額・掲載情報はサンプルです。
+      </div>
+    </dialog>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

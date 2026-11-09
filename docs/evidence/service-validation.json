@@ -1,0 +1,296 @@
+{
+  "recordedAt": "2026-11-10T04:20:00+09:00",
+  "freeQuota": {
+    "limit": 50,
+    "remaining": 0,
+    "reset": "2026-11-10T09:00:00+09:00"
+  },
+  "llmRuns": [
+    {
+      "caseId": "gourmet-kyoto-lunch",
+      "service": "hotpepper-gourmet",
+      "taskId": "f533b442-7237-4d71-a801-2dfcac16714e",
+      "status": "timed_out",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "createdAt": "2026-11-09T19:04:56.008Z",
+      "updatedAt": "2026-11-09T19:08:56.999Z",
+      "steps": 48,
+      "pages": [
+        {
+          "url": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/",
+          "title": "和食ランチならここ！京都駅でお昼ご飯におすすめなお店 | ホットペッパーグルメ",
+          "textLength": 6100,
+          "truncated": false
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ004577270/lunch/",
+          "title": "美味酒肴 京すいしん(和食)のランチ | ホットペッパーグルメ",
+          "textLength": 3926,
+          "truncated": false
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ004089638/lunch/",
+          "title": "京やさい料理 接方来 京都駅ビル店(和食)のランチ | ホットペッパーグルメ",
+          "textLength": 3414,
+          "truncated": false
+        }
+      ],
+      "evidenceCount": 7,
+      "answerSaved": false,
+      "failureKind": "timed_out"
+    },
+    {
+      "caseId": "jalan-hakone-onsen",
+      "service": "jalan",
+      "taskId": "93330c15-2bfb-4328-8f5c-f9a99ee2ddea",
+      "status": "timed_out",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "createdAt": "2026-11-09T19:04:56.008Z",
+      "updatedAt": "2026-11-09T19:09:04.034Z",
+      "steps": 22,
+      "pages": [
+        {
+          "url": "https://www.jalan.net/",
+          "title": "宿・ホテル予約 - 旅行ならじゃらんnet",
+          "textLength": 1994,
+          "truncated": false
+        },
+        {
+          "url": "https://www.jalan.net/jalan/doc/etc/onsenranking/onsenranking_index.html?ctm=N11",
+          "title": "全国のじゃらんnetユーザーが選んだ！人気温泉地ランキング2026【じゃらんnet】",
+          "textLength": 4229,
+          "truncated": false
+        },
+        {
+          "url": "https://www.jalan.net/yado.html",
+          "title": "ホテル・宿泊施設一覧 - じゃらんnet",
+          "textLength": 949,
+          "truncated": false
+        }
+      ],
+      "evidenceCount": 0,
+      "answerSaved": false,
+      "failureKind": "timed_out"
+    },
+    {
+      "caseId": "carsensor-family-sienta",
+      "service": "carsensor",
+      "taskId": "24a51884-54ad-4ea8-92af-0041a07d5d87",
+      "status": "failed",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "createdAt": "2026-11-09T19:08:58.090Z",
+      "updatedAt": "2026-11-09T19:09:32.300Z",
+      "steps": 16,
+      "pages": [
+        {
+          "url": "https://www.carsensor.net/usedcar/freeword/%E3%82%B7%E3%82%A8%E3%83%B3%E3%82%BF/index.html",
+          "title": "「シエンタ」の中古車を探す【カーセンサー】",
+          "textLength": 18133,
+          "truncated": false
+        },
+        {
+          "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+          "title": "シエンタ ハイブリッド 1.5 G トヨタセーフティセンス(大阪)の中古車詳細 | 中古車なら【カーセンサー】",
+          "textLength": 20650,
+          "truncated": false
+        },
+        {
+          "url": "https://www.carsensor.net/usedcar/detail/AU7340506499/index.html",
+          "title": "シエンタ ハイブリッド 1.5 G クエロ トヨタセーフティーセンス/純正SDナビ(新潟)の中古車詳細 | 中古車なら【カーセンサー】",
+          "textLength": 21482,
+          "truncated": false
+        }
+      ],
+      "evidenceCount": 0,
+      "answerSaved": false,
+      "failureKind": "daily_limit"
+    },
+    {
+      "caseId": "suumo-kosugi-rental",
+      "service": "suumo",
+      "taskId": "d2ba6a7f-e40a-4c25-b8d9-b70d6f5679a1",
+      "status": "failed",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "createdAt": "2026-11-09T19:09:05.671Z",
+      "updatedAt": "2026-11-09T19:09:56.684Z",
+      "steps": 11,
+      "pages": [
+        {
+          "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+          "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）",
+          "textLength": 13206,
+          "truncated": false
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート",
+          "textLength": 5077,
+          "truncated": false
+        },
+        {
+          "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/?page=2&rn=0120",
+          "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）（2ページ）",
+          "textLength": 11035,
+          "truncated": false
+        }
+      ],
+      "evidenceCount": 0,
+      "answerSaved": false,
+      "failureKind": "daily_limit"
+    },
+    {
+      "caseId": "indeed-tokyo-cs",
+      "service": "indeed",
+      "taskId": "7a38053c-3198-4a9d-b1e4-9df055dad0dd",
+      "status": "failed",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "createdAt": "2026-11-09T19:09:33.431Z",
+      "updatedAt": "2026-11-09T19:09:36.791Z",
+      "steps": 4,
+      "pages": [],
+      "evidenceCount": 0,
+      "answerSaved": false,
+      "failureKind": "daily_limit"
+    }
+  ],
+  "browserProbes": [
+    {
+      "service": "gourmet",
+      "listing": {
+        "url": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/",
+        "title": "和食ランチならここ！京都駅でお昼ご飯におすすめなお店 | ホットペッパーグルメ",
+        "assessment": {
+          "kind": "available",
+          "shouldStop": false,
+          "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+        },
+        "discoveredDetails": 2
+      },
+      "details": [
+        {
+          "url": "https://www.hotpepper.jp/strJ001154802/lunch/",
+          "title": "但馬屋 イオンモールKYOTO店(和食)のランチ | ホットペッパーグルメ",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          },
+          "textLength": 3646
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ000660913/lunch/",
+          "title": "寿司 和食 がんこ 京都駅ビル店(和食)のランチ | ホットペッパーグルメ",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          },
+          "textLength": 2567
+        }
+      ]
+    },
+    {
+      "service": "indeed",
+      "listing": {
+        "url": "https://jp.indeed.com/jobs?q=%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B5%E3%82%AF%E3%82%BB%E3%82%B9&l=%E6%9D%B1%E4%BA%AC%E9%83%BD",
+        "title": "Blocked - Indeed.com",
+        "assessment": {
+          "kind": "access_denied",
+          "shouldStop": true,
+          "reason": "アクセス制限・人間確認が表示されています。回避せず別の許可ソースか未確認回答へ進んでください。"
+        },
+        "discoveredDetails": 0
+      },
+      "details": []
+    },
+    {
+      "service": "carsensor",
+      "listing": {
+        "url": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+        "title": "シエンタ（トヨタ）の中古車を探す【カーセンサー】",
+        "assessment": {
+          "kind": "available",
+          "shouldStop": false,
+          "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+        },
+        "discoveredDetails": 2
+      },
+      "details": [
+        {
+          "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+          "title": "シエンタ ハイブリッド 1.5 G トヨタセーフティセンス(大阪)の中古車詳細 | 中古車なら【カーセンサー】",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          },
+          "textLength": 20651
+        },
+        {
+          "url": "https://www.carsensor.net/usedcar/detail/AU7364352002/index.html",
+          "title": "シエンタ ハイブリッド 1.5 G NSZT-W64 純正ナビ TV バックカメラ ETC(富山)の中古車詳細 | 中古車なら【カーセンサー】",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          },
+          "textLength": 11633
+        }
+      ]
+    },
+    {
+      "service": "suumo",
+      "listing": {
+        "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+        "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）",
+        "assessment": {
+          "kind": "available",
+          "shouldStop": false,
+          "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+        },
+        "discoveredDetails": 2
+      },
+      "details": [
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110384935/",
+          "error": "Command failed: <workspace>/node_modules/.bin/agent-browser --config <workspace>/.runtime/search-probes/suumo/browser-config.json --session whr-search-probe-suumo-1794251450450 --allowed-domains suumo.jp,www.suumo.jp --json open https://suumo.jp/chintai/jnc_000110384935/\n"
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110464466/",
+          "error": "Command failed: <workspace>/node_modules/.bin/agent-browser --config <workspace>/.runtime/search-probes/suumo/browser-config.json --session whr-search-probe-suumo-1794251450450 --allowed-domains suumo.jp,www.suumo.jp --json open https://suumo.jp/chintai/jnc_000110464466/\n"
+        }
+      ]
+    }
+  ],
+  "recommendationQualityPassed": false,
+  "requiresRerunAfterQuotaReset": true,
+  "navigationWaitFollowup": {
+    "recordedAt": "2026-11-10T06:15:00+09:00",
+    "agentBrowserVersion": "0.41.2",
+    "cliOpenWaitUntilSupported": false,
+    "mcpOpenWaitUntilSupported": false,
+    "domContentLoadedDiffDiagnostic": "outcome_unknown",
+    "fixedCodeDomReadinessDiagnostic": "outcome_unknown for both services",
+    "productionBrowserChanged": false,
+    "directDetails": [
+      {
+        "service": "suumo",
+        "url": "https://suumo.jp/chintai/bc_100521216176/",
+        "startedAt": "2026-11-09T21:12:56.047Z",
+        "endedAt": "2026-11-09T21:13:53.550Z",
+        "error": "Failed to read: Resource temporarily unavailable (os error 35) (the command reached the daemon but no response came back; it may or may not have run, so it was not retried)",
+        "getUrlReported": "about:blank",
+        "usableBodyCaptured": false
+      },
+      {
+        "service": "jalan",
+        "url": "https://www.jalan.net/yad375320/",
+        "startedAt": "2026-11-09T21:12:56.046Z",
+        "endedAt": "2026-11-09T21:13:53.736Z",
+        "error": "Failed to read: Resource temporarily unavailable (os error 35) (the command reached the daemon but no response came back; it may or may not have run, so it was not retried)",
+        "getUrlReported": "about:blank",
+        "usableBodyCaptured": false
+      }
+    ]
+  }
+}

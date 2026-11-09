@@ -1,0 +1,4 @@
+#!/bin/sh
+# Chromium's inner container sandbox cannot initialize inside all OpenShell
+# compute drivers. The outer OpenShell/Landlock/seccomp boundary remains required.
+exec /usr/lib/chromium/chromium --no-sandbox --disable-dev-shm-usage "$@"

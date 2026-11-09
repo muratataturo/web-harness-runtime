@@ -1,0 +1,40 @@
+{
+  "name": "web-harness-runtime",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Pi + OpenRouter + agent-browser autonomous research task runtime",
+  "bin": {
+    "web-harness": "dist/cli.js"
+  },
+  "scripts": {
+    "dev": "node --import tsx src/cli.ts",
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "check": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "browser:install": "agent-browser install",
+    "web": "node --import tsx src/cli.ts web",
+    "test:ui": "node scripts/ui-smoke.mjs",
+    "test:image": "sh infra/openshell/smoke.sh",
+    "format": "prettier --write src web test scripts examples .github",
+    "format:check": "prettier --check src web test scripts examples .github"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "1.5.0",
+    "@sinclair/typebox": "^0.34.41",
+    "agent-browser": "0.41.2",
+    "commander": "^14.0.0",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^24.10.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
