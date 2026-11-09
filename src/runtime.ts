@@ -28,11 +28,13 @@ import { freeQuota } from "./quota.js";
 import { classifyRuntimeFailure } from "./failures.js";
 import { assessPage } from "./page-quality.js";
 import { SYSTEM_PROMPT } from "./prompt.js";
+import { CodexAgent, agentEngine, type AgentEngine } from "./codex.js";
 import type { Task } from "./types.js";
 export interface RunOptions {
   query: string;
   urls: string[];
   model?: string;
+  agent?: AgentEngine;
   maxSteps: number;
   timeoutSeconds: number;
   maxPages: number;
@@ -56,6 +58,7 @@ export function newTask(options: RunOptions): Task {
   }
   return {
     id: randomUUID(),
+    agent: agentEngine(options.agent),
     parentId: options.parentId,
     goalId: options.goalId,
     query: options.query,
@@ -100,6 +103,7 @@ export async function runTask(
     options.headed,
   );
   let session: AgentSession | undefined;
+  let codex: CodexAgent | undefined;
   let cleanupWarning: string | undefined;
   const progress = (m: string) => options.onProgress?.(m);
   const redact = (s: string) =>
@@ -297,127 +301,163 @@ export async function runTask(
     await store.save(task);
     progress(`task: ${task.id}`);
     controller.signal.throwIfAborted();
-    if (!process.env.OPENROUTER_API_KEY)
-      throw new Error(".env に OPENROUTER_API_KEY を設定してください");
-    let quota: Awaited<ReturnType<typeof freeQuota>> | undefined;
-    try {
-      quota = await freeQuota(controller.signal);
-    } catch (error) {
-      controller.signal.throwIfAborted();
-      await store.event(task.id, "quota_check_unavailable", {
-        error: redact(error instanceof Error ? error.message : String(error)),
+    if (task.agent === "codex") {
+      codex = new CodexAgent({
+        cwd: dir,
+        signal: controller.signal,
+        onStep: step,
+        onEvent: (name, data) => store.event(task.id, name, data),
       });
-    }
-    if (quota) {
-      await store.event(task.id, "free_quota", quota);
-      if (quota.remaining === 0)
-        throw new Error(
-          `free-models-per-day: 無料日次枠の残量0/${quota.limit}。次回リセット ${quota.resetsAtJapan} 日本時間。推論要求は送信していません。`,
-        );
-    }
-    const catalog = await selectModel(
-      options.model ?? process.env.OPENROUTER_MODEL,
-    );
-    controller.signal.throwIfAborted();
-    task.model = catalog.id;
-    progress(`model: ${catalog.id}（無料）`);
-    await store.save(task);
-    const modelRuntime = await ModelRuntime.create({
-      authPath: join(dir, "auth.json"),
-      modelsPath: null,
-      modelsStorePath: join(dir, "models-cache.json"),
-      refreshOnCreate: false,
-      signal: controller.signal,
-    });
-    modelRuntime.registerProvider("openrouter", {
-      baseUrl: "https://openrouter.ai/api/v1",
-      api: "openai-completions",
-      apiKey: "OPENROUTER_API_KEY",
-      models: [
-        {
-          id: catalog.id,
-          name: catalog.name,
-          reasoning: false,
-          input: ["text"],
-          cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-          contextWindow: catalog.context_length,
-          maxTokens: Math.min(
-            6000,
-            catalog.top_provider?.max_completion_tokens ?? 6000,
-          ),
-        },
-      ],
-    });
-    await modelRuntime.setRuntimeApiKey(
-      "openrouter",
-      process.env.OPENROUTER_API_KEY,
-    );
-    await browser.init();
-    await mkdir(join(dir, "sessions"), { recursive: true, mode: 0o700 });
-    ({ session } = await createAgentSession({
-      cwd: dir,
-      agentDir: join(dir, "pi"),
-      modelRuntime,
-      model: modelRuntime.getModel("openrouter", catalog.id)!,
-      thinkingLevel: "off",
-      resourceLoader: resources,
-      customTools: tools,
-      tools: tools.map((t) => t.name),
-      sessionManager: SessionManager.create(dir, join(dir, "sessions")),
-      settingsManager: SettingsManager.inMemory({
-        compaction: { enabled: false },
-        retry: { enabled: false },
-      }),
-    }));
-    session.agent.toolExecution = "sequential";
-    const originalPayload = session.agent.onPayload;
-    session.agent.onPayload = async (payload, model) => {
-      await step("model_request", { model: model.id });
-      const modified = (await originalPayload?.(payload, model)) ?? payload;
-      const request = {
-        ...(modified as Record<string, unknown>),
-        max_tokens: Math.min(6000, model.maxTokens),
-        provider: { max_price: { prompt: 0, completion: 0 } },
-      };
-      return request;
-    };
-    const originalFinish = session.agent.finishTurn;
-    session.agent.finishTurn = async (context, signal) => {
-      if (task.answer) return { action: "end" as const };
-      const decision = await originalFinish?.(context, signal);
-      return decision || undefined;
-    };
-    const prompt = JSON.stringify({
-      query: task.query,
-      sources: task.sources,
-      limits: task.limits,
-      instruction:
-        "優先ソースから調査し、条件を検証して finish_task で日本語回答を保存してください。",
-    });
-    await session.prompt(prompt);
-    controller.signal.throwIfAborted();
-    const firstError = session.messages
-      .filter((m: any) => m.role === "assistant")
-      .map((m: any) => m.errorMessage)
-      .filter(Boolean)
-      .at(-1);
-    if (!task.answer && firstError) throw new Error(firstError);
-    if (!task.answer && !exhausted)
-      await session.prompt(
-        "まだ構造化回答が保存されていません。調査済みの根拠を使って finish_task を呼んでください。未確認はunknown、候補なしも許可されます。",
+      const auth = await codex.initialize();
+      await store.event(task.id, "codex_auth", auth);
+      await codex.start(
+        tools,
+        SYSTEM_PROMPT,
+        options.model ?? process.env.CODEX_MODEL,
       );
-    controller.signal.throwIfAborted();
-    if (!task.answer) {
-      const errorMessage = session.messages
+      task.model = codex.model;
+      progress(`model: ${task.model} (Codex / ChatGPTログイン)`);
+      await store.save(task);
+      await browser.init();
+      await codex.prompt(
+        JSON.stringify({
+          query: task.query,
+          sources: task.sources,
+          limits: task.limits,
+          instruction:
+            "条件を検証してfinish_taskで日本語回答を保存してください。",
+        }),
+      );
+      if (!task.answer && !exhausted)
+        await codex.prompt(
+          "回答が保存されていません。調査済みの根拠でfinish_taskを呼んでください。未確認はunknown、候補なしも許可されます。",
+        );
+      controller.signal.throwIfAborted();
+      if (!task.answer)
+        throw new Error("Codexが構造化回答を確定しませんでした");
+    } else {
+      if (!process.env.OPENROUTER_API_KEY)
+        throw new Error(".env に OPENROUTER_API_KEY を設定してください");
+      let quota: Awaited<ReturnType<typeof freeQuota>> | undefined;
+      try {
+        quota = await freeQuota(controller.signal);
+      } catch (error) {
+        controller.signal.throwIfAborted();
+        await store.event(task.id, "quota_check_unavailable", {
+          error: redact(error instanceof Error ? error.message : String(error)),
+        });
+      }
+      if (quota) {
+        await store.event(task.id, "free_quota", quota);
+        if (quota.remaining === 0)
+          throw new Error(
+            `free-models-per-day: 無料日次枠の残量0/${quota.limit}。次回リセット ${quota.resetsAtJapan} 日本時間。推論要求は送信していません。`,
+          );
+      }
+      const catalog = await selectModel(
+        options.model ?? process.env.OPENROUTER_MODEL,
+      );
+      controller.signal.throwIfAborted();
+      task.model = catalog.id;
+      progress(`model: ${catalog.id}（無料）`);
+      await store.save(task);
+      const modelRuntime = await ModelRuntime.create({
+        authPath: join(dir, "auth.json"),
+        modelsPath: null,
+        modelsStorePath: join(dir, "models-cache.json"),
+        refreshOnCreate: false,
+        signal: controller.signal,
+      });
+      modelRuntime.registerProvider("openrouter", {
+        baseUrl: "https://openrouter.ai/api/v1",
+        api: "openai-completions",
+        apiKey: "OPENROUTER_API_KEY",
+        models: [
+          {
+            id: catalog.id,
+            name: catalog.name,
+            reasoning: false,
+            input: ["text"],
+            cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+            contextWindow: catalog.context_length,
+            maxTokens: Math.min(
+              6000,
+              catalog.top_provider?.max_completion_tokens ?? 6000,
+            ),
+          },
+        ],
+      });
+      await modelRuntime.setRuntimeApiKey(
+        "openrouter",
+        process.env.OPENROUTER_API_KEY,
+      );
+      await browser.init();
+      await mkdir(join(dir, "sessions"), { recursive: true, mode: 0o700 });
+      ({ session } = await createAgentSession({
+        cwd: dir,
+        agentDir: join(dir, "pi"),
+        modelRuntime,
+        model: modelRuntime.getModel("openrouter", catalog.id)!,
+        thinkingLevel: "off",
+        resourceLoader: resources,
+        customTools: tools,
+        tools: tools.map((t) => t.name),
+        sessionManager: SessionManager.create(dir, join(dir, "sessions")),
+        settingsManager: SettingsManager.inMemory({
+          compaction: { enabled: false },
+          retry: { enabled: false },
+        }),
+      }));
+      session.agent.toolExecution = "sequential";
+      const originalPayload = session.agent.onPayload;
+      session.agent.onPayload = async (payload, model) => {
+        await step("model_request", { model: model.id });
+        const modified = (await originalPayload?.(payload, model)) ?? payload;
+        const request = {
+          ...(modified as Record<string, unknown>),
+          max_tokens: Math.min(6000, model.maxTokens),
+          provider: { max_price: { prompt: 0, completion: 0 } },
+        };
+        return request;
+      };
+      const originalFinish = session.agent.finishTurn;
+      session.agent.finishTurn = async (context, signal) => {
+        if (task.answer) return { action: "end" as const };
+        const decision = await originalFinish?.(context, signal);
+        return decision || undefined;
+      };
+      const prompt = JSON.stringify({
+        query: task.query,
+        sources: task.sources,
+        limits: task.limits,
+        instruction:
+          "優先ソースから調査し、条件を検証して finish_task で日本語回答を保存してください。",
+      });
+      await session.prompt(prompt);
+      controller.signal.throwIfAborted();
+      const firstError = session.messages
         .filter((m: any) => m.role === "assistant")
         .map((m: any) => m.errorMessage)
         .filter(Boolean)
         .at(-1);
-      throw new Error(
-        exhausted
-          ? "実行ステップ上限に達しました"
-          : (errorMessage ?? "モデルが構造化回答を確定しませんでした"),
-      );
+      if (!task.answer && firstError) throw new Error(firstError);
+      if (!task.answer && !exhausted)
+        await session.prompt(
+          "まだ構造化回答が保存されていません。調査済みの根拠を使って finish_task を呼んでください。未確認はunknown、候補なしも許可されます。",
+        );
+      controller.signal.throwIfAborted();
+      if (!task.answer) {
+        const errorMessage = session.messages
+          .filter((m: any) => m.role === "assistant")
+          .map((m: any) => m.errorMessage)
+          .filter(Boolean)
+          .at(-1);
+        throw new Error(
+          exhausted
+            ? "実行ステップ上限に達しました"
+            : (errorMessage ?? "モデルが構造化回答を確定しませんでした"),
+        );
+      }
     }
     task.status =
       task.answer.candidates.length === 0
@@ -430,7 +470,7 @@ export async function runTask(
           : "partial";
   } catch (e) {
     task.error = redact(e instanceof Error ? e.message : String(e));
-    task.failure = classifyRuntimeFailure(task.error);
+    task.failure = classifyRuntimeFailure(task.error, task.agent);
     task.status = timedOut
       ? "timed_out"
       : controller.signal.aborted
@@ -443,6 +483,7 @@ export async function runTask(
     options.signal?.removeEventListener("abort", cancel);
     controller.signal.removeEventListener("abort", abortSession);
     session?.dispose();
+    await codex?.close();
     try {
       await browser.close();
     } catch (e) {

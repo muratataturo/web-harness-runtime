@@ -1,0 +1,299 @@
+{
+  "testedCli": "0.167.0",
+  "authentication": "chatgpt",
+  "cases": [
+    {
+      "taskId": "1724ef40-5246-4c80-90ed-420332de31d7",
+      "createdAt": "2026-11-09T23:44:11.747Z",
+      "updatedAt": "2026-11-09T23:44:51.495Z",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "query": "この2宿を、所在地・総部屋数・温泉や浴場の情報で比較してください。取得できた範囲だけでよく、価格や空室は未確認としてください。2件の比較を日本語で返してください。",
+      "sources": [
+        "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+        "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html"
+      ],
+      "pages": [
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+          "title": "箱根強羅グアムドッグ本店 設備・アメニティ・基本情報【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          }
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+          "title": "箱根芦ノ湖 ＨＯＴＥＬ ＲａＫｕｕｎ（ホテルラクーン） 設備・アメニティ・基本情報【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          }
+        }
+      ],
+      "steps": 11,
+      "evidenceCount": 6,
+      "retrieval": {
+        "status": "verified",
+        "verifiedDetailUrls": [
+          "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+          "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html"
+        ],
+        "checkedPages": 2
+      },
+      "candidates": [
+        {
+          "name": "箱根強羅グアムドッグ本店",
+          "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+          "eligible": true,
+          "score": 100,
+          "criteria": [
+            {
+              "id": "location",
+              "status": "supported"
+            },
+            {
+              "id": "rooms",
+              "status": "supported"
+            },
+            {
+              "id": "bath",
+              "status": "supported"
+            }
+          ]
+        },
+        {
+          "name": "箱根芦ノ湖 HOTEL RaKuun（ホテルラクーン）",
+          "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+          "eligible": true,
+          "score": 100,
+          "criteria": [
+            {
+              "id": "location",
+              "status": "supported"
+            },
+            {
+              "id": "rooms",
+              "status": "supported"
+            },
+            {
+              "id": "bath",
+              "status": "supported"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "価格・空室は未確認。",
+        "楽天トラベルの公開HTMLに掲載された情報のみ比較し、動的な予約状況や現地の営業状況は確認していない。"
+      ]
+    },
+    {
+      "taskId": "3e22a053-7bea-4b12-aa26-cb4e15fff56f",
+      "createdAt": "2026-11-09T23:45:19.799Z",
+      "updatedAt": "2026-11-09T23:46:17.195Z",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "query": "渋谷駅から徒歩5分以内で、髪質改善と韓国アイドル風のヘアに対応する美容室を2件比較してください。有名かどうかは口コミ数などの根拠がある場合だけ説明してください。料金も確認し、取得できない条件は未確認としてください。",
+      "sources": [
+        "https://beauty.hotpepper.jp/svcSA/macAD/salon/"
+      ],
+      "pages": [
+        {
+          "url": "https://beauty.hotpepper.jp/svcSA/macAD/salon/",
+          "title": "渋谷で人気の美容院・美容室・ヘアサロン｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "title": "アコテアット ヘア(acote @)｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000729394/",
+          "title": "ジーナ 渋谷本店(Zina)｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          }
+        }
+      ],
+      "steps": 15,
+      "evidenceCount": 9,
+      "retrieval": {
+        "status": "verified",
+        "verifiedDetailUrls": [
+          "https://beauty.hotpepper.jp/slnH000074059/",
+          "https://beauty.hotpepper.jp/slnH000729394/"
+        ],
+        "checkedPages": 3
+      },
+      "candidates": [
+        {
+          "name": "acote @",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "eligible": false,
+          "score": 73,
+          "criteria": [
+            {
+              "id": "walk",
+              "status": "supported"
+            },
+            {
+              "id": "care",
+              "status": "supported"
+            },
+            {
+              "id": "korea",
+              "status": "unknown"
+            },
+            {
+              "id": "price",
+              "status": "supported"
+            },
+            {
+              "id": "reviews",
+              "status": "supported"
+            }
+          ]
+        },
+        {
+          "name": "Zina 渋谷本店",
+          "url": "https://beauty.hotpepper.jp/slnH000729394/",
+          "eligible": false,
+          "score": 73,
+          "criteria": [
+            {
+              "id": "walk",
+              "status": "supported"
+            },
+            {
+              "id": "care",
+              "status": "supported"
+            },
+            {
+              "id": "korea",
+              "status": "unknown"
+            },
+            {
+              "id": "price",
+              "status": "supported"
+            },
+            {
+              "id": "reviews",
+              "status": "supported"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "2026年11月10日取得時点の掲載料金・口コミ。料金と空席を確約しません。",
+        "両店とも韓国風は確認できましたが、特定アイドル風への対応は未確認です。",
+        "料金は異なる施術内容のクーポンのため単純な価格比較はできません。Zinaの髪質改善専用TR料金は今回未確認です。",
+        "平均評価は直近1年間の集計。口コミ数だけで有名とは断定していません。"
+      ]
+    },
+    {
+      "taskId": "4435013a-4a75-44f9-bb52-88efb5c8bcb8",
+      "createdAt": "2026-11-09T23:49:19.262Z",
+      "updatedAt": "2026-11-09T23:49:50.009Z",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "query": "この2件の賃貸物件を、家賃と管理費の合計（月額）、間取り、最寄り駅への徒歩時間で比較してください。予算の上限は指定しません。取得できた情報だけを引用して2件の違いを説明してください。美容室は今回の目的に関係ありません。",
+      "sources": [
+        "https://beauty.hotpepper.jp/svcSA/macAD/salon/",
+        "https://suumo.jp/chintai/jnc_000110384935/",
+        "https://suumo.jp/chintai/jnc_000110464466/"
+      ],
+      "pages": [
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110384935/",
+          "title": "【SUUMO】1LDK/6階/31.75m2／神奈川県川崎市中原区小杉町２／武蔵小杉駅の賃貸・部屋探し情報（000110384935） | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          }
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110464466/",
+          "title": "【SUUMO】1LDK/6階/30.18m2／神奈川県川崎市中原区小杉町２／武蔵小杉駅の賃貸・部屋探し情報（000110464466） | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          }
+        }
+      ],
+      "steps": 11,
+      "evidenceCount": 6,
+      "retrieval": {
+        "status": "verified",
+        "verifiedDetailUrls": [
+          "https://suumo.jp/chintai/jnc_000110384935/",
+          "https://suumo.jp/chintai/jnc_000110464466/"
+        ],
+        "checkedPages": 2
+      },
+      "candidates": [
+        {
+          "name": "物件1（000110384935）",
+          "url": "https://suumo.jp/chintai/jnc_000110384935/",
+          "eligible": true,
+          "score": 100,
+          "criteria": [
+            {
+              "id": "monthly",
+              "status": "supported"
+            },
+            {
+              "id": "layout",
+              "status": "supported"
+            },
+            {
+              "id": "walk",
+              "status": "supported"
+            }
+          ]
+        },
+        {
+          "name": "物件2（000110464466）",
+          "url": "https://suumo.jp/chintai/jnc_000110464466/",
+          "eligible": true,
+          "score": 100,
+          "criteria": [
+            {
+              "id": "monthly",
+              "status": "supported"
+            },
+            {
+              "id": "layout",
+              "status": "supported"
+            },
+            {
+              "id": "walk",
+              "status": "supported"
+            }
+          ]
+        }
+      ],
+      "limitations": [
+        "公開HTMLの掲載情報による比較で、動的な空室・入居可否は確認していません。",
+        "月額合計は指定された家賃と管理費・共益費のみで、その他費用は含みません。予算上限による判定はしていません。",
+        "美容室のソースは目的に無関係のため使用していません。"
+      ]
+    }
+  ]
+}

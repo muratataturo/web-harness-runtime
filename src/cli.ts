@@ -13,6 +13,7 @@ import {
   activeTrustedUrls,
 } from "./trusted.js";
 import { freeQuota } from "./quota.js";
+import { CodexAgent, agentEngine } from "./codex.js";
 import { freeModels } from "./models.js";
 import { routeSources, adapters } from "./sources.js";
 import { browserBin } from "./browser.js";
@@ -34,7 +35,7 @@ config({ quiet: true });
 process.umask(0o077);
 const program = new Command()
   .name("web-harness")
-  .description("Pi + OpenRouter + agent-browser 自律調査タスク runtime")
+  .description("Codex / pi + agent-browser 自律調査タスク runtime")
   .version("0.2.0");
 const integer = (value: string) => {
   const number = Number(value);
@@ -44,13 +45,11 @@ const integer = (value: string) => {
 };
 const withRunOptions = (command: Command) =>
   command
-    .option(
-      "--model <id>",
-      "無料・ツール対応モデルID（既定: カタログから選択）",
-    )
+    .option("--agent <engine>", "codex（既定）または pi-openrouter")
+    .option("--model <id>", "選択エンジンのモデルID（既定: 各カタログ）")
     .option(
       "--max-steps <n>",
-      "モデル要求とツール呼び出しの合計上限",
+      "モデルturnと調査ツール呼び出しの上限",
       integer,
       70,
     )
@@ -73,6 +72,7 @@ async function execute(
       query,
       urls,
       model: opts.model,
+      agent: agentEngine(opts.agent),
       maxSteps: opts.maxSteps,
       timeoutSeconds: opts.timeout,
       maxPages: opts.maxPages,
@@ -119,7 +119,11 @@ withRunOptions(
     !definition.urls.every((u: unknown) => typeof u === "string")
   )
     throw new Error("定義には query:string と urls:string[] が必要です");
-  await execute(definition.query, definition.urls, opts);
+  await execute(definition.query, definition.urls, {
+    ...opts,
+    agent: opts.agent ?? definition.agent,
+    model: opts.model ?? definition.model,
+  });
 });
 program
   .command("plan")
@@ -131,14 +135,35 @@ program
   );
 program
   .command("models")
-  .description("現在の無料・ツール対応モデル一覧")
-  .action(async () => {
-    for (const m of await freeModels())
-      console.log(`${m.id}\tcontext=${m.context_length}\t${m.name}`);
+  .description("選択エンジンで利用可能なモデル一覧")
+  .option("--agent <engine>", "codex または pi-openrouter")
+  .action(async (opts) => {
+    if (agentEngine(opts.agent) === "pi-openrouter") {
+      for (const m of await freeModels())
+        console.log(`${m.id}\tcontext=${m.context_length}\t${m.name}`);
+      return;
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
+    const client = new CodexAgent({
+      cwd: process.cwd(),
+      signal: controller.signal,
+      onStep: async () => {},
+    });
+    try {
+      await client.initialize();
+      for (const m of await client.models())
+        console.log(
+          `${m.model}\t${m.isDefault ? "default" : "available"}\t${m.displayName}`,
+        );
+    } finally {
+      clearTimeout(timer);
+      await client.close();
+    }
   });
 program
   .command("quota")
-  .description("無料枠の残量と次の回復時刻を確認（推論は実行しない）")
+  .description("OpenRouter無料枠の残量と回復時刻を確認（Codex利用枠とは別）")
   .option("--json")
   .action(async (opts) => {
     const quota = await freeQuota();
@@ -178,18 +203,22 @@ withRunOptions(
     .argument("<id>"),
 ).action(async (id, opts) => {
   const task = await new Store().get(id);
-  await execute(task.query, task.urls, opts, id);
+  await execute(
+    task.query,
+    task.urls,
+    { ...opts, agent: opts.agent ?? task.agent ?? "pi-openrouter" },
+    id,
+  );
 });
 program
   .command("doctor")
-  .description("キー設定・ブラウザ・無料モデル一覧への接続を確認")
-  .action(async () => {
+  .description("実行エンジンの認証・モデル・ブラウザを確認")
+  .option("--agent <engine>", "codex または pi-openrouter")
+  .action(async (opts) => {
     let ok = true;
     console.log(`Node: ${process.version}`);
-    console.log(
-      `OPENROUTER_API_KEY: ${process.env.OPENROUTER_API_KEY ? "設定済み（値は非表示）" : "未設定"}`,
-    );
-    if (!process.env.OPENROUTER_API_KEY) ok = false;
+    const engine = agentEngine(opts.agent);
+    console.log(`Agent: ${engine}`);
     try {
       const { stdout } = await promisify(execFile)(browserBin, ["doctor"], {
         timeout: 25000,
@@ -197,17 +226,42 @@ program
       console.log(stdout.trim());
     } catch (e: any) {
       ok = false;
-      console.log(`browser: ${e.stdout || e.message}`);
+      console.log(`browser: ${e.message}`);
     }
-    try {
-      const models = await freeModels();
+    if (engine === "codex") {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 30000);
+      const client = new CodexAgent({
+        cwd: process.cwd(),
+        signal: controller.signal,
+        onStep: async () => {},
+      });
+      try {
+        const auth = await client.initialize();
+        const models = await client.models();
+        console.log(
+          `Codex: ${auth.authentication} / ${auth.planType} / ${models.length} models`,
+        );
+      } catch (e: any) {
+        ok = false;
+        console.log(e.message);
+      } finally {
+        clearTimeout(timer);
+        await client.close();
+      }
+    } else {
       console.log(
-        `無料・ツール対応モデル: ${models.length}件 / 既定候補: ${models[0]?.id ?? "なし"}`,
+        `OPENROUTER_API_KEY: ${process.env.OPENROUTER_API_KEY ? "設定済み（値は非表示）" : "未設定"}`,
       );
-      if (!models.length) ok = false;
-    } catch (e: any) {
-      ok = false;
-      console.log(`models: ${e.message}`);
+      if (!process.env.OPENROUTER_API_KEY) ok = false;
+      try {
+        const models = await freeModels();
+        console.log(`無料・ツール対応モデル: ${models.length}件`);
+        if (!models.length) ok = false;
+      } catch (e: any) {
+        ok = false;
+        console.log(e.message);
+      }
     }
     if (!ok) process.exitCode = 1;
   });
@@ -278,6 +332,7 @@ program
   )
   .option("--retrieval-only", "取得のみ検証する（--browser-onlyの別名）")
   .option("--parallel <n>", "並列数1または2", integer, 1)
+  .option("--agent <engine>", "codex または pi-openrouter")
   .option("--model <id>")
   .option("--timeout <seconds>", "ケースごとの制限時間", integer, 180)
   .action(async (opts) => {
@@ -293,6 +348,7 @@ program
         caseIds: opts.case,
         parallel: opts.parallel,
         model: opts.model,
+        agent: agentEngine(opts.agent),
         timeoutSeconds: opts.timeout,
         signal: controller.signal,
         onProgress: (m: string) => process.stderr.write(m + "\n"),
@@ -313,6 +369,30 @@ program
     }
   });
 
+program
+  .command("codex-doctor")
+  .description("公式CodexのChatGPTログインとモデル一覧を確認（推論なし）")
+  .action(async () => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
+    const client = new CodexAgent({
+      cwd: process.cwd(),
+      signal: controller.signal,
+      onStep: async () => {},
+    });
+    try {
+      console.log(
+        JSON.stringify(
+          { ...(await client.initialize()), models: await client.models() },
+          null,
+          2,
+        ),
+      );
+    } finally {
+      clearTimeout(timer);
+      await client.close();
+    }
+  });
 const trusted = program
   .command("trusted")
   .description("個別詳細を実取得できたURLだけを台帳に登録する");

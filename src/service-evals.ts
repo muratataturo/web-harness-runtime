@@ -115,6 +115,7 @@ export async function runServiceEvaluations(
     caseIds?: string[];
     parallel?: number;
     model?: string;
+    agent?: RunOptions["agent"];
     maxSteps?: number;
     maxPages?: number;
     timeoutSeconds?: number;
@@ -146,6 +147,7 @@ export async function runServiceEvaluations(
         query: test.query,
         urls: test.urls,
         model: options.model,
+        agent: options.agent,
         maxSteps: options.maxSteps ?? 80,
         maxPages: options.maxPages ?? 10,
         timeoutSeconds: options.timeoutSeconds ?? 360,

@@ -70,3 +70,40 @@ test("local API validates origins, JSON, live opt-in and stale decisions", async
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("Web configuration checks Codex subscription login without requiring an OpenRouter key", async () => {
+  const { resolve } = await import("node:path");
+  const root = await mkdtemp(join(tmpdir(), "codex-config-"));
+  const engine = new GoalEngine(new GoalRepository(root), 1);
+  const oldAgent = process.env.RUNTIME_AGENT,
+    oldBin = process.env.CODEX_BIN,
+    oldKey = process.env.OPENROUTER_API_KEY;
+  process.env.RUNTIME_AGENT = "codex";
+  process.env.CODEX_BIN = resolve("test/fixtures/codex-server.mjs");
+  delete process.env.OPENROUTER_API_KEY;
+  const server = createWorkbenchServer(engine);
+  try {
+    await new Promise<void>((resolve) =>
+      server.listen(0, "127.0.0.1", resolve),
+    );
+    const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    const config: any = await (await fetch(base + "/api/config")).json();
+    assert.equal(config.agent, "codex");
+    assert.equal(config.codexReady, true);
+    assert.equal(config.liveAvailable, true);
+    assert.equal(config.localKeyConfigured, false);
+    assert.equal(config.email, undefined);
+  } finally {
+    engine.shutdown();
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+    for (const [key, value] of [
+      ["RUNTIME_AGENT", oldAgent],
+      ["CODEX_BIN", oldBin],
+      ["OPENROUTER_API_KEY", oldKey],
+    ]) {
+      if (value === undefined) delete process.env[key!];
+      else process.env[key!] = value;
+    }
+    await rm(root, { recursive: true, force: true });
+  }
+});

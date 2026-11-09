@@ -71,6 +71,7 @@ export interface Task {
   createdAt: string;
   updatedAt: string;
   model?: string;
+  agent?: import("./codex.js").AgentEngine;
   sources: Source[];
   failure?: import("./failures.js").RuntimeFailure;
   retrieval?: {

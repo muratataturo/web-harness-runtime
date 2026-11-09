@@ -56,6 +56,7 @@ test("an exhausted quota ends the task before model selection or inference", asy
   try {
     const task = await runTask(
       {
+        agent: "pi-openrouter",
         query: "箱根の宿",
         urls: ["https://www.jalan.net/"],
         maxSteps: 10,

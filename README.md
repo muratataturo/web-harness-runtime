@@ -1,6 +1,6 @@
 # Relay / web-harness-runtime
 
-**目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** pi coding agent、OpenRouter の無料モデル、Vercel agent-browser を使う CLI に、Grok Bot / OpenMausBot / Rakazo の公開画面を参照した会話中心の Web Mock と、self-host VM 向け NVIDIA OpenShell executor を追加しました。
+**目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** 公式CodexのChatGPTログインを既定の調査エンジンとし、pi + OpenRouter無料モデルも選択できるCLIです。Vercel agent-browserで調査し、Grok Bot / OpenMausBot / Rakazoの公開画面を参照した会話中心のWeb Mockと、self-host VM向けNVIDIA OpenShell executorを備えています。
 
 ## Web Mock を試す
 
@@ -20,7 +20,7 @@ API キーなしで体験できます。左の Bot 一覧、中央のチーム�
 
 方針変更では旧承認を再利用せず、改訂番号を上げて再計画します。現段階では影響タスク限定の差分再計画ではなく、同じ目標の全タスクを作り直します。停止後に古い処理が結果を書き戻さないことも検証しています。
 
-UI の「実調査に切り替え」は `.env` の無料モデル枠を実際に使う操作です。実調査は数分かかり、公開サイトにアクセスできない場合もあります。体験モードとは別の明示操作にしています。
+UI の「実調査に切り替え」は、選択エンジンの利用枠（既定はCodexのChatGPTログイン）を実際に使う操作です。実調査は数分かかり、公開サイトにアクセスできない場合もあります。体験モードとは別の明示操作にしています。
 
 ![会話とComputerの画面](docs/screenshots/welcome.png)
 
@@ -29,10 +29,12 @@ UI の「実調査に切り替え」は `.env` の無料モデル枠を実際に
 Node.js 22 以降が必要です。既存 `.env` は上書きしないでください。
 
 ```sh
-# 初回のみ：.env がなければ作り OPENROUTER_API_KEY を記入
-cp -n .env.example .env
+# 公式Codex CLIをインストール済みであること（動作確認: 0.167.0）
+codex login
+# .envはOpenRouterなど追加設定にのみ必要。既存ファイルを上書きしない。
 npm run browser:install
 npm run build
+npm start -- codex-doctor
 npm start -- doctor
 
 npm start -- run '髪質改善で有名な渋谷の駅から近い韓国アイドル風になれるサロンを教えて欲しい'
@@ -51,14 +53,18 @@ npm start -- run '渋谷で髪質改善と韓国風ヘアが得意なサロン�
 npm start -- run-file examples/beauty.json
 npm start -- plan '温泉旅館を比較して' --url https://www.jalan.net/ https://beauty.hotpepper.jp/
 npm start -- models
-npm start -- quota # 推論を使わず、残量と次の日次リセット時刻を確認
+npm start -- quota # OpenRouter無料枠のみ。Codex利用枠とは別
 npm start -- sources
 npm start -- tasks
 npm start -- show TASK_ID --json
 npm start -- retry TASK_ID
 ```
 
-モデルは現行 OpenRouter カタログから、無料 ID、全料金ゼロ、tools 対応、16K 以上のコンテキストを確認して選びます。`provider.max_price` もゼロに設定し、有料への fallback はしません。`OPENROUTER_MODEL` で特定の無料モデルを選べます。開始前にキー情報APIで無料残量を確認できた場合、残量0ならモデル要求を送らず次の回復時刻を返します。日次枠切れと短期の429を区別し、エラー後に同じ要求を繰り返しません。
+Codexは公式App Serverのモデル一覧からアカウントの既定モデルを選び、APIキーではなくChatGPTログインを要求します。`--model` または `CODEX_MODEL` で利用可能なモデルを指定できます。APIキーやOpenRouterへの自動fallbackは行いません。実行結果に `agent` と `model` を保存します。
+
+`--agent pi-openrouter`（または `RUNTIME_AGENT=pi-openrouter`）の場合、モデルは現行 OpenRouter カタログから、無料 ID、全料金ゼロ、tools 対応、16K 以上のコンテキストを確認して選びます。`provider.max_price` もゼロに設定し、有料への fallback はしません。`OPENROUTER_MODEL` で特定の無料モデルを選べます。開始前にキー情報APIで無料残量を確認できた場合、残量0ならモデル要求を送らず次の回復時刻を返します。日次枠切れと短期の429を区別し、エラー後に同じ要求を繰り返しません。
+
+Codexでの実測は、楽天トラベル2宿と複数ドメインから選んだSUUMO2物件が `succeeded`。Hot Pepper Beautyはサロン2件の詳細取得と日本語比較を完了し、「韓国アイドル風」への厳密な適合を未確認として `partial`。79テストと実測の詳細は [Codex接続と検証](docs/codex.md) を参照。
 
 ## サービスごとの品質を確認する
 
@@ -67,7 +73,7 @@ npm start -- eval --list
 # APIを使わず、検索一覧→個別詳細の導線だけを切り分ける
 npm start -- eval --browser-only --case gourmet-kyoto-lunch --timeout 90
 npm start -- eval --browser-only --case carsensor-family-sienta --timeout 90
-# 無料枠回復後、自然言語から比較回答までを評価
+# Codexで自然言語から比較回答までを評価（OpenRouter版は --agent pi-openrouter）
 npm start -- eval --case gourmet-kyoto-lunch --parallel 1 --timeout 360
 ```
 
@@ -84,7 +90,7 @@ npm start -- eval --case gourmet-kyoto-lunch --parallel 1 --timeout 360
 
 じゃらん・SUUMOはサーバーが公開するHTMLを優先し、他サイトや動的ページにはagent-browserを利用します。取得方式・HTTP状態・文字コードをページに記録し、公開HTMLの取得をブラウザ描画確認と混同しません。両方式とも同じ引用・候補検証を通します。
 
-実評価中に無料日次枠（50件）を消費したため、5サービスの自然言語回答品質が合格したとはしていません。[実測レポート](docs/cli-service-validation.md) に task ID、具体的な失敗、改善、再評価手順を記録しました。引用は取得本文との一致と同一対象への対応を検証し、一覧ページや制限画面の候補化を拒否します。引用の意味と主張が一致するかには、モデルの誤りが残り得ます。
+以前のOpenRouter実評価では無料日次枠（50件）を消費したため、当時の5サービスの自然言語回答品質が合格したとはしていません。[実測レポート](docs/cli-service-validation.md) に task ID、具体的な失敗、改善、再評価手順を記録しました。引用は取得本文との一致と同一対象への対応を検証し、一覧ページや制限画面の候補化を拒否します。引用の意味と主張が一致するかには、モデルの誤りが残り得ます。
 
 ## 詳細取得を完了条件にする trusted URL台帳
 

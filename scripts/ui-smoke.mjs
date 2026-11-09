@@ -19,6 +19,8 @@ const child = spawn(
       RUNTIME_DIR: root,
       OPENROUTER_API_KEY: "",
       RUNTIME_EXECUTOR: "local",
+      RUNTIME_AGENT: "codex",
+      CODEX_BIN: join(root, "not-installed-codex"),
     },
     stdio: ["ignore", "pipe", "pipe"],
   },

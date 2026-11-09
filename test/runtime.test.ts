@@ -272,6 +272,7 @@ test("runtime saves a failed task and error artifact when the API key is missing
     const store = new Store(root);
     const task = await runTask(
       {
+        agent: "pi-openrouter",
         query: "test",
         urls: ["https://example.com/"],
         maxSteps: 10,

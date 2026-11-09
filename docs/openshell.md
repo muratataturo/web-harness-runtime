@@ -1,5 +1,7 @@
 # Self-host VM 上の OpenShell task executor
 
+現在のOpenShellイメージ/providerはpi + OpenRouter用です。ローカル既定のCodexエンジンとは別で、sandbox planのコマンドは `--agent pi-openrouter` を明示します。`RUNTIME_AGENT=codex` のままGoal RouterからOpenShellを使うと、発行前に未対応として停止します。Codexの資格情報はイメージやsandboxへコピーしません。Codexでのself-host VM実行には公式認証とegressの追加連携・実機検証が必要です。
+
 本 PR には、1 調査タスクを 1 OpenShell sandbox に割り当てる実行アダプターと image/provider/policy の準備を含めています。Web Mock の sandbox 表示はデモであり、実際に VM を発行した証拠ではありません。実際の割り当てはホスト CLI から明示的に実行する経路です。
 
 2026-11-10 時点の公式 `latest` は **v0.1.7**。この版の [Pi + OpenRouter チュートリアル](https://docs.nvidia.com/openshell/v0.1.7/tutorials/run-pi-with-openrouter) に合わせ、`node` のネットワークと credential placeholder を利用します。実装は `src/sandbox.ts`、image は `infra/openshell/Dockerfile` です。

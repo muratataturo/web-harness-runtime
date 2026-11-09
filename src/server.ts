@@ -7,6 +7,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { GoalEngine, scenarioDefaults } from "./goals.js";
 import { Store } from "./store.js";
+import { agentEngine, CodexAgent } from "./codex.js";
 import { runtimeTarget } from "./executors.js";
 import { doctorOpenShell } from "./sandbox.js";
 const webRoot = fileURLToPath(new URL("../web/", import.meta.url));
@@ -52,14 +53,35 @@ export function createWorkbenchServer(engine = new GoalEngine()) {
       const url = new URL(req.url ?? "/", "http://localhost");
       const path = url.pathname;
       if (path === "/api/config" && req.method === "GET") {
+        const agent = agentEngine();
+        let codexReady = false;
+        if (agent === "codex" && runtimeTarget() === "local") {
+          const signal = AbortSignal.timeout(10000);
+          const client = new CodexAgent({
+            cwd: process.cwd(),
+            signal,
+            onStep: async () => {},
+          });
+          try {
+            await client.initialize();
+            codexReady = true;
+          } catch {
+          } finally {
+            await client.close();
+          }
+        }
         send(res, 200, {
           scenarios: scenarioDefaults,
+          agent,
           liveAvailable:
-            runtimeTarget() === "openshell"
-              ? !!process.env.OPENSHELL_GATEWAY
-              : !!process.env.OPENROUTER_API_KEY,
+            agent === "codex"
+              ? codexReady
+              : runtimeTarget() === "openshell"
+                ? !!process.env.OPENSHELL_GATEWAY
+                : !!process.env.OPENROUTER_API_KEY,
           executor: runtimeTarget(),
           localKeyConfigured: !!process.env.OPENROUTER_API_KEY,
+          codexReady,
           sandboxMode: "not-connected",
           a2a: "internal-v1",
         });

@@ -174,6 +174,8 @@ export function planOpenShellTask(
     "/opt/web-harness/dist/cli.js",
     "run",
     options.query,
+    "--agent",
+    "pi-openrouter",
     "--url",
     ...sources.map((source) => source.url),
     "--max-steps",

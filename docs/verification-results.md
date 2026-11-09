@@ -68,3 +68,8 @@ GitHub Actions の設定を追加したが、GitHub上のCI実行結果をこの
 完了条件を個別本文・領域別必須項目の取得に変更。楽天7サービス14URL、Recruit系5サービス10URLを確認して登録。楽天不動産は確認した導線が認証転送、中古車は終了、Careersは未対応、Indeedは制限として登録除外。[詳細と根拠台帳](trusted-urls.md)。推論APIを使わずに実施し、LLM回答の合格とはしない。
 
 追加後の `npm run check` / `npm run build` / 整形チェック / 全64テストが成功。Webの8フローの回帰確認とLinux arm64コンテナのnetwork none・非root・秘密情報なしのCLI/Chromium smokeも成功。同梱台帳の初回読み込みと、コンテナ内の `trusted list --all` を確認。
+
+
+## Codex実行エンジン
+
+ChatGPTログイン済みのCodex CLI 0.167.0 / gpt-6.1-solで楽天トラベル2宿とSUUMO2物件の比較がsucceeded。SUUMOは無関係な美容URLを渡してもSUUMOのみ選択。Beautyは詳細取得2件を満たし、厳密な韓国アイドル風条件を未確認としてpartial。全79テスト、Web8フローの回帰試験と型・ビルドが成功。[接続と検証](codex.md)。

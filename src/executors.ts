@@ -1,6 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { runTask, type RunOptions } from "./runtime.js";
+import { agentEngine } from "./codex.js";
 import { Store } from "./store.js";
 import {
   planOpenShellTask,
@@ -35,6 +36,10 @@ export function createOpenShellExecutor(
 ): RuntimeExecutor {
   return async (options, store = new Store()) => {
     options.signal?.throwIfAborted();
+    if (agentEngine(options.agent) === "codex")
+      throw new Error(
+        "CodexのOpenShell実行は認証連携が未対応です。RUNTIME_EXECUTOR=localで利用してください。",
+      );
     const plan = planOpenShellTask({
       query: options.query,
       urls: options.urls,
