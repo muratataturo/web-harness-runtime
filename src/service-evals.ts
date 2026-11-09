@@ -192,7 +192,7 @@ export async function runServiceEvaluations(
 export interface ServiceProbeResult {
   caseId: string;
   service: string;
-  mode: "browser-only";
+  mode: "retrieval-only";
   outcome: "details_read" | "listing_only" | "site_blocked" | "browser_error";
   artifactDir: string;
   pages: {
@@ -200,11 +200,12 @@ export interface ServiceProbeResult {
     title: string;
     assessment: ReturnType<typeof assessPage>;
     textLength: number;
+    acquisition?: import("./types.js").Page["acquisition"];
   }[];
   discoveredDetails: number;
   error?: string;
 }
-/** Browser-only diagnostics intentionally do not assert that a natural-language goal was answered. */
+/** Retrieval-only diagnostics intentionally do not assert that a natural-language goal was answered. */
 export async function probeServiceCases(
   options: {
     caseIds?: string[];
@@ -262,7 +263,7 @@ export async function probeServiceCases(
       const result: ServiceProbeResult = {
         caseId: test.id,
         service: test.service,
-        mode: "browser-only",
+        mode: "retrieval-only",
         outcome: "browser_error",
         artifactDir: dir,
         pages: [],
@@ -276,6 +277,7 @@ export async function probeServiceCases(
           title: page.title,
           assessment: assessPage(page),
           textLength: page.text.length,
+          acquisition: page.acquisition,
         });
         await writeFile(
           join(dir, `page-${result.pages.length}.json`),

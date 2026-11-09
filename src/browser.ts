@@ -1,10 +1,12 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
-import { lookup } from "node:dns/promises";
-import { isIP } from "node:net";
 import { join } from "node:path";
 import { writeFile } from "node:fs/promises";
+import { publicTarget } from "./net-policy.js";
+export { privateAddress } from "./net-policy.js";
+import { readPublicHtml, prefersPublicHtml } from "./html-reader.js";
+import { assessPage } from "./page-quality.js";
 import { checkNavigation } from "./sources.js";
 import type { Page } from "./types.js";
 const exec = promisify(execFile);
@@ -27,24 +29,10 @@ export const EXTRACT = `JSON.stringify((()=>{
  return {url:location.href,title,text:text.slice(0,32000),truncated:text.length>32000,links:unique.slice(0,220)};
 })())`;
 
-export function privateAddress(ip: string): boolean {
-  if (ip.includes(":"))
-    return !/^2[0-9a-f]{3}:/i.test(ip) && !/^3[0-9a-f]{3}:/i.test(ip);
-  const [a = 0, b = 0] = ip.split(".").map(Number);
-  return (
-    a === 0 ||
-    a === 10 ||
-    a === 127 ||
-    (a === 169 && b === 254) ||
-    (a === 172 && b >= 16 && b <= 31) ||
-    (a === 192 && b === 168) ||
-    (a === 100 && b >= 64 && b <= 127) ||
-    a >= 224
-  );
-}
 class BrowserCommandError extends Error {}
 export class Browser {
   private count = 0;
+  private htmlPage?: Page;
   private started = false;
   private config: string;
   constructor(
@@ -125,13 +113,21 @@ export class Browser {
     return result.data;
   }
   async open(value: string): Promise<Page> {
-    const url = checkNavigation(value, this.hosts);
-    const addresses = await lookup(new URL(url).hostname, { all: true });
-    if (
-      !addresses.length ||
-      addresses.some((a) => !isIP(a.address) || privateAddress(a.address))
-    )
-      throw new Error("公開 IP アドレス以外へ接続できません");
+    const url = await publicTarget(value, this.hosts);
+    this.htmlPage = undefined;
+    if (prefersPublicHtml(url)) {
+      try {
+        const extracted = await readPublicHtml(url, this.hosts, this.signal);
+        const quality = assessPage(extracted);
+        if (quality.shouldStop || extracted.text.length >= 150) {
+          const page: Page = { ...extracted, id: `page-${++this.count}` };
+          this.htmlPage = page;
+          return page;
+        }
+      } catch (error) {
+        if (this.signal.aborted) throw error;
+      }
+    }
     this.started = true;
     try {
       await this.command(["open", url]);
@@ -155,6 +151,7 @@ export class Browser {
     return this.read();
   }
   async read(): Promise<Page> {
+    if (this.htmlPage) return this.htmlPage;
     const data = await this.command(["eval", EXTRACT]);
     const page = JSON.parse(
       typeof data.result === "string"
@@ -174,9 +171,14 @@ export class Browser {
       ...page,
       id: `page-${++this.count}`,
       capturedAt: new Date().toISOString(),
+      acquisition: { kind: "browser-dom" },
     };
   }
   async snapshot(): Promise<string> {
+    if (this.htmlPage)
+      throw new Error(
+        "現在のページは公開HTMLとして取得しています。ブラウザのアクセシビリティツリーはありません。取得済み本文とリンクを使用してください。",
+      );
     const data = await this.command(["snapshot", "-c", "-u"]);
     return String(data.snapshot ?? JSON.stringify(data)).slice(0, 20000);
   }

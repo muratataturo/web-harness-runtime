@@ -11,7 +11,22 @@ export interface PageAssessment {
   reason: string;
 }
 /** Diagnose the captured page, never search-engine snippets or inferred availability. */
-export function assessPage(page: Pick<Page, "title" | "text">): PageAssessment {
+export function assessPage(
+  page: Pick<Page, "title" | "text"> & Partial<Pick<Page, "acquisition">>,
+): PageAssessment {
+  if ([401, 403, 429].includes(page.acquisition?.status ?? 0))
+    return {
+      kind: "access_denied",
+      shouldStop: true,
+      reason: `公開HTML HTTP ${page.acquisition!.status}。アクセス制限を回避せず、取得不可として扱ってください。`,
+    };
+  if (page.acquisition?.status === 404)
+    return {
+      kind: "not_found",
+      shouldStop: true,
+      reason:
+        "公開HTML HTTP 404。取得済みリンクから正しい詳細URLを確認してください。",
+    };
   const title = page.title.trim();
   const text = page.text.trim();
   if (

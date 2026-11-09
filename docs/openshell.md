@@ -148,3 +148,7 @@ OpenShell CLI は未導入であり、接続先 VM/gateway も提供されてい
 ## Web/goal routerとの接続
 
 `.env` に `RUNTIME_EXECUTOR=openshell` と `OPENSHELL_GATEWAY=selfhost` を設定すると、`src/executors.ts` が各実調査をsandboxへ発行します。`OPENSHELL_IMAGE` と `OPENSHELL_PROVIDER` でimage/providerを指定できます。体験モードはこの設定でも発行しません。downloadしたタスクはqueryとURL、終端状態等を照合してlocal Storeへ取り込み、goalId/runtimeTaskIdで関連付けます。ユーザーの改訂・停止はcontrol planeで制御しますが、remote taskの停止保証はなく、gateway上での確認が必要です。
+
+## 公開HTML reader追加後のイメージ検証
+
+じゃらん/SUUMOの取得経路を追加後にLinux arm64 imageを再ビルドし、`--network none`・秘密なしでcheerioの読み込み、Windows-31J→日本語のデコード、HTML本文抽出、無料枠のUTC→JST計算を実行して成功した。HTML取得は既存policyのNode向けHTTPS許可を使い、新しい外部ホストの許可は追加していない。

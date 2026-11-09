@@ -1,0 +1,36 @@
+[
+  {
+    "service": "jalan",
+    "url": "https://www.jalan.net/yad375320/",
+    "title": "箱根 強羅 月の泉 - 宿泊予約は＜じゃらんnet＞",
+    "quality": {
+      "kind": "available",
+      "shouldStop": false,
+      "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+    },
+    "acquisition": {
+      "kind": "public-html",
+      "status": 200,
+      "charset": "shift_jis",
+      "contentType": "text/html;charset=Windows-31J"
+    },
+    "textLength": 3732
+  },
+  {
+    "service": "suumo",
+    "url": "https://suumo.jp/chintai/bc_100521216176/",
+    "title": "【SUUMO】フィーノ武蔵小杉（いい部屋ネット大東建託リーシング(株)川崎店提供）／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（100521216176） | 賃貸マンション・賃貸アパート",
+    "quality": {
+      "kind": "available",
+      "shouldStop": false,
+      "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+    },
+    "acquisition": {
+      "kind": "public-html",
+      "status": 200,
+      "charset": "utf-8",
+      "contentType": "text/html;charset=UTF-8"
+    },
+    "textLength": 6155
+  }
+]

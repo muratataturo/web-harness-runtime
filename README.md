@@ -51,13 +51,14 @@ npm start -- run '渋谷で髪質改善と韓国風ヘアが得意なサロン�
 npm start -- run-file examples/beauty.json
 npm start -- plan '温泉旅館を比較して' --url https://www.jalan.net/ https://beauty.hotpepper.jp/
 npm start -- models
+npm start -- quota # 推論を使わず、残量と次の日次リセット時刻を確認
 npm start -- sources
 npm start -- tasks
 npm start -- show TASK_ID --json
 npm start -- retry TASK_ID
 ```
 
-モデルは現行 OpenRouter カタログから、無料 ID、全料金ゼロ、tools 対応、16K 以上のコンテキストを確認して選びます。`provider.max_price` もゼロに設定し、有料への fallback はしません。`OPENROUTER_MODEL` で特定の無料モデルを選べます。日次枠切れと短期の429を区別し、エラー後に同じ要求を繰り返しません。
+モデルは現行 OpenRouter カタログから、無料 ID、全料金ゼロ、tools 対応、16K 以上のコンテキストを確認して選びます。`provider.max_price` もゼロに設定し、有料への fallback はしません。`OPENROUTER_MODEL` で特定の無料モデルを選べます。開始前にキー情報APIで無料残量を確認できた場合、残量0ならモデル要求を送らず次の回復時刻を返します。日次枠切れと短期の429を区別し、エラー後に同じ要求を繰り返しません。
 
 ## サービスごとの品質を確認する
 
@@ -70,18 +71,20 @@ npm start -- eval --browser-only --case carsensor-family-sienta --timeout 90
 npm start -- eval --case gourmet-kyoto-lunch --parallel 1 --timeout 360
 ```
 
-5サービスの条件付きクエリは [examples/service-evals.json](examples/service-evals.json)。`browser-only / details_read` はブラウザ導線の成功であり、自然言語回答の合格ではありません。
+5サービスの条件付きクエリは [examples/service-evals.json](examples/service-evals.json)。`--retrieval-only`（`--browser-only`と互換）で返る `mode: retrieval-only / details_read` は本文と詳細リンク取得の成功であり、自然言語回答の合格ではありません。
 
 | サービス | 今回の実測 |
 | --- | --- |
 | Hot Pepper Beauty | メンテナンスを検知し、架空のサロンを回答しない動作を確認 |
 | Hot Pepper グルメ | 検索一覧→ランチ詳細2件の取得成功。引用修復を改善、改善後LLM回答は再評価が必要 |
 | カーセンサー | 一覧→個別車両2台の取得成功。総額・走行距離の不一致事例を確認 |
-| じゃらん | トップ等は取得。地域検索・宿詳細の待機失敗が残る |
-| SUUMO | 一覧を取得。個別詳細の待機失敗が残る |
+| じゃらん | 公開HTMLをWindows-31Jで解析し、箱根一覧→宿詳細2件を取得。温泉・露天風呂・アクセスの本文を確認 |
+| SUUMO | 公開HTMLから検索結果本体→物件詳細2件を取得。家賃・管理費・間取り・対象駅の本文を確認 |
 | Indeed | Request Blocked。回避せず、取得不可として扱う |
 
-実評価中に無料日次枠（50件）を消費したため、5サービスの回答品質が合格したとはしていません。[実測レポート](docs/cli-service-validation.md) に task ID、具体的な失敗、改善、再評価手順を記録しました。引用は取得本文との一致と同一対象への対応を検証し、一覧ページや制限画面の候補化を拒否します。引用の意味と主張が一致するかには、モデルの誤りが残り得ます。
+じゃらん・SUUMOはサーバーが公開するHTMLを優先し、他サイトや動的ページにはagent-browserを利用します。取得方式・HTTP状態・文字コードをページに記録し、公開HTMLの取得をブラウザ描画確認と混同しません。両方式とも同じ引用・候補検証を通します。
+
+実評価中に無料日次枠（50件）を消費したため、5サービスの自然言語回答品質が合格したとはしていません。[実測レポート](docs/cli-service-validation.md) に task ID、具体的な失敗、改善、再評価手順を記録しました。引用は取得本文との一致と同一対象への対応を検証し、一覧ページや制限画面の候補化を拒否します。引用の意味と主張が一致するかには、モデルの誤りが残り得ます。
 
 ## 目標ルーターと内部A2A
 
@@ -163,7 +166,7 @@ Linux arm64 イメージのビルドと、秘密・ネットワークなしコ�
 
 単一タスクの終了コードは成功0、部分回答2、失敗・時間切れ・候補なし1、中断130。`retry` は新規調査で、元会話の途中からの再開ではありません。強制終了の途中状態は Web 再起動時に interrupted とし、再計画します。
 
-提供ツール以外の shell/ファイル編集をモデルに渡さず、公開HTTPS・許可host・固定DOM抽出コードで閲覧します。サイトのCAPTCHA・ログイン・制限を回避しません。予約・購入・応募はしません。
+提供ツール以外の shell/ファイル編集をモデルに渡さず、公開HTTPS・許可host・固定DOM抽出コードで閲覧します。公開HTMLの転送先もホストと公開IPを検証し、スクリプトを実行せず、本文を4MiBで制限します。サイトのCAPTCHA・ログイン・制限を回避しません。予約・購入・応募はしません。
 
 ## 検証とレビュー
 

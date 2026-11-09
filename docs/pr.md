@@ -19,9 +19,11 @@
 
 ## 検証
 
-- `npm run check`、`npm test`（44件）、`npm run build`、整形チェック。
+- `npm run check`、`npm test`（55件）、`npm run build`、整形チェック。
 - `npm run test:ui`: デスクトップ/390pxモバイルで8フロー。両シナリオ、好みの反映、再読み込み、改訂、停止、JSエラー0。
 - `npm start -- eval --browser-only --case gourmet-kyoto-lunch`: 一覧→個別ランチ詳細2件を取得。
+- `eval --retrieval-only --case jalan-hakone-onsen suumo-kosugi-rental`: 公開HTMLで一覧→詳細2件ずつを取得。
+- `quota`: 無料残量と日本時間の次回リセットを表示。残量0ならruntimeは推論要求前に終了。
 - Docker Linux arm64: image build、uid1000・秘密なし・network noneでCLI/Chromium起動とページ取得。
 - sandbox発行計画のargv/policyと、timeout・出力上限・中断を実プロセスでテスト。
 
@@ -29,7 +31,7 @@
 
 このPRはUXを仕上げるためのMockと、実行基盤の段階実装。体験モードの施設・価格・レビューは架空。liveの横断レビューはルール検証で、交通/料金の統合最適化は実装していない。方針改訂は全再計画。
 
-他サービスの回答品質を全面合格とはしない。グルメ/カーセンサーで詳細取得を確認した一方、じゃらん/SUUMOの詳細取得失敗とIndeedのアクセス制限が残る。実評価で無料日次枠に達したため、改善後のLLM完走は再評価が必要。有料へ切り替えていない。
+他サービスの回答品質を全面合格とはしない。グルメ/カーセンサーに加え、じゃらん/SUUMOも公開HTMLから詳細2件ずつを取得できた。取得方式・文字コード・HTTP状態を記録し、Windows-31Jのデコード、転送先とDNSの検査、非表示要素/スクリプトの除外を実装。以前失敗した宿/部屋の同じURLも取得を確認した。Indeedのアクセス制限は残る。実評価で無料日次枠に達したため、改善後のLLM完走は再評価が必要。有料へ切り替えていない。
 
 self-host VM/gatewayが未指定のため、実OpenShell発行・credential rewrite・Landlock下のChromeは未検証。Docker起動と別の検証ゲートとする。sandboxは成果物回収後もretainする。
 

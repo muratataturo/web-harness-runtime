@@ -6,6 +6,7 @@ import { promisify } from "node:util";
 import { readFile } from "node:fs/promises";
 import { Store } from "./store.js";
 import { runTask } from "./runtime.js";
+import { freeQuota } from "./quota.js";
 import { freeModels } from "./models.js";
 import { routeSources, adapters } from "./sources.js";
 import { browserBin } from "./browser.js";
@@ -128,6 +129,18 @@ program
   .action(async () => {
     for (const m of await freeModels())
       console.log(`${m.id}\tcontext=${m.context_length}\t${m.name}`);
+  });
+program
+  .command("quota")
+  .description("無料枠の残量と次の回復時刻を確認（推論は実行しない）")
+  .option("--json")
+  .action(async (opts) => {
+    const quota = await freeQuota();
+    console.log(
+      opts.json
+        ? JSON.stringify(quota, null, 2)
+        : `無料枠: 残り ${quota.remaining}/${quota.limit} リクエスト（本日使用 ${quota.used}）\n次の日次リセット: ${quota.resetsAtJapan} 日本時間（00:00 UTC）`,
+    );
   });
 program
   .command("sources")
@@ -253,7 +266,11 @@ program
   .description("5サービスの条件付きクエリを再現可能に評価")
   .option("--list", "ケース一覧のみ表示")
   .option("--case <ids...>", "評価ケースID")
-  .option("--browser-only", "モデルを使わず一覧→詳細導線のみ検証")
+  .option(
+    "--browser-only",
+    "モデルを使わず本文と詳細導線のみ検証（公開HTML/ブラウザ）",
+  )
+  .option("--retrieval-only", "取得のみ検証する（--browser-onlyの別名）")
   .option("--parallel <n>", "並列数1または2", integer, 1)
   .option("--model <id>")
   .option("--timeout <seconds>", "ケースごとの制限時間", integer, 180)
@@ -274,9 +291,10 @@ program
         signal: controller.signal,
         onProgress: (m: string) => process.stderr.write(m + "\n"),
       };
-      const result = opts.browserOnly
-        ? await probeServiceCases(options)
-        : await runServiceEvaluations(options);
+      const result =
+        opts.browserOnly || opts.retrievalOnly
+          ? await probeServiceCases(options)
+          : await runServiceEvaluations(options);
       console.log(JSON.stringify(result, null, 2));
       if (
         result.some((r) => !["validated", "details_read"].includes(r.outcome))

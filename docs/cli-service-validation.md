@@ -4,7 +4,9 @@
 
 ## 結論
 
-**他サービスの検索・詳細取得の基盤は一部実証できましたが、5サービスの自然言語クエリへの回答品質が合格したとは判断していません。** Hot Pepper グルメとカーセンサーは検索一覧から2件の個別詳細の取得を確認。SUUMO は一覧を確認しましたが詳細のナビゲーションがタイムアウト。じゃらんはトップや温泉ランキングは取得可能でしたが、地域検索・宿詳細への導線で失敗。Indeed は公開ページに Request Blocked が表示されました。
+**追加修正後、じゃらん・SUUMOも一覧→個別詳細2件ずつを取得しました。5サービスの自然言語回答品質の合格とは区別しています。**
+
+以下の初回結果と、末尾の公開HTML経路による改善後の結果を区別してください。 Hot Pepper グルメとカーセンサーは検索一覧から2件の個別詳細の取得を確認。SUUMO は一覧を確認しましたが詳細のナビゲーションがタイムアウト。じゃらんはトップや温泉ランキングは取得可能でしたが、地域検索・宿詳細への導線で失敗。Indeed は公開ページに Request Blocked が表示されました。
 
 また、実評価中に OpenRouter の無料モデル日次枠（API 応答: `free-models-per-day`, limit=50, remaining=0）を使い切りました。API 応答上のリセットは **2026-11-10 09:00 JST**。有料モデルへの切り替え・課金設定変更は行っていません。枠が戻った後の LLM 完走評価を残しています。
 
@@ -104,3 +106,25 @@
 したがって、単純なloadイベント待機だけを原因と断定せず、agent-browser daemon・CDP・対象サイトの読み込みの切り分けを残します。今回の専用セッションは明示的に終了しています。実測ファイルは `.runtime/fast-navigation-probes/` と `.runtime/direct-detail-probes/` に保存しました。
 
 公開用の構造化ログでは、ローカルworkspaceの絶対パスを `<workspace>` に正規化しています。URL・状態・判定の内容は変更していません。
+
+## 公開HTML経路での解決（2026-11-10 06:55 JST）
+
+ブラウザ経路が応答しない同じ詳細URLでも、通常の公開HTTPS GETは200で本文を返していた。そこでじゃらん・SUUMOをサーバーHTML優先にし、ブラウザとは別の取得方式として記録する実装を追加した。ブラウザ制御内部の原因を解明した、またはChromeで詳細を描画できたという意味ではない。
+
+- じゃらん: HTTPの `charset=Windows-31J` を `shift_jis` としてデコード。箱根一覧から天成園・ホテル南風荘の詳細を取得し、温泉・露天風呂・アクセスの本文が読めることを確認。
+- SUUMO: UTF-8で検索本体の物件詳細2件を取得。家賃・管理費・1LDK・武蔵小杉の記載を確認。検索結果本体のjncリンクを、別の駅を含む周辺物件広告のbcリンクより優先する。
+- どちらも一覧＋詳細2件すべてHTTP200。取得結果は `acquisition.kind=public-html`、status、charset付き。同じ引用検証とエンティティ対応を利用する。
+- 許可ホスト・公開IP・各転送先を検査し、認証情報やcookiesを送らず、HTML内のJavaScriptを実行しない。HTTP拒否を再試行で回避しない。
+- `inspect_page` のブラウザsnapshotをHTML取得ページに偽装しない。動的な空室・掲載継続の確認として扱わない。
+
+再実行:
+
+```sh
+npm run build
+npm start -- eval --browser-only --case jalan-hakone-onsen suumo-kosugi-rental --parallel 2 --timeout 90
+npm start -- quota
+```
+
+集計は [evidence/public-html-details.json](evidence/public-html-details.json)。推論API呼び出しは0件。無料枠回復後のLLM回答完走は引き続き再評価する。`quota` はキー情報APIの無料リクエスト残量を取得し、UTC日次境界の次のリセットを日本時間で表示する。2026-11-10 06:55の応答では残量0/50、次回09:00 JSTだった。
+
+CLIの `--retrieval-only` は `--browser-only` の別名です。現在の取得診断は `mode: retrieval-only` を返し、各ページの acquisition でHTTPとブラウザを区別します。以前失敗した宿yad375320と部屋bc_100521216176も、新経路でHTTP200・文字化けなしの本文を取得しました（[固定詳細URLの結果](evidence/fixed-direct-details.json)）。

@@ -22,6 +22,12 @@ export interface Source {
   guidance: string;
 }
 export interface Page {
+  acquisition?: {
+    kind: "browser-dom" | "public-html";
+    status?: number;
+    charset?: string;
+    contentType?: string;
+  };
   id: string;
   url: string;
   title: string;

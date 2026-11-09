@@ -23,6 +23,7 @@ import {
   validateAnswer,
   renderAnswer,
 } from "./evidence.js";
+import { freeQuota } from "./quota.js";
 import { classifyRuntimeFailure } from "./failures.js";
 import { assessPage } from "./page-quality.js";
 import { SYSTEM_PROMPT } from "./prompt.js";
@@ -184,7 +185,7 @@ export async function runTask(
       name: "inspect_page",
       label: "Inspect",
       description:
-        "現在のページのアクセシビリティスナップショットを取得する。本文・リンクの補助確認用。",
+        "ブラウザ取得ページのアクセシビリティスナップショットを取得する。acquisition.kindがpublic-htmlの場合は利用できないため取得済み本文とリンクを使う。",
       parameters: Type.Object({}),
       execute: wrap("inspect_page", async () => ({
         untrustedSnapshot: await browser.snapshot(),
@@ -270,6 +271,22 @@ export async function runTask(
     controller.signal.throwIfAborted();
     if (!process.env.OPENROUTER_API_KEY)
       throw new Error(".env に OPENROUTER_API_KEY を設定してください");
+    let quota: Awaited<ReturnType<typeof freeQuota>> | undefined;
+    try {
+      quota = await freeQuota(controller.signal);
+    } catch (error) {
+      controller.signal.throwIfAborted();
+      await store.event(task.id, "quota_check_unavailable", {
+        error: redact(error instanceof Error ? error.message : String(error)),
+      });
+    }
+    if (quota) {
+      await store.event(task.id, "free_quota", quota);
+      if (quota.remaining === 0)
+        throw new Error(
+          `free-models-per-day: 無料日次枠の残量0/${quota.limit}。次回リセット ${quota.resetsAtJapan} 日本時間。推論要求は送信していません。`,
+        );
+    }
     const catalog = await selectModel(
       options.model ?? process.env.OPENROUTER_MODEL,
     );
