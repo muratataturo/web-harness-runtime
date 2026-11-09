@@ -71,11 +71,11 @@ npm start -- eval --browser-only --case carsensor-family-sienta --timeout 90
 npm start -- eval --case gourmet-kyoto-lunch --parallel 1 --timeout 360
 ```
 
-5サービスの条件付きクエリは [examples/service-evals.json](examples/service-evals.json)。`--retrieval-only`（`--browser-only`と互換）で返る `mode: retrieval-only / details_read` は本文と詳細リンク取得の成功であり、自然言語回答の合格ではありません。
+5サービスの条件付きクエリは [examples/service-evals.json](examples/service-evals.json)。`--retrieval-only`（`--browser-only`と互換）で返る `mode: retrieval-only / details_verified` は領域別必須項目まで確認した詳細取得の成功であり、自然言語回答の合格ではありません。
 
 | サービス | 今回の実測 |
 | --- | --- |
-| Hot Pepper Beauty | メンテナンスを検知し、架空のサロンを回答しない動作を確認 |
+| Hot Pepper Beauty | 正式な `/slnH.../` 形式を修正し、一覧→個別サロン2件の詳細を取得 |
 | Hot Pepper グルメ | 検索一覧→ランチ詳細2件の取得成功。引用修復を改善、改善後LLM回答は再評価が必要 |
 | カーセンサー | 一覧→個別車両2台の取得成功。総額・走行距離の不一致事例を確認 |
 | じゃらん | 公開HTMLをWindows-31Jで解析し、箱根一覧→宿詳細2件を取得。温泉・露天風呂・アクセスの本文を確認 |
@@ -85,6 +85,26 @@ npm start -- eval --case gourmet-kyoto-lunch --parallel 1 --timeout 360
 じゃらん・SUUMOはサーバーが公開するHTMLを優先し、他サイトや動的ページにはagent-browserを利用します。取得方式・HTTP状態・文字コードをページに記録し、公開HTMLの取得をブラウザ描画確認と混同しません。両方式とも同じ引用・候補検証を通します。
 
 実評価中に無料日次枠（50件）を消費したため、5サービスの自然言語回答品質が合格したとはしていません。[実測レポート](docs/cli-service-validation.md) に task ID、具体的な失敗、改善、再評価手順を記録しました。引用は取得本文との一致と同一対象への対応を検証し、一覧ページや制限画面の候補化を拒否します。引用の意味と主張が一致するかには、モデルの誤りが残り得ます。
+
+## 詳細取得を完了条件にする trusted URL台帳
+
+```sh
+# 推論APIを使わず一覧→個別詳細を確認。楽天ぐるなびも含む
+npm start -- trusted verify --family rakuten --parallel 2 --timeout 75
+# 制限・終了・未対応が含まれる一括検証の終了コードは2
+npm start -- trusted list --all
+npm start -- trusted list --json
+npm start -- trusted plan '箱根の温泉宿を比較して'
+npm start -- trusted run '温泉とアクセスを重視して2件比較して' --source rakuten-travel
+```
+
+トップや一覧が開くだけでは完了にしません。個別対象のURL、本文、文字品質、住所や価格など領域別必須項目を検査し、各候補の詳細取得を満たした場合だけ調査タスクを `succeeded` にします。推薦条件への適合も従来通り別途検査します。未知のドメイン・詳細形式は `unsupported` になり、取得成功にはしません。
+
+source登録の検証では異なる対象IDの詳細2件以上を確認し、合格した**個別URLだけ**を台帳に記録します。タイトル、確認日時、方式、項目の短い引用、本文SHA-256を保持。有効期限は7日、期限切れは使用不可、再検証失敗では登録を外します。台帳の更新はプロセス間ロックで保護します。trustedは「詳細取得できた」という意味で、ページの命令・広告や推薦品質を信頼する意味ではありません。価格・在庫・空室は再取得時点でも確認が必要です。
+
+[検証済み台帳](config/trusted-urls.json)を初期データとして同梱し、実行時の更新はgitignore対象の `.runtime/trusted-urls.json` に保存します。`TRUSTED_URLS_FILE` または `RUNTIME_DIR` で保存先を変更できます。未作成の実行時台帳は同梱データを読み、期限判定を通して利用します。新しい検証対象の入口は [source-catalog.json](config/source-catalog.json)、詳細URL形式は `src/sources.ts`、必須項目は `src/detail-contracts.ts` に追加します。
+
+楽天の対象は美容・宿泊・飲食・住居・車・求人と、旅行/生活に関連するゴルフ・本・買い物です。金融や通信を含む楽天全サービスを検証したものではありません。実測の対象URLと失敗・未対応の区分は [楽天・trusted URL検証](docs/trusted-urls.md) に記録しています。
 
 ## 目標ルーターと内部A2A
 

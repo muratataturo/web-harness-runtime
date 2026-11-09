@@ -6,6 +6,12 @@ import { promisify } from "node:util";
 import { readFile } from "node:fs/promises";
 import { Store } from "./store.js";
 import { runTask } from "./runtime.js";
+import {
+  TrustedStore,
+  verifySources,
+  sourceCatalog,
+  activeTrustedUrls,
+} from "./trusted.js";
 import { freeQuota } from "./quota.js";
 import { freeModels } from "./models.js";
 import { routeSources, adapters } from "./sources.js";
@@ -297,12 +303,86 @@ program
           : await runServiceEvaluations(options);
       console.log(JSON.stringify(result, null, 2));
       if (
-        result.some((r) => !["validated", "details_read"].includes(r.outcome))
+        result.some(
+          (r) => !["validated", "details_verified"].includes(r.outcome),
+        )
       )
         process.exitCode = 2;
     } finally {
       process.removeListener("SIGINT", cancel);
     }
+  });
+
+const trusted = program
+  .command("trusted")
+  .description("個別詳細を実取得できたURLだけを台帳に登録する");
+trusted
+  .command("list")
+  .option("--all", "未確認・失敗のsourceも表示")
+  .option("--json")
+  .action(async (opts) => {
+    const registry = await new TrustedStore().load();
+    if (opts.json) {
+      console.log(
+        JSON.stringify(
+          opts.all ? registry : activeTrustedUrls(registry),
+          null,
+          2,
+        ),
+      );
+      return;
+    }
+    for (const source of await sourceCatalog()) {
+      const urls = activeTrustedUrls(registry).filter(
+        (u) => u.sourceId === source.id,
+      );
+      const audit = registry.audits.find((a) => a.sourceId === source.id);
+      if (opts.all || urls.length)
+        console.log(
+          `${source.id}\t${urls.length ? "trusted" : audit?.status === "verified" ? "expired" : (audit?.status ?? "unverified")}\t${urls.length} URL\t${source.label}`,
+        );
+    }
+  });
+trusted
+  .command("verify")
+  .option("--source <ids...>")
+  .option("--family <name>", "recruit または rakuten")
+  .option("--parallel <n>", "並列数1または2", integer, 2)
+  .option("--timeout <seconds>", "sourceごとの制限時間", integer, 75)
+  .action(async (opts) => {
+    const results = await verifySources({
+      ids: opts.source,
+      family: opts.family,
+      parallel: opts.parallel,
+      timeoutSeconds: opts.timeout,
+      onProgress: (m) => process.stderr.write(m + "\n"),
+    });
+    console.log(JSON.stringify(results, null, 2));
+    if (results.some((r) => r.status !== "verified")) process.exitCode = 2;
+  });
+withRunOptions(
+  trusted
+    .command("run")
+    .argument("<query>")
+    .requiredOption("--source <ids...>", "有効なtrusted source ID"),
+).action(async (query, opts) =>
+  execute(query, await new TrustedStore().urlsFor(opts.source), opts),
+);
+trusted
+  .command("plan")
+  .argument("<query>")
+  .action(async (query) => {
+    const r = await new TrustedStore().load();
+    console.log(
+      JSON.stringify(
+        routeSources(
+          query,
+          activeTrustedUrls(r).map((u) => u.url),
+        ),
+        null,
+        2,
+      ),
+    );
   });
 const goal = program
   .command("goal")

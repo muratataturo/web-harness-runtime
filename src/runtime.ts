@@ -23,6 +23,7 @@ import {
   validateAnswer,
   renderAnswer,
 } from "./evidence.js";
+import { verifyDetail } from "./detail-contracts.js";
 import { freeQuota } from "./quota.js";
 import { classifyRuntimeFailure } from "./failures.js";
 import { assessPage } from "./page-quality.js";
@@ -178,7 +179,21 @@ export async function runTask(
           );
         const page = await browser.open(p.url);
         task.pages.push(page);
-        return { untrustedPage: page, quality: assessPage(page) };
+        const verifiedDetailUrls = task.pages
+          .filter((p) => verifyDetail(p).status === "verified")
+          .map((p) => p.url);
+        task.retrieval = {
+          status: verifiedDetailUrls.length
+            ? "verified"
+            : "insufficient_detail",
+          verifiedDetailUrls,
+          checkedPages: task.pages.length,
+        };
+        return {
+          untrustedPage: page,
+          quality: assessPage(page),
+          detailVerification: verifyDetail(page),
+        };
       }),
     }),
     defineTool({
@@ -239,7 +254,20 @@ export async function runTask(
           p.candidates,
           p.limitations,
         );
-        return { accepted: true };
+        const incomplete = task.answer.candidates.filter(
+          (c) => !task.retrieval?.verifiedDetailUrls.includes(c.url),
+        );
+        if (incomplete.length)
+          task.answer.limitations.push(
+            "詳細取得の必須項目を確認できていない候補があります: " +
+              incomplete.map((c) => c.url).join(", "),
+          );
+        return {
+          accepted: true,
+          detailCompletion: incomplete.length
+            ? "insufficient_detail"
+            : "verified",
+        };
       }),
     }),
   ];
@@ -394,7 +422,10 @@ export async function runTask(
     task.status =
       task.answer.candidates.length === 0
         ? "blocked"
-        : task.answer.candidates.some((c) => c.eligible)
+        : task.answer.candidates.some((c) => c.eligible) &&
+            task.answer.candidates.every((c) =>
+              task.retrieval?.verifiedDetailUrls.includes(c.url),
+            )
           ? "succeeded"
           : "partial";
   } catch (e) {

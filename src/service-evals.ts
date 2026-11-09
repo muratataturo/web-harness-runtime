@@ -2,6 +2,7 @@ import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { runTask, type RunOptions } from "./runtime.js";
 import { entityKey } from "./sources.js";
+import { verifyDetail, type DetailVerification } from "./detail-contracts.js";
 import { assessPage } from "./page-quality.js";
 import { Store } from "./store.js";
 import type { Task } from "./types.js";
@@ -193,13 +194,19 @@ export interface ServiceProbeResult {
   caseId: string;
   service: string;
   mode: "retrieval-only";
-  outcome: "details_read" | "listing_only" | "site_blocked" | "browser_error";
+  outcome:
+    | "details_verified"
+    | "insufficient_detail"
+    | "listing_only"
+    | "site_blocked"
+    | "browser_error";
   artifactDir: string;
   pages: {
     url: string;
     title: string;
     assessment: ReturnType<typeof assessPage>;
     textLength: number;
+    detailVerification: DetailVerification;
     acquisition?: import("./types.js").Page["acquisition"];
   }[];
   discoveredDetails: number;
@@ -277,6 +284,7 @@ export async function probeServiceCases(
           title: page.title,
           assessment: assessPage(page),
           textLength: page.text.length,
+          detailVerification: verifyDetail(page, test.service),
           acquisition: page.acquisition,
         });
         await writeFile(
@@ -301,11 +309,16 @@ export async function probeServiceCases(
           result.discoveredDetails = links.length;
           for (const link of links.slice(0, maxDetails))
             await capture(link.url);
-          result.outcome = result.pages
+          const verified = result.pages
             .slice(1)
-            .some((p) => !p.assessment.shouldStop)
-            ? "details_read"
-            : "listing_only";
+            .map((p) => p.detailVerification)
+            .filter((d) => d.status === "verified");
+          result.outcome =
+            new Set(verified.map((d) => d.entityId)).size >= test.minCandidates
+              ? "details_verified"
+              : result.pages.length > 1
+                ? "insufficient_detail"
+                : "listing_only";
         }
       } catch (e) {
         result.error = e instanceof Error ? e.message : String(e);

@@ -189,3 +189,21 @@ test("non-HTML access denial still stops and does not invite a browser bypass", 
   });
   assert.equal(assessPage(page).kind, "access_denied");
 });
+
+test("authentication redirects stop before login navigation and preserve actual redirect status", async () => {
+  let calls = 0;
+  const p = await readPublicHtml(url, [host], new AbortController().signal, {
+    resolveHost,
+    fetcher: async () => {
+      calls++;
+      return request(302, "", {
+        Location:
+          "https://login.account.rakuten.com/sso/authorize?client_id=sample",
+      });
+    },
+  });
+  assert.equal(calls, 1);
+  assert.equal(p.acquisition?.status, 302);
+  assert.equal(assessPage(p).kind, "login_required");
+  assert.equal(p.url, url);
+});

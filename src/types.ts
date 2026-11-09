@@ -73,6 +73,11 @@ export interface Task {
   model?: string;
   sources: Source[];
   failure?: import("./failures.js").RuntimeFailure;
+  retrieval?: {
+    status: "verified" | "insufficient_detail";
+    verifiedDetailUrls: string[];
+    checkedPages: number;
+  };
   criteria: Criterion[];
   pages: Page[];
   evidence: Evidence[];

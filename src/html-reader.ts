@@ -4,9 +4,22 @@ import { publicTarget, type HostResolver } from "./net-policy.js";
 import type { Page } from "./types.js";
 const MAX_BYTES = 4 * 1024 * 1024;
 export const prefersPublicHtml = (value: string) =>
-  ["www.jalan.net", "jalan.net", "suumo.jp", "www.suumo.jp"].includes(
-    new URL(value).hostname,
-  );
+  [
+    "www.jalan.net",
+    "jalan.net",
+    "suumo.jp",
+    "www.suumo.jp",
+    "beauty.rakuten.co.jp",
+    "travel.rakuten.co.jp",
+    "r.gnavi.co.jp",
+    "realestate.rakuten.co.jp",
+    "car.rakuten.co.jp",
+    "gora.golf.rakuten.co.jp",
+    "booking.gora.golf.rakuten.co.jp",
+    "books.rakuten.co.jp",
+    "search.rakuten.co.jp",
+    "item.rakuten.co.jp",
+  ].includes(new URL(value).hostname);
 export class HtmlReadError extends Error {
   constructor(
     message: string,
@@ -55,18 +68,8 @@ export function extractPublicHtml(
 ): Omit<Page, "id" | "capturedAt" | "acquisition"> {
   const $ = cheerio.load(html);
   const title = $("title").first().text().replace(/\s+/g, " ").trim();
-  // No script is executed. Explicitly hidden controls/markup are not treated as page evidence.
-  $(
-    'script,style,noscript,template,svg,canvas,[hidden],[aria-hidden="true"],input,select,button',
-  ).remove();
-  $("[style]").each((_i, el) => {
-    if (
-      /(?:display\s*:\s*none|visibility\s*:\s*hidden)/i.test(
-        $(el).attr("style") ?? "",
-      )
-    )
-      $(el).remove();
-  });
+  // Hidden anchors are discovery hints only. Their text never enters citation evidence.
+  $("script,style,noscript,template,svg,canvas").remove();
   const links: { text: string; url: string }[] = [];
   const seen = new Set<string>();
   const priority = new Map<string, number>();
@@ -98,13 +101,17 @@ export function extractPublicHtml(
     }
   });
   const rank = (value: string) =>
-    /\/chintai\/bc_\d+/.test(value)
-      ? 4
-      : /\/yad\d+\//.test(value)
-        ? 3
-        : /\/chintai\/jnc_\d+/.test(value)
-          ? 2
-          : 0;
+    /\/s\d{8,}\/|\/HOTEL\/\d+\/|\/guide\/disp\/c_id\/\d+|\/rb\/\d+\//.test(
+      value,
+    ) || value.startsWith("https://item.rakuten.co.jp/")
+      ? 5
+      : /\/chintai\/bc_\d+/.test(value)
+        ? 4
+        : /\/yad\d+\//.test(value)
+          ? 3
+          : /\/chintai\/jnc_\d+/.test(value)
+            ? 2
+            : 0;
   links.sort(
     (a, b) =>
       (priority.get(b.url) ?? 0) +
@@ -112,6 +119,18 @@ export function extractPublicHtml(
       (priority.get(a.url) ?? 0) -
       rank(a.url),
   );
+  // No script is executed. Explicitly hidden controls/markup are not treated as page evidence.
+  $(
+    'script,style,noscript,template,svg,canvas,[hidden],[aria-hidden="true"],input,select,button',
+  ).remove();
+  $("[style]").each((_i, el) => {
+    if (
+      /(?:display\s*:\s*none|visibility\s*:\s*hidden)/i.test(
+        $(el).attr("style") ?? "",
+      )
+    )
+      $(el).remove();
+  });
   $("br").replaceWith("\n");
   $(
     "p,div,section,article,header,footer,nav,h1,h2,h3,h4,h5,h6,li,tr,td,th,dt,dd,table",
@@ -161,7 +180,26 @@ export async function readPublicHtml(
       await response.body?.cancel();
       if (!location)
         throw new HtmlReadError("転送先が指定されていません", "redirect");
-      url = checkNavigation(new URL(location, url).href, hosts);
+      const target = new URL(location, url);
+      if (
+        /^(?:login|auth|accounts?)\./i.test(target.hostname) ||
+        /\/(?:login|signin|authorize)(?:\/|$)/i.test(target.pathname)
+      ) {
+        return {
+          url,
+          title: "ログイン・認証先への転送",
+          text: `公開ページから認証用URL（${target.hostname}）へ転送されました。認証先は取得していません。`,
+          links: [],
+          truncated: false,
+          capturedAt: new Date().toISOString(),
+          acquisition: {
+            kind: "public-html",
+            status: response.status,
+            contentType: response.headers.get("content-type") ?? undefined,
+          },
+        };
+      }
+      url = checkNavigation(target.href, hosts);
       continue;
     }
     // Access-denied pages are returned with their status; callers must not retry to evade them.

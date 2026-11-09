@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "recruit-beauty",
+      "family": "recruit",
+      "service": "hotpepper-beauty",
+      "label": "Hot Pepper Beauty",
+      "category": "beauty",
+      "seedUrl": "https://beauty.hotpepper.jp/svcSA/macAD/salon/"
+    },
+    {
+      "id": "recruit-gourmet",
+      "family": "recruit",
+      "service": "hotpepper-gourmet",
+      "label": "Hot Pepper グルメ",
+      "category": "food",
+      "seedUrl": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/"
+    },
+    {
+      "id": "recruit-jalan",
+      "family": "recruit",
+      "service": "jalan",
+      "label": "じゃらん",
+      "category": "stay",
+      "seedUrl": "https://www.jalan.net/140000/LRG_141600/"
+    },
+    {
+      "id": "recruit-carsensor",
+      "family": "recruit",
+      "service": "carsensor",
+      "label": "カーセンサー",
+      "category": "car-purchase",
+      "seedUrl": "https://www.carsensor.net/usedcar/bTO/s077/index.html"
+    },
+    {
+      "id": "recruit-suumo",
+      "family": "recruit",
+      "service": "suumo",
+      "label": "SUUMO",
+      "category": "home",
+      "seedUrl": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/"
+    },
+    {
+      "id": "recruit-indeed",
+      "family": "recruit",
+      "service": "indeed",
+      "label": "Indeed",
+      "category": "career",
+      "seedUrl": "https://jp.indeed.com/jobs?q=customer+success&l=Tokyo"
+    },
+    {
+      "id": "rakuten-beauty",
+      "family": "rakuten",
+      "service": "rakuten-beauty",
+      "label": "楽天ビューティ",
+      "category": "beauty",
+      "seedUrl": "https://beauty.rakuten.co.jp/addr13113/"
+    },
+    {
+      "id": "rakuten-travel",
+      "family": "rakuten",
+      "service": "rakuten-travel",
+      "label": "楽天トラベル",
+      "category": "stay",
+      "seedUrl": "https://travel.rakuten.co.jp/yado/kanagawa/hakone.html"
+    },
+    {
+      "id": "rakuten-gourmet",
+      "family": "rakuten-associated",
+      "service": "rakuten-gourmet",
+      "label": "楽天ぐるなび（提携サービス）",
+      "category": "food",
+      "seedUrl": "https://r.gnavi.co.jp/area/aream2126/japanese/rs/"
+    },
+    {
+      "id": "rakuten-realestate",
+      "family": "rakuten",
+      "service": "rakuten-realestate",
+      "label": "楽天不動産",
+      "category": "home",
+      "seedUrl": "https://realestate.rakuten.co.jp/rent/",
+      "discoveryPattern": "/rent/"
+    },
+    {
+      "id": "rakuten-car-shaken",
+      "family": "rakuten",
+      "service": "rakuten-car",
+      "label": "楽天Car車検（中古車購入とは別）",
+      "category": "car-maintenance",
+      "seedUrl": "https://car.rakuten.co.jp/shaken/area/tokyo/"
+    },
+    {
+      "id": "rakuten-car-used",
+      "family": "rakuten",
+      "service": "rakuten-car",
+      "label": "楽天Car中古車",
+      "category": "car-purchase",
+      "seedUrl": "https://car.rakuten.co.jp/sales/usedcar/search"
+    },
+    {
+      "id": "rakuten-careers",
+      "family": "rakuten",
+      "service": "rakuten-careers",
+      "label": "楽天Careers（楽天自社求人。一般求人とは別）",
+      "category": "employer-career",
+      "seedUrl": "https://corp.rakuten.co.jp/careers/"
+    },
+    {
+      "id": "rakuten-gora",
+      "family": "rakuten",
+      "service": "rakuten-gora",
+      "label": "楽天GORA",
+      "category": "golf",
+      "seedUrl": "https://gora.golf.rakuten.co.jp/doc/area/chiba/"
+    },
+    {
+      "id": "rakuten-books",
+      "family": "rakuten",
+      "service": "rakuten-books",
+      "label": "楽天ブックス",
+      "category": "books",
+      "seedUrl": "https://books.rakuten.co.jp/search?sitem=%E7%AE%B1%E6%A0%B9"
+    },
+    {
+      "id": "rakuten-ichiba",
+      "family": "rakuten",
+      "service": "rakuten-ichiba",
+      "label": "楽天市場",
+      "category": "shopping",
+      "seedUrl": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/"
+    }
+  ]
+}

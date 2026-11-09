@@ -17,8 +17,8 @@
     "web": "node --import tsx src/cli.ts web",
     "test:ui": "node scripts/ui-smoke.mjs",
     "test:image": "sh infra/openshell/smoke.sh",
-    "format": "prettier --write src web test scripts examples .github",
-    "format:check": "prettier --check src web test scripts examples .github"
+    "format": "prettier --write src web test scripts examples config .github",
+    "format:check": "prettier --check src web test scripts examples config .github"
   },
   "engines": {
     "node": ">=22"

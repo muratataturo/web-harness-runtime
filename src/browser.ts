@@ -22,7 +22,7 @@ export const EXTRACT = `JSON.stringify((()=>{
   .map(a=>({text:a.innerText.trim().slice(0,180),url:a.href}));
  const seen=new Set();
  const unique=links.filter(l=>{if(seen.has(l.url))return false;seen.add(l.url);return true;});
- const detail=/\\/(?:sln\\/H[0-9a-z]+|strJ[0-9]+|yad[0-9]+|usedcar\\/detail\\/|chintai\\/(?:bc|jnc)_[0-9]+|viewjob)/i;
+ const detail=/\\/(?:sln\\/?H[0-9a-z]+|strJ[0-9]+|yad[0-9]+|usedcar\\/detail\\/|chintai\\/(?:bc|jnc)_[0-9]+|viewjob)/i;
  const rank=l=>/\\/chintai\\/bc_[0-9]+/i.test(l.url)?3:/\\/chintai\\/jnc_[0-9]+/i.test(l.url)?1:detail.test(l.url)?2:0;
  unique.sort((a,b)=>rank(b)-rank(a));
  const text=title+'\\n'+body;

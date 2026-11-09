@@ -177,6 +177,7 @@ export function renderAnswer(task: Task): string {
   const lines = [
     answer.summary,
     "",
+    `状態: ${task.status} / 詳細取得: ${task.retrieval?.status ?? "未検証"}`,
     `調査日時: ${task.updatedAt} / モデル: ${task.model}`,
     "",
   ];

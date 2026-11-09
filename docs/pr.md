@@ -4,7 +4,7 @@
 
 ## 実装
 
-- CLI: run/run-file、モデル・ソース一覧、状態・履歴・retry、5サービスの評価ケースとbrowser-only切り分け。
+- CLI: run/run-file、モデル・ソース一覧、状態・履歴・retry、5サービスの評価ケースとbrowser-only切り分け。楽天8アダプター、詳細完了契約、trusted URL台帳と再検証CLI。
 - 調査品質: 個別エンティティの判定、同じ候補への引用対応、一覧/制限画面の推薦拒否、引用修復の案内、無料枠切れの分類。
 - Router: DAG検証、上限2の並列実行、未確認の前提を持つタスクのskip、タスクと目標の関連付け。
 - 協調: 内部A2A envelope、メンバー/配送ID/hop検査、会話内の指摘と差し戻し。外部A2A規格への準拠はうたわない。
@@ -19,7 +19,7 @@
 
 ## 検証
 
-- `npm run check`、`npm test`（55件）、`npm run build`、整形チェック。
+- `npm run check`、`npm test`（64件）、`npm run build`、整形チェック。
 - `npm run test:ui`: デスクトップ/390pxモバイルで8フロー。両シナリオ、好みの反映、再読み込み、改訂、停止、JSエラー0。
 - `npm start -- eval --browser-only --case gourmet-kyoto-lunch`: 一覧→個別ランチ詳細2件を取得。
 - `eval --retrieval-only --case jalan-hakone-onsen suumo-kosugi-rental`: 公開HTMLで一覧→詳細2件ずつを取得。
@@ -36,3 +36,12 @@
 self-host VM/gatewayが未指定のため、実OpenShell発行・credential rewrite・Landlock下のChromeは未検証。Docker起動と別の検証ゲートとする。sandboxは成果物回収後もretainする。
 
 参照画面に似た会話構成を実装したが、認証後のGrok全機能の複製ではない。参照commitと再現/差分は [docs/reference-ux.md](reference-ux.md)、結果は [docs/verification-results.md](verification-results.md)、次の検証は [docs/verification-plan.md](verification-plan.md)。
+
+
+## trusted URLと楽天の検証
+
+個別対象の本文・領域別必須項目を取得できることを完了条件に追加。共通ナビ・検索フォームだけの語では完了にしない。sourceの検証では2対象以上を確認し、合格した個別URLだけを7日有効で登録する。取得根拠・日時・方式・本文ハッシュを保存し、再検証失敗/期限切れは利用不可。台帳更新はプロセス間ロックと新旧検査で保護する。
+
+楽天ビューティ/トラベル/ぐるなび/Car車検/GORA/ブックス/市場は各2件合格、14URL登録。楽天不動産の確認した導線は認証転送、中古車はサービス終了、Careersは一般求人の代替として未対応。Recruit系は5サービス各2件を再検証し、Indeedは引き続き制限。全12サービス24URL。非表示のホテルリンクは探索にのみ使用し、引用には取得先の可視本文を使う。詳細は [docs/trusted-urls.md](trusted-urls.md)。
+
+これは詳細取得の検証であり、楽天を使ったLLM回答の意味的品質の合格とはしない。実OpenShell gatewayでの発行も未検証。

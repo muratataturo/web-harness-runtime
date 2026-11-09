@@ -12,7 +12,7 @@ export const adapters: Adapter[] = [
     hosts: ["beauty.hotpepper.jp"],
     keywords: /髪|美容|サロン|ヘア|韓国|アイドル|縮毛|salon|hair/i,
     guidance:
-      "美容室の詳細 /sln/H.../、クーポン、スタイル、口コミを比較する。髪質改善と韓国風の根拠を別々に集める。駅徒歩分数はアクセス欄で確認。「有名」は宣伝文句だけで断定せず口コミ数・評価・実績と区別する。検索は /sln/keyword/ + encodeURIComponent(短い検索語) + / を使える。語を絞って探す。",
+      "美容室の詳細 /slnH.../、クーポン、スタイル、口コミを比較する。髪質改善と韓国風の根拠を別々に集める。駅徒歩分数はアクセス欄で確認。「有名」は宣伝文句だけで断定せず口コミ数・評価・実績と区別する。検索URLを推測せず、地域・駅の実在リンクを辿る。渋谷の入口は /svcSA/macAD/salon/。",
   },
   {
     id: "hotpepper-gourmet",
@@ -48,6 +48,66 @@ export const adapters: Adapter[] = [
     keywords: /求人|仕事|転職|就職|年収|リモート|job/i,
     guidance:
       "勤務地、職種、雇用形態、給与、要件、掲載日を /viewjob?jk=... の求人詳細で確認する。https://jp.indeed.com/jobs?q= + encodeURIComponent(職種) + &l= + encodeURIComponent(勤務地) で検索できる。年収下限と上限、年俸と月給、固定残業代の有無を区別する。給与レンジの上限だけで希望年収を満たすと判定しない。Request Blocked・CAPTCHAは回避しない。応募はしない。",
+  },
+  {
+    id: "rakuten-beauty",
+    hosts: ["beauty.rakuten.co.jp"],
+    keywords: /髪|美容|サロン|ヘア|韓国|salon|hair/i,
+    guidance:
+      "地域一覧から /s数字/ の個別サロン詳細へ進む。メニュー料金、アクセス、特徴を分けて確認する。",
+  },
+  {
+    id: "rakuten-travel",
+    hosts: [
+      "travel.rakuten.co.jp",
+      "hotel.travel.rakuten.co.jp",
+      "review.travel.rakuten.co.jp",
+    ],
+    keywords: /旅|宿|ホテル|温泉|泊|hotel/i,
+    guidance:
+      "地域一覧から /HOTEL/数字/数字.html の宿詳細へ進む。日程未定の空室や合計額を断定しない。",
+  },
+  {
+    id: "rakuten-gourmet",
+    hosts: ["r.gnavi.co.jp"],
+    keywords: /グルメ|食|料理|ランチ|ディナー|和食|restaurant/i,
+    guidance:
+      "楽天ぐるなび。店舗ID付きの詳細ページで住所、営業時間、予算を確認。PR順位を品質評価にしない。",
+  },
+  {
+    id: "rakuten-realestate",
+    hosts: ["realestate.rakuten.co.jp"],
+    keywords: /賃貸|物件|家賃|マンション|住ま|住宅/i,
+    guidance:
+      "地域・駅の実在リンクから個別物件へ進み、家賃、管理費、間取り、アクセスを確認。SUUMOと同様、空室や成約を保証しない。",
+  },
+  {
+    id: "rakuten-car",
+    hosts: ["car.rakuten.co.jp"],
+    keywords: /車|車検|中古|car/i,
+    guidance:
+      "車検店舗と中古車購入は別能力。終了した中古車サービスを在庫情報源にしない。車検店舗は料金とアクセスを確認。",
+  },
+  {
+    id: "rakuten-gora",
+    hosts: ["gora.golf.rakuten.co.jp", "booking.gora.golf.rakuten.co.jp"],
+    keywords: /ゴルフ|コース|golf/i,
+    guidance:
+      "地域一覧から /guide/disp/c_id/数字/ のゴルフ場詳細へ進む。所在地・コース・アクセスを確認。日付未指定の料金や空きを断定しない。",
+  },
+  {
+    id: "rakuten-books",
+    hosts: ["books.rakuten.co.jp"],
+    keywords: /本|書籍|読書|書|book/i,
+    guidance:
+      "/rb/数字/ の商品詳細で書名、著者/出版社、発売情報、価格を確認。購入はしない。",
+  },
+  {
+    id: "rakuten-ichiba",
+    hosts: ["search.rakuten.co.jp", "item.rakuten.co.jp"],
+    keywords: /商品|買|買い物|リュック|用品|バッグ|ショッピング/i,
+    guidance:
+      "検索一覧から item.rakuten.co.jp/店舗/商品/ へ進む。商品仕様、価格、店舗を確認。広告リダイレクトのホストは自動許可しない。",
   },
 ];
 export function publicUrl(value: string): URL {
@@ -115,7 +175,7 @@ export function entityKey(value: string): string | undefined {
   if (!adapter) return `generic:${url.href}`;
   let id: string | undefined;
   if (adapter.id === "hotpepper-beauty")
-    id = url.pathname.match(/^\/sln\/(H[0-9a-z]+)(?:\/|$)/i)?.[1];
+    id = url.pathname.match(/^\/sln\/?(H[0-9a-z]+)(?:\/|$)/i)?.[1];
   if (adapter.id === "hotpepper-gourmet")
     id = url.pathname.match(/^\/str(J[0-9]+)(?:\/|$)/i)?.[1];
   if (adapter.id === "jalan")
@@ -126,5 +186,26 @@ export function entityKey(value: string): string | undefined {
     id = url.pathname.match(/^\/chintai\/((?:bc|jnc)_[0-9]+)(?:\/|$)/)?.[1];
   if (adapter.id === "indeed" && /^\/(?:viewjob|rc\/clk)$/.test(url.pathname))
     id = url.searchParams.get("jk") ?? undefined;
+
+  if (adapter.id === "rakuten-beauty")
+    id = url.pathname.match(/^\/(s\d{8,})(?:\/|$)/)?.[1];
+  if (adapter.id === "rakuten-travel")
+    id = url.pathname.match(/^\/HOTEL\/(\d+)\//i)?.[1];
+  if (adapter.id === "rakuten-gourmet")
+    id = url.pathname.match(/^\/((?=[a-z0-9]*\d)[a-z0-9]{6,20})(?:\/|$)/i)?.[1];
+  if (adapter.id === "rakuten-gora")
+    id = url.pathname.match(/^\/guide\/disp\/c_id\/(\d+)(?:\/|$)/)?.[1];
+  if (adapter.id === "rakuten-books")
+    id = url.pathname.match(/^\/rb\/(\d+)(?:\/|$)/)?.[1];
+  if (
+    adapter.id === "rakuten-ichiba" &&
+    url.hostname === "item.rakuten.co.jp"
+  ) {
+    const m = url.pathname.match(/^\/([^/]+)\/([^/]+)\/?$/);
+    if (m && !["c", "info", "company", "search"].includes(m[2]!))
+      id = m[1] + ":" + m[2];
+  }
+  if (adapter.id === "rakuten-car")
+    id = url.pathname.match(/^\/shaken\/shop\/(\d+)(?:\/|$)/)?.[1];
   return id ? `${adapter.id}:${id}` : undefined;
 }

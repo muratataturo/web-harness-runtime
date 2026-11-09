@@ -6,7 +6,9 @@ export interface PageAssessment {
     | "maintenance"
     | "access_denied"
     | "not_found"
-    | "empty";
+    | "empty"
+    | "retired"
+    | "login_required";
   shouldStop: boolean;
   reason: string;
 }
@@ -27,8 +29,29 @@ export function assessPage(
       reason:
         "公開HTML HTTP 404。取得済みリンクから正しい詳細URLを確認してください。",
     };
+  if ((page.acquisition?.status ?? 200) >= 400)
+    return {
+      kind: "access_denied",
+      shouldStop: true,
+      reason: `公開HTML HTTP ${page.acquisition!.status}。正常な個別詳細として扱いません。`,
+    };
   const title = page.title.trim();
   const text = page.text.trim();
+  if (
+    /サービス.{0,6}終了/.test(title) ||
+    /楽天Car中古車は[\s\S]{0,100}サービス終了/.test(text)
+  )
+    return {
+      kind: "retired",
+      shouldStop: true,
+      reason: "サービス終了の告知です。現行の詳細情報源として登録しません。",
+    };
+  if (/^(?:ログイン|サインイン|Sign in|Log in)/i.test(title))
+    return {
+      kind: "login_required",
+      shouldStop: true,
+      reason: "ログインが必要なページです。公開詳細として登録しません。",
+    };
   if (
     /blocked|access denied|just a moment|attention required|captcha/i.test(
       title,

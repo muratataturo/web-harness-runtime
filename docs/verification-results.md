@@ -61,3 +61,10 @@ GitHub Actions の設定を追加したが、GitHub上のCI実行結果をこの
 - 実VM/gatewayでの並列sandbox発行・隔離・異常時cleanup: rolloutで検証する。
 
 追加回帰: Windows-31J/UTF-8、本文と表の区切り、引用検証、検索本体と広告の優先順、転送先/DNS検査、サイズ上限、401/403/429/404、無料枠のUTC→JST表示をテスト。詳細は `docs/evidence/public-html-details.json`。
+
+
+## 2026-11-10 trusted URLと楽天の追加検証
+
+完了条件を個別本文・領域別必須項目の取得に変更。楽天7サービス14URL、Recruit系5サービス10URLを確認して登録。楽天不動産は確認した導線が認証転送、中古車は終了、Careersは未対応、Indeedは制限として登録除外。[詳細と根拠台帳](trusted-urls.md)。推論APIを使わずに実施し、LLM回答の合格とはしない。
+
+追加後の `npm run check` / `npm run build` / 整形チェック / 全64テストが成功。Webの8フローの回帰確認とLinux arm64コンテナのnetwork none・非root・秘密情報なしのCLI/Chromium smokeも成功。同梱台帳の初回読み込みと、コンテナ内の `trusted list --all` を確認。
