@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { randomUUID } from "node:crypto";
 import { allowedHosts, routeSources } from "./sources.js";
+import { interactionMode } from "./interaction.js";
 
 export interface SandboxCommand {
   label: string;
@@ -10,6 +11,10 @@ export interface SandboxCommand {
   args: string[];
 }
 export interface OpenShellTaskOptions {
+  model?: string;
+  improvement?: import("./improvement-context.js").ImprovementContext;
+  interactionMode?: import("./interaction.js").InteractionMode;
+  deepenRounds?: number;
   query: string;
   urls: string[];
   /** An already registered, authenticated gateway name; never a URL or SSH command. */
@@ -36,6 +41,7 @@ export interface OpenShellPlan {
   policyYaml: string;
   commands: SandboxCommand[];
   inspectCommand: SandboxCommand;
+  stopCommand: SandboxCommand;
   deleteCommand: SandboxCommand;
   limits: { timeoutSeconds: number; maxSteps: number; maxPages: number };
   secretMode: "gateway-provider-placeholder";
@@ -49,6 +55,8 @@ export interface SandboxCommandResult {
   termination?: "timeout" | "output_limit" | "aborted";
 }
 export interface OpenShellExecution {
+  cleanupStatus: "stopped" | "unconfirmed";
+  observedSandbox?: { id: string; name: string; phase: string };
   sandboxName: string;
   status: "completed" | "partial" | "failed" | "cancelled";
   commands: SandboxCommandResult[];
@@ -89,7 +97,7 @@ export function openShellPolicy(hosts: string[]): string {
     "filesystem_policy:",
     "  include_workdir: true",
     "  read_only: [/usr, /lib, /lib64, /etc, /opt/web-harness, /bin, /sbin, /sys, /dev]",
-    "  read_write: [/workspace, /tmp, /home/node]",
+    "  read_write: [/sandbox, /workspace, /tmp, /home/node]",
     "landlock:",
     "  compatibility: hard_requirement",
     "process:",
@@ -127,15 +135,20 @@ export function planOpenShellTask(
   if (!options.urls.length || options.urls.length > 20)
     throw new Error("Specify 1–20 source URLs");
   const sources = routeSources(options.query, options.urls);
+  interactionMode(options.interactionMode);
+  if (
+    !Number.isSafeInteger(options.deepenRounds ?? 2) ||
+    (options.deepenRounds ?? 2) < 0 ||
+    (options.deepenRounds ?? 2) > 3
+  )
+    throw new Error("deepenRounds は0〜3です");
   const gateway = identifier(options.gateway, "gateway");
   const sandboxName = identifier(
     options.name ?? `research-${randomUUID().slice(0, 8)}`,
     "name",
   );
-  const provider = identifier(
-    options.provider ?? "web-harness-openrouter",
-    "provider",
-  );
+  if (sandboxName.length > 19) throw new Error("sandbox name は19文字以内です");
+  const provider = identifier(options.provider ?? "wh-pi-router", "provider");
   const image = options.image ?? "web-harness-runtime:local";
   if (!/^[a-zA-Z0-9][a-zA-Z0-9._/:@-]{0,254}$/.test(image))
     throw new Error("Invalid OCI image reference");
@@ -163,6 +176,15 @@ export function planOpenShellTask(
     image,
     "--provider",
     provider,
+    "--no-auto-providers",
+    "--env",
+    "RUNTIME_DIR=/sandbox/.runtime",
+    "--env",
+    "HOME=/sandbox",
+    "--env",
+    "AGENT_BROWSER_EXECUTABLE_PATH=/opt/web-harness/infra/openshell/chromium",
+    "--env",
+    "PI_CODING_AGENT_DIR=/tmp/pi-agent",
     "--policy",
     policyPath,
     "--cpu",
@@ -185,7 +207,17 @@ export function planOpenShellTask(
     "--timeout",
     String(limits.timeoutSeconds),
     "--json",
+    "--mode",
+    options.interactionMode ?? "approval",
+    "--deepen-rounds",
+    String(options.deepenRounds ?? 2),
   ]);
+  if (options.model) create.args.push("--model", options.model);
+  if (options.improvement)
+    create.args.push(
+      "--improvement-context",
+      Buffer.from(JSON.stringify(options.improvement)).toString("base64url"),
+    );
   if (
     create.args.some((arg) => Buffer.byteLength(arg) > 32 * 1024) ||
     create.args.reduce((sum, arg) => sum + Buffer.byteLength(arg), 0) >
@@ -196,7 +228,7 @@ export function planOpenShellTask(
     "sandbox",
     "download",
     sandboxName,
-    ".runtime",
+    "/sandbox/.runtime",
     join(directory, "artifacts"),
   ]);
   return {
@@ -216,6 +248,11 @@ export function planOpenShellTask(
       sandboxName,
       "--output",
       "json",
+    ]),
+    stopCommand: command("stop-retain", gateway, [
+      "sandbox",
+      "stop",
+      sandboxName,
     ]),
     deleteCommand: command("delete", gateway, [
       "sandbox",
@@ -284,11 +321,15 @@ export function runOpenShellCommand(
       });
       return;
     }
-    const child = spawn("openshell", command.args, {
-      shell: false,
-      env: hostEnvironment(),
-      stdio: ["ignore", "pipe", "pipe"],
-    });
+    const child = spawn(
+      process.env.OPENSHELL_BIN ?? "openshell",
+      command.args,
+      {
+        shell: false,
+        env: hostEnvironment(),
+        stdio: ["ignore", "pipe", "pipe"],
+      },
+    );
     let stdout = "",
       stderr = "",
       captured = 0,
@@ -379,6 +420,7 @@ export async function executeOpenShellPlan(
     throw new Error("Explicit execution is required");
   await writeOpenShellPlan(plan);
   const commands: SandboxCommandResult[] = [];
+  let observedSandbox: OpenShellExecution["observedSandbox"];
   let status: OpenShellExecution["status"] = "failed";
   try {
     options.signal?.throwIfAborted();
@@ -397,6 +439,25 @@ export async function executeOpenShellPlan(
             ? "partial"
             : "failed";
     if (!options.signal?.aborted) {
+      const inspect = await runOpenShellCommand(plan.inspectCommand, {
+        ...options,
+        timeoutMs: 15000,
+        onOutput: undefined,
+      });
+      commands.push(inspect);
+      if (inspect.exitCode === 0) {
+        const observed = JSON.parse(inspect.stdout);
+        if (
+          observed.name === plan.sandboxName &&
+          typeof observed.id === "string" &&
+          typeof observed.phase === "string"
+        )
+          observedSandbox = {
+            id: observed.id,
+            name: observed.name,
+            phase: observed.phase,
+          };
+      }
       const download = await runOpenShellCommand(plan.commands[1]!, {
         ...options,
         timeoutMs: 90_000,
@@ -414,18 +475,57 @@ export async function executeOpenShellPlan(
       stderr: error instanceof Error ? error.message : String(error),
     });
   }
+  // The gateway owns guest lifetime. Stopping the CLI alone does not stop a VM.
+  // Stop only this run's uniquely named sandbox; retain its disk and host artifacts.
+  if (!observedSandbox) {
+    try {
+      const inspect = await runOpenShellCommand(plan.inspectCommand, {
+        timeoutMs: 10000,
+      });
+      commands.push(inspect);
+      const observed =
+        inspect.exitCode === 0 ? JSON.parse(inspect.stdout) : undefined;
+      if (
+        observed?.name === plan.sandboxName &&
+        typeof observed.id === "string" &&
+        typeof observed.phase === "string"
+      )
+        observedSandbox = {
+          id: observed.id,
+          name: observed.name,
+          phase: observed.phase,
+        };
+    } catch {
+      /* Unreachable gateway cannot establish allocation or safe cleanup. */
+    }
+  }
+  let cleanupStatus: OpenShellExecution["cleanupStatus"] = "unconfirmed";
+  if (observedSandbox) {
+    try {
+      const stopped = await runOpenShellCommand(plan.stopCommand, {
+        timeoutMs: 15000,
+      });
+      commands.push(stopped);
+      if (stopped.exitCode === 0) cleanupStatus = "stopped";
+    } catch {
+      /* Retain inspect/delete commands for operator recovery. */
+    }
+  }
+  if (cleanupStatus !== "stopped" && observedSandbox)
+    options.onOutput?.(
+      "stderr",
+      `sandboxの停止を確認できません。sandbox get/stop ${plan.sandboxName} で確認してください。`,
+    );
   if (options.signal?.aborted) status = "cancelled";
   const execution: OpenShellExecution = {
     sandboxName: plan.sandboxName,
     status,
     commands,
+    observedSandbox,
+    cleanupStatus,
     artifactsDirectory: join(plan.directory, "artifacts"),
     cleanupPolicy: "retain",
-    sandboxState: commands.some(
-      (c) => c.label === "download-artifacts" && c.exitCode === 0,
-    )
-      ? "created"
-      : "unknown",
+    sandboxState: observedSandbox ? "created" : "unknown",
   };
   await writeFile(
     join(plan.directory, "execution.json"),

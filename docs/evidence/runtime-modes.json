@@ -1,0 +1,666 @@
+{
+  "recordedAt": "2026-11-10T08:48:45.256787+00:00",
+  "environment": {
+    "platform": "Apple Silicon macOS",
+    "gateway": "web-harness-local",
+    "version": "0.1.7",
+    "computeDriver": "vm",
+    "image": "web-harness-runtime:local",
+    "engine": "pi-openrouter",
+    "credentialMode": "gateway provider; no host subscription credentials copied"
+  },
+  "autoBooks": {
+    "taskId": "77119783-49ad-469c-bec6-1ede3c017669",
+    "status": "succeeded",
+    "interactionMode": "auto",
+    "agent": "pi-openrouter",
+    "model": "nvidia/nemotron-3.5-super-vl:free",
+    "query": "まずplan_taskで書名・著者・価格・ISBNの4条件を定義し、その後にページ閲覧と引用保存をしてください。楽天ブックスのこの1冊を日本語で根拠付きで回答してください。購入はしません。未確認はunknownにしてください。",
+    "urls": [
+      "https://books.rakuten.co.jp/rb/18577690/"
+    ],
+    "execution": {
+      "target": "openshell",
+      "isolation": "openshell-sandbox",
+      "gateway": "web-harness-local",
+      "sandboxName": "research-63589aad",
+      "image": "web-harness-runtime:local",
+      "elapsedMs": 52287
+    },
+    "metrics": {
+      "elapsedMs": 16386,
+      "tokenAccounting": "provider-reported",
+      "tokens": {
+        "inputTokens": 49710,
+        "outputTokens": 2123,
+        "cachedInputTokens": 13008,
+        "cacheWriteInputTokens": 0,
+        "reasoningOutputTokens": null,
+        "totalTokens": 51833,
+        "source": "pi-session-total"
+      },
+      "billing": {
+        "mode": "openrouter-free",
+        "additionalApiUsd": 0,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    },
+    "criteria": [
+      {
+        "id": "title",
+        "description": "商品ページに記載されている書名（タイトル）を確認する。",
+        "weight": 10,
+        "required": true
+      },
+      {
+        "id": "author",
+        "description": "商品ページに記載されている著者名を確認する。",
+        "weight": 10,
+        "required": true
+      },
+      {
+        "id": "price",
+        "description": "商品ページに記載されている販売価格（税込・定価など表示通り）を確認する。購入は行わない。",
+        "weight": 10,
+        "required": true
+      },
+      {
+        "id": "isbn",
+        "description": "商品ページに記載されているISBNを確認する。",
+        "weight": 10,
+        "required": true
+      }
+    ],
+    "retrieval": {
+      "status": "verified",
+      "verifiedDetailUrls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "checkedPages": 1
+    },
+    "pages": [
+      {
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+        "capturedAt": "2026-11-10T08:34:36.691Z",
+        "acquisition": {
+          "kind": "public-html",
+          "status": 200,
+          "charset": "utf-8",
+          "contentType": "text/html;charset=UTF-8"
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev-1",
+        "pageId": "page-1",
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+        "capturedAt": "2026-11-10T08:34:36.691Z"
+      },
+      {
+        "id": "ev-2",
+        "pageId": "page-1",
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "quote": "1,430円（税込）",
+        "capturedAt": "2026-11-10T08:34:36.691Z"
+      },
+      {
+        "id": "ev-3",
+        "pageId": "page-1",
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "quote": "JTBパブリッシング 旅行ガイドブック 編集部(編)",
+        "capturedAt": "2026-11-10T08:34:36.691Z"
+      },
+      {
+        "id": "ev-4",
+        "pageId": "page-1",
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "quote": "9784533172731",
+        "capturedAt": "2026-11-10T08:34:36.691Z"
+      }
+    ],
+    "answer": {
+      "summary": "楽天ブックスの商品詳細ページ（https://books.rakuten.co.jp/rb/18577690/）を閲覧し、書名・著者・価格・ISBNの4条件を確認しました。すべての条件がページ本文に記載されており、supportedと評価できます。購入は行っていません。",
+      "candidates": [
+        {
+          "name": "るるぶ 箱根 '27 （るるぶ情報版）",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "matches": [
+            {
+              "criterionId": "title",
+              "status": "supported",
+              "explanation": "ページ本文に「るるぶ 箱根 '27 （るるぶ情報版）」と記載されている。",
+              "evidenceIds": [
+                "ev-1"
+              ]
+            },
+            {
+              "criterionId": "author",
+              "status": "supported",
+              "explanation": "ページ本文の「著者／編集：」欄に「JTBパブリッシング 旅行ガイドブック 編集部(編)」と記載されている。",
+              "evidenceIds": [
+                "ev-3"
+              ]
+            },
+            {
+              "criterionId": "price",
+              "status": "supported",
+              "explanation": "ページ本文に「1,430円（税込）」と記載されている。",
+              "evidenceIds": [
+                "ev-2"
+              ]
+            },
+            {
+              "criterionId": "isbn",
+              "status": "supported",
+              "explanation": "ページ本文の「ISBN：」欄に「9784533172731」と記載されている。",
+              "evidenceIds": [
+                "ev-4"
+              ]
+            }
+          ],
+          "score": 100,
+          "eligible": true
+        }
+      ],
+      "limitations": [
+        "• 取得方式は公開サーバーHTML（public-html）であり、ブラウザ描画や動的な在庫・送料・SKU確定価格を確認したものではない。\n• 価格は閲覧時点（2026-11-10）の表示であり、購入時の確約ではない。\n• 購入は行っていない。"
+      ]
+    },
+    "error": null
+  },
+  "approvalDayOut": {
+    "task": {
+      "taskId": "67dc8ce1-3d85-422a-a904-3c43c251097e",
+      "status": "partial",
+      "interactionMode": "approval",
+      "agent": "pi-openrouter",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "query": "2026年11月14日(土)に大人1名で押上周辺を一日遊ぶ案を作ってください。最初にplan_taskで「施設の掲載入場料金」と「2026年11月14日の当日営業時間」を必須条件として定義してください。すみだ水族館を遊び施設の候補にし、当日の営業時間が本文から確認できなければunknownとして残してください。食事1500円・カフェ600円・交通800円は未確認の予算枠、合計8000円以内。移動は見積と明記し、予約・購入はせず、確認できた根拠を示して仮の時刻付き行程を日本語summaryにしてください。楽しみポイントは水族館をゆっくり見るか、周辺散策を長くするかの推奨と2択。本文を引用したら条件を変更せずfinish_taskで必ず回答を保存してください。",
+      "urls": [
+        "https://sumida-aquarium.com/about/price/",
+        "https://sumida-aquarium.com/about/access/"
+      ],
+      "execution": {
+        "target": "openshell",
+        "isolation": "openshell-sandbox",
+        "gateway": "web-harness-local",
+        "sandboxName": "research-42f50be3",
+        "sandboxId": "16ead647-7798-4e6b-84a9-5e6230b9fc99",
+        "image": "web-harness-runtime:local",
+        "elapsedMs": 169723
+      },
+      "metrics": {
+        "elapsedMs": 167775,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 336164,
+          "outputTokens": 17192,
+          "cachedInputTokens": 234144,
+          "cacheWriteInputTokens": 0,
+          "reasoningOutputTokens": null,
+          "totalTokens": 353356,
+          "source": "pi-session-total"
+        },
+        "billing": {
+          "mode": "openrouter-free",
+          "additionalApiUsd": 0,
+          "subscriptionAllocationUsd": null,
+          "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+        }
+      },
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "すみだ水族館の大人（高校生以上/18歳以上など）掲載入場料金の確認",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "c2",
+          "description": "2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "c3",
+          "description": "押上駅・東京スカイツリー駅からのアクセス・徒歩時間の確認",
+          "weight": 7,
+          "required": true
+        },
+        {
+          "id": "c4",
+          "description": "合計8000円以内の予算枠（入場料＋食事1500円＋カフェ600円＋交通800円）の試算",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "c5",
+          "description": "予約・購入を行わず、当日利用可能であることの確認",
+          "weight": 5,
+          "required": true
+        },
+        {
+          "id": "c6",
+          "description": "楽しみポイントとして「水族館をゆっくり見る」か「周辺散策を長くする」かの2択推奨を提示",
+          "weight": 6,
+          "required": true
+        }
+      ],
+      "retrieval": {
+        "status": "verified",
+        "verifiedDetailUrls": [
+          "https://sumida-aquarium.com/about/price/"
+        ],
+        "checkedPages": 2
+      },
+      "pages": [
+        {
+          "url": "https://sumida-aquarium.com/about/price/",
+          "title": "ご利用料金・年間パスポート | 東京スカイツリータウン®にある「すみだ水族館」【公式】",
+          "capturedAt": "2026-11-10T08:35:43.625Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          }
+        },
+        {
+          "url": "https://sumida-aquarium.com/about/access/",
+          "title": "営業時間・アクセス | 東京スカイツリータウン®にある「すみだ水族館」【公式】",
+          "capturedAt": "2026-11-10T08:35:49.680Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://sumida-aquarium.com/about/price/",
+          "quote": "大人\n2,700円",
+          "capturedAt": "2026-11-10T08:35:43.625Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://sumida-aquarium.com/about/access/",
+          "quote": "休館日\nなし（年中無休）",
+          "capturedAt": "2026-11-10T08:35:49.680Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://sumida-aquarium.com/about/access/",
+          "quote": "ご入場、チケットおよび年間パスポートの購入・手続きの受付は閉館の1時間前までです。",
+          "capturedAt": "2026-11-10T08:35:49.680Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://sumida-aquarium.com/about/access/",
+          "quote": "10:00\n体験プログラム\nチンアナゴお面",
+          "capturedAt": "2026-11-10T08:35:49.680Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-2",
+          "url": "https://sumida-aquarium.com/about/access/",
+          "quote": "「押上(スカイツリー前)」駅 直通徒歩5分",
+          "capturedAt": "2026-11-10T08:35:49.680Z"
+        }
+      ],
+      "answer": {
+        "summary": "【2026年11月14日(土) 大人1名 押上周辺一日遊び（すみだ水族館メイン）】\n対象施設：すみだ水族館（東京都墨田区押上一丁目1番2号 東京スカイツリータウン・ソラマチ5F・6F）\n\n1. 入場料金：大人 2,700円（公式掲載、supported）\n2. 2026年11月14日の営業時間：本文に当日の開閉時間記載なし→unknown。休館日は「なし（年中無休）」との記載あり。当日は公式サイトのカレンダーで開閉時間・臨時休館の有無を必ず確認。\n3. アクセス：押上(スカイツリー前)駅 直通徒歩5分、とうきょうスカイツリー駅 すぐ（supported）\n4. 予算（合計8,000円以内）：入場2,700円＋食事1,500円＋カフェ600円＋交通800円＝5,600円の見積もりで8,000円以内（supported）。ただし食事・カフェ・交通は未確認の予算枠。\n5. 予約・購入：行わない。チケットカウンター販売・閉館1時間前まで購入手続き可との記載あり（supported）。当日の空き・混雑は確約しない。\n6. 楽しみポイントの2択推奨：推奨は「A.水族館をゆっくり見る」（入場料・施設が確定している核施設をじっくり）。代替案「B.周辺散策を長くする」（天候が良い場合）。\n\n仮の時刻付き行程（営業時間未確認のためすべて見積もり）：\n10:30 押上駅着、スカイツリータウンへ（徒歩5分見積もり）\n11:00 すみだ水族館入場（閉館1時間前まで購入手続き可）\n11:00〜14:00 水族館を見学（ペンギン・オットセイ・クラゲ・チンアナゴ等。本文にある「10:00 体験プログラム チンアナゴお面」等は館内プログラムの例示で、11/14実施は未確認）\n14:00〜15:00 東京ソラマチで昼食（1,500円枠、未確認）\n15:00〜16:00 押上周辺散策（隅田公園、スカイツリー展望等）\n16:00〜16:30 カフェ（600円枠、未確認）\n16:30 帰路（交通費800円は往復見積もり）\n合計見積もり5,600円、8,000円以内。",
+        "candidates": [
+          {
+            "name": "すみだ水族館",
+            "url": "https://sumida-aquarium.com/about/access/",
+            "matches": [
+              {
+                "criterionId": "c1",
+                "status": "supported",
+                "explanation": "公式料金ページに「大人 2,700円」の一般料金掲載あり（年間パスポート6,000円は別）。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "c2",
+                "status": "unknown",
+                "explanation": "アクセス・営業時間ページに2026年11月14日の開閉時間・当日営業時間の記載はなく、Calendarリンクのみ。短縮営業告知の日付は2026-11-14に関するものではない。unknownのままとする。",
+                "evidenceIds": []
+              },
+              {
+                "criterionId": "c3",
+                "status": "supported",
+                "explanation": "「押上(スカイツリー前)駅 直通徒歩5分」、および「東武スカイツリーライン とうきょうスカイツリー駅 すぐ」との記載あり。",
+                "evidenceIds": [
+                  "ev-5"
+                ]
+              },
+              {
+                "criterionId": "c4",
+                "status": "supported",
+                "explanation": "入場料2,700円は確定。未確認の予算枠（食事1,500円・カフェ600円・交通800円）を加えた合計見積もり5,600円は8,000円以内。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "c5",
+                "status": "supported",
+                "explanation": "「ご入場、チケットおよび年間パスポートの購入・手続きの受付は閉館の1時間前までです」との記載あり。予約・購入は行わず、当日窓口購入を前提とするが空き・混雑は確約しない。",
+                "evidenceIds": [
+                  "ev-3"
+                ]
+              },
+              {
+                "criterionId": "c6",
+                "status": "supported",
+                "explanation": "入場料2,700円が確定している核施設を軸に「水族館をゆっくり見る」を推奨し、代替に周辺散策案を提示（推奨自体は調査エージェントの助言）。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              }
+            ],
+            "score": 78,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "2026年11月14日の開閉時間は公開HTML本文に記載がなくunknown（公式サイトカレンダーで当日要確認）。臨時休館・短縮営業の有無も未確認。追加取得を試みたが本文欠落のため取得できず。",
+          "食事1,500円・カフェ600円・交通800円はユーザー指定の未確認予算枠であり、実店舗メニュー・運賃は調査していない。",
+          "館内プログラム時間（10:00 チンアナゴお面等）は本文に繰り返し掲載の例示であり、11/14の実施は未確認。",
+          "public-html取得のため、当日の空き・混雑・チケット販売状況は確約しない。行程の時刻はすべて営業時間未確認の見積もり。",
+          "追加確認しても未確認の項目: admission・2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）・本文の欠落",
+          "詳細取得の必須項目を確認できていない候補があります: https://sumida-aquarium.com/about/access/"
+        ]
+      },
+      "error": null
+    },
+    "loop": {
+      "interactionMode": "approval",
+      "executionTarget": "openshell",
+      "id": "444041b8-7e11-4f9e-b060-5bcfe78e8cb1",
+      "sourceTaskId": "67dc8ce1-3d85-422a-a904-3c43c251097e",
+      "query": "2026年11月14日(土)に大人1名で押上周辺を一日遊ぶ案を作ってください。最初にplan_taskで「施設の掲載入場料金」と「2026年11月14日の当日営業時間」を必須条件として定義してください。すみだ水族館を遊び施設の候補にし、当日の営業時間が本文から確認できなければunknownとして残してください。食事1500円・カフェ600円・交通800円は未確認の予算枠、合計8000円以内。移動は見積と明記し、予約・購入はせず、確認できた根拠を示して仮の時刻付き行程を日本語summaryにしてください。楽しみポイントは水族館をゆっくり見るか、周辺散策を長くするかの推奨と2択。本文を引用したら条件を変更せずfinish_taskで必ず回答を保存してください。",
+      "urls": [
+        "https://sumida-aquarium.com/about/price/",
+        "https://sumida-aquarium.com/about/access/"
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "すみだ水族館の大人（高校生以上/18歳以上など）掲載入場料金の確認",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "c2",
+          "description": "2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "c3",
+          "description": "押上駅・東京スカイツリー駅からのアクセス・徒歩時間の確認",
+          "weight": 7,
+          "required": true
+        },
+        {
+          "id": "c4",
+          "description": "合計8000円以内の予算枠（入場料＋食事1500円＋カフェ600円＋交通800円）の試算",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "c5",
+          "description": "予約・購入を行わず、当日利用可能であることの確認",
+          "weight": 5,
+          "required": true
+        },
+        {
+          "id": "c6",
+          "description": "楽しみポイントとして「水族館をゆっくり見る」か「周辺散策を長くする」かの2択推奨を提示",
+          "weight": 6,
+          "required": true
+        }
+      ],
+      "candidateUrls": [
+        "https://sumida-aquarium.com/about/access/"
+      ],
+      "minimumCandidates": 1,
+      "additionalUrls": [],
+      "allowReplacements": false,
+      "agent": "pi-openrouter",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "createdAt": "2026-11-10T08:38:12.296Z",
+      "updatedAt": "2026-11-10T08:38:12.300Z",
+      "status": "needs_input",
+      "maxIterations": 3,
+      "timeoutSeconds": 1800,
+      "bestTaskId": "67dc8ce1-3d85-422a-a904-3c43c251097e",
+      "baseline": {
+        "complete": false,
+        "verifiedDetails": 0,
+        "supportedRequired": 5,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://sumida-aquarium.com/about/access/",
+            "fields": [
+              "個別詳細の必須項目",
+              "2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）"
+            ]
+          }
+        ],
+        "causes": [
+          "truncated_body",
+          "detail_missing",
+          "required_unknown"
+        ],
+        "achievements": [
+          "official-visit:sumida-aquarium:c1",
+          "official-visit:sumida-aquarium:c3",
+          "official-visit:sumida-aquarium:c4",
+          "official-visit:sumida-aquarium:c5",
+          "official-visit:sumida-aquarium:c6"
+        ]
+      },
+      "best": {
+        "complete": false,
+        "verifiedDetails": 0,
+        "supportedRequired": 5,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://sumida-aquarium.com/about/access/",
+            "fields": [
+              "個別詳細の必須項目",
+              "2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）"
+            ]
+          }
+        ],
+        "causes": [
+          "truncated_body",
+          "detail_missing",
+          "required_unknown"
+        ],
+        "achievements": [
+          "official-visit:sumida-aquarium:c1",
+          "official-visit:sumida-aquarium:c3",
+          "official-visit:sumida-aquarium:c4",
+          "official-visit:sumida-aquarium:c5",
+          "official-visit:sumida-aquarium:c6"
+        ]
+      },
+      "iterations": [],
+      "promotedStrategies": [],
+      "questions": [
+        {
+          "url": "https://sumida-aquarium.com/about/access/",
+          "missing": [
+            "個別詳細の必須項目",
+            "2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）"
+          ],
+          "question": "https://sumida-aquarium.com/about/access/ の「個別詳細の必須項目・2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）」が未確認です。未確認を明記して受け取るか、調査を追加するか選べます。",
+          "options": [
+            "未確認を明記して提案を受け取る",
+            "同じ条件で追加調査する（時間・利用枠を追加）",
+            "同一候補の公式詳細URLを追加する"
+          ]
+        }
+      ],
+      "stopReason": "取得済みの根拠から未達を検出しました",
+      "approval": {
+        "id": "8cd78c06-44b3-4915-b7b1-11bfc873466d",
+        "status": "pending",
+        "title": "確認できた候補で進めますか？",
+        "reason": "取得済みの根拠から未達を検出しました。未確認: 個別詳細の必須項目・2026年11月14日（土）の当日営業時間の確認（本文になければunknownとし推測しない）。必須条件を緩めず、最良の回答を保持しています。",
+        "choices": [
+          {
+            "id": "return_partial",
+            "title": "未確認事項を明記して提案を受け取る",
+            "recommended": true,
+            "tradeoff": "追加推論なし。未確認条件・空席・営業日は保証できません。"
+          },
+          {
+            "id": "research_more",
+            "title": "同じ条件でもう一度調べる",
+            "tradeoff": "最大3回・1800秒を追加で使います。改善できない場合もあります。"
+          },
+          {
+            "id": "add_url",
+            "title": "公式の詳細URLを追加して調べる",
+            "tradeoff": "同一候補の公開URLを最大8件入力。認証・アクセス制限は回避しません。"
+          }
+        ]
+      }
+    }
+  },
+  "autoDayOutReplay": {
+    "loopId": "c881a071-08e6-4947-a7a8-fdc93cc9efdb",
+    "sourceTaskId": "67dc8ce1-3d85-422a-a904-3c43c251097e",
+    "mode": "auto",
+    "status": "completed_partial",
+    "iterations": 0,
+    "questions": [],
+    "approval": null,
+    "bestComplete": false,
+    "wallMs": 711,
+    "additionalInferenceCalls": 0,
+    "additionalTokens": 0,
+    "scope": "Re-diagnosis of the same previously captured MicroVM task; not fresh browsing or inference"
+  },
+  "autoBooksPostRunInspection": {
+    "id": "8cceef02-af51-4510-bc0b-e36618f741db",
+    "name": "research-63589aad",
+    "phase": "Completed"
+  },
+  "finalQuotaFailure": {
+    "taskId": "38af6dd7-1db1-4833-8cb0-b6b3bd92a9c2",
+    "status": "failed",
+    "interactionMode": "auto",
+    "agent": "pi-openrouter",
+    "model": null,
+    "query": "まずplan_taskで書名・著者・価格・ISBNの4条件を定義し、その後にページ閲覧と引用保存をしてください。楽天ブックスのこの1冊を日本語で根拠付きで回答してください。購入はしません。未確認はunknownにしてください。",
+    "urls": [
+      "https://books.rakuten.co.jp/rb/18577690/"
+    ],
+    "execution": {
+      "target": "openshell",
+      "isolation": "openshell-sandbox",
+      "gateway": "web-harness-local",
+      "sandboxName": "research-b6f458d8",
+      "sandboxId": "706757e0-45e6-4907-b553-61bb67713761",
+      "image": "web-harness-runtime:local",
+      "elapsedMs": 44956,
+      "cleanupStatus": "stopped"
+    },
+    "metrics": {
+      "elapsedMs": 333,
+      "tokenAccounting": "unavailable",
+      "tokens": null,
+      "billing": {
+        "mode": "openrouter-free",
+        "additionalApiUsd": null,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    },
+    "criteria": [],
+    "retrieval": null,
+    "pages": [],
+    "evidence": [],
+    "answer": null,
+    "error": "free-models-per-day: 無料日次枠の残量0/50。次回リセット 2026/11/11 09:00 日本時間。推論要求は送信していません。"
+  },
+  "reviewFindings": [
+    {
+      "scope": "approvalDayOut.task.answer.summary",
+      "finding": "スカイツリー展望等 is not backed by a verified fee in the budget. Do not treat the free-text itinerary as fully validated.",
+      "status": "unresolved"
+    },
+    {
+      "scope": "approvalDayOut.task",
+      "finding": "The specific date opening hours and individual detail contract are not verified.",
+      "status": "unknown-preserved"
+    }
+  ],
+  "earlierFailures": [
+    {
+      "kind": "provider-binary",
+      "detail": "A generic NVIDIA OpenRouter profile allowed opencode, not the Pi Node binary. Fixed by importing the repository Node-only provider profile."
+    },
+    {
+      "kind": "guest-workspace",
+      "detail": "MicroVM does not inherit OCI ENV and uses /sandbox. /workspace was not writable; explicit non-secret environment and /sandbox artifacts fixed it."
+    },
+    {
+      "kind": "tool-order",
+      "taskId": "33e274ad-56e2-4916-9951-d51eec54eff9",
+      "status": "partial-without-answer",
+      "detail": "Evidence before planning locked an empty criteria contract. Runtime now rejects evidence before planning and accepts identical plan retransmission."
+    }
+  ],
+  "measurementNotes": [
+    "Input includes cache tokens; cache is not added again to total. Pi reasoning-token breakdown is unavailable.",
+    "No paid fallback. API additional cost for successful free-model runs is zero; subscription allocation is not computed.",
+    "Auto/Approval used different requests and cache states, so timing is not a controlled comparison.",
+    "Previous three-persona Codex day-out runs were local host execution, not OpenShell VM."
+  ],
+  "browserMicroVMSmoke": {
+    "status": "failed",
+    "platform": "linux",
+    "uid": 1000,
+    "command": "agent-browser open data URL -> get title -> close",
+    "error": "CDP response channel closed",
+    "diagnostics": [
+      "Chromium zygote credentials operation not permitted under current OpenShell boundary",
+      "single-process and guest /proc read-only did not resolve; shared memfd open was denied"
+    ],
+    "policyRelaxedInRepository": false,
+    "claimScope": "Live research successes above used public HTML acquisition; no claim that Chromium DOM acquisition is supported in this MicroVM configuration."
+  },
+  "manualSandboxStops": {
+    "recordedAt": "2026-11-10T08:53:09.510360+00:00",
+    "names": [
+      "research-63589aad",
+      "research-42f50be3",
+      "wh-browser-proof",
+      "wh-chrome-probe",
+      "wh-chrome-single",
+      "wh-chrome-proc"
+    ],
+    "result": "stop CLI exited 0 for all; disks retained"
+  }
+}

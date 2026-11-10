@@ -42,7 +42,10 @@ test("OpenShell plans real lifecycle argv without contacting gateway or exposing
   assert.ok(create.args.includes("--provider"));
   assert.ok(create.args.includes("--policy"));
   assert.ok(create.args.includes("/opt/web-harness/dist/cli.js"));
-  assert.ok(!create.args.includes("--env"));
+  assert.ok(create.args.includes("--env"));
+  assert.ok(create.args.includes("RUNTIME_DIR=/sandbox/.runtime"));
+  assert.ok(!create.args.some((a) => a.startsWith("OPENROUTER_API_KEY=")));
+  assert.ok(create.args.includes("--no-auto-providers"));
   assert.ok(!create.args.includes("--env-from"));
   assert.ok(!create.args.includes("--upload"));
   assert.ok(!create.args.includes("--no-keep"));
@@ -179,4 +182,56 @@ else setInterval(()=>{},1000);
     process.env.PATH = original;
     await rm(directory, { recursive: true, force: true });
   }
+});
+
+test("OpenShell forwards mode, model and the immutable improvement contract instead of dropping context", async () => {
+  const { decodeImprovementContext } =
+    await import("../src/improvement-context.js");
+  const context = {
+    loopId: "loop-1",
+    iteration: 1,
+    criteria: [
+      { id: "fee", description: "掲載価格", weight: 5, required: true },
+    ],
+    candidateUrls: ["https://www.hotpepper.jp/strJ000000001/"],
+    gaps: [
+      { url: "https://www.hotpepper.jp/strJ000000001/", fields: ["掲載価格"] },
+    ],
+    priorityUrls: [],
+    visitedUrls: [],
+    strategy: "targeted-links" as const,
+  };
+  const plan = planOpenShellTask({
+    ...options,
+    interactionMode: "auto",
+    model: "openrouter/free",
+    deepenRounds: 1,
+    improvement: context,
+  });
+  const args = plan.commands[0]!.args;
+  assert.equal(args[args.indexOf("--mode") + 1], "auto");
+  assert.equal(args[args.indexOf("--model") + 1], "openrouter/free");
+  assert.deepEqual(
+    decodeImprovementContext(args[args.indexOf("--improvement-context") + 1]!),
+    context,
+  );
+  assert.ok(plan.commands[1]!.args.includes("/sandbox/.runtime"));
+  assert.ok(plan.stopCommand.args.includes("stop"));
+  assert.throws(
+    () => planOpenShellTask({ ...options, name: "abcdefghijklmnopqrst" }),
+    /19/,
+  );
+  assert.throws(
+    () => planOpenShellTask({ ...options, deepenRounds: 4 }),
+    /0〜3/,
+  );
+  assert.throws(
+    () =>
+      decodeImprovementContext(
+        Buffer.from(JSON.stringify({ ...context, iteration: 100 })).toString(
+          "base64url",
+        ),
+      ),
+    /スキーマ/,
+  );
 });

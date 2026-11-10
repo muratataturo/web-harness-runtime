@@ -105,3 +105,8 @@ npm run eval:day-out -- --persona family-ueno --agent codex
 CLIは全件成功0、要確認/部分結果2、失敗/未実行/追加調査の時間上限1、中断130を返す。quota・認証等の既知の停止条件は後続の未実行ペルソナを記録して停止する。
 
 137テスト・型・ビルド・整形を確認。ネイティブトークンの累積値を通知回数で二重計上しないこと、別threadを除外すること、欠測を0にしないこと、施設URLと取得契約を検証する。今回のトークン計測はCodex対応で、Claude/piのトークン値は未実装ならnullになる。
+
+
+## 実行環境とモードについての追記
+
+この3件はホスト上のCodex CLI実行で、OpenShellのVM実行ではありません。read-only設定とVM隔離は区別します。後続の変更でAuto/Approvalの2モードと、pi/OpenRouterの実MicroVM実行を追加しました。[別実測と起動手順](runtime-modes.md)。本ページの元の実測値・タスク状態は当時のまま保持します。

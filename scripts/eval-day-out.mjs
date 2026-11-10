@@ -3,13 +3,16 @@ import { Command } from "commander";
 import { readFile, mkdir, writeFile, rename } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
-import { runTask } from "../dist/runtime.js";
+import { configuredRuntime, runtimeTarget } from "../dist/executors.js";
+import { interactionMode } from "../dist/interaction.js";
 import { improveTask } from "../dist/improvement.js";
 import { Store } from "../dist/store.js";
 import { agentEngine } from "../dist/codex.js";
 config({ quiet: true });
+const runTask = configuredRuntime();
 process.umask(0o077);
 const cli = new Command()
+  .option("--mode <mode>", "auto / approval", interactionMode, "approval")
   .option("--agent <engine>", "実行エンジン", "codex")
   .option("--model <id>", "モデルID")
   .option("--parallel <n>", "並列1〜2", Number, 2)
@@ -49,11 +52,13 @@ const save = async () => {
   const report = {
     id,
     date: definition.date,
+    interactionMode: opts.mode,
+    executionTarget: runtimeTarget(),
     locationAssumption: definition.locationAssumption,
     parallel: opts.parallel,
     batchWallMs: Math.round(performance.now() - started),
     measurementScope:
-      "runTask + up to one improveTask + local artifact I/O; excludes setup/development/research outside runtime",
+      "configured executor + up to one improveTask + host artifact I/O; excludes setup/development/research outside runtime",
     results,
     notRun: queue.map((p) => p.id),
     stoppedReason,
@@ -74,6 +79,7 @@ async function worker() {
     try {
       task = await runTask(
         {
+          interactionMode: opts.mode,
           query: p.query,
           urls: p.urls,
           agent: agentEngine(opts.agent),
@@ -98,6 +104,7 @@ async function worker() {
         loop = await improveTask(
           task.id,
           {
+            interactionMode: opts.mode,
             maxIterations: 1,
             timeoutSeconds: 120,
             signal: controller.signal,
@@ -173,6 +180,7 @@ async function worker() {
       },
       attempts: tasks.map((t) => ({
         taskId: t.id,
+        execution: t.execution,
         status: t.status,
         model: t.model,
         metrics: t.metrics,

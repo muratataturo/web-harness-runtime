@@ -8,6 +8,7 @@ import {
   diagnose,
   ImprovementStore,
   improvementPlan,
+  decideImprovement,
 } from "../src/improvement.js";
 import { newTask, type RunOptions } from "../src/runtime.js";
 import { Store } from "../src/store.js";
@@ -245,7 +246,8 @@ test("whole-loop timeout aborts the current task and saves the original best", a
         return t;
       },
     );
-    assert.equal(loop.status, "timed_out");
+    assert.equal(loop.status, "needs_input");
+    assert.equal(loop.approval?.status, "pending");
     assert.equal(loop.bestTaskId, f.seed.id);
   } finally {
     await f.cleanup();
@@ -605,4 +607,149 @@ test("two URLs for an apparently identical SUUMO room cannot satisfy a two-room 
     true,
   );
   assert.equal(diagnose(t, t.criteria, roomUrls, true).complete, false);
+});
+
+test("auto returns partial without pending questions and preserves unknown criteria", async () => {
+  const f = await setup();
+  try {
+    const loop = await improveTask(
+      f.seed.id,
+      { interactionMode: "auto", maxIterations: 1 },
+      f.store,
+      async (o, s) => {
+        const task = fixture(undefined, o);
+        await s!.save(task);
+        return task;
+      },
+    );
+    assert.equal(loop.status, "completed_partial");
+    assert.equal(loop.questions.length, 0);
+    assert.equal(loop.approval, undefined);
+    assert.equal(loop.best.complete, false);
+    assert.deepEqual(loop.criteria, f.seed.criteria);
+    assert.equal(
+      (await f.store.get(loop.bestTaskId)).answer!.candidates[0]!.matches[0]!
+        .status,
+      "unknown",
+    );
+  } finally {
+    await f.cleanup();
+  }
+});
+
+test("approval persists choices, rejects stale approvals and returns partial idempotently without inference", async () => {
+  const f = await setup();
+  try {
+    const loop = await improveTask(
+      f.seed.id,
+      { interactionMode: "approval", diagnoseOnly: true },
+      f.store,
+      async () => {
+        throw new Error("must not run");
+      },
+    );
+    assert.equal(loop.status, "needs_input");
+    assert.ok(loop.approval!.choices.find((c) => c.recommended)?.tradeoff);
+    await assert.rejects(
+      decideImprovement(
+        loop.id,
+        { approvalId: "stale", choiceId: "return_partial" },
+        f.store,
+      ),
+      /古い/,
+    );
+    const input = { approvalId: loop.approval!.id, choiceId: "return_partial" };
+    const done = await decideImprovement(loop.id, input, f.store);
+    assert.equal(done.status, "completed_partial");
+    assert.equal(done.best.complete, false);
+    assert.equal(
+      (await decideImprovement(loop.id, input, f.store)).id,
+      done.id,
+    );
+    await assert.rejects(
+      decideImprovement(
+        loop.id,
+        { ...input, choiceId: "research_more" },
+        f.store,
+      ),
+      /確定済み/,
+    );
+  } finally {
+    await f.cleanup();
+  }
+});
+
+test("approval research resumes the same contract and records a child loop without duplicate spending", async () => {
+  const f = await setup();
+  let calls = 0;
+  try {
+    const loop = await improveTask(
+      f.seed.id,
+      { diagnoseOnly: true, interactionMode: "approval" },
+      f.store,
+      async () => {
+        throw new Error("must not run");
+      },
+    );
+    const input = { approvalId: loop.approval!.id, choiceId: "research_more" };
+    const runner = async (o: RunOptions, s?: Store) => {
+      calls++;
+      assert.deepEqual(o.improvement!.criteria, f.seed.criteria);
+      const task = fixture([true, true], o);
+      await s!.save(task);
+      return task;
+    };
+    const next = await decideImprovement(loop.id, input, f.store, runner);
+    assert.equal(next.status, "succeeded");
+    assert.equal(next.parentLoopId, loop.id);
+    assert.equal(
+      (await decideImprovement(loop.id, input, f.store, runner)).id,
+      next.id,
+    );
+    assert.equal(calls, 1);
+  } finally {
+    await f.cleanup();
+  }
+});
+
+test("evidence before planning cannot lock a free-model run into an unrecoverable empty contract", async () => {
+  const { recordPlannedEvidence, setCriteria } =
+    await import("../src/evidence.js");
+  const task = fixture([true, true]);
+  task.criteria = [];
+  task.evidence = [];
+  delete task.answer;
+  assert.throws(
+    () => recordPlannedEvidence(task, "page-1", "容量は40Lです。"),
+    /先にplan_task/,
+  );
+  assert.equal(task.evidence.length, 0);
+  setCriteria(task, criteria);
+  assert.equal(
+    recordPlannedEvidence(task, "page-1", "容量は40Lです。").id,
+    "ev-1",
+  );
+});
+
+test("sandbox seeds cannot silently improve on a local executor", async () => {
+  const f = await setup();
+  const old = process.env.RUNTIME_EXECUTOR;
+  try {
+    f.seed.execution = {
+      target: "openshell",
+      isolation: "openshell-sandbox",
+      gateway: "test",
+      sandboxName: "source",
+    };
+    await f.store.save(f.seed);
+    process.env.RUNTIME_EXECUTOR = "local";
+    await assert.rejects(
+      improveTask(f.seed.id, { diagnoseOnly: true }, f.store),
+      /元タスクと実行先/,
+    );
+  } finally {
+    if (old === undefined) delete process.env.RUNTIME_EXECUTOR;
+    else process.env.RUNTIME_EXECUTOR = old;
+    await f.cleanup();
+  }
 });

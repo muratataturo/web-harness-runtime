@@ -11,6 +11,7 @@ import { claudeAuthentication } from "./claude.js";
 import { agentEngine, CodexAgent } from "./codex.js";
 import { runtimeTarget } from "./executors.js";
 import { doctorOpenShell } from "./sandbox.js";
+import { ImprovementStore, decideImprovement } from "./improvement.js";
 const webRoot = fileURLToPath(new URL("../web/", import.meta.url));
 function send(res: ServerResponse, status: number, body: unknown) {
   res.writeHead(status, {
@@ -30,7 +31,10 @@ async function body(req: IncomingMessage): Promise<any> {
   }
   return JSON.parse(Buffer.concat(chunks).toString() || "{}");
 }
-export function createWorkbenchServer(engine = new GoalEngine()) {
+export function createWorkbenchServer(
+  engine = new GoalEngine(),
+  taskStore = new Store(),
+) {
   return createServer(async (req, res) => {
     try {
       const host = req.headers.host ?? "";
@@ -53,6 +57,22 @@ export function createWorkbenchServer(engine = new GoalEngine()) {
       }
       const url = new URL(req.url ?? "/", "http://localhost");
       const path = url.pathname;
+      if (path === "/api/improvements" && req.method === "GET") {
+        send(res, 200, await new ImprovementStore(taskStore).list());
+        return;
+      }
+      const improvementMatch = path.match(
+        /^\/api\/improvements\/([a-zA-Z0-9-]+)\/decision$/,
+      );
+      if (improvementMatch && req.method === "POST") {
+        const loop = await decideImprovement(
+          improvementMatch[1]!,
+          await body(req),
+          taskStore,
+        );
+        send(res, 200, { loop, task: await taskStore.get(loop.bestTaskId) });
+        return;
+      }
       if (path === "/api/config" && req.method === "GET") {
         const agent = agentEngine();
         let codexReady = false;
@@ -92,7 +112,10 @@ export function createWorkbenchServer(engine = new GoalEngine()) {
           executor: runtimeTarget(),
           localKeyConfigured: !!process.env.OPENROUTER_API_KEY,
           codexReady,
-          sandboxMode: "not-connected",
+          sandboxMode:
+            runtimeTarget() === "openshell"
+              ? "configured-unverified"
+              : "host-process",
           a2a: "internal-v1",
         });
         return;
@@ -144,7 +167,7 @@ export function createWorkbenchServer(engine = new GoalEngine()) {
         return;
       }
       if (path === "/api/sandbox" && req.method === "GET") {
-        send(res, 200, await doctorOpenShell());
+        send(res, 200, await doctorOpenShell(process.env.OPENSHELL_GATEWAY));
         return;
       }
       const staticFiles: Record<string, [string, string]> = {

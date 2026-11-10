@@ -248,3 +248,38 @@ test("invalid decision payload cannot partially settle a pending approval", asyn
     await cleanup();
   }
 });
+
+test("auto completes both planning gates without user decisions and records runtime choices", async () => {
+  const { engine, cleanup } = await fixture();
+  try {
+    const goal = await engine.create({
+      scenario: "travel",
+      interactionMode: "auto",
+    });
+    await engine.settle(goal.id);
+    assert.equal(goal.status, "completed");
+    assert.equal(goal.gates.length, 2);
+    assert.ok(
+      goal.gates.every(
+        (g) => g.status === "approved" && g.decidedBy === "runtime",
+      ),
+    );
+    assert.ok(goal.messages.some((m) => m.text.startsWith("自動選択：")));
+    assert.ok(
+      goal.messages
+        .filter((m) => m.kind === "decision")
+        .every((m) => m.from !== "you"),
+    );
+    await engine.revise(goal.id, "予算内で、ゆっくり旅したい");
+    await engine.settle(goal.id);
+    assert.equal(goal.status, "completed");
+    assert.ok(
+      goal.gates
+        .filter((g) => g.revision === 2)
+        .every((g) => g.decidedBy === "runtime"),
+    );
+  } finally {
+    engine.shutdown();
+    await cleanup();
+  }
+});

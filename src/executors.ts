@@ -35,10 +35,15 @@ export function createOpenShellExecutor(
   config: Pick<OpenShellTaskOptions, "gateway" | "image" | "provider">,
 ): RuntimeExecutor {
   return async (options, store = new Store()) => {
+    const started = performance.now();
     options.signal?.throwIfAborted();
     if (agentEngine(options.agent) !== "pi-openrouter")
       throw new Error(
         "選択エンジンのOpenShell実行は認証連携が未対応です。RUNTIME_EXECUTOR=localで利用してください。",
+      );
+    if (options.benchmark || options.headed)
+      throw new Error(
+        "OpenShell: benchmark / headed は未対応です。ローカルへ切り替えず停止しました。",
       );
     const plan = planOpenShellTask({
       query: options.query,
@@ -49,6 +54,10 @@ export function createOpenShellExecutor(
       maxSteps: options.maxSteps,
       maxPages: options.maxPages,
       timeoutSeconds: options.timeoutSeconds,
+      interactionMode: options.interactionMode,
+      deepenRounds: options.deepenRounds,
+      model: options.model,
+      improvement: options.improvement,
     });
     options.onProgress?.(
       `sandbox: ${plan.sandboxName} / gateway: ${plan.gateway}`,
@@ -58,6 +67,18 @@ export function createOpenShellExecutor(
       signal: options.signal,
       onOutput: (_stream, text) => options.onProgress?.(text.slice(-1000)),
     });
+    if (!result.observedSandbox)
+      throw new Error(
+        `OpenShell sandbox の発行を確認できません。ローカルへ切り替えず停止しました。${plan.directory}`,
+      );
+    if (
+      !result.commands.some(
+        (c) => c.label === "download-artifacts" && c.exitCode === 0,
+      )
+    )
+      throw new Error(
+        `OpenShell成果物の回収を確認できません。${plan.directory}`,
+      );
     const files = await taskFiles(result.artifactsDirectory).catch(() => []);
     const tasks: Task[] = [];
     for (const file of files) {
@@ -96,6 +117,23 @@ export function createOpenShellExecutor(
     const task = tasks[0]!;
     task.parentId = options.parentId;
     task.goalId = options.goalId;
+    if (result.status === "failed" && task.status === "succeeded") {
+      task.status = "partial";
+      task.error =
+        "sandboxの実行終了を正常確認できませんでした。回収できた回答を保持します";
+    }
+    task.interactionMode = options.interactionMode ?? "approval";
+    task.execution = {
+      target: "openshell",
+      isolation: "openshell-sandbox",
+      gateway: plan.gateway,
+      sandboxName: plan.sandboxName,
+      sandboxId: result.observedSandbox.id,
+      image: plan.image,
+      artifactsDirectory: result.artifactsDirectory,
+      elapsedMs: Math.round(performance.now() - started),
+      cleanupStatus: result.cleanupStatus,
+    };
     await store.save(task);
     await store.event(task.id, "sandbox_import", {
       sandbox: plan.sandboxName,

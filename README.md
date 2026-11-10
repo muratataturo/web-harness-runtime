@@ -237,7 +237,7 @@ UI試験は Playwright を使います。既存 Chrome/Chromium を自動検出�
 
 ## CLIの自己改善ループ
 
-`run --self-improve` で初回の未達を診断・再計画・再実行・独立検証します。保存済みタスクは `improve TASK_ID`。既定3回、条件と必要件数は保持し、改善を採用するか旧情報を訂正した履歴を残します。許可した場合だけ `--allow-replacements` で別候補を探索します。公開情報で埋められない項目は `needs_input` として質問・選択肢を返します。
+`run --self-improve` で初回の未達を診断・再計画・再実行・独立検証します。保存済みタスクは `improve TASK_ID`。既定3回、条件と必要件数は保持し、改善を採用するか旧情報を訂正した履歴を残します。許可した場合だけ `--allow-replacements` で別候補を探索します。`--mode approval`（既定）は未確認が残れば `needs_input` と選択肢を保存し、`--mode auto` は承認待ちを作らず未確認を明記した部分回答を返します。
 
 ```sh
 npm start -- improve TASK_ID --iterations 3 --timeout 600
@@ -269,3 +269,9 @@ npm run eval:day-out -- --agent codex --model gpt-6.1-sol --parallel 2
 ```
 
 カップル・5歳児連れ家族・一人向けに、実サイトから提案・予算・雨天代替を生成します。実測は [一日遊びの提案結果](docs/day-out-results.md)。Codexのネイティブ入力/出力/キャッシュトークンと実行時間を保存し、サブスク費用の未配賦や中断時の観測不足を明示します。API追加課金0を総コスト0とは扱いません。
+
+## Auto / Approval とローカルMicroVM
+
+`run` / `improve` / `goal create` に `--mode auto|approval` を追加しました。Webの「進め方」からも選択し、CLIの確認待ちはWebの「調査の確認待ち」から再開できます。通常CLIと自己改善も設定されたexecutorを使用し、OpenShell指定からホストへの暗黙の切替を拒否します。
+
+Apple Silicon Macの実OpenShell MicroVMで、pi/OpenRouter無料モデルの回答・引用・結果回収を確認しました。以前のCodexの3ペルソナ実測はローカル実行です。Codex/ClaudeのVM内サブスク認証連携は未対応です。[起動手順・2モードの仕様・実測](docs/runtime-modes.md)。

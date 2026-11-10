@@ -63,6 +63,18 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  interactionMode?: import("./interaction.js").InteractionMode;
+  execution?: {
+    target: "local" | "openshell";
+    isolation: "host-process" | "openshell-sandbox";
+    gateway?: string;
+    sandboxName?: string;
+    sandboxId?: string;
+    image?: string;
+    artifactsDirectory?: string;
+    elapsedMs?: number;
+    cleanupStatus?: "stopped" | "unconfirmed";
+  };
   metrics?: {
     elapsedMs: number;
     tokenAccounting?:

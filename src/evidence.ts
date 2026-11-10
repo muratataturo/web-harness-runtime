@@ -11,6 +11,17 @@ import type {
 } from "./types.js";
 export const normalized = (s: string) =>
   s.normalize("NFKC").replace(/\s+/g, " ").trim();
+export function recordPlannedEvidence(
+  task: Task,
+  pageId: string,
+  quote: string,
+): Evidence {
+  if (!task.criteria.length)
+    throw new Error(
+      "先にplan_taskで評価条件を定義してください。まだ引用は保存していません。",
+    );
+  return addEvidence(task, pageId, quote);
+}
 export function addEvidence(
   task: Task,
   pageId: string,
@@ -227,6 +238,7 @@ export function renderAnswer(task: Task): string {
     answer.summary,
     "",
     `状態: ${task.status} / 詳細取得: ${task.retrieval?.status ?? "未検証"}`,
+    `実行環境: ${task.execution ? (task.execution.target === "openshell" ? `OpenShell sandbox ${task.execution.sandboxName} / gateway ${task.execution.gateway}` : "local / ホスト上のプロセス（VM sandboxではありません）") : "記録なし（過去の実行）"} / mode: ${task.interactionMode ?? "未記録"}`,
     `${task.evaluation ? "凍結ベンチマーク実行日時（ライブ取得ではありません）" : "調査日時"}: ${task.updatedAt} / モデル: ${task.model}`,
     "",
   ];

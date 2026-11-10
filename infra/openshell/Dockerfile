@@ -16,8 +16,8 @@ COPY infra/openshell/chromium /opt/web-harness/infra/openshell/chromium
 RUN chmod 755 /opt/web-harness/infra/openshell/chromium \
     && ./node_modules/.bin/tsc \
     && npm prune --omit=dev \
-    && mkdir -p /workspace /home/node/.agent-browser \
-    && chown -R node:node /workspace /home/node
+    && mkdir -p /sandbox /workspace /home/node/.agent-browser \
+    && chown -R node:node /sandbox /workspace /home/node
 ENV AGENT_BROWSER_EXECUTABLE_PATH=/opt/web-harness/infra/openshell/chromium \
     RUNTIME_DIR=/workspace/.runtime \
     PI_CODING_AGENT_DIR=/tmp/pi-agent

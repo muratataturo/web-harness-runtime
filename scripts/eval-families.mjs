@@ -4,9 +4,11 @@ import { randomUUID } from "node:crypto";
 import { Command } from "commander";
 import { agentEngine } from "../dist/codex.js";
 import { config } from "dotenv";
-import { runTask } from "../dist/runtime.js";
+import { configuredRuntime, runtimeTarget } from "../dist/executors.js";
+import { interactionMode } from "../dist/interaction.js";
 import { verifyDetail } from "../dist/detail-contracts.js";
 config({ quiet: true });
+const runTask = configuredRuntime();
 const definitions = JSON.parse(
   await readFile(
     new URL("../examples/codex-family-evals.json", import.meta.url),
@@ -14,6 +16,7 @@ const definitions = JSON.parse(
   ),
 );
 const cli = new Command()
+  .option("--mode <mode>", "auto / approval", interactionMode, "approval")
   .option("--agent <engine>", "codex / claude-code / pi-openrouter", "codex")
   .option("--model <id>")
   .argument("[sources...]")
@@ -56,6 +59,7 @@ async function worker() {
     if (!test) return;
     process.stderr.write(`START ${test.id}\n`);
     const task = await runTask({
+      interactionMode: cli.opts().mode,
       agent: engine,
       model,
       query: test.query,
@@ -77,6 +81,9 @@ async function worker() {
       query: test.query,
       seedUrl: test.seedUrl,
       taskId: task.id,
+      interactionMode: cli.opts().mode,
+      execution: task.execution,
+      executionTarget: runtimeTarget(),
       agent: task.agent,
       model: task.model,
       status: task.status,

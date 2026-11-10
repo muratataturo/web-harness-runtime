@@ -1,6 +1,7 @@
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { runTask, type RunOptions } from "./runtime.js";
+import { type RunOptions } from "./runtime.js";
+import { configuredRuntime } from "./executors.js";
 import { entityKey } from "./sources.js";
 import { verifyDetail, type DetailVerification } from "./detail-contracts.js";
 import { assessPage } from "./page-quality.js";
@@ -154,7 +155,7 @@ export async function runServiceEvaluations(
         signal: options.signal,
         onProgress: (m) => options.onProgress?.(`${test.id}: ${m}`),
       };
-      const task = await runTask(runOptions, store);
+      const task = await configuredRuntime()(runOptions, store);
       const result = evaluateServiceTask(test, task);
       results.push(result);
       if (task.failure?.kind === "quota_exhausted") exhausted = true;

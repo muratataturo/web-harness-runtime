@@ -1,4 +1,50 @@
 import type { Criterion } from "./types.js";
+import { Type } from "@sinclair/typebox";
+import { Value } from "@sinclair/typebox/value";
+const strings = Type.Array(Type.String({ maxLength: 4000 }), {
+  maxItems: 1000,
+});
+const contextSchema = Type.Object(
+  {
+    minimumCandidates: Type.Optional(
+      Type.Integer({ minimum: 1, maximum: 100 }),
+    ),
+    allowReplacements: Type.Optional(Type.Boolean()),
+    loopId: Type.String({ pattern: "^[a-zA-Z0-9-]+$", maxLength: 100 }),
+    iteration: Type.Integer({ minimum: 1, maximum: 5 }),
+    criteria: Type.Array(
+      Type.Object({
+        id: Type.String(),
+        description: Type.String(),
+        weight: Type.Number({ minimum: 1, maximum: 10 }),
+        required: Type.Boolean(),
+      }),
+      { minItems: 1, maxItems: 12 },
+    ),
+    candidateUrls: strings,
+    gaps: Type.Array(Type.Object({ url: Type.String(), fields: strings }), {
+      maxItems: 100,
+    }),
+    priorityUrls: strings,
+    visitedUrls: strings,
+    strategy: Type.Union([
+      Type.Literal("targeted-links"),
+      Type.Literal("broader-links"),
+      Type.Literal("render-and-recheck"),
+    ]),
+  },
+  { additionalProperties: false },
+);
+export function decodeImprovementContext(encoded: string): ImprovementContext {
+  if (encoded.length > 32768 || !/^[a-zA-Z0-9_-]+$/.test(encoded))
+    throw new Error("改善contextの形式またはサイズが不正です");
+  const parsed: unknown = JSON.parse(
+    Buffer.from(encoded, "base64url").toString("utf8"),
+  );
+  if (!Value.Check(contextSchema, parsed))
+    throw new Error("改善contextがスキーマに一致しません");
+  return parsed as ImprovementContext;
+}
 export interface ImprovementContext {
   minimumCandidates?: number;
   allowReplacements?: boolean;

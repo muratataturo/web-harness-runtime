@@ -43,3 +43,27 @@ test("official visitor sources bind only known facility paths and keep the origi
     "insufficient_detail",
   );
 });
+
+test("Pi session totals include cached input once and leave reasoning breakdown unknown", async () => {
+  const { piUsage } = await import("../src/metrics.js");
+  const usage = piUsage({
+    input: 100,
+    output: 20,
+    cacheRead: 50,
+    cacheWrite: 10,
+    total: 180,
+  })!;
+  assert.equal(usage.inputTokens, 160);
+  assert.equal(usage.totalTokens, usage.inputTokens + usage.outputTokens);
+  assert.equal(usage.reasoningOutputTokens, null);
+  assert.equal(
+    piUsage({
+      input: 100,
+      output: 20,
+      cacheRead: 50,
+      cacheWrite: 10,
+      total: 120,
+    }),
+    undefined,
+  );
+});

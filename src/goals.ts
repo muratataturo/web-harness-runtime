@@ -9,6 +9,7 @@ import {
 } from "./executors.js";
 import { Store } from "./store.js";
 import type { Task } from "./types.js";
+import { interactionMode, type InteractionMode } from "./interaction.js";
 export type Scenario = "travel" | "life";
 export type GoalStatus =
   | "awaiting_direction"
@@ -27,6 +28,7 @@ export interface Choice {
   recommended?: boolean;
 }
 export interface Gate {
+  decidedBy?: "user" | "runtime";
   id: string;
   revision: number;
   kind: "direction" | "delight";
@@ -61,6 +63,7 @@ export interface PeerMessage {
   hop: number;
 }
 export interface Work {
+  execution?: Task["execution"];
   id: string;
   agent: string;
   title: string;
@@ -84,6 +87,7 @@ export interface PlanItem {
   demo: boolean;
 }
 export interface Goal {
+  interactionMode?: InteractionMode;
   id: string;
   revision: number;
   scenario: Scenario;
@@ -370,7 +374,7 @@ export class GoalEngine {
     private runtime: RuntimeExecutor = configuredRuntime(),
   ) {}
   async settle(id: string): Promise<Goal> {
-    await this.work.get(id);
+    while (this.work.has(id)) await this.work.get(id);
     return this.repo.get(id);
   }
   shutdown() {
@@ -397,6 +401,7 @@ export class GoalEngine {
     });
   }
   async create(input: {
+    interactionMode?: InteractionMode;
     scenario: Scenario;
     text?: string;
     mode?: "demo" | "live";
@@ -415,6 +420,7 @@ export class GoalEngine {
       throw new Error("予算は1万〜200万円で指定してください");
     const now = new Date().toISOString();
     const goal: Goal = {
+      interactionMode: interactionMode(input.interactionMode),
       id: randomUUID(),
       revision: 1,
       scenario: input.scenario,
@@ -449,7 +455,21 @@ export class GoalEngine {
       afterMessageId: goal.messages.at(-1)?.id,
     });
     await this.repo.save(goal);
+    await this.autoContinue(goal);
     return goal;
+  }
+  private async autoContinue(goal: Goal) {
+    if (goal.interactionMode !== "auto") return;
+    const gate = goal.gates.find(
+      (g) => g.revision === goal.revision && g.status === "pending",
+    );
+    if (!gate) return;
+    const choice = gate.choices.find((c) => c.recommended) ?? gate.choices[0]!;
+    await this.decide(
+      goal.id,
+      { gateId: gate.id, revision: goal.revision, choiceId: choice.id },
+      "runtime",
+    );
   }
   async decide(
     id: string,
@@ -460,6 +480,7 @@ export class GoalEngine {
       note?: string;
       budget?: number;
     },
+    actor: "user" | "runtime" = "user",
   ): Promise<Goal> {
     const goal = await this.repo.get(id);
     const gate = goal.gates.find((g) => g.id === input.gateId);
@@ -495,13 +516,16 @@ export class GoalEngine {
     gate.selected = input.choiceId;
     gate.note = input.note?.trim();
     gate.decidedAt = new Date().toISOString();
+    gate.decidedBy = actor;
     goal.note = [goal.note, input.note?.trim()].filter(Boolean).join(" / ");
     if (input.budget !== undefined) goal.budget = input.budget;
     const title = gate.choices.find((c) => c.id === input.choiceId)!.title;
     this.message(
       goal,
-      "you",
-      `${title}でお願いします。${input.note?.trim() ? ` こだわり：${input.note.trim()}` : ""}`,
+      actor === "runtime" ? "concierge" : "you",
+      actor === "runtime"
+        ? `自動選択：${title}。${gate.choices.find((c) => c.id === input.choiceId)!.description} 判断の影響：${gate.choices.find((c) => c.id === input.choiceId)!.tradeoff}`
+        : `${title}でお願いします。${input.note?.trim() ? ` こだわり：${input.note.trim()}` : ""}`,
       "decision",
     );
     if (gate.kind === "direction") {
@@ -578,6 +602,7 @@ export class GoalEngine {
       afterMessageId: goal.messages.at(-1)?.id,
     });
     await this.repo.save(goal);
+    await this.autoContinue(goal);
     return goal;
   }
   async cancel(id: string) {
@@ -715,6 +740,7 @@ export class GoalEngine {
               );
             const task = await this.runtime(
               {
+                interactionMode: goal.interactionMode,
                 query: `${roleQueries[work.agent]}\n目標:${goal.text}\n優先:${goal.direction}\n予算(${travel ? "旅行全体" : "毎月の固定費"}):${goal.budget}円\nこだわり:${goal.note}\n提示されていない個人条件や予約日程は推測しない。`,
                 urls: [url!],
                 goalId: goal.id,
@@ -727,6 +753,7 @@ export class GoalEngine {
             );
             if (goal.revision !== revision) return task;
             work.runtimeTaskId = task.id;
+            work.execution = task.execution;
             work.note = task.answer?.summary ?? task.error ?? task.status;
             this.message(
               goal,
@@ -866,6 +893,7 @@ export class GoalEngine {
       afterMessageId: goal.messages.at(-1)?.id,
     });
     await this.repo.save(goal);
+    await this.autoContinue(goal);
   }
   private async synthesize(goal: Goal, signal: AbortSignal, revision: number) {
     const valid = () => {
@@ -928,6 +956,7 @@ export class GoalEngine {
         valid();
         const followup = await this.runtime(
           {
+            interactionMode: goal.interactionMode,
             query: `${goal.text}\n特に優先:${choice?.title}。${choice?.description}。追加条件:${goal.note}。公開情報で検証できる候補のみ示し、未確認を埋めない。`,
             urls: [original.url],
             parentId: original.runtimeTaskId,
@@ -941,6 +970,7 @@ export class GoalEngine {
         );
         valid();
         work.runtimeTaskId = followup.id;
+        work.execution = followup.execution;
         work.status = followup.status === "succeeded" ? "succeeded" : "failed";
         work.note = followup.answer?.summary ?? followup.error;
         this.message(

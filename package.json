@@ -15,12 +15,13 @@
     "test": "node --import tsx --test test/*.test.ts",
     "browser:install": "agent-browser install",
     "web": "node --import tsx src/cli.ts web",
-    "test:ui": "node scripts/ui-smoke.mjs",
+    "test:ui": "node --import tsx scripts/ui-smoke.mjs",
     "test:image": "sh infra/openshell/smoke.sh",
     "format": "prettier --write src web test scripts examples benchmarks config .github",
     "format:check": "prettier --check src web test scripts examples benchmarks config .github",
     "eval:families": "node scripts/eval-families.mjs",
-    "eval:day-out": "node scripts/eval-day-out.mjs"
+    "eval:day-out": "node scripts/eval-day-out.mjs",
+    "sandbox:local": "node scripts/local-openshell.mjs"
   },
   "engines": {
     "node": ">=22"

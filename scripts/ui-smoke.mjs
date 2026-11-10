@@ -5,7 +5,52 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawn } from "node:child_process";
+import { newTask } from "../src/runtime.js";
+import { Store } from "../src/store.js";
+import { improveTask } from "../src/improvement.js";
 const root = await mkdtemp(join(tmpdir(), "relay-ui-"));
+const taskStore = new Store(root);
+const pendingTask = newTask({
+  query: "UI検証用：容量40Lを確認（架空資料）",
+  urls: ["https://item.rakuten.co.jp/ui-fixture/bag/"],
+  agent: "codex",
+  maxSteps: 10,
+  maxPages: 2,
+  timeoutSeconds: 10,
+});
+pendingTask.status = "partial";
+pendingTask.criteria = [
+  { id: "capacity", description: "容量40L", required: true, weight: 5 },
+];
+pendingTask.answer = {
+  summary: "容量が未確認のため確定できません（UIテスト資料）",
+  candidates: [
+    {
+      name: "検証用バッグ",
+      url: pendingTask.urls[0],
+      matches: [
+        {
+          criterionId: "capacity",
+          status: "unknown",
+          explanation: "記載なし",
+          evidenceIds: [],
+        },
+      ],
+      score: 0,
+      eligible: false,
+    },
+  ],
+  limitations: ["架空のUI検証資料"],
+};
+await taskStore.save(pendingTask);
+const pendingLoop = await improveTask(
+  pendingTask.id,
+  { diagnoseOnly: true, interactionMode: "approval" },
+  taskStore,
+  async () => {
+    throw new Error("UI test must not invoke a model");
+  },
+);
 const artifacts = resolve(".runtime/ui-qa");
 await mkdir(artifacts, { recursive: true });
 const port = Number(process.env.UI_TEST_PORT ?? 4311),
@@ -224,6 +269,84 @@ try {
     fullPage: true,
   });
   checks.push("390px mobile: approvals, final plan, no horizontal overflow");
+  const autoContext = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+  });
+  const autoPage = await autoContext.newPage();
+  autoPage.on("pageerror", (error) => errors.push(error.message));
+  await autoPage.goto(base);
+  await autoPage.getByLabel("進め方", { exact: true }).selectOption("auto");
+  await autoPage
+    .getByRole("button", { name: /余白のある、2泊3日の旅/ })
+    .click();
+  await autoPage
+    .getByText("あなたらしいプランの、たたき台ができました", { exact: false })
+    .waitFor({ timeout: 25000 });
+  assert.equal(await autoPage.locator(".approval-card").count(), 0);
+  assert.equal(await autoPage.getByText(/Autoで自動選択/).count(), 2);
+  const autoId = await autoPage.evaluate(() =>
+    localStorage.getItem("relay.goal"),
+  );
+  const autoGoal = await (await fetch(base + "/api/goals/" + autoId)).json();
+  assert.equal(autoGoal.interactionMode, "auto");
+  assert.ok(
+    autoGoal.gates.every(
+      (g) => g.status === "approved" && g.decidedBy === "runtime",
+    ),
+  );
+  await autoPage.reload();
+  await autoPage
+    .getByText("あなたらしいプランの、たたき台ができました", { exact: false })
+    .waitFor();
+  assert.equal(await autoPage.locator(".approval-card").count(), 0);
+  await autoPage.screenshot({
+    path: join(artifacts, "08-auto-mobile.png"),
+    fullPage: true,
+  });
+  checks.push(
+    "Auto: no pending gates, runtime decision receipts, reload persistence on mobile",
+  );
+  await autoPage.locator("#mobile-menu").click();
+  await autoPage.getByRole("button", { name: "調査の確認待ち ↗" }).click();
+  const inbox = autoPage.locator("#runtime-approvals-dialog");
+  await inbox
+    .getByRole("heading", { name: "確認できた候補で進めますか？" })
+    .waitFor();
+  assert.equal(
+    await inbox
+      .getByRole("radio", { name: /未確認事項を明記して/ })
+      .isChecked(),
+    true,
+  );
+  await inbox.getByRole("radio", { name: /公式の詳細URLを追加して/ }).check();
+  await inbox.getByRole("textbox", { name: "追加の公開詳細URL" }).waitFor();
+  await inbox.getByRole("radio", { name: /未確認事項を明記して/ }).check();
+  assert.equal(
+    await inbox.getByRole("textbox", { name: "追加の公開詳細URL" }).count(),
+    0,
+  );
+  await autoPage.screenshot({
+    path: join(artifacts, "09-runtime-approval-mobile.png"),
+    fullPage: true,
+  });
+  await inbox.getByRole("button", { name: /選んで続ける/ }).click();
+  await inbox.getByRole("heading", { name: "選択を保存しました" }).waitFor();
+  await inbox.getByText(/容量が未確認のため/).waitFor();
+  const decided = (await (await fetch(base + "/api/improvements")).json()).find(
+    (l) => l.id === pendingLoop.id,
+  );
+  assert.equal(decided.status, "completed_partial");
+  assert.equal(decided.best.complete, false);
+  checks.push(
+    "Approval inbox: recommended choice, tradeoff, durable decision, partial answer without fabricated completion",
+  );
+  await inbox.getByRole("button", { name: "確認待ちを更新" }).click();
+  await autoPage
+    .getByText("現在、選択待ちの調査はありません。Autoは承認待ちを作りません。")
+    .waitFor();
+  checks.push("runtime approvals inbox: no pending state");
+  await autoContext.close();
   assert.deepEqual(errors, []);
   checks.push("no browser JavaScript errors");
   await mobileContext.close();

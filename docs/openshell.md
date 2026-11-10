@@ -1,6 +1,6 @@
 # Self-host VM 上の OpenShell task executor
 
-現在のOpenShellイメージ/providerはpi + OpenRouter用です。ローカル既定のCodexエンジンとは別で、sandbox planのコマンドは `--agent pi-openrouter` を明示します。`RUNTIME_AGENT=codex` のままGoal RouterからOpenShellを使うと、発行前に未対応として停止します。Codexの資格情報はイメージやsandboxへコピーしません。Codexでのself-host VM実行には公式認証とegressの追加連携・実機検証が必要です。
+[Auto/Approvalの起動手順・Apple Silicon MicroVMの最新実測](runtime-modes.md)。現在のOpenShellイメージ/providerはpi + OpenRouter用です。ローカル既定のCodexエンジンとは別で、sandbox planのコマンドは `--agent pi-openrouter` を明示します。`RUNTIME_AGENT=codex` のままGoal RouterからOpenShellを使うと、発行前に未対応として停止します。Codexの資格情報はイメージやsandboxへコピーしません。Codexでのself-host VM実行には公式認証とegressの追加連携・実機検証が必要です。
 
 本 PR には、1 調査タスクを 1 OpenShell sandbox に割り当てる実行アダプターと image/provider/policy の準備を含めています。Web Mock の sandbox 表示はデモであり、実際に VM を発行した証拠ではありません。実際の割り当てはホスト CLI から明示的に実行する経路です。
 
@@ -27,7 +27,7 @@ router と approval state は sandbox 外に置きます。タスクの依存が
 
 ## 1. VM と gateway を準備
 
-Linux VM に Docker、Node.js 22 以降、OpenShell v0.1.7 の gateway/CLI を準備します。インストールと driver 設定は [公式 installation](https://docs.nvidia.com/openshell/v0.1.7/about/installation) に従ってください。VM の provisioning や外部への port 公開はこの PR では実行していません。
+Linux VM に Docker、Node.js 22 以降、OpenShell v0.1.7 の gateway/CLI を準備します。インストールと driver 設定は [公式 installation](https://docs.nvidia.com/openshell/v0.1.7/about/installation) に従ってください。remote VM の provisioning や外部への port 公開は行っていません。Apple SiliconのローカルMicroVMは[専用手順](runtime-modes.md)で発行・実行しています。
 
 VM 内で実行するなら既存 gateway 名を `openshell gateway list` で確認します。別ホストから既存の認証付き gateway を登録する場合の例は次です。
 
@@ -62,7 +62,7 @@ openshell -g selfhost profile lint -f infra/openshell/provider-openrouter.yaml
 openshell -g selfhost profile import -f infra/openshell/provider-openrouter.yaml
 
 # キーを argv に含めず、既存の .env から host process の環境へロードする。
-node --env-file=.env -e 'const {spawnSync}=require("node:child_process"); const r=spawnSync("openshell",["-g","selfhost","provider","create","--name","web-harness-openrouter","--type","web-harness-openrouter","--from-existing"],{stdio:"inherit",env:process.env}); process.exit(r.status??1)'
+node --env-file=.env -e 'const {spawnSync}=require("node:child_process"); const r=spawnSync("openshell",["-g","selfhost","provider","create","--name","wh-pi-router","--type","wh-pi-openrouter","--from-existing"],{stdio:"inherit",env:process.env}); process.exit(r.status??1)'
 ```
 
 import は create-only なので、登録済みなら再 import せず profile を確認し、変更する場合は公式の `profile export/update` 手順を利用します。既存 provider を再 create する必要はありません。
@@ -134,9 +134,9 @@ openshell -g selfhost sandbox delete dinner-001
 
 既定 Docker credential helper による manifest 取得が待機したため、資格情報を含まない専用の一時 Docker 設定と Docker Desktop の BuildKit plugin でビルドしました。BuildKit が使えない場合に legacy builder の大きな context を送らないよう、root `.dockerignore` と Dockerfile-specific allowlist の両方を利用してください。
 
-OpenShell CLI は未導入であり、接続先 VM/gateway も提供されていません。したがって **実 OpenShell sandbox 発行、gateway proxy の credential rewrite、Landlock/seccomp 下の Chromium 起動、Linux amd64 image は未検証** です。通常の Docker container 内での起動成功を、OpenShell 境界の検証成功とは表示しません。
+この節は初期のDocker単独検証の記録です。後続でOpenShell v0.1.7を導入し、Apple SiliconのMicroVMでpi/OpenRouterの取得・推論・結果回収を実行しました。[最新実測](runtime-modes.md)。MicroVMでのpublic-html取得と推論は成功しましたが、Chromium DOMはCDP/zygote権限制約で失敗しています。Linux amd64・remote gateway・独立した境界の侵入試験は未実施です。
 
-自動テストでは dry-run の lifecycle argv、shell metacharacter の独立引数保持、入力検証、host/非root/Landlock policy、plan ファイル保存、明示実行 gate を確認しました。さらに SIGTERM を無視する実子プロセスに対して timeout → SIGKILL の終了、出力洪水の buffer 上限、中断済み command の未起動も検証しています。local timeout は124、出力上限は125、中断は130として記録します。`cleanupPolicy: retain` は削除しない方針で、sandbox の実在確認ではありません。`sandboxState` はartifact downloadが成功した場合のみ `created`、それ以外は `unknown` です。導入先で以下を順に確認してください。
+自動テストでは dry-run の lifecycle argv、shell metacharacter の独立引数保持、入力検証、host/非root/Landlock policy、plan ファイル保存、明示実行 gate を確認しました。さらに SIGTERM を無視する実子プロセスに対して timeout → SIGKILL の終了、出力洪水の buffer 上限、中断済み command の未起動も検証しています。local timeout は124、出力上限は125、中断は130として記録します。`cleanupPolicy: retain` は削除しない方針で、sandbox の実在確認ではありません。`sandboxState` はgatewayの`get --output json`で実IDと名前を確認した場合のみ `created`、それ以外は `unknown` です。artifact回収確認も必須とし、回収後はstopしてディスクを保持します。停止未確認時は`cleanupStatus: unconfirmed`を返します。導入先で以下を順に確認してください。
 
 1. OpenShell CLI/gateway v0.1.7 を揃え、`status` の接続と認証を確認。
 2. image build、profile lint/import、provider attach が成功。
@@ -149,7 +149,7 @@ OpenShell CLI は未導入であり、接続先 VM/gateway も提供されてい
 
 ## Web/goal routerとの接続
 
-`.env` に `RUNTIME_EXECUTOR=openshell` と `OPENSHELL_GATEWAY=selfhost` を設定すると、`src/executors.ts` が各実調査をsandboxへ発行します。`OPENSHELL_IMAGE` と `OPENSHELL_PROVIDER` でimage/providerを指定できます。体験モードはこの設定でも発行しません。downloadしたタスクはqueryとURL、終端状態等を照合してlocal Storeへ取り込み、goalId/runtimeTaskIdで関連付けます。ユーザーの改訂・停止はcontrol planeで制御しますが、remote taskの停止保証はなく、gateway上での確認が必要です。
+`.env` に `RUNTIME_EXECUTOR=openshell` と `OPENSHELL_GATEWAY=selfhost` を設定すると、`src/executors.ts` が各実調査をsandboxへ発行します。`OPENSHELL_IMAGE` と `OPENSHELL_PROVIDER` でimage/providerを指定できます。体験モードはこの設定でも発行しません。downloadしたタスクはqueryとURL、終端状態等を照合してlocal Storeへ取り込み、goalId/runtimeTaskIdで関連付けます。ユーザーの改訂・停止はcontrol planeで制御しますが、終了・中断後は対象sandboxのstopも試みますが、通信断時の停止は保証できないため、`cleanupStatus`とgatewayを確認してください。
 
 ## 公開HTML reader追加後のイメージ検証
 

@@ -6,6 +6,7 @@ const state = {
   day: null,
   filter: null,
   mode: "demo",
+  interactionMode: "approval",
   config: null,
   signature: "",
   navigation: 0,
@@ -155,7 +156,7 @@ function renderMessage(message) {
 function renderGate(gate) {
   if (gate.status === "expired") return "";
   if (gate.status === "approved")
-    return `<div class="decision-receipt">✓ ${e(gate.choices.find((c) => c.id === gate.selected)?.title)}<span>あなたが選択 · v${gate.revision}</span></div>`;
+    return `<div class="decision-receipt">✓ ${e(gate.choices.find((c) => c.id === gate.selected)?.title)}<span>${gate.decidedBy === "runtime" ? "Autoで自動選択" : "あなたが選択"} · v${gate.revision}</span></div>`;
   const chosen =
     state.choices.get(gate.id) ??
     gate.choices.find((c) => c.recommended)?.id ??
@@ -237,7 +238,7 @@ function tasksView() {
     return '<div class="empty-state"><div class="empty-icon">✳</div><strong>まずは、方針を選びましょう。</strong>選んだ方針に合わせて、<br>チームが作業を分担します。</div>';
   const running = goal.tasks.filter((t) => t.status === "running").length,
     done = goal.tasks.filter((t) => t.status === "succeeded").length;
-  return `<div class="task-stats"><span><strong>${running}/${goal.concurrency}</strong>同時実行</span><span><strong>${done}/${goal.tasks.length}</strong>完了</span></div>${goal.tasks.map((t) => `<article class="task-card"><div class="task-card-top">${avatar(t.agent)}<h3>${e(t.title)}</h3><span class="task-status ${e(t.status)}">${workLabels[t.status]}</span></div><p>${e(t.source)} · ${t.round > 1 ? `再調査 ${t.round}回目` : "初回調査"}${t.runtimeTaskId ? "<br>実調査 " + e(t.runtimeTaskId.slice(0, 8)) : ""}</p>${t.dependsOn.length ? `<div class="depends">↳ ${t.dependsOn.map((id) => e(goal.tasks.find((w) => w.id === id)?.title ?? id)).join("・")} の後</div>` : ""}${t.note ? `<p>${e(t.note.slice(0, 250))}</p>` : ""}</article>`).join("")}<div class="side-info"><strong>独立した作業は並行して。</strong>他の条件が決まらないと進められない作業は、先に進めません。レビューで気づいた点は、担当に戻して見直します。${goal.mode === "demo" ? "<br>体験モードの調査・レビュー内容はシナリオに沿って再生しています。" : ""}</div>`;
+  return `<div class="task-stats"><span><strong>${running}/${goal.concurrency}</strong>同時実行</span><span><strong>${done}/${goal.tasks.length}</strong>完了</span></div>${goal.tasks.map((t) => `<article class="task-card"><div class="task-card-top">${avatar(t.agent)}<h3>${e(t.title)}</h3><span class="task-status ${e(t.status)}">${workLabels[t.status]}</span></div><p>${e(t.source)} · ${t.round > 1 ? `再調査 ${t.round}回目` : "初回調査"}${t.runtimeTaskId ? "<br>実調査 " + e(t.runtimeTaskId.slice(0, 8)) : ""}${t.execution ? "<br>" + (t.execution.target === "openshell" ? "OpenShell: " + e(t.execution.sandboxName) : "local · ホストプロセス") : ""}</p>${t.dependsOn.length ? `<div class="depends">↳ ${t.dependsOn.map((id) => e(goal.tasks.find((w) => w.id === id)?.title ?? id)).join("・")} の後</div>` : ""}${t.note ? `<p>${e(t.note.slice(0, 250))}</p>` : ""}</article>`).join("")}<div class="side-info"><strong>独立した作業は並行して。</strong>他の条件が決まらないと進められない作業は、先に進めません。レビューで気づいた点は、担当に戻して見直します。${goal.mode === "demo" ? "<br>体験モードの調査・レビュー内容はシナリオに沿って再生しています。" : ""}</div>`;
 }
 function activityView() {
   const messages =
@@ -267,7 +268,9 @@ function renderComputer() {
     "<i></i> " +
     (state.goal?.mode === "live"
       ? state.goal.executionTarget === "openshell"
-        ? "OpenShell実調査"
+        ? state.goal.tasks.some((t) => t.execution?.target === "openshell")
+          ? "OpenShell実行記録あり"
+          : "OpenShell指定（発行未確認）"
         : "ローカル実調査"
       : "体験用");
   $("#computer-footer-label").textContent =
@@ -297,6 +300,12 @@ function render() {
     !!goal?.status.startsWith("awaiting"),
   );
   const mode = goal?.mode ?? state.mode;
+  $("#interaction-mode").value = goal?.interactionMode ?? state.interactionMode;
+  $("#interaction-mode").disabled = !!goal;
+  $("#interaction-hint").textContent =
+    (goal?.interactionMode ?? state.interactionMode) === "auto"
+      ? "おすすめと判断の影響を記録して進みます。未確認事項は回答に残します。予約・購入は行いません。"
+      : "推奨案・選択の影響を見て承認。選択後に再開します。進め方の変更は新しい相談から。";
   $("#mode-label").textContent =
     mode === "demo" ? "体験モード" : "実調査モード";
   $("#mode-description").textContent =
@@ -335,6 +344,7 @@ async function start(scenario, text) {
         scenario,
         text,
         mode: state.mode,
+        interactionMode: state.interactionMode,
         confirmLive: state.mode === "live",
       }),
     });
@@ -436,7 +446,7 @@ async function environment() {
     sandbox = { available: false };
   }
   $("#environment-content").innerHTML =
-    `<div class="env-row">実行モード<span>${state.goal?.mode === "live" ? "ローカル実調査" : "シナリオ体験（API使用なし）"}</span></div><div class="env-row">調査エンジン<span>${state.config?.agent === "claude-code" ? (state.config?.claudeReady ? "Claude Code · サブスク認証確認済み" : "Claude Code · 認証を確認してください") : state.config?.agent === "codex" ? (state.config?.codexReady ? "Codex · ChatGPTログイン確認済み" : "Codex · ログインを確認してください") : state.config?.localKeyConfigured ? "pi + OpenRouter · 無料モデル" : "OpenRouter認証を確認してください"}</span></div><div class="env-row">OpenShell CLI<span>${sandbox.available ? "導入済み（gatewayは未確認）" : "未導入"}</span></div><div class="env-row">self-host VM<span>${state.config?.executor === "openshell" ? "OpenShell adapter選択済み・接続状態はCLIで確認" : "未接続 · 発行していません"}</span></div><div class="env-row">エージェント間通信<span>内部A2A · 配送ID/改訂/引き継ぎ上限あり</span></div><p class="env-description">この画面のComputerは体験表示です。実調査モードは設定された local/OpenShell executor で選択した調査エンジンと agent-browser を使います。Codex / Claude Codeは現在ローカル実行のみです。OpenShellの発行計画は既存のpi + OpenRouter構成を使います。</p><pre class="env-code">npm start -- sandbox plan '調査すること' \\\n  --gateway my-vm --url https://www.jalan.net/</pre><p class="dialog-note">OpenShellの実キーはgateway側のproviderで保持します。ブラウザにAPIキーは送信しません。</p>`;
+    `<div class="env-row">実行モード<span>${state.goal?.mode === "live" ? (state.config?.executor === "openshell" ? "OpenShell指定（タスクのsandbox IDで確認）" : "ローカル実調査 · VM隔離なし") : "シナリオ体験（API使用なし）"}</span></div><div class="env-row">調査エンジン<span>${state.config?.agent === "claude-code" ? (state.config?.claudeReady ? "Claude Code · サブスク認証確認済み" : "Claude Code · 認証を確認してください") : state.config?.agent === "codex" ? (state.config?.codexReady ? "Codex · ChatGPTログイン確認済み" : "Codex · ログインを確認してください") : state.config?.localKeyConfigured ? "pi + OpenRouter · 無料モデル" : "OpenRouter認証を確認してください"}</span></div><div class="env-row">OpenShell CLI<span>${sandbox.available ? (sandbox.checks?.some((c) => c.label === "gateway-status") ? "gateway接続確認済み" : "導入済み（gatewayは未確認）") : "未接続（CLI/gatewayを確認）"}</span></div><div class="env-row">self-host VM<span>${state.config?.executor === "openshell" ? "OpenShell adapter選択済み・接続状態はCLIで確認" : "未接続 · 発行していません"}</span></div><div class="env-row">エージェント間通信<span>内部A2A · 配送ID/改訂/引き継ぎ上限あり</span></div><p class="env-description">この画面のComputerは体験表示です。実調査モードは設定された local/OpenShell executor で選択した調査エンジンと agent-browser を使います。Codex / Claude Codeは現在ローカル実行のみです。OpenShellの発行計画は既存のpi + OpenRouter構成を使います。</p><pre class="env-code">npm start -- sandbox plan '調査すること' \\\n  --gateway my-vm --url https://www.jalan.net/</pre><p class="dialog-note">OpenShellの実キーはgateway側のproviderで保持します。ブラウザにAPIキーは送信しません。</p>`;
 }
 document.addEventListener("click", async (event) => {
   const button = event.target.closest("button");
@@ -663,3 +673,77 @@ async function init() {
   void poll();
 }
 void init();
+
+$("#interaction-mode").onchange = (event) => {
+  state.interactionMode = event.target.value;
+  render();
+};
+
+async function runtimeApprovals() {
+  const dialog = $("#runtime-approvals-dialog");
+  if (!dialog.open) dialog.showModal();
+  const loops = await api("/api/improvements");
+  const pending = loops.filter(
+    (l) => l.status === "needs_input" && l.approval?.status === "pending",
+  );
+  $("#runtime-approvals-content").innerHTML = pending.length
+    ? pending
+        .map((loop) => {
+          const gate = loop.approval;
+          return `<form class="runtime-approval-form" data-loop="${e(loop.id)}" data-approval="${e(gate.id)}"><h3>${e(gate.title)}</h3><p>${e(loop.query)}</p><p>${e(gate.reason)}</p><fieldset><legend>次の進め方</legend>${gate.choices.map((c) => `<label class="choice"><input type="radio" name="runtime-choice" value="${e(c.id)}" ${c.recommended ? "checked" : ""} required><strong>${e(c.title)}${c.recommended ? "（おすすめ）" : ""}</strong><p>${e(c.tradeoff)}</p></label>`).join("")}</fieldset><label data-runtime-url hidden>追加の公開詳細URL（1行1件・最大8件）<textarea name="urls" rows="2" aria-label="追加の公開詳細URL" disabled></textarea></label><button class="primary-button" type="submit">選んで続ける →</button><p class="runtime-decision-status" role="status"></p></form>`;
+        })
+        .join("")
+    : "<p>現在、選択待ちの調査はありません。Autoは承認待ちを作りません。</p>";
+}
+$("#runtime-approvals-button").onclick = () =>
+  runtimeApprovals().catch((err) => notify(err.message));
+$("#runtime-approvals-content").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const form = event.target.closest(".runtime-approval-form");
+  if (!form) return;
+  const values = new FormData(form),
+    choiceId = values.get("runtime-choice");
+  const status = form.querySelector(".runtime-decision-status"),
+    button = form.querySelector("button");
+  const additionalUrls = String(values.get("urls") ?? "")
+    .split(/\s+/)
+    .filter(Boolean);
+  button.disabled = true;
+  status.textContent =
+    choiceId === "return_partial"
+      ? "提案を取り出しています…"
+      : "選択を保存して追加調査中です。この画面を閉じても履歴は残ります。";
+  try {
+    const result = await api(
+      `/api/improvements/${form.dataset.loop}/decision`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          approvalId: form.dataset.approval,
+          choiceId,
+          additionalUrls,
+        }),
+      },
+    );
+    form.innerHTML = `<h3>選択を保存しました</h3><p>${e(result.task.answer?.summary ?? "回答なし")}</p><p>状態: ${e(result.loop.status)}。未確認対象: ${result.loop.best.gaps.length}件</p>${result.loop.best.gaps.map((g) => `<p>${e(g.url)}：${e(g.fields.join("・"))}</p>`).join("")}<p>最良タスク: ${e(result.task.id)}</p><button type="button" data-refresh-runtime-approvals>確認待ちを更新</button>`;
+  } catch (err) {
+    status.textContent = err.message;
+    button.disabled = false;
+  }
+});
+$("#runtime-approvals-content").addEventListener("click", (event) => {
+  if (event.target.closest("[data-refresh-runtime-approvals]"))
+    runtimeApprovals().catch((err) => notify(err.message));
+});
+
+$("#runtime-approvals-content").addEventListener("change", (event) => {
+  const form = event.target.closest(".runtime-approval-form");
+  if (!form || event.target.name !== "runtime-choice") return;
+  const field = form.querySelector("[data-runtime-url]"),
+    textarea = field.querySelector("textarea");
+  const needsUrl = event.target.value === "add_url";
+  field.hidden = !needsUrl;
+  textarea.disabled = !needsUrl;
+  textarea.required = needsUrl;
+  if (!needsUrl) textarea.value = "";
+});

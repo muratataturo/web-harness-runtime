@@ -40,6 +40,9 @@
               ></span
             ><span>↗</span>
           </button>
+          <button id="runtime-approvals-button" class="environment-button">
+            調査の確認待ち ↗
+          </button>
           <div class="profile">
             <span class="user-avatar">Y</span>
             <div>あなたのワークスペース<small>Pi × OpenRouter</small></div>
@@ -83,6 +86,16 @@
           ><button id="mode-button">実調査に切り替え ↗</button>
         </div>
         <nav id="phase-bar" class="phase-bar" aria-label="相談の進み具合"></nav>
+        <div class="interaction-controls">
+          <label for="interaction-mode">進め方</label>
+          <select id="interaction-mode" aria-describedby="interaction-hint">
+            <option value="approval">Approval · 大切なところで選ぶ</option>
+            <option value="auto">Auto · おすすめで最後まで進む</option>
+          </select>
+          <small id="interaction-hint"
+            >推奨案・選択の影響を見て承認。選択後に再開します。</small
+          >
+        </div>
         <div class="thread-scroll" id="thread-scroll">
           <div id="thread" class="thread-content"></div>
         </div>
@@ -150,6 +163,16 @@
       </aside>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="runtime-approvals-dialog">
+      <div class="dialog-header">
+        <h2>調査の確認待ち</h2>
+        <button data-close-dialog class="icon-button" aria-label="閉じる">
+          ×
+        </button>
+      </div>
+      <p>追加調査にかかる時間と、未確認の条件を確認して選べます。</p>
+      <div id="runtime-approvals-content" aria-live="polite"></div>
+    </dialog>
     <dialog id="environment-dialog">
       <div class="dialog-header">
         <h2>チームの実行環境</h2>

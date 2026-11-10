@@ -1,9 +1,22 @@
 import { roomConflicts } from "./improvement-conflicts.js";
 import { randomUUID } from "node:crypto";
-import { mkdir, readFile, writeFile, rename, readdir } from "node:fs/promises";
+import {
+  mkdir,
+  readFile,
+  writeFile,
+  rename,
+  readdir,
+  rmdir,
+} from "node:fs/promises";
 import { join } from "node:path";
 import { Store } from "./store.js";
-import { runTask, type RunOptions } from "./runtime.js";
+import { type RunOptions } from "./runtime.js";
+import {
+  configuredRuntime,
+  runtimeTarget,
+  type RuntimeExecutor,
+} from "./executors.js";
+import { interactionMode, type InteractionMode } from "./interaction.js";
 import { validateAnswer, setCriteria, addEvidence } from "./evidence.js";
 import { verifyDetail } from "./detail-contracts.js";
 import { assessPage } from "./page-quality.js";
@@ -28,6 +41,26 @@ export interface Diagnosis {
   achievements: string[];
 }
 export interface ImprovementLoop {
+  interactionMode?: InteractionMode;
+  executionTarget?: "local" | "openshell";
+  parentLoopId?: string;
+  approval?: {
+    id: string;
+    status: "pending" | "decided";
+    title: string;
+    reason: string;
+    choices: {
+      id: "return_partial" | "research_more" | "add_url";
+      title: string;
+      tradeoff: string;
+      recommended?: boolean;
+    }[];
+    selected?: string;
+    additionalUrls?: string[];
+    decidedAt?: string;
+    nextLoopId?: string;
+    error?: string;
+  };
   id: string;
   sourceTaskId: string;
   query: string;
@@ -48,6 +81,7 @@ export interface ImprovementLoop {
     | "running"
     | "succeeded"
     | "needs_input"
+    | "completed_partial"
     | "exhausted"
     | "stalled"
     | "blocked"
@@ -401,6 +435,9 @@ export function improvementPlan(
   };
 }
 export interface ImproveOptions {
+  diagnoseOnly?: boolean;
+  interactionMode?: InteractionMode;
+  parentLoopId?: string;
   allowReplacements?: boolean;
   additionalUrls?: string[];
   maxIterations?: number;
@@ -414,8 +451,9 @@ export async function improveTask(
   taskId: string,
   options: ImproveOptions = {},
   store = new Store(),
-  runner = runTask,
+  runner?: RuntimeExecutor,
 ): Promise<ImprovementLoop> {
+  const mode = interactionMode(options.interactionMode);
   const maxIterations = options.maxIterations ?? 3,
     timeoutSeconds = options.timeoutSeconds ?? 1800;
   if (
@@ -431,6 +469,12 @@ export async function improveTask(
   )
     throw new Error("改善全体の時間は1〜3600秒です");
   const seed = await store.get(taskId);
+  const target = seed.execution?.target ?? "local";
+  if (!runner && target !== runtimeTarget())
+    throw new Error(
+      "元タスクと実行先が異なります。RUNTIME_EXECUTORを元の実行先に設定してください",
+    );
+  const execute = runner ?? configuredRuntime();
   if (seed.evaluation)
     throw new Error(
       "凍結ベンチマークはbenchmark runで再評価してください。ライブ自己改善には使いません",
@@ -486,6 +530,9 @@ export async function improveTask(
     minimumCandidates,
   );
   const loop: ImprovementLoop = {
+    interactionMode: mode,
+    executionTarget: target,
+    parentLoopId: options.parentLoopId,
     id: randomUUID(),
     sourceTaskId: seed.id,
     query: seed.query,
@@ -581,6 +628,11 @@ export async function improveTask(
         loop.stopReason = "元の全候補・必須条件・詳細取得を検証済み";
         break;
       }
+      if (options.diagnoseOnly) {
+        loop.status = "exhausted";
+        loop.stopReason = "取得済みの根拠から未達を検出しました";
+        break;
+      }
       const last = tasks.at(-1)!;
       if (last.failure && last.failure.kind !== "unknown") {
         loop.status = "blocked";
@@ -599,8 +651,9 @@ export async function improveTask(
       options.onProgress?.(
         `improvement ${loop.id} [${i}/${maxIterations}] ${plan.strategy}: ${loop.best.gaps.length}対象が未達・未調査リンク${plan.priorityUrls.length}件`,
       );
-      const task = await runner(
+      const task = await execute(
         {
+          interactionMode: mode,
           query: loop.query,
           urls: loop.urls,
           agent: loop.agent,
@@ -724,18 +777,49 @@ export async function improveTask(
     clearTimeout(timer);
     options.signal?.removeEventListener("abort", cancel);
     if (!loop.best.complete) {
-      loop.questions = loop.best.gaps.map((g) => ({
-        url: g.url,
-        missing: g.fields,
-        question: `${g.url} の「${g.fields.join("・")}」が未確認です。次の調査に使える情報はありますか？`,
-        options: [
-          "公式の詳細URLを追加する",
-          "店舗・担当者への確認結果を用意する",
-          "未確認のまま結果を確認する",
-        ],
-      }));
-      if (["exhausted", "stalled"].includes(loop.status))
-        loop.status = "needs_input";
+      loop.questions =
+        mode === "auto"
+          ? []
+          : loop.best.gaps.map((g) => ({
+              url: g.url,
+              missing: g.fields,
+              question: `${g.url} の「${g.fields.join("・")}」が未確認です。未確認を明記して受け取るか、調査を追加するか選べます。`,
+              options: [
+                "未確認を明記して提案を受け取る",
+                "同じ条件で追加調査する（時間・利用枠を追加）",
+                "同一候補の公式詳細URLを追加する",
+              ],
+            }));
+      if (["exhausted", "stalled", "timed_out"].includes(loop.status)) {
+        loop.status = mode === "auto" ? "completed_partial" : "needs_input";
+        if (mode === "approval")
+          loop.approval = {
+            id: randomUUID(),
+            status: "pending",
+            title: "確認できた候補で進めますか？",
+            reason: `${loop.stopReason ?? "追加調査の上限です"}。未確認: ${loop.best.gaps.map((g) => g.fields.join("・")).join(" / ") || loop.best.causes.join(" / ")}。必須条件を緩めず、最良の回答を保持しています。`,
+            choices: [
+              {
+                id: "return_partial",
+                title: "未確認事項を明記して提案を受け取る",
+                recommended: true,
+                tradeoff:
+                  "追加推論なし。未確認条件・空席・営業日は保証できません。",
+              },
+              {
+                id: "research_more",
+                title: "同じ条件でもう一度調べる",
+                tradeoff: `最大${loop.maxIterations}回・${loop.timeoutSeconds}秒を追加で使います。改善できない場合もあります。`,
+              },
+              {
+                id: "add_url",
+                title: "公式の詳細URLを追加して調べる",
+                tradeoff:
+                  "同一候補の公開URLを最大8件入力。認証・アクセス制限は回避しません。",
+              },
+            ],
+          };
+      }
     }
     await loops.save(loop);
   }
@@ -745,12 +829,24 @@ export function renderImprovement(loop: ImprovementLoop) {
   const lines = [
     `改善ループ: ${loop.id}`,
     `status: ${loop.status}`,
+    `mode: ${loop.interactionMode ?? "approval"} / executor: ${loop.executionTarget ?? "local"}`,
     `実行: ${loop.iterations.length}/${loop.maxIterations}`,
     `必須条件の確認数: ${loop.baseline.supportedRequired} → ${loop.best.supportedRequired}`,
     `詳細取得済み: ${loop.baseline.verifiedDetails} → ${loop.best.verifiedDetails}`,
     `未達対象: ${new Set(loop.baseline.gaps.map((g) => g.url)).size} → ${new Set(loop.best.gaps.map((g) => g.url)).size}`,
     `最良タスク: ${loop.bestTaskId}`,
     loop.stopReason ?? "",
+    ...(loop.approval?.status === "pending"
+      ? [
+          loop.approval.title,
+          loop.approval.reason,
+          ...loop.approval.choices.map(
+            (c) =>
+              `${c.id}${c.recommended ? " [推奨]" : ""}: ${c.title} — ${c.tradeoff}`,
+          ),
+          `再開: improvements decide ${loop.id} --approval ${loop.approval.id} --choice return_partial`,
+        ]
+      : []),
     ...loop.iterations.map(
       (i) =>
         `#${i.number} ${i.plan.strategy}: ${i.taskStatus}, 新規本文${i.newPages}, ${i.corrections?.length ? "旧情報を訂正" : i.accepted ? "採用" : "最良結果を維持"} (${i.taskId})`,
@@ -761,4 +857,94 @@ export function renderImprovement(loop: ImprovementLoop) {
     ),
   ];
   return lines.join("\n");
+}
+
+/** Persist a decision before performing more work. A replay cannot spend the budget twice. */
+export async function decideImprovement(
+  id: string,
+  input: { approvalId: string; choiceId: string; additionalUrls?: string[] },
+  store = new Store(),
+  runner?: RuntimeExecutor,
+): Promise<ImprovementLoop> {
+  const loops = new ImprovementStore(store);
+  const lock = join(loops.dir(id), "decision.lock");
+  await mkdir(lock).catch(() => {
+    throw new Error("この承認は処理中です。履歴を確認してください");
+  });
+  try {
+    const loop = await loops.get(id),
+      gate = loop.approval;
+    if (
+      !gate ||
+      gate.id !== input.approvalId ||
+      loop.interactionMode !== "approval"
+    )
+      throw new Error("古い承認、または承認対象ではありません");
+    const urls = input.additionalUrls ?? [];
+    if (!Array.isArray(urls) || !urls.every((u) => typeof u === "string"))
+      throw new Error("追加URLが不正です");
+    if (gate.status === "decided") {
+      if (
+        gate.selected !== input.choiceId ||
+        JSON.stringify(gate.additionalUrls ?? []) !== JSON.stringify(urls)
+      )
+        throw new Error("確定済みの選択は変更できません");
+      return gate.nextLoopId ? loops.get(gate.nextLoopId) : loop;
+    }
+    if (
+      loop.status !== "needs_input" ||
+      !gate.choices.some((c) => c.id === input.choiceId)
+    )
+      throw new Error("提示された選択肢から選んでください");
+    if (input.choiceId === "add_url") {
+      if (!urls.length || urls.length > 8)
+        throw new Error("追加URLを1〜8件入力してください");
+      const hosts = allowedHosts(routeSources(loop.query, loop.urls));
+      for (const url of urls) {
+        checkNavigation(url, hosts);
+        if (!loop.candidateUrls.some((u) => entityKey(u) === entityKey(url)))
+          throw new Error("追加URLは同一候補の公開詳細に限ります");
+      }
+    } else if (urls.length) throw new Error("URL追加の選択時だけ指定できます");
+    if (
+      input.choiceId !== "return_partial" &&
+      !runner &&
+      (loop.executionTarget ?? "local") !== runtimeTarget()
+    )
+      throw new Error("元の実行先に設定してから再開してください");
+    gate.status = "decided";
+    gate.selected = input.choiceId;
+    gate.additionalUrls = urls;
+    gate.decidedAt = new Date().toISOString();
+    loop.status = "completed_partial";
+    loop.questions = [];
+    await loops.save(loop);
+    if (input.choiceId === "return_partial") return loop;
+    try {
+      const next = await improveTask(
+        loop.bestTaskId,
+        {
+          interactionMode: "approval",
+          parentLoopId: loop.id,
+          maxIterations: loop.maxIterations,
+          timeoutSeconds: loop.timeoutSeconds,
+          allowReplacements: loop.allowReplacements,
+          additionalUrls: urls,
+          agent: loop.agent,
+          model: loop.model,
+        },
+        store,
+        runner,
+      );
+      gate.nextLoopId = next.id;
+      await loops.save(loop);
+      return next;
+    } catch (error) {
+      gate.error = error instanceof Error ? error.message : String(error);
+      await loops.save(loop);
+      throw error;
+    }
+  } finally {
+    await rmdir(lock);
+  }
 }

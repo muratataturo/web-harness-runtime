@@ -1,6 +1,6 @@
 # Derived from NVIDIA's official Run Pi with OpenRouter tutorial.
 # Import once into the gateway; credentials stay in the gateway's credential store.
-id: web-harness-openrouter
+id: wh-pi-openrouter
 display_name: Web Harness OpenRouter
 description: Endpoint-bound OpenRouter inference for the Node.js Pi runtime
 category: inference

@@ -25,7 +25,7 @@ import { routeSources, allowedHosts } from "./sources.js";
 import { selectModel } from "./models.js";
 import { Store } from "./store.js";
 import {
-  addEvidence,
+  recordPlannedEvidence,
   setCriteria,
   validateAnswer,
   renderAnswer,
@@ -43,8 +43,10 @@ import { classifyRuntimeFailure } from "./failures.js";
 import { assessPage } from "./page-quality.js";
 import { SYSTEM_PROMPT } from "./prompt.js";
 import { CodexAgent, agentEngine, type AgentEngine } from "./codex.js";
+import { piUsage } from "./metrics.js";
 import type { Task, Page, Criterion } from "./types.js";
 export interface RunOptions {
+  interactionMode?: import("./interaction.js").InteractionMode;
   query: string;
   urls: string[];
   model?: string;
@@ -82,6 +84,8 @@ export function newTask(options: RunOptions): Task {
   )
     throw new Error("deepenRoundsは0〜3です");
   return {
+    interactionMode: options.interactionMode ?? "approval",
+    execution: { target: "local", isolation: "host-process" },
     id: randomUUID(),
     agent: agentEngine(options.agent),
     parentId: options.parentId,
@@ -125,6 +129,11 @@ export async function runTask(
   const task = newTask(options);
   const instructions =
     SYSTEM_PROMPT +
+    (options.benchmark
+      ? ""
+      : task.interactionMode === "auto"
+        ? "\n進め方はautoです。ユーザーの予算・必須条件の範囲で推奨を選び、選択理由と未確認事項を明記して回答してください。ユーザーの返答待ちは作りません。条件を勝手に緩めたり、未確認を確認済みにしたりしないでください。"
+        : "\n進め方はapprovalです。確認できない条件はunknownとして回答に残してください。ホストが推奨案・影響・選択肢と承認後の再開を扱います。ユーザーが承認したと仮定しないでください。") +
     (options.improvement ? IMPROVEMENT_PROMPT : "") +
     (options.benchmark
       ? "\n凍結資料の含意判定ベンチマークです。これは推薦の条件充足ではなく記述の真偽/未確認の評価です。benchmark.criteriaを変更せず、全記述をsupported/contradicted/unknownに判定してください。ライブ検索は使えません。各対象URLの本文を取得し、日本語の理由と本文引用を記録して全対象をfinish_taskに含めてください。"
@@ -342,7 +351,10 @@ export async function runTask(
             );
           return task.criteria;
         }
-        setCriteria(task, pinRequiredCriteria(task.query, p.criteria));
+        const criteria = pinRequiredCriteria(task.query, p.criteria);
+        if (JSON.stringify(task.criteria) === JSON.stringify(criteria))
+          return task.criteria;
+        setCriteria(task, criteria);
         return task.criteria;
       }),
     }),
@@ -399,7 +411,7 @@ export async function runTask(
         quote: Type.String({ minLength: 6, maxLength: 1200 }),
       }),
       execute: wrap("record_evidence", (p) =>
-        addEvidence(task, p.pageId, p.quote),
+        recordPlannedEvidence(task, p.pageId, p.quote),
       ),
     }),
     defineTool({
@@ -786,6 +798,9 @@ export async function runTask(
     clearTimeout(timer);
     options.signal?.removeEventListener("abort", cancel);
     controller.signal.removeEventListener("abort", abortSession);
+    const usage =
+      codex?.usage ??
+      (session ? piUsage(session.getSessionStats().tokens) : undefined);
     session?.dispose();
     await codex?.close();
     await claude?.close();
@@ -796,12 +811,12 @@ export async function runTask(
     }
     task.metrics = {
       elapsedMs: Math.round(performance.now() - started),
-      tokenAccounting: codex?.usage
+      tokenAccounting: usage
         ? controller.signal.aborted
           ? "last-observed-partial"
           : "provider-reported"
         : "unavailable",
-      tokens: codex?.usage ?? null,
+      tokens: usage ?? null,
       billing: {
         mode:
           task.agent === "codex"

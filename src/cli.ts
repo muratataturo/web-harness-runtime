@@ -9,6 +9,7 @@ import {
   ImprovementStore,
   renderImprovement,
   diagnose,
+  decideImprovement,
 } from "./improvement.js";
 import {
   loadSemanticCases,
@@ -20,7 +21,9 @@ import { taskReviewSignals } from "./reviews.js";
 import { FeedbackStore } from "./feedback.js";
 import { Store } from "./store.js";
 import { assessPage } from "./page-quality.js";
-import { runTask } from "./runtime.js";
+import { configuredRuntime } from "./executors.js";
+import { interactionMode } from "./interaction.js";
+import { decodeImprovementContext } from "./improvement-context.js";
 import {
   TrustedStore,
   verifySources,
@@ -63,6 +66,17 @@ const integer = (value: string) => {
 };
 const withRunOptions = (command: Command) =>
   command
+    .option(
+      "--improvement-context <base64url>",
+      "sandboxへの検証契約転送",
+      decodeImprovementContext,
+    )
+    .option(
+      "--mode <mode>",
+      "auto: 承認待ちなし / approval: 推奨案を承認して再開",
+      interactionMode,
+      "approval",
+    )
     .option("--agent <engine>", "codex（既定）/ claude-code / pi-openrouter")
     .option("--model <id>", "選択エンジンのモデルID（既定: 各カタログ）")
     .option(
@@ -114,7 +128,9 @@ async function execute(
   process.once("SIGINT", cancel);
   process.once("SIGTERM", cancel);
   try {
-    const task = await runTask({
+    const task = await configuredRuntime()({
+      interactionMode: interactionMode(opts.mode),
+      improvement: opts.improvementContext,
       query,
       urls,
       model: opts.model,
@@ -129,7 +145,8 @@ async function execute(
       onProgress: (m) => process.stderr.write(m + "\n"),
     });
     if (
-      opts.selfImprove &&
+      (opts.selfImprove ||
+        (opts.mode === "approval" && task.status === "partial")) &&
       !controller.signal.aborted &&
       task.pages.some((p) => {
         const key = entityKey(p.url);
@@ -138,6 +155,8 @@ async function execute(
       task.criteria.length
     ) {
       const loop = await improveTask(task.id, {
+        diagnoseOnly: !opts.selfImprove,
+        interactionMode: interactionMode(opts.mode),
         allowReplacements: opts.allowReplacements,
         maxIterations: opts.improveIterations,
         timeoutSeconds: opts.improveTimeout,
@@ -294,12 +313,17 @@ function improvementExitCode(status: string) {
     ? 0
     : status === "cancelled"
       ? 130
-      : status === "needs_input"
+      : ["needs_input", "completed_partial"].includes(status)
         ? 2
         : 1;
 }
 program
   .command("improve")
+  .option(
+    "--diagnose-only",
+    "追加推論せず保存済み根拠だけでmodeの終了・承認を作る",
+  )
+  .option("--mode <mode>", "auto / approval", interactionMode, "approval")
   .description("保存タスクの未達を診断・計画・再実行・検証し最良結果を保存")
   .argument("<task-id>")
   .option("--allow-replacements", "同じ条件・同数以上の代替候補の探索を許可")
@@ -321,6 +345,8 @@ program
     process.once("SIGTERM", cancel);
     try {
       const loop = await improveTask(id, {
+        diagnoseOnly: opts.diagnoseOnly,
+        interactionMode: interactionMode(opts.mode),
         allowReplacements: opts.allowReplacements,
         additionalUrls: opts.url,
         maxIterations: opts.iterations,
@@ -345,6 +371,27 @@ program
 const improvements = program
   .command("improvements")
   .description("自己改善の診断・採否・最良結果・要確認事項の履歴");
+improvements
+  .command("decide")
+  .argument("<loop-id>")
+  .requiredOption("--approval <id>", "表示された承認ID")
+  .requiredOption("--choice <id>", "return_partial / research_more / add_url")
+  .option("--url <urls...>", "同一候補の追加公開URL")
+  .option("--json")
+  .action(async (id, opts) => {
+    const loop = await decideImprovement(id, {
+      approvalId: opts.approval,
+      choiceId: opts.choice,
+      additionalUrls: opts.url,
+    });
+    const task = await new Store().get(loop.bestTaskId);
+    console.log(
+      opts.json
+        ? JSON.stringify({ loop, task }, null, 2)
+        : renderImprovement(loop) + "\n\n" + renderAnswer(task),
+    );
+    process.exitCode = improvementExitCode(loop.status);
+  });
 improvements
   .command("diagnose")
   .argument("<task-id>")
@@ -831,22 +878,26 @@ const goal = program
   .description("複数エージェントの目標・選択・履歴をCLIから操作");
 goal
   .command("create")
+  .option("--mode <mode>", "auto / approval", interactionMode, "approval")
   .argument("[text]")
   .option("--scenario <type>", "travel または life", "travel")
   .option("--live", "実サイト調査（既定はAPIを使わない体験）")
-  .action(async (text, opts) =>
+  .action(async (text, opts) => {
+    const engine = new GoalEngine();
+    const created = await engine.create({
+      interactionMode: interactionMode(opts.mode),
+      scenario: opts.scenario,
+      text,
+      mode: opts.live ? "live" : "demo",
+    });
     console.log(
       JSON.stringify(
-        await new GoalEngine().create({
-          scenario: opts.scenario,
-          text,
-          mode: opts.live ? "live" : "demo",
-        }),
+        opts.mode === "auto" ? await engine.settle(created.id) : created,
         null,
         2,
       ),
-    ),
-  );
+    );
+  });
 goal
   .command("list")
   .action(async () =>
