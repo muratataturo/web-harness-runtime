@@ -1,3 +1,9 @@
+import { pageArtifact, type PageArtifact } from "./artifacts.js";
+import {
+  ProgressDecoder,
+  researchProgress,
+  type ResearchProgress,
+} from "./progress.js";
 import { randomUUID } from "node:crypto";
 import { mkdir, readFile, readdir, writeFile, rename } from "node:fs/promises";
 import { join } from "node:path";
@@ -61,6 +67,7 @@ export interface RunRecord {
   revision: number;
   createdAt: string;
   updatedAt: string;
+  updateSeq?: number;
   status:
     | "needs_input"
     | "running"
@@ -81,6 +88,8 @@ export interface RunRecord {
     additionalUrls?: string[];
   }[];
   progress: string[];
+  activities?: ResearchProgress[];
+  artifacts?: PageArtifact[];
   taskId?: string;
   task?: Task;
   loop?: ImprovementLoop;
@@ -114,6 +123,42 @@ export function runtimeCapabilities() {
 }
 export class RunService {
   private runs = new Map<string, RunRecord>();
+  private listeners = new Map<string, Set<(record: RunRecord) => void>>();
+  subscribe(id: string, fn: (record: RunRecord) => void) {
+    const group = this.listeners.get(id) ?? new Set();
+    group.add(fn);
+    this.listeners.set(id, group);
+    return () => {
+      group.delete(fn);
+      if (!group.size) this.listeners.delete(id);
+    };
+  }
+  private activity(r: RunRecord, event: Omit<ResearchProgress, "seq">) {
+    r.activities = [
+      ...(r.activities ?? []),
+      { ...event, seq: (r.activities?.at(-1)?.seq ?? 0) + 1 },
+    ].slice(-80);
+    r.phase = event.title;
+    if (event.artifact)
+      r.artifacts = [
+        ...(r.artifacts ?? []).filter((a) => a.id !== event.artifact!.id),
+        event.artifact,
+      ].slice(-80);
+  }
+  private progressSink(r: RunRecord) {
+    const decoder = new ProgressDecoder((event) => this.activity(r, event));
+    return (message: string) => {
+      decoder.push(message);
+      if (message.startsWith("Codex account-worker"))
+        this.activity(
+          r,
+          researchProgress("prepare", "active", { pages: 0, evidence: 0 }),
+        );
+      r.progress = [...r.progress, message.slice(-600)].slice(-40);
+      void this.save(r).catch(() => {});
+    };
+  }
+
   private active = new Map<string, AbortController>();
   private writes = new Map<string, Promise<void>>();
   private pending = new Set<Promise<unknown>>();
@@ -126,6 +171,7 @@ export class RunService {
     return join(this.store.root, "runs", id + ".json");
   }
   private async save(r: RunRecord) {
+    r.updateSeq = (r.updateSeq ?? 0) + 1;
     r.updatedAt = new Date().toISOString();
     this.runs.set(r.id, r);
     const contents = JSON.stringify(r, null, 2);
@@ -142,6 +188,10 @@ export class RunService {
       });
     this.writes.set(r.id, write);
     await write;
+    if (this.listeners.has(r.id)) {
+      const snapshot = JSON.parse(contents) as RunRecord;
+      for (const fn of this.listeners.get(r.id)!) fn(snapshot);
+    }
   }
   async get(id: string) {
     await this.writes.get(id);
@@ -153,6 +203,10 @@ export class RunService {
         ? listingReview(full)
         : (r.task?.reviewWarnings ?? []);
     }
+    if (r.task && r.artifacts === undefined) {
+      const full = await this.store.get(r.task.id).catch(() => r.task!);
+      r.artifacts = full.pages.map((p, i) => pageArtifact(full, p, i));
+    }
     if (r.status === "running") {
       r.status = "interrupted";
       r.phase = "プロセス再起動により中断。自動再送しません";
@@ -160,6 +214,25 @@ export class RunService {
     }
     this.runs.set(id, r);
     return r;
+  }
+  async artifact(id: string, artifactId: string) {
+    const r = await this.get(id);
+    const a = r.artifacts?.find((a) => a.id === artifactId);
+    if (!a)
+      throw Object.assign(Error("成果物が見つかりません"), { code: "ENOENT" });
+    const full = await this.store.get(a.taskId).catch(() => undefined);
+    const page = full?.pages.find((p) =>
+      a.pageId ? p.id === a.pageId : p.url === a.url,
+    );
+    return {
+      ...a,
+      body: page?.text || a.preview,
+      excerptOnly: !page?.text,
+      quotes: (full?.evidence ?? r.task?.evidence ?? []).filter(
+        (e) => e.url === a.url,
+      ),
+      source: r.input.source,
+    };
   }
   async list() {
     const names = await readdir(join(this.store.root, "runs")).catch(() => []);
@@ -291,8 +364,30 @@ export class RunService {
   }
   private async finish(r: RunRecord, t: Task, signal: AbortSignal) {
     signal.throwIfAborted();
+    if (r.input.source === "live")
+      this.activity(
+        r,
+        researchProgress("finish_task", t.answer ? "done" : "error", {
+          pages: t.pages.length,
+          evidence: t.evidence.length,
+          step: t.steps,
+        }),
+      );
     r.taskId = t.id;
     r.task = summaryTask(t);
+    const full =
+      r.input.source === "replay"
+        ? await this.store.get(t.id).catch(() => t)
+        : t;
+    const captured = full.pages.map((p, i) => pageArtifact(full, p, i));
+    r.artifacts = [
+      ...captured,
+      ...(r.artifacts ?? []).filter(
+        (a) =>
+          a.state === "unavailable" &&
+          !captured.some((p) => p.id === a.id || p.url === a.url),
+      ),
+    ];
     r.reviewWarnings = t.reviewWarnings ?? listingReview(t);
     if (!t.answer) {
       r.status = t.status === "cancelled" ? "cancelled" : "failed";
@@ -458,12 +553,7 @@ export class RunService {
                   timeoutSeconds: 240,
                   deepenRounds: 1,
                   signal,
-                  onProgress: (message) => {
-                    r.progress = [...r.progress, message.slice(-600)].slice(
-                      -40,
-                    );
-                    void this.save(r).catch(() => {});
-                  },
+                  onProgress: this.progressSink(r),
                 },
                 this.store,
               );
@@ -492,7 +582,11 @@ export class RunService {
             additionalUrls: input.additionalUrls,
           },
           this.store,
-          (options, store) => this.runtime({ ...options, signal }, store),
+          (options, store) =>
+            this.runtime(
+              { ...options, signal, onProgress: this.progressSink(r) },
+              store,
+            ),
         );
         r.loop = loop;
         await this.finish(r, await this.store.get(loop.bestTaskId), signal);

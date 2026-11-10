@@ -1,3 +1,4 @@
+import { StringDecoder } from "node:string_decoder";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve, join } from "node:path";
@@ -385,12 +386,16 @@ export function runOpenShellCommand(
       options.timeoutMs ?? 60_000,
     );
     options.signal?.addEventListener("abort", abort, { once: true });
+    const decoders = {
+      stdout: new StringDecoder("utf8"),
+      stderr: new StringDecoder("utf8"),
+    };
     const collect = (stream: "stdout" | "stderr", chunk: Buffer) => {
       if (settled || termination) return;
       const available = Math.max(0, cap - captured);
       const accepted = chunk.subarray(0, available);
       captured += accepted.length;
-      const text = accepted.toString();
+      const text = decoders[stream].write(accepted);
       if (stream === "stdout") stdout += text;
       else stderr += text;
       if (text) options.onOutput?.(stream, text);

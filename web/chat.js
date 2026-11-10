@@ -48,8 +48,8 @@ function theme(brand) {
   document.body.dataset.brand = brand;
   $("#brand-name").innerHTML =
     brand === "rakuten"
-      ? 'Rakuten<span class="wordmark-sub">inspired / HARNESS</span>'
-      : 'RECRUIT<span class="wordmark-sub">inspired / HARNESS</span>';
+      ? 'Rakuten<span class="wordmark-sub">HARNESS WORKSPACE</span>'
+      : 'RECRUIT<span class="wordmark-sub">HARNESS WORKSPACE</span>';
   document
     .querySelectorAll(".brand-switch button")
     .forEach((b) =>
@@ -74,8 +74,12 @@ function sample(id) {
   $("#chat-query").value = p.query;
   $("#chat-urls").value = p.urls.join("\n");
   if (state.run) {
+    state.stream?.close();
+    state.stream = null;
+    state.streamId = null;
     state.run = null;
     state.signature = "";
+    $("#artifact-jump").hidden = true;
     localStorage.removeItem("harness.run");
     $("#conversation").innerHTML = welcomeHtml;
     $("#inspection").innerHTML =
@@ -123,14 +127,121 @@ function inspection(r) {
         .join("") ?? "<small>まだ根拠は保存されていません。</small>"
     }</section><section class="inspect-section"><h3>未確認・制約</h3>${t?.answer?.limitations?.map((l) => `<p>${esc(l)}</p>`).join("") ?? "<small>取得結果と一緒に表示します。</small>"}</section>`;
 }
+function progressHtml(r) {
+  const events = r.activities ?? [],
+    last = events.at(-1),
+    stages = [
+      ["prepare", "準備"],
+      ["plan", "条件整理"],
+      ["read", "ページ取得"],
+      ["verify", "根拠確認"],
+      ["answer", "回答"],
+    ];
+  const finishedStages = new Set(
+    events.filter((e) => e.status === "done").map((e) => e.stage),
+  );
+  return `<div class="stream-heading"><span class="pulse" aria-hidden="true"></span><span>${esc(last?.title ?? r.phase)}</span><span class="live-pill" id="stream-state">接続中</span></div><div class="stage-track">${stages.map(([key, label]) => `<span class="stage ${key === last?.stage ? "active" : finishedStages.has(key) ? "done" : ""}">${label}</span>`).join("")}</div><div class="stream-counts"><span>取得記録 <strong>${last?.pages ?? 0}</strong></span><span>保存した根拠 <strong>${last?.evidence ?? 0}</strong></span><span>経過 <strong id="stream-elapsed">${Math.max(0, Math.floor((Date.now() - new Date(r.createdAt)) / 1000))}s</strong></span></div><ol class="stream-timeline" aria-label="調査の進捗">${
+    events
+      .slice(-7)
+      .map(
+        (e) =>
+          `<li><span class="event-dot ${e.status}">${e.status === "done" ? "✓" : e.status === "error" ? "!" : "◌"}</span><div><strong>${esc(e.title)}${e.status === "error" ? " · 取得できず" : ""}</strong>${e.url ? `<small>${esc(new URL(e.url).hostname + new URL(e.url).pathname)}</small>` : ""}</div><time>${new Date(e.at).toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit", second: "2-digit" }).slice(0, 8)}</time></li>`,
+      )
+      .join("") ||
+    '<li><span class="event-dot">◌</span><div><strong>実行環境の応答を待っています</strong><small>取得の開始が届き次第、ここに順次表示します。</small></div></li>'
+  }</ol>`;
+}
+function artifactsHtml(r) {
+  const cards = r.artifacts ?? [];
+  if (!cards.length) return "";
+  return `<section class="artifact-shelf"><h3 class="shelf-heading">調査で確認したリンク <small>${cards.filter((a) => a.state === "captured").length}件取得 · ${r.input.source === "replay" ? "保存済み実測" : "調査成果物"}</small></h3><div class="artifact-grid">${cards.map((a) => `<article class="artifact-card"><button class="artifact-open" data-artifact="${esc(a.id)}" title="${esc(a.url)}"><div class="artifact-domain"><span>${esc(new URL(a.url).hostname)}</span><b class="artifact-status ${a.state === "unavailable" ? "error" : ""}">${a.state === "unavailable" ? "取得不可" : "取得済み"}${a.statusCode ? " / " + a.statusCode : ""}</b></div><strong>${esc(a.title)}</strong><p>${esc(a.preview)}</p></button><footer><button class="artifact-preview-link" data-artifact="${esc(a.id)}">プレビューを開く</button><a href="${link(a.url)}" title="${esc(a.url)}" target="_blank" rel="noopener noreferrer">元のページ ↗</a></footer></article>`).join("")}</div></section>`;
+}
+
+function updateLive(r) {
+  const stream = $("#stream-view");
+  if (stream) stream.innerHTML = progressHtml(r);
+  const shelf = $("#live-artifacts");
+  if (shelf) {
+    const cards = artifactsHtml(r);
+    if (shelf.lastCards !== cards) {
+      shelf.innerHTML = cards;
+      shelf.lastCards = cards;
+    }
+  }
+  const jump = $("#artifact-jump");
+  const count = r.artifacts?.length ?? 0;
+  jump.hidden = !count;
+  jump.textContent = `取得リンク ${count}`;
+  const badge = $("#stream-state");
+  if (badge)
+    badge.textContent =
+      state.stream?.readyState === EventSource.OPEN ? "● LIVE" : "再接続中";
+}
+function watch(r) {
+  if (
+    state.streamId === r.id &&
+    ["running", "needs_input"].includes(r.status) &&
+    state.stream
+  )
+    return;
+  state.stream?.close();
+  state.stream = null;
+  state.streamId = null;
+  if (!["running", "needs_input"].includes(r.status)) return;
+  const es = new EventSource(`/api/runs/${r.id}/events`);
+  state.stream = es;
+  state.streamId = r.id;
+  es.addEventListener("run", (event) => {
+    if (state.run?.id !== r.id) return;
+    try {
+      const next = JSON.parse(event.data);
+      render(next);
+      if (next.status !== "running") void history();
+    } catch {
+      notice("進捗の更新を読み込めませんでした");
+    }
+  });
+  es.onopen = () => {
+    const b = $("#stream-state");
+    if (b) b.textContent = "● LIVE";
+  };
+  es.onerror = () => {
+    const b = $("#stream-state");
+    if (b) b.textContent = "再接続中";
+  };
+}
+async function previewArtifact(id) {
+  const r = state.run;
+  if (!r) return;
+  $("#artifact-content").innerHTML =
+    "<p>保存された取得内容を読み込んでいます…</p>";
+  $("#artifact-dialog").showModal();
+  try {
+    const a = await api(`/api/runs/${r.id}/artifacts/${id}`);
+    if (state.run?.id !== r.id) return;
+    $("#artifact-content").innerHTML =
+      `<span class="run-tag">${a.state === "unavailable" ? "取得できなかったページ" : "取得したページの成果物"}</span><h2>${esc(a.title)}</h2><div class="artifact-meta">${esc(a.url)}<br>${esc(a.capturedAt)} · ${esc(a.method)}${a.statusCode ? " · HTTP " + a.statusCode : ""}</div><div class="artifact-preview-body">${esc(a.body)}</div><p class="artifact-meta">${a.state === "unavailable" ? "取得に失敗した記録です。ページ本文の取得成功を示すものではありません。" : a.excerptOnly ? "この表示は保存された本文抜粋・引用です。全文取得ではありません。" : "取得した時点の本文です。現在のページを埋め込んだ表示ではありません。"}</p>${a.quotes.length ? "<h3>回答に使った引用</h3>" + a.quotes.map((q) => `<blockquote class="artifact-quote">${esc(q.quote)}</blockquote>`).join("") : ""}<a class="artifact-external" href="${link(a.url)}" target="_blank" rel="noopener noreferrer">元のページを開く ↗</a>`;
+  } catch (e) {
+    $("#artifact-content").textContent = e.message;
+  }
+}
 function render(r) {
+  if (state.run?.id === r.id && (r.updateSeq ?? 0) < (state.run.updateSeq ?? 0))
+    return;
+  if (state.run?.id !== r.id) {
+    if (r.input.example) state.example = r.input.example;
+    $("#chat-query").value = r.input.query;
+    $("#chat-urls").value = r.input.urls.join("\n");
+    $("#chat-mode").value = r.input.mode;
+    $("#data-source").value = r.input.source;
+    $("#chat-agent").value = r.input.agent;
+    modeHint();
+  }
   state.run = r;
   localStorage.setItem("harness.run", r.id);
-  $("#chat-mode").value = r.input.mode;
-  $("#data-source").value = r.input.source;
-  $("#chat-agent").value = r.input.agent;
-  modeHint();
+  watch(r);
   const signature = JSON.stringify([
+    r.id,
     r.status,
     r.revision,
     r.gate?.id,
@@ -140,6 +251,7 @@ function render(r) {
     r.error,
   ]);
   if (signature === state.signature) {
+    updateLive(r);
     const pre = $("#progress-lines");
     if (pre) pre.textContent = r.progress.slice(-8).join("\n");
     return;
@@ -164,11 +276,13 @@ function render(r) {
     html += `<form class="gate-card" id="decision-form"><span class="run-tag">${r.gate.kind === "direction" ? "あなたのこだわり" : "未確認事項の扱い"}</span><h2>${esc(r.gate.title)}</h2><p>${esc(r.gate.reason)}</p><div class="gate-options">${r.gate.choices.map((c) => `<label class="gate-choice"><input type="radio" name="choice" value="${esc(c.id)}" ${c.id === state.selection ? "checked" : ""}><span><strong>${esc(c.title)}${c.recommended ? '<b class="recommended">おすすめ</b>' : ""}</strong><small>${esc(c.tradeoff)}</small></span></label>`).join("")}</div>${r.gate.choices.some((c) => c.id === "add_url") ? '<textarea class="gate-urls" id="extra-urls" rows="2" placeholder="URL追加を選んだ場合：同一候補の公式詳細URLを1行に1つ"></textarea>' : ""}<button class="gate-confirm" type="submit">この選択で進む →</button><p>おすすめは自動送信されません。押すと選択を保存して再開します。</p></form>`;
   }
   if (r.status === "running")
-    html += `<div class="progress-box" role="status">◌ ${esc(r.phase)}<details><summary>取得の進み具合</summary><pre id="progress-lines">${esc(r.progress.slice(-8).join("\n"))}</pre></details><button class="cancel-run" id="cancel-run">調査を停止</button></div>`;
+    html += `<div class="progress-box"><div id="stream-view" aria-live="polite" aria-atomic="false">${progressHtml(r)}</div><details><summary>詳細ログ</summary><pre id="progress-lines">${esc(r.progress.slice(-8).join("\n"))}</pre></details><button class="cancel-run" id="cancel-run">調査を停止</button></div>`;
+  html += `<div id="live-artifacts">${artifactsHtml(r)}</div>`;
   if (r.task?.answer)
     html += `<div class="result-actions"><button id="copy-answer">回答をコピー</button><a href="/api/runs/${esc(r.id)}" target="_blank" rel="noopener">回答・引用・実行記録 JSON ↗</a></div>`;
   $("#conversation").innerHTML = html;
   inspection(r);
+  updateLive(r);
   $("#decision-form")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (state.busy) return;
@@ -219,7 +333,8 @@ function render(r) {
       notice("ブラウザのコピー権限を確認してください");
     }
   });
-  $("#conversation").scrollTop = $("#conversation").scrollHeight;
+  if (r.status !== "needs_input" || r.gate?.kind !== "direction")
+    $("#conversation").scrollTop = $("#conversation").scrollHeight;
 }
 $("#chat-form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -252,6 +367,11 @@ $("#chat-form").addEventListener("submit", async (e) => {
   }
 });
 document.addEventListener("click", async (e) => {
+  const artifact = e.target.closest("[data-artifact]");
+  if (artifact) {
+    await previewArtifact(artifact.dataset.artifact);
+    return;
+  }
   const brand = e.target.closest("[data-brand]");
   if (brand?.tagName === "BUTTON") theme(brand.dataset.brand);
   const ex = e.target.closest("[data-example]");
@@ -272,10 +392,13 @@ document.addEventListener("click", async (e) => {
 });
 $("#new-chat").onclick = () => {
   localStorage.removeItem("harness.run");
-  location.reload();
+  location.assign("/chat");
 };
 $("#mobile-nav").onclick = () => $(".rail").classList.toggle("open");
 $("#usage-toggle").onclick = () => $("#usage").showModal();
+$("#artifact-close").onclick = () => $("#artifact-dialog").close();
+$("#artifact-jump").onclick = () =>
+  $(".artifact-shelf")?.scrollIntoView({ block: "start" });
 $("#usage-close").onclick = () => $("#usage").close();
 $("#chat-mode").onchange = modeHint;
 $("#data-source").onchange = modeHint;
@@ -297,8 +420,10 @@ async function init() {
     $("#chat-agent").value = config.defaultAgent;
     sample("day-out");
     await history();
-    const id = localStorage.getItem("harness.run");
-    if (id) render(await api("/api/runs/" + id));
+    const id =
+      new URLSearchParams(location.search).get("run") ??
+      localStorage.getItem("harness.run");
+    if (id && /^[a-zA-Z0-9-]+$/.test(id)) render(await api("/api/runs/" + id));
   } catch (e) {
     notice(e.message);
   }
@@ -306,7 +431,18 @@ async function init() {
 }
 setInterval(async () => {
   const r = state.run;
-  if (r?.status === "running" && !state.busy) {
+  if (r?.status === "running") {
+    const elapsed = $("#stream-elapsed");
+    if (elapsed)
+      elapsed.textContent =
+        Math.max(0, Math.floor((Date.now() - new Date(r.createdAt)) / 1000)) +
+        "s";
+  }
+  if (
+    r?.status === "running" &&
+    !state.busy &&
+    state.stream?.readyState !== EventSource.OPEN
+  ) {
     try {
       const next = await api("/api/runs/" + r.id);
       if (state.run?.id === next.id) {

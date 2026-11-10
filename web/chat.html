@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#087bd0" />
+    <meta name="theme-color" content="#ffffff" />
     <title>つぎの、いい選択。｜Harness Chat</title>
     <link rel="stylesheet" href="/chat.css" />
   </head>
@@ -12,7 +12,7 @@
       <a href="/chat" class="wordmark" aria-label="Harness Chat ホーム"
         ><span class="brand-symbol">r</span
         ><span id="brand-name"
-          >RECRUIT<span class="wordmark-sub">inspired / HARNESS</span></span
+          >RECRUIT<span class="wordmark-sub">HARNESS WORKSPACE</span></span
         ></a
       >
       <p class="local-label">
@@ -22,15 +22,15 @@
       <p class="nav-label">相談する</p>
       <button class="example" data-example="day-out">
         <span>☀</span>
-        <div>一日を、ちょっと特別に<small>遊び・食事・寄り道</small></div>
+        <div>一日のお出かけ<small>遊び・食事・寄り道</small></div>
         <b>↗</b></button
       ><button class="example" data-example="life-plan">
         <span>⌂</span>
-        <div>これからの暮らしを考える<small>仕事・住まい・移動</small></div>
+        <div>これからの暮らし<small>仕事・住まい・移動</small></div>
         <b>↗</b></button
       ><button class="example" data-example="books">
         <span>▤</span>
-        <div>根拠を確かめて選ぶ<small>本・買い物・情報確認</small></div>
+        <div>根拠から選ぶ<small>本・買い物・情報確認</small></div>
         <b>↗</b>
       </button>
       <p class="nav-label history-label">最近の相談</p>
@@ -47,12 +47,11 @@
       <header>
         <button id="mobile-nav" aria-label="相談一覧を開く">☰</button>
         <div class="brand-switch" aria-label="画面テーマ">
-          <button data-brand="recruit" aria-pressed="true">Recruit style</button
-          ><button data-brand="rakuten" aria-pressed="false">
-            Rakuten style
-          </button>
+          <button data-brand="recruit" aria-pressed="true">Recruit</button
+          ><button data-brand="rakuten" aria-pressed="false">Rakuten</button>
         </div>
         <span id="runtime-badge">実行環境を確認中</span>
+        <button id="artifact-jump" type="button" hidden></button>
       </header>
       <section class="conversation" id="conversation">
         <div class="welcome">
@@ -160,6 +159,16 @@ node /absolute/path/dist/cli.js mcp
         VM対応: Codex / pi。Claude Code /
         OpenCodeの調査プロセスはlocalを選びます。クライアントとしては4エージェントから同じMCPを利用できます。
       </p>
+    </dialog>
+    <dialog id="artifact-dialog" aria-label="取得ページのプレビュー">
+      <button
+        class="artifact-close"
+        id="artifact-close"
+        aria-label="プレビューを閉じる"
+      >
+        ×
+      </button>
+      <div id="artifact-content"></div>
     </dialog>
     <div id="notice" role="status" aria-live="polite"></div>
     <script src="/chat.js"></script>

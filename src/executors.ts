@@ -66,7 +66,9 @@ export function createOpenShellExecutor(
     const result = await executeOpenShellPlan(plan, {
       confirmed: true,
       signal: options.signal,
-      onOutput: (_stream, text) => options.onProgress?.(text.slice(-1000)),
+      onOutput: (stream, text) => {
+        if (stream === "stderr") options.onProgress?.(text);
+      },
     });
     if (!result.observedSandbox)
       throw new Error(

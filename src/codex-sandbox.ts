@@ -484,7 +484,9 @@ export async function runCodexSandbox(
           {
             signal: options.signal,
             timeoutMs: (options.timeoutSeconds + 60) * 1000,
-            onOutput: (_stream, text) => options.onProgress?.(text.slice(-800)),
+            onOutput: (stream, text) => {
+              if (stream === "stderr") options.onProgress?.(text);
+            },
           },
         );
         await run(

@@ -1,3 +1,5 @@
+import { pageArtifact } from "./artifacts.js";
+import { researchProgress, progressPrefix } from "./progress.js";
 import {
   IMPROVEMENT_PROMPT,
   type ImprovementContext,
@@ -22,7 +24,7 @@ import { ReplayBrowser } from "./replay-browser.js";
 import { extractReviewSignal } from "./reviews.js";
 import { createHash } from "node:crypto";
 import { Browser } from "./browser.js";
-import { routeSources, allowedHosts } from "./sources.js";
+import { routeSources, allowedHosts, checkNavigation } from "./sources.js";
 import { selectModel } from "./models.js";
 import { Store } from "./store.js";
 import {
@@ -162,19 +164,10 @@ export async function runTask(
   const cancel = () => controller.abort();
   options.signal?.addEventListener("abort", cancel, { once: true });
   if (options.signal?.aborted) cancel();
+  const hosts = allowedHosts(task.sources);
   const browser = options.benchmark
-    ? new ReplayBrowser(
-        options.benchmark.pages,
-        allowedHosts(task.sources),
-        controller.signal,
-      )
-    : new Browser(
-        task.id,
-        dir,
-        allowedHosts(task.sources),
-        controller.signal,
-        options.headed,
-      );
+    ? new ReplayBrowser(options.benchmark.pages, hosts, controller.signal)
+    : new Browser(task.id, dir, hosts, controller.signal, options.headed);
   let session: AgentSession | undefined;
   let codex: CodexAgent | undefined;
   let claude: ClaudeAgent | undefined;
@@ -185,6 +178,28 @@ export async function runTask(
     process.env.OPENROUTER_API_KEY
       ? s.split(process.env.OPENROUTER_API_KEY).join("[REDACTED]")
       : s;
+  const activity = (
+    name: string,
+    status: "active" | "done" | "error",
+    args: any = {},
+  ) => {
+    const page = [...task.pages]
+      .reverse()
+      .find((p) => p.id === args?.pageId || p.url === args?.url);
+    const url = page?.url ?? args?.url;
+    progress(
+      progressPrefix +
+        JSON.stringify(
+          researchProgress(name, status, {
+            url,
+            pages: task.pages.length,
+            evidence: task.evidence.length,
+            step: task.steps,
+          }),
+        ) +
+        "\n",
+    );
+  };
   const step = async (name: string, args: unknown) => {
     controller.signal.throwIfAborted();
     if (task.answer) throw new Error("回答確定済みです");
@@ -194,6 +209,7 @@ export async function runTask(
     }
     task.steps++;
     progress(`[${task.steps}/${task.limits.maxSteps}] ${name}`);
+    if (!/model/.test(name) || task.steps === 1) activity(name, "active", args);
     await store.event(task.id, name, args);
     await store.save(task);
   };
@@ -209,6 +225,12 @@ export async function runTask(
         const result = await fn(p);
         controller.signal.throwIfAborted();
         await store.save(task);
+        if (name !== "open_page")
+          activity(
+            name,
+            (result as any)?.quality?.shouldStop ? "error" : "done",
+            p,
+          );
         return output({
           result,
           remainingSteps: task.limits.maxSteps - task.steps,
@@ -222,6 +244,7 @@ export async function runTask(
         controller.signal.throwIfAborted();
         const error = redact(e instanceof Error ? e.message : String(e));
         await store.event(task.id, "tool_error", { tool: name, error });
+        activity(name, "error", p);
         return { ...output({ error }), isError: true };
       }
     };
@@ -240,9 +263,56 @@ export async function runTask(
   const capture = async (url: string, render = false) => {
     if (task.pages.length >= task.limits.maxPages)
       throw new Error("ページ上限です");
-    const page = await browser.open(url, { render });
+    const target = checkNavigation(url, hosts);
+    let page: Page;
+    try {
+      page = await browser.open(target, { render });
+    } catch (error) {
+      controller.signal.throwIfAborted();
+      progress(
+        progressPrefix +
+          JSON.stringify(
+            researchProgress("open_page", "error", {
+              url: target,
+              pages: task.pages.length,
+              evidence: task.evidence.length,
+              step: task.steps,
+              artifact: {
+                id: `${task.id}-attempt-${task.steps}`,
+                taskId: task.id,
+                url: target,
+                title: "ページを取得できませんでした",
+                preview:
+                  "本文を取得できなかった試行の記録です。確認済みの情報として使用していません。",
+                capturedAt: new Date().toISOString(),
+                method: "not-captured",
+                state: "unavailable",
+              },
+            }),
+          ) +
+          "\n",
+      );
+      throw error;
+    }
     controller.signal.throwIfAborted();
     task.pages.push(page);
+    progress(
+      progressPrefix +
+        JSON.stringify(
+          researchProgress(
+            "open_page",
+            assessPage(page).shouldStop ? "error" : "done",
+            {
+              url: page.url,
+              pages: task.pages.length,
+              evidence: task.evidence.length,
+              step: task.steps,
+              artifact: pageArtifact(task, page),
+            },
+          ),
+        ) +
+        "\n",
+    );
     const review = extractReviewSignal(page);
     if (review) (task.reviewSignals ??= []).push(review);
     attempted.add(actionKey(render ? "render" : "link", page.url));

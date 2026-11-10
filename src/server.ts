@@ -37,8 +37,9 @@ async function body(req: IncomingMessage): Promise<any> {
 export function createWorkbenchServer(
   engine = new GoalEngine(),
   taskStore = new Store(),
+  runs = new RunService(taskStore),
 ) {
-  const runs = new RunService(taskStore);
+  const streams = new Set<ServerResponse>();
   const server = createServer(async (req, res) => {
     try {
       const host = req.headers.host ?? "";
@@ -102,10 +103,60 @@ export function createWorkbenchServer(
         else send(res, 405, { error: "GET / POST only" });
         return;
       }
+      const artifactMatch = path.match(
+        /^\/api\/runs\/([a-zA-Z0-9-]+)\/artifacts\/([a-zA-Z0-9-]+)$/,
+      );
+      if (artifactMatch && req.method === "GET") {
+        send(
+          res,
+          200,
+          await runs.artifact(artifactMatch[1]!, artifactMatch[2]!),
+        );
+        return;
+      }
       const runMatch = path.match(
-        /^\/api\/runs\/([a-zA-Z0-9-]+)(?:\/(decision|cancel))?$/,
+        /^\/api\/runs\/([a-zA-Z0-9-]+)(?:\/(decision|cancel|events))?$/,
       );
       if (runMatch) {
+        if (req.method === "GET" && runMatch[2] === "events") {
+          const current = await runs.get(runMatch[1]!);
+          res.writeHead(200, {
+            "Content-Type": "text/event-stream; charset=utf-8",
+            "Cache-Control": "no-cache, no-transform",
+            Connection: "keep-alive",
+            "X-Accel-Buffering": "no",
+            "X-Content-Type-Options": "nosniff",
+          });
+          streams.add(res);
+          const sendEvent = (record: typeof current) =>
+            res.write(
+              `id: ${record.updatedAt}\nevent: run\ndata: ${JSON.stringify(record)}\n\n`,
+            );
+          sendEvent(current);
+          if (!["running", "needs_input"].includes(current.status)) {
+            res.end();
+            return;
+          }
+          const unsub = runs.subscribe(current.id, (record) => {
+            if (res.destroyed || res.writableEnded) return;
+            sendEvent(record);
+            if (!["running", "needs_input"].includes(record.status)) {
+              unsub();
+              res.end();
+            }
+          });
+          const heartbeat = setInterval(
+            () => res.write(": heartbeat\n\n"),
+            15000,
+          );
+          heartbeat.unref();
+          res.once("close", () => {
+            streams.delete(res);
+            clearInterval(heartbeat);
+            unsub();
+          });
+          return;
+        }
         if (req.method === "GET" && !runMatch[2])
           send(res, 200, await runs.get(runMatch[1]!));
         else if (req.method === "POST" && runMatch[2] === "decision")
@@ -288,6 +339,11 @@ export function createWorkbenchServer(
     engine.shutdown();
     void runs.shutdown();
   });
+  server.on("shutdown", () => {
+    for (const response of streams) response.end();
+    engine.shutdown();
+    void runs.shutdown();
+  });
   return server;
 }
 export async function startWorkbench(port = 4310) {
@@ -301,7 +357,10 @@ export async function startWorkbench(port = 4310) {
   console.log(
     `Harness Chat: http://127.0.0.1:${port}/chat\nRelay Workbench: http://127.0.0.1:${port}\n体験モードは外部APIを使用しません。Ctrl+Cで終了します。`,
   );
-  const stop = () => server.close();
+  const stop = () => {
+    server.emit("shutdown");
+    server.close();
+  };
   process.once("SIGINT", stop);
   process.once("SIGTERM", stop);
   server.once("close", () => {
