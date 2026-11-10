@@ -10,6 +10,14 @@ import {
   renderImprovement,
   diagnose,
 } from "./improvement.js";
+import {
+  loadSemanticCases,
+  gradeSemanticTask,
+  semanticMetrics,
+  runSemanticBenchmark,
+} from "./semantic-benchmark.js";
+import { taskReviewSignals } from "./reviews.js";
+import { FeedbackStore } from "./feedback.js";
 import { Store } from "./store.js";
 import { assessPage } from "./page-quality.js";
 import { runTask } from "./runtime.js";
@@ -272,6 +280,8 @@ withRunOptions(
     .argument("<id>"),
 ).action(async (id, opts) => {
   const task = await new Store().get(id);
+  if (task.evaluation)
+    throw new Error("凍結ベンチマークはbenchmark runで再実行してください");
   await execute(
     task.query,
     task.urls,
@@ -369,6 +379,145 @@ improvements
       opts.json ? JSON.stringify(loop, null, 2) : renderImprovement(loop),
     );
   });
+const benchmark = program
+  .command("benchmark")
+  .description("正解ラベル付き凍結資料による限定的な意味判定ベンチマーク");
+benchmark.command("list").action(async () => {
+  for (const c of await loadSemanticCases())
+    console.log(
+      `${c.id}\t${c.service}\t${c.expected.length}判定\t${c.provenance.annotationStatus}`,
+    );
+});
+benchmark
+  .command("inspect")
+  .argument("<case-id>")
+  .description("正解ラベルと根拠を人がレビューするため表示")
+  .action(async (id) => {
+    const c = (await loadSemanticCases()).find((c) => c.id === id);
+    if (!c) throw new Error("不明なケースID");
+    console.log(JSON.stringify(c, null, 2));
+  });
+benchmark
+  .command("check")
+  .description("データと根拠の整合性を確認。推論なし")
+  .action(async () => {
+    const cases = await loadSemanticCases();
+    console.log(
+      JSON.stringify(
+        {
+          cases: cases.length,
+          labels: cases.reduce((s, c) => s + c.expected.length, 0),
+          humanReviewed: cases.filter(
+            (c) => c.provenance.independentHumanReview,
+          ).length,
+          scope: "targeted-entailment-regression",
+          freeTextReview: "not_evaluated",
+        },
+        null,
+        2,
+      ),
+    );
+  });
+benchmark
+  .command("run")
+  .option("--case <ids...>")
+  .option("--agent <engine>")
+  .option("--model <id>")
+  .option("--max-steps <n>", "ケースごとのステップ上限", integer, 40)
+  .option("--timeout <seconds>", "ケースごとの時間上限", integer, 120)
+  .option("--json")
+  .action(async (opts) => {
+    const controller = new AbortController(),
+      cancel = () => controller.abort();
+    process.once("SIGINT", cancel);
+    process.once("SIGTERM", cancel);
+    try {
+      const report = await runSemanticBenchmark({
+        caseIds: opts.case,
+        agent: agentEngine(opts.agent),
+        model: opts.model,
+        maxSteps: opts.maxSteps,
+        timeoutSeconds: opts.timeout,
+        signal: controller.signal,
+        onProgress: (m) => process.stderr.write(m + "\n"),
+      });
+      console.log(JSON.stringify(report, null, 2));
+      process.exitCode = controller.signal.aborted
+        ? 130
+        : report.overallPass
+          ? 0
+          : 2;
+    } finally {
+      process.removeListener("SIGINT", cancel);
+      process.removeListener("SIGTERM", cancel);
+    }
+  });
+benchmark
+  .command("grade")
+  .argument("<task-id>")
+  .requiredOption("--case <id>")
+  .action(async (id, opts) => {
+    const c = (await loadSemanticCases()).find((c) => c.id === opts.case);
+    if (!c) throw new Error("不明なケースID");
+    const result = gradeSemanticTask(c, await new Store().get(id));
+    console.log(
+      JSON.stringify({ result, metrics: semanticMetrics([result]) }, null, 2),
+    );
+    process.exitCode = result.strictPass ? 0 : 2;
+  });
+program
+  .command("reviews")
+  .argument("<task-id>")
+  .description("対象サービスの口コミ指標。回答満足度とは別")
+  .option("--json")
+  .action(async (id) => {
+    const task = await new Store().get(id);
+    console.log(
+      JSON.stringify(
+        {
+          taskId: task.id,
+          mode: task.evaluation?.mode ?? "captured-live-task",
+          signals: taskReviewSignals(task),
+          note: "評点はサービス利用者の参考指標。回答への満足度や満足者の割合ではありません。表示件数の集計期間は未確認",
+        },
+        null,
+        2,
+      ),
+    );
+  });
+const feedback = program
+  .command("feedback")
+  .description("ローカル利用者による回答への評価。口コミと分離");
+feedback
+  .command("add")
+  .argument("<task-id>")
+  .requiredOption("--rating <1-5>", "回答の満足度", integer)
+  .requiredOption("--helpful <yes-no>", "役に立ったか", (v) => {
+    if (!["yes", "no"].includes(v))
+      throw new InvalidArgumentError("yesまたはnoを指定");
+    return v === "yes";
+  })
+  .option("--candidate-url <url>")
+  .option("--note <text>")
+  .action(async (id, opts) => {
+    console.log(
+      JSON.stringify(
+        await new FeedbackStore().add(id, {
+          rating: opts.rating,
+          helpful: opts.helpful,
+          candidateUrl: opts.candidateUrl,
+          note: opts.note,
+        }),
+        null,
+        2,
+      ),
+    );
+  });
+feedback
+  .command("summary")
+  .action(async () =>
+    console.log(JSON.stringify(await new FeedbackStore().summary(), null, 2)),
+  );
 program
   .command("doctor")
   .description("実行エンジンの認証・モデル・ブラウザを確認")

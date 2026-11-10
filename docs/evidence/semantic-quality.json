@@ -1,0 +1,1961 @@
+{
+  "dateJapan": "2026-11-10",
+  "revision": "2026-11-10-r2",
+  "annotationStatus": "provisional",
+  "independentHumanReviewedCases": 0,
+  "freeTextReview": "not_evaluated",
+  "finalRuns": [
+    {
+      "report": {
+        "id": "4a38a1f6-a4c6-4900-a32c-0b68ebb568a4",
+        "dataset": "targeted-semantic-regression-v1",
+        "datasetSha256": "5d90f47aa3d7e47ec31fffc821c331c640c322eb8764338d9a26c8dcf28dbe03",
+        "split": "regression",
+        "annotationStatus": "provisional",
+        "scope": "structured-entailment-judgements",
+        "plannedCases": 8,
+        "completedCases": 8,
+        "notRun": [],
+        "results": [
+          {
+            "caseId": "beauty-idol-entailment",
+            "caseSha256": "dff2e2905df9185dad07ea9d24848a43d7c14ebe90946d67a74231492edf9a89",
+            "taskId": "ca127f08-2106-4560-bb95-f2c7e0ba5547",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://beauty.hotpepper.jp/slnH900000001/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH900000001/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH900000001/",
+                "criterionId": "claim-3",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "suumo-missing-fee",
+            "caseSha256": "d9d4419cdc69ff1b0765b1fb656fa49454ae09473c77df56cd1a94f948ae78d2",
+            "taskId": "74a4e7e5-0fe6-4e76-a954-d57f30091a42",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://suumo.jp/chintai/bc_900000001/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000001/",
+                "criterionId": "claim-2",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000001/",
+                "criterionId": "claim-3",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "suumo-monthly-arithmetic",
+            "caseSha256": "0a22fd84701e52d28c894af4868124364a8fc54b5cea6b342132b49664b6796a",
+            "taskId": "3401df54-e925-4cc3-9341-df81572a1710",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://suumo.jp/chintai/bc_900000002/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000002/",
+                "criterionId": "claim-2",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000002/",
+                "criterionId": "claim-3",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "suumo-station-identity",
+            "caseSha256": "4524415d342e9d7218e626e54d932523563229c836410289ab6b00bb752f9707",
+            "taskId": "f3fbf70c-ad0f-441d-85ab-a7facb68716f",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://suumo.jp/chintai/bc_900000003/",
+                "criterionId": "claim-1",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000003/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000003/",
+                "criterionId": "claim-3",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "market-price-scope",
+            "caseSha256": "bff7e92cd2c4c3709f67fb1ee079e6ee5dd043e6458f49de3a4b5ca8f0725d99",
+            "taskId": "488ff83f-d4ac-4823-a08a-eba613c8538c",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+                "criterionId": "claim-2",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+                "criterionId": "claim-3",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "books-edition-identity",
+            "caseSha256": "033ea16f89dfcca236e5e0d6dc895483fec276dd70f0ce84413fd42ac4face3e",
+            "taskId": "f215f9a1-4bde-45de-b69d-e243071de2c8",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000001/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000001/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000001/",
+                "criterionId": "claim-3",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000002/",
+                "criterionId": "claim-1",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000002/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000002/",
+                "criterionId": "claim-3",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "hotel-cross-entity",
+            "caseSha256": "32d8bff39aff743887e8bba0ff10c425e8c06ec43548dd1ad85e3e1d850f01cd",
+            "taskId": "676d311d-4753-4a18-b181-46719e47113b",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+                "criterionId": "claim-1",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "review-proxy-boundary",
+            "caseSha256": "348fbc2fd2dfe8254245a9573f649624976908a5ff33bab2fe2931d51aa970d1",
+            "taskId": "2254f3cd-d885-4081-8c14-4651218becfb",
+            "agent": "codex",
+            "model": "gpt-6.1-sol",
+            "taskStatus": "succeeded",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://beauty.hotpepper.jp/slnH000074059/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH000074059/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH000074059/",
+                "criterionId": "claim-3",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cases": 8,
+          "labelledClaims": 28,
+          "targetedEntailmentAccuracy": 1,
+          "macroF1": 1,
+          "supportedPrecision": 1,
+          "unsupportedAssertionRate": 0,
+          "unknownRecall": 1,
+          "citationAccuracy": 1,
+          "strictCasePassRate": 1,
+          "perClass": [
+            {
+              "label": "supported",
+              "support": 17,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1
+            },
+            {
+              "label": "contradicted",
+              "support": 7,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1
+            },
+            {
+              "label": "unknown",
+              "support": 4,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1
+            }
+          ],
+          "freeTextReview": "not_evaluated",
+          "independentHumanReviewedCases": 0
+        },
+        "overallPass": true
+      },
+      "answers": [
+        {
+          "taskId": "ca127f08-2106-4560-bb95-f2c7e0ba5547",
+          "caseId": "beauty-idol-entailment",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:02:13.648Z",
+          "updatedAt": "2026-11-10T06:02:37.750Z",
+          "summary": "凍結資料の判定は、claim-1とclaim-2がsupported、claim-3がunknown。推薦ではなく本文の含意を評価した。",
+          "matches": [
+            {
+              "url": "https://beauty.hotpepper.jp/slnH900000001/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文に「渋谷駅徒歩2分。」とあり、5分以内に該当する。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "本文に髪質改善トリートメントへの対応が明記されている。"
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "unknown",
+                  "evidenceIds": [
+                    "ev-2",
+                    "ev-3"
+                  ],
+                  "explanation": "韓国風レイヤーカットには対応するが、「アイドル風の対応可否は掲載していません。」とあるため、韓国アイドル風への対応は判断できない。非対応という記載でもない。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "beauty-idol-entailment",
+            "fixtureSha256": "ae3a517819ef73ed16a9f288f2ae5ed0ceecfe141d641d3bec9fa5d0fd1c3e08"
+          }
+        },
+        {
+          "taskId": "74a4e7e5-0fe6-4e76-a954-d57f30091a42",
+          "caseId": "suumo-missing-fee",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:02:37.752Z",
+          "updatedAt": "2026-11-10T06:03:01.074Z",
+          "summary": "家賃135000円と武蔵小杉駅徒歩10分以内は支持される。月額合計150000円以下は管理費不明のため判断できない。",
+          "matches": [
+            {
+              "url": "https://suumo.jp/chintai/bc_900000001/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "家賃13.5万円は135000円に相当する。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "unknown",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "管理費の金額が不明のため、家賃との合計が150000円以下か判断できない。「-」を0円とは扱わない。"
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-3"
+                  ],
+                  "explanation": "対象の武蔵小杉駅まで徒歩7分であり、10分以内である。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "suumo-missing-fee",
+            "fixtureSha256": "4a151f2d746c05bff0ae2c8bd97a224e217e22ca893ef9c635d7d3b037440aaa"
+          }
+        },
+        {
+          "taskId": "3401df54-e925-4cc3-9341-df81572a1710",
+          "caseId": "suumo-monthly-arithmetic",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:03:01.076Z",
+          "updatedAt": "2026-11-10T06:03:26.595Z",
+          "summary": "家賃と管理費の合計は146000円。claim-1とclaim-3はsupported、claim-2はcontradicted。",
+          "matches": [
+            {
+              "url": "https://suumo.jp/chintai/bc_900000002/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "家賃14万円（140000円）＋管理費6000円＝146000円であり、記述を支持する。 "
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "contradicted",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "140000円は家賃のみ。管理費6000円を加えた合計は146000円なので、140000円という記述に反する。 "
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "合計146000円は150000円以下なので記述を支持する。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "suumo-monthly-arithmetic",
+            "fixtureSha256": "7fd80672ca976c92f40d51f3cb36511370cbfba27a0ce32ed52b119643beff2a"
+          }
+        },
+        {
+          "taskId": "f3fbf70c-ad0f-441d-85ab-a7facb68716f",
+          "caseId": "suumo-station-identity",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:03:26.596Z",
+          "updatedAt": "2026-11-10T06:03:50.610Z",
+          "summary": "条件1と条件3は本文に反し、条件2は支持されます。武蔵小杉駅徒歩19分と向河原駅徒歩6分を区別して判定しました。",
+          "matches": [
+            {
+              "url": "https://suumo.jp/chintai/bc_900000003/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "contradicted",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "武蔵小杉駅は徒歩19分と記載され、10分以内ではありません。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "向河原駅は徒歩6分と記載され、10分以内です。"
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "contradicted",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "武蔵小杉駅は徒歩19分です。徒歩6分は向河原駅の記述です。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "suumo-station-identity",
+            "fixtureSha256": "d61f9d4abba5a8cfc4fce24e8090a9c2e82c623bf2779c90e5c4669de8d569ae"
+          }
+        },
+        {
+          "taskId": "488ff83f-d4ac-4823-a08a-eba613c8538c",
+          "caseId": "market-price-scope",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:03:50.612Z",
+          "updatedAt": "2026-11-10T06:04:14.421Z",
+          "summary": "記述の含意判定結果：claim-1はsupported、claim-2はunknown、claim-3はcontradicted。推薦ではなく凍結本文の記述を評価した。",
+          "matches": [
+            {
+              "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文に販売価格帯6990〜7990円と明記されている。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "unknown",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "選択SKUの確定価格は未確認と明記されており、価格帯の下限を確定価格とは判断できない。"
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "contradicted",
+                  "evidenceIds": [
+                    "ev-1",
+                    "ev-2"
+                  ],
+                  "explanation": "販売価格帯は6990〜7990円。1000円はクーポンの金額であり、販売価格という記述に反する。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "market-price-scope",
+            "fixtureSha256": "caa65ee90cd4c29d8fc4fc314f41ae95d83adc83854b92568329cd2904ebaf4e"
+          }
+        },
+        {
+          "taskId": "f215f9a1-4bde-45de-b69d-e243071de2c8",
+          "caseId": "books-edition-identity",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:04:14.422Z",
+          "updatedAt": "2026-11-10T06:04:41.192Z",
+          "summary": "通常版はISBNと価格が支持され、サイズは反証される。超ちいサイズは価格とサイズが支持され、ISBNは反証される。推薦ではなく、各版の本文に対する記述の真偽を評価した。",
+          "matches": [
+            {
+              "url": "https://books.rakuten.co.jp/rb/900000001/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文のISBNは9784533172731で一致する。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文に価格1430円と明記されている。"
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "contradicted",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文のサイズは25.7×21cmであり、18×14.7cmではない。"
+                }
+              ]
+            },
+            {
+              "url": "https://books.rakuten.co.jp/rb/900000002/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "contradicted",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "本文のISBNは9784533172748であり、指定の番号と異なる。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "本文に価格1430円と明記されている。"
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "本文にサイズ18×14.7cmと明記されている。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "books-edition-identity",
+            "fixtureSha256": "40b0fd102580c8f7bcf56423964b02ce4f377385ff31d4d3acd5ccc8a57bed83"
+          }
+        },
+        {
+          "taskId": "676d311d-4753-4a18-b181-46719e47113b",
+          "caseId": "hotel-cross-entity",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:04:41.194Z",
+          "updatedAt": "2026-11-10T06:05:08.112Z",
+          "summary": "凍結本文に基づく含意判定：宿Aは両記述を支持。宿Bは総部屋数4室に反し、温泉があることを支持する。推薦評価ではない。",
+          "matches": [
+            {
+              "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文に総部屋数4室と明記されている。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文に温泉ありと明記されている。"
+                }
+              ]
+            },
+            {
+              "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "contradicted",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "本文は総部屋数22室と記載しており、4室という記述に反する。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "本文に温泉ありと明記されている。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "hotel-cross-entity",
+            "fixtureSha256": "984eed65eb07b7b48e4c7eac3e562a1694e321a893bee45929864e42deae59b9"
+          }
+        },
+        {
+          "taskId": "2254f3cd-d885-4081-8c14-4651218becfb",
+          "caseId": "review-proxy-boundary",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-10T06:05:08.113Z",
+          "updatedAt": "2026-11-10T06:05:31.000Z",
+          "summary": "claim-1とclaim-2はsupported、claim-3はunknown。本文は平均点4.81と口コミ978件を支持するが、runtimeの回答への満足率96.2%は確認できない。",
+          "matches": [
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1",
+                    "ev-2"
+                  ],
+                  "explanation": "本文に口コミ平均点4.81と表示され、平均点は直近1年間の集計と説明されている。"
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "本文の平均点直後に「（978件）」と表示されている。"
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "unknown",
+                  "evidenceIds": [],
+                  "explanation": "本文は美容室の口コミ評価であり、runtimeの回答に対するユーザー満足率の記載はない。口コミ平均点を満足率96.2%へ換算しても、この記述の根拠にはならない。"
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "review-proxy-boundary",
+            "fixtureSha256": "b80138d27f32614e81312a55431cdaac62f9e12e4a6bd82beefe277df4453c1f"
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "id": "73e34ad1-d2a1-4b62-a147-66cd4f7993bd",
+        "dataset": "targeted-semantic-regression-v1",
+        "datasetSha256": "5d90f47aa3d7e47ec31fffc821c331c640c322eb8764338d9a26c8dcf28dbe03",
+        "split": "regression",
+        "annotationStatus": "provisional",
+        "scope": "structured-entailment-judgements",
+        "plannedCases": 8,
+        "completedCases": 8,
+        "notRun": [],
+        "results": [
+          {
+            "caseId": "beauty-idol-entailment",
+            "caseSha256": "dff2e2905df9185dad07ea9d24848a43d7c14ebe90946d67a74231492edf9a89",
+            "taskId": "d35b7f55-a33d-4759-a515-dbf5ba85d5b4",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://beauty.hotpepper.jp/slnH900000001/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH900000001/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH900000001/",
+                "criterionId": "claim-3",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "suumo-missing-fee",
+            "caseSha256": "d9d4419cdc69ff1b0765b1fb656fa49454ae09473c77df56cd1a94f948ae78d2",
+            "taskId": "e567a6fb-22e7-4d36-926a-914076a38355",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://suumo.jp/chintai/bc_900000001/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000001/",
+                "criterionId": "claim-2",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000001/",
+                "criterionId": "claim-3",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "suumo-monthly-arithmetic",
+            "caseSha256": "0a22fd84701e52d28c894af4868124364a8fc54b5cea6b342132b49664b6796a",
+            "taskId": "4306df29-8430-46f2-aae0-1db3dc6c9d7b",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://suumo.jp/chintai/bc_900000002/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000002/",
+                "criterionId": "claim-2",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000002/",
+                "criterionId": "claim-3",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "suumo-station-identity",
+            "caseSha256": "4524415d342e9d7218e626e54d932523563229c836410289ab6b00bb752f9707",
+            "taskId": "60273aa6-8306-4871-86e4-7af927685f24",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://suumo.jp/chintai/bc_900000003/",
+                "criterionId": "claim-1",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000003/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://suumo.jp/chintai/bc_900000003/",
+                "criterionId": "claim-3",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "market-price-scope",
+            "caseSha256": "bff7e92cd2c4c3709f67fb1ee079e6ee5dd043e6458f49de3a4b5ca8f0725d99",
+            "taskId": "8c7e3263-dfad-4c88-89d8-40cd7b4155e6",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+                "criterionId": "claim-2",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+                "criterionId": "claim-3",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "books-edition-identity",
+            "caseSha256": "033ea16f89dfcca236e5e0d6dc895483fec276dd70f0ce84413fd42ac4face3e",
+            "taskId": "2d0c3c2c-9e7d-40b3-96f9-3528b11410d6",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000001/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000001/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000001/",
+                "criterionId": "claim-3",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000002/",
+                "criterionId": "claim-1",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000002/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://books.rakuten.co.jp/rb/900000002/",
+                "criterionId": "claim-3",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "hotel-cross-entity",
+            "caseSha256": "32d8bff39aff743887e8bba0ff10c425e8c06ec43548dd1ad85e3e1d850f01cd",
+            "taskId": "7c09b68f-bff5-442d-b0fa-45c545399dd2",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "partial",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+                "criterionId": "claim-1",
+                "expected": "contradicted",
+                "actual": "contradicted",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          },
+          {
+            "caseId": "review-proxy-boundary",
+            "caseSha256": "348fbc2fd2dfe8254245a9573f649624976908a5ff33bab2fe2931d51aa970d1",
+            "taskId": "c446fc13-b945-493d-93fb-5d238f980a97",
+            "agent": "claude-code",
+            "model": "claude-haiku-5-5",
+            "taskStatus": "succeeded",
+            "annotationStatus": "provisional",
+            "inputIntact": true,
+            "contractIntact": true,
+            "strictPass": true,
+            "freeTextReview": "not_evaluated",
+            "judgements": [
+              {
+                "url": "https://beauty.hotpepper.jp/slnH000074059/",
+                "criterionId": "claim-1",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH000074059/",
+                "criterionId": "claim-2",
+                "expected": "supported",
+                "actual": "supported",
+                "correct": true,
+                "citationCorrect": true
+              },
+              {
+                "url": "https://beauty.hotpepper.jp/slnH000074059/",
+                "criterionId": "claim-3",
+                "expected": "unknown",
+                "actual": "unknown",
+                "correct": true,
+                "citationCorrect": true
+              }
+            ]
+          }
+        ],
+        "metrics": {
+          "cases": 8,
+          "labelledClaims": 28,
+          "targetedEntailmentAccuracy": 1,
+          "macroF1": 1,
+          "supportedPrecision": 1,
+          "unsupportedAssertionRate": 0,
+          "unknownRecall": 1,
+          "citationAccuracy": 1,
+          "strictCasePassRate": 1,
+          "perClass": [
+            {
+              "label": "supported",
+              "support": 17,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1
+            },
+            {
+              "label": "contradicted",
+              "support": 7,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1
+            },
+            {
+              "label": "unknown",
+              "support": 4,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1
+            }
+          ],
+          "freeTextReview": "not_evaluated",
+          "independentHumanReviewedCases": 0
+        },
+        "overallPass": true
+      },
+      "answers": [
+        {
+          "taskId": "d35b7f55-a33d-4759-a515-dbf5ba85d5b4",
+          "caseId": "beauty-idol-entailment",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:02:12.001Z",
+          "updatedAt": "2026-11-10T06:02:24.658Z",
+          "summary": "凍結資料（架空の評価用サロン、東京都渋谷区）の本文のみで判定しました。claim-1は「渋谷駅徒歩2分」の記載により supported。claim-2は「髪質改善トリートメント」の提供の記載により supported。claim-3は本文に「韓国風レイヤーカット」の記載はあるものの「韓国アイドル風の施術」への対応は明記されず、本文も「アイドル風の対応可否は掲載していません」と述べているため unknown（contradictedではない）。",
+          "matches": [
+            {
+              "url": "https://beauty.hotpepper.jp/slnH900000001/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "explanation": "本文に「渋谷駅徒歩2分」とあり、徒歩5分以内の記述を支持する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "explanation": "本文に「髪質改善トリートメント、韓国風レイヤーカットに対応」とあり、髪質改善への対応を支持する。",
+                  "evidenceIds": [
+                    "ev-2"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "unknown",
+                  "explanation": "本文は「韓国風レイヤーカット」の対応を述べるが、「韓国アイドル風の施術」は別の概念であり、本文自体も「アイドル風の対応可否は掲載していません」と明記している。よって支持も反証もできず unknown とした。",
+                  "evidenceIds": [
+                    "ev-2",
+                    "ev-3"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "beauty-idol-entailment",
+            "fixtureSha256": "ae3a517819ef73ed16a9f288f2ae5ed0ceecfe141d641d3bec9fa5d0fd1c3e08"
+          }
+        },
+        {
+          "taskId": "e567a6fb-22e7-4d36-926a-914076a38355",
+          "caseId": "suumo-missing-fee",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:02:24.663Z",
+          "updatedAt": "2026-11-10T06:02:36.868Z",
+          "summary": "凍結資料（架空物件、神奈川県川崎市中原区、1LDK）1件のみを判定した。claim-1（家賃135000円）は本文の「家賃13.5万円」により supported。claim-3（武蔵小杉駅徒歩10分以内）は本文の「武蔵小杉駅徒歩7分」により supported。claim-2（家賃と管理費の合計150000円以下）は、本文が管理費・共益費を「-」かつ「管理費の金額は不明」としているため合計を算出できず unknown。推測で補っていない。",
+          "matches": [
+            {
+              "url": "https://suumo.jp/chintai/bc_900000001/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "explanation": "本文に「家賃13.5万円」とあり、135000円と一致する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "unknown",
+                  "explanation": "家賃13.5万円は確認できるが、管理費・共益費は「-」で金額が「不明」と記載されているため、家賃との合計が150000円以下かは判定できない。",
+                  "evidenceIds": [
+                    "ev-2"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "supported",
+                  "explanation": "本文に「武蔵小杉駅徒歩7分」とあり、徒歩10分以内を満たす（7分≤10分）。",
+                  "evidenceIds": [
+                    "ev-3"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "suumo-missing-fee",
+            "fixtureSha256": "4a151f2d746c05bff0ae2c8bd97a224e217e22ca893ef9c635d7d3b037440aaa"
+          }
+        },
+        {
+          "taskId": "4306df29-8430-46f2-aae0-1db3dc6c9d7b",
+          "caseId": "suumo-monthly-arithmetic",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:02:36.870Z",
+          "updatedAt": "2026-11-10T06:02:48.660Z",
+          "summary": "対象URL（凍結資料 page-1）の本文に「家賃14万円。管理費6000円。」とあり、家賃140000円と管理費6000円の合計は146000円。claim-1（合計146000円）はsupported、claim-2（合計140000円）は本文の数値と矛盾するためcontradicted（管理費を含めると合計は140000円ではない）、claim-3（合計150000円以下）はsupportedと判定。ただし詳細検証はinsufficient_detailで、追加取得もできなかった。",
+          "matches": [
+            {
+              "url": "https://suumo.jp/chintai/bc_900000002/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "explanation": "家賃14万円（140000円）と管理費6000円の合計は146000円であり、記述と一致する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "contradicted",
+                  "explanation": "家賃14万円と管理費6000円の合計は146000円で、140000円ではない。家賃単独の140000円とは一致するが、記述は家賃と管理費の合計であるため本文に反する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "supported",
+                  "explanation": "合計146000円は150000円以下であり、記述と一致する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "suumo-monthly-arithmetic",
+            "fixtureSha256": "7fd80672ca976c92f40d51f3cb36511370cbfba27a0ce32ed52b119643beff2a"
+          }
+        },
+        {
+          "taskId": "60273aa6-8306-4871-86e4-7af927685f24",
+          "caseId": "suumo-station-identity",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:02:48.663Z",
+          "updatedAt": "2026-11-10T06:03:01.303Z",
+          "summary": "凍結資料（架空物件 bc_900000003）の本文は「向河原駅徒歩6分。武蔵小杉駅徒歩19分。」と記載している。claim-1（武蔵小杉駅徒歩10分以内）は本文の19分と反するため contradicted。claim-2（向河原駅徒歩10分以内）は本文の6分で支持されるため supported。claim-3（武蔵小杉駅の徒歩時間は6分）は本文の19分と反するため contradicted。評価対象は1件の候補のみ。detailVerificationは insufficient_detail のまま（deepen_detailsでは追加ページなし）だが、判定に必要な徒歩分数は本文に明記されている。",
+          "matches": [
+            {
+              "url": "https://suumo.jp/chintai/bc_900000003/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "contradicted",
+                  "explanation": "本文では武蔵小杉駅徒歩19分と記載されており、徒歩10分以内という記述に反する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "explanation": "本文では向河原駅徒歩6分と記載されており、徒歩10分以内という記述を支持する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "contradicted",
+                  "explanation": "本文では武蔵小杉駅徒歩19分と記載されており、徒歩6分という記述に反する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "suumo-station-identity",
+            "fixtureSha256": "d61f9d4abba5a8cfc4fce24e8090a9c2e82c623bf2779c90e5c4669de8d569ae"
+          }
+        },
+        {
+          "taskId": "8c7e3263-dfad-4c88-89d8-40cd7b4155e6",
+          "caseId": "market-price-scope",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:03:01.304Z",
+          "updatedAt": "2026-11-10T06:03:14.732Z",
+          "summary": "凍結資料（評価用商品 benchmark/pack-a）の本文を取得し、3つの記述を判定しました。claim-1（価格帯6990〜7990円）は本文の「対象商品の販売価格帯: 6990〜7990円」で支持されます。claim-2（選択SKUの確定価格6990円）は本文が「選択SKUの確定価格、送料、在庫は未確認」としているため判断できず unknown です。claim-3（販売価格1000円）は本文の販売価格帯6990〜7990円に反するため contradicted です。1000円は「クーポン1000円」とあり販売価格ではありません。詳細検証のステータスは insufficient_detail で、price が missingFields にあります。",
+          "matches": [
+            {
+              "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "explanation": "本文に「対象商品の販売価格帯: 6990〜7990円」とあり、価格帯の記述と一致します。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "unknown",
+                  "explanation": "本文は選択SKUの確定価格を未確認としており、6990円かどうかは判断できません。",
+                  "evidenceIds": [
+                    "ev-2"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "contradicted",
+                  "explanation": "本文の販売価格帯は6990〜7990円で、1000円は販売価格ではなくクーポン額として記載されています。",
+                  "evidenceIds": [
+                    "ev-1",
+                    "ev-3"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "market-price-scope",
+            "fixtureSha256": "caa65ee90cd4c29d8fc4fc314f41ae95d83adc83854b92568329cd2904ebaf4e"
+          }
+        },
+        {
+          "taskId": "2d0c3c2c-9e7d-40b3-96f9-3528b11410d6",
+          "caseId": "books-edition-identity",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:03:14.735Z",
+          "updatedAt": "2026-11-10T06:03:30.102Z",
+          "summary": "凍結資料2件（楽天ブックス系の評価用ページ）の本文を取得し、3つの記述を判定した。900000001（旅行ガイド 通常版）: ISBNは9784533172731と本文に一致（supported）、価格1430円も一致（supported）、サイズは25.7×21cmで18×14.7cmに反する（contradicted）。900000002（旅行ガイド 超ちいサイズ）: ISBNは9784533172748で9784533172731に反する（contradicted）、価格1430円（supported）、サイズ18×14.7cm（supported）。対象は2件とも同じ書名の別版として扱い、どちらか一方を推薦するものではない。",
+          "matches": [
+            {
+              "url": "https://books.rakuten.co.jp/rb/900000001/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "explanation": "本文に「ISBN 9784533172731」と記載があり、記述のISBNと一致する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "explanation": "本文に「価格1430円」と記載があり、記述の価格と一致する。",
+                  "evidenceIds": [
+                    "ev-2"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "contradicted",
+                  "explanation": "本文のサイズは「25.7×21cm」で、記述の18×14.7cmとは一致せず反する。",
+                  "evidenceIds": [
+                    "ev-3"
+                  ]
+                }
+              ]
+            },
+            {
+              "url": "https://books.rakuten.co.jp/rb/900000002/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "contradicted",
+                  "explanation": "本文のISBNは「9784533172748」で、記述の9784533172731とは異なり反する。",
+                  "evidenceIds": [
+                    "ev-4"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "explanation": "本文に「価格1430円」と記載があり、記述の価格と一致する。",
+                  "evidenceIds": [
+                    "ev-5"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "supported",
+                  "explanation": "本文に「サイズ18×14.7cm」と記載があり、記述のサイズと一致する。",
+                  "evidenceIds": [
+                    "ev-6"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "books-edition-identity",
+            "fixtureSha256": "40b0fd102580c8f7bcf56423964b02ce4f377385ff31d4d3acd5ccc8a57bed83"
+          }
+        },
+        {
+          "taskId": "7c09b68f-bff5-442d-b0fa-45c545399dd2",
+          "caseId": "hotel-cross-entity",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:03:30.103Z",
+          "updatedAt": "2026-11-10T06:03:43.510Z",
+          "summary": "凍結資料2件を判定しました。claim-1（総部屋数は4室）は、宿A（900000001）の本文「総部屋数4室。温泉あり。」により supported です。一方、宿B（900000002）は本文「総部屋数22室。温泉あり。」のため、同じ記述は contradicted です。claim-2（温泉がある）は両方の本文に「温泉あり」とあるため、どちらも supported です。ただし両ページとも detailVerification は insufficient_detail のため、詳細の補完は未実施です。",
+          "matches": [
+            {
+              "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "explanation": "本文に「総部屋数4室」とあり、記述『総部屋数は4室』と一致する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "explanation": "本文に「温泉あり」とあり、記述『温泉がある』と一致する。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                }
+              ]
+            },
+            {
+              "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "contradicted",
+                  "explanation": "本文に「総部屋数22室」とあり、記述『総部屋数は4室』に反する。",
+                  "evidenceIds": [
+                    "ev-2"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "explanation": "本文に「温泉あり」とあり、記述『温泉がある』と一致する。",
+                  "evidenceIds": [
+                    "ev-2"
+                  ]
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "hotel-cross-entity",
+            "fixtureSha256": "984eed65eb07b7b48e4c7eac3e562a1694e321a893bee45929864e42deae59b9"
+          }
+        },
+        {
+          "taskId": "c446fc13-b945-493d-93fb-5d238f980a97",
+          "caseId": "review-proxy-boundary",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "createdAt": "2026-11-10T06:03:43.512Z",
+          "updatedAt": "2026-11-10T06:03:55.446Z",
+          "summary": "対象ページ（ホットペッパービューティー「アコテアット ヘア(acote @)」）の本文で、掲載の口コミ平均点4.81と口コミ件数978件は確認できた（supported）。ただし平均点は直近1年間の集計と明記されている。「runtimeの回答に満足したユーザーが96.2%」は、対象本文に該当記述がないため判断できない（unknown）。取得は公開HTMLによるもので、動的な表示確認ではない。",
+          "matches": [
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "matches": [
+                {
+                  "criterionId": "claim-1",
+                  "status": "supported",
+                  "explanation": "本文に「4.81（978件）」の表示があり、平均点は4.81と読める。注記として平均点は直近1年間の集計とされている。",
+                  "evidenceIds": [
+                    "ev-1",
+                    "ev-2"
+                  ]
+                },
+                {
+                  "criterionId": "claim-2",
+                  "status": "supported",
+                  "explanation": "本文の同じ箇所に「（978件）」と表示されており、表示口コミ件数は978件。",
+                  "evidenceIds": [
+                    "ev-1"
+                  ]
+                },
+                {
+                  "criterionId": "claim-3",
+                  "status": "unknown",
+                  "explanation": "対象ページの本文に『runtimeの回答』や満足度96.2%に関する記述は見当たらないため、真偽を判断できない。",
+                  "evidenceIds": []
+                }
+              ]
+            }
+          ],
+          "evaluation": {
+            "mode": "frozen-replay",
+            "caseId": "review-proxy-boundary",
+            "fixtureSha256": "b80138d27f32614e81312a55431cdaac62f9e12e4a6bd82beefe277df4453c1f"
+          }
+        }
+      ]
+    }
+  ],
+  "calibration": [
+    {
+      "reportId": "32bb603b-d06d-467f-b307-5d49892bbf84",
+      "metrics": {
+        "cases": 8,
+        "labelledClaims": 28,
+        "targetedEntailmentAccuracy": 1,
+        "macroF1": 1,
+        "supportedPrecision": 1,
+        "unsupportedAssertionRate": 0,
+        "unknownRecall": 1,
+        "citationAccuracy": 1,
+        "strictCasePassRate": 1,
+        "perClass": [
+          {
+            "label": "supported",
+            "support": 17,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "contradicted",
+            "support": 7,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "unknown",
+            "support": 4,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          }
+        ],
+        "freeTextReview": "not_evaluated",
+        "independentHumanReviewedCases": 0
+      },
+      "note": "r1のclaim-3は「対応を確認できる」で未確認/不一致の解釈が分かれた。r2では事実の主張「韓国アイドル風の施術に対応している」に訂正し両モデルを全8件再評価。正解ラベルをモデルへ提示せず、ラベル自体も変更していない。"
+    },
+    {
+      "reportId": "0793194f-9cba-4177-a412-d3e191154ed7",
+      "metrics": {
+        "cases": 8,
+        "labelledClaims": 28,
+        "targetedEntailmentAccuracy": 0.9642857142857143,
+        "macroF1": 0.9301587301587301,
+        "supportedPrecision": 1,
+        "unsupportedAssertionRate": 0,
+        "unknownRecall": 0.75,
+        "citationAccuracy": 1,
+        "strictCasePassRate": 0.875,
+        "perClass": [
+          {
+            "label": "supported",
+            "support": 17,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "contradicted",
+            "support": 7,
+            "precision": 0.875,
+            "recall": 1,
+            "f1": 0.9333333333333333
+          },
+          {
+            "label": "unknown",
+            "support": 4,
+            "precision": 1,
+            "recall": 0.75,
+            "f1": 0.8571428571428571
+          }
+        ],
+        "freeTextReview": "not_evaluated",
+        "independentHumanReviewedCases": 0
+      },
+      "note": "r1のclaim-3は「対応を確認できる」で未確認/不一致の解釈が分かれた。r2では事実の主張「韓国アイドル風の施術に対応している」に訂正し両モデルを全8件再評価。正解ラベルをモデルへ提示せず、ラベル自体も変更していない。"
+    }
+  ],
+  "reviewSignals": [
+    {
+      "taskId": "29f5a055-e210-414d-8f72-562adaf148ed",
+      "mode": "captured-live-task",
+      "signals": [
+        {
+          "latest": {
+            "candidateEntity": "hotpepper-beauty:H000074059",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/",
+            "provider": "hotpepper-beauty",
+            "average": 4.81,
+            "scale": {
+              "min": 1,
+              "max": 5
+            },
+            "displayedCount": 978,
+            "countPeriodConfirmed": false,
+            "meanWindowPolicy": "直近1年の総合評価の単純平均",
+            "policyUrl": "https://beauty.hotpepper.jp/doc/review_guide/review_average_point.html",
+            "policyCheckedAt": "2026-11-10",
+            "quote": "4.81\n（978件）\n\n口コミ・平均点について",
+            "capturedAt": "2026-11-10T03:43:04.800Z",
+            "interpretation": "service-review-proxy-not-answer-satisfaction"
+          },
+          "conflictingObservations": false,
+          "observations": 1
+        }
+      ],
+      "note": "評点はサービス利用者の参考指標。回答への満足度や満足者の割合ではありません。表示件数の集計期間は未確認"
+    },
+    {
+      "taskId": "81984f98-798c-42c3-973e-bedcbc047662",
+      "mode": "captured-live-task",
+      "signals": [
+        {
+          "latest": {
+            "candidateEntity": "rakuten-travel:142874",
+            "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+            "provider": "rakuten-travel",
+            "average": 4.18,
+            "scale": {
+              "min": 1,
+              "max": 5
+            },
+            "displayedCount": 108,
+            "countPeriodConfirmed": false,
+            "meanWindowPolicy": "過去1年。投稿がない場合は過去2年の総合スコア",
+            "policyUrl": "https://travel.faq.rakuten.net/detail/000004323",
+            "policyCheckedAt": "2026-11-10",
+            "quote": "4.18\n(108件)",
+            "capturedAt": "2026-11-10T03:13:23.567Z",
+            "interpretation": "service-review-proxy-not-answer-satisfaction"
+          },
+          "conflictingObservations": false,
+          "observations": 1
+        },
+        {
+          "latest": {
+            "candidateEntity": "rakuten-travel:10956",
+            "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+            "provider": "rakuten-travel",
+            "average": 3.99,
+            "scale": {
+              "min": 1,
+              "max": 5
+            },
+            "displayedCount": 625,
+            "countPeriodConfirmed": false,
+            "meanWindowPolicy": "過去1年。投稿がない場合は過去2年の総合スコア",
+            "policyUrl": "https://travel.faq.rakuten.net/detail/000004323",
+            "policyCheckedAt": "2026-11-10",
+            "quote": "3.99\n(625件)",
+            "capturedAt": "2026-11-10T03:13:23.805Z",
+            "interpretation": "service-review-proxy-not-answer-satisfaction"
+          },
+          "conflictingObservations": false,
+          "observations": 1
+        }
+      ],
+      "note": "評点はサービス利用者の参考指標。回答への満足度や満足者の割合ではありません。表示件数の集計期間は未確認"
+    }
+  ],
+  "answerFeedback": {
+    "responses": 0,
+    "meanRating": null,
+    "csat4or5": null,
+    "helpfulRate": null
+  },
+  "followUpChecks": [
+    {
+      "id": "02bd297b-b95e-42bf-9ec3-0cbd146c7ef0",
+      "dataset": "targeted-semantic-regression-v1",
+      "datasetSha256": "5d90f47aa3d7e47ec31fffc821c331c640c322eb8764338d9a26c8dcf28dbe03",
+      "split": "regression",
+      "annotationStatus": "provisional",
+      "scope": "structured-entailment-judgements",
+      "plannedCases": 1,
+      "completedCases": 1,
+      "notRun": [],
+      "results": [
+        {
+          "caseId": "review-proxy-boundary",
+          "caseSha256": "348fbc2fd2dfe8254245a9573f649624976908a5ff33bab2fe2931d51aa970d1",
+          "taskId": "2ee97b22-366c-41e8-956e-f7cd5b178544",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "taskStatus": "succeeded",
+          "annotationStatus": "provisional",
+          "inputIntact": true,
+          "contractIntact": true,
+          "strictPass": true,
+          "freeTextReview": "not_evaluated",
+          "judgements": [
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "criterionId": "claim-1",
+              "expected": "supported",
+              "actual": "supported",
+              "correct": true,
+              "citationCorrect": true
+            },
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "criterionId": "claim-2",
+              "expected": "supported",
+              "actual": "supported",
+              "correct": true,
+              "citationCorrect": true
+            },
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "criterionId": "claim-3",
+              "expected": "unknown",
+              "actual": "unknown",
+              "correct": true,
+              "citationCorrect": true
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "cases": 1,
+        "labelledClaims": 3,
+        "targetedEntailmentAccuracy": 1,
+        "macroF1": 1,
+        "supportedPrecision": 1,
+        "unsupportedAssertionRate": 0,
+        "unknownRecall": 1,
+        "citationAccuracy": 1,
+        "strictCasePassRate": 1,
+        "perClass": [
+          {
+            "label": "supported",
+            "support": 2,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "contradicted",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "unknown",
+            "support": 1,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          }
+        ],
+        "freeTextReview": "not_evaluated",
+        "independentHumanReviewedCases": 0
+      },
+      "overallPass": true
+    },
+    {
+      "id": "0bc3dc90-6678-4560-a4e5-5b2b3cb88ea5",
+      "dataset": "targeted-semantic-regression-v1",
+      "datasetSha256": "5d90f47aa3d7e47ec31fffc821c331c640c322eb8764338d9a26c8dcf28dbe03",
+      "split": "regression",
+      "annotationStatus": "provisional",
+      "scope": "structured-entailment-judgements",
+      "plannedCases": 1,
+      "completedCases": 1,
+      "notRun": [],
+      "results": [
+        {
+          "caseId": "review-proxy-boundary",
+          "caseSha256": "348fbc2fd2dfe8254245a9573f649624976908a5ff33bab2fe2931d51aa970d1",
+          "taskId": "16c4679e-7bde-4151-a607-ecb07ec0e96e",
+          "agent": "claude-code",
+          "model": "claude-haiku-5-5",
+          "taskStatus": "succeeded",
+          "annotationStatus": "provisional",
+          "inputIntact": true,
+          "contractIntact": true,
+          "strictPass": true,
+          "freeTextReview": "not_evaluated",
+          "judgements": [
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "criterionId": "claim-1",
+              "expected": "supported",
+              "actual": "supported",
+              "correct": true,
+              "citationCorrect": true
+            },
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "criterionId": "claim-2",
+              "expected": "supported",
+              "actual": "supported",
+              "correct": true,
+              "citationCorrect": true
+            },
+            {
+              "url": "https://beauty.hotpepper.jp/slnH000074059/",
+              "criterionId": "claim-3",
+              "expected": "unknown",
+              "actual": "unknown",
+              "correct": true,
+              "citationCorrect": true
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "cases": 1,
+        "labelledClaims": 3,
+        "targetedEntailmentAccuracy": 1,
+        "macroF1": 1,
+        "supportedPrecision": 1,
+        "unsupportedAssertionRate": 0,
+        "unknownRecall": 1,
+        "citationAccuracy": 1,
+        "strictCasePassRate": 1,
+        "perClass": [
+          {
+            "label": "supported",
+            "support": 2,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "contradicted",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "unknown",
+            "support": 1,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          }
+        ],
+        "freeTextReview": "not_evaluated",
+        "independentHumanReviewedCases": 0
+      },
+      "overallPass": true
+    }
+  ]
+}

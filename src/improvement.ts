@@ -431,6 +431,10 @@ export async function improveTask(
   )
     throw new Error("改善全体の時間は1〜3600秒です");
   const seed = await store.get(taskId);
+  if (seed.evaluation)
+    throw new Error(
+      "凍結ベンチマークはbenchmark runで再評価してください。ライブ自己改善には使いません",
+    );
   if (options.agent && options.agent !== seed.agent && !options.model)
     throw new Error("別エンジンへ変更する場合は--modelも明示してください");
   if (!seed.criteria.length)

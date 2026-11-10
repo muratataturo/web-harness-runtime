@@ -63,6 +63,8 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  evaluation?: { mode: "frozen-replay"; caseId: string; fixtureSha256: string };
+  reviewSignals?: import("./reviews.js").ReviewSignal[];
   improvement?: import("./improvement-context.js").ImprovementContext;
   id: string;
   parentId?: string;

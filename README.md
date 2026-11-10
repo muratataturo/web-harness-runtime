@@ -247,3 +247,17 @@ npm start -- improvements list
 ```
 
 楽天ブックスではCodexとpi/OpenRouter無料モデルの両方で、実際に初回未完了から改善1回で2冊・全10条件の比較へ回復しました。美容室のアイドル風根拠やSUUMO管理費は追加調査後も未確認が残り、未達ゼロを装わず停止しています。[仕様・CLI・実測結果](docs/self-improvement.md)。
+
+## 正解ラベル・口コミ・回答満足度
+
+8ケース28判定の凍結回帰ベンチマークと、口コミ指標・回答フィードバックを追加しました。ラベルは人の独立レビュー前の暫定版で、自由文全体の採点は別途必要です。同じ資料でCodex/Haikuを実行し、どちらも28判定が一致しました。
+
+```sh
+npm start -- benchmark check
+npm start -- benchmark run --agent codex --json
+npm start -- reviews TASK_ID --json
+npm start -- feedback add TASK_ID --rating 4 --helpful yes
+npm start -- feedback summary
+```
+
+口コミはサービスの評判、feedbackは回答への評価です。取得元・件数・期間を分け、口コミの星を回答の満足率へ変換しません。[仕様・評価の範囲・実測](docs/semantic-quality.md)。

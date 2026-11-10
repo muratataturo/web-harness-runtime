@@ -9,6 +9,7 @@ COPY package.json package-lock.json tsconfig.json ./
 RUN npm ci
 COPY src ./src
 COPY examples ./examples
+COPY benchmarks ./benchmarks
 COPY config ./config
 COPY web ./web
 COPY infra/openshell/chromium /opt/web-harness/infra/openshell/chromium

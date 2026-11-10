@@ -227,7 +227,7 @@ export function renderAnswer(task: Task): string {
     answer.summary,
     "",
     `状態: ${task.status} / 詳細取得: ${task.retrieval?.status ?? "未検証"}`,
-    `調査日時: ${task.updatedAt} / モデル: ${task.model}`,
+    `${task.evaluation ? "凍結ベンチマーク実行日時（ライブ取得ではありません）" : "調査日時"}: ${task.updatedAt} / モデル: ${task.model}`,
     "",
   ];
   for (const [i, c] of answer.candidates.entries()) {

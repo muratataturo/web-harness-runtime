@@ -1,0 +1,602 @@
+{
+  "version": 1,
+  "name": "targeted-semantic-regression-v1",
+  "split": "regression",
+  "freeTextReview": "not_evaluated",
+  "cases": [
+    {
+      "id": "beauty-idol-entailment",
+      "service": "hotpepper-beauty",
+      "provenance": {
+        "kind": "synthetic-counterfactual",
+        "description": "一般的な韓国風の記述からアイドル対応を推論しない",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://beauty.hotpepper.jp/slnH900000001/",
+          "title": "評価用凍結資料 beauty-idol-entailment",
+          "text": "架空の評価用サロン。東京都渋谷区。渋谷駅徒歩2分。カット料金6000円。髪質改善トリートメント、韓国風レイヤーカットに対応。アイドル風の対応可否は掲載していません。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "渋谷駅から徒歩5分以内",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "髪質改善に対応",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-3",
+          "description": "韓国アイドル風の施術に対応している",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://beauty.hotpepper.jp/slnH900000001/",
+          "criterionId": "claim-1",
+          "status": "supported",
+          "evidenceAnchors": ["渋谷駅徒歩2分"]
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH900000001/",
+          "criterionId": "claim-2",
+          "status": "supported",
+          "evidenceAnchors": ["髪質改善トリートメント"]
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH900000001/",
+          "criterionId": "claim-3",
+          "status": "unknown",
+          "evidenceAnchors": []
+        }
+      ]
+    },
+    {
+      "id": "suumo-missing-fee",
+      "service": "suumo",
+      "provenance": {
+        "kind": "synthetic-counterfactual",
+        "description": "管理費「-」から月額総額を確定しない",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://suumo.jp/chintai/bc_900000001/",
+          "title": "評価用凍結資料 suumo-missing-fee",
+          "text": "架空物件。所在地 神奈川県川崎市中原区。家賃13.5万円。管理費・共益費: -。間取り1LDK。武蔵小杉駅徒歩7分。管理費の金額は不明。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "家賃は135000円",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "家賃と管理費の合計は150000円以下",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-3",
+          "description": "武蔵小杉駅徒歩10分以内",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://suumo.jp/chintai/bc_900000001/",
+          "criterionId": "claim-1",
+          "status": "supported",
+          "evidenceAnchors": ["家賃13.5万円"]
+        },
+        {
+          "url": "https://suumo.jp/chintai/bc_900000001/",
+          "criterionId": "claim-2",
+          "status": "unknown",
+          "evidenceAnchors": []
+        },
+        {
+          "url": "https://suumo.jp/chintai/bc_900000001/",
+          "criterionId": "claim-3",
+          "status": "supported",
+          "evidenceAnchors": ["武蔵小杉駅徒歩7分"]
+        }
+      ]
+    },
+    {
+      "id": "suumo-monthly-arithmetic",
+      "service": "suumo",
+      "provenance": {
+        "kind": "synthetic-counterfactual",
+        "description": "万円を換算して合算し、家賃のみを合計にしない",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://suumo.jp/chintai/bc_900000002/",
+          "title": "評価用凍結資料 suumo-monthly-arithmetic",
+          "text": "架空物件。所在地 神奈川県川崎市中原区。家賃14万円。管理費6000円。間取り1LDK。武蔵小杉駅徒歩10分。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "家賃と管理費の合計は146000円",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "家賃と管理費の合計は140000円",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-3",
+          "description": "家賃と管理費の合計は150000円以下",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://suumo.jp/chintai/bc_900000002/",
+          "criterionId": "claim-1",
+          "status": "supported",
+          "evidenceAnchors": ["家賃14万円", "管理費6000円"]
+        },
+        {
+          "url": "https://suumo.jp/chintai/bc_900000002/",
+          "criterionId": "claim-2",
+          "status": "contradicted",
+          "evidenceAnchors": ["家賃14万円", "管理費6000円"]
+        },
+        {
+          "url": "https://suumo.jp/chintai/bc_900000002/",
+          "criterionId": "claim-3",
+          "status": "supported",
+          "evidenceAnchors": ["家賃14万円", "管理費6000円"]
+        }
+      ]
+    },
+    {
+      "id": "suumo-station-identity",
+      "service": "suumo",
+      "provenance": {
+        "kind": "synthetic-counterfactual",
+        "description": "別駅の短い徒歩分数を希望駅に流用しない",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://suumo.jp/chintai/bc_900000003/",
+          "title": "評価用凍結資料 suumo-station-identity",
+          "text": "架空物件。所在地 神奈川県川崎市。家賃12万円、管理費5000円、間取り1LDK。向河原駅徒歩6分。武蔵小杉駅徒歩19分。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "武蔵小杉駅徒歩10分以内",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "向河原駅徒歩10分以内",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-3",
+          "description": "武蔵小杉駅の徒歩時間は6分",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://suumo.jp/chintai/bc_900000003/",
+          "criterionId": "claim-1",
+          "status": "contradicted",
+          "evidenceAnchors": ["武蔵小杉駅徒歩19分"]
+        },
+        {
+          "url": "https://suumo.jp/chintai/bc_900000003/",
+          "criterionId": "claim-2",
+          "status": "supported",
+          "evidenceAnchors": ["向河原駅徒歩6分"]
+        },
+        {
+          "url": "https://suumo.jp/chintai/bc_900000003/",
+          "criterionId": "claim-3",
+          "status": "contradicted",
+          "evidenceAnchors": ["武蔵小杉駅徒歩19分"]
+        }
+      ]
+    },
+    {
+      "id": "market-price-scope",
+      "service": "rakuten-ichiba",
+      "provenance": {
+        "kind": "synthetic-counterfactual",
+        "description": "価格帯・SKU価格・クーポン額を区別",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+          "title": "評価用凍結資料 market-price-scope",
+          "text": "架空の評価用商品。商品詳細: 40Lリュック、素材ナイロン、サイズ52cm。ショップ benchmark。対象商品の販売価格帯: 6990〜7990円。公開Microdataの価格帯です。クーポン1000円。選択SKUの確定価格、送料、在庫は未確認。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "対象商品の価格帯は6990〜7990円",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "選択SKUの確定価格は6990円",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-3",
+          "description": "商品の販売価格は1000円",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+          "criterionId": "claim-1",
+          "status": "supported",
+          "evidenceAnchors": ["対象商品の販売価格帯: 6990〜7990円"]
+        },
+        {
+          "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+          "criterionId": "claim-2",
+          "status": "unknown",
+          "evidenceAnchors": []
+        },
+        {
+          "url": "https://item.rakuten.co.jp/benchmark/pack-a/",
+          "criterionId": "claim-3",
+          "status": "contradicted",
+          "evidenceAnchors": [
+            "対象商品の販売価格帯: 6990〜7990円",
+            "クーポン1000円"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "books-edition-identity",
+      "service": "rakuten-books",
+      "provenance": {
+        "kind": "synthetic-counterfactual",
+        "description": "同じ書名のサイズ別ISBNを混同しない",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://books.rakuten.co.jp/rb/900000001/",
+          "title": "評価用凍結資料 books-edition-identity",
+          "text": "架空の評価用書籍。書名 旅行ガイド 通常版。発売日2026年05月08日。ISBN 9784533172731。価格1430円。サイズ25.7×21cm。出版社 評価用出版。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        },
+        {
+          "id": "fixture-2",
+          "url": "https://books.rakuten.co.jp/rb/900000002/",
+          "title": "評価用凍結資料 books-edition-identity",
+          "text": "架空の評価用書籍。書名 旅行ガイド 超ちいサイズ。発売日2026年05月08日。ISBN 9784533172748。価格1430円。サイズ18×14.7cm。出版社 評価用出版。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "ISBNは9784533172731",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "価格は1430円",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-3",
+          "description": "サイズは18×14.7cm",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://books.rakuten.co.jp/rb/900000001/",
+          "criterionId": "claim-1",
+          "status": "supported",
+          "evidenceAnchors": ["ISBN 9784533172731"]
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/900000001/",
+          "criterionId": "claim-2",
+          "status": "supported",
+          "evidenceAnchors": ["価格1430円"]
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/900000001/",
+          "criterionId": "claim-3",
+          "status": "contradicted",
+          "evidenceAnchors": ["サイズ25.7×21cm"]
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/900000002/",
+          "criterionId": "claim-1",
+          "status": "contradicted",
+          "evidenceAnchors": ["ISBN 9784533172748"]
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/900000002/",
+          "criterionId": "claim-2",
+          "status": "supported",
+          "evidenceAnchors": ["価格1430円"]
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/900000002/",
+          "criterionId": "claim-3",
+          "status": "supported",
+          "evidenceAnchors": ["サイズ18×14.7cm"]
+        }
+      ]
+    },
+    {
+      "id": "hotel-cross-entity",
+      "service": "rakuten-travel",
+      "provenance": {
+        "kind": "synthetic-counterfactual",
+        "description": "別施設の客室数を流用しない",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+          "title": "評価用凍結資料 hotel-cross-entity",
+          "text": "架空の宿A。所在地 神奈川県箱根町。総部屋数4室。温泉あり。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        },
+        {
+          "id": "fixture-2",
+          "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+          "title": "評価用凍結資料 hotel-cross-entity",
+          "text": "架空の宿B。所在地 神奈川県箱根町。総部屋数22室。温泉あり。",
+          "links": [],
+          "capturedAt": "2026-11-10T03:00:00.000Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "総部屋数は4室",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "温泉がある",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+          "criterionId": "claim-1",
+          "status": "supported",
+          "evidenceAnchors": ["総部屋数4室"]
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/900000001/900000001_std.html",
+          "criterionId": "claim-2",
+          "status": "supported",
+          "evidenceAnchors": ["温泉あり"]
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+          "criterionId": "claim-1",
+          "status": "contradicted",
+          "evidenceAnchors": ["総部屋数22室"]
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/900000002/900000002_std.html",
+          "criterionId": "claim-2",
+          "status": "supported",
+          "evidenceAnchors": ["温泉あり"]
+        }
+      ]
+    },
+    {
+      "id": "review-proxy-boundary",
+      "service": "hotpepper-beauty",
+      "provenance": {
+        "kind": "frozen-real-excerpt",
+        "description": "2026-11-10取得のacote @のヘッダー抜粋。自動生成ラベルで人の独立レビューは未実施。",
+        "annotationStatus": "provisional",
+        "annotator": "codex-assisted-curation",
+        "independentHumanReview": false
+      },
+      "query": "凍結資料だけを読み、各評価条件の記述が本文から支持されるか(supported)、本文に反するか(contradicted)、判断できないか(unknown)を判定してください。引用を記録してfinish_taskで日本語の理由と全候補を保存してください。外部検索や予約は行いません。",
+      "pages": [
+        {
+          "id": "fixture-1",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "title": "アコテアット ヘア(acote @)｜ホットペッパービューティー",
+          "text": "   \nアコテアット ヘア(acote @)\n空席確認・予約する 本日◯空席あり\n\nブックマークする\n\nacote @（旧：Neolive ＆ 渋谷店）\n\nアコテアット　キュウネオリーブアンドシブヤテン\n\nスマート支払いOK\nスマート支払いの詳細を見る\n4.81\n（978件）\n\n口コミ・平均点について\n\n普通＝3が評価時の基準です。あくまでも個人の感想であり、個人差があります。\n平均点は直近1年間の集計です。\n詳細を見る\n東京都渋谷区渋谷３-16-5　SHOKAIビルB1～2F\n渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷］\nサロン情報\nクーポン\nメニュー\nこだわり\nスタイリスト\nスタイル\nブログ\n地図\n口コミ\n\n【限定価格♪】カット+カラー￥6500/ロコミ4.8★渋谷/髪質改善/韓国/レイヤーカット/縮毛矯正\n\n＜＞\n\n渋谷で縮毛矯正と韓国レイヤーならacote@。自然な艶髪ストレートと顔周りデザインで毎日扱いやすいスタイルをご提案。1Fヘアケアショップ併設でホームケアまでサポート。髪質改善、前髪カット、透明感カラー、ダブルカラー、メンズカットも人気。渋谷駅近で通いやすく当日予約も歓迎。学割U24やトリートメントのご相談も◎\n\n空席確",
+          "links": [],
+          "capturedAt": "2026-11-10T03:43:04.800Z",
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8"
+          }
+        }
+      ],
+      "criteria": [
+        {
+          "id": "claim-1",
+          "description": "掲載の口コミ平均点は4.81",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-2",
+          "description": "表示口コミ件数は978件",
+          "weight": 1,
+          "required": false
+        },
+        {
+          "id": "claim-3",
+          "description": "runtimeの回答に満足したユーザーが96.2%である",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "expected": [
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "criterionId": "claim-1",
+          "status": "supported",
+          "evidenceAnchors": ["4.81"]
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "criterionId": "claim-2",
+          "status": "supported",
+          "evidenceAnchors": ["978件"]
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "criterionId": "claim-3",
+          "status": "unknown",
+          "evidenceAnchors": []
+        }
+      ]
+    }
+  ],
+  "revision": "2026-11-10-r2"
+}

@@ -17,6 +17,9 @@ import {
   type ToolDefinition,
   type AgentSession,
 } from "@earendil-works/pi-coding-agent";
+import { ReplayBrowser } from "./replay-browser.js";
+import { extractReviewSignal } from "./reviews.js";
+import { createHash } from "node:crypto";
 import { Browser } from "./browser.js";
 import { routeSources, allowedHosts } from "./sources.js";
 import { selectModel } from "./models.js";
@@ -40,7 +43,7 @@ import { classifyRuntimeFailure } from "./failures.js";
 import { assessPage } from "./page-quality.js";
 import { SYSTEM_PROMPT } from "./prompt.js";
 import { CodexAgent, agentEngine, type AgentEngine } from "./codex.js";
-import type { Task } from "./types.js";
+import type { Task, Page, Criterion } from "./types.js";
 export interface RunOptions {
   query: string;
   urls: string[];
@@ -51,6 +54,7 @@ export interface RunOptions {
   maxPages: number;
   deepenRounds?: number;
   improvement?: ImprovementContext;
+  benchmark?: { id: string; pages: Page[]; criteria: Criterion[] };
   headed?: boolean;
   parentId?: string;
   goalId?: string;
@@ -58,6 +62,8 @@ export interface RunOptions {
   onProgress?: (message: string) => void;
 }
 export function newTask(options: RunOptions): Task {
+  if (options.benchmark && options.improvement)
+    throw new Error("凍結評価とライブ自己改善は同時指定できません");
   if (!options.query.trim() || !options.urls.length)
     throw new Error("クエリと1件以上のURLが必要です");
   const sources = routeSources(options.query, options.urls);
@@ -87,9 +93,20 @@ export function newTask(options: RunOptions): Task {
     updatedAt: new Date().toISOString(),
     sources,
     improvement: options.improvement,
-    criteria: options.improvement
-      ? structuredClone(options.improvement.criteria)
-      : [],
+    evaluation: options.benchmark
+      ? {
+          mode: "frozen-replay",
+          caseId: options.benchmark.id,
+          fixtureSha256: createHash("sha256")
+            .update(JSON.stringify(options.benchmark.pages))
+            .digest("hex"),
+        }
+      : undefined,
+    criteria: options.benchmark
+      ? structuredClone(options.benchmark.criteria)
+      : options.improvement
+        ? structuredClone(options.improvement.criteria)
+        : [],
     pages: [],
     evidence: [],
     steps: 0,
@@ -106,7 +123,11 @@ export async function runTask(
 ): Promise<Task> {
   const task = newTask(options);
   const instructions =
-    SYSTEM_PROMPT + (options.improvement ? IMPROVEMENT_PROMPT : "");
+    SYSTEM_PROMPT +
+    (options.improvement ? IMPROVEMENT_PROMPT : "") +
+    (options.benchmark
+      ? "\n凍結資料の含意判定ベンチマークです。これは推薦の条件充足ではなく記述の真偽/未確認の評価です。benchmark.criteriaを変更せず、全記述をsupported/contradicted/unknownに判定してください。ライブ検索は使えません。各対象URLの本文を取得し、日本語の理由と本文引用を記録して全対象をfinish_taskに含めてください。"
+      : "");
   await store.save(task);
   const dir = store.dir(task.id);
   const controller = new AbortController();
@@ -119,13 +140,19 @@ export async function runTask(
   const cancel = () => controller.abort();
   options.signal?.addEventListener("abort", cancel, { once: true });
   if (options.signal?.aborted) cancel();
-  const browser = new Browser(
-    task.id,
-    dir,
-    allowedHosts(task.sources),
-    controller.signal,
-    options.headed,
-  );
+  const browser = options.benchmark
+    ? new ReplayBrowser(
+        options.benchmark.pages,
+        allowedHosts(task.sources),
+        controller.signal,
+      )
+    : new Browser(
+        task.id,
+        dir,
+        allowedHosts(task.sources),
+        controller.signal,
+        options.headed,
+      );
   let session: AgentSession | undefined;
   let codex: CodexAgent | undefined;
   let claude: ClaudeAgent | undefined;
@@ -193,6 +220,8 @@ export async function runTask(
     const page = await browser.open(url, { render });
     controller.signal.throwIfAborted();
     task.pages.push(page);
+    const review = extractReviewSignal(page);
+    if (review) (task.reviewSignals ??= []).push(review);
     attempted.add(actionKey(render ? "render" : "link", page.url));
     const urls = task.pages
       .filter((p) => verifyDetail(p).status === "verified")
@@ -204,6 +233,7 @@ export async function runTask(
     };
     return {
       untrustedPage: page,
+      reviewSignal: review,
       quality: assessPage(page),
       detailVerification: verifyDetail(page),
     };
@@ -299,10 +329,12 @@ export async function runTask(
         ),
       }),
       execute: wrap("plan_task", (p) => {
-        if (options.improvement) {
+        if (options.improvement || options.benchmark) {
           if (
             JSON.stringify(p.criteria) !==
-            JSON.stringify(options.improvement.criteria)
+            JSON.stringify(
+              options.benchmark?.criteria ?? options.improvement!.criteria,
+            )
           )
             throw new Error(
               "自己改善中は元の評価条件を変更できません。提示したcriteriaをそのまま使用してください",
@@ -325,6 +357,7 @@ export async function runTask(
         if (cached)
           return {
             untrustedPage: cached,
+            reviewSignal: extractReviewSignal(cached),
             quality: assessPage(cached),
             detailVerification: verifyDetail(cached),
           };
@@ -545,6 +578,9 @@ export async function runTask(
       await browser.init();
       await codex.prompt(
         JSON.stringify({
+          benchmark: options.benchmark
+            ? { id: options.benchmark.id, criteria: task.criteria }
+            : undefined,
           query: task.query,
           improvement: options.improvement,
           primedPages: await primeImprovement(),
@@ -576,6 +612,9 @@ export async function runTask(
       await browser.init();
       await claude.prompt(
         JSON.stringify({
+          benchmark: options.benchmark
+            ? { id: options.benchmark.id, criteria: task.criteria }
+            : undefined,
           query: task.query,
           improvement: options.improvement,
           primedPages: await primeImprovement(),
@@ -685,6 +724,9 @@ export async function runTask(
         return decision || undefined;
       };
       const prompt = JSON.stringify({
+        benchmark: options.benchmark
+          ? { id: options.benchmark.id, criteria: task.criteria }
+          : undefined,
         query: task.query,
         improvement: options.improvement,
         primedPages: await primeImprovement(),
