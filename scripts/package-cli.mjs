@@ -20,6 +20,7 @@ if (
 )
   throw Error("Private file in package");
 for (const required of [
+  "benchmarks/semantic-v1.json",
   "dist/cli.js",
   "dist/public-mcp.js",
   "web/chat.html",

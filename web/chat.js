@@ -82,6 +82,8 @@ function sample(id) {
       "<p>新しい相談の根拠・時間をここに表示します。</p>";
   }
   $("#chat-query").focus();
+  $("#chat-query").setSelectionRange(0, 0);
+  $("#chat-query").scrollTop = 0;
 }
 async function history() {
   state.history = await api("/api/runs");
@@ -203,7 +205,14 @@ function render(r) {
   $("#copy-answer")?.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(
-        r.task.answer.summary.replaceAll("\\n", "\n"),
+        [
+          r.reviewWarnings?.length
+            ? "掲載情報の照合結果：\n" + r.reviewWarnings.join("\n")
+            : "",
+          r.task.answer.summary.replaceAll("\\n", "\n"),
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
       );
       notice("回答をコピーしました");
     } catch {

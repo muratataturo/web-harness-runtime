@@ -28,10 +28,10 @@
   },
   "package": {
     "artifact": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/releases/web-harness-runtime-0.3.0.tgz",
-    "shasum": "b8ab236394c317b6e2dab4e04d5d62005ac55c21",
-    "integrity": "sha512-rcpUrB2KiSZe7aXOsZiKEt24fgVzykqt1l1wOGMOdXt8/8v0PgAWZsws+WSsEiyt8x48rjVWNr+9WMJbvXrqhg==",
-    "size": 261483,
-    "fileCount": 70,
+    "shasum": "74f442a2cfa95972ae50147d531b70fc3e59ac6c",
+    "integrity": "sha512-4lzQfkjWNGQnRovyUyXri69SqicOGPes7320UjunzouHu/08uu5AQ4am8j6LrCPG75ynQTdsRqohj6a57DYFsA==",
+    "size": 264725,
+    "fileCount": 71,
     "privateFilesAbsent": true,
     "requiredAssetsPresent": true
   },
@@ -39,7 +39,14 @@
     "version": "0.3.0",
     "chatHttp": 200,
     "snapshotGeneratedWithoutPackageLock": true,
-    "installPrefix": "/private/tmp/whr-cli-install"
+    "installPrefix": "/private/tmp/whr-cli-install",
+    "benchmark": {
+      "cases": 8,
+      "labels": 28,
+      "humanReviewed": 0,
+      "scope": "targeted-entailment-regression",
+      "freeTextReview": "not_evaluated"
+    }
   },
   "container": {
     "chatHttp": 200,

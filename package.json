@@ -59,6 +59,7 @@
     "docs/evidence/codex-strata.json",
     "docs/evidence/recruit-theme-results.json",
     "docs/evidence/delivery-results.json",
-    "scripts/opencode-client.mjs"
+    "scripts/opencode-client.mjs",
+    "benchmarks/*.json"
   ]
 }
