@@ -9,6 +9,7 @@ import {
   type OpenShellTaskOptions,
 } from "./sandbox.js";
 import type { Task } from "./types.js";
+import { runCodexSandbox, configuredCodexSandbox } from "./codex-sandbox.js";
 export type RuntimeExecutor = (
   options: RunOptions,
   store?: Store,
@@ -148,9 +149,17 @@ export function configuredRuntime(): RuntimeExecutor {
   const gateway = process.env.OPENSHELL_GATEWAY;
   if (!gateway)
     throw new Error("OPENSHELL_GATEWAY に登録済みgateway名を指定してください");
-  return createOpenShellExecutor({
+  const pi = createOpenShellExecutor({
     gateway,
     image: process.env.OPENSHELL_IMAGE,
     provider: process.env.OPENSHELL_PROVIDER,
   });
+  return (options, store) =>
+    agentEngine(options.agent) === "codex"
+      ? runCodexSandbox(
+          { ...options, agent: "codex" },
+          store,
+          configuredCodexSandbox(),
+        )
+      : pi(options, store);
 }

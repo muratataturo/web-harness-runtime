@@ -32,6 +32,7 @@ function fixture(mode = "success") {
     },
     binary: process.execPath,
     args: [resolve("test/fixtures/codex-server.mjs"), mode],
+    ...(mode === "external" ? { outerSandbox: "openshell" as const } : {}),
   });
   return { client, controller, tool, calls: () => calls, steps: () => steps };
 }
@@ -73,6 +74,29 @@ test("duplicate tool deliveries execute the host tool only once", async () => {
   } finally {
     await f.client.close();
   }
+});
+test("managed external sandbox sends externalSandbox while the default retains read-only", async () => {
+  const f = fixture("external");
+  try {
+    await f.client.initialize();
+    await f.client.start([f.tool], "Use lookup");
+    await f.client.prompt("look up");
+    assert.equal(f.calls(), 1);
+  } finally {
+    await f.client.close();
+  }
+});
+test("host runtime cannot opt into the managed MicroVM sandbox policy", async () => {
+  const { runTask } = await import("../src/runtime.js");
+  await assert.rejects(
+    runTask({
+      agent: "codex",
+      query: "test",
+      urls: ["https://books.rakuten.co.jp/"],
+      outerSandbox: "openshell",
+    }),
+    /OpenShell|sandbox|MicroVM|管理/,
+  );
 });
 for (const mode of ["invalid", "unknown", "forbidden", "wrong-thread"])
   test(`Codex ${mode} request cannot execute a host tool`, async () => {

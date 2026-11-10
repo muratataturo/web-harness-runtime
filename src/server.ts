@@ -12,6 +12,8 @@ import { agentEngine, CodexAgent } from "./codex.js";
 import { runtimeTarget } from "./executors.js";
 import { doctorOpenShell } from "./sandbox.js";
 import { ImprovementStore, decideImprovement } from "./improvement.js";
+import { codexSandboxStatus } from "./codex-sandbox.js";
+import { strataConnection } from "./opencode.js";
 const webRoot = fileURLToPath(new URL("../web/", import.meta.url));
 function send(res: ServerResponse, status: number, body: unknown) {
   res.writeHead(status, {
@@ -76,6 +78,14 @@ export function createWorkbenchServer(
       if (path === "/api/config" && req.method === "GET") {
         const agent = agentEngine();
         let codexReady = false;
+        let codexWorkerPhase: string | undefined;
+        if (agent === "codex" && runtimeTarget() === "openshell") {
+          try {
+            const status = await codexSandboxStatus();
+            codexReady = status.authenticated;
+            codexWorkerPhase = status.phase;
+          } catch {}
+        }
         if (agent === "codex" && runtimeTarget() === "local") {
           const signal = AbortSignal.timeout(10000);
           const client = new CodexAgent({
@@ -92,6 +102,13 @@ export function createWorkbenchServer(
           }
         }
         let claudeReady = false;
+        let opencodeReady = false;
+        if (agent === "opencode" && runtimeTarget() === "local") {
+          try {
+            await strataConnection();
+            opencodeReady = true;
+          } catch {}
+        }
         if (agent === "claude-code" && runtimeTarget() === "local")
           try {
             await claudeAuthentication(undefined, AbortSignal.timeout(10000));
@@ -99,16 +116,20 @@ export function createWorkbenchServer(
           } catch {}
         send(res, 200, {
           claudeReady,
+          opencodeReady,
+          codexWorkerPhase,
           scenarios: scenarioDefaults,
           agent,
           liveAvailable:
             agent === "claude-code"
               ? claudeReady
               : agent === "codex"
-                ? codexReady
-                : runtimeTarget() === "openshell"
-                  ? !!process.env.OPENSHELL_GATEWAY
-                  : !!process.env.OPENROUTER_API_KEY,
+                ? codexReady || codexWorkerPhase === "Stopped"
+                : agent === "opencode"
+                  ? opencodeReady
+                  : runtimeTarget() === "openshell"
+                    ? !!process.env.OPENSHELL_GATEWAY
+                    : !!process.env.OPENROUTER_API_KEY,
           executor: runtimeTarget(),
           localKeyConfigured: !!process.env.OPENROUTER_API_KEY,
           codexReady,

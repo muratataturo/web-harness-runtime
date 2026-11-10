@@ -192,6 +192,29 @@ try {
       ],
       { OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY },
     );
+  } else if (action === "codex-setup" || action === "codex-login") {
+    await run(
+      process.execPath,
+      [
+        "dist/cli.js",
+        "sandbox",
+        "codex",
+        action === "codex-setup" ? "setup" : "login",
+        "--gateway",
+        "web-harness-local",
+        ...process.argv.slice(3),
+      ],
+      { OPENSHELL_BIN: join(bin, "openshell") },
+    );
+  } else if (action === "run-codex") {
+    await run(process.execPath, ["dist/cli.js", ...process.argv.slice(3)], {
+      RUNTIME_EXECUTOR: "openshell",
+      RUNTIME_AGENT: "codex",
+      OPENSHELL_GATEWAY: "web-harness-local",
+      OPENSHELL_CODEX_SANDBOX:
+        process.env.OPENSHELL_CODEX_SANDBOX ?? "wh-codex",
+      OPENSHELL_BIN: join(bin, "openshell"),
+    });
   } else if (action === "cli") {
     await cli(...process.argv.slice(3));
   } else if (action === "run") {
@@ -204,7 +227,7 @@ try {
     });
   } else
     throw new Error(
-      "setup / start / register / init-provider / cli / run から指定してください",
+      "setup / start / register / init-provider / codex-setup / codex-login / run-codex / cli / run から指定してください",
     );
 } catch (error) {
   if (!Number.isInteger(error.exitCode)) console.error(error.message);

@@ -1,0 +1,1011 @@
+{
+  "observedAt": "2026-11-10T09:47:58.610Z",
+  "scope": "Live integration checks on one Rakuten Books detail URL, not a provider performance benchmark",
+  "codexAuto": {
+    "id": "06b5329d-b797-4027-9ffd-5d7491be7cfb",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "status": "succeeded",
+    "interactionMode": "auto",
+    "urls": [
+      "https://books.rakuten.co.jp/rb/18577690/"
+    ],
+    "criteria": [
+      {
+        "id": "title",
+        "description": "商品詳細に記載された書名を確認する",
+        "required": true,
+        "weight": 1
+      },
+      {
+        "id": "author",
+        "description": "商品詳細に記載された著者を確認する",
+        "required": true,
+        "weight": 1
+      },
+      {
+        "id": "price",
+        "description": "商品詳細に記載された価格を確認する",
+        "required": true,
+        "weight": 1
+      },
+      {
+        "id": "isbn",
+        "description": "商品詳細に記載されたISBNを確認する",
+        "required": true,
+        "weight": 1
+      }
+    ],
+    "pageCount": 1,
+    "evidenceCount": 4,
+    "answer": {
+      "summary": "指定された楽天ブックスの商品詳細で、書名『るるぶ 箱根 '27 （るるぶ情報版）』、編集者 JTBパブリッシング 旅行ガイドブック 編集部、価格1,430円（税込）、ISBN 9784533172731の4項目を確認しました。購入操作は行っていません。",
+      "candidates": [
+        {
+          "name": "るるぶ 箱根 '27 （るるぶ情報版）",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "matches": [
+            {
+              "criterionId": "title",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-1"
+              ],
+              "explanation": "書名：るるぶ 箱根 '27 （るるぶ情報版）。"
+            },
+            {
+              "criterionId": "author",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-2"
+              ],
+              "explanation": "著者／編集：JTBパブリッシング 旅行ガイドブック 編集部（編）。"
+            },
+            {
+              "criterionId": "price",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-3"
+              ],
+              "explanation": "表示価格は1,430円（税込）。"
+            },
+            {
+              "criterionId": "isbn",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-4"
+              ],
+              "explanation": "ISBN：9784533172731。"
+            }
+          ],
+          "score": 100,
+          "eligible": true
+        }
+      ],
+      "limitations": [
+        "価格は2026年11月10日の閲覧時点の表示です。公開HTMLによる確認であり、動的な在庫や購入時の価格を確約するものではありません。"
+      ]
+    },
+    "execution": {
+      "target": "openshell",
+      "isolation": "openshell-sandbox",
+      "gateway": "web-harness-local",
+      "sandboxName": "wh-codex",
+      "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+      "image": "web-harness-codex:local",
+      "artifactsDirectory": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/codex-workers/runs/9982face-eb9e-48b8-9419-188c7a0ed496/artifacts",
+      "allocation": "account-worker",
+      "runtimeRevision": "d0d78a4902c12291a0cf55e3",
+      "innerSandbox": "externalSandbox",
+      "elapsedMs": 36780,
+      "cleanupStatus": "stopped"
+    },
+    "metrics": {
+      "elapsedMs": 24465,
+      "tokenAccounting": "provider-reported",
+      "tokens": {
+        "inputTokens": 60780,
+        "outputTokens": 682,
+        "cachedInputTokens": 25472,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 61462,
+        "cacheWriteInputTokens": 0,
+        "source": "codex-thread-total"
+      },
+      "billing": {
+        "mode": "chatgpt-subscription",
+        "additionalApiUsd": 0,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    }
+  },
+  "codexApproval": {
+    "task": {
+      "id": "3a94dd1a-fb5b-4a7e-9aaf-62efafda7588",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "interactionMode": "approval",
+      "urls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "対象書籍の掲載価格を確認できること",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "signature",
+          "description": "著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "pageCount": 1,
+      "evidenceCount": 2,
+      "answer": {
+        "summary": "指定の1冊『るるぶ 箱根 '27』は掲載価格1,430円（税込）を確認。著者本人の直筆サイン付きであることは本文に記載がなくunknown。必須条件をすべて満たすとは判断できません。条件は変更していません。",
+        "candidates": [
+          {
+            "name": "るるぶ 箱根 '27 （るるぶ情報版）",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "matches": [
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "掲載価格は1,430円（税込）。"
+              },
+              {
+                "criterionId": "signature",
+                "status": "unknown",
+                "evidenceIds": [],
+                "explanation": "取得した商品本文に著者本人の直筆サイン付きとの記載がないため、未確認を保持する。サインなしとは断定しない。"
+              }
+            ],
+            "score": 50,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "公開HTMLを確認した結果であり、価格は閲覧時点の表示。",
+          "直筆サイン付きの明記は確認できず、追加取得できる同一対象リンクもなかった。必須条件は未確認のまま。",
+          "購入は行っていない。",
+          "追加確認しても未確認の項目: 著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する"
+        ]
+      },
+      "execution": {
+        "target": "openshell",
+        "isolation": "openshell-sandbox",
+        "gateway": "web-harness-local",
+        "sandboxName": "wh-codex",
+        "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+        "image": "web-harness-codex:local",
+        "artifactsDirectory": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/codex-workers/runs/676f8f38-78de-4b01-8f8b-5a723a9dd630/artifacts",
+        "allocation": "account-worker",
+        "runtimeRevision": "d0d78a4902c12291a0cf55e3",
+        "innerSandbox": "externalSandbox",
+        "elapsedMs": 35716,
+        "cleanupStatus": "stopped"
+      },
+      "metrics": {
+        "elapsedMs": 22829,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 60361,
+          "outputTokens": 608,
+          "cachedInputTokens": 42752,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 60969,
+          "cacheWriteInputTokens": 0,
+          "source": "codex-thread-total"
+        },
+        "billing": {
+          "mode": "chatgpt-subscription",
+          "additionalApiUsd": 0,
+          "subscriptionAllocationUsd": null,
+          "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+        }
+      }
+    },
+    "loop": {
+      "interactionMode": "approval",
+      "executionTarget": "openshell",
+      "id": "81290081-08eb-4c22-b072-12920ce0d76a",
+      "sourceTaskId": "3a94dd1a-fb5b-4a7e-9aaf-62efafda7588",
+      "query": "最初にplan_taskで掲載価格と「著者本人の直筆サイン付きであること」を必須条件に定義してください。楽天ブックスのこの1冊を確認し、サイン付きと本文に記載がなければunknownを保持してください。条件は変更せず、引用を保存してfinish_taskで回答してください。購入はしません。",
+      "urls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "対象書籍の掲載価格を確認できること",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "signature",
+          "description": "著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "candidateUrls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "minimumCandidates": 1,
+      "additionalUrls": [],
+      "allowReplacements": false,
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "createdAt": "2026-11-10T09:44:29.745Z",
+      "updatedAt": "2026-11-10T09:44:29.748Z",
+      "status": "needs_input",
+      "maxIterations": 3,
+      "timeoutSeconds": 1800,
+      "bestTaskId": "3a94dd1a-fb5b-4a7e-9aaf-62efafda7588",
+      "baseline": {
+        "complete": false,
+        "verifiedDetails": 1,
+        "supportedRequired": 1,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "fields": [
+              "著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する"
+            ]
+          }
+        ],
+        "causes": [
+          "required_unknown"
+        ],
+        "achievements": [
+          "detail:rakuten-books:18577690",
+          "rakuten-books:18577690:price"
+        ]
+      },
+      "best": {
+        "complete": false,
+        "verifiedDetails": 1,
+        "supportedRequired": 1,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "fields": [
+              "著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する"
+            ]
+          }
+        ],
+        "causes": [
+          "required_unknown"
+        ],
+        "achievements": [
+          "detail:rakuten-books:18577690",
+          "rakuten-books:18577690:price"
+        ]
+      },
+      "iterations": [],
+      "promotedStrategies": [],
+      "questions": [
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "missing": [
+            "著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する"
+          ],
+          "question": "https://books.rakuten.co.jp/rb/18577690/ の「著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する」が未確認です。未確認を明記して受け取るか、調査を追加するか選べます。",
+          "options": [
+            "未確認を明記して提案を受け取る",
+            "同じ条件で追加調査する（時間・利用枠を追加）",
+            "同一候補の公式詳細URLを追加する"
+          ]
+        }
+      ],
+      "stopReason": "取得済みの根拠から未達を検出しました",
+      "approval": {
+        "id": "3fe0ea8c-a475-45f1-92be-cd59788b8258",
+        "status": "pending",
+        "title": "確認できた候補で進めますか？",
+        "reason": "取得済みの根拠から未達を検出しました。未確認: 著者本人の直筆サイン付きであることが商品本文に明記されていること。記載がなければunknownを保持する。必須条件を緩めず、最良の回答を保持しています。",
+        "choices": [
+          {
+            "id": "return_partial",
+            "title": "未確認事項を明記して提案を受け取る",
+            "recommended": true,
+            "tradeoff": "追加推論なし。未確認条件・空席・営業日は保証できません。"
+          },
+          {
+            "id": "research_more",
+            "title": "同じ条件でもう一度調べる",
+            "tradeoff": "最大3回・1800秒を追加で使います。改善できない場合もあります。"
+          },
+          {
+            "id": "add_url",
+            "title": "公式の詳細URLを追加して調べる",
+            "tradeoff": "同一候補の公開URLを最大8件入力。認証・アクセス制限は回避しません。"
+          }
+        ]
+      }
+    }
+  },
+  "opencodeAuto": {
+    "id": "cdbf3347-be99-48e7-9906-44a91e93e808",
+    "agent": "opencode",
+    "model": "strata-colab/qwen3.8-flash-next-iq2_xs",
+    "status": "succeeded",
+    "interactionMode": "auto",
+    "urls": [
+      "https://books.rakuten.co.jp/rb/18577690/"
+    ],
+    "criteria": [
+      {
+        "id": "book_title",
+        "description": "書名が商品詳細ページから確認できること",
+        "weight": 8,
+        "required": true
+      },
+      {
+        "id": "author",
+        "description": "著者名が商品詳細ページから確認できること",
+        "weight": 8,
+        "required": true
+      },
+      {
+        "id": "price",
+        "description": "楽天ブックス掲載価格が商品詳細ページから確認できること",
+        "weight": 6,
+        "required": true
+      },
+      {
+        "id": "isbn",
+        "description": "ISBNが商品詳細ページから確認できること",
+        "weight": 8,
+        "required": true
+      }
+    ],
+    "pageCount": 1,
+    "evidenceCount": 5,
+    "answer": {
+      "summary": "楽天ブックスの商品詳細（/rb/18577690/）を確認した結果、4条件すべて本文から裏付けできました。\\n\\n- 書名: るるぶ 箱根 '27（るるぶ情報版）\\n- 著者／編集: JTBパブリッシング 旅行ガイドブック 編集部(編)（出版社: JTBパブリッシング、発売日: 2026年05月08日）\\n- 掲載価格: 1,430円（税込）、送料無料\\n- ISBN: 9784533172731\\n\\n購入操作は行っていません。",
+      "candidates": [
+        {
+          "name": "るるぶ 箱根 '27（るるぶ情報版）",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "matches": [
+            {
+              "criterionId": "book_title",
+              "status": "supported",
+              "explanation": "ページタイトルおよび本文に書名「るるぶ 箱根 '27（るるぶ情報版）」が記載されています。",
+              "evidenceIds": [
+                "ev-1"
+              ]
+            },
+            {
+              "criterionId": "author",
+              "status": "supported",
+              "explanation": "商品情報の著者／編集欄に「JTBパブリッシング 旅行ガイドブック 編集部(編)」と記載されています（個人著者ではなく編集部）。",
+              "evidenceIds": [
+                "ev-4"
+              ]
+            },
+            {
+              "criterionId": "price",
+              "status": "supported",
+              "explanation": "掲載価格は1,430円（税込）で、構造化データでも1430円(JPY)と一致します。",
+              "evidenceIds": [
+                "ev-1",
+                "ev-3"
+              ]
+            },
+            {
+              "criterionId": "isbn",
+              "status": "supported",
+              "explanation": "ISBN:9784533172731が商品情報に記載されています。",
+              "evidenceIds": [
+                "ev-2"
+              ]
+            }
+          ],
+          "score": 100,
+          "eligible": true
+        }
+      ],
+      "limitations": [
+        "著者は個人名ではなく「JTBパブリッシング 旅行ガイドブック 編集部(編)」です。",
+        "価格・在庫は閲覧日時（2026-11-10）時点の情報で、選択SKU・送料・在庫の最終確定は未確認です。",
+        "レビュー件数0件のため評価に関する判断はできません。"
+      ]
+    },
+    "execution": {
+      "target": "local",
+      "isolation": "host-process"
+    },
+    "metrics": {
+      "elapsedMs": 87097,
+      "tokenAccounting": "unavailable",
+      "tokens": null,
+      "billing": {
+        "mode": "strata-existing-gpu",
+        "additionalApiUsd": null,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    }
+  },
+  "opencodeApproval": {
+    "task": {
+      "id": "78a78186-e933-4db9-8737-78d95672b3c2",
+      "agent": "opencode",
+      "model": "strata-colab/qwen3.8-flash-next-iq2_xs",
+      "status": "partial",
+      "interactionMode": "approval",
+      "urls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "楽天ブックス商品詳細ページに掲載されている価格が確認できること（必須）",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "signed",
+          "description": "著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。",
+          "weight": 10,
+          "required": true
+        }
+      ],
+      "pageCount": 1,
+      "evidenceCount": 5,
+      "answer": {
+        "summary": "楽天ブックス 商品ID 18577690「るるぶ 箱根 '27」(JTBパブリッシング 旅行ガイドブック 編集部編、ISBN 9784533172731)を確認しました。掲載価格は1,430円(税込)、送料無料(閲覧日2026-11-10)で価格条件はsupported。一方、「著者本人の直筆サイン付き」の記載は商品説明・内容紹介・レビュー(0件)のいずれにもなく、編者名義も個人著者ではないため、サイン付き条件はunknownのまま維持します(条件は変更していません)。",
+        "candidates": [
+          {
+            "name": "るるぶ 箱根 '27(るるぶ情報版)",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "matches": [
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "explanation": "楽天ブックス商品詳細(閲覧日 2026-11-10)に税込1,430円と表示。構造化データでも販売価格1430円(JPY)。",
+                "evidenceIds": [
+                  "ev-2"
+                ]
+              },
+              {
+                "criterionId": "signed",
+                "status": "unknown",
+                "explanation": "本文(商品説明・内容紹介)に「直筆サイン」「サイン付き」の記載は見当たらず、レビューも0件。著者名義は「JTBパブリッシング 旅行ガイドブック 編集部(編)」であり、個人著者の直筆サイン付きであることは確認できない。未確認のためunknownを維持。",
+                "evidenceIds": [
+                  "ev-3",
+                  "ev-4",
+                  "ev-5"
+                ]
+              }
+            ],
+            "titleEvidenceId": "ev-1",
+            "score": 50,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "「著者本人の直筆サイン付き」の記載は詳細本文どこにもなく、レビュー0件・関連特集リンクからも確認できなかったためunknown。在庫あり(残り19個)表示があるが、これは取得成功でありサイン付きSKUの確約ではない。",
+          "構造化データの価格1430円(JPY)は選択SKU/送料/在庫未確認の値として取得。本文表示の1,430円(税込)・送料無料と一致。",
+          "購入は行っていない。",
+          "追加確認しても未確認の項目: 著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。"
+        ]
+      },
+      "execution": {
+        "target": "local",
+        "isolation": "host-process"
+      },
+      "metrics": {
+        "elapsedMs": 48353,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 112676,
+          "outputTokens": 1389,
+          "cachedInputTokens": 99962,
+          "cacheWriteInputTokens": 0,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 114065,
+          "source": "opencode-step-total"
+        },
+        "billing": {
+          "mode": "strata-existing-gpu",
+          "additionalApiUsd": null,
+          "subscriptionAllocationUsd": null,
+          "note": "既存Colab GPUの利用時間・クレジット消費額は未取得です。OpenCodeの設定単価0を実費0とは扱いません"
+        }
+      }
+    },
+    "loop": {
+      "interactionMode": "approval",
+      "executionTarget": "local",
+      "id": "701eb820-7f59-44a8-949f-ac4fc6f9d636",
+      "sourceTaskId": "78a78186-e933-4db9-8737-78d95672b3c2",
+      "query": "最初にplan_taskで掲載価格と「著者本人の直筆サイン付きであること」を必須条件に定義してください。楽天ブックスのこの1冊を確認し、サイン付きと本文に記載がなければunknownを保持してください。条件は変更せず、引用を保存してfinish_taskで回答してください。購入はしません。",
+      "urls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "楽天ブックス商品詳細ページに掲載されている価格が確認できること（必須）",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "signed",
+          "description": "著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。",
+          "weight": 10,
+          "required": true
+        }
+      ],
+      "candidateUrls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "minimumCandidates": 1,
+      "additionalUrls": [],
+      "allowReplacements": false,
+      "agent": "opencode",
+      "model": "strata-colab/qwen3.8-flash-next-iq2_xs",
+      "createdAt": "2026-11-10T09:44:42.306Z",
+      "updatedAt": "2026-11-10T09:44:42.309Z",
+      "status": "needs_input",
+      "maxIterations": 3,
+      "timeoutSeconds": 1800,
+      "bestTaskId": "78a78186-e933-4db9-8737-78d95672b3c2",
+      "baseline": {
+        "complete": false,
+        "verifiedDetails": 1,
+        "supportedRequired": 1,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "fields": [
+              "著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。"
+            ]
+          }
+        ],
+        "causes": [
+          "required_unknown"
+        ],
+        "achievements": [
+          "detail:rakuten-books:18577690",
+          "rakuten-books:18577690:price"
+        ]
+      },
+      "best": {
+        "complete": false,
+        "verifiedDetails": 1,
+        "supportedRequired": 1,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "fields": [
+              "著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。"
+            ]
+          }
+        ],
+        "causes": [
+          "required_unknown"
+        ],
+        "achievements": [
+          "detail:rakuten-books:18577690",
+          "rakuten-books:18577690:price"
+        ]
+      },
+      "iterations": [],
+      "promotedStrategies": [],
+      "questions": [
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "missing": [
+            "著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。"
+          ],
+          "question": "https://books.rakuten.co.jp/rb/18577690/ の「著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。」が未確認です。未確認を明記して受け取るか、調査を追加するか選べます。",
+          "options": [
+            "未確認を明記して提案を受け取る",
+            "同じ条件で追加調査する（時間・利用枠を追加）",
+            "同一候補の公式詳細URLを追加する"
+          ]
+        }
+      ],
+      "stopReason": "取得済みの根拠から未達を検出しました",
+      "approval": {
+        "id": "15a6d861-d7a8-4c93-878c-158f7d3d13ad",
+        "status": "pending",
+        "title": "確認できた候補で進めますか？",
+        "reason": "取得済みの根拠から未達を検出しました。未確認: 著者本人の直筆サイン付きであることが商品本文（仕様・備考等）に記載されていること（必須）。記載がなければunknownとする。。必須条件を緩めず、最良の回答を保持しています。",
+        "choices": [
+          {
+            "id": "return_partial",
+            "title": "未確認事項を明記して提案を受け取る",
+            "recommended": true,
+            "tradeoff": "追加推論なし。未確認条件・空席・営業日は保証できません。"
+          },
+          {
+            "id": "research_more",
+            "title": "同じ条件でもう一度調べる",
+            "tradeoff": "最大3回・1800秒を追加で使います。改善できない場合もあります。"
+          },
+          {
+            "id": "add_url",
+            "title": "公式の詳細URLを追加して調べる",
+            "tradeoff": "同一候補の公開URLを最大8件入力。認証・アクセス制限は回避しません。"
+          }
+        ]
+      }
+    }
+  },
+  "codexAutoImprovement": {
+    "baseline": {
+      "id": "1c09322b-50df-4f51-b2d2-5d891e64391f",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "interactionMode": "auto",
+      "urls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "商品詳細本文に掲載価格が明記されていること。予算指定はないため価格の確認を行う。",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "signature",
+          "description": "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "pageCount": 1,
+      "evidenceCount": 1,
+      "answer": {
+        "summary": "指定の1冊は掲載価格1,430円（税込）を確認しました。ただし必須条件「著者本人の直筆サイン付き」は本文に記載がなくunknownのため、全必須条件を満たす商品としては推奨できません。購入は行っていません。",
+        "candidates": [
+          {
+            "name": "るるぶ 箱根 '27（るるぶ情報版）",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "matches": [
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "掲載価格は1,430円（税込）。"
+              },
+              {
+                "criterionId": "signature",
+                "status": "unknown",
+                "evidenceIds": [],
+                "explanation": "取得した商品詳細本文に著者本人の直筆サイン付きとの記載がないため、未確認を維持する。サインなしとも断定しない。"
+              }
+            ],
+            "score": 50,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "2026年11月10日取得の公開HTMLに基づく掲載価格です。",
+          "直筆サインの記載は確認できず、同一対象の追加取得可能なリンクもなかったため未確認です。条件は変更していません。",
+          "追加確認しても未確認の項目: 著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。"
+        ]
+      },
+      "execution": {
+        "target": "openshell",
+        "isolation": "openshell-sandbox",
+        "gateway": "web-harness-local",
+        "sandboxName": "wh-codex",
+        "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+        "image": "web-harness-codex:local",
+        "artifactsDirectory": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/codex-workers/runs/383ed856-5980-4e5c-99b5-29f87d7ca5eb/artifacts",
+        "allocation": "account-worker",
+        "runtimeRevision": "c7bd33d759010ac2d8db832f",
+        "innerSandbox": "externalSandbox",
+        "elapsedMs": 34389,
+        "cleanupStatus": "stopped"
+      },
+      "metrics": {
+        "elapsedMs": 21378,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 60300,
+          "outputTokens": 598,
+          "cachedInputTokens": 42752,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 60898,
+          "cacheWriteInputTokens": 0,
+          "source": "codex-thread-total"
+        },
+        "billing": {
+          "mode": "chatgpt-subscription",
+          "additionalApiUsd": 0,
+          "subscriptionAllocationUsd": null,
+          "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+        }
+      }
+    },
+    "child": {
+      "id": "69eb5175-8cbd-4fb1-80da-ad8994f19a2f",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "interactionMode": "auto",
+      "urls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "商品詳細本文に掲載価格が明記されていること。予算指定はないため価格の確認を行う。",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "signature",
+          "description": "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "pageCount": 1,
+      "evidenceCount": 1,
+      "answer": {
+        "summary": "対象の『るるぶ 箱根 '27』は掲載価格1,430円（税込）を確認できました。一方、必須条件の「著者本人の直筆サイン付き」は本文に記載がなくunknownです。したがって、両必須条件を満たす商品としては推奨できません。条件は変更していません。",
+        "candidates": [
+          {
+            "name": "るるぶ 箱根 '27",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "matches": [
+              {
+                "criterionId": "price",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "商品詳細本文に1,430円（税込）と掲載されている。",
+                "status": "supported"
+              },
+              {
+                "criterionId": "signature",
+                "evidenceIds": [],
+                "explanation": "取得した商品詳細本文に著者本人の直筆サイン付きとの記載はないため、unknownを維持する。サインなしと断定はしない。",
+                "status": "unknown"
+              }
+            ],
+            "score": 50,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "公開HTMLの商品詳細を確認。追加確認も試みたが、同一対象の追加取得可能なリンクがなく、直筆サイン付きであることは確認できなかった。",
+          "価格は閲覧時点の掲載情報。購入は行っていない。",
+          "追加確認しても未確認の項目: 著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。"
+        ]
+      },
+      "execution": {
+        "target": "openshell",
+        "isolation": "openshell-sandbox",
+        "gateway": "web-harness-local",
+        "sandboxName": "wh-codex",
+        "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+        "image": "web-harness-codex:local",
+        "artifactsDirectory": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/codex-workers/runs/3121386a-9f33-4404-9776-6faf39006f58/artifacts",
+        "allocation": "account-worker",
+        "runtimeRevision": "605be36d8a4e42298300720a",
+        "innerSandbox": "externalSandbox",
+        "elapsedMs": 33985,
+        "cleanupStatus": "stopped"
+      },
+      "metrics": {
+        "elapsedMs": 21336,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 63150,
+          "outputTokens": 621,
+          "cachedInputTokens": 26752,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 63771,
+          "cacheWriteInputTokens": 0,
+          "source": "codex-thread-total"
+        },
+        "billing": {
+          "mode": "chatgpt-subscription",
+          "additionalApiUsd": 0,
+          "subscriptionAllocationUsd": null,
+          "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+        }
+      }
+    },
+    "loop": {
+      "interactionMode": "auto",
+      "executionTarget": "openshell",
+      "id": "57a39bc8-de3d-4799-a1fe-cc6c4401f07e",
+      "sourceTaskId": "1c09322b-50df-4f51-b2d2-5d891e64391f",
+      "query": "最初にplan_taskで掲載価格と「著者本人の直筆サイン付きであること」を必須条件に定義してください。楽天ブックスのこの1冊を確認し、サイン付きと本文に記載がなければunknownを保持してください。条件は変更せず、引用を保存してfinish_taskで回答してください。購入はしません。",
+      "urls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "criteria": [
+        {
+          "id": "price",
+          "description": "商品詳細本文に掲載価格が明記されていること。予算指定はないため価格の確認を行う。",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "signature",
+          "description": "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "candidateUrls": [
+        "https://books.rakuten.co.jp/rb/18577690/"
+      ],
+      "minimumCandidates": 1,
+      "additionalUrls": [],
+      "allowReplacements": false,
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "createdAt": "2026-11-10T09:46:10.652Z",
+      "updatedAt": "2026-11-10T09:46:44.709Z",
+      "status": "completed_partial",
+      "maxIterations": 1,
+      "timeoutSeconds": 240,
+      "bestTaskId": "1c09322b-50df-4f51-b2d2-5d891e64391f",
+      "baseline": {
+        "complete": false,
+        "verifiedDetails": 1,
+        "supportedRequired": 1,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "fields": [
+              "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。"
+            ]
+          }
+        ],
+        "causes": [
+          "required_unknown"
+        ],
+        "achievements": [
+          "detail:rakuten-books:18577690",
+          "rakuten-books:18577690:price"
+        ]
+      },
+      "best": {
+        "complete": false,
+        "verifiedDetails": 1,
+        "supportedRequired": 1,
+        "supportedOptional": 0,
+        "gaps": [
+          {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "fields": [
+              "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。"
+            ]
+          }
+        ],
+        "causes": [
+          "required_unknown"
+        ],
+        "achievements": [
+          "detail:rakuten-books:18577690",
+          "rakuten-books:18577690:price"
+        ]
+      },
+      "iterations": [
+        {
+          "number": 1,
+          "taskId": "69eb5175-8cbd-4fb1-80da-ad8994f19a2f",
+          "plan": {
+            "minimumCandidates": 1,
+            "allowReplacements": false,
+            "loopId": "57a39bc8-de3d-4799-a1fe-cc6c4401f07e",
+            "iteration": 1,
+            "criteria": [
+              {
+                "id": "price",
+                "description": "商品詳細本文に掲載価格が明記されていること。予算指定はないため価格の確認を行う。",
+                "required": true,
+                "weight": 1
+              },
+              {
+                "id": "signature",
+                "description": "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。",
+                "required": true,
+                "weight": 1
+              }
+            ],
+            "candidateUrls": [
+              "https://books.rakuten.co.jp/rb/18577690/"
+            ],
+            "gaps": [
+              {
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "fields": [
+                  "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。"
+                ]
+              }
+            ],
+            "priorityUrls": [],
+            "visitedUrls": [
+              "https://books.rakuten.co.jp/rb/18577690/"
+            ],
+            "strategy": "targeted-links"
+          },
+          "result": {
+            "complete": false,
+            "verifiedDetails": 1,
+            "supportedRequired": 1,
+            "supportedOptional": 0,
+            "gaps": [
+              {
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "fields": [
+                  "著者本人の直筆サイン付きであることが商品詳細本文に明記されていること。記載がなければunknownを維持する。"
+                ]
+              }
+            ],
+            "causes": [
+              "required_unknown"
+            ],
+            "achievements": [
+              "detail:rakuten-books:18577690",
+              "rakuten-books:18577690:price"
+            ]
+          },
+          "accepted": false,
+          "corrections": [],
+          "newPages": 0,
+          "taskStatus": "partial"
+        }
+      ],
+      "promotedStrategies": [],
+      "questions": [],
+      "stopReason": "改善回数上限に達しました"
+    },
+    "aggregateTokens": 124669,
+    "aggregateExecutionMs": 68374
+  },
+  "failuresAndCorrections": [
+    {
+      "stage": "Codex native copied out of package",
+      "outcome": "Inference authenticated, but dynamic research tools failed to start",
+      "correction": "Launch official JS wrapper preserving native and codex-code-mode-host layout; explicit native binary egress policy; externalSandbox only in managed guest"
+    },
+    {
+      "stage": "Runtime snapshot install",
+      "outcome": "Installer regex escaping then whole-lock hash comparison failed",
+      "correction": "Compile installer regression test; compare direct SDK version/integrity and allowlisted public file hashes"
+    },
+    {
+      "stage": "OpenCode final step after accepted finish_task",
+      "outcome": "Valid answer was marked failed by post-completion step accounting",
+      "correction": "Skip model step budget mutation after answer accepted; retain usage; regression test and live Approval rerun"
+    }
+  ],
+  "limitations": [
+    "Successful VM retrieval used public HTML; Chromium DOM path remains unavailable",
+    "OpenCode agent runs locally, inference uses existing Strata GPU; no VM claim",
+    "Codex subscription allocation and Strata GPU costs are unmeasured",
+    "No GPU allocation, tunnel restart, original-session attach, model/provider fallback, purchase or booking"
+  ]
+}

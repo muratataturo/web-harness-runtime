@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { config } from "dotenv";
-import { Command, InvalidArgumentError } from "commander";
+import { Command, InvalidArgumentError, Option } from "commander";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { readFile } from "node:fs/promises";
@@ -21,9 +21,15 @@ import { taskReviewSignals } from "./reviews.js";
 import { FeedbackStore } from "./feedback.js";
 import { Store } from "./store.js";
 import { assessPage } from "./page-quality.js";
-import { configuredRuntime } from "./executors.js";
+import { configuredRuntime, runtimeTarget } from "./executors.js";
 import { interactionMode } from "./interaction.js";
 import { decodeImprovementContext } from "./improvement-context.js";
+import {
+  setupCodexSandbox,
+  loginCodexSandbox,
+  codexSandboxStatus,
+} from "./codex-sandbox.js";
+import { strataConnection } from "./opencode.js";
 import {
   TrustedStore,
   verifySources,
@@ -66,6 +72,7 @@ const integer = (value: string) => {
 };
 const withRunOptions = (command: Command) =>
   command
+    .addOption(new Option("--openshell-outer-sandbox").hideHelp())
     .option(
       "--improvement-context <base64url>",
       "sandboxへの検証契約転送",
@@ -77,7 +84,10 @@ const withRunOptions = (command: Command) =>
       interactionMode,
       "approval",
     )
-    .option("--agent <engine>", "codex（既定）/ claude-code / pi-openrouter")
+    .option(
+      "--agent <engine>",
+      "codex（既定）/ claude-code / pi-openrouter / opencode",
+    )
     .option("--model <id>", "選択エンジンのモデルID（既定: 各カタログ）")
     .option(
       "--max-steps <n>",
@@ -129,6 +139,7 @@ async function execute(
   process.once("SIGTERM", cancel);
   try {
     const task = await configuredRuntime()({
+      outerSandbox: opts.openshellOuterSandbox ? "openshell" : undefined,
       interactionMode: interactionMode(opts.mode),
       improvement: opts.improvementContext,
       query,
@@ -227,8 +238,25 @@ program
 program
   .command("models")
   .description("選択エンジンで利用可能なモデル一覧")
-  .option("--agent <engine>", "codex / claude-code / pi-openrouter")
+  .option("--agent <engine>", "codex / claude-code / pi-openrouter / opencode")
   .action(async (opts) => {
+    if (agentEngine(opts.agent) === "opencode") {
+      const c = await strataConnection();
+      console.log(`${c.model}\tcontext=${c.context}`);
+      return;
+    }
+    if (
+      agentEngine(opts.agent) === "codex" &&
+      runtimeTarget() === "openshell"
+    ) {
+      const status = await codexSandboxStatus();
+      if (!status.authenticated)
+        throw new Error(
+          "Codex workerの起動・ChatGPTログインを確認してください。ホストのモデル一覧には切り替えません",
+        );
+      for (const model of status.models) console.log(model);
+      return;
+    }
     if (agentEngine(opts.agent) === "claude-code") {
       await claudeAuthentication();
       for (const m of claudeModels) console.log(m);
@@ -568,7 +596,7 @@ feedback
 program
   .command("doctor")
   .description("実行エンジンの認証・モデル・ブラウザを確認")
-  .option("--agent <engine>", "codex / claude-code / pi-openrouter")
+  .option("--agent <engine>", "codex / claude-code / pi-openrouter / opencode")
   .action(async (opts) => {
     let ok = true;
     console.log(`Node: ${process.version}`);
@@ -593,6 +621,10 @@ program
         ok = false;
         console.log(e.message);
       }
+    } else if (engine === "codex" && runtimeTarget() === "openshell") {
+      const status = await codexSandboxStatus();
+      console.log(JSON.stringify(status));
+      ok = status.authenticated;
     } else if (engine === "codex") {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 30000);
@@ -613,6 +645,14 @@ program
       } finally {
         clearTimeout(timer);
         await client.close();
+      }
+    } else if (engine === "opencode") {
+      try {
+        const c = await strataConnection();
+        console.log(`OpenCode / ${c.model} / context=${c.context}`);
+      } catch (e) {
+        ok = false;
+        console.log(e instanceof Error ? e.message : String(e));
       }
     } else {
       console.log(
@@ -640,6 +680,27 @@ program
 const sandbox = program
   .command("sandbox")
   .description("OpenShellの計画・実行・環境確認");
+const sandboxCodex = sandbox
+  .command("codex")
+  .description("サブスク用の専用Codex MicroVMを初期設定・ログイン");
+for (const action of ["setup", "login"] as const) {
+  sandboxCodex
+    .command(action)
+    .requiredOption("--gateway <name>")
+    .option("--name <name>", "アカウント専用worker名", "wh-codex")
+    .option("--image <image>", "Codex同梱イメージ", "web-harness-codex:local")
+    .action(async (opts) => {
+      console.log(
+        JSON.stringify(
+          await (action === "setup"
+            ? setupCodexSandbox(opts)
+            : loginCodexSandbox(opts)),
+          null,
+          2,
+        ),
+      );
+    });
+}
 function sandboxOptions(command: Command) {
   return command
     .argument("<query>")
@@ -697,7 +758,7 @@ program
   )
   .option("--retrieval-only", "取得のみ検証する（--browser-onlyの別名）")
   .option("--parallel <n>", "並列数1または2", integer, 1)
-  .option("--agent <engine>", "codex / claude-code / pi-openrouter")
+  .option("--agent <engine>", "codex / claude-code / pi-openrouter / opencode")
   .option("--model <id>")
   .option("--timeout <seconds>", "ケースごとの制限時間", integer, 180)
   .action(async (opts) => {

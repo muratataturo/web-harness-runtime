@@ -5,7 +5,31 @@ export interface TokenUsage {
   reasoningOutputTokens: number | null;
   totalTokens: number;
   cacheWriteInputTokens: number;
-  source: "codex-thread-total" | "pi-session-total";
+  source: "codex-thread-total" | "pi-session-total" | "opencode-step-total";
+}
+export function opencodeUsage(raw: any): TokenUsage | undefined {
+  const values = [
+    raw?.input,
+    raw?.output,
+    raw?.reasoning,
+    raw?.total,
+    raw?.cache?.read,
+    raw?.cache?.write,
+  ];
+  if (values.some((n) => !Number.isSafeInteger(n) || n < 0)) return;
+  const input = raw.input + raw.cache.read + raw.cache.write;
+  const output =
+    input + raw.output === raw.total ? raw.output : raw.output + raw.reasoning;
+  if (input + output !== raw.total) return;
+  return {
+    inputTokens: input,
+    outputTokens: output,
+    cachedInputTokens: raw.cache.read,
+    cacheWriteInputTokens: raw.cache.write,
+    reasoningOutputTokens: raw.reasoning,
+    totalTokens: raw.total,
+    source: "opencode-step-total",
+  };
 }
 export function piUsage(value: {
   input: number;

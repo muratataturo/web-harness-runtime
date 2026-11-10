@@ -3,12 +3,20 @@ import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { createInterface } from "node:readline";
 import { Value } from "@sinclair/typebox/value";
 import type { ToolDefinition } from "@earendil-works/pi-coding-agent";
-export type AgentEngine = "codex" | "pi-openrouter" | "claude-code";
+export type AgentEngine =
+  "codex" | "pi-openrouter" | "claude-code" | "opencode";
 export function agentEngine(
   value = process.env.RUNTIME_AGENT ?? "codex",
 ): AgentEngine {
-  if (value !== "codex" && value !== "pi-openrouter" && value !== "claude-code")
-    throw new Error("agent は codex / claude-code / pi-openrouter です");
+  if (
+    value !== "codex" &&
+    value !== "pi-openrouter" &&
+    value !== "claude-code" &&
+    value !== "opencode"
+  )
+    throw new Error(
+      "agent は codex / claude-code / pi-openrouter / opencode です",
+    );
   return value;
 }
 /** Keep provider credentials in the official CLI. Never pass API keys or repository env to it. */
@@ -98,6 +106,7 @@ export class CodexAgent {
       onEvent?: (type: string, data: unknown) => Promise<void>;
       binary?: string;
       args?: string[];
+      outerSandbox?: "openshell";
     },
   ) {
     options.signal.throwIfAborted();
@@ -199,6 +208,9 @@ export class CodexAgent {
     if (message.id !== undefined) {
       const id = message.id;
       if (message.method !== "item/tool/call") {
+        void this.options
+          .onEvent?.("codex_rejected_request", { method: message.method })
+          .catch(() => {});
         this.send({
           id,
           error: {
@@ -210,6 +222,13 @@ export class CodexAgent {
       }
       const p = message.params;
       if (p.threadId !== this.threadId || p.namespace) {
+        void this.options
+          .onEvent?.("codex_rejected_tool", {
+            tool: p.tool,
+            namespace: p.namespace,
+            threadMatches: p.threadId === this.threadId,
+          })
+          .catch(() => {});
         this.send({
           id,
           error: {
@@ -243,6 +262,16 @@ export class CodexAgent {
         );
       this.turn = undefined;
     }
+    if (
+      message.method === "item/completed" &&
+      message.params?.threadId === this.threadId &&
+      message.params.item?.type === "agentMessage"
+    )
+      void this.options
+        .onEvent?.("codex_agent_message", {
+          text: String(message.params.item.text ?? "").slice(0, 5000),
+        })
+        .catch(() => {});
   }
   private async callTool(params: any) {
     this.options.signal.throwIfAborted();
@@ -378,6 +407,14 @@ export class CodexAgent {
     await this.request("turn/start", {
       threadId: this.threadId,
       input: [{ type: "text", text, text_elements: [] }],
+      ...(this.options.outerSandbox
+        ? {
+            sandboxPolicy: {
+              type: "externalSandbox",
+              networkAccess: "enabled",
+            },
+          }
+        : {}),
       effort: "low",
       serviceTierForTurn: "default",
     });

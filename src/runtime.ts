@@ -5,6 +5,7 @@ import {
 import { randomUUID } from "node:crypto";
 import { join } from "node:path";
 import { mkdir, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { Type } from "@sinclair/typebox";
 import {
   ModelRuntime,
@@ -37,6 +38,7 @@ import {
 } from "./research.js";
 import { entityKey } from "./sources.js";
 import { ClaudeAgent } from "./claude.js";
+import { OpenCodeAgent } from "./opencode.js";
 import { verifyDetail } from "./detail-contracts.js";
 import { freeQuota } from "./quota.js";
 import { classifyRuntimeFailure } from "./failures.js";
@@ -46,6 +48,7 @@ import { CodexAgent, agentEngine, type AgentEngine } from "./codex.js";
 import { piUsage } from "./metrics.js";
 import type { Task, Page, Criterion } from "./types.js";
 export interface RunOptions {
+  outerSandbox?: "openshell";
   interactionMode?: import("./interaction.js").InteractionMode;
   query: string;
   urls: string[];
@@ -125,6 +128,15 @@ export async function runTask(
   options: RunOptions,
   store = new Store(),
 ): Promise<Task> {
+  if (
+    options.outerSandbox &&
+    (process.platform !== "linux" ||
+      !existsSync("/opt/openshell") ||
+      process.env.WEB_HARNESS_MANAGED_WORKER !== "codex")
+  )
+    throw new Error(
+      "externalSandboxは管理されたOpenShell Linux worker内だけで利用できます",
+    );
   const started = performance.now();
   const task = newTask(options);
   const instructions =
@@ -166,6 +178,7 @@ export async function runTask(
   let session: AgentSession | undefined;
   let codex: CodexAgent | undefined;
   let claude: ClaudeAgent | undefined;
+  let opencode: OpenCodeAgent | undefined;
   let cleanupWarning: string | undefined;
   const progress = (m: string) => options.onProgress?.(m);
   const redact = (s: string) =>
@@ -573,6 +586,7 @@ export async function runTask(
     controller.signal.throwIfAborted();
     if (task.agent === "codex") {
       codex = new CodexAgent({
+        outerSandbox: options.outerSandbox,
         cwd: dir,
         signal: controller.signal,
         onStep: step,
@@ -645,6 +659,39 @@ export async function runTask(
       controller.signal.throwIfAborted();
       if (!task.answer)
         throw new Error("Claude Codeが構造化回答を確定しませんでした");
+    } else if (task.agent === "opencode") {
+      opencode = new OpenCodeAgent({
+        isComplete: () => !!task.answer,
+        cwd: dir,
+        signal: controller.signal,
+        onStep: step,
+        model: options.model,
+      });
+      await opencode.start(tools, instructions);
+      task.model = opencode.model;
+      progress(`model: ${task.model} (OpenCode / existing Strata)`);
+      await store.save(task);
+      await browser.init();
+      await opencode.prompt(
+        JSON.stringify({
+          query: task.query,
+          improvement: options.improvement,
+          primedPages: await primeImprovement(),
+          sources: task.sources,
+          limits: task.limits,
+        }),
+      );
+      if (!task.answer && !exhausted)
+        await opencode.prompt(
+          JSON.stringify({
+            instruction:
+              "取得した引用でfinish_taskを呼び、未確認はunknownにしてください",
+            task,
+          }),
+        );
+      controller.signal.throwIfAborted();
+      if (!task.answer)
+        throw new Error("OpenCodeが構造化回答を確定しませんでした");
     } else {
       if (!process.env.OPENROUTER_API_KEY)
         throw new Error(".env に OPENROUTER_API_KEY を設定してください");
@@ -800,10 +847,12 @@ export async function runTask(
     controller.signal.removeEventListener("abort", abortSession);
     const usage =
       codex?.usage ??
+      opencode?.usage ??
       (session ? piUsage(session.getSessionStats().tokens) : undefined);
     session?.dispose();
     await codex?.close();
     await claude?.close();
+    await opencode?.close();
     try {
       await browser.close();
     } catch (e) {
@@ -823,10 +872,16 @@ export async function runTask(
             ? "chatgpt-subscription"
             : task.agent === "claude-code"
               ? "claude-subscription"
-              : "openrouter-free",
-        additionalApiUsd: task.model ? 0 : null,
+              : task.agent === "opencode"
+                ? "strata-existing-gpu"
+                : "openrouter-free",
+        additionalApiUsd:
+          task.agent === "opencode" ? null : task.model ? 0 : null,
         subscriptionAllocationUsd: null,
-        note: "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません",
+        note:
+          task.agent === "opencode"
+            ? "既存Colab GPUの利用時間・クレジット消費額は未取得です。OpenCodeの設定単価0を実費0とは扱いません"
+            : "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません",
       },
     };
     await store.save(task);

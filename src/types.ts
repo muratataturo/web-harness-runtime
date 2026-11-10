@@ -74,6 +74,9 @@ export interface Task {
     artifactsDirectory?: string;
     elapsedMs?: number;
     cleanupStatus?: "stopped" | "unconfirmed";
+    allocation?: "account-worker";
+    runtimeRevision?: string;
+    innerSandbox?: "externalSandbox";
   };
   metrics?: {
     elapsedMs: number;

@@ -274,7 +274,7 @@ export async function writeOpenShellPlan(plan: OpenShellPlan) {
   );
   return plan.directory;
 }
-function hostEnvironment(): NodeJS.ProcessEnv {
+export function openShellHostEnvironment(): NodeJS.ProcessEnv {
   const env: NodeJS.ProcessEnv = {};
   // The gateway already owns the credential. Do not pass .env API keys to this child.
   for (const key of [
@@ -326,7 +326,7 @@ export function runOpenShellCommand(
       command.args,
       {
         shell: false,
-        env: hostEnvironment(),
+        env: openShellHostEnvironment(),
         stdio: ["ignore", "pipe", "pipe"],
       },
     );

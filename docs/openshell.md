@@ -1,6 +1,6 @@
 # Self-host VM 上の OpenShell task executor
 
-[Auto/Approvalの起動手順・Apple Silicon MicroVMの最新実測](runtime-modes.md)。現在のOpenShellイメージ/providerはpi + OpenRouter用です。ローカル既定のCodexエンジンとは別で、sandbox planのコマンドは `--agent pi-openrouter` を明示します。`RUNTIME_AGENT=codex` のままGoal RouterからOpenShellを使うと、発行前に未対応として停止します。Codexの資格情報はイメージやsandboxへコピーしません。Codexでのself-host VM実行には公式認証とegressの追加連携・実機検証が必要です。
+[Auto/Approvalの仕様](runtime-modes.md)、[Codex MicroVMと既存Strataの手順・実測](codex-strata.md)。OpenShellはpi用の都度発行executorと、Codex用の認証を保持する専用workerに対応します。`sandbox plan` はpi用です。Codexは `npm run sandbox:local -- codex-setup` とVM内の初回ログインを経て `npm run sandbox:local -- run-codex run ...` で実行します。ホストのCodex資格情報をイメージやVMへコピーしません。Claude Code / OpenCodeのOpenShell実行は未対応で、ホストへ暗黙に切り替えません。
 
 本 PR には、1 調査タスクを 1 OpenShell sandbox に割り当てる実行アダプターと image/provider/policy の準備を含めています。Web Mock の sandbox 表示はデモであり、実際に VM を発行した証拠ではありません。実際の割り当てはホスト CLI から明示的に実行する経路です。
 

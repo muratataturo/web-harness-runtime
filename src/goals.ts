@@ -9,6 +9,7 @@ import {
 } from "./executors.js";
 import { Store } from "./store.js";
 import type { Task } from "./types.js";
+import { agentEngine } from "./codex.js";
 import { interactionMode, type InteractionMode } from "./interaction.js";
 export type Scenario = "travel" | "life";
 export type GoalStatus =
@@ -439,7 +440,8 @@ export class GoalEngine {
       highlights: [],
       limitations: [],
       activeDay: input.scenario === "travel" ? "1日目" : "仕事",
-      concurrency: 2,
+      concurrency:
+        runtimeTarget() === "openshell" && agentEngine() === "codex" ? 1 : 2,
       executionTarget: runtimeTarget(),
     };
     this.message(goal, "you", text, "user");

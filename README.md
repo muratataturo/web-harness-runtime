@@ -1,6 +1,6 @@
 # Relay / web-harness-runtime
 
-**目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** 公式CodexのChatGPTログインを既定の調査エンジンとし、Claude Code Sonnet 5.5 / Haiku 5.5、pi + OpenRouter無料モデルも選択できるCLIです。Vercel agent-browserで調査し、Grok Bot / OpenMausBot / Rakazoの公開画面を参照した会話中心のWeb Mockと、self-host VM向けNVIDIA OpenShell executorを備えています。
+**目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** 公式CodexのChatGPTログインを既定の調査エンジンとし、Claude Code Sonnet 5.5 / Haiku 5.5、pi + OpenRouter無料モデル、既存OpenCode × Strataも選択できるCLIです。Vercel agent-browserで調査し、Grok Bot / OpenMausBot / Rakazoの公開画面を参照した会話中心のWeb Mockと、self-host VM向けNVIDIA OpenShell executorを備えています。
 
 ## Web Mock を試す
 
@@ -274,4 +274,4 @@ npm run eval:day-out -- --agent codex --model gpt-6.1-sol --parallel 2
 
 `run` / `improve` / `goal create` に `--mode auto|approval` を追加しました。Webの「進め方」からも選択し、CLIの確認待ちはWebの「調査の確認待ち」から再開できます。通常CLIと自己改善も設定されたexecutorを使用し、OpenShell指定からホストへの暗黙の切替を拒否します。
 
-Apple Silicon Macの実OpenShell MicroVMで、pi/OpenRouter無料モデルの回答・引用・結果回収を確認しました。以前のCodexの3ペルソナ実測はローカル実行です。Codex/ClaudeのVM内サブスク認証連携は未対応です。[起動手順・2モードの仕様・実測](docs/runtime-modes.md)。
+Apple Silicon Macの実OpenShell MicroVMで、pi/OpenRouter無料モデルに加え、CodexのChatGPTサブスクによる詳細取得・引用・回答回収を確認しました。CodexはVM内で初回ログインし、専用workerを停止・再開して使います。既存のOpenCode × Strata（Qwen3.8 Flash Next）も独立した調査セッションとして利用できます。OpenCodeのエージェントはローカル実行です。[Codex MicroVM / Strataの手順と実測](docs/codex-strata.md)、[2モードの仕様](docs/runtime-modes.md)。以前のCodexの3ペルソナ実測は引き続きローカル実行の記録です。

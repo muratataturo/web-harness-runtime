@@ -57,6 +57,13 @@ createInterface({ input: process.stdin }).on("line", (line) => {
     });
   }
   if (m.method === "turn/start") {
+    if (mode === "external") {
+      if (
+        m.params.sandboxPolicy?.type !== "externalSandbox" ||
+        m.params.sandboxPolicy.networkAccess !== "enabled"
+      )
+        process.exit(9);
+    } else if (m.params.sandboxPolicy) process.exit(10);
     send({ id: m.id, result: { turn: { id: "turn-1" } } });
     if (mode === "hang") return;
     if (mode === "exit") {

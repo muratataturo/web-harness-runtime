@@ -57,7 +57,7 @@ npm run sandbox:local -- run web
 
 結果の`execution`に`target`、sandbox名、gatewayから取得した実ID、image、回収場所、準備・回収・停止込みの時間を記録します。発行確認またはdownloadを確認できなければ取り込みません。回収後はVMをstopしてディスクと成果物を保持します。停止を確認できない場合は`cleanupStatus: unconfirmed`と操作案内を残します。sandboxの削除は別操作です。VMは2 vCPU・4GiB、overlay 8GiBを使用し、保持するディスクの累積上限は未実装です。
 
-**Codex/Claude Codeのサブスク認証をsandboxへ渡す連携は未対応です。** 既定のCodexは引き続きローカル実行で、OpenShellを指定すると発行前に拒否します。今回のMicroVM実測をCodexやClaudeのVM実測とは表示しません。Linux amd64・remote gateway・並列VMの障害注入は今回の実測対象外です。
+**CodexのVM内サブスク認証と実調査を追加しました。** [専用workerの起動・実測](codex-strata.md)。ホストから資格情報をコピーせず、本人がVM内で初回ログインします。piの都度発行とは異なり、Codexは認証を保持する同一VMを直列で再利用し、各タスク後に停止します。Claude Code / OpenCodeのOpenShell実行、Linux amd64・remote gateway・並列VMの障害注入は実測対象外です。以下の既存pi実測とは別記録です。
 
 ## 実測結果（2026-11-10）
 
