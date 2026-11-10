@@ -671,90 +671,6 @@
       }
     },
     {
-      "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
-      "sourceId": "rakuten-ichiba",
-      "service": "rakuten-ichiba",
-      "entityId": "rakuten-ichiba:samfolk:sa80ss",
-      "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
-      "checkedAt": "2026-11-09T23:03:09.494Z",
-      "expiresAt": "2026-11-16T23:03:09.494Z",
-      "purpose": "detail-retrieval-only",
-      "evidence": {
-        "status": "verified",
-        "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
-        "service": "rakuten-ichiba",
-        "entityId": "rakuten-ichiba:samfolk:sa80ss",
-        "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
-        "capturedAt": "2026-11-09T23:03:10.797Z",
-        "acquisition": {
-          "kind": "public-html",
-          "status": 200,
-          "charset": "euc-jp",
-          "contentType": "text/html;charset=EUC-JP"
-        },
-        "fields": [
-          {
-            "id": "price",
-            "quote": "する逸品\n【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量"
-          },
-          {
-            "id": "specification",
-            "quote": "ル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全"
-          },
-          {
-            "id": "seller",
-            "quote": "S\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
-          }
-        ],
-        "missingFields": [],
-        "bodySha256": "5e00fbd0e496cffd5d2568dd38bf50d3fc4b55f7da586711722457f412f6da70",
-        "reason": "個別対象の本文と領域別必須項目を取得しました",
-        "truncated": false
-      }
-    },
-    {
-      "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
-      "sourceId": "rakuten-ichiba",
-      "service": "rakuten-ichiba",
-      "entityId": "rakuten-ichiba:samfolk:sa80pross",
-      "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
-      "checkedAt": "2026-11-09T23:03:09.494Z",
-      "expiresAt": "2026-11-16T23:03:09.494Z",
-      "purpose": "detail-retrieval-only",
-      "evidence": {
-        "status": "verified",
-        "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
-        "service": "rakuten-ichiba",
-        "entityId": "rakuten-ichiba:samfolk:sa80pross",
-        "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
-        "capturedAt": "2026-11-09T23:03:11.235Z",
-        "acquisition": {
-          "kind": "public-html",
-          "status": 200,
-          "charset": "euc-jp",
-          "contentType": "text/html;charset=EUC-JP"
-        },
-        "fields": [
-          {
-            "id": "price",
-            "quote": "0 SAMFOLK\n価格2,790円~\nトラベルポーチ 圧縮 圧縮ポーチ 旅行用圧縮袋 旅行用ポーチ 圧縮"
-          },
-          {
-            "id": "specification",
-            "quote": "FIDスキミング防止・大容量収納を備えた高機能バックパック。\n＼マラソン限定15%CP付き+P10"
-          },
-          {
-            "id": "seller",
-            "quote": "o\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
-          }
-        ],
-        "missingFields": [],
-        "bodySha256": "44c4fc554da8411f8480d857fbd870af0e2ba470cc945379407ad01a46112878",
-        "reason": "個別対象の本文と領域別必須項目を取得しました",
-        "truncated": false
-      }
-    },
-    {
       "url": "https://www.hotpepper.jp/strJ001154802/",
       "sourceId": "recruit-gourmet",
       "service": "hotpepper-gourmet",
@@ -1911,147 +1827,6 @@
       ]
     },
     {
-      "sourceId": "rakuten-ichiba",
-      "service": "rakuten-ichiba",
-      "seedUrl": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
-      "status": "verified",
-      "checkedAt": "2026-11-09T23:03:09.494Z",
-      "expiresAt": "2026-11-16T23:03:09.494Z",
-      "minDetails": 2,
-      "details": [
-        {
-          "status": "verified",
-          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
-          "service": "rakuten-ichiba",
-          "entityId": "rakuten-ichiba:samfolk:sa80ss",
-          "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
-          "capturedAt": "2026-11-09T23:03:10.797Z",
-          "acquisition": {
-            "kind": "public-html",
-            "status": 200,
-            "charset": "euc-jp",
-            "contentType": "text/html;charset=EUC-JP"
-          },
-          "fields": [
-            {
-              "id": "price",
-              "quote": "する逸品\n【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量"
-            },
-            {
-              "id": "specification",
-              "quote": "ル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全"
-            },
-            {
-              "id": "seller",
-              "quote": "S\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
-            }
-          ],
-          "missingFields": [],
-          "bodySha256": "5e00fbd0e496cffd5d2568dd38bf50d3fc4b55f7da586711722457f412f6da70",
-          "reason": "個別対象の本文と領域別必須項目を取得しました",
-          "truncated": false
-        },
-        {
-          "status": "insufficient_detail",
-          "url": "https://item.rakuten.co.jp/tomtoc/t66/",
-          "service": "rakuten-ichiba",
-          "entityId": "rakuten-ichiba:tomtoc:t66",
-          "title": "【楽天市場】【お買い物マラソン期間限定♪15％クーポン】【楽天1位・tomtoc公式店】 T66 トラベルバックパック 旅行 リュック 大容量 28L 40LNavigator 機内持ち込み ビジネス バックパック 旅行バッグ カバン リュックサック メンズ 多機能 17.3型PC対応 撥水加工 海外旅行：tomtoc公式店",
-          "capturedAt": "2026-11-09T23:03:11.040Z",
-          "acquisition": {
-            "kind": "public-html",
-            "status": 200,
-            "charset": "euc-jp",
-            "contentType": "text/html;charset=EUC-JP"
-          },
-          "fields": [
-            {
-              "id": "specification",
-              "quote": "公式ショップ 正規品】大容量 リュックサック 3~5日 トラベル パック バッグ 機内持込 ビジネ"
-            },
-            {
-              "id": "seller",
-              "quote": "リュックサック\n【公式ショップ 正規品】大容量 リュックサック 3~5日 トラベル パック バッグ"
-            }
-          ],
-          "missingFields": ["price"],
-          "bodySha256": "a731c0e10f493f7f589c917f4b5dc0fb58986492e97bcd5e378ca652f9af6ca9",
-          "reason": "詳細本文・文字品質・必須項目が不足しています",
-          "truncated": false
-        },
-        {
-          "status": "verified",
-          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
-          "service": "rakuten-ichiba",
-          "entityId": "rakuten-ichiba:samfolk:sa80pross",
-          "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
-          "capturedAt": "2026-11-09T23:03:11.235Z",
-          "acquisition": {
-            "kind": "public-html",
-            "status": 200,
-            "charset": "euc-jp",
-            "contentType": "text/html;charset=EUC-JP"
-          },
-          "fields": [
-            {
-              "id": "price",
-              "quote": "0 SAMFOLK\n価格2,790円~\nトラベルポーチ 圧縮 圧縮ポーチ 旅行用圧縮袋 旅行用ポーチ 圧縮"
-            },
-            {
-              "id": "specification",
-              "quote": "FIDスキミング防止・大容量収納を備えた高機能バックパック。\n＼マラソン限定15%CP付き+P10"
-            },
-            {
-              "id": "seller",
-              "quote": "o\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
-            }
-          ],
-          "missingFields": [],
-          "bodySha256": "44c4fc554da8411f8480d857fbd870af0e2ba470cc945379407ad01a46112878",
-          "reason": "個別対象の本文と領域別必須項目を取得しました",
-          "truncated": false
-        }
-      ],
-      "pages": [
-        {
-          "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
-          "title": "【楽天市場】旅行リュックの通販",
-          "assessment": {
-            "kind": "available",
-            "shouldStop": false,
-            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
-          }
-        },
-        {
-          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
-          "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
-          "assessment": {
-            "kind": "available",
-            "shouldStop": false,
-            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
-          }
-        },
-        {
-          "url": "https://item.rakuten.co.jp/tomtoc/t66/",
-          "title": "【楽天市場】【お買い物マラソン期間限定♪15％クーポン】【楽天1位・tomtoc公式店】 T66 トラベルバックパック 旅行 リュック 大容量 28L 40LNavigator 機内持ち込み ビジネス バックパック 旅行バッグ カバン リュックサック メンズ 多機能 17.3型PC対応 撥水加工 海外旅行：tomtoc公式店",
-          "assessment": {
-            "kind": "available",
-            "shouldStop": false,
-            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
-          }
-        },
-        {
-          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
-          "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
-          "assessment": {
-            "kind": "available",
-            "shouldStop": false,
-            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
-          }
-        }
-      ]
-    },
-    {
       "sourceId": "recruit-gourmet",
       "service": "hotpepper-gourmet",
       "seedUrl": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/",
@@ -2415,6 +2190,176 @@
         {
           "url": "https://www.jalan.net/yad385995/?stayCount=1&roomCount=1&stayYear=&stayMonth=&dateUndecided=1&distCd=01&roomCrack=200000&adultNum=2&stayDay=&screenId=UWW1402&yadNo=385995&callbackHistFlg=1",
           "title": "箱根湯本温泉 ホテル南風荘 - 宿泊予約は＜じゃらんnet＞",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          }
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-ichiba",
+      "service": "rakuten-ichiba",
+      "seedUrl": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+      "status": "insufficient_detail",
+      "checkedAt": "2026-11-10T02:16:21.539Z",
+      "expiresAt": "2026-11-17T02:16:21.539Z",
+      "minDetails": 2,
+      "details": [
+        {
+          "status": "insufficient_detail",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "service": "rakuten-ichiba",
+          "entityId": "rakuten-ichiba:samfolk:sa80ss",
+          "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+          "capturedAt": "2026-11-10T02:16:23.619Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "fields": [
+            {
+              "id": "specification",
+              "quote": "ル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全"
+            },
+            {
+              "id": "seller",
+              "quote": "S\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+            }
+          ],
+          "missingFields": ["price"],
+          "bodySha256": "5e00fbd0e496cffd5d2568dd38bf50d3fc4b55f7da586711722457f412f6da70",
+          "reason": "詳細本文・文字品質・必須項目が不足しています",
+          "truncated": false
+        },
+        {
+          "status": "insufficient_detail",
+          "url": "https://item.rakuten.co.jp/tomtoc/t66/",
+          "service": "rakuten-ichiba",
+          "entityId": "rakuten-ichiba:tomtoc:t66",
+          "title": "【楽天市場】【お買い物マラソン期間限定♪15％クーポン】【楽天1位・tomtoc公式店】 T66 トラベルバックパック 旅行 リュック 大容量 28L 40LNavigator 機内持ち込み ビジネス バックパック 旅行バッグ カバン リュックサック メンズ 多機能 17.3型PC対応 撥水加工 海外旅行：tomtoc公式店",
+          "capturedAt": "2026-11-10T02:16:23.942Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "fields": [
+            {
+              "id": "specification",
+              "quote": "公式ショップ 正規品】大容量 リュックサック 3~5日 トラベル パック バッグ 機内持込 ビジネ"
+            },
+            {
+              "id": "seller",
+              "quote": "リュックサック\n【公式ショップ 正規品】大容量 リュックサック 3~5日 トラベル パック バッグ"
+            }
+          ],
+          "missingFields": ["price"],
+          "bodySha256": "a731c0e10f493f7f589c917f4b5dc0fb58986492e97bcd5e378ca652f9af6ca9",
+          "reason": "詳細本文・文字品質・必須項目が不足しています",
+          "truncated": false
+        },
+        {
+          "status": "insufficient_detail",
+          "url": "https://item.rakuten.co.jp/sanjunnikoniko/s1529/",
+          "service": "rakuten-ichiba",
+          "entityId": "rakuten-ichiba:sanjunnikoniko:s1529",
+          "title": "【楽天市場】＼P最大47.5倍！全店舗！／リュック 大容量 機内持ち込みサイズ 防水 防災リュック 単品 丈夫 防犯 旅行バック 旅行リュック おしゃれ 人気 カジュアル 通学 軽量 丈夫 タウンリュック：三順ニコニコ楽天市場店",
+          "capturedAt": "2026-11-10T02:16:24.285Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "fields": [
+            {
+              "id": "specification",
+              "quote": "！全店舗！／リュック 大容量 機内持ち込みサイズ 防水 防災リュック 単品 丈夫 防犯 旅行バック"
+            },
+            {
+              "id": "seller",
+              "quote": "＼P最大47.5倍！全店舗！／リュック 大容量 機内持ち込みサイズ 防水 防災リュック 単品 丈"
+            }
+          ],
+          "missingFields": ["price"],
+          "bodySha256": "5b1f9fe9efde88a27e6a41918e57b791a219f044bedb443d7db8abe89a0cdfd0",
+          "reason": "詳細本文・文字品質・必須項目が不足しています",
+          "truncated": false
+        },
+        {
+          "status": "insufficient_detail",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "service": "rakuten-ichiba",
+          "entityId": "rakuten-ichiba:samfolk:sa80pross",
+          "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
+          "capturedAt": "2026-11-10T02:16:24.525Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "fields": [
+            {
+              "id": "specification",
+              "quote": "FIDスキミング防止・大容量収納を備えた高機能バックパック。\n＼マラソン限定15%CP付き+P10"
+            },
+            {
+              "id": "seller",
+              "quote": "o\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+            }
+          ],
+          "missingFields": ["price"],
+          "bodySha256": "44c4fc554da8411f8480d857fbd870af0e2ba470cc945379407ad01a46112878",
+          "reason": "詳細本文・文字品質・必須項目が不足しています",
+          "truncated": false
+        }
+      ],
+      "pages": [
+        {
+          "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+          "title": "【楽天市場】旅行リュックの通販",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/tomtoc/t66/",
+          "title": "【楽天市場】【お買い物マラソン期間限定♪15％クーポン】【楽天1位・tomtoc公式店】 T66 トラベルバックパック 旅行 リュック 大容量 28L 40LNavigator 機内持ち込み ビジネス バックパック 旅行バッグ カバン リュックサック メンズ 多機能 17.3型PC対応 撥水加工 海外旅行：tomtoc公式店",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/sanjunnikoniko/s1529/",
+          "title": "【楽天市場】＼P最大47.5倍！全店舗！／リュック 大容量 機内持ち込みサイズ 防水 防災リュック 単品 丈夫 防犯 旅行バック 旅行リュック おしゃれ 人気 カジュアル 通学 軽量 丈夫 タウンリュック：三順ニコニコ楽天市場店",
+          "assessment": {
+            "kind": "available",
+            "shouldStop": false,
+            "reason": "本文を取得しました。候補の個別詳細と条件の根拠は引き続き検証が必要です。"
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
           "assessment": {
             "kind": "available",
             "shouldStop": false,

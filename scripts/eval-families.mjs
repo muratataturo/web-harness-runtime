@@ -1,0 +1,144 @@
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { resolve, join } from "node:path";
+import { randomUUID } from "node:crypto";
+import { config } from "dotenv";
+import { runTask } from "../dist/runtime.js";
+import { verifyDetail } from "../dist/detail-contracts.js";
+config({ quiet: true });
+const definitions = JSON.parse(
+  await readFile(
+    new URL("../examples/codex-family-evals.json", import.meta.url),
+    "utf8",
+  ),
+);
+const ids = process.argv.slice(2);
+const cases = definitions.cases.filter(
+  (c) => !ids.length || ids.includes(c.id),
+);
+if (!cases.length || ids.some((id) => !cases.some((c) => c.id === id)))
+  throw new Error("Unknown source ID");
+const directory = resolve(
+  process.env.RUNTIME_DIR ?? ".runtime",
+  "family-evals",
+  new Date().toISOString().replaceAll(":", "-") +
+    "-" +
+    randomUUID().slice(0, 8),
+);
+await mkdir(directory, { recursive: true, mode: 0o700 });
+const controller = new AbortController();
+const cancel = () => controller.abort();
+process.once("SIGINT", cancel);
+process.once("SIGTERM", cancel);
+const results = [];
+const queue = [...cases];
+let quotaExhausted = false;
+async function save() {
+  await writeFile(
+    join(directory, "results.json"),
+    JSON.stringify({ agent: "codex", directory, results }, null, 2) + "\n",
+    { mode: 0o600 },
+  );
+}
+async function worker() {
+  for (;;) {
+    if (quotaExhausted || controller.signal.aborted) return;
+    const test = queue.shift();
+    if (!test) return;
+    process.stderr.write(`START ${test.id}\n`);
+    const task = await runTask({
+      agent: "codex",
+      query: test.query,
+      urls: [test.seedUrl],
+      maxSteps: definitions.maxSteps,
+      maxPages: definitions.maxPages,
+      timeoutSeconds: definitions.timeoutSeconds,
+      signal: controller.signal,
+      onProgress: (message) => process.stderr.write(`${test.id}: ${message}\n`),
+    });
+    const verified = task.pages
+      .map((p) => verifyDetail(p, test.service))
+      .filter((d) => d.status === "verified");
+    const candidates = task.answer?.candidates ?? [];
+    const r = {
+      sourceId: test.id,
+      family: test.family,
+      label: test.label,
+      query: test.query,
+      seedUrl: test.seedUrl,
+      taskId: task.id,
+      agent: task.agent,
+      model: task.model,
+      status: task.status,
+      failure: task.failure,
+      error: task.error,
+      startedAt: task.createdAt,
+      finishedAt: task.updatedAt,
+      pages: task.pages.map((p) => ({
+        url: p.url,
+        title: p.title,
+        acquisition: p.acquisition,
+        detail: verifyDetail(p, test.service),
+      })),
+      verifiedDetails: new Set(verified.map((d) => d.entityId)).size,
+      candidates: candidates.length,
+      eligible: candidates.filter((c) => c.eligible).length,
+      evidenceCount: task.evidence.length,
+      criteria: task.criteria,
+      answer: task.answer,
+    };
+    results.push(r);
+    if (task.failure?.kind === "quota_exhausted") quotaExhausted = true;
+    await writeFile(
+      join(directory, test.id + ".json"),
+      JSON.stringify(r, null, 2) + "\n",
+      { mode: 0o600 },
+    );
+    // Per-case files are durable; produce the combined summary only after both workers finish.
+    process.stderr.write(
+      `DONE ${test.id}: ${task.status}, details=${r.verifiedDetails}, candidates=${r.candidates}, eligible=${r.eligible}\n`,
+    );
+  }
+}
+try {
+  await Promise.all(Array.from({ length: definitions.parallel }, worker));
+  for (const c of queue)
+    results.push({
+      sourceId: c.id,
+      label: c.label,
+      status: "not_started",
+      reason: quotaExhausted ? "Codex quota exhausted" : "Cancelled",
+    });
+  results.sort(
+    (a, b) =>
+      cases.findIndex((c) => c.id === a.sourceId) -
+      cases.findIndex((c) => c.id === b.sourceId),
+  );
+  await save();
+  console.log(
+    JSON.stringify(
+      {
+        directory,
+        results: results.map((r) => ({
+          sourceId: r.sourceId,
+          status: r.status,
+          details: r.verifiedDetails,
+          candidates: r.candidates,
+          eligible: r.eligible,
+          taskId: r.taskId,
+        })),
+      },
+      null,
+      2,
+    ),
+  );
+  process.exitCode = controller.signal.aborted
+    ? 130
+    : results.some(
+          (r) => r.status !== "succeeded" || (r.verifiedDetails ?? 0) < 2,
+        )
+      ? 2
+      : 0;
+} finally {
+  process.removeListener("SIGINT", cancel);
+  process.removeListener("SIGTERM", cancel);
+}

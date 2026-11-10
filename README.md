@@ -66,6 +66,16 @@ Codexは公式App Serverのモデル一覧からアカウントの既定モデ�
 
 Codexでの実測は、楽天トラベル2宿と複数ドメインから選んだSUUMO2物件が `succeeded`。Hot Pepper Beautyはサロン2件の詳細取得と日本語比較を完了し、「韓国アイドル風」への厳密な適合を未確認として `partial`。79テストと実測の詳細は [Codex接続と検証](docs/codex.md) を参照。
 
+## Recruit・楽天の実行結果
+
+[16サービスのCodex実測](docs/codex-family-results.md)を追加しました。11サービスで詳細2件以上を取得。楽天市場は仕様を読めても販売価格が不足し、trustedから除外しました。Indeed・楽天不動産・楽天Car中古車・楽天Careersは個別比較に進めていません。
+
+```sh
+npm run build
+npm run eval:families
+npm run eval:families -- recruit-jalan rakuten-travel
+```
+
 ## サービスごとの品質を確認する
 
 ```sh

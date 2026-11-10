@@ -90,7 +90,12 @@ export const detailContracts: Record<string, DetailField[]> = {
     { id: "identifier", pattern: /ISBN|JAN|商品番号|コード/ },
   ],
   "rakuten-ichiba": [
-    price,
+    // A coupon or a related item's generic "価格" is not this product's selling price.
+    {
+      id: "price",
+      pattern:
+        /(?:^|\n)(?:販売価格|商品価格)[ \t]*[：:]?[ \t]*(?:\n[ \t]*)?(?:[¥￥][ \t]*)?\d[\d,]*(?:[ \t]*円|(?=[ \t]*(?:\n|$)))/,
+    },
     { id: "specification", pattern: /商品説明|商品詳細|仕様|サイズ|素材|容量/ },
     { id: "seller", pattern: /ショップ|店舗|会社概要|販売元|メーカー/ },
   ],

@@ -228,3 +228,27 @@ test("shared travel navigation text is insufficient as hotel detail evidence", (
   assert.equal(d.status, "insufficient_detail");
   assert.deepEqual(d.missingFields, ["access", "facilities", "rooms"]);
 });
+
+test("Rakuten item coupons and related-item prices cannot satisfy the selling-price requirement", () => {
+  const p = {
+    ...page(),
+    url: "https://item.rakuten.co.jp/samfolk/sa80ss/",
+    title: "旅行リュック",
+    text:
+      "旅行リュック\n商品詳細 サイズ40L 素材ナイロン ショップSAMFOLK\n" +
+      "商品の仕様について記載します。".repeat(20),
+  };
+  for (const other of [
+    "【マラソン限定1000円CP付き】",
+    "関連商品\n価格2,790円~\nトラベルポーチ",
+    "1万円以上で1000円OFF",
+  ]) {
+    const d = verifyDetail({ ...p, text: p.text + "\n" + other });
+    assert.equal(d.status, "insufficient_detail");
+    assert.ok(d.missingFields.includes("price"));
+  }
+  assert.equal(
+    verifyDetail({ ...p, text: p.text + "\n販売価格：6,990円（税込）" }).status,
+    "verified",
+  );
+});

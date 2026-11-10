@@ -73,3 +73,10 @@ GitHub Actions の設定を追加したが、GitHub上のCI実行結果をこの
 ## Codex実行エンジン
 
 ChatGPTログイン済みのCodex CLI 0.167.0 / gpt-6.1-solで楽天トラベル2宿とSUUMO2物件の比較がsucceeded。SUUMOは無関係な美容URLを渡してもSUUMOのみ選択。Beautyは詳細取得2件を満たし、厳密な韓国アイドル風条件を未確認としてpartial。全79テスト、Web8フローの回帰試験と型・ビルドが成功。[接続と検証](codex.md)。
+
+
+## Recruit・楽天の自然言語回答を16サービスで実行
+
+CodexのChatGPTログインで実行し、succeeded 9 / partial 3 / blocked 4。詳細取得の完了条件は11サービスで達成。楽天市場は価格不足を検出し、クーポン・関連商品価格の誤検出を修正して再実行、trustedの2URLを除外した。現行台帳は11サービス22URL。以前の14URL/24URLという初期登録数を訂正する。[全結果](codex-family-results.md)。
+
+価格判定修正後の全80テスト、型チェック・ビルド・整形、既存イメージのビルドとnetwork noneのCLI/ブラウザsmokeが成功。

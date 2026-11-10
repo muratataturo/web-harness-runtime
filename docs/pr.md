@@ -19,7 +19,7 @@
 
 ## 検証
 
-- `npm run check`、`npm test`（79件）、`npm run build`、整形チェック。
+- `npm run check`、`npm test`（80件）、`npm run build`、整形チェック。
 - `npm run test:ui`: デスクトップ/390pxモバイルで8フロー。両シナリオ、好みの反映、再読み込み、改訂、停止、JSエラー0。
 - `npm start -- eval --browser-only --case gourmet-kyoto-lunch`: 一覧→個別ランチ詳細2件を取得。
 - `eval --retrieval-only --case jalan-hakone-onsen suumo-kosugi-rental`: 公開HTMLで一覧→詳細2件ずつを取得。
@@ -42,7 +42,7 @@ self-host VM/gatewayが未指定のため、実OpenShell発行・credential rewr
 
 個別対象の本文・領域別必須項目を取得できることを完了条件に追加。共通ナビ・検索フォームだけの語では完了にしない。sourceの検証では2対象以上を確認し、合格した個別URLだけを7日有効で登録する。取得根拠・日時・方式・本文ハッシュを保存し、再検証失敗/期限切れは利用不可。台帳更新はプロセス間ロックと新旧検査で保護する。
 
-楽天ビューティ/トラベル/ぐるなび/Car車検/GORA/ブックス/市場は各2件合格、14URL登録。楽天不動産の確認した導線は認証転送、中古車はサービス終了、Careersは一般求人の代替として未対応。Recruit系は5サービス各2件を再検証し、Indeedは引き続き制限。全12サービス24URL。非表示のホテルリンクは探索にのみ使用し、引用には取得先の可視本文を使う。詳細は [docs/trusted-urls.md](trusted-urls.md)。
+楽天ビューティ/トラベル/ぐるなび/Car車検/GORA/ブックスは各2件合格、12URL登録。楽天市場は対象商品の販売価格が不足するため登録除外。楽天不動産の確認した導線は認証転送、中古車はサービス終了、Careersは一般求人の代替として未対応。Recruit系は5サービス各2件を再検証し、Indeedは引き続き制限。全11サービス22URL。非表示のホテルリンクは探索にのみ使用し、引用には取得先の可視本文を使う。詳細は [docs/trusted-urls.md](trusted-urls.md)。
 
 これは詳細取得の検証であり、楽天を使ったLLM回答の意味的品質の合格とはしない。実OpenShell gatewayでの発行も未検証。
 
@@ -54,3 +54,10 @@ self-host VM/gatewayが未指定のため、実OpenShell発行・credential rewr
 CLI run/run-file/retry/trusted run/eval、Webのlive設定、Goal Routerから同じエンジンを利用できる。既存OpenRouterは明示選択で維持。Codex+OpenShellの認証連携は未対応として発行前に停止し、既存sandbox planはOpenRouterエンジンを明記する。
 
 追加検証: 全79テスト、型・ビルド・整形、Web8フロー。実際のChatGPTログインで楽天トラベル2宿の比較とSUUMO2物件の家賃+管理費合算がsucceeded。SUUMOは複数ドメインから該当分野だけを選択。Beautyは一覧→2店舗の詳細・引用付き比較を完了、必須の韓国アイドル風を未確認としてpartial。エビデンスは [docs/codex.md](codex.md)。模擬App Serverで認証拒否・利用枠切れ・中断・プロセス終了・引数検査・重複配送・不正要求を検証し、CIは実ログインやモデルを使わない。
+
+
+## Recruit・楽天の16サービスをCodexで実行
+
+入口から個別詳細・引用付き回答まで最大2並列で実行。11サービスで詳細2件以上を確認、楽天市場は販売価格が不足、4サービスはアクセス制限/認証/終了/詳細検証未対応。機械的な状態はsucceeded 9、partial 3、blocked 4。結果は [docs/codex-family-results.md](codex-family-results.md)。美容の必須条件分類の揺れ、SUUMOの管理費「-」の扱いなどを条件付きとして明記した。
+
+楽天市場でクーポン・関連商品価格を価格取得と誤検出したため、保守的な販売価格ラベルの検査に修正し、模擬負例と実サイト再実行で確認。旧trusted2URLを除外した。再現用の `eval:families` と16クエリ定義、コンパクトな結果・引用を追加。

@@ -1,0 +1,154 @@
+{
+  "agent": "codex",
+  "parallel": 2,
+  "maxSteps": 55,
+  "maxPages": 9,
+  "timeoutSeconds": 240,
+  "cases": [
+    {
+      "id": "recruit-beauty",
+      "family": "recruit",
+      "service": "hotpepper-beauty",
+      "label": "Hot Pepper Beauty",
+      "category": "beauty",
+      "seedUrl": "https://beauty.hotpepper.jp/svcSA/macAD/salon/",
+      "query": "渋谷駅から徒歩5分以内で、髪質改善と韓国アイドル風ヘアに対応できる美容室を2件比較してください。アクセス・料金・口コミ数や評価の根拠を個別詳細で確認し、韓国風と特定アイドル風を区別してください。未確認は未確認とし、予約はしません。"
+    },
+    {
+      "id": "recruit-gourmet",
+      "family": "recruit",
+      "service": "hotpepper-gourmet",
+      "label": "Hot Pepper グルメ",
+      "category": "food",
+      "seedUrl": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/",
+      "query": "京都駅から徒歩10分以内で、和食ランチを楽しめるお店を2件比較してください。1人3000円以内を希望します。駅徒歩、昼のメニュー、ランチ料金を個別詳細で確認し、未達や未確認の条件を明示してください。予約はしません。"
+    },
+    {
+      "id": "recruit-jalan",
+      "family": "recruit",
+      "service": "jalan",
+      "label": "じゃらん",
+      "category": "stay",
+      "seedUrl": "https://www.jalan.net/140000/LRG_141600/",
+      "query": "2泊3日の箱根旅行を考えています。温泉と露天風呂を楽しめる宿を2件比較してください。所在地、駅からのアクセス、温泉、露天風呂を個別詳細で確認してください。日付は未定なので空室や2泊の総額は未確認とし、予約はしません。"
+    },
+    {
+      "id": "recruit-carsensor",
+      "family": "recruit",
+      "service": "carsensor",
+      "label": "カーセンサー",
+      "category": "car-purchase",
+      "seedUrl": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+      "query": "家族の週末旅行に使うトヨタ・シエンタの中古車を2台比較してください。支払総額150万円以下、走行距離8万km以下、修復歴なしを希望します。車両詳細で総額・年式・走行距離・修復歴を確認し、未達条件や在庫未確認を明示してください。本体価格を支払総額と混同しないでください。購入や問い合わせはしません。"
+    },
+    {
+      "id": "recruit-suumo",
+      "family": "recruit",
+      "service": "suumo",
+      "label": "SUUMO",
+      "category": "home",
+      "seedUrl": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+      "query": "武蔵小杉駅から徒歩10分以内で、1LDK、家賃と管理費の合計が月15万円以下の賃貸を2件比較してください。駅徒歩、家賃、管理費、合計月額、間取りを個別詳細で確認してください。上限を超える場合は条件未達とし、空室や入居可否は未確認としてください。問い合わせや申込みはしません。"
+    },
+    {
+      "id": "recruit-indeed",
+      "family": "recruit",
+      "service": "indeed",
+      "label": "Indeed",
+      "category": "career",
+      "seedUrl": "https://jp.indeed.com/jobs?q=customer+success&l=Tokyo",
+      "query": "東京でSaaSのカスタマーサクセスに転職したいです。正社員、年収500万円以上を希望します。勤務地・給与・雇用形態・必須経験が確認できる個別求人を2件比較してください。給与下限が500万円に届かない場合は条件未達です。アクセス拒否やログインを回避せず報告してください。応募はしません。"
+    },
+    {
+      "id": "rakuten-beauty",
+      "family": "rakuten",
+      "service": "rakuten-beauty",
+      "label": "楽天ビューティ",
+      "category": "beauty",
+      "seedUrl": "https://beauty.rakuten.co.jp/addr13113/",
+      "query": "渋谷駅から徒歩5分以内で、髪質改善と韓国アイドル風ヘアに対応できる美容室を2件比較してください。渋谷区でも新宿駅や表参道駅の店を渋谷駅近として扱わないでください。アクセス・料金・口コミ数や評価を個別詳細で確認し、韓国風と特定アイドル風を区別してください。予約はしません。"
+    },
+    {
+      "id": "rakuten-travel",
+      "family": "rakuten",
+      "service": "rakuten-travel",
+      "label": "楽天トラベル",
+      "category": "stay",
+      "seedUrl": "https://travel.rakuten.co.jp/yado/kanagawa/hakone.html",
+      "query": "2泊3日の箱根旅行を考えています。温泉と露天風呂を楽しめる宿を2件比較してください。所在地、駅からのアクセス、温泉、露天風呂を個別詳細で確認してください。部屋情報も詳細情報ページで確認してください。日付は未定なので空室や2泊の総額は未確認とし、予約はしません。"
+    },
+    {
+      "id": "rakuten-gourmet",
+      "family": "rakuten-associated",
+      "service": "rakuten-gourmet",
+      "label": "楽天ぐるなび（提携サービス）",
+      "category": "food",
+      "seedUrl": "https://r.gnavi.co.jp/area/aream2126/japanese/rs/",
+      "query": "渋谷駅から徒歩5分以内で、夕食を楽しめる和食・居酒屋を2件比較してください。1人5000円以内を希望します。住所、駅徒歩、夜のメニューと料金、営業時間を個別詳細で確認してください。平均予算とコース総額を区別し、飲み放題込みか不明なら未確認としてください。予約はしません。"
+    },
+    {
+      "id": "rakuten-realestate",
+      "family": "rakuten",
+      "service": "rakuten-realestate",
+      "label": "楽天不動産",
+      "category": "home",
+      "seedUrl": "https://realestate.rakuten.co.jp/rent/",
+      "discoveryPattern": "/rent/",
+      "query": "武蔵小杉駅から徒歩10分以内で、1LDK、家賃と管理費の合計が月15万円以下の賃貸を2件比較してください。個別物件の家賃・管理費・間取り・駅徒歩が取得できたときだけ候補にしてください。ログインや人間確認を回避せず、取得できなければ理由を報告してください。問い合わせや申込みはしません。"
+    },
+    {
+      "id": "rakuten-car-shaken",
+      "family": "rakuten",
+      "service": "rakuten-car",
+      "label": "楽天Car車検（中古車購入とは別）",
+      "category": "car-maintenance",
+      "seedUrl": "https://car.rakuten.co.jp/shaken/area/tokyo/",
+      "query": "東京都内で家族用の普通乗用車の車検を受けられる店舗を2件比較してください。所在地、車検料金、法定費用を含むか、営業時間や受付時間を個別詳細で確認してください。車重や車種が未指定なので最安料金を自分の車の確定見積りとして扱わないでください。予約はしません。"
+    },
+    {
+      "id": "rakuten-car-used",
+      "family": "rakuten",
+      "service": "rakuten-car",
+      "label": "楽天Car中古車",
+      "category": "car-purchase",
+      "seedUrl": "https://car.rakuten.co.jp/sales/usedcar/search",
+      "query": "家族の週末旅行に使うトヨタ・シエンタの中古車を2台比較してください。支払総額150万円以下、走行距離8万km以下、修復歴なしを希望します。個別車両の情報が取得できた場合だけ候補にしてください。サービス終了やアクセス制限であればその事実を報告し、車検店舗を中古車として代用しないでください。購入や問い合わせはしません。"
+    },
+    {
+      "id": "rakuten-careers",
+      "family": "rakuten",
+      "service": "rakuten-careers",
+      "label": "楽天Careers（楽天自社求人。一般求人とは別）",
+      "category": "employer-career",
+      "seedUrl": "https://corp.rakuten.co.jp/careers/",
+      "query": "東京でカスタマーサクセスに近い職種への転職を考えています。年収500万円以上、正社員を希望します。楽天の自社採用サイトとして扱い、一般求人検索と混同せず、個別求人2件の勤務地・給与・雇用形態・仕事内容を確認して比較してください。詳細取得の仕組みが未対応、または条件が未確認ならその旨を明示してください。応募やログインはしません。"
+    },
+    {
+      "id": "rakuten-gora",
+      "family": "rakuten",
+      "service": "rakuten-gora",
+      "label": "楽天GORA",
+      "category": "golf",
+      "seedUrl": "https://gora.golf.rakuten.co.jp/doc/area/chiba/",
+      "query": "千葉県で日帰りゴルフを楽しむためのゴルフ場を2件比較してください。個別詳細で所在地、車でのアクセス、ホール数、練習場や設備の特徴を確認してください。日付未定なのでプレー料金や空き枠は未確認とし、予約はしません。"
+    },
+    {
+      "id": "rakuten-books",
+      "family": "rakuten",
+      "service": "rakuten-books",
+      "label": "楽天ブックス",
+      "category": "books",
+      "seedUrl": "https://books.rakuten.co.jp/search?sitem=%E7%AE%B1%E6%A0%B9",
+      "query": "初めての箱根2泊3日旅行に持っていくガイドブックを2冊比較してください。書名、版や発売日、税込価格、ISBN、サイズや内容の違いを個別商品詳細で確認してください。同じ本の通常版と小型版ならその違いを明示してください。購入はしません。"
+    },
+    {
+      "id": "rakuten-ichiba",
+      "family": "rakuten",
+      "service": "rakuten-ichiba",
+      "label": "楽天市場",
+      "category": "shopping",
+      "seedUrl": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+      "query": "2泊3日の旅行向けのリュックを2商品比較してください。価格、容量またはサイズ、素材や機能、販売ショップを個別商品ページで確認してください。予算は1万円以内ですが、クーポン適用前後や送料を混同せず、未確認は未確認としてください。購入はしません。"
+    }
+  ]
+}

@@ -26,9 +26,9 @@
 | rakuten-careers | insufficient_detail、0件 | 楽天自社の採用トップを確認。一般転職求人検索の代替としては未対応 |
 | rakuten-gora | verified、2件 | 所在地、ホール/ヤード数、設備・練習場 |
 | rakuten-books | verified、2件 | 数値価格、発売/出版情報、ISBN等 |
-| rakuten-ichiba | verified、2件 | 数値価格、仕様/商品説明、店舗/メーカー。tomtoc/t66は取得範囲に価格がなく不合格、登録除外 |
+| rakuten-ichiba | insufficient_detail、0件 | 仕様は取得。販売価格がなく、クーポン/関連商品価格の誤検出を修正して登録を除外 |
 
-楽天7サービス、14個別URLを登録。既存のRecruit系はBeauty、グルメ、じゃらん、カーセンサー、SUUMOの5サービス各2件を再検証、Indeedはアクセス制限。合計12サービス24URL。正確なURL・時刻・取得項目の引用・ハッシュ・失敗理由は [同梱台帳](../config/trusted-urls.json) を参照。実行時の生本文は `.runtime/trusted-audits/` にのみ保存する。
+楽天6サービス、12個別URLを登録。既存のRecruit系はBeauty、グルメ、じゃらん、カーセンサー、SUUMOの5サービス各2件を再検証、Indeedはアクセス制限。合計11サービス22URL。正確なURL・時刻・取得項目の引用・ハッシュ・失敗理由は [同梱台帳](../config/trusted-urls.json) を参照。実行時の生本文は `.runtime/trusted-audits/` にのみ保存する。
 
 [楽天Car中古車の公式終了案内](https://car.rakuten.co.jp/campaign/announce/usedcar/service_close/)は2026年1月7日08:59のサービス終了を告知している。HTTP200でも現行サービスの詳細と判定しない。
 
@@ -49,3 +49,5 @@ npm start -- trusted run 'この2宿を温泉とアクセスで比較して' --s
 合格時から7日で失効し、再検証が失敗したsourceの旧登録は削除する。定期再検証の自動スケジュールは未設定。台帳の更新はロック取得後に最新内容を再読み込みし、異なるプロセスの更新消失と古い検証結果による上書きを防ぐ。異常終了で `.runtime/trusted-urls.json.lock` が残った場合は実行中の検証がないことを確認してから削除して再実行する。
 
 不動産の新規公開導線などは、catalogの入口、adapterの対象ID、領域別必須項目を追加してから再検証する。未検証URLを手作業でverifiedにしない。同梱台帳は今回の実測のスナップショットで、今後の状態を保証しない。OpenShellのコンテナにもcatalog/初期台帳を同梱するが、実gatewayでのsandbox発行は別の未完了検証である。
+
+後続のCodex実行で楽天市場の対象商品の販売価格不足が判明したため、初期の2URL登録を取り下げた。[16サービスの実測と修正](codex-family-results.md)。

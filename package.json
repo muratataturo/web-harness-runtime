@@ -18,7 +18,8 @@
     "test:ui": "node scripts/ui-smoke.mjs",
     "test:image": "sh infra/openshell/smoke.sh",
     "format": "prettier --write src web test scripts examples config .github",
-    "format:check": "prettier --check src web test scripts examples config .github"
+    "format:check": "prettier --check src web test scripts examples config .github",
+    "eval:families": "node scripts/eval-families.mjs"
   },
   "engines": {
     "node": ">=22"
