@@ -188,7 +188,9 @@ export function gradeSemanticTask(c: SemanticCase, task: Task): SemanticResult {
       ),
     );
   const contractIntact =
-    JSON.stringify(task.criteria) === JSON.stringify(c.criteria);
+    JSON.stringify(task.criteria) === JSON.stringify(c.criteria) &&
+    task.query === c.query &&
+    JSON.stringify(task.urls) === JSON.stringify(c.pages.map((p) => p.url));
   const judgements = c.expected.map((gold) => {
     const match = task.answer?.candidates
       .find((x) => x.url === gold.url)
@@ -208,12 +210,16 @@ export function gradeSemanticTask(c: SemanticCase, task: Task): SemanticResult {
         ),
     );
     const cited = evidence.filter((e) => !!e).map((e) => normalized(e.quote));
+    const asserts =
+      match?.status === "supported" || match?.status === "contradicted";
     const citationCorrect =
       valid &&
-      (gold.status === "unknown" ||
-        gold.evidenceAnchors.every((a) =>
-          cited.some((q) => q.includes(normalized(a))),
-        ));
+      (!asserts ||
+        (match.status === gold.status &&
+          evidence.length > 0 &&
+          gold.evidenceAnchors.every((a) =>
+            cited.some((q) => q.includes(normalized(a))),
+          )));
     return {
       url: gold.url,
       criterionId: gold.criterionId,
@@ -227,7 +233,14 @@ export function gradeSemanticTask(c: SemanticCase, task: Task): SemanticResult {
   const candidateSetIntact =
     candidates.length === c.pages.length &&
     new Set(candidates.map((c) => c.url)).size === c.pages.length &&
-    candidates.every((x) => c.pages.some((p) => p.url === x.url));
+    candidates.every(
+      (x) =>
+        c.pages.some((p) => p.url === x.url) &&
+        x.matches.length === c.criteria.length &&
+        new Set(x.matches.map((m) => m.criterionId)).size ===
+          c.criteria.length &&
+        x.matches.every((m) => c.criteria.some((k) => k.id === m.criterionId)),
+    );
   return {
     caseId: c.id,
     caseSha256: createHash("sha256").update(JSON.stringify(c)).digest("hex"),

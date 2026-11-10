@@ -91,6 +91,7 @@ test("wrong support of an unknown claim lowers accuracy and support precision", 
   assert.equal(m.targetedEntailmentAccuracy, 2 / 3);
   assert.equal(m.supportedPrecision, 2 / 3);
   assert.equal(m.unknownRecall, 0);
+  assert.equal(m.citationAccuracy, 2 / 3);
 });
 test("quotes from another entity, invented quotes and input drift cannot pass", async () => {
   const c = (await loadSemanticCases()).find(
@@ -113,6 +114,14 @@ test("quotes from another entity, invented quotes and input drift cannot pass", 
   const changed = oracle(c);
   changed.criteria[0]!.description = "別の簡単な条件";
   assert.equal(gradeSemanticTask(c, changed).contractIntact, false);
+  const alteredQuery = oracle(c);
+  alteredQuery.query += "別の簡単な問題";
+  assert.equal(gradeSemanticTask(c, alteredQuery).contractIntact, false);
+  const duplicate = oracle(c);
+  duplicate.answer!.candidates[0]!.matches.push(
+    structuredClone(duplicate.answer!.candidates[0]!.matches[0]!),
+  );
+  assert.equal(gradeSemanticTask(c, duplicate).strictPass, false);
 });
 test("missing answers have zero accuracy and do not manufacture precision", async () => {
   const c = (await loadSemanticCases())[0]!,

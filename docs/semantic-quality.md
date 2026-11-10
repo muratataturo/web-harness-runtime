@@ -28,11 +28,11 @@
 | supportedPrecision | supportedと断定したうち正解もsupportedの割合 |
 | unsupportedAssertionRate | supportedと断定したうち正解が別ラベルの割合 |
 | unknownRecall | 正解がunknownのうちunknownと返せた割合 |
-| citationAccuracy | supported/contradictedと回答した判定の引用検査合格率。断定なしはnull |
+| citationAccuracy | supported/contradictedと回答した判定の、ラベル整合・出典・根拠アンカーの検査合格率。断定なしはnull |
 | strictCasePassRate | 全判定・引用・入力・対象集合の検査に合格したケースの割合 |
 | coverage | 予定ケース、実行ケース、quota等で未実行のケースIDを併記 |
 
-比率は0〜1。分母0はnull。未回答は正解にしない。未実行ケースを隠して全体合格にしない。正解ラベルのレビュー状態も報告する。CIは推論を使わず、データと根拠の整合性・採点器の正例/反例を検証する。
+比率は0〜1。分母0はnull。未回答は正解にしない。未実行ケースを隠して全体合格にしない。正解ラベルのレビュー状態も報告する。引用なしの断定、クエリの変更、条件ごとの判定の重複も合格にしない。CIは推論を使わず、データと根拠の整合性・採点器の正例/反例を検証する。
 
 これは構造化された記述の含意・反証・未確認判定を測るもの。自由文のsummaryやexplanation全体の意味の正しさを自動採点する仕組みではなく、`freeTextReview=not_evaluated` を明示する。自然な言い換え、説明の一貫性、推薦の妥当性を全面保証しない。引用のアンカー検査も、汎用的な文章含意判定器ではない。自由文評価、人によるラベル確定、独立した大きなholdoutは次の評価段階である。
 

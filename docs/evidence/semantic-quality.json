@@ -1647,7 +1647,8 @@
         "freeTextReview": "not_evaluated",
         "independentHumanReviewedCases": 0
       },
-      "note": "r1のclaim-3は「対応を確認できる」で未確認/不一致の解釈が分かれた。r2では事実の主張「韓国アイドル風の施術に対応している」に訂正し両モデルを全8件再評価。正解ラベルをモデルへ提示せず、ラベル自体も変更していない。"
+      "note": "r1のclaim-3は「対応を確認できる」で未確認/不一致の解釈が分かれた。r2では事実の主張「韓国アイドル風の施術に対応している」に訂正し両モデルを全8件再評価。正解ラベルをモデルへ提示せず、ラベル自体も変更していない。",
+      "gradingContext": "historical calibration before final citation/contract hardening; not the release benchmark"
     },
     {
       "reportId": "0793194f-9cba-4177-a412-d3e191154ed7",
@@ -1687,7 +1688,8 @@
         "freeTextReview": "not_evaluated",
         "independentHumanReviewedCases": 0
       },
-      "note": "r1のclaim-3は「対応を確認できる」で未確認/不一致の解釈が分かれた。r2では事実の主張「韓国アイドル風の施術に対応している」に訂正し両モデルを全8件再評価。正解ラベルをモデルへ提示せず、ラベル自体も変更していない。"
+      "note": "r1のclaim-3は「対応を確認できる」で未確認/不一致の解釈が分かれた。r2では事実の主張「韓国アイドル風の施術に対応している」に訂正し両モデルを全8件再評価。正解ラベルをモデルへ提示せず、ラベル自体も変更していない。",
+      "gradingContext": "historical calibration before final citation/contract hardening; not the release benchmark"
     }
   ],
   "reviewSignals": [
@@ -1957,5 +1959,14 @@
       },
       "overallPass": true
     }
-  ]
+  ],
+  "finalGraderRevalidation": {
+    "tasks": 16,
+    "allStrictPass": true,
+    "checks": [
+      "query and criteria intact",
+      "candidate and judgement sets intact",
+      "assertions require supporting citations"
+    ]
+  }
 }
