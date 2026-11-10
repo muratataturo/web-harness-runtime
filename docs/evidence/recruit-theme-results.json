@@ -1,0 +1,708 @@
+{
+  "observedAt": "2026-11-10T12:36:39.089Z",
+  "scope": "Two sample themes run sequentially through the CLI configured executor on the same retained Codex account MicroVM. No host fallback, no mock or A2A Goal Router run. External discovery/preparation time is excluded from task latency.",
+  "inputs": [
+    {
+      "id": "day-out",
+      "title": "上野で家族3人の一日遊び",
+      "urls": [
+        "https://www.hotpepper.jp/strJ001100102/",
+        "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "https://www.kahaku.go.jp/riyou/nyukan-annai/"
+      ],
+      "query": "これはサンプル条件の「1日遊び」提案の実行です。2026年11月14日(土)、大人2名と5歳児1名、9:30〜17:00、上野周辺、家族合計16,000円以内。動物と科学が好きで、休憩2回、施設は最大2か所。提供したRecruit Hot Pepperグルメのまいかアトレ上野店と、施設公式の公開ページを実際に取得し、一日を過ごす具体的な回答を日本語で作成してください。plan_taskで役割別の条件を定義し、店舗へ動物・施設へランチなど全候補に同じ条件を要求しない。summaryには時刻付き行程、徒歩区間の見積時間、採用理由、掲載料金と未確認予算枠を分けた家族総額、雨天代替、楽しみポイントの推奨案と2択を含めてください。子供の疲れを優先し、博物館は任意でもよい。動物園・博物館の年齢別料金/営業時間/休館を確認し、特別展と常設料金を混同しない。土曜に平日限定ランチ価格を適用しない。「大人のお子様ランチ」は5歳児向けと断定しない。交通2,500円/家族、おやつ休憩1,500円/家族を未確認予算枠とし、他の未確認料金も明示して予算上限との残額を計算。将来日の営業・空席を確約しない。候補の個別ページを引用し、取得不能の候補を断定せず、取得できた情報だけでも実行可能な暫定案をfinish_taskで保存してください。予約・購入・問い合わせはしません。"
+    },
+    {
+      "id": "life-plan",
+      "title": "仕事・住居・車を一緒に考える人生計画",
+      "urls": [
+        "https://suumo.jp/chintai/jnc_000110455233/",
+        "https://suumo.jp/chintai/jnc_000094254501/",
+        "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+        "https://www.carsensor.net/usedcar/bTO/s077/kanagawa/index.html",
+        "https://jp.indeed.com/jobs?q=%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B5%E3%82%AF%E3%82%BB%E3%82%B9&l=%E6%9D%B1%E4%BA%AC"
+      ],
+      "query": "これは実在ユーザーの個人情報ではなく「人生計画」テーマのサンプル実行です。35歳の会社員が、都内への通勤を残しつつ武蔵小杉周辺で暮らし、リモート中心のSaaSカスタマーサクセス職へ転職し、週末は小さな車で家族と出かけたいと考えています。職歴・現年収・貯蓄・手取り・家族人数は未指定で推測しない。希望は、仕事:正社員・給与下限年収500万円以上・在宅日数を明記。住居:武蔵小杉駅徒歩10分以内、1LDK、家賃と管理費合計15万円以内/月。車:神奈川県のシエンタ等の小型ミニバン、支払総額150万円以内、走行8万km以下、修復歴なし。家と車関連固定費は暫定月18万円上限とするが、食費等の全生活費上限ではない。提供したRecruit系のSUUMO、Indeed、カーセンサーの公開URLを実際に調べ、仕事・住居・車を一体にした日本語回答を返してください。plan_taskで分野別の必須条件を定義し、全候補に全分野の条件を機械的に要求しない。summaryには取得できた実在候補/URL/掲載金額、仕事→住居→車の決める順番、0〜30日/1〜3か月/3〜6か月の行動、費用の積み上げ、足りない情報、楽しみ・こだわりの推奨案と2択を含める。管理費「-」は0円と断定しない。車は本体価格ではなく支払総額で比較。在庫/空室/採用/在宅日数が未確認なら保留し、求人がアクセス拒否ならログインやCAPTCHAを回避せず求人名や給与を作らない。地域の違う車を持ってこない。家賃と車の購入一時金を足して月額にしない。駐車場・税保険・整備・燃料・引越初期費用の未確認を明示し、18万円以内を保証しない。車を保留する案を含める。取得不能の分野は再試行を浪費せず制約として記載し、取得できた情報でfinish_taskに暫定回答を保存する。応募/内見予約/購入/問い合わせ/契約はしません。"
+    }
+  ],
+  "dayOut": {
+    "id": "62e4d495-f354-4f9a-8559-de34f63e9ca2",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "query": "これはサンプル条件の「1日遊び」提案の実行です。2026年11月14日(土)、大人2名と5歳児1名、9:30〜17:00、上野周辺、家族合計16,000円以内。動物と科学が好きで、休憩2回、施設は最大2か所。提供したRecruit Hot Pepperグルメのまいかアトレ上野店と、施設公式の公開ページを実際に取得し、一日を過ごす具体的な回答を日本語で作成してください。plan_taskで役割別の条件を定義し、店舗へ動物・施設へランチなど全候補に同じ条件を要求しない。summaryには時刻付き行程、徒歩区間の見積時間、採用理由、掲載料金と未確認予算枠を分けた家族総額、雨天代替、楽しみポイントの推奨案と2択を含めてください。子供の疲れを優先し、博物館は任意でもよい。動物園・博物館の年齢別料金/営業時間/休館を確認し、特別展と常設料金を混同しない。土曜に平日限定ランチ価格を適用しない。「大人のお子様ランチ」は5歳児向けと断定しない。交通2,500円/家族、おやつ休憩1,500円/家族を未確認予算枠とし、他の未確認料金も明示して予算上限との残額を計算。将来日の営業・空席を確約しない。候補の個別ページを引用し、取得不能の候補を断定せず、取得できた情報だけでも実行可能な暫定案をfinish_taskで保存してください。予約・購入・問い合わせはしません。",
+    "urls": [
+      "https://www.hotpepper.jp/strJ001100102/",
+      "https://www.hotpepper.jp/strJ001100102/lunch/",
+      "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "https://www.kahaku.go.jp/riyou/nyukan-annai/"
+    ],
+    "status": "partial",
+    "createdAt": "2026-11-10T12:32:40.457Z",
+    "updatedAt": "2026-11-10T12:36:22.609Z",
+    "interactionMode": "auto",
+    "execution": {
+      "target": "openshell",
+      "isolation": "openshell-sandbox",
+      "gateway": "web-harness-local",
+      "sandboxName": "wh-codex",
+      "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+      "image": "web-harness-codex:local",
+      "artifactsDirectory": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/codex-workers/runs/f7b6c40c-9758-4c54-b58c-1acd5258bb96/artifacts",
+      "allocation": "account-worker",
+      "runtimeRevision": "0c5cb80cadbbe6b87ce53cf1",
+      "innerSandbox": "externalSandbox",
+      "elapsedMs": 234574,
+      "cleanupStatus": "stopped"
+    },
+    "metrics": {
+      "elapsedMs": 221890,
+      "tokenAccounting": "provider-reported",
+      "tokens": {
+        "inputTokens": 186472,
+        "outputTokens": 4652,
+        "cachedInputTokens": 154112,
+        "reasoningOutputTokens": 242,
+        "totalTokens": 191124,
+        "cacheWriteInputTokens": 0,
+        "source": "codex-thread-total"
+      },
+      "billing": {
+        "mode": "chatgpt-subscription",
+        "additionalApiUsd": 0,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    },
+    "answer": {
+      "summary": "【暫定推奨：動物園を主役に、博物館は無理に追加しない】\n2026年11月14日（土）、大人2名＋5歳児1名。取得できた公式情報では両施設とも通常の土曜は休館日に当たりませんが、対象日のカレンダー取得は失敗しており臨時変更は未確認です。まいかの店舗・ランチURLも実際に取得を試みましたが通信エラーで本文を取得できず、営業・土曜ランチ価格・子供用料理・空席は確認できません。したがって同店を確定行程にはしません。\n\n■時刻付き推奨行程（晴天）\n9:30 JR上野駅公園口集合。正門まで公式徒歩5分、5歳児連れの計画枠は10〜15分。\n9:45〜10:35 動物園・東園中心。ゾウ／トラ／ゴリラなど、子供が選ぶ2〜3種類に絞る。全園制覇や特定動物との対面は約束しない。\n10:35〜11:00 休憩①：園内の利用可能なベンチで座って給水・トイレ。場所・席は当日判断。\n11:00〜12:00 見たい動物を少し追加。歩き疲れたらここで終了してよい。\n12:00〜12:20 退園し上野駅方面へ徒歩15〜20分を見込む（独自概算、門・経路・混雑で変動）。\n12:20〜13:20 昼食。まいかアトレ上野店は営業・価格を現地掲示で判断する任意候補。営業不明・満席・予算超過なら待ち続けず、家族6,000円枠内で持参食または購入食に切替え、飲食可能場所で食べる。購入先・席・持参可否は未確認。\n13:20〜14:00 子供のペースで駅周辺の短い散歩、または座って休む。移動徒歩は小区間ごと5〜10分の計画枠。\n14:00〜14:30 休憩②：おやつ・給水。1,500円／家族の未確認枠。店舗を増やさず持ち帰りと利用可能な休憩場所を使う案。\n14:30〜16:30 余力に応じた自由時間と帰路の余裕。博物館を追加して時間を埋めず、眠い・寒い・疲れたら早めに切り上げる。\n16:30〜17:00 上野駅で解散・帰路へ。施設は観光1か所（動物園）＋昼食店を使っても2か所以内。9:30〜17:00は利用可能時間帯として扱い、疲れている子供を17時まで歩かせない。\n\n■楽しみ方の2択\nA【推奨・動物優先】上記の動物園中心。「耳の形」「歩き方」など好きな動物の特徴を親子で1つ見つける。東園中心にして移動負担を抑える。\nB【雨天・科学優先】動物園を国立科学博物館の常設展に置換。9:30駅集合→徒歩10〜15分（独自概算）→9:45〜10:35見学→10:35〜11:00休憩①→11:00〜12:00短く見学→駅方面へ徒歩15〜20分（概算）→12:20昼食、14:00休憩②、以後は早帰り可。展示を全部回らず「好きな標本を1つ探し、形を比べる」を提案。館内の休憩・飲食は指定場所に限る。暴風雨なら外歩きを減らし中止も選択。展示室の一部閉鎖告知があり、特定展示を見られると確約しない。博物館は任意で、両方を同日に詰め込まない。\n\n■掲載料金（2026年11月10日取得）\n上野動物園：一般600円×2＋5歳無料＝家族1,200円。9:30〜17:00、入園・券販売は16:00まで。通常休園は月曜（祝休日なら翌日）、年末年始。\n科博：常設一般630円×2＋5歳無料（18歳未満無料）＝家族1,260円。9:00〜17:00、最終入場16:30。通常休館は月曜（日・月が祝休日なら火曜）、年末年始等。特別展は別料金・別条件のため採用しない。年齢確認書類を持参。\nまいか：取得不能のため掲載ランチ料金は不明。平日限定価格を土曜に流用しない。「大人のお子様ランチ」を5歳児向けとは判断しない。\n\n■家族予算（価格の確約ではなく支出上限管理）\nA：掲載入園料1,200円＋未確認枠〔昼食6,000円（子供分・飲物等込みの自己設定上限）、交通2,500円、おやつ休憩1,500円〕＝計11,200円、16,000円まで残額4,800円。\nB：掲載常設料1,260円＋同じ未確認枠10,000円＝計11,260円、残額4,740円。\n参考：仮に両施設へ行けば掲載料2,460円＋未確認枠10,000円＝12,460円、残額3,540円。ただし疲れ優先のため非推奨、昼食店も施設に数える場合は最大2か所を超えるので採用しない。\n未確認：実際の昼食価格・子供向け内容・追加飲食、交通実費（出発地未指定）、おやつ代、ベビーカー・ロッカー等。土産・有料企画・特別展は基本案に含めず、使うなら残額内で現地料金を確認する。6,000円でまいかに入れるという意味ではない。\n\n■根拠\n上野動物園個別案内 https://www.tokyo-zoo.net/ueno/visitor-info/tickets/ 「9時30分～17時00分」「一般 600円」「小学6年生まで 無料」。\n科博個別案内 https://www.kahaku.go.jp/riyou/nyukan-annai/ 「入館料（常設展） 一般・大学生 630円」、無料対象「18歳未満の方」。\n公式本文は公開サーバーHTMLの取得であり当日の営業・混雑・席を確認したものではない。予約・購入・問い合わせは実施していません。",
+      "candidates": [
+        {
+          "name": "上野動物園（晴天の推奨主役）",
+          "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+          "matches": [
+            {
+              "criterionId": "zoo",
+              "status": "unknown",
+              "evidenceIds": [
+                "ev-1",
+                "ev-2",
+                "ev-3",
+                "ev-4"
+              ],
+              "explanation": "通常営業時間・一般600円と5歳無料を確認。対象日カレンダーは取得不能で臨時休園未確認。"
+            },
+            {
+              "criterionId": "museum",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "動物園の役割対象外。科学施設は別候補で評価し追加を要求しない。"
+            },
+            {
+              "criterionId": "lunch",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "動物園に飲食店条件を要求しない。指定店本文取得不能。"
+            },
+            {
+              "criterionId": "day",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-1",
+                "ev-9",
+                "ev-10"
+              ],
+              "explanation": "9:30開園・駅公園口徒歩5分、東園の動物を絞る計画で休憩2回。観光施設は1か所、昼食店利用でも2か所。"
+            },
+            {
+              "criterionId": "budget",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-3",
+                "ev-4"
+              ],
+              "explanation": "掲載入園料1200円＋未確認昼食6000円・交通2500円・おやつ1500円＝11200円、残4800円。実費確約ではなく枠内運用。"
+            }
+          ],
+          "score": 43,
+          "eligible": false
+        },
+        {
+          "name": "国立科学博物館・常設展（任意／雨天置換）",
+          "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+          "matches": [
+            {
+              "criterionId": "zoo",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "科学施設の役割対象外。生きた動物の観覧条件を要求しない。"
+            },
+            {
+              "criterionId": "museum",
+              "status": "unknown",
+              "evidenceIds": [
+                "ev-5",
+                "ev-6",
+                "ev-7",
+                "ev-11"
+              ],
+              "explanation": "常設一般630円、18歳未満無料、9〜17時と通常月曜休館を確認。対象日の開館カレンダー取得不能で臨時変更未確認。"
+            },
+            {
+              "criterionId": "lunch",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "科学施設にランチ条件を要求しない。指定店本文取得不能。"
+            },
+            {
+              "criterionId": "day",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-5"
+              ],
+              "explanation": "雨天時は動物園に置換し午前の短時間見学と2回休憩。追加はせず疲れ優先。徒歩は未検証概算。"
+            },
+            {
+              "criterionId": "budget",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-7",
+                "ev-11"
+              ],
+              "explanation": "常設家族1260円＋未確認予算枠10000円＝11260円、残4740円。特別展は含めない。"
+            }
+          ],
+          "score": 43,
+          "eligible": false
+        }
+      ],
+      "limitations": [
+        "指定まいかの店舗詳細とランチページは複数回取得を試みたがCDP response channel closed。本文・料金・営業時間・5歳向け料理・対象日空席を検証できず、候補として断定せず条件付き昼食案のみ。検証済み候補は2施設で指定店の詳細検証は未達。",
+        "両施設のカレンダー取得に失敗。動物園の深掘りは同内容案内とアクセス、科博は混雑予測本文のみ取得。11/14の臨時休館・開館変更は未確認。",
+        "取得はpublic-htmlでブラウザ描画・動的空席確認ではない。アクセス・混雑予測子ページは単独では料金・営業時間のない補助ページであり、検証済み個別案内を候補URLとした。",
+        "徒歩は動物園公式の上野駅公園口5分以外は子供連れの独自概算。昼食6000円、交通2500円、おやつ1500円は未確認予算枠で販売価格ではない。休憩場所・席・飲食販売も未確約。",
+        "追加確認しても未確認の項目: 動物園役割：上野動物園の大人2名・5歳児料金、営業時間、11/14土曜の休園条件を確認・飲食店役割：まいかアトレ上野店の場所、土曜営業時間・ランチ掲載料金と子供向け適否の確認 / 動物園役割：上野動物園の大人2名・5歳児料金、営業時間、11/14土曜の休園条件を確認・飲食店役割：まいかアトレ上野店の場所、土曜営業時間・ランチ掲載料金と子供向け適否の確認"
+      ]
+    },
+    "criteria": [
+      {
+        "id": "zoo",
+        "description": "動物園役割：上野動物園の大人2名・5歳児料金、営業時間、11/14土曜の休園条件を確認",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "museum",
+        "description": "任意の科学施設役割：科博の常設の年齢別料金、営業時間、休館を確認。特別展は別扱い",
+        "required": false,
+        "weight": 2
+      },
+      {
+        "id": "lunch",
+        "description": "飲食店役割：まいかアトレ上野店の場所、土曜営業時間・ランチ掲載料金と子供向け適否の確認",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "day",
+        "description": "行程役割：9:30〜17:00、施設最大2、休憩2回、5歳児の疲れ優先。各候補は担当役割への寄与を評価",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "budget",
+        "description": "予算役割：家族16000円以内。交通2500円・おやつ1500円は未確認枠、飲食等未確認枠と掲載料金を区別し残額計算",
+        "required": true,
+        "weight": 3
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev-1",
+        "pageId": "page-1",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "9時30分～17時00分",
+        "capturedAt": "2026-11-10T12:33:18.607Z"
+      },
+      {
+        "id": "ev-2",
+        "pageId": "page-1",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "月曜日（月曜日が国民の祝日や振替休日の場合はその翌日が休園日）",
+        "capturedAt": "2026-11-10T12:33:18.607Z"
+      },
+      {
+        "id": "ev-3",
+        "pageId": "page-1",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "一般\n600円",
+        "capturedAt": "2026-11-10T12:33:18.607Z"
+      },
+      {
+        "id": "ev-4",
+        "pageId": "page-1",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "小学6年生まで\n無料",
+        "capturedAt": "2026-11-10T12:33:18.607Z"
+      },
+      {
+        "id": "ev-5",
+        "pageId": "page-2",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "開館時間 9：00 ～17：00",
+        "capturedAt": "2026-11-10T12:33:18.720Z"
+      },
+      {
+        "id": "ev-6",
+        "pageId": "page-2",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "毎週月曜日（日・月曜日が祝日・休日の場合は火曜日）",
+        "capturedAt": "2026-11-10T12:33:18.720Z"
+      },
+      {
+        "id": "ev-7",
+        "pageId": "page-2",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "入館料（常設展）\n一般・大学生 630円",
+        "capturedAt": "2026-11-10T12:33:18.720Z"
+      },
+      {
+        "id": "ev-8",
+        "pageId": "page-2",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "65歳以上の方および\n18歳未満の方",
+        "capturedAt": "2026-11-10T12:33:18.720Z"
+      },
+      {
+        "id": "ev-9",
+        "pageId": "page-4",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/access/index.html",
+        "quote": "① JR上野駅「公園口」から徒歩5分",
+        "capturedAt": "2026-11-10T12:34:24.042Z"
+      },
+      {
+        "id": "ev-10",
+        "pageId": "page-4",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/access/index.html",
+        "quote": "ゾウ、ホッキョクグマ、 トラ、ゴリラ",
+        "capturedAt": "2026-11-10T12:34:24.042Z"
+      },
+      {
+        "id": "ev-11",
+        "pageId": "page-2",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "入館料無料対象の方\n次の方々は無料で入館いただけます。ただし、特別展はその都度異なりますのでお問い合わせください。\n65歳以上の方および\n18歳未満の方",
+        "capturedAt": "2026-11-10T12:33:18.720Z"
+      }
+    ],
+    "pages": [
+      {
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "title": "開園時間・休園日・入園料 | 上野動物園"
+      },
+      {
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "title": "入館案内（上野本館） | 国立科学博物館 National Museum of Nature and Science,Tokyo"
+      },
+      {
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/index.html",
+        "title": "開園時間・休園日・入園料 | 上野動物園"
+      },
+      {
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/access/index.html",
+        "title": "交通アクセス | 上野動物園"
+      },
+      {
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/crowd-calendar.html",
+        "title": "混雑予測カレンダー | 国立科学博物館 National Museum of Nature and Science,Tokyo"
+      }
+    ],
+    "retrieval": {
+      "status": "verified",
+      "verifiedDetailUrls": [
+        "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/index.html"
+      ],
+      "checkedPages": 5
+    }
+  },
+  "lifePlan": {
+    "id": "2559289f-4a3d-4ed4-8750-19d99aaba773",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "query": "これは実在ユーザーの個人情報ではなく「人生計画」テーマのサンプル実行です。35歳の会社員が、都内への通勤を残しつつ武蔵小杉周辺で暮らし、リモート中心のSaaSカスタマーサクセス職へ転職し、週末は小さな車で家族と出かけたいと考えています。職歴・現年収・貯蓄・手取り・家族人数は未指定で推測しない。希望は、仕事:正社員・給与下限年収500万円以上・在宅日数を明記。住居:武蔵小杉駅徒歩10分以内、1LDK、家賃と管理費合計15万円以内/月。車:神奈川県のシエンタ等の小型ミニバン、支払総額150万円以内、走行8万km以下、修復歴なし。家と車関連固定費は暫定月18万円上限とするが、食費等の全生活費上限ではない。提供したRecruit系のSUUMO、Indeed、カーセンサーの公開URLを実際に調べ、仕事・住居・車を一体にした日本語回答を返してください。plan_taskで分野別の必須条件を定義し、全候補に全分野の条件を機械的に要求しない。summaryには取得できた実在候補/URL/掲載金額、仕事→住居→車の決める順番、0〜30日/1〜3か月/3〜6か月の行動、費用の積み上げ、足りない情報、楽しみ・こだわりの推奨案と2択を含める。管理費「-」は0円と断定しない。車は本体価格ではなく支払総額で比較。在庫/空室/採用/在宅日数が未確認なら保留し、求人がアクセス拒否ならログインやCAPTCHAを回避せず求人名や給与を作らない。地域の違う車を持ってこない。家賃と車の購入一時金を足して月額にしない。駐車場・税保険・整備・燃料・引越初期費用の未確認を明示し、18万円以内を保証しない。車を保留する案を含める。取得不能の分野は再試行を浪費せず制約として記載し、取得できた情報でfinish_taskに暫定回答を保存する。応募/内見予約/購入/問い合わせ/契約はしません。",
+    "urls": [
+      "https://suumo.jp/chintai/jnc_000110455233/",
+      "https://suumo.jp/chintai/jnc_000094254501/",
+      "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+      "https://www.carsensor.net/usedcar/bTO/s077/kanagawa/index.html",
+      "https://jp.indeed.com/jobs?q=%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B5%E3%82%AF%E3%82%BB%E3%82%B9&l=%E6%9D%B1%E4%BA%AC"
+    ],
+    "status": "partial",
+    "createdAt": "2026-11-10T12:28:02.707Z",
+    "updatedAt": "2026-11-10T12:32:27.695Z",
+    "interactionMode": "auto",
+    "execution": {
+      "target": "openshell",
+      "isolation": "openshell-sandbox",
+      "gateway": "web-harness-local",
+      "sandboxName": "wh-codex",
+      "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+      "image": "web-harness-codex:local",
+      "artifactsDirectory": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/codex-workers/runs/239a96af-10e9-42f7-8474-cd2dcc27a364/artifacts",
+      "allocation": "account-worker",
+      "runtimeRevision": "0c5cb80cadbbe6b87ce53cf1",
+      "innerSandbox": "externalSandbox",
+      "elapsedMs": 323496,
+      "cleanupStatus": "stopped"
+    },
+    "metrics": {
+      "elapsedMs": 264909,
+      "tokenAccounting": "provider-reported",
+      "tokens": {
+        "inputTokens": 858328,
+        "outputTokens": 6192,
+        "cachedInputTokens": 771840,
+        "reasoningOutputTokens": 79,
+        "totalTokens": 864520,
+        "cacheWriteInputTokens": 0,
+        "source": "codex-thread-total"
+      },
+      "billing": {
+        "mode": "chatgpt-subscription",
+        "additionalApiUsd": 0,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    },
+    "answer": {
+      "summary": "【2026年11月10日閲覧・暫定計画】\n仕事→住居→車の順で決め、車は当面保留を推奨。全分野の必須条件を満たす組合せは未確定。\n実在第一候補：ラ・ミューズ https://suumo.jp/chintai/bc_100475302431/ 家賃11万円＋管理費5000円＝月11.5万円、1LDK・36.91㎡、武蔵小杉徒歩5分、築43年。掲載入居時期12月中旬だが空室・家族入居可否は保留。\n比較：フレメゾン https://suumo.jp/chintai/bc_100536394753/ 家賃13.5万円、1LDK・52.8㎡・徒歩7分。追加周辺環境ページでも管理費「-」で、15万円以内は未確認。広さは魅力だが保留。\n除外：D Paina 中丸子 https://suumo.jp/chintai/bc_100531827116/ 家賃14万円＋管理費6000円＝14.6万円、1LDK。武蔵小杉徒歩19分で不一致。向河原徒歩6分を代用しない。\n仕事：Indeed指定検索URLは接続エラーで未取得。SaaS CS・正社員・年収下限500万円以上・在宅日数明記・採用状況を満たす実在求人は提示できない。\n車：カーセンサー神奈川県シエンタURLも接続エラーで未取得。神奈川県、小型ミニバン、支払総額150万円以内、8万km以下、修復歴なしの実在車を確認できず購入保留。地域外の車や本体価格で代用しない。\n【月額と一時金】\nラ・ミューズの総賃料を11.5万円と仮置きすると、月額保証料2％＝2300円＋サポート990円で118290円。損保2万円/2年の積立月約833円を加え約119123円。18万円との差約60877円は仮の余地で、駐車場・車の税保険・整備等が未確認。燃料やローン利用時の返済金利も別途積み上げ、更新費等も確認する。18万円は家と車関連固定費の暫定上限で食費等の全生活費ではない。\n一時金は敷金11万円＋礼金11万円＋初回保証料仮9.2万円（総賃料の80％）＋鍵2.5万円＋損保2万円＝掲載分概算35.7万円。敷引11万円の扱い、前家賃・日割り・引越代等は別途確認。車購入は支払総額150万円以内という一時金上限で別管理し、家賃と足して月額にしない。\n【行動】\n0〜30日：職歴・SaaS/CS経験を整理し、正社員・年収下限500万円以上・週何日在宅か、試用期間中の出社、勤務地、固定残業代を明記した求人を比較。現年収・手取り・貯蓄・家族人数を推測せず整理。\n1〜3か月：仕事の給与と出社条件が確定してから住居を選ぶ。家族入居可否、通信回線、仕事中の音、断熱・階段・収納、実際の通勤ルートと初期費用総額を確認。フレメゾンは管理費確認まで保留。\n3〜6か月：実家計と出社頻度が落ち着いてから、神奈川県の車両詳細で支払総額・距離・修復歴・販売店・在庫を検証。駐車場・税保険・整備・燃料を積み上げ資金余力を確認して判断。\n【楽しみ・こだわりの2択】\nA（推奨）：駅徒歩5分と住居固定費の余裕を優先し、車は保留。必要な週末だけレンタカー等を料金確認して利用し家族の小旅行を試す。\nB：小型ミニバンを所有する自由を優先。ただし仕事、家族人数、駐車場、維持費、購入後の貯蓄余力が確認できた場合のみ検討へ。\n応募・内見予約・購入・問い合わせ・契約は行っていない。",
+      "candidates": [
+        {
+          "name": "ラ・ミューズ",
+          "url": "https://suumo.jp/chintai/bc_100475302431/",
+          "matches": [
+            {
+              "criterionId": "home",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-5",
+                "ev-6",
+                "ev-7"
+              ],
+              "explanation": "武蔵小杉徒歩5分、1LDK、家賃管理費合計115000円。空室・家族入居可否は別途保留。"
+            },
+            {
+              "criterionId": "job",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "住居候補には対象外の分野。統合計画では取得不能につき保留。"
+            },
+            {
+              "criterionId": "car",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "住居候補には対象外の分野。統合計画では取得不能につき保留。"
+            },
+            {
+              "criterionId": "budget",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "駐車場・車維持費等未確認で18万円以内は未確定。"
+            }
+          ],
+          "score": 27,
+          "eligible": false
+        },
+        {
+          "name": "フレメゾン",
+          "url": "https://suumo.jp/chintai/bc_100536394753/",
+          "matches": [
+            {
+              "criterionId": "home",
+              "status": "unknown",
+              "evidenceIds": [
+                "ev-1",
+                "ev-2",
+                "ev-3",
+                "ev-12"
+              ],
+              "explanation": "徒歩7分、1LDK、家賃135000円。追加周辺環境ページでも管理費-のままで、0円と断定せず合計上限判定を保留。"
+            },
+            {
+              "criterionId": "job",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "住居候補には対象外の分野。取得不能で保留。"
+            },
+            {
+              "criterionId": "car",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "住居候補には対象外の分野。取得不能で保留。"
+            },
+            {
+              "criterionId": "budget",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "管理費・車関連費用未確認。"
+            }
+          ],
+          "score": 0,
+          "eligible": false
+        },
+        {
+          "name": "D Paina 中丸子",
+          "url": "https://suumo.jp/chintai/bc_100531827116/",
+          "matches": [
+            {
+              "criterionId": "home",
+              "status": "contradicted",
+              "evidenceIds": [
+                "ev-4",
+                "ev-11"
+              ],
+              "explanation": "合計146000円だが武蔵小杉徒歩19分で10分以内に不一致。"
+            },
+            {
+              "criterionId": "job",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "住居候補には対象外の分野。取得不能で保留。"
+            },
+            {
+              "criterionId": "car",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "住居候補には対象外の分野。取得不能で保留。"
+            },
+            {
+              "criterionId": "budget",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "車関連費用未確認。駅条件不一致で推奨しない。"
+            }
+          ],
+          "score": 0,
+          "eligible": false
+        }
+      ],
+      "limitations": [
+        "Indeedとカーセンサーの指定公開URLは各2回ともCDP response channel closed。本文取得不能で、求人名・給与・在宅日数・車両・支払総額を創作しない。拒否と断定せず回避もしない。仕事と車の候補数不足。",
+        "住居は公開HTMLのみで動的空室・入居可否未確認。追加取得でも管理費-は解消せず、一部CDP接続失敗。駐車場、税保険、整備、燃料、引越初期費用総額未確認。18万円以内を保証しない。",
+        "職歴、現年収、貯蓄、手取り、家族人数は未指定で推測しない。通勤先・出社頻度・家族入居制限・資金余力も確認が必要。対象外分野のunknownは住居自体の欠点ではない。",
+        "追加調査上限に到達。周辺環境ページでも仕事・車・固定費総額を補えず、全条件を再評価したが未確認は維持。",
+        "追加確認しても未確認の項目: 仕事分野のみ：SaaSカスタマーサクセス・正社員・年収下限500万円以上・在宅日数明記（リモート中心）。採用状況は別途未確認を明示・車分野のみ：神奈川県のシエンタ等小型ミニバン・支払総額150万円以内・走行8万km以下・修復歴なし・統合計画：家と車関連固定費暫定月18万円以内を検討。一時金と月額を分離し、未確認費用があれば保証しない / 住居分野のみ：武蔵小杉駅徒歩10分以内・1LDK・家賃管理費合計月15万円以内。管理費-は不明・仕事分野のみ：SaaSカスタマーサクセス・正社員・年収下限500万円以上・在宅日数明記（リモート中心）。採用状況は別途未確認を明示・車分野のみ：神奈川県のシエンタ等小型ミニバン・支払総額150万円以内・走行8万km以下・修復歴なし・統合計画：家と車関連固定費暫定月18万円以内を検討。一時金と月額を分離し、未確認費用があれば保証しない / 仕事分野のみ：SaaSカスタマーサクセス・正社員・年収下限500万円以上・在宅日数明記（リモート中心）。採用状況は別途未確認を明示・車分野のみ：神奈川県のシエンタ等小型ミニバン・支払総額150万円以内・走行8万km以下・修復歴なし・統合計画：家と車関連固定費暫定月18万円以内を検討。一時金と月額を分離し、未確認費用があれば保証しない"
+      ]
+    },
+    "criteria": [
+      {
+        "id": "job",
+        "description": "仕事分野のみ：SaaSカスタマーサクセス・正社員・年収下限500万円以上・在宅日数明記（リモート中心）。採用状況は別途未確認を明示",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "home",
+        "description": "住居分野のみ：武蔵小杉駅徒歩10分以内・1LDK・家賃管理費合計月15万円以内。管理費-は不明",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "car",
+        "description": "車分野のみ：神奈川県のシエンタ等小型ミニバン・支払総額150万円以内・走行8万km以下・修復歴なし",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "budget",
+        "description": "統合計画：家と車関連固定費暫定月18万円以内を検討。一時金と月額を分離し、未確認費用があれば保証しない",
+        "required": true,
+        "weight": 2
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev-1",
+        "pageId": "page-3",
+        "url": "https://suumo.jp/chintai/bc_100536394753/",
+        "quote": "13.5万円\n管理費・共益費\n-",
+        "capturedAt": "2026-11-10T12:28:56.987Z"
+      },
+      {
+        "id": "ev-2",
+        "pageId": "page-3",
+        "url": "https://suumo.jp/chintai/bc_100536394753/",
+        "quote": "東急東横線/武蔵小杉駅 歩7分",
+        "capturedAt": "2026-11-10T12:28:56.987Z"
+      },
+      {
+        "id": "ev-3",
+        "pageId": "page-3",
+        "url": "https://suumo.jp/chintai/bc_100536394753/",
+        "quote": "間取り\n1LDK",
+        "capturedAt": "2026-11-10T12:28:56.987Z"
+      },
+      {
+        "id": "ev-4",
+        "pageId": "page-4",
+        "url": "https://suumo.jp/chintai/bc_100531827116/",
+        "quote": "ＪＲ埼京線/武蔵小杉駅 歩19分",
+        "capturedAt": "2026-11-10T12:28:57.204Z"
+      },
+      {
+        "id": "ev-5",
+        "pageId": "page-7",
+        "url": "https://suumo.jp/chintai/bc_100475302431/",
+        "quote": "11万円\n管理費・共益費\n5000円",
+        "capturedAt": "2026-11-10T12:30:09.398Z"
+      },
+      {
+        "id": "ev-6",
+        "pageId": "page-7",
+        "url": "https://suumo.jp/chintai/bc_100475302431/",
+        "quote": "間取り\n1LDK",
+        "capturedAt": "2026-11-10T12:30:09.398Z"
+      },
+      {
+        "id": "ev-7",
+        "pageId": "page-7",
+        "url": "https://suumo.jp/chintai/bc_100475302431/",
+        "quote": "東急東横線/武蔵小杉駅 歩5分",
+        "capturedAt": "2026-11-10T12:30:09.398Z"
+      },
+      {
+        "id": "ev-8",
+        "pageId": "page-7",
+        "url": "https://suumo.jp/chintai/bc_100475302431/",
+        "quote": "保証会社利用必 初回総賃料の80％ 月額2％\nほか諸費用\n24時間サポート月額990円。・鍵交換2.5万",
+        "capturedAt": "2026-11-10T12:30:09.398Z"
+      },
+      {
+        "id": "ev-9",
+        "pageId": "page-7",
+        "url": "https://suumo.jp/chintai/bc_100475302431/",
+        "quote": "損保\n2万円2年",
+        "capturedAt": "2026-11-10T12:30:09.398Z"
+      },
+      {
+        "id": "ev-10",
+        "pageId": "page-7",
+        "url": "https://suumo.jp/chintai/bc_100475302431/",
+        "quote": "敷金/礼金\n11万円\n/\n11万円",
+        "capturedAt": "2026-11-10T12:30:09.398Z"
+      },
+      {
+        "id": "ev-11",
+        "pageId": "page-4",
+        "url": "https://suumo.jp/chintai/bc_100531827116/",
+        "quote": "14万円\n管理費・共益費\n6000円",
+        "capturedAt": "2026-11-10T12:28:57.204Z"
+      },
+      {
+        "id": "ev-12",
+        "pageId": "page-8",
+        "url": "https://suumo.jp/chintai/bc_100536394753/kankyo/",
+        "quote": "13.5万円\n管理費・共益費\n-",
+        "capturedAt": "2026-11-10T12:31:18.932Z"
+      },
+      {
+        "id": "ev-13",
+        "pageId": "page-9",
+        "url": "https://suumo.jp/chintai/bc_100475302431/kankyo/",
+        "quote": "東急東横線/武蔵小杉駅 歩5分",
+        "capturedAt": "2026-11-10T12:31:58.076Z"
+      }
+    ],
+    "pages": [
+      {
+        "url": "https://suumo.jp/chintai/jnc_000110455233/",
+        "title": "【SUUMO】D Paina 中丸子／神奈川県川崎市中原区中丸子／向河原駅の賃貸・部屋探し情報（000110455233） | 賃貸マンション・賃貸アパート"
+      },
+      {
+        "url": "https://suumo.jp/chintai/jnc_000094254501/",
+        "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート"
+      },
+      {
+        "url": "https://suumo.jp/chintai/bc_100536394753/",
+        "title": "【SUUMO】フレメゾン（ハウスコム東神奈川(株)川崎駅前店提供）／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（100536394753） | 賃貸マンション・賃貸アパート"
+      },
+      {
+        "url": "https://suumo.jp/chintai/bc_100531827116/",
+        "title": "【SUUMO】D Paina 中丸子（(株)タウンハウジング神奈川 鹿島田店提供）／神奈川県川崎市中原区中丸子／向河原駅の賃貸・部屋探し情報（100531827116） | 賃貸マンション・賃貸アパート"
+      },
+      {
+        "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+        "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）"
+      },
+      {
+        "url": "https://suumo.jp/chintai/jnc_000111053787/",
+        "title": "【SUUMO】ラ・ミューズ／神奈川県川崎市中原区新丸子東２／武蔵小杉駅の賃貸・部屋探し情報（000111053787） | 賃貸マンション・賃貸アパート"
+      },
+      {
+        "url": "https://suumo.jp/chintai/bc_100475302431/",
+        "title": "【SUUMO】ラ・ミューズ（(株)ウォーム提供）／神奈川県川崎市中原区新丸子東２／武蔵小杉駅の賃貸・部屋探し情報（100475302431） | 賃貸マンション・賃貸アパート"
+      },
+      {
+        "url": "https://suumo.jp/chintai/bc_100536394753/kankyo/",
+        "title": "【SUUMO】フレメゾン（ハウスコム東神奈川(株)川崎駅前店提供）／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（100536394753） - 周辺環境｜賃貸マンション・賃貸アパート"
+      },
+      {
+        "url": "https://suumo.jp/chintai/bc_100475302431/kankyo/",
+        "title": "【SUUMO】ラ・ミューズ（(株)ウォーム提供）／神奈川県川崎市中原区新丸子東２／武蔵小杉駅の賃貸・部屋探し情報（100475302431） - 周辺環境｜賃貸マンション・賃貸アパート"
+      }
+    ],
+    "retrieval": {
+      "status": "verified",
+      "verifiedDetailUrls": [
+        "https://suumo.jp/chintai/jnc_000110455233/",
+        "https://suumo.jp/chintai/jnc_000094254501/",
+        "https://suumo.jp/chintai/bc_100536394753/",
+        "https://suumo.jp/chintai/bc_100531827116/",
+        "https://suumo.jp/chintai/jnc_000111053787/",
+        "https://suumo.jp/chintai/bc_100475302431/",
+        "https://suumo.jp/chintai/bc_100536394753/kankyo/",
+        "https://suumo.jp/chintai/bc_100475302431/kankyo/"
+      ],
+      "checkedPages": 9
+    }
+  },
+  "attempts": {
+    "batchWallMs": 385451,
+    "results": [
+      {
+        "id": "day-out",
+        "title": "上野で家族3人の一日遊び",
+        "wallMs": 60917,
+        "exit": 1
+      },
+      {
+        "id": "life-plan",
+        "title": "仕事・住居・車を一緒に考える人生計画",
+        "wallMs": 324533,
+        "exit": 2
+      }
+    ]
+  },
+  "dayOutRetryTiming": {
+    "wallMs": 395483,
+    "exit": 2,
+    "scope": "Includes waiting for the account-worker lease while life-plan runs. Use task.execution.elapsedMs for per-theme execution latency."
+  },
+  "aggregate": {
+    "executionMs": 558070,
+    "guestMs": 486799,
+    "tokens": 1055644,
+    "apiAdditionalUsd": 0,
+    "subscriptionAllocationUsd": null,
+    "microVmCostUsd": null
+  },
+  "limitations": [
+    "First day-out attempt failed before inference because worker restart timed out after 60.917 seconds; retry succeeded in producing a partial answer",
+    "Per-theme execution latency includes worker startup/auth check/runtime transfer/research/artifact download, excludes account-worker queue wait and developer preparation",
+    "Token counts are provider-reported cumulative thread usage; cache is included in input",
+    "No account invoice, subscription credit consumption, subscription fixed-cost allocation or local VM monetary cost was measured",
+    "The generated recommendations are sample plans and remain partial; unverified prices and failed source retrieval are preserved"
+  ]
+}

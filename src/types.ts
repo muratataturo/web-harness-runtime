@@ -63,6 +63,7 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  reviewWarnings?: string[];
   interactionMode?: import("./interaction.js").InteractionMode;
   execution?: {
     target: "local" | "openshell";

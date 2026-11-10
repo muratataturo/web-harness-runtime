@@ -20,3 +20,9 @@
 
 !benchmarks/
 !benchmarks/*.json
+
+!docs/
+!docs/evidence/
+!docs/evidence/recruit-theme-results.json
+!docs/evidence/codex-strata.json
+!docs/evidence/delivery-results.json

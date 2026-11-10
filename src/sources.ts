@@ -8,6 +8,13 @@ export interface Adapter {
 }
 export const adapters: Adapter[] = [
   {
+    id: "recruit-agent",
+    hosts: ["www.r-agent.com", "r-agent.com"],
+    keywords: /求人|仕事|転職|年収|リモート|job/i,
+    guidance:
+      "リクルートエージェントの公開求人。/viewjob/jk.../ の個別求人で職務・給与下限・雇用形態・勤務地・在宅条件を確認。一覧や検索スニペットを個別求人の根拠にしない。Indeedとは別の取得元として明示。応募はしない。",
+  },
+  {
     id: "official-visit",
     hosts: [
       "www.tokyo-zoo.net",
@@ -233,6 +240,8 @@ export function entityKey(value: string): string | undefined {
     id = url.pathname.match(/^\/chintai\/((?:bc|jnc)_[0-9]+)(?:\/|$)/)?.[1];
   if (adapter.id === "indeed" && /^\/(?:viewjob|rc\/clk)$/.test(url.pathname))
     id = url.searchParams.get("jk") ?? undefined;
+  if (adapter.id === "recruit-agent")
+    id = url.pathname.match(/^\/viewjob\/(jk[a-z0-9]+)\/?$/i)?.[1];
 
   if (adapter.id === "rakuten-beauty")
     id = url.pathname.match(/^\/(s\d{8,})(?:\/|$)/)?.[1];

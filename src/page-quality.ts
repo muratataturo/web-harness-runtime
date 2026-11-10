@@ -37,6 +37,13 @@ export function assessPage(
     };
   const title = page.title.trim();
   const text = page.text.trim();
+  if (/掲載終了|募集終了|売約済み/.test(title))
+    return {
+      kind: "not_found",
+      shouldStop: true,
+      reason:
+        "個別掲載が終了しています。現在の候補・在庫として使わず、公開一覧から現行詳細を探してください。",
+    };
   if (
     /サービス.{0,6}終了/.test(title) ||
     /楽天Car中古車は[\s\S]{0,100}サービス終了/.test(text)

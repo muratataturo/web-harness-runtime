@@ -1,6 +1,6 @@
 {
   "name": "web-harness-runtime",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "Pi + OpenRouter + agent-browser autonomous research task runtime",
@@ -21,18 +21,24 @@
     "format:check": "prettier --check src web test scripts examples benchmarks config .github",
     "eval:families": "node scripts/eval-families.mjs",
     "eval:day-out": "node scripts/eval-day-out.mjs",
-    "sandbox:local": "node scripts/local-openshell.mjs"
+    "sandbox:local": "node scripts/local-openshell.mjs",
+    "chat": "node --import tsx src/cli.ts chat",
+    "mcp": "node dist/cli.js mcp",
+    "test:chat": "node --import tsx scripts/chat-smoke.mjs",
+    "clients:config": "node dist/cli.js clients",
+    "opencode:client": "node scripts/opencode-client.mjs",
+    "package:cli": "npm run build && node scripts/package-cli.mjs"
   },
   "engines": {
     "node": ">=22"
   },
   "dependencies": {
     "@earendil-works/pi-coding-agent": "1.5.0",
-    "@sinclair/typebox": "^0.34.41",
+    "@sinclair/typebox": "0.34.52",
     "agent-browser": "0.41.2",
-    "cheerio": "^1.2.0",
-    "commander": "^14.0.0",
-    "dotenv": "^17.2.3"
+    "cheerio": "1.2.0",
+    "commander": "14.0.3",
+    "dotenv": "17.4.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
@@ -40,5 +46,19 @@
     "prettier": "^3.9.10",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
-  }
+  },
+  "files": [
+    "dist/*.js",
+    "web/*.html",
+    "web/*.js",
+    "web/*.css",
+    "config/*.json",
+    "examples/*.json",
+    "docs/usage.md",
+    "docs/delivery-results.md",
+    "docs/evidence/codex-strata.json",
+    "docs/evidence/recruit-theme-results.json",
+    "docs/evidence/delivery-results.json",
+    "scripts/opencode-client.mjs"
+  ]
 }

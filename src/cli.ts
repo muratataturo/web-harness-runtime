@@ -63,7 +63,7 @@ const program = new Command()
   .description(
     "Codex / Claude Code / pi + agent-browser 自律調査タスク runtime",
   )
-  .version("0.2.0");
+  .version("0.3.0");
 const integer = (value: string) => {
   const number = Number(value);
   if (!Number.isSafeInteger(number) || number < 1)
@@ -284,6 +284,133 @@ program
       clearTimeout(timer);
       await client.close();
     }
+  });
+const runsCommand = program
+  .command("runs")
+  .description("Chat / MCPと同じdaemon上の相談・承認を操作");
+const endpointOption = (c: Command) =>
+  c.option(
+    "--endpoint <origin>",
+    "local daemon",
+    process.env.HARNESS_URL ?? "http://127.0.0.1:4310",
+  );
+endpointOption(
+  runsCommand
+    .command("start")
+    .argument("<query>")
+    .requiredOption("--url <urls...>")
+    .option("--mode <mode>", "auto / approval", "approval")
+    .option("--agent <agent>")
+    .option("--model <model>")
+    .option("--source <source>", "live / replay", "live")
+    .option("--example <id>", "day-out / life-plan / books", "day-out")
+    .option("--confirm-live", "実調査によるモデル利用枠の使用を明示"),
+).action(async (query, opts) => {
+  const { harnessCall } = await import("./public-mcp.js");
+  console.log(
+    JSON.stringify(
+      await harnessCall(
+        "harness_start",
+        {
+          query,
+          urls: opts.url,
+          mode: opts.mode,
+          source: opts.source,
+          example: opts.example,
+          confirmLive: !!opts.confirmLive,
+          ...(opts.agent ? { agent: opts.agent } : {}),
+          ...(opts.model ? { model: opts.model } : {}),
+        },
+        opts.endpoint,
+      ),
+      null,
+      2,
+    ),
+  );
+});
+for (const action of ["get", "cancel"] as const)
+  endpointOption(runsCommand.command(action).argument("<id>")).action(
+    async (id, opts) => {
+      const { harnessCall } = await import("./public-mcp.js");
+      console.log(
+        JSON.stringify(
+          await harnessCall(`harness_${action}`, { id }, opts.endpoint),
+          null,
+          2,
+        ),
+      );
+    },
+  );
+endpointOption(runsCommand.command("list")).action(async (opts) => {
+  const { harnessCall } = await import("./public-mcp.js");
+  console.log(
+    JSON.stringify(
+      await harnessCall("harness_list", {}, opts.endpoint),
+      null,
+      2,
+    ),
+  );
+});
+endpointOption(
+  runsCommand
+    .command("decide")
+    .argument("<id>")
+    .requiredOption("--gate <id>")
+    .requiredOption("--revision <n>", "表示されたrevision", integer)
+    .requiredOption("--choice <id>")
+    .option("--additional-url <urls...>"),
+).action(async (id, opts) => {
+  const { harnessCall } = await import("./public-mcp.js");
+  console.log(
+    JSON.stringify(
+      await harnessCall(
+        "harness_decide",
+        {
+          id,
+          gateId: opts.gate,
+          revision: opts.revision,
+          choiceId: opts.choice,
+          confirmedByUser: true,
+          ...(opts.additionalUrl ? { additionalUrls: opts.additionalUrl } : {}),
+        },
+        opts.endpoint,
+      ),
+      null,
+      2,
+    ),
+  );
+});
+program
+  .command("clients")
+  .description(
+    "Codex / Claude Code / pi / OpenCode用のMCP設定を生成（既存設定を変更しない）",
+  )
+  .option("--output <directory>", "出力先", ".runtime/clients")
+  .option("--url <origin>", "daemon origin", "http://127.0.0.1:4310")
+  .action(async (opts) => {
+    const { writeClientConfigs } = await import("./client-config.js");
+    console.log(
+      JSON.stringify(await writeClientConfigs(opts.output, opts.url), null, 2),
+    );
+  });
+program
+  .command("mcp")
+  .description("MCP stdio bridge。先にchat/web daemonを起動してください")
+  .option(
+    "--url <origin>",
+    "loopback daemon origin",
+    process.env.HARNESS_URL ?? "http://127.0.0.1:4310",
+  )
+  .action(async (opts) => {
+    const { startPublicMcp } = await import("./public-mcp.js");
+    await startPublicMcp(opts.url);
+  });
+program
+  .command("chat")
+  .description("Recruit / RakutenスタイルのローカルChat UIと共有runtime API")
+  .option("--port <port>", "loopback port", integer, 4310)
+  .action(async (opts) => {
+    await startWorkbench(opts.port);
   });
 program
   .command("quota")

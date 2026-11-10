@@ -87,6 +87,12 @@ export const detailContracts: Record<string, DetailField[]> = {
     { id: "salary", pattern: /給与|年収|月給|時給/ },
     { id: "location", pattern: /勤務地|勤務場所/ },
   ],
+  "recruit-agent": [
+    { id: "job", pattern: /仕事内容|職務内容|業務内容|仕事の内容/ },
+    { id: "salary", pattern: /給与|年収|月給|時給|年俸/ },
+    { id: "location", pattern: /勤務地|勤務場所/ },
+    { id: "employment", pattern: /正社員|契約社員|雇用形態/ },
+  ],
   "rakuten-car": [
     access,
     price,

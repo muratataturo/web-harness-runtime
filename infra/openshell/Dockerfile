@@ -12,6 +12,7 @@ COPY examples ./examples
 COPY benchmarks ./benchmarks
 COPY config ./config
 COPY web ./web
+COPY docs/evidence/recruit-theme-results.json docs/evidence/codex-strata.json docs/evidence/delivery-results.json ./docs/evidence/
 COPY infra/openshell/chromium /opt/web-harness/infra/openshell/chromium
 RUN chmod 755 /opt/web-harness/infra/openshell/chromium \
     && ./node_modules/.bin/tsc \

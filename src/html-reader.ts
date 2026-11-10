@@ -15,7 +15,17 @@ export const prefersPublicHtml = (value: string) =>
     "www.maruka.net",
     "maruka.net",
     "www.jalan.net",
+    "www.r-agent.com",
+    "r-agent.com",
     "jalan.net",
+    "www.hotpepper.jp",
+    "hotpepper.jp",
+    "beauty.hotpepper.jp",
+    "www.carsensor.net",
+    "carsensor.net",
+    "jp.indeed.com",
+    "www.indeed.com",
+    "indeed.com",
     "suumo.jp",
     "www.suumo.jp",
     "beauty.rakuten.co.jp",
@@ -148,12 +158,17 @@ export function extractPublicHtml(
     $(el).prepend("\n");
     $(el).append("\n");
   });
-  const body = $("body")
+  let body = $("body")
     .text()
     .split(/\r?\n/)
     .map((l) => l.replace(/[\t \u00a0\u3000]+/g, " ").trim())
     .filter(Boolean)
     .join("\n");
+  if (
+    ["www.r-agent.com", "r-agent.com"].includes(new URL(url).hostname) &&
+    /^\/viewjob\/jk[a-z0-9]+\/?$/i.test(new URL(url).pathname)
+  )
+    body = body.split("\nあなたにおすすめの求人\n")[0]!;
   const text = title + "\n" + (offer ? offerText(offer) + "\n" : "") + body;
   return {
     url,

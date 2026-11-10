@@ -170,7 +170,7 @@ test("HTTP access denial and not-found are not mistaken for candidate evidence",
   }
   assert.equal(prefersPublicHtml(url), true);
   assert.equal(prefersPublicHtml("https://suumo.jp/chintai/bc_1/"), true);
-  assert.equal(prefersPublicHtml("https://jp.indeed.com/"), false);
+  assert.equal(prefersPublicHtml("https://jp.indeed.com/"), true);
 });
 test("SUUMO primary search results outrank surrounding-property advertising", () => {
   const page = extractPublicHtml(
@@ -206,4 +206,100 @@ test("authentication redirects stop before login navigation and preserve actual 
   assert.equal(p.acquisition?.status, 302);
   assert.equal(assessPage(p).kind, "login_required");
   assert.equal(p.url, url);
+});
+
+test("Recruit public HTML is preferred without relying on MicroVM Chromium; ended listings never pass", () => {
+  for (const u of [
+    "https://www.hotpepper.jp/strJ001100102/lunch/",
+    "https://www.carsensor.net/usedcar/detail/AU123/index.html",
+    "https://jp.indeed.com/jobs?q=test",
+  ])
+    assert.equal(prefersPublicHtml(u), true);
+  assert.equal(
+    assessPage({
+      title: "シエンタ（掲載終了）の中古車詳細",
+      text: "支払総額100万円 修復歴なし 走行1万km",
+    }).shouldStop,
+    true,
+  );
+});
+
+test("Recruit Agent job evidence excludes unrelated recommended jobs and has a distinct entity identity", async () => {
+  const u = "https://www.r-agent.com/viewjob/jk9b74b5709c774aad/";
+  const p = extractPublicHtml(
+    "<title>会社Aの求人</title><body><p>仕事内容</p><p>給与 年俸500万円 勤務地 東京都 正社員</p>" +
+      "<p>業務の詳細と勤務地条件を確認する公開求人情報です。</p>".repeat(10) +
+      "<h2>あなたにおすすめの求人</h2><p>別の会社の給与900万円</p></body>",
+    u,
+    ["www.r-agent.com"],
+  );
+  assert.doesNotMatch(p.text, /900万円/);
+  const { entityKey } = await import("../src/sources.js");
+  const { verifyDetail } = await import("../src/detail-contracts.js");
+  assert.equal(entityKey(u), "recruit-agent:jk9b74b5709c774aad");
+  assert.ok(!entityKey("https://www.r-agent.com/job_search/"));
+  assert.equal(
+    verifyDetail({ ...p, id: "p", capturedAt: new Date().toISOString() })
+      .status,
+    "verified",
+  );
+});
+
+test("ordinary runtime completion rejects contradictory cross-listing station claims, not only improvement loops", () => {
+  const t = newTask({
+    query: "武蔵小杉駅徒歩10分以内",
+    urls: ["https://suumo.jp/chintai/bc_100001/"],
+    maxPages: 3,
+    maxSteps: 10,
+    timeoutSeconds: 20,
+  });
+  setCriteria(t, [
+    {
+      id: "walk",
+      description: "武蔵小杉駅徒歩10分以内",
+      required: true,
+      weight: 1,
+    },
+  ]);
+  t.pages = [10, 19].map((n, i) => ({
+    id: `p-${i}`,
+    url: `https://suumo.jp/chintai/bc_10000${i + 1}/`,
+    title: "【SUUMO】同じ住居／神奈川県川崎市",
+    text:
+      `所在地\n神奈川県川崎市中原区中丸子\n専有面積33.53m2\n間取り1LDK\n14万円\n武蔵小杉駅 歩${n}分\n` +
+      "詳細情報。".repeat(20),
+    links: [],
+    truncated: false,
+    capturedAt: new Date().toISOString(),
+  }));
+  const ev = addEvidence(t, "p-0", "武蔵小杉駅 歩10分");
+  const candidate = {
+    name: "同じ住居",
+    url: t.pages[0]!.url,
+    matches: [
+      {
+        criterionId: "walk",
+        status: "supported" as const,
+        evidenceIds: [ev.id],
+        explanation: "一方の掲載は10分",
+      },
+    ],
+  };
+  assert.throws(
+    () => validateAnswer(t, "徒歩10分です", [candidate], []),
+    /駅徒歩.*矛盾/,
+  );
+  const safe = validateAnswer(
+    t,
+    "徒歩条件は掲載間で矛盾し未確認です",
+    [
+      {
+        ...candidate,
+        matches: [{ ...candidate.matches[0]!, status: "unknown" }],
+      },
+    ],
+    [],
+  );
+  assert.equal(safe.candidates[0]?.eligible, false);
+  assert.match(safe.summary, /runtime検証/);
 });

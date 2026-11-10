@@ -70,6 +70,7 @@ const child = spawn(
     stdio: ["ignore", "pipe", "pipe"],
   },
 );
+const childExit = new Promise((resolve) => child.once("close", resolve));
 let output = "";
 child.stdout.on("data", (b) => (output += b));
 child.stderr.on("data", (b) => (output += b));
@@ -80,7 +81,10 @@ try {
   let ready = false;
   for (let i = 0; i < 80; i++) {
     try {
-      if ((await fetch(base + "/api/config")).ok) {
+      if (child.exitCode !== null)
+        throw new Error("Web server exited: " + output);
+      const response = await fetch(base + "/api/config");
+      if (response.ok && (await response.json()).scenarios?.travel) {
         ready = true;
         break;
       }
@@ -369,6 +373,6 @@ try {
 } finally {
   await browser?.close();
   child.kill("SIGTERM");
-  await new Promise((resolve) => child.once("close", resolve));
+  await childExit;
   await rm(root, { recursive: true, force: true });
 }

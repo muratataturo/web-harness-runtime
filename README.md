@@ -1,5 +1,7 @@
 # Relay / web-harness-runtime
 
+**ローカル Chat / MCP / 配布CLIを追加しました。** [具体的なusage](docs/usage.md) / [今回の実回答・時間・費用](docs/delivery-results.md)。起動済みの画面: http://127.0.0.1:4311/chat 。Recruit/Rakutenスタイル、Approval/Auto、保存済み実測の再生と実調査を切り替えられます。`npm run sandbox:local -- run-codex chat --port 4311` でCodex MicroVMを使うChatを起動し、`npm start -- clients --url http://127.0.0.1:4311` で4種類のcoding agent用MCP設定を生成できます。
+
 **目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** 公式CodexのChatGPTログインを既定の調査エンジンとし、Claude Code Sonnet 5.5 / Haiku 5.5、pi + OpenRouter無料モデル、既存OpenCode × Strataも選択できるCLIです。Vercel agent-browserで調査し、Grok Bot / OpenMausBot / Rakazoの公開画面を参照した会話中心のWeb Mockと、self-host VM向けNVIDIA OpenShell executorを備えています。
 
 ## Web Mock を試す

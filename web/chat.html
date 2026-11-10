@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#087bd0" />
+    <title>つぎの、いい選択。｜Harness Chat</title>
+    <link rel="stylesheet" href="/chat.css" />
+  </head>
+  <body data-brand="recruit">
+    <aside class="rail">
+      <a href="/chat" class="wordmark" aria-label="Harness Chat ホーム"
+        ><span class="brand-symbol">r</span
+        ><span id="brand-name"
+          >RECRUIT<span class="wordmark-sub">inspired / HARNESS</span></span
+        ></a
+      >
+      <p class="local-label">
+        <span></span> LOCAL WORKSPACE <small>非公式・ローカル実験</small>
+      </p>
+      <button id="new-chat" class="new-chat">＋ 新しい相談</button>
+      <p class="nav-label">相談する</p>
+      <button class="example" data-example="day-out">
+        <span>☀</span>
+        <div>一日を、ちょっと特別に<small>遊び・食事・寄り道</small></div>
+        <b>↗</b></button
+      ><button class="example" data-example="life-plan">
+        <span>⌂</span>
+        <div>これからの暮らしを考える<small>仕事・住まい・移動</small></div>
+        <b>↗</b></button
+      ><button class="example" data-example="books">
+        <span>▤</span>
+        <div>根拠を確かめて選ぶ<small>本・買い物・情報確認</small></div>
+        <b>↗</b>
+      </button>
+      <p class="nav-label history-label">最近の相談</p>
+      <nav id="sessions" aria-label="保存した相談"></nav>
+      <div class="rail-bottom">
+        <a href="/">チーム Workbench ↗</a
+        ><button id="usage-toggle">CLI・MCP の使い方 ↗</button
+        ><small
+          >回答・選択・引用はこのPCに保存。<br />実調査は外部サイトとモデルに接続します。</small
+        >
+      </div>
+    </aside>
+    <main>
+      <header>
+        <button id="mobile-nav" aria-label="相談一覧を開く">☰</button>
+        <div class="brand-switch" aria-label="画面テーマ">
+          <button data-brand="recruit" aria-pressed="true">Recruit style</button
+          ><button data-brand="rakuten" aria-pressed="false">
+            Rakuten style
+          </button>
+        </div>
+        <span id="runtime-badge">実行環境を確認中</span>
+      </header>
+      <section class="conversation" id="conversation">
+        <div class="welcome">
+          <div class="eyebrow">YOUR NEXT GOOD CHOICE</div>
+          <h1>つぎの、<br /><span>いい選択を、一緒に。</span></h1>
+          <p>
+            やりたいことから、具体的な一歩まで。<br />得意なサービスをつないで、根拠のある提案を。
+          </p>
+          <div class="source-chips">
+            <span>じゃらん</span><span>HOT PEPPER</span><span>SUUMO</span
+            ><span>カーセンサー</span><span class="rakuten-chip">Rakuten</span>
+          </div>
+          <div class="intro-cards">
+            <button data-example="day-out">
+              <span>01 / DAY OUT</span
+              ><strong>子どもと一日、<br />無理なく楽しみたい。</strong
+              ><small>上野・家族3人・予算16,000円 ↗</small></button
+            ><button data-example="life-plan">
+              <span>02 / LIFE DESIGN</span
+              ><strong>仕事も家も、<br />自分らしく選びたい。</strong
+              ><small>武蔵小杉・在宅勤務・週末の車 ↗</small>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="compose-panel">
+        <div class="settings">
+          <label
+            >進め方<select id="chat-mode">
+              <option value="approval">Approval · 選びながら進む</option>
+              <option value="auto">Auto · 推奨で進める</option>
+            </select></label
+          ><label
+            >使うデータ<select id="data-source">
+              <option value="replay">保存済み実測で体験 · 推論なし</option>
+              <option value="live">実調査 · モデル利用枠を使用</option>
+            </select></label
+          ><label
+            >エンジン<select id="chat-agent">
+              <option value="codex">Codex</option>
+              <option value="claude-code">Claude Code</option>
+              <option value="pi-openrouter">pi / OpenRouter free</option>
+              <option value="opencode">OpenCode / Strata</option>
+            </select></label
+          >
+        </div>
+        <p id="mode-help">
+          推奨案と選択の影響を見て、あなたが決定。選ぶまで調査を始めません。
+        </p>
+        <form id="chat-form">
+          <label class="sr-only" for="chat-query">相談内容</label
+          ><textarea
+            id="chat-query"
+            rows="2"
+            placeholder="例：土曜日、子どもと上野で一日遊びたい。家族で16,000円以内で。"
+          ></textarea>
+          <details id="url-options">
+            <summary>調べるURL・サンプル条件</summary>
+            <label
+              >公開URL（1行に1つ）<textarea id="chat-urls" rows="3"></textarea>
+            </label>
+            <p>
+              実調査では入力URLを使います。保存済み実測の体験は、選んだ例の当時の回答を再生します。
+            </p>
+          </details>
+          <div class="compose-actions">
+            <span id="source-help"
+              >実際に取得した回答を、追加の推論なしで体験できます。</span
+            ><button id="send-chat" type="submit">
+              相談をはじめる <b>↑</b>
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <aside class="inspector">
+      <div class="inspector-title">この相談の見える化 <span>◉</span></div>
+      <div id="inspection">
+        <p>提案の根拠、未確認のこと、<br />実行時間をここにまとめます。</p>
+        <div class="flow">
+          <b>1</b><span>好みを伝える</span><b>2</b><span>公開情報を調べる</span
+          ><b>3</b><span>根拠を見て選ぶ</span>
+        </div>
+      </div>
+    </aside>
+    <dialog id="usage">
+      <button id="usage-close" aria-label="閉じる">×</button>
+      <h2>好きな入口から、同じ runtime へ。</h2>
+      <p>この画面、CLI、MCPは同じローカル保存先を使用します。</p>
+      <h3>ローカル Chat</h3>
+      <pre>
+npm run chat
+# http://127.0.0.1:4310/chat</pre>
+      <h3>Codex MicroVM の Chat</h3>
+      <pre>npm run sandbox:local -- run-codex chat</pre>
+      <h3>CLI</h3>
+      <pre>
+npm run sandbox:local -- run-codex run-file \
+  examples/recruit-day-out.json --mode auto --json</pre>
+      <h3>MCP（daemonを先に起動）</h3>
+      <pre>
+node /absolute/path/dist/cli.js mcp
+# harness_start → harness_get → harness_decide</pre>
+      <p>
+        VM対応: Codex / pi。Claude Code /
+        OpenCodeの調査プロセスはlocalを選びます。クライアントとしては4エージェントから同じMCPを利用できます。
+      </p>
+    </dialog>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <script src="/chat.js"></script>
+  </body>
+</html>

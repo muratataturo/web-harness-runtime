@@ -1,0 +1,57 @@
+{
+  "observedAt": "2026-11-10T14:59:03.167Z",
+  "checks": {
+    "types": true,
+    "tests": 160,
+    "testsFailed": 0,
+    "format": true,
+    "build": true,
+    "benchmark": {
+      "cases": 8,
+      "labels": 28,
+      "humanReviewed": 0
+    },
+    "chatFlows": {
+      "passed": 7,
+      "checks": [
+        "Recruit desktop welcome, sample query and source disclosure",
+        "Rakuten theme persists after reload",
+        "Approval waits before any lookup; recommended choice is not auto-submitted",
+        "Approval result gate + durable reload + accept partial without fabricated success",
+        "Auto makes a visible runtime decision, no input gates, saved answer restored",
+        "390px mobile: no horizontal overflow, navigation and saved answer usable",
+        "No browser JavaScript errors"
+      ],
+      "artifacts": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/chat-qa"
+    },
+    "workbenchFlows": 11
+  },
+  "package": {
+    "artifact": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/releases/web-harness-runtime-0.3.0.tgz",
+    "shasum": "b8ab236394c317b6e2dab4e04d5d62005ac55c21",
+    "integrity": "sha512-rcpUrB2KiSZe7aXOsZiKEt24fgVzykqt1l1wOGMOdXt8/8v0PgAWZsws+WSsEiyt8x48rjVWNr+9WMJbvXrqhg==",
+    "size": 261483,
+    "fileCount": 70,
+    "privateFilesAbsent": true,
+    "requiredAssetsPresent": true
+  },
+  "installedCli": {
+    "version": "0.3.0",
+    "chatHttp": 200,
+    "snapshotGeneratedWithoutPackageLock": true,
+    "installPrefix": "/private/tmp/whr-cli-install"
+  },
+  "container": {
+    "chatHttp": 200,
+    "brandUi": true,
+    "replay": "completed_partial",
+    "inference": false,
+    "codeVersion": "0.3.0"
+  },
+  "image": "web-harness-codex:delivery",
+  "limitations": [
+    "Clean base build waited on registry metadata and was cancelled; offline release from existing image succeeded",
+    "Remote self-host VM deployment not executed; current research VM is the local OpenShell MicroVM",
+    "No claim that Indeed HTTP 403 or MicroVM Chromium DOM was fixed"
+  ]
+}

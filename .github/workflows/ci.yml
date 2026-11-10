@@ -22,6 +22,7 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: node dist/cli.js benchmark check
+      - run: node scripts/package-cli.mjs
   ux:
     runs-on: ubuntu-latest
     steps:
@@ -33,8 +34,11 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run test:ui
+      - run: npm run test:chat
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ux-screenshots
-          path: .runtime/ui-qa
+          path: |
+            .runtime/ui-qa
+            .runtime/chat-qa

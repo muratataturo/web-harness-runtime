@@ -14,6 +14,7 @@ import { doctorOpenShell } from "./sandbox.js";
 import { ImprovementStore, decideImprovement } from "./improvement.js";
 import { codexSandboxStatus } from "./codex-sandbox.js";
 import { strataConnection } from "./opencode.js";
+import { RunService, runtimeCapabilities } from "./run-service.js";
 const webRoot = fileURLToPath(new URL("../web/", import.meta.url));
 function send(res: ServerResponse, status: number, body: unknown) {
   res.writeHead(status, {
@@ -37,7 +38,8 @@ export function createWorkbenchServer(
   engine = new GoalEngine(),
   taskStore = new Store(),
 ) {
-  return createServer(async (req, res) => {
+  const runs = new RunService(taskStore);
+  const server = createServer(async (req, res) => {
     try {
       const host = req.headers.host ?? "";
       if (!/^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(host)) {
@@ -59,6 +61,60 @@ export function createWorkbenchServer(
       }
       const url = new URL(req.url ?? "/", "http://localhost");
       const path = url.pathname;
+      if (path === "/api/runtime" && req.method === "GET") {
+        send(res, 200, runtimeCapabilities());
+        return;
+      }
+      if (path === "/api/examples" && req.method === "GET") {
+        const examples = await Promise.all(
+          ["day-out", "life-plan"].map(async (id) => ({
+            id,
+            ...JSON.parse(
+              await readFile(
+                new URL(`../examples/recruit-${id}.json`, import.meta.url),
+                "utf8",
+              ),
+            ),
+          })),
+        );
+        send(res, 200, [
+          ...examples.map((example) => ({
+            ...example,
+            query:
+              example.id === "day-out"
+                ? "2026年11月14日（土）、大人2人と5歳児で上野を一日楽しみたい。家族予算16,000円、休憩2回。動物を主役に、科学博物館は無理のない範囲で。土曜に使えるランチと雨の日の案、交通・食事を含む予算も教えて。"
+                : "武蔵小杉周辺で、リモート中心の仕事と駅近の家、週末に使える小さな車のある暮らしを考えたい。住居は1LDK・駅徒歩10分以内・家賃と管理費で月15万円以内。仕事は正社員・年収下限500万円以上を希望。車は支払総額150万円以内。仕事・住居・車を決める順番と、無理のない行動案を教えて。",
+          })),
+          {
+            id: "books",
+            title: "本の確認・承認モードを試す",
+            query:
+              "この本の価格と著者本人の直筆サイン付きを確認してください。記載がなければunknownを保持してください。",
+            urls: ["https://books.rakuten.co.jp/rb/18577690/"],
+          },
+        ]);
+        return;
+      }
+      if (path === "/api/runs") {
+        if (req.method === "GET") send(res, 200, await runs.list());
+        else if (req.method === "POST")
+          send(res, 202, await runs.create(await body(req)));
+        else send(res, 405, { error: "GET / POST only" });
+        return;
+      }
+      const runMatch = path.match(
+        /^\/api\/runs\/([a-zA-Z0-9-]+)(?:\/(decision|cancel))?$/,
+      );
+      if (runMatch) {
+        if (req.method === "GET" && !runMatch[2])
+          send(res, 200, await runs.get(runMatch[1]!));
+        else if (req.method === "POST" && runMatch[2] === "decision")
+          send(res, 202, await runs.decide(runMatch[1]!, await body(req)));
+        else if (req.method === "POST" && runMatch[2] === "cancel")
+          send(res, 200, await runs.cancel(runMatch[1]!));
+        else send(res, 405, { error: "Unsupported method" });
+        return;
+      }
       if (path === "/api/improvements" && req.method === "GET") {
         send(res, 200, await new ImprovementStore(taskStore).list());
         return;
@@ -179,12 +235,12 @@ export function createWorkbenchServer(
         }
       }
       if (path === "/api/tasks" && req.method === "GET") {
-        send(res, 200, await new Store().list());
+        send(res, 200, await taskStore.list());
         return;
       }
       const taskMatch = path.match(/^\/api\/tasks\/([a-zA-Z0-9-]+)$/);
       if (taskMatch && req.method === "GET") {
-        send(res, 200, await new Store().get(taskMatch[1]!));
+        send(res, 200, await taskStore.get(taskMatch[1]!));
         return;
       }
       if (path === "/api/sandbox" && req.method === "GET") {
@@ -193,6 +249,9 @@ export function createWorkbenchServer(
       }
       const staticFiles: Record<string, [string, string]> = {
         "/": ["index.html", "text/html"],
+        "/chat": ["chat.html", "text/html"],
+        "/chat.js": ["chat.js", "text/javascript"],
+        "/chat.css": ["chat.css", "text/css"],
         "/app.js": ["app.js", "text/javascript"],
         "/style.css": ["style.css", "text/css"],
       };
@@ -225,6 +284,11 @@ export function createWorkbenchServer(
       );
     }
   });
+  server.once("close", () => {
+    engine.shutdown();
+    void runs.shutdown();
+  });
+  return server;
 }
 export async function startWorkbench(port = 4310) {
   if (!Number.isInteger(port) || port < 1024 || port > 65535)
@@ -235,7 +299,14 @@ export async function startWorkbench(port = 4310) {
     server.listen(port, "127.0.0.1", resolve);
   });
   console.log(
-    `Relay Workbench: http://127.0.0.1:${port}\n体験モードは外部APIを使用しません。Ctrl+Cで終了します。`,
+    `Harness Chat: http://127.0.0.1:${port}/chat\nRelay Workbench: http://127.0.0.1:${port}\n体験モードは外部APIを使用しません。Ctrl+Cで終了します。`,
   );
+  const stop = () => server.close();
+  process.once("SIGINT", stop);
+  process.once("SIGTERM", stop);
+  server.once("close", () => {
+    process.removeListener("SIGINT", stop);
+    process.removeListener("SIGTERM", stop);
+  });
   return server;
 }

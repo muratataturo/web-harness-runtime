@@ -19,6 +19,7 @@ import {
 } from "../src/codex-sandbox.js";
 import {
   buildRuntimeSnapshot,
+  snapshotAssets,
   snapshotInstallScript,
 } from "../src/runtime-snapshot.js";
 import { Store } from "../src/store.js";
@@ -45,16 +46,12 @@ test("Codex worker policy is native-binary scoped and has no OpenRouter credenti
 test("Runtime snapshots include only compiled code/public assets, exclude secrets, and produce valid installer JS", async () => {
   const root = await mkdtemp(join(tmpdir(), "codex-snapshot-"));
   try {
-    for (const dir of ["dist", "web", "config"]) await mkdir(join(root, dir));
-    for (const file of [
-      "dist/cli.js",
-      "dist/codex.js",
-      "web/index.html",
-      "web/app.js",
-      "web/style.css",
-      "config/trusted-urls.json",
-    ])
+    for (const dir of ["dist", "web", "config", "examples", "docs"])
+      await mkdir(join(root, dir));
+    for (const file of ["dist/cli.js", "dist/codex.js", ...snapshotAssets]) {
+      await mkdir(join(root, file, ".."), { recursive: true });
       await writeFile(join(root, file), "public");
+    }
     await writeFile(join(root, "package-lock.json"), "{}");
     await writeFile(join(root, "package.json"), "{}");
     await writeFile(join(root, ".env"), "private-secret");

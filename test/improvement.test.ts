@@ -534,12 +534,14 @@ test("SUUMO conflicting cross-listings cannot manufacture a verified walk-time c
     b = "https://suumo.jp/chintai/jnc_000110455233/";
   t.pages = [page(a, "p1", 10), page(b, "p2", 19)];
   const ev = addEvidence(t, "p1", "武蔵小杉駅 徒歩10分");
-  t.answer = validateAnswer(
-    t,
-    "徒歩10分と掲載",
-    [
+  // Historical pre-validation record: diagnosis must still catch it.
+  t.answer = {
+    summary: "徒歩10分と掲載",
+    candidates: [
       {
         name: "物件",
+        score: 100,
+        eligible: true,
         url: a,
         matches: [
           {
@@ -551,7 +553,11 @@ test("SUUMO conflicting cross-listings cannot manufacture a verified walk-time c
         ],
       },
     ],
-    [],
+    limitations: [],
+  };
+  assert.throws(
+    () => validateAnswer(t, t.answer!.summary, t.answer!.candidates, []),
+    /駅徒歩.*矛盾/,
   );
   assert.equal(diagnose(t, c, [a]).causes.includes("source_conflict"), true);
   assert.equal(diagnose(t, c, [a]).complete, false);
@@ -583,11 +589,13 @@ test("two URLs for an apparently identical SUUMO room cannot satisfy a two-room 
     capturedAt: new Date().toISOString(),
     truncated: false,
   }));
-  t.answer = validateAnswer(
-    t,
-    "2掲載",
-    roomUrls.map((url, i) => ({
+  // Historical duplicate result remains diagnosable; new completions reject it.
+  t.answer = {
+    summary: "2掲載",
+    candidates: roomUrls.map((url, i) => ({
       name: "部屋" + i,
+      score: 100,
+      eligible: true,
       url,
       matches: [
         {
@@ -598,7 +606,11 @@ test("two URLs for an apparently identical SUUMO room cannot satisfy a two-room 
         },
       ],
     })),
-    [],
+    limitations: [],
+  };
+  assert.throws(
+    () => validateAnswer(t, t.answer!.summary, t.answer!.candidates, []),
+    /重複/,
   );
   assert.equal(
     diagnose(t, t.criteria, roomUrls, true).causes.includes(

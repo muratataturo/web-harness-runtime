@@ -245,7 +245,7 @@ async function ensure(
       "start-codex-worker",
       ["sandbox", "start", config.name],
       signal,
-      60000,
+      180000,
     );
   }
   return ready(config, signal);
@@ -350,6 +350,7 @@ export async function runCodexSandbox(
   const config = codexSandboxConfig(input);
   if (options.agent !== "codex" || options.benchmark || options.headed)
     throw new Error("Codex workerはcodexの公開調査のみ対応します");
+  options.onProgress?.("Codex account-workerの空きと起動状態を確認しています");
   return lease(
     config,
     async () => {

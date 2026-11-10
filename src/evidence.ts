@@ -1,5 +1,6 @@
 import { entityKey } from "./sources.js";
 import { assessPage } from "./page-quality.js";
+import { roomConflicts } from "./improvement-conflicts.js";
 import type {
   Answer,
   Candidate,
@@ -99,6 +100,18 @@ export function validateAnswer(
     new Set(input.map((c) => c.url)).size !== input.length
   )
     throw new Error("候補は URL が重複しない最大 10 件です");
+  const conflicts = roomConflicts({
+    ...task,
+    answer: {
+      summary,
+      candidates: input.map((c) => ({ ...c, score: 0, eligible: false })),
+      limitations,
+    },
+  });
+  if (conflicts.duplicateUrls.size)
+    throw new Error(
+      "同一住居の別掲載を重複候補にできません。異なる住居を比較してください",
+    );
   const candidates = input
     .map((c) => ({
       ...c,
@@ -155,6 +168,14 @@ export function validateAnswer(
         }
       }
       for (const m of candidate.matches) {
+        if (
+          m.status === "supported" &&
+          conflicts.stationConflicts.get(candidate.url)?.includes(m.criterionId)
+        )
+          throw new Error(
+            "同一住居の掲載間で駅徒歩の記載が矛盾しています。該当条件はunknownにし、要約でも徒歩条件を確認済みと断定しないでください: " +
+              candidate.url,
+          );
         const criterion = task.criteria.find((c) => c.id === m.criterionId)!;
         if (
           m.status === "supported" &&
@@ -222,7 +243,15 @@ export function validateAnswer(
     .sort(
       (a, b) => Number(b.eligible) - Number(a.eligible) || b.score - a.score,
     );
-  return { summary, candidates, limitations };
+  const warning = conflicts.stationConflicts.size
+    ? "掲載間で駅徒歩の記載が一致しない住居があります。駅徒歩条件は未確認です: " +
+      [...conflicts.stationConflicts.keys()].join(", ")
+    : undefined;
+  return {
+    summary: warning ? "【runtime検証】" + warning + "\n\n" + summary : summary,
+    candidates,
+    limitations: warning ? [...limitations, warning] : limitations,
+  };
 }
 function sameEntity(a: Page, b: Page) {
   const x = entityKey(a.url),
