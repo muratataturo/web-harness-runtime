@@ -234,3 +234,16 @@ UI試験は Playwright を使います。既存 Chrome/Chromium を自動検出�
 - [PR説明](docs/pr.md)
 
 参照: [agent-browser](https://github.com/vercel-labs/agent-browser)、[pi SDK](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/sdk.md)、[OpenRouter無料モデル](https://openrouter.ai/docs/guides/routing/model-variants/free)、[NVIDIA OpenShell](https://github.com/NVIDIA/OpenShell)、[Grok Bot](https://x.ai/bot)、[OpenMausBot](https://github.com/milind-soni/OpenMausBot)、[Rakazo](https://github.com/elie222/rakazo)。
+
+## CLIの自己改善ループ
+
+`run --self-improve` で初回の未達を診断・再計画・再実行・独立検証します。保存済みタスクは `improve TASK_ID`。既定3回、条件と必要件数は保持し、改善を採用するか旧情報を訂正した履歴を残します。許可した場合だけ `--allow-replacements` で別候補を探索します。公開情報で埋められない項目は `needs_input` として質問・選択肢を返します。
+
+```sh
+npm start -- improve TASK_ID --iterations 3 --timeout 600
+npm start -- improve TASK_ID --allow-replacements --iterations 3
+npm start -- improvements diagnose TASK_ID
+npm start -- improvements list
+```
+
+楽天ブックスではCodexとpi/OpenRouter無料モデルの両方で、実際に初回未完了から改善1回で2冊・全10条件の比較へ回復しました。美容室のアイドル風根拠やSUUMO管理費は追加調査後も未確認が残り、未達ゼロを装わず停止しています。[仕様・CLI・実測結果](docs/self-improvement.md)。

@@ -63,6 +63,7 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  improvement?: import("./improvement-context.js").ImprovementContext;
   id: string;
   parentId?: string;
   goalId?: string;

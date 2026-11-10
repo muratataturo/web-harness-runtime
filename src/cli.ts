@@ -4,7 +4,14 @@ import { Command, InvalidArgumentError } from "commander";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { readFile } from "node:fs/promises";
+import {
+  improveTask,
+  ImprovementStore,
+  renderImprovement,
+  diagnose,
+} from "./improvement.js";
 import { Store } from "./store.js";
+import { assessPage } from "./page-quality.js";
 import { runTask } from "./runtime.js";
 import {
   TrustedStore,
@@ -16,7 +23,7 @@ import { claudeAuthentication, claudeModels } from "./claude.js";
 import { freeQuota } from "./quota.js";
 import { CodexAgent, agentEngine } from "./codex.js";
 import { freeModels } from "./models.js";
-import { routeSources, adapters } from "./sources.js";
+import { routeSources, adapters, entityKey } from "./sources.js";
 import { browserBin } from "./browser.js";
 import { GoalEngine } from "./goals.js";
 import { startWorkbench } from "./server.js";
@@ -36,7 +43,9 @@ config({ quiet: true });
 process.umask(0o077);
 const program = new Command()
   .name("web-harness")
-  .description("Codex / pi + agent-browser 自律調査タスク runtime")
+  .description(
+    "Codex / Claude Code / pi + agent-browser 自律調査タスク runtime",
+  )
   .version("0.2.0");
 const integer = (value: string) => {
   const number = Number(value);
@@ -67,6 +76,18 @@ const withRunOptions = (command: Command) =>
       },
       2,
     )
+    .option(
+      "--allow-replacements",
+      "自己改善時に同じ条件・同数以上の代替候補を探索可能にする",
+    )
+    .option("--self-improve", "未達を診断して最大3回の自己改善を実行")
+    .option("--improve-iterations <n>", "自己改善の実行回数1〜5", integer, 3)
+    .option(
+      "--improve-timeout <seconds>",
+      "自己改善全体の制限時間（最大3600秒）",
+      integer,
+      1800,
+    )
     .option("--headed", "ブラウザを画面表示")
     .option("--json", "JSON形式で結果を出力");
 async function execute(
@@ -75,6 +96,11 @@ async function execute(
   opts: any,
   parentId?: string,
 ) {
+  if (
+    opts.selfImprove &&
+    (opts.improveIterations > 5 || opts.improveTimeout > 3600)
+  )
+    throw new Error("自己改善は最大5回・3600秒です");
   const controller = new AbortController();
   const cancel = () => controller.abort();
   process.once("SIGINT", cancel);
@@ -94,6 +120,31 @@ async function execute(
       signal: controller.signal,
       onProgress: (m) => process.stderr.write(m + "\n"),
     });
+    if (
+      opts.selfImprove &&
+      !controller.signal.aborted &&
+      task.pages.some((p) => {
+        const key = entityKey(p.url);
+        return key && !key.startsWith("generic:") && !assessPage(p).shouldStop;
+      }) &&
+      task.criteria.length
+    ) {
+      const loop = await improveTask(task.id, {
+        allowReplacements: opts.allowReplacements,
+        maxIterations: opts.improveIterations,
+        timeoutSeconds: opts.improveTimeout,
+        signal: controller.signal,
+        onProgress: (m) => process.stderr.write(m + "\n"),
+      });
+      const best = await new Store().get(loop.bestTaskId);
+      console.log(
+        opts.json
+          ? JSON.stringify({ loop, task: best }, null, 2)
+          : renderImprovement(loop) + "\n\n" + renderAnswer(best),
+      );
+      process.exitCode = improvementExitCode(loop.status);
+      return;
+    }
     console.log(opts.json ? JSON.stringify(task, null, 2) : renderAnswer(task));
     process.stderr.write(
       `status: ${task.status}\nartifacts: ${new Store().dir(task.id)}\n`,
@@ -228,6 +279,96 @@ withRunOptions(
     id,
   );
 });
+function improvementExitCode(status: string) {
+  return status === "succeeded"
+    ? 0
+    : status === "cancelled"
+      ? 130
+      : status === "needs_input"
+        ? 2
+        : 1;
+}
+program
+  .command("improve")
+  .description("保存タスクの未達を診断・計画・再実行・検証し最良結果を保存")
+  .argument("<task-id>")
+  .option("--allow-replacements", "同じ条件・同数以上の代替候補の探索を許可")
+  .option("--url <urls...>", "確認に使う同一対象の追加公開URL（最大8件）")
+  .option("--iterations <n>", "最大改善回数1〜5", integer, 3)
+  .option(
+    "--timeout <seconds>",
+    "ループ全体の制限時間（最大3600秒）",
+    integer,
+    1800,
+  )
+  .option("--agent <engine>", "省略時は元タスクのエンジン")
+  .option("--model <id>", "省略時は元タスクのモデル。別エンジンなら明示指定")
+  .option("--json")
+  .action(async (id, opts) => {
+    const controller = new AbortController();
+    const cancel = () => controller.abort();
+    process.once("SIGINT", cancel);
+    process.once("SIGTERM", cancel);
+    try {
+      const loop = await improveTask(id, {
+        allowReplacements: opts.allowReplacements,
+        additionalUrls: opts.url,
+        maxIterations: opts.iterations,
+        timeoutSeconds: opts.timeout,
+        agent: opts.agent ? agentEngine(opts.agent) : undefined,
+        model: opts.model,
+        signal: controller.signal,
+        onProgress: (m) => process.stderr.write(m + "\n"),
+      });
+      const task = await new Store().get(loop.bestTaskId);
+      console.log(
+        opts.json
+          ? JSON.stringify({ loop, task }, null, 2)
+          : renderImprovement(loop) + "\n\n" + renderAnswer(task),
+      );
+      process.exitCode = improvementExitCode(loop.status);
+    } finally {
+      process.removeListener("SIGINT", cancel);
+      process.removeListener("SIGTERM", cancel);
+    }
+  });
+const improvements = program
+  .command("improvements")
+  .description("自己改善の診断・採否・最良結果・要確認事項の履歴");
+improvements
+  .command("diagnose")
+  .argument("<task-id>")
+  .description("推論せず保存済み本文と引用から未達を再診断")
+  .action(async (id) => {
+    const task = await new Store().get(id);
+    console.log(
+      JSON.stringify(
+        diagnose(
+          task,
+          task.criteria,
+          task.answer?.candidates.map((c) => c.url) ?? [],
+        ),
+        null,
+        2,
+      ),
+    );
+  });
+improvements.command("list").action(async () => {
+  for (const l of await new ImprovementStore().list())
+    console.log(
+      `${l.id}\t${l.status}\t${l.sourceTaskId}\t${l.best.gaps.length}未達`,
+    );
+});
+improvements
+  .command("show")
+  .argument("<id>")
+  .option("--json")
+  .action(async (id, opts) => {
+    const loop = await new ImprovementStore().get(id);
+    console.log(
+      opts.json ? JSON.stringify(loop, null, 2) : renderImprovement(loop),
+    );
+  });
 program
   .command("doctor")
   .description("実行エンジンの認証・モデル・ブラウザを確認")
