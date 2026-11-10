@@ -1,63 +1,33 @@
-# Codex対応の自律調査CLI、承認型UX、trusted URL検証基盤を追加
+# 複数coding agent対応の自律調査CLI・承認型UX・trusted URL検証基盤
 
-自然言語と候補URLを受け、公式Codex（ChatGPTログイン、既定）またはpi + OpenRouter無料モデルとagent-browserで条件付き比較を返すruntimeを追加する。さらに「箱根の2泊3日」と「仕事・住居・車をまとめて考える暮らし」のWeb体験を用意し、目標を分担・並列調査・レビュー・再調査し、重要な好みを人の選択で決める流れを操作可能にする。
+自然言語と候補URLから個別対象を調査し、引用付きの比較と未確認事項を返すruntimeを追加する。CodexのChatGPTログイン（既定）、Claude CodeのSonnet 5.5 / Haiku 5.5、pi × OpenRouterの無料モデルを同じ調査・完了判定へ接続する。旅行や仕事・住居・車の目標を分担し、好みを人が選びながら進めるWeb体験も用意する。
 
 ## 実装
 
-- CLI: run/run-file、モデル・ソース一覧、状態・履歴・retry、5サービスの評価ケースとbrowser-only切り分け。楽天8アダプター、詳細完了契約、trusted URL台帳と再検証CLI。
-- 調査品質: 個別エンティティの判定、同じ候補への引用対応、一覧/制限画面の推薦拒否、引用修復の案内、無料枠切れの分類。
-- Router: DAG検証、上限2の並列実行、未確認の前提を持つタスクのskip、タスクと目標の関連付け。
-- 協調: 内部A2A envelope、メンバー/配送ID/hop検査、会話内の指摘と差し戻し。外部A2A規格への準拠はうたわない。
-- 人の選択: 推奨案と2〜3択、トレードオフ、予算・追加のこだわり、改訂と承認履歴、停止、古い処理の結果書き戻し防止。
-- UI: Grok Bot/OpenMausBot/Rakazoの公開画面を参照した、左Bot一覧・中央会話・右Computer。日本語、モバイル、キーボード、履歴復元。
-- OpenShell: self-host gateway向けイメージ・provider・host限定policy・dry-run・sandbox発行・成果物回収・router executor。実キーをimageやsandboxへ保存しない。
-- CI: Node22/24の型・テスト・ビルド、APIキーなしのブラウザ試験。
-
-## 関連性と並列性
-
-実装はCLI品質、OpenShell、参照UX、Router/Webを並行して進め、共通Task/RunOptions契約で統合した。実行時の並列性は目標ごとに制限する。旅行の宿・食事・観光は独立。暮らしの車は仕事と住居に依存。レビュー後の再調査は先行結果の後にだけ進める。control planeと承認はsandbox外に置く。
+- CLIのrun/run-file/retry/eval/trusted runとWebのlive実行でエンジンを選択。Codexは公式App Server、Claude Codeは公式CLIと専用MCPで連携し、APIキーや別モデルへ自動fallbackしない。
+- 個別対象・領域別必須詳細・引用の本文一致を検証。情報不足は同一対象の子ページと公開HTMLの描画で追加調査し、既定2ラウンド・追加4ページで打ち切る。埋まらない条件はunknown/partialとして返す。
+- 楽天市場の価格は対象URLに一致する一意のProduct/Offer Microdataも使用。価格帯とSKU確定価格・送料・在庫を区別し、クーポンや関連商品額を採用しない。美容の必須アイドル条件とSUUMO管理費「-」の扱いも補強する。
+- trusted URLはL0〜L4の取得レベルを証拠から計算。L3以上の個別URLのみを7日有効で登録し、再検証失敗は除外する。台帳はロック・atomic更新・新旧検査で保護。現在12サービス24URL（L3:4 / L4:20）。L4は追加情報量を表し、予約可能性や条件適合は保証しない。
+- Goal RouterはDAGに沿って最大2タスクを並列実行。旅行の宿・食事・観光は独立、暮らしの車は仕事・住居へ依存する。内部A2Aの配送検査とレビュー後の再調査を備える。
+- Web MockはBot一覧・会話・Computerの構成、推奨案と選択肢、好み・予算の改訂、承認履歴、停止、履歴復元、日本語・モバイル操作に対応。
+- OpenShellはself-host gateway用イメージ・provider・host限定policy・計画・発行・成果物回収を備える。control planeと人の承認はsandbox外に置く。
 
 ## 検証
 
-- `npm run check`、`npm test`（80件）、`npm run build`、整形チェック。
-- `npm run test:ui`: デスクトップ/390pxモバイルで8フロー。両シナリオ、好みの反映、再読み込み、改訂、停止、JSエラー0。
-- `npm start -- eval --browser-only --case gourmet-kyoto-lunch`: 一覧→個別ランチ詳細2件を取得。
-- `eval --retrieval-only --case jalan-hakone-onsen suumo-kosugi-rental`: 公開HTMLで一覧→詳細2件ずつを取得。
-- `quota`: 無料残量と日本時間の次回リセットを表示。残量0ならruntimeは推論要求前に終了。
-- Docker Linux arm64: image build、uid1000・秘密なし・network noneでCLI/Chromium起動とページ取得。
-- sandbox発行計画のargv/policyと、timeout・出力上限・中断を実プロセスでテスト。
+- 型検査、100テスト、ビルド、整形チェック。CIはNode22/24とブラウザ試験を実行し、実ログインや推論キーを不要にする。
+- Webのデスクトップ/390pxモバイルで8フローを確認。Dockerは非root・ホスト秘密情報なし・network noneでCLIとChromiumの起動を確認。
+- Recruit/楽天16サービスを取得検証。詳細を取得できた12サービスを登録し、Indeedの制限・楽天不動産の認証・楽天中古車の終了・Careersの詳細未対応は登録しない。
+- Sonnet 5.5で楽天トラベルを比較し、サロンのスタイル詳細も追加調査。Haiku 5.5で楽天市場を比較し、SUUMOの不明管理費は未確認を維持。回復したpi/OpenRouter無料枠でもRecruitグルメ・楽天市場を完走。共通機能追加後のCodexは楽天ブックスで回帰確認。
+- 全16サービスのCodex実測と、今回の7件の代表実測はそれぞれ記録する。全サービス×全モデルの品質合格とはしない。
 
-## レビュー時の重要な制約
+## 制約と確認資料
 
-このPRはUXを仕上げるためのMockと、実行基盤の段階実装。体験モードの施設・価格・レビューは架空。liveの横断レビューはルール検証で、交通/料金の統合最適化は実装していない。方針改訂は全再計画。
+Web体験モードの施設・価格は架空。横断レビューはルール検証で、交通や料金の統合最適化は未実装。外部A2A規格への準拠は主張しない。公開画面を参照した会話構成であり、Grokの認証後機能全体の複製ではない。
 
-他サービスの回答品質を全面合格とはしない。グルメ/カーセンサーに加え、じゃらん/SUUMOも公開HTMLから詳細2件ずつを取得できた。取得方式・文字コード・HTTP状態を記録し、Windows-31Jのデコード、転送先とDNSの検査、非表示要素/スクリプトの除外を実装。以前失敗した宿/部屋の同じURLも取得を確認した。Indeedのアクセス制限は残る。実評価で無料日次枠に達したため、改善後のLLM完走は再評価が必要。有料へ切り替えていない。
+Codex/Claude Codeはローカル実行のみ。OpenShell経由はpi/OpenRouterに限定し、他エンジンは発行前に拒否する。実self-host VM/gatewayでの発行・credential rewrite・Landlock下のChromeは未検証。
 
-self-host VM/gatewayが未指定のため、実OpenShell発行・credential rewrite・Landlock下のChromeは未検証。Docker起動と別の検証ゲートとする。sandboxは成果物回収後もretainする。
+追加調査後も意味的な条件判定にはモデルの誤りが残り得る。価格帯はSKU価格、空室や在庫の確約ではない。探索で見つかった誤りと修正・再実行も記録する。
 
-参照画面に似た会話構成を実装したが、認証後のGrok全機能の複製ではない。参照commitと再現/差分は [docs/reference-ux.md](reference-ux.md)、結果は [docs/verification-results.md](verification-results.md)、次の検証は [docs/verification-plan.md](verification-plan.md)。
-
-
-## trusted URLと楽天の検証
-
-個別対象の本文・領域別必須項目を取得できることを完了条件に追加。共通ナビ・検索フォームだけの語では完了にしない。sourceの検証では2対象以上を確認し、合格した個別URLだけを7日有効で登録する。取得根拠・日時・方式・本文ハッシュを保存し、再検証失敗/期限切れは利用不可。台帳更新はプロセス間ロックと新旧検査で保護する。
-
-楽天ビューティ/トラベル/ぐるなび/Car車検/GORA/ブックスは各2件合格、12URL登録。楽天市場は対象商品の販売価格が不足するため登録除外。楽天不動産の確認した導線は認証転送、中古車はサービス終了、Careersは一般求人の代替として未対応。Recruit系は5サービス各2件を再検証し、Indeedは引き続き制限。全11サービス22URL。非表示のホテルリンクは探索にのみ使用し、引用には取得先の可視本文を使う。詳細は [docs/trusted-urls.md](trusted-urls.md)。
-
-これは詳細取得の検証であり、楽天を使ったLLM回答の意味的品質の合格とはしない。実OpenShell gatewayでの発行も未検証。
-
-
-## Codexを既定エンジンに追加
-
-公式CLIのApp Serverへprivate stdioで接続し、同じplan/open/evidence/finishツールをdynamicToolsとして提供する。ChatGPTログインを確認し、アカウントの既定モデルを取得。OpenRouterのキー・無料枠検査を通さず、APIキーや別プロバイダーへのfallbackはしない。外部コマンドにAPIキーを渡さず、read-only/承認never、shell/apps/plugins/MCP/web検索等を無効にする。experimental dynamicToolsはCodex CLI 0.167.0で検証。
-
-CLI run/run-file/retry/trusted run/eval、Webのlive設定、Goal Routerから同じエンジンを利用できる。既存OpenRouterは明示選択で維持。Codex+OpenShellの認証連携は未対応として発行前に停止し、既存sandbox planはOpenRouterエンジンを明記する。
-
-追加検証: 全79テスト、型・ビルド・整形、Web8フロー。実際のChatGPTログインで楽天トラベル2宿の比較とSUUMO2物件の家賃+管理費合算がsucceeded。SUUMOは複数ドメインから該当分野だけを選択。Beautyは一覧→2店舗の詳細・引用付き比較を完了、必須の韓国アイドル風を未確認としてpartial。エビデンスは [docs/codex.md](codex.md)。模擬App Serverで認証拒否・利用枠切れ・中断・プロセス終了・引数検査・重複配送・不正要求を検証し、CIは実ログインやモデルを使わない。
-
-
-## Recruit・楽天の16サービスをCodexで実行
-
-入口から個別詳細・引用付き回答まで最大2並列で実行。11サービスで詳細2件以上を確認、楽天市場は販売価格が不足、4サービスはアクセス制限/認証/終了/詳細検証未対応。機械的な状態はsucceeded 9、partial 3、blocked 4。結果は [docs/codex-family-results.md](codex-family-results.md)。美容の必須条件分類の揺れ、SUUMOの管理費「-」の扱いなどを条件付きとして明記した。
-
-楽天市場でクーポン・関連商品価格を価格取得と誤検出したため、保守的な販売価格ラベルの検査に修正し、模擬負例と実サイト再実行で確認。旧trusted2URLを除外した。再現用の `eval:families` と16クエリ定義、コンパクトな結果・引用を追加。
+- [エンジン・深掘り・レベル・代表実測](engines-and-depth.md) / [実行記録JSON](evidence/engines-and-depth.json)
+- [trusted URLの取得検証](trusted-urls.md) / [Codexの16サービス実測](codex-family-results.md)
+- [検証結果](verification-results.md) / [検証計画](verification-plan.md) / [参照UXとの差分](reference-ux.md)

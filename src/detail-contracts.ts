@@ -1,3 +1,8 @@
+import {
+  enrichmentFields,
+  verificationLevel,
+  type TrustLevel,
+} from "./trust-levels.js";
 import { createHash } from "node:crypto";
 import { entityKey, adapters } from "./sources.js";
 import { assessPage } from "./page-quality.js";
@@ -94,13 +99,15 @@ export const detailContracts: Record<string, DetailField[]> = {
     {
       id: "price",
       pattern:
-        /(?:^|\n)(?:販売価格|商品価格)[ \t]*[：:]?[ \t]*(?:\n[ \t]*)?(?:[¥￥][ \t]*)?\d[\d,]*(?:[ \t]*円|(?=[ \t]*(?:\n|$)))/,
+        /(?:^|\n)(?:対象商品の販売価格(?:帯)?|販売価格|商品価格)[ \t]*[：:]?[ \t]*(?:\n[ \t]*)?(?:[¥￥][ \t]*)?\d[\d,]*(?:[〜～]\d[\d,]*)?(?:[ \t]*円|(?=[ \t]*(?:\n|$)))/,
     },
     { id: "specification", pattern: /商品説明|商品詳細|仕様|サイズ|素材|容量/ },
     { id: "seller", pattern: /ショップ|店舗|会社概要|販売元|メーカー/ },
   ],
 };
 export interface DetailVerification {
+  level?: TrustLevel;
+  enrichments?: { id: string; quote: string; url: string }[];
   status:
     | "verified"
     | "blocked"
@@ -120,7 +127,7 @@ export interface DetailVerification {
   truncated: boolean;
 }
 /** Retrieval evidence, not an endorsement of page instructions, prices or business suitability. */
-export function verifyDetail(
+function verifyDetailBase(
   page: Page,
   expectedService?: string,
 ): DetailVerification {
@@ -137,6 +144,7 @@ export function verifyDetail(
     title: page.title,
     capturedAt: page.capturedAt,
     acquisition: page.acquisition,
+    enrichments: enrichmentFields(page, service),
     fields: [],
     missingFields: [],
     bodySha256: createHash("sha256").update(page.text).digest("hex"),
@@ -187,4 +195,12 @@ export function verifyDetail(
     status: "verified",
     reason: "個別対象の本文と領域別必須項目を取得しました",
   };
+}
+
+export function verifyDetail(
+  page: Page,
+  expectedService?: string,
+): DetailVerification {
+  const result = verifyDetailBase(page, expectedService);
+  return { ...result, level: verificationLevel(result) };
 }

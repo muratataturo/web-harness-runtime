@@ -252,3 +252,20 @@ test("Rakuten item coupons and related-item prices cannot satisfy the selling-pr
     "verified",
   );
 });
+
+test("legacy trust migrates to derived L3 and an asserted L4 cannot bypass enrichment evidence", async () => {
+  const a = audit(),
+    r = reconcileAudit(emptyRegistry(), a);
+  for (const u of r.urls) u.level = 4;
+  assert.ok(activeTrustedUrls(r).every((u) => u.level === 3));
+  const dir = await mkdtemp(join(tmpdir(), "trust-level-"));
+  try {
+    const store = new TrustedStore(join(dir, "registry.json"));
+    await store.save(r);
+    assert.ok((await store.load()).urls.every((u) => u.level === 3));
+    await assert.rejects(store.urlsFor(["sample"], 4), /未確認/);
+    assert.equal((await store.urlsFor(["sample"], 3)).length, 2);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});

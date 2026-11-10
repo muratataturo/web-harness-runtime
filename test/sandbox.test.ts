@@ -142,13 +142,13 @@ else setInterval(()=>{},1000);
       const start = Date.now();
       const result = await runOpenShellCommand(
         { label: "timeout", executable: "openshell", args: ["hang"] },
-        { timeoutMs: 500, killGraceMs: 50 },
+        { timeoutMs: 1500, killGraceMs: 50 },
       );
       assert.equal(result.exitCode, 124);
       assert.equal(result.termination, "timeout");
       assert.match(result.stdout, /READY/);
-      assert.ok(Date.now() - start >= 540);
-      assert.ok(Date.now() - start < 2000);
+      assert.ok(Date.now() - start >= 1540);
+      assert.ok(Date.now() - start < 4000);
     });
     await t.test(
       "output is capped and the flooding child is killed",

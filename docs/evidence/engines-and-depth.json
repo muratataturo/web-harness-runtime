@@ -1,0 +1,2901 @@
+{
+  "dateJapan": "2026-11-10",
+  "claudeCli": "2.1.307",
+  "models": [
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5",
+    "nvidia/nemotron-3.5-super-vl:free",
+    "gpt-6.1-sol"
+  ],
+  "levelCounts": {
+    "L4": 20,
+    "L3": 4
+  },
+  "results": [
+    {
+      "taskId": "81984f98-798c-42c3-973e-bedcbc047662",
+      "agent": "claude-code",
+      "model": "claude-sonnet-5-5",
+      "status": "succeeded",
+      "query": "この2宿の所在地・総部屋数・温泉を引用付きで比較してください。日程未定なので料金と空室は未確認でよいです。",
+      "createdAt": "2026-11-10T03:13:19.322Z",
+      "updatedAt": "2026-11-10T03:13:36.431Z",
+      "pages": [
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+          "title": "箱根強羅グアムドッグ本店 設備・アメニティ・基本情報【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+            "service": "rakuten-travel",
+            "entityId": "rakuten-travel:142874",
+            "title": "箱根強羅グアムドッグ本店 設備・アメニティ・基本情報【楽天トラベル】",
+            "capturedAt": "2026-11-10T03:13:23.567Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "enrichments": [
+              {
+                "id": "checkin",
+                "quote": "を満たしています。\nチェックイン\n15:00 （最終チェックイン：17:00）\nチェックアウト",
+                "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection"
+              },
+              {
+                "id": "checkout",
+                "quote": "イン：17:00）\nチェックアウト\n10:00\n住所\n〒250-0408神奈川県足柄下郡箱根町強",
+                "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection"
+              },
+              {
+                "id": "parking",
+                "quote": "停で下車、徒歩５分\n駐車場\n有り ４台 無料 予約不要\nトイプードル連れで、バースデープランで初めて宿泊",
+                "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "件)\n〒250-0408神奈川県足柄下郡箱根町強羅1322-20\nサステナブルな取り組み\nサステナブルトラベル\nメルマガ登録\nお気に入"
+              },
+              {
+                "id": "facilities",
+                "quote": "国\n神奈川県\n箱根\n強羅温泉\n箱根強羅グアムドッグ本店 設備・アメニティ・基本情報\nこちらの宿泊施"
+              },
+              {
+                "id": "rooms",
+                "quote": "泊情報を見る\n基本情報\n総部屋数\n4室\n館内設備\nレストラン\nラウンジ\n多目的室\n禁煙ルーム\n自動販売機"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "c95e855bf140a5e637f0c450144e1c0ff735cbd70114be9d6a72acd29e4b66d2",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+          "title": "箱根芦ノ湖 ＨＯＴＥＬ ＲａＫｕｕｎ（ホテルラクーン） 設備・アメニティ・基本情報【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+            "service": "rakuten-travel",
+            "entityId": "rakuten-travel:10956",
+            "title": "箱根芦ノ湖 ＨＯＴＥＬ ＲａＫｕｕｎ（ホテルラクーン） 設備・アメニティ・基本情報【楽天トラベル】",
+            "capturedAt": "2026-11-10T03:13:23.805Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "enrichments": [
+              {
+                "id": "checkin",
+                "quote": "場あり\n自動販売機\nチェックイン\n15:00 （最終チェックイン：21:00）\nチェックアウト",
+                "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html"
+              },
+              {
+                "id": "checkout",
+                "quote": "イン：21:00）\nチェックアウト\n10:00\n住所\n〒250-0522神奈川県足柄下郡箱根町元",
+                "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html"
+              },
+              {
+                "id": "parking",
+                "quote": "大浴場\n露天風呂\n駐車場あり\n自動販売機\nチェックイン\n15:00 （最終チェ",
+                "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "件)\n〒250-0522神奈川県足柄下郡箱根町元箱根103-227\nメルマガ登録\nお気に入り追加\n施設紹介\n宿ニュース\nプラン一覧\n宿泊"
+              },
+              {
+                "id": "facilities",
+                "quote": "神奈川県\n箱根\n芦ノ湖温泉\n箱根芦ノ湖 ＨＯＴＥＬ ＲａＫｕｕｎ（ホテルラクーン） 設備・アメニ"
+              },
+              {
+                "id": "rooms",
+                "quote": "泉情報を見る\n基本情報\n総部屋数\n22室\n館内設備\n大浴場\n露天風呂\n禁煙ルーム\n自動販売機\n宅配便\n駐車場"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "8f459ce51308afe6c890c4dffb60caef8d1fb9e20f316e65d4ca0b97f2495152",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        }
+      ],
+      "steps": 11,
+      "criteria": [
+        {
+          "id": "loc",
+          "description": "所在地",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "rooms",
+          "description": "総部屋数",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "onsen",
+          "description": "温泉の有無",
+          "weight": 8,
+          "required": true
+        }
+      ],
+      "answer": {
+        "summary": "2宿とも箱根町（神奈川県）にあり、どちらも温泉があります。違いは規模です。箱根強羅グアムドッグ本店は4室、HOTEL RaKuunは22室です。料金と空室は日程未定のため未確認です。",
+        "candidates": [
+          {
+            "name": "箱根強羅グアムドッグ本店",
+            "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+            "matches": [
+              {
+                "criterionId": "loc",
+                "status": "supported",
+                "explanation": "神奈川県足柄下郡箱根町強羅（強羅温泉エリア）",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "rooms",
+                "status": "supported",
+                "explanation": "総部屋数は4室",
+                "evidenceIds": [
+                  "ev-2"
+                ]
+              },
+              {
+                "criterionId": "onsen",
+                "status": "supported",
+                "explanation": "源泉100%掛け流しの天然温泉の内風呂あり",
+                "evidenceIds": [
+                  "ev-3"
+                ]
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "箱根芦ノ湖 HOTEL RaKuun（ホテルラクーン）",
+            "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+            "matches": [
+              {
+                "criterionId": "loc",
+                "status": "supported",
+                "explanation": "神奈川県足柄下郡箱根町元箱根（芦ノ湖温泉エリア）",
+                "evidenceIds": [
+                  "ev-4"
+                ]
+              },
+              {
+                "criterionId": "rooms",
+                "status": "supported",
+                "explanation": "総部屋数は22室",
+                "evidenceIds": [
+                  "ev-5"
+                ]
+              },
+              {
+                "criterionId": "onsen",
+                "status": "supported",
+                "explanation": "風呂の種類に温泉・大浴場・露天風呂・天然温泉と記載",
+                "evidenceIds": [
+                  "ev-6"
+                ]
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "料金・空室は日程未定のため未確認",
+          "情報は2026-11-10時点の楽天トラベル公開HTMLに基づく"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+          "quote": "住所\n〒250-0408神奈川県足柄下郡箱根町強羅1322-20",
+          "capturedAt": "2026-11-10T03:13:23.567Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+          "quote": "総部屋数\n4室",
+          "capturedAt": "2026-11-10T03:13:23.567Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://travel.rakuten.co.jp/HOTEL/142874/142874_std.html#sustainableSection",
+          "quote": "源泉（天然温泉）100％掛け流しの内風呂",
+          "capturedAt": "2026-11-10T03:13:23.567Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+          "quote": "住所\n〒250-0522神奈川県足柄下郡箱根町元箱根103-227",
+          "capturedAt": "2026-11-10T03:13:23.805Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-2",
+          "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+          "quote": "総部屋数\n22室",
+          "capturedAt": "2026-11-10T03:13:23.805Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-2",
+          "url": "https://travel.rakuten.co.jp/HOTEL/10956/10956_std.html",
+          "quote": "[種類] 温泉 大浴場 露天風呂 天然温泉",
+          "capturedAt": "2026-11-10T03:13:23.805Z"
+        }
+      ]
+    },
+    {
+      "taskId": "29f5a055-e210-414d-8f72-562adaf148ed",
+      "agent": "claude-code",
+      "model": "claude-sonnet-5-5",
+      "status": "partial",
+      "query": "この美容室について渋谷駅からの徒歩、髪質改善、韓国アイドル風に対応する根拠を確認してください。スタイルや口コミに不足情報があれば追加調査してください。韓国風とアイドル風の対応を混同せず、料金と未確認条件を示してください。",
+      "createdAt": "2026-11-10T03:42:57.846Z",
+      "updatedAt": "2026-11-10T03:43:44.943Z",
+      "pages": [
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "title": "アコテアット ヘア(acote @)｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000074059",
+            "title": "アコテアット ヘア(acote @)｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T03:43:04.800Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "hours",
+                "quote": "カット/顔周り] \n営業時間\t平日10:00～17:30(perm、co)18:30(cut)/土曜日10:00～18:00(perm",
+                "url": "https://beauty.hotpepper.jp/slnH000074059/"
+              },
+              {
+                "id": "reviews",
+                "quote": "支払いの詳細を見る\n4.81\n（978件）\n\n口コミ・平均点について\n\n普通＝3が評価時の",
+                "url": "https://beauty.hotpepper.jp/slnH000074059/"
+              },
+              {
+                "id": "specialty",
+                "quote": "2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷",
+                "url": "https://beauty.hotpepper.jp/slnH000074059/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "集計です。\n詳細を見る\n東京都渋谷区渋谷３-16-5　SHOKAIビルB1～2F\n渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/"
+              },
+              {
+                "id": "price",
+                "quote": "定価格♪】カット+カラー￥6500/ロコミ4.8★渋谷/髪質改善/韓国/レイヤーカット/縮毛矯正\n\n＜＞"
+              },
+              {
+                "id": "menu",
+                "quote": "改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷］\nサロン情報\nクーポン\nメニュー\nこだわり"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "b0a7269c518b43cb79f3468358c22f66d7773468fa3041cfa6de0c4b5f388c26",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/style/",
+          "title": "ヘアスタイル｜アコテアット ヘア(acote @)｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000074059",
+            "title": "ヘアスタイル｜アコテアット ヘア(acote @)｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T03:43:07.893Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "specialty",
+                "quote": "2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷",
+                "url": "https://beauty.hotpepper.jp/slnH000074059/style/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "ート支払いの詳細を見る\n東京都渋谷区渋谷３-16-5　SHOKAIビルB1～2F\n渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/"
+              },
+              {
+                "id": "price",
+                "quote": "ト\nカラー\n平日限定\n\n¥7,000\n\n【平日限定】似合わせカット＋艶カラー￥7,000｜渋谷・韓国ヘア"
+              },
+              {
+                "id": "menu",
+                "quote": "改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷］\nサロン情報\nクーポン\nメニュー\nこだわり"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "7fd5cdf64194ba983f4759de667ac41ccc7cc26e00f279e6fcebbb6abc43bc1a",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 3
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383450.html",
+          "title": "メルティーカラー/フェミニンロング/似合わせカット/渋谷/韓国：L283383450｜アコテアット ヘア(acote @)のヘアスタイル｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383450.html",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000074059",
+            "title": "メルティーカラー/フェミニンロング/似合わせカット/渋谷/韓国：L283383450｜アコテアット ヘア(acote @)のヘアスタイル｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T03:43:08.209Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "specialty",
+                "quote": "2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷",
+                "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383450.html"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "ート支払いの詳細を見る\n東京都渋谷区渋谷３-16-5　SHOKAIビルB1～2F\n渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/"
+              },
+              {
+                "id": "price",
+                "quote": "ント\n10時～20時\n\n¥8,500\n\n【定番人気】カット＋艶カラー＋トリートメント｜渋谷・レイヤーカット"
+              },
+              {
+                "id": "menu",
+                "quote": "ェミニンロング/似合わせカット/渋谷/韓国\nHOT PEPPER Beauty 国内最大級のヘアサロ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "abccfb8c26df060018538a73dc753bc3f8616c285c7cf27567ed8dd77066c5cc",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 3
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383605.html",
+          "title": "メルティーカラー/フェミニンロング/似合わせカット/渋谷/韓国：L283383605｜アコテアット ヘア(acote @)のヘアスタイル｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383605.html",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000074059",
+            "title": "メルティーカラー/フェミニンロング/似合わせカット/渋谷/韓国：L283383605｜アコテアット ヘア(acote @)のヘアスタイル｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T03:43:21.478Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "specialty",
+                "quote": "2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷",
+                "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383605.html"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "ート支払いの詳細を見る\n東京都渋谷区渋谷３-16-5　SHOKAIビルB1～2F\n渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/"
+              },
+              {
+                "id": "price",
+                "quote": "ント\n10時～20時\n\n¥8,500\n\n【定番人気】カット＋艶カラー＋トリートメント｜渋谷・レイヤーカット"
+              },
+              {
+                "id": "menu",
+                "quote": "ェミニンロング/似合わせカット/渋谷/韓国\nHOT PEPPER Beauty 国内最大級のヘアサロ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "cb48c6bd63ac9e65cbac1fad00b36d6dccfb1781d2cfc4a3a56dfbb8f54a99ff",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 3
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/style/L284751041.html",
+          "title": "ミルクブラウン/くびれヘア/レイヤーカット/韓国ヘア/髪質改善：L284751041｜アコテアット ヘア(acote @)のヘアスタイル｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/L284751041.html",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000074059",
+            "title": "ミルクブラウン/くびれヘア/レイヤーカット/韓国ヘア/髪質改善：L284751041｜アコテアット ヘア(acote @)のヘアスタイル｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T03:43:26.832Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "specialty",
+                "quote": "ーカット/韓国ヘア/髪質改善\nHOT PEPPER Beauty 国内最大級の",
+                "url": "https://beauty.hotpepper.jp/slnH000074059/style/L284751041.html"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "ート支払いの詳細を見る\n東京都渋谷区渋谷３-16-5　SHOKAIビルB1～2F\n渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/"
+              },
+              {
+                "id": "price",
+                "quote": "ント\n10時～20時\n\n¥8,500\n\n【定番人気】カット＋艶カラー＋トリートメント｜渋谷・レイヤーカット"
+              },
+              {
+                "id": "menu",
+                "quote": "ン/くびれヘア/レイヤーカット/韓国ヘア/髪質改善\nHOT PEPPER Beauty 国内最大級の"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "151d42ae6c042b3534455370751adddbef6e98acb0649d086c99768191f851df",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 3
+          }
+        }
+      ],
+      "steps": 15,
+      "research": {
+        "rounds": 2,
+        "maxRounds": 2,
+        "pagesOpened": 4,
+        "maxPages": 4,
+        "attempts": [
+          {
+            "pageId": "page-1",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/",
+            "mode": "link",
+            "fields": [
+              "アイドル風スタイル",
+              "スタイル",
+              "口コミ"
+            ],
+            "result": "verified"
+          },
+          {
+            "pageId": "page-1",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383450.html",
+            "mode": "link",
+            "fields": [
+              "アイドル風スタイル",
+              "スタイル",
+              "口コミ"
+            ],
+            "result": "verified"
+          },
+          {
+            "pageId": "page-1",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/L283383605.html",
+            "mode": "link",
+            "fields": [
+              "アイドル風スタイルの根拠(韓国風と別)"
+            ],
+            "result": "verified"
+          },
+          {
+            "pageId": "page-1",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/style/L284751041.html",
+            "mode": "link",
+            "fields": [
+              "アイドル風スタイルの根拠(韓国風と別)"
+            ],
+            "result": "verified"
+          }
+        ]
+      },
+      "criteria": [
+        {
+          "id": "c1",
+          "description": "渋谷駅から徒歩5分以内(アクセス欄)",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "c2",
+          "description": "髪質改善メニュー/根拠",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "c3",
+          "description": "韓国風スタイルの根拠",
+          "weight": 6,
+          "required": true
+        },
+        {
+          "id": "c4",
+          "description": "アイドル風スタイルの根拠(韓国風と別)",
+          "weight": 6,
+          "required": true
+        },
+        {
+          "id": "c5",
+          "description": "料金・口コミ",
+          "weight": 5,
+          "required": false
+        }
+      ],
+      "answer": {
+        "summary": "acote @(旧Neolive＆渋谷店)は渋谷駅新南口2分で徒歩条件を満たし、髪質改善・韓国風の根拠が明確(口コミ4.81/978件)。「アイドル風」を示す記載は、サロンページ・スタイル一覧・スタイル詳細3件でも確認できず未確認。「推し活」ヘアセットは別概念のためアイドル風の根拠にしていない。",
+        "candidates": [
+          {
+            "name": "アコテアット ヘア(acote @)",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/",
+            "matches": [
+              {
+                "criterionId": "c1",
+                "status": "supported",
+                "explanation": "渋谷駅新南口2分(地下鉄C2出口4分)で5分以内。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "c2",
+                "status": "supported",
+                "explanation": "髪質改善TR付きクーポンあり(¥6,000、新規限定)。",
+                "evidenceIds": [
+                  "ev-2"
+                ]
+              },
+              {
+                "criterionId": "c3",
+                "status": "supported",
+                "explanation": "韓国風の顔周りカット・レイヤーを前面に掲載。",
+                "evidenceIds": [
+                  "ev-3"
+                ]
+              },
+              {
+                "criterionId": "c4",
+                "status": "unknown",
+                "explanation": "アイドル風と明記した記載は未確認。推し活ヘアセットは根拠にしていない。",
+                "evidenceIds": []
+              },
+              {
+                "criterionId": "c5",
+                "status": "supported",
+                "explanation": "口コミ4.81(978件)。料金は髪質改善カット+TR ¥6,000〜(新規条件あり)。",
+                "evidenceIds": [
+                  "ev-4",
+                  "ev-2"
+                ]
+              }
+            ],
+            "score": 82,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "アイドル風は未確認。スタイル一覧は2123件中1ページ目と詳細3件のみ確認、口コミ全件・ブログは未確認。",
+          "クーポン料金は新規限定・併用不可など条件付きで閲覧時点の情報。空席・最終料金の確約ではない。",
+          "徒歩分数は掲載表記であり実測ではない。",
+          "追加確認しても未確認の項目: アイドル風スタイルの根拠(韓国風と別)"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷］",
+          "capturedAt": "2026-11-10T03:43:04.800Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "【艶髪】カット＋1step髪質改善トリートメント｜渋谷",
+          "capturedAt": "2026-11-10T03:43:04.800Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "最旬韓国風！顔周りの似合わせカットと軽やかレイヤーで、あなたの魅力を引き出す前髪に！",
+          "capturedAt": "2026-11-10T03:43:04.800Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-1",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "4.81\n（978件）",
+          "capturedAt": "2026-11-10T03:43:04.800Z"
+        }
+      ]
+    },
+    {
+      "taskId": "26f5c4d1-c09f-496f-b7ac-b6713c5206bd",
+      "agent": "claude-code",
+      "model": "claude-haiku-5-5",
+      "status": "succeeded",
+      "query": "次の2商品の公開情報を比較してください。対象商品の販売価格帯、容量、素材・サイズの違いを引用してください。公開HTMLのMicrodata価格帯は選択SKUの確定価格と区別し、送料と在庫は未確認と明記してください。購入はしません。",
+      "createdAt": "2026-11-10T03:35:48.393Z",
+      "updatedAt": "2026-11-10T03:36:20.089Z",
+      "pages": [
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "productOffer": {
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "currency": "JPY",
+            "low": 6990,
+            "high": 7990,
+            "source": "microdata",
+            "kind": "range"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "service": "rakuten-ichiba",
+            "entityId": "rakuten-ichiba:samfolk:sa80ss",
+            "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+            "capturedAt": "2026-11-10T03:35:53.238Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "euc-jp",
+              "contentType": "text/html;charset=EUC-JP"
+            },
+            "enrichments": [
+              {
+                "id": "capacity",
+                "quote": "災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80ss/"
+              },
+              {
+                "id": "material",
+                "quote": "1680D高密度防水ナイロンを採用。180度全開設計で3～5泊の荷物もスーツケ",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80ss/"
+              },
+              {
+                "id": "size",
+                "quote": "52 x 34 x 23cm\n容量：約40L\n重量：約1.2 kg\nノートPC",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80ss/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "KU/送料/在庫未確認）\n対象商品の販売価格帯: 6990〜7990円（JPY）\n通常商品 ⇒全会員5倍 ポイントアップキャンペーン中\n定期"
+              },
+              {
+                "id": "specification",
+                "quote": "ル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全"
+              },
+              {
+                "id": "seller",
+                "quote": "S\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "50c4121de1009431973ef3d7393ae764fe37524cf52013264ba08eeeba45e954",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "productOffer": {
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "currency": "JPY",
+            "low": 8990,
+            "high": 10190,
+            "source": "microdata",
+            "kind": "range"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "service": "rakuten-ichiba",
+            "entityId": "rakuten-ichiba:samfolk:sa80pross",
+            "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
+            "capturedAt": "2026-11-10T03:35:53.535Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "euc-jp",
+              "contentType": "text/html;charset=EUC-JP"
+            },
+            "enrichments": [
+              {
+                "id": "capacity",
+                "quote": "天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80pross/"
+              },
+              {
+                "id": "material",
+                "quote": "】\n・表地：840Dナイロン / 400Dポリエステル\n・裏地：ポリエステル",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80pross/"
+              },
+              {
+                "id": "size",
+                "quote": "53 × 35 × 22 cm\n【容量】約 40 L\n【重量】本体 約1,240",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80pross/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "KU/送料/在庫未確認）\n対象商品の販売価格帯: 8990〜10190円（JPY）\n当店利用時のご注意\n・当店の商品は全て国内から配送されます"
+              },
+              {
+                "id": "specification",
+                "quote": "FIDスキミング防止・大容量収納を備えた高機能バックパック。\n＼マラソン限定15%CP付き+P10"
+              },
+              {
+                "id": "seller",
+                "quote": "o\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "cd8d3e8997611bff08d56a9d08eca7bee5b01e0e1b4482ea66ce983ad03ad7a1",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        }
+      ],
+      "steps": 16,
+      "research": {
+        "rounds": 0,
+        "maxRounds": 2,
+        "pagesOpened": 0,
+        "maxPages": 4,
+        "attempts": []
+      },
+      "criteria": [
+        {
+          "id": "price_range",
+          "description": "対象商品の販売価格（表示価格・価格帯）が公開ページから確認できること。Microdataの価格帯は選択SKUの確定価格と区別して記録する。",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "capacity",
+          "description": "容量（例: ml・g・個数など）が公開ページの仕様から確認できること。",
+          "weight": 7,
+          "required": true
+        },
+        {
+          "id": "material_size",
+          "description": "素材・サイズ（寸法・材質）が公開ページの仕様から確認できること。",
+          "weight": 7,
+          "required": true
+        },
+        {
+          "id": "shipping_stock_unknown",
+          "description": "送料と在庫は公開情報から確定せず、未確認と明記する（確認できた場合はその旨を記録）。",
+          "weight": 4,
+          "required": true
+        },
+        {
+          "id": "store_info",
+          "description": "販売店舗（店舗名）が確認できること。",
+          "weight": 3,
+          "required": false
+        }
+      ],
+      "answer": {
+        "summary": "2商品（Samfolk、楽天市場 samfolk 店）の公開ページを比較しました。販売価格帯は公開HTMLのMicrodata上の「対象商品の販売価格帯」で、選択SKUの確定価格ではありません。sa80ss は 6990〜7990円、容量約40L、外寸 52x34x23cm、メイン素材 1680D高密度高耐久防水生地。sa80pross は 8990〜10190円、容量約40L、本体サイズ約53x35x22cm、表地 840Dナイロン / 400Dポリエステル、裏地ポリエステル。送料と在庫は両ページとも「選択SKU/送料/在庫未確認」と記載され、未確認です。容量はほぼ同じで、価格と素材・寸法が異なります。",
+        "candidates": [
+          {
+            "name": "Samfolk 40L リュック（商品番号 sa80SS）",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "matches": [
+              {
+                "criterionId": "price_range",
+                "status": "supported",
+                "explanation": "公開HTMLのMicrodata上の対象商品の販売価格帯は6990〜7990円（JPY）。選択SKUの確定価格ではない。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "capacity",
+                "status": "supported",
+                "explanation": "仕様に容量：約40Lと記載。",
+                "evidenceIds": [
+                  "ev-2"
+                ]
+              },
+              {
+                "criterionId": "material_size",
+                "status": "supported",
+                "explanation": "メイン素材は1680D高密度高耐久防水生地（撥水・防汚加工済）、外寸は52 x 34 x 23cm。",
+                "evidenceIds": [
+                  "ev-3",
+                  "ev-4"
+                ]
+              },
+              {
+                "criterionId": "shipping_stock_unknown",
+                "status": "supported",
+                "explanation": "公開HTMLに「選択SKU/送料/在庫未確認」と明記。送料・在庫は未確認として扱う。",
+                "evidenceIds": [
+                  "ev-5"
+                ]
+              },
+              {
+                "criterionId": "store_info",
+                "status": "unknown",
+                "explanation": "URLとページタイトルに店舗名samfolkが見えるが、店舗情報として引用・記録していないため確定扱いにしない。",
+                "evidenceIds": []
+              }
+            ],
+            "score": 90,
+            "eligible": true
+          },
+          {
+            "name": "Samfolk 40L リュック（商品番号 sa80pro）",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "matches": [
+              {
+                "criterionId": "price_range",
+                "status": "supported",
+                "explanation": "公開HTMLのMicrodata上の対象商品の販売価格帯は8990〜10190円（JPY）。選択SKUの確定価格ではない。",
+                "evidenceIds": [
+                  "ev-6"
+                ]
+              },
+              {
+                "criterionId": "capacity",
+                "status": "supported",
+                "explanation": "仕様に【容量】約 40 L と記載。",
+                "evidenceIds": [
+                  "ev-7"
+                ]
+              },
+              {
+                "criterionId": "material_size",
+                "status": "supported",
+                "explanation": "表地は840Dナイロン / 400Dポリエステル、本体サイズは約53 × 35 × 22 cm。",
+                "evidenceIds": [
+                  "ev-8",
+                  "ev-9"
+                ]
+              },
+              {
+                "criterionId": "shipping_stock_unknown",
+                "status": "supported",
+                "explanation": "公開HTMLに「選択SKU/送料/在庫未確認」と明記。送料・在庫は未確認として扱う。",
+                "evidenceIds": [
+                  "ev-10"
+                ]
+              },
+              {
+                "criterionId": "store_info",
+                "status": "unknown",
+                "explanation": "URLとページタイトルに店舗名samfolkが見えるが、店舗情報として引用・記録していないため確定扱いにしない。",
+                "evidenceIds": []
+              }
+            ],
+            "score": 90,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "販売価格は公開HTMLのMicrodataによる価格帯（範囲）であり、選択SKUの確定価格ではない。",
+          "送料と在庫は両ページとも未確認。",
+          "store_info は任意条件のため引用を記録せず unknown とした。",
+          "楽天のキャンペーン表記（マラソン限定CP、ポイント倍率など）は実際の支払総額に影響するため確認していない。",
+          "レビューは参考情報で、品質の判断根拠にはしていない。",
+          "購入・予約・在庫確認は行っていない。"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "対象商品の販売価格帯: 6990〜7990円（JPY）",
+          "capturedAt": "2026-11-10T03:35:53.238Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "容量：約40L",
+          "capturedAt": "2026-11-10T03:35:53.238Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "メイン素材：1680D高密度高耐久防水生地",
+          "capturedAt": "2026-11-10T03:35:53.238Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "外寸：52 x 34 x 23cm",
+          "capturedAt": "2026-11-10T03:35:53.238Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "選択SKU/送料/在庫未確認",
+          "capturedAt": "2026-11-10T03:35:53.238Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "対象商品の販売価格帯: 8990〜10190円（JPY）",
+          "capturedAt": "2026-11-10T03:35:53.535Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "【容量】約 40 L",
+          "capturedAt": "2026-11-10T03:35:53.535Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "表地：840Dナイロン / 400Dポリエステル",
+          "capturedAt": "2026-11-10T03:35:53.535Z"
+        },
+        {
+          "id": "ev-9",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "【本体サイズ】約 53 × 35 × 22 cm",
+          "capturedAt": "2026-11-10T03:35:53.535Z"
+        },
+        {
+          "id": "ev-10",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "選択SKU/送料/在庫未確認",
+          "capturedAt": "2026-11-10T03:35:53.535Z"
+        }
+      ]
+    },
+    {
+      "taskId": "3270d02c-7e15-4da3-94fa-cac51afbb823",
+      "agent": "claude-code",
+      "model": "claude-haiku-5-5",
+      "status": "partial",
+      "query": "この2物件を比較してください。武蔵小杉駅徒歩10分以内、1LDK、家賃と管理費合計15万円以下を希望します。管理費「-」は0円とせず、詳細の不足を追加調査してください。空室・入居可否は未確認でよいです。",
+      "createdAt": "2026-11-10T03:55:58.132Z",
+      "updatedAt": "2026-11-10T03:56:40.596Z",
+      "pages": [
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "title": "【SUUMO】D Paina 中丸子／神奈川県川崎市中原区中丸子／武蔵小杉駅の賃貸・部屋探し情報（000110455233） | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://suumo.jp/chintai/jnc_000110455233/",
+            "service": "suumo",
+            "entityId": "suumo:jnc_000110455233",
+            "title": "【SUUMO】D Paina 中丸子／神奈川県川崎市中原区中丸子／武蔵小杉駅の賃貸・部屋探し情報（000110455233） | 賃貸マンション・賃貸アパート",
+            "capturedAt": "2026-11-10T03:56:02.917Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "enrichments": [
+              {
+                "id": "area",
+                "quote": "1LDK\n専有面積\n33.53m2\n築年数\n築2年\n階\n1階\n向き\n-\n建物種別\nア",
+                "url": "https://suumo.jp/chintai/jnc_000110455233/"
+              },
+              {
+                "id": "built",
+                "quote": ".53m2\n築年数\n築2年\n階\n1階\n向き\n-\n建物種別\nアパート\nこの物件",
+                "url": "https://suumo.jp/chintai/jnc_000110455233/"
+              },
+              {
+                "id": "deposit",
+                "quote": "00円\n敷金: -\n礼金: 21万円\n保証金: -\n敷引・償却: -\n建物外観\n1/2",
+                "url": "https://suumo.jp/chintai/jnc_000110455233/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "D Paina 中丸子／神奈川県川崎市中原区中丸子／武蔵小杉駅の賃貸物件情報 - SUUMO(スーモ)賃貸\n全国へ\n関東版\n借りる\n賃貸\nマンションを買う\n新築\n中古\n一戸建て"
+              },
+              {
+                "id": "rent",
+                "quote": "回：１８０００円、月額：賃料等の１％＋８００円／月\nほか初期費用\n合計6.88万円（内訳：室内清掃"
+              },
+              {
+                "id": "fees",
+                "quote": "りに追加済み\n14万円\n管理費・共益費: 6000円\n敷金: -\n礼金: 21万円\n保証金: -\n敷"
+              },
+              {
+                "id": "layout",
+                "quote": "武線/平間駅 歩16分\n間取り\n1LDK\n専有面積\n33.53m2\n築年数\n築2年\n階\n1階\n向き"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "eb2cd3651cae621ed88c92fc85b4608c51d594b437fe90b588afe08a8a13e5a6",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/",
+            "service": "suumo",
+            "entityId": "suumo:jnc_000094254501",
+            "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート",
+            "capturedAt": "2026-11-10T03:56:03.313Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "enrichments": [
+              {
+                "id": "area",
+                "quote": "1LDK\n専有面積\n52.8m2\n築年数\n築37年\n階\n3階\n向き\n南\n建物種別",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/"
+              },
+              {
+                "id": "built",
+                "quote": "2.8m2\n築年数\n築37年\n階\n3階\n向き\n南\n建物種別\nマンション\nこの物",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/"
+              },
+              {
+                "id": "deposit",
+                "quote": "理費・共益費: -\n敷金: 13.5万円\n礼金: 13.5万円\n保証金: -\n敷引・償却:",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": ":H:0\"\nフレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸物件情報 - SUUMO(スーモ)賃貸\n全国へ\n関東版\n借りる\n賃貸\nマンションを買う\n新築\n中古\n一戸建て"
+              },
+              {
+                "id": "rent",
+                "quote": "用品の収納に重宝します。賃料は13.5万円です。\nこの物件にお問い合わせ\nお問い合わせの内容を選択"
+              },
+              {
+                "id": "fees",
+                "quote": "追加済み\n13.5万円\n管理費・共益費: -\n敷金: 13.5万円\n礼金: 13.5万円\n保証金:"
+              },
+              {
+                "id": "layout",
+                "quote": "線/向河原駅 歩15分\n間取り\n1LDK\n専有面積\n52.8m2\n築年数\n築37年\n階\n3階\n向き"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "df7d4b1a9153781dc3839efdbb467f264fd802135b690e2ddb9c9b397b5d7608",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/",
+            "service": "suumo",
+            "entityId": "suumo:jnc_000094254501",
+            "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート",
+            "capturedAt": "2026-11-10T03:56:11.946Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "area",
+                "quote": "1LDK\t専有面積\t52.8m2\n築年数\t築37年\t階\t3階\n向き\t南\t建物種別",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/"
+              },
+              {
+                "id": "built",
+                "quote": "2.8m2\n築年数\t築37年\t階\t3階\n向き\t南\t建物種別\tマンション\nこの物",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/"
+              },
+              {
+                "id": "deposit",
+                "quote": "理費・共益費: -\n敷金: 13.5万円 礼金: 13.5万円 保証金: - 敷引・償却:",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "ログイン\n\nフレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸物件情報 - SUUMO(スーモ)賃貸\n\n全国へ\n関東版\n借りる\n賃貸\nマンションを買う\n新築\t中古\n一戸建"
+              },
+              {
+                "id": "rent",
+                "quote": "用品の収納に重宝します。賃料は13.5万円です。\n\nこの物件にお問い合わせ\nお問い合わせの内容を選"
+              },
+              {
+                "id": "fees",
+                "quote": "追加する\n13.5万円 管理費・共益費: -\n敷金: 13.5万円 礼金: 13.5万円 保証金:"
+              },
+              {
+                "id": "layout",
+                "quote": "/向河原駅 歩15分\n\n間取り\t1LDK\t専有面積\t52.8m2\n築年数\t築37年\t階\t3階\n向き"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "789afb3ca739a1afd79c35a1b1ae742bd4c203fc694ea79097ad5925cf1077f4",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000094254501/kankyo/?bc=100536332729",
+          "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501）- 周辺環境 | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/kankyo/?bc=100536332729",
+            "service": "suumo",
+            "entityId": "suumo:jnc_000094254501",
+            "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501）- 周辺環境 | 賃貸マンション・賃貸アパート",
+            "capturedAt": "2026-11-10T03:56:12.261Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "enrichments": [
+              {
+                "id": "area",
+                "quote": "1LDK\n専有面積\n52.8m2\n向き\n南\n建物種別\nマンション\n築年数\n築37年",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/kankyo/?bc=100536332729"
+              },
+              {
+                "id": "built",
+                "quote": "マンション\n築年数\n築37年\nアクセス\n東急東横線/武蔵小杉駅 歩7分\n東急東",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/kankyo/?bc=100536332729"
+              },
+              {
+                "id": "deposit",
+                "quote": "・共益費\n-\n敷金/礼金\n13.5万円\n/\n13.5万円\n保証金\n-\n敷引・償却\n13.",
+                "url": "https://suumo.jp/chintai/jnc_000094254501/kankyo/?bc=100536332729"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "辺環境 | フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸物件情報 - SUUMO(スーモ)賃貸\n全国へ\n関東版\n借りる\n賃貸\nマンションを買う\n新築\n中古\n一戸建て"
+              },
+              {
+                "id": "rent",
+                "quote": "ールに送る\n印刷用画面\n賃料・初期費用\n13.5万円\n管理費・共益費\n-\n敷金/礼金\n13.5万円"
+              },
+              {
+                "id": "fees",
+                "quote": "初期費用\n13.5万円\n管理費・共益費\n-\n敷金/礼金\n13.5万円\n/\n13.5万円\n保証金\n-"
+              },
+              {
+                "id": "layout",
+                "quote": "13.5万円\n部屋情報\n間取り\n1LDK\n専有面積\n52.8m2\n向き\n南\n建物種別\nマンション\n築"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "5d8c360432617d8d75ca2256148505b094ee8a8c24795b8dc8580cf683949c6d",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        }
+      ],
+      "steps": 24,
+      "research": {
+        "rounds": 1,
+        "maxRounds": 2,
+        "pagesOpened": 2,
+        "maxPages": 4,
+        "attempts": [
+          {
+            "pageId": "page-2",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/",
+            "mode": "render",
+            "fields": [
+              "管理費・共益費の金額",
+              "管理費が「-」の場合の内訳・表示の意味",
+              "家賃+管理費の合計",
+              "武蔵小杉駅からの徒歩分数",
+              "間取り",
+              "初期費用"
+            ],
+            "result": "verified"
+          },
+          {
+            "pageId": "page-2",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/kankyo/?bc=100536332729",
+            "mode": "link",
+            "fields": [
+              "管理費・共益費の金額",
+              "管理費が「-」の場合の内訳・表示の意味",
+              "家賃+管理費の合計",
+              "武蔵小杉駅からの徒歩分数",
+              "間取り",
+              "初期費用"
+            ],
+            "result": "verified"
+          }
+        ]
+      },
+      "criteria": [
+        {
+          "id": "station_walk",
+          "description": "武蔵小杉駅から徒歩10分以内（詳細ページで対象駅と徒歩分数を確認。別駅の徒歩は不可）",
+          "weight": 9,
+          "required": true
+        },
+        {
+          "id": "layout_1ldk",
+          "description": "間取りが1LDK",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "monthly_total_15man",
+          "description": "家賃+管理費・共益費の合計が15万円以下（管理費が「-」の場合は0円とせず追加調査）",
+          "weight": 9,
+          "required": true
+        },
+        {
+          "id": "fees_detail",
+          "description": "管理費・共益費の金額と内訳が詳細ページで確認できるか",
+          "weight": 6,
+          "required": false
+        },
+        {
+          "id": "initial_cost",
+          "description": "初期費用（敷金・礼金等）の確認",
+          "weight": 3,
+          "required": false
+        },
+        {
+          "id": "building_age",
+          "description": "築年・構造などの基本情報",
+          "weight": 2,
+          "required": false
+        },
+        {
+          "id": "vacancy_unconfirmed",
+          "description": "空室・入居可否は未確認でよい（評価対象外として明記）",
+          "weight": 1,
+          "required": false
+        }
+      ],
+      "answer": {
+        "summary": "2物件を比較した。D Paina 中丸子（jnc_000110455233）は武蔵小杉駅徒歩10分、1LDK、家賃14万円＋管理費・共益費6000円で合計146,000円となり、条件をすべて満たす（ただし閲覧時点の情報で、空室・入居可否は未確認）。フレメゾン（jnc_000094254501）は武蔵小杉駅徒歩7分、1LDK、家賃13.5万円だが、管理費・共益費は詳細ページおよび周辺環境ページの両方で「-」と表示され、金額が確認できなかったため合計家賃は判定できず（unknown）。「-」は0円とみなさない方針のため、現時点ではD Paina 中丸子が条件を確認できた唯一の候補。最適候補はD Paina 中丸子。",
+        "candidates": [
+          {
+            "name": "D Paina 中丸子（1LDK・築2年）",
+            "url": "https://suumo.jp/chintai/jnc_000110455233/",
+            "matches": [
+              {
+                "criterionId": "station_walk",
+                "status": "supported",
+                "explanation": "「JR横須賀線/武蔵小杉駅 歩10分」と表示。徒歩10分以内の条件を満たす（10分ちょうど）。",
+                "evidenceIds": [
+                  "ev-2"
+                ]
+              },
+              {
+                "criterionId": "layout_1ldk",
+                "status": "supported",
+                "explanation": "間取りは1LDK、専有面積33.53m2。",
+                "evidenceIds": [
+                  "ev-5"
+                ]
+              },
+              {
+                "criterionId": "monthly_total_15man",
+                "status": "supported",
+                "explanation": "家賃14万円＋管理費・共益費6000円＝146,000円で15万円以下。",
+                "evidenceIds": [
+                  "ev-6",
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "fees_detail",
+                "status": "supported",
+                "explanation": "管理費・共益費は6000円と明記。内訳の詳細は本文に記載なし。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "initial_cost",
+                "status": "supported",
+                "explanation": "礼金21万円、保証金なし。ほか初期費用（室内清掃等）の合計は本文に記載（6.88万円）だが、引用は礼金・保証金部分のみ保存。",
+                "evidenceIds": [
+                  "ev-10"
+                ]
+              },
+              {
+                "criterionId": "building_age",
+                "status": "supported",
+                "explanation": "築2年、鉄骨ではなく軽量鉄骨、1階建3階建構造の記載あり（築年・構造は本文で確認）。",
+                "evidenceIds": [
+                  "ev-5"
+                ]
+              },
+              {
+                "criterionId": "vacancy_unconfirmed",
+                "status": "unknown",
+                "explanation": "ユーザーの指示どおり空室・入居可否は未確認として評価対象外。",
+                "evidenceIds": []
+              }
+            ],
+            "score": 97,
+            "eligible": true
+          },
+          {
+            "name": "フレメゾン（1LDK・築37年）",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/",
+            "matches": [
+              {
+                "criterionId": "station_walk",
+                "status": "supported",
+                "explanation": "「東急東横線/武蔵小杉駅 歩7分」と表示。徒歩10分以内を満たす。",
+                "evidenceIds": [
+                  "ev-3"
+                ]
+              },
+              {
+                "criterionId": "layout_1ldk",
+                "status": "supported",
+                "explanation": "間取り1LDK、専有面積52.8m2。",
+                "evidenceIds": [
+                  "ev-7"
+                ]
+              },
+              {
+                "criterionId": "monthly_total_15man",
+                "status": "unknown",
+                "explanation": "家賃13.5万円は確認できたが、管理費・共益費は「-」で金額未確認。0円とみなさないため合計は確定できない。15万円以下となる可能性はあるが判定不可。",
+                "evidenceIds": [
+                  "ev-8"
+                ]
+              },
+              {
+                "criterionId": "fees_detail",
+                "status": "unknown",
+                "explanation": "詳細ページと周辺環境ページの双方で管理費・共益費は「-」のまま。内訳や金額は追加取得できず。",
+                "evidenceIds": [
+                  "ev-4",
+                  "ev-9"
+                ]
+              },
+              {
+                "criterionId": "initial_cost",
+                "status": "supported",
+                "explanation": "敷金13.5万円・礼金13.5万円（保証金なし）。保証会社利用必須で初回保証料は家賃の50%と記載。",
+                "evidenceIds": [
+                  "ev-11"
+                ]
+              },
+              {
+                "criterionId": "building_age",
+                "status": "supported",
+                "explanation": "築37年（1990年3月）、鉄骨造、3階/5階建。",
+                "evidenceIds": [
+                  "ev-7"
+                ]
+              },
+              {
+                "criterionId": "vacancy_unconfirmed",
+                "status": "unknown",
+                "explanation": "ユーザーの指示どおり空室・入居可否は未確認として評価対象外。",
+                "evidenceIds": []
+              }
+            ],
+            "score": 58,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "管理費・共益費が「-」のフレメゾンは、詳細ページおよび周辺環境ページで金額が確認できず、家賃+管理費の合計15万円以下は未確定（0円とみなさず）。不動産会社への問い合わせが必要。",
+          "両物件とも保証会社の月額保証料（D Paina: 賃料等の1%+800円、フレメゾン: 総家賃の1.5%）が別途かかる記載があり、家賃+管理費の判定には含めていない。",
+          "初期費用の詳細は一部のみ引用（D Paina の初期費用合計6.88万円は本文記載だが引用は未保存）。",
+          "空室・入居可否は閲覧日（2026-11-10）時点の掲載情報で、確約ではない。ユーザーの指示により評価対象外。",
+          "候補は2件のみ（ユーザー指定の2物件）。",
+          "D Paina 中丸子の築年・構造は『築2年』『軽量鉄骨』『1階/3階建』の記載で、築年の引用は専有面積と同じ引用に含めた。",
+          "追加確認しても未確認の項目: 家賃+管理費・共益費の合計が15万円以下（管理費が「-」の場合は0円とせず追加調査）"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "管理費・共益費: 6000円",
+          "capturedAt": "2026-11-10T03:56:02.917Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "ＪＲ横須賀線/武蔵小杉駅 歩10分",
+          "capturedAt": "2026-11-10T03:56:02.917Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "東急東横線/武蔵小杉駅 歩7分",
+          "capturedAt": "2026-11-10T03:56:03.313Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "管理費・共益費: -",
+          "capturedAt": "2026-11-10T03:56:03.313Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-1",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "1LDK 専有面積 33.53m2",
+          "capturedAt": "2026-11-10T03:56:02.917Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-1",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "14万円 管理費・共益費: 6000円",
+          "capturedAt": "2026-11-10T03:56:02.917Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "間取り 1LDK 専有面積 52.8m2",
+          "capturedAt": "2026-11-10T03:56:03.313Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "13.5万円 管理費・共益費: - 敷金: 13.5万円",
+          "capturedAt": "2026-11-10T03:56:03.313Z"
+        },
+        {
+          "id": "ev-9",
+          "pageId": "page-4",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/kankyo/?bc=100536332729",
+          "quote": "管理費・共益費 - 敷金/礼金",
+          "capturedAt": "2026-11-10T03:56:12.261Z"
+        },
+        {
+          "id": "ev-10",
+          "pageId": "page-1",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "礼金: 21万円 保証金: -",
+          "capturedAt": "2026-11-10T03:56:02.917Z"
+        },
+        {
+          "id": "ev-11",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "礼金: 13.5万円 保証金: -",
+          "capturedAt": "2026-11-10T03:56:03.313Z"
+        }
+      ]
+    },
+    {
+      "taskId": "4f04acc0-c138-42b9-b7a3-df23476fe873",
+      "agent": "pi-openrouter",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "status": "succeeded",
+      "query": "京都駅から近い次の2店について、駅アクセスと掲載ランチを各1点選んで税込価格を比較してください。予算上限は指定しません。公開情報の更新日や当日の提供・空席が未確認なら明記し、予約はしません。",
+      "createdAt": "2026-11-10T03:35:52.875Z",
+      "updatedAt": "2026-11-10T03:36:59.851Z",
+      "pages": [
+        {
+          "url": "https://www.hotpepper.jp/strJ004577270/",
+          "title": "美味酒肴 京すいしん(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://www.hotpepper.jp/strJ004577270/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J004577270",
+            "title": "美味酒肴 京すいしん(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T03:36:03.779Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "hours",
+                "quote": "ト予約はこちら\n\n\n営業時間\t月～日、祝日: 11:30～15:00 （料理L.O. 14:30 ドリンクL.O. 14:30）\n17:00～23",
+                "url": "https://www.hotpepper.jp/strJ004577270/"
+              },
+              {
+                "id": "seats",
+                "quote": "ください。\n\nお席\n総席数\t194席\n最大宴会収容人数\t36人\n個室\tなし\n座敷\tあり",
+                "url": "https://www.hotpepper.jp/strJ004577270/"
+              },
+              {
+                "id": "payment",
+                "quote": "用不可\n\nクレジットカード\t利用可 ：VISA､マスター､アメックス､DINERS､",
+                "url": "https://www.hotpepper.jp/strJ004577270/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "も喜んでくださいます\n\n京都駅徒歩3分の立地\n\nご利用シーンに合わせたお席をバリエーション豊富にご用意してお"
+              },
+              {
+                "id": "price",
+                "quote": "48件\n予算\n4001～5000円 1501～2000円\nジャンル\n\n和食\n\n日本料理・懐石・割烹\n寿司"
+              },
+              {
+                "id": "menu",
+                "quote": "最近見たお店\n\nマイメニュー\nマイページTOP\n予約の確認\nお店からのメッセージ一覧\nグルメ手帳"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "9f5076411504892e9f55b49cfcb5bab9b57892a29d8570cb4a6fe828708a08cb",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ000805841/",
+          "title": "串の坊 京都駅店(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://www.hotpepper.jp/strJ000805841/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J000805841",
+            "title": "串の坊 京都駅店(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T03:36:04.325Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [
+              {
+                "id": "hours",
+                "quote": "ト予約はこちら\n\n\n営業時間\t月～日、祝日、祝前日: 11:00～22:00 （料理L.O. 21:30 ドリンクL.O. 2",
+                "url": "https://www.hotpepper.jp/strJ000805841/"
+              },
+              {
+                "id": "seats",
+                "quote": "ください。\n\nお席\n総席数\t20席(ご宴会など承ります。ご予約はお早めに！)\n最大宴",
+                "url": "https://www.hotpepper.jp/strJ000805841/"
+              },
+              {
+                "id": "payment",
+                "quote": "利用可\n\nクレジットカード\t利用可 ：VISA､マスター､アメックス､DINERS､",
+                "url": "https://www.hotpepper.jp/strJ000805841/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "access",
+                "quote": "の坊　京都駅店\n住所\t\n京都府京都市下京区東塩小路町６５７ 京都駅ビル11F\n\nアクセス\tJR京都駅徒歩3分\n電話\t電話番号を表示する\n\n営業時間"
+              },
+              {
+                "id": "price",
+                "quote": "57件\n予算\n5001～6000円 2001～3000円\nジャンル\n\n和食\n\n和食全般\n烏丸五条・京都駅"
+              },
+              {
+                "id": "menu",
+                "quote": "最近見たお店\n\nマイメニュー\nマイページTOP\n予約の確認\nお店からのメッセージ一覧\nグルメ手帳"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "4a5976ad24f83ae8da8a68cba6ef65d35071ff2477a92134b627f530619b92d5",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ004577270/lunch/",
+          "title": "美味酒肴 京すいしん(和食)のランチ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "insufficient_detail",
+            "url": "https://www.hotpepper.jp/strJ004577270/lunch/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J004577270",
+            "title": "美味酒肴 京すいしん(和食)のランチ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T03:36:13.170Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "48件\n予算\n4001～5000円 1501～2000円\nジャンル\n\n和食\n\n日本料理・懐石・割烹\n寿司"
+              },
+              {
+                "id": "menu",
+                "quote": "ランチ | 美味酒肴 京すいしん - クーポン・予約のホットペッパーグルメ"
+              }
+            ],
+            "missingFields": [
+              "access"
+            ],
+            "bodySha256": "b9ee0828c450df132a4455ef555c80b085cb396da3c8b41b5e3ec1d40fd166a5",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false,
+            "level": 2
+          }
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ000805841/lunch/",
+          "title": "串の坊 京都駅店(和食)のランチ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "verification": {
+            "status": "insufficient_detail",
+            "url": "https://www.hotpepper.jp/strJ000805841/lunch/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J000805841",
+            "title": "串の坊 京都駅店(和食)のランチ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T03:36:13.698Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "enrichments": [],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "57件\n予算\n5001～6000円 2001～3000円\nジャンル\n\n和食\n\n和食全般\n烏丸五条・京都駅"
+              },
+              {
+                "id": "menu",
+                "quote": "ランチ | 串の坊 京都駅店 - クーポン・予約のホットペッパーグルメ\n\n最"
+              }
+            ],
+            "missingFields": [
+              "access"
+            ],
+            "bodySha256": "47bab26e394a0db95b05f637b5fee7118269a9f0792dc18213f6026101776d9d",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false,
+            "level": 2
+          }
+        }
+      ],
+      "steps": 21,
+      "research": {
+        "rounds": 0,
+        "maxRounds": 2,
+        "pagesOpened": 0,
+        "maxPages": 4,
+        "attempts": []
+      },
+      "criteria": [
+        {
+          "id": "kyoto-station-near",
+          "description": "京都駅から近いか（徒歩5分以内を暫定基準）",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "station-access",
+          "description": "駅アクセス情報が掲載されているか",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "lunch-posted",
+          "description": "ランチメニューが掲載されているか",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "lunch-tax-included-price",
+          "description": "ランチの税込価格が確認できるか",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "price-comparison",
+          "description": "両店のランチ税込価格を比較できるか",
+          "weight": 9,
+          "required": true
+        },
+        {
+          "id": "update-date-availability",
+          "description": "公開情報の更新日・当日の提供・空席状況が確認できるか（未確認なら明記）",
+          "weight": 5,
+          "required": false
+        }
+      ],
+      "answer": {
+        "summary": "京都駅近くの2店（美味酒肴 京すいしん、串の坊 京都駅店）について、駅アクセス（両店ともJR京都駅徒歩3分、徒歩5分以内基準を満たす）と掲載ランチ各1点を選び税込価格を比較。京すいしん「京御膳」3,080円（税込）に対し、串の坊「潮騒串揚げ8種」2,420円（税込）で、差額は660円（京すいしんが高い）。公開情報の更新日は京すいしんランチページ2026/11/06、串の坊ランチページは2023/12/01と古い。当日の提供・空席は来店日・人数未指定のため未確認。予約は行っていない。",
+        "candidates": [
+          {
+            "name": "美味酒肴 京すいしん",
+            "url": "https://www.hotpepper.jp/strJ004577270/",
+            "matches": [
+              {
+                "criterionId": "kyoto-station-near",
+                "status": "supported",
+                "explanation": "店舗詳細に「アクセス JR 京都駅 徒歩3分」「京都駅徒歩3分の立地」とあり、徒歩5分以内の暫定基準を満たす。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "station-access",
+                "status": "supported",
+                "explanation": "JR京都駅徒歩3分、京都タワー目の前のSKビル1Fと掲載。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "lunch-posted",
+                "status": "supported",
+                "explanation": "ランチ専用ページに京御膳・寿司膳・豚ロースカツ膳・うな丼など複数のランチが掲載。",
+                "evidenceIds": [
+                  "ev-7"
+                ]
+              },
+              {
+                "criterionId": "lunch-tax-included-price",
+                "status": "supported",
+                "explanation": "選択した京御膳は「3,080円（税込）」と税込価格が明記。",
+                "evidenceIds": [
+                  "ev-7"
+                ]
+              },
+              {
+                "criterionId": "price-comparison",
+                "status": "supported",
+                "explanation": "自店の京御膳 3,080円（税込）は、串の坊の潮騒串揚げ8種 2,420円（税込）より660円高い。",
+                "evidenceIds": [
+                  "ev-7"
+                ]
+              },
+              {
+                "criterionId": "update-date-availability",
+                "status": "supported",
+                "explanation": "ランチページ最終更新日は2026/11/06と確認済み。ただし来店日・人数未指定のため当日の提供・空席は未確認（予約も行わない）。",
+                "evidenceIds": [
+                  "ev-2",
+                  "ev-3"
+                ]
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "串の坊 京都駅店",
+            "url": "https://www.hotpepper.jp/strJ000805841/",
+            "matches": [
+              {
+                "criterionId": "kyoto-station-near",
+                "status": "supported",
+                "explanation": "店舗詳細に「アクセス JR京都駅徒歩3分」とあり、徒歩5分以内の暫定基準を満たす。",
+                "evidenceIds": [
+                  "ev-4"
+                ]
+              },
+              {
+                "criterionId": "station-access",
+                "status": "supported",
+                "explanation": "JR京都駅徒歩3分、京都駅ビル11Fと掲載。",
+                "evidenceIds": [
+                  "ev-4"
+                ]
+              },
+              {
+                "criterionId": "lunch-posted",
+                "status": "supported",
+                "explanation": "ランチ専用ページに潮騒串揚げ8種（2,420円税込）など3品が掲載。",
+                "evidenceIds": [
+                  "ev-8"
+                ]
+              },
+              {
+                "criterionId": "lunch-tax-included-price",
+                "status": "supported",
+                "explanation": "選択した潮騒串揚げ8種は「2,420円（税込）」と税込価格が明記。",
+                "evidenceIds": [
+                  "ev-8"
+                ]
+              },
+              {
+                "criterionId": "price-comparison",
+                "status": "supported",
+                "explanation": "自店の潮騒串揚げ8種 2,420円（税込）は、京すいしんの京御膳 3,080円（税込）より660円安い。",
+                "evidenceIds": [
+                  "ev-8"
+                ]
+              },
+              {
+                "criterionId": "update-date-availability",
+                "status": "supported",
+                "explanation": "ランチページ最終更新日は2023/12/01（トップページは2026/10/22）と確認済みだが、ランチ情報は更新が古く最新とは限らない。当日の提供・空席は未確認。",
+                "evidenceIds": [
+                  "ev-5",
+                  "ev-6"
+                ]
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "予算上限は指定なしのため「予算内か」の判断は行わない。",
+          "来店日・人数が未指定のため、当日の提供メニュー・空席状況は未確認（予約は行っていない）。",
+          "串の坊のランチページ最終更新日は2023/12/01と古く、価格・提供内容は最新とは限らず、直接店舗への確認が必要。",
+          "取得は公開HTMLであり、動的な空席・在庫状況を確認したものではない。"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://www.hotpepper.jp/strJ004577270/",
+          "quote": "アクセス\tＪＲ 京都駅 徒歩3分　京都タワー目の前のSKビル１Ｆ！",
+          "capturedAt": "2026-11-10T03:36:03.779Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://www.hotpepper.jp/strJ004577270/",
+          "quote": "2026/11/06 更新",
+          "capturedAt": "2026-11-10T03:36:03.779Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://www.hotpepper.jp/strJ004577270/",
+          "quote": "予算詳細\tランチ：1,600～3,000円、ディナー：4,000円～5,000円",
+          "capturedAt": "2026-11-10T03:36:03.779Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://www.hotpepper.jp/strJ000805841/",
+          "quote": "アクセス\tJR京都駅徒歩3分",
+          "capturedAt": "2026-11-10T03:36:04.325Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-2",
+          "url": "https://www.hotpepper.jp/strJ000805841/",
+          "quote": "2026/10/22 更新",
+          "capturedAt": "2026-11-10T03:36:04.325Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-2",
+          "url": "https://www.hotpepper.jp/strJ000805841/",
+          "quote": "予算詳細\tランチ2200円～　ディナー4180円～",
+          "capturedAt": "2026-11-10T03:36:04.325Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-3",
+          "url": "https://www.hotpepper.jp/strJ004577270/lunch/",
+          "quote": "京御膳\n\nお造り　　焼き物　　生麩田楽　　茶碗蒸し　　煮物　　天ぷら　　土瓶蒸し　　おぼろ豆腐　　季節の御飯(松茸)　　香の物　　デザート\n\n3,080円（税込）",
+          "capturedAt": "2026-11-10T03:36:13.170Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-4",
+          "url": "https://www.hotpepper.jp/strJ000805841/lunch/",
+          "quote": "潮騒(しおさい）串揚げ8種\n\n海老・豚フィレ・生椎茸・その他\n\n2,420円（税込）",
+          "capturedAt": "2026-11-10T03:36:13.698Z"
+        }
+      ]
+    },
+    {
+      "taskId": "52139778-e2f6-4238-8502-4a6e025fbe10",
+      "agent": "pi-openrouter",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "status": "succeeded",
+      "query": "この2商品の公開Microdataの価格帯、容量、素材、サイズを比較してください。選択SKU確定価格は未確認でよいです。送料・在庫も未確認でよいです。価格帯をSKU確定価格や送料込み総額と混同せず、購入はしません。",
+      "createdAt": "2026-11-10T03:49:53.313Z",
+      "updatedAt": "2026-11-10T03:50:24.410Z",
+      "pages": [
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "productOffer": {
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "currency": "JPY",
+            "low": 6990,
+            "high": 7990,
+            "source": "microdata",
+            "kind": "range"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "service": "rakuten-ichiba",
+            "entityId": "rakuten-ichiba:samfolk:sa80ss",
+            "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+            "capturedAt": "2026-11-10T03:49:57.993Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "euc-jp",
+              "contentType": "text/html;charset=EUC-JP"
+            },
+            "enrichments": [
+              {
+                "id": "capacity",
+                "quote": "災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80ss/"
+              },
+              {
+                "id": "material",
+                "quote": "1680D高密度防水ナイロンを採用。180度全開設計で3～5泊の荷物もスーツケ",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80ss/"
+              },
+              {
+                "id": "size",
+                "quote": "52 x 34 x 23cm\n容量：約40L\n重量：約1.2 kg\nノートPC",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80ss/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "KU/送料/在庫未確認）\n対象商品の販売価格帯: 6990〜7990円（JPY）\n通常商品 ⇒全会員5倍 ポイントアップキャンペーン中\n定期"
+              },
+              {
+                "id": "specification",
+                "quote": "ル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全"
+              },
+              {
+                "id": "seller",
+                "quote": "S\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "50c4121de1009431973ef3d7393ae764fe37524cf52013264ba08eeeba45e954",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "productOffer": {
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "currency": "JPY",
+            "low": 8990,
+            "high": 10190,
+            "source": "microdata",
+            "kind": "range"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "service": "rakuten-ichiba",
+            "entityId": "rakuten-ichiba:samfolk:sa80pross",
+            "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
+            "capturedAt": "2026-11-10T03:50:00.117Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "euc-jp",
+              "contentType": "text/html;charset=EUC-JP"
+            },
+            "enrichments": [
+              {
+                "id": "capacity",
+                "quote": "天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80pross/"
+              },
+              {
+                "id": "material",
+                "quote": "】\n・表地：840Dナイロン / 400Dポリエステル\n・裏地：ポリエステル",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80pross/"
+              },
+              {
+                "id": "size",
+                "quote": "53 × 35 × 22 cm\n【容量】約 40 L\n【重量】本体 約1,240",
+                "url": "https://item.rakuten.co.jp/samfolk/sa80pross/"
+              }
+            ],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "KU/送料/在庫未確認）\n対象商品の販売価格帯: 8990〜10190円（JPY）\n当店利用時のご注意\n・当店の商品は全て国内から配送されます"
+              },
+              {
+                "id": "specification",
+                "quote": "FIDスキミング防止・大容量収納を備えた高機能バックパック。\n＼マラソン限定15%CP付き+P10"
+              },
+              {
+                "id": "seller",
+                "quote": "o\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "cd8d3e8997611bff08d56a9d08eca7bee5b01e0e1b4482ea66ce983ad03ad7a1",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        }
+      ],
+      "steps": 18,
+      "research": {
+        "rounds": 0,
+        "maxRounds": 2,
+        "pagesOpened": 0,
+        "maxPages": 4,
+        "attempts": []
+      },
+      "criteria": [
+        {
+          "id": "price-range",
+          "description": "公開Microdataの価格帯（SKU確定価格・送料込み総額とは区別。購入は行わない）",
+          "weight": 10,
+          "required": false
+        },
+        {
+          "id": "capacity",
+          "description": "商品の容量（Lやmlなどの表記）",
+          "weight": 9,
+          "required": true
+        },
+        {
+          "id": "material",
+          "description": "商品の素材・成分表記",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "size",
+          "description": "商品のサイズ（縦×横×奥行などの外形寸法）",
+          "weight": 8,
+          "required": true
+        }
+      ],
+      "answer": {
+        "summary": "2商品（Samfolkのトラベルリュック）を公開Microdataに基づいて比較しました。いずれも容量は約40Lで同じですが、価格帯・素材・サイズに違いがあります。sa80ssは価格帯6990〜7990円、メイン素材1680D高密度防水ナイロン、外寸52×34×23cm。sa80prossは価格帯8990〜10190円、表地840Dナイロン/400Dポリエステル・裏地ポリエステル、本体サイズ約53×35×22cm。価格帯を比較するとsa80ssの方が約2,000円安いです。送料・在庫・選択SKU確定価格はユーザー指定により未確認とし、購入は行っていません。",
+        "candidates": [
+          {
+            "name": "Samfolk トラベルリュック sa80ss",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "matches": [
+              {
+                "criterionId": "price-range",
+                "status": "supported",
+                "explanation": "Microdataの価格帯は6990〜7990円（JPY）。SKU確定価格や送料込み総額とは区別。",
+                "evidenceIds": [
+                  "ev-1"
+                ]
+              },
+              {
+                "criterionId": "capacity",
+                "status": "supported",
+                "explanation": "仕様欄に「容量：約40L」と記載。",
+                "evidenceIds": [
+                  "ev-2"
+                ]
+              },
+              {
+                "criterionId": "material",
+                "status": "supported",
+                "explanation": "メイン素材は「1680D高密度高耐久防水生地（撥水・防汚加工済）」。",
+                "evidenceIds": [
+                  "ev-3"
+                ]
+              },
+              {
+                "criterionId": "size",
+                "status": "supported",
+                "explanation": "外寸は「52 x 34 x 23cm」。",
+                "evidenceIds": [
+                  "ev-4"
+                ]
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "Samfolk トラベルリュック sa80pross",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "matches": [
+              {
+                "criterionId": "price-range",
+                "status": "supported",
+                "explanation": "Microdataの価格帯は8990〜10190円（JPY）。SKU確定価格や送料込み総額とは区別。",
+                "evidenceIds": [
+                  "ev-5"
+                ]
+              },
+              {
+                "criterionId": "capacity",
+                "status": "supported",
+                "explanation": "仕様欄に「【容量】約 40 L」と記載。sa80ssと同じ約40L。",
+                "evidenceIds": [
+                  "ev-6"
+                ]
+              },
+              {
+                "criterionId": "material",
+                "status": "supported",
+                "explanation": "表地は「840Dナイロン / 400Dポリエステル」、裏地はポリエステル。sa80ssとは異なる複合素材構成。",
+                "evidenceIds": [
+                  "ev-7"
+                ]
+              },
+              {
+                "criterionId": "size",
+                "status": "supported",
+                "explanation": "本体サイズは「約 53 × 35 × 22 cm」。sa80ssより縦・横各1cm大きく、奥行きは1cm小さい。",
+                "evidenceIds": [
+                  "ev-8"
+                ]
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "• 送料・在庫・選択SKU確定価格はユーザー指定により未確認とし、比較対象外としています。\n• 価格帯は公開HTML（Microdata）取得時点での表示であり、購入・注文は行っていません。実際の支払総額とは異なる可能性があります。\n• 本文が途中で切れている箇所はありませんが、各項目は閲覧日時（2026-11-10）の情報に基づきます。"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "対象商品の販売価格帯: 6990〜7990円（JPY）",
+          "capturedAt": "2026-11-10T03:49:57.993Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "容量：約40L",
+          "capturedAt": "2026-11-10T03:49:57.993Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "メイン素材：1680D高密度高耐久防水生地（撥水・防汚加工済）",
+          "capturedAt": "2026-11-10T03:49:57.993Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-1",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "外寸：52 x 34 x 23cm",
+          "capturedAt": "2026-11-10T03:49:57.993Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "対象商品の販売価格帯: 8990〜10190円（JPY）",
+          "capturedAt": "2026-11-10T03:50:00.117Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "【容量】約 40 L",
+          "capturedAt": "2026-11-10T03:50:00.117Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "・表地：840Dナイロン / 400Dポリエステル",
+          "capturedAt": "2026-11-10T03:50:00.117Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-2",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "【本体サイズ】約 53 × 35 × 22 cm",
+          "capturedAt": "2026-11-10T03:50:00.117Z"
+        }
+      ]
+    },
+    {
+      "taskId": "1cc086e4-af2a-4078-9359-f5ff46063ca6",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "query": "この2冊の書名、発売日、ISBN、掲載価格、サイズの違いを引用して比較してください。同じガイドのサイズ違いならその旨を明記し、購入はしません。",
+      "createdAt": "2026-11-10T03:55:52.642Z",
+      "updatedAt": "2026-11-10T03:56:28.698Z",
+      "pages": [
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+          "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "productOffer": {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "currency": "JPY",
+            "low": 1430,
+            "high": 1430,
+            "source": "microdata",
+            "kind": "exact"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+            "service": "rakuten-books",
+            "entityId": "rakuten-books:18577690",
+            "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+            "capturedAt": "2026-11-10T03:56:03.513Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "enrichments": [
+              {
+                "id": "pages",
+                "quote": "その他\nページ数：\n160p\nISBN：\n9784533172731\n旧版：",
+                "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01"
+              },
+              {
+                "id": "dimensions",
+                "quote": "すいサイズ（通常版／25.7×21cm）と、持ち運びに便利な「超ちいサイズ」（18×14",
+                "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01"
+              },
+              {
+                "id": "edition",
+                "quote": "ーポン★\n商品情報\n発売日：\n2026年05月08日\n著者／編集：\nJTBパブリッシング 旅行ガイドブ",
+                "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01"
+              }
+            ],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "対象商品の販売価格: 1430円（JPY）\n買い物かご\nお知らせ\nMyクーポン\nお気に入り\n購入履歴"
+              },
+              {
+                "id": "publication",
+                "quote": "でクーポン★\n商品情報\n発売日：\n2026年05月08日\n著者／編集：\nJTBパブリッシング 旅行ガ"
+              },
+              {
+                "id": "identifier",
+                "quote": "ページ数：\n160p\nISBN：\n9784533172731\n旧版：\nるるぶ箱根'26\n商品説明\n内"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "a1ae9d928bee33fb13e0158102e22236733c843c40dca0da0b31bbdca7dfd553",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+          "title": "楽天ブックス: るるぶ 箱根 '27 超ちいサイズ - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172748 : 本",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "productOffer": {
+            "url": "https://books.rakuten.co.jp/rb/18577689/",
+            "currency": "JPY",
+            "low": 1430,
+            "high": 1430,
+            "source": "microdata",
+            "kind": "exact"
+          },
+          "verification": {
+            "status": "verified",
+            "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+            "service": "rakuten-books",
+            "entityId": "rakuten-books:18577689",
+            "title": "楽天ブックス: るるぶ 箱根 '27 超ちいサイズ - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172748 : 本",
+            "capturedAt": "2026-11-10T03:56:03.894Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "enrichments": [
+              {
+                "id": "pages",
+                "quote": "その他\nページ数：\n160p\nISBN：\n9784533172748\n旧版：",
+                "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02"
+              },
+              {
+                "id": "dimensions",
+                "quote": "すいサイズ（通常版／25.7×21cm）と、持ち運びに便利な「超ちいサイズ」（18×14",
+                "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02"
+              },
+              {
+                "id": "edition",
+                "quote": "ーポン★\n商品情報\n発売日：\n2026年05月08日\n著者／編集：\nJTBパブリッシング 旅行ガイドブ",
+                "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02"
+              }
+            ],
+            "fields": [
+              {
+                "id": "price",
+                "quote": "対象商品の販売価格: 1430円（JPY）\n買い物かご\nお知らせ\nMyクーポン\nお気に入り\n購入履歴"
+              },
+              {
+                "id": "publication",
+                "quote": "でクーポン★\n商品情報\n発売日：\n2026年05月08日\n著者／編集：\nJTBパブリッシング 旅行ガ"
+              },
+              {
+                "id": "identifier",
+                "quote": "ページ数：\n160p\nISBN：\n9784533172748\n旧版：\nるるぶ箱根'26超ちいサイズ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "bff3696d2ccf56d438e1ac7047e76248588f20faf8932a3affd862eccdffdc54",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false,
+            "level": 4
+          }
+        }
+      ],
+      "steps": 16,
+      "research": {
+        "rounds": 0,
+        "maxRounds": 2,
+        "pagesOpened": 0,
+        "maxPages": 4,
+        "attempts": []
+      },
+      "criteria": [
+        {
+          "id": "title",
+          "description": "書名と同一ガイドのサイズ違いかを確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "date",
+          "description": "発売日を比較",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "isbn",
+          "description": "ISBNを比較",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "price",
+          "description": "掲載価格を比較（購入しない）",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "size",
+          "description": "サイズを比較",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "同じ『るるぶ 箱根 ’27』のサイズ違い。発売日と価格は同じ、ISBNとサイズが異なる。見やすさなら通常版、携帯性なら超ちいサイズが適する。購入は行っていない。",
+        "candidates": [
+          {
+            "name": "るるぶ 箱根 '27",
+            "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+            "matches": [
+              {
+                "criterionId": "title",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "通常版。同じガイドの2サイズ展開。"
+              },
+              {
+                "criterionId": "date",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "発売日2026年05月08日"
+              },
+              {
+                "criterionId": "isbn",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "ISBN 9784533172731"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "掲載価格1,430円（税込）"
+              },
+              {
+                "criterionId": "size",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "通常版25.7×21cm"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "るるぶ 箱根 '27 超ちいサイズ",
+            "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+            "matches": [
+              {
+                "criterionId": "title",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "超ちいサイズ版"
+              },
+              {
+                "criterionId": "date",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "発売日2026年05月08日"
+              },
+              {
+                "criterionId": "isbn",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8"
+                ],
+                "explanation": "ISBN 9784533172748"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-9"
+                ],
+                "explanation": "掲載価格1,430円（税込）"
+              },
+              {
+                "criterionId": "size",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-11"
+                ],
+                "explanation": "18×14.7cm"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "2026年11月10日取得の公開HTML掲載情報。購入時価格・在庫の確約ではない。"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+          "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+          "capturedAt": "2026-11-10T03:56:03.513Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+          "quote": "2026年05月08日",
+          "capturedAt": "2026-11-10T03:56:03.513Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+          "quote": "9784533172731",
+          "capturedAt": "2026-11-10T03:56:03.513Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+          "quote": "1,430円（税込）",
+          "capturedAt": "2026-11-10T03:56:03.513Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/?l-id=search-c-item-img-01",
+          "quote": "大きくて見やすいサイズ（通常版／25.7×21cm）と、持ち運びに便利な「超ちいサイズ」（18×14.7cm）の2つのサイズ展開！こちらは通常版の商品ページです。",
+          "capturedAt": "2026-11-10T03:56:03.513Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+          "quote": "るるぶ 箱根 '27 超ちいサイズ",
+          "capturedAt": "2026-11-10T03:56:03.894Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+          "quote": "2026年05月08日",
+          "capturedAt": "2026-11-10T03:56:03.894Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+          "quote": "9784533172748",
+          "capturedAt": "2026-11-10T03:56:03.894Z"
+        },
+        {
+          "id": "ev-9",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+          "quote": "1,430円（税込）",
+          "capturedAt": "2026-11-10T03:56:03.894Z"
+        },
+        {
+          "id": "ev-10",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+          "quote": "通常版／25.7×21cm",
+          "capturedAt": "2026-11-10T03:56:03.894Z"
+        },
+        {
+          "id": "ev-11",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577689/?l-id=search-c-item-img-02",
+          "quote": "「超ちいサイズ」（18×14.7cm）",
+          "capturedAt": "2026-11-10T03:56:03.894Z"
+        }
+      ]
+    }
+  ],
+  "exploration": [
+    {
+      "taskId": "9331cea1-a8eb-4311-ae1d-614debc937f8",
+      "agent": "pi-openrouter",
+      "model": "nvidia/nemotron-3.5-super-vl:free",
+      "status": "partial",
+      "query": "この2商品の対象商品価格帯、容量、素材・サイズの違いを引用して比較してください。公開Microdataの価格帯と選択SKUの確定価格を区別し、送料・在庫は未確認と明記してください。予算上限は指定せず購入はしません。",
+      "criteria": [
+        {
+          "id": "price-band-microdata",
+          "description": "公開Microdataに記載された対象商品の価格帯（SKU確定価格とは区別）",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "price-sku-final",
+          "description": "選択SKU時点での確定価格（公開価格帯と区別）",
+          "weight": 10,
+          "required": true
+        },
+        {
+          "id": "capacity",
+          "description": "商品の容量（mlやLなど、記載があれば）",
+          "weight": 8,
+          "required": false
+        },
+        {
+          "id": "material",
+          "description": "商品の素材・成分",
+          "weight": 9,
+          "required": true
+        },
+        {
+          "id": "size",
+          "description": "商品のサイズ（幅×奥行×高さなど）",
+          "weight": 9,
+          "required": true
+        },
+        {
+          "id": "shipping-stock",
+          "description": "送料・在庫状況（未確認と明記）",
+          "weight": 5,
+          "required": false
+        }
+      ],
+      "summary": "2商品（samfolk sa80ss と samfolk sa80pross）の価格帯・容量・素材・サイズを公開Microdataと商品仕様から比較しました。価格帯は sa80ss が 6990〜7990円、sa80pross が 8990〜10190円で、prossの方が約2000円高い価格帯です。容量は両方とも約40Lで同一です。素材は sa80ss が「1680D高密度高耐久防水生地（撥水・防汚加工済）」、sa80pross が「表地：840Dナイロン / 400Dポリエステル、裏地：ポリエステル」と異なります。サイズは sa80ss が「外寸：52 x 34 x 23cm」、sa80pross が「【本体サイズ】約 53 × 35 × 22 cm」で、prossの方が幅と奥行きは約1cmずつ大きく、高さは約1cm小さい仕様です。選択SKU確定価格、送料、在庫状況は両ページとも本文に記載がなく未確認です。予算上限は指定されておらず、購入は行いません。",
+      "limitations": [
+        "選択SKU確定価格・送料・在庫状況は両商品ページとも本文に記載がなく、unknownと評価しました。deepeningで追加取得を試みましたがリソースエラーで取得できませんでした。",
+        "取得元は公開HTML（public-html）であり、動的な在庫・空室・カート価格の確定を確認したものではありません。",
+        "予算上限の指定はなく、購入・予約・問い合わせは行っていません。",
+        "追加確認しても未確認の項目: 選択SKU時点での確定価格（公開価格帯と区別） / 選択SKU時点での確定価格（公開価格帯と区別）"
+      ],
+      "research": {
+        "rounds": 2,
+        "maxRounds": 2,
+        "pagesOpened": 2,
+        "maxPages": 4,
+        "attempts": [
+          {
+            "pageId": "page-1",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "mode": "render",
+            "fields": [
+              "選択SKU時点での確定価格（公開価格帯と区別）"
+            ],
+            "result": "Failed to read: Resource temporarily unavailable (os error 35) (the command reached the daemon but no response came back; it may or may not have run, so it was not retried)"
+          },
+          {
+            "pageId": "page-2",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "mode": "render",
+            "fields": [
+              "選択SKU時点での確定価格（公開価格帯と区別）"
+            ],
+            "result": "Failed to read: Resource temporarily unavailable (os error 35) (the command reached the daemon but no response came back; it may or may not have run, so it was not retried)"
+          }
+        ]
+      }
+    },
+    {
+      "taskId": "791d0091-5a44-4413-a28d-9b5812e2868b",
+      "agent": "claude-code",
+      "model": "claude-haiku-5-5",
+      "status": "partial",
+      "query": "この2物件の家賃と管理費の合計月額が15万円以下か、1LDKか、武蔵小杉駅への徒歩を比較してください。管理費が「-」なら0円と断定せず、不足情報を追加確認したうえで未確認条件を明示してください。問い合わせはしません。",
+      "criteria": [
+        {
+          "id": "total_rent_limit",
+          "description": "家賃と管理費・共益費の合計月額が15万円以下（管理費が「-」の場合は0円と断定せず未確認扱い）",
+          "weight": 9,
+          "required": true
+        },
+        {
+          "id": "layout_1ldk",
+          "description": "間取りが1LDK",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "station_walk_musashikosugi",
+          "description": "武蔵小杉駅への徒歩が5分以内（暫定基準・対象駅の徒歩で判定、別駅の徒歩と混同しない）",
+          "weight": 8,
+          "required": true
+        },
+        {
+          "id": "fees_breakdown",
+          "description": "家賃・管理費・共益費・初期費用の内訳が確認できること",
+          "weight": 4,
+          "required": false
+        }
+      ],
+      "summary": "2物件を比較した。最適候補は確定しない。条件を完全に満たす物件はなし。\n(1) D Paina 中丸子（jnc_000110455233）: 家賃14万円+管理費・共益費6000円=14.6万円で15万円以下、間取り1LDK。ただし武蔵小杉駅はJR横須賀線「歩10分」で5分基準を満たさない（別駅の向河原駅歩10分・平間駅歩16分は対象外）。\n(2) フレメゾン（jnc_000094254501）: 家賃13.5万円、間取り1LDK、武蔵小杉駅は東急東横線「歩7分」で5分基準を満たさない。管理費・共益費は「-」のため0円と断定せず未確認。合計月額は確定できない。\n必須条件の未充足: 両物件とも武蔵小杉駅徒歩5分以内を満たさない。フレメゾンは管理費が未確認。",
+      "limitations": [
+        "両候補とも詳細ページは公開HTML（public-html）で取得。空室・入居可否・募集条件は確認していない。",
+        "フレメゾンの管理費・共益費は「-」。子ページ・描画取得でも金額は確認できず、0円と断定していない。",
+        "候補数は2件（ユーザー指定の候補数なし）。武蔵小杉駅5分以内の物件は今回の2件では見つからなかった。",
+        "駅徒歩は掲載情報の表示値に基づく。掲載元の更新は2026/11/09時点。",
+        "料金は閲覧日時の掲載値であり確約ではない。",
+        "追加確認しても未確認の項目: 家賃と管理費・共益費の合計月額が15万円以下（管理費が「-」の場合は0円と断定せず未確認扱い）"
+      ],
+      "research": {
+        "rounds": 1,
+        "maxRounds": 2,
+        "pagesOpened": 3,
+        "maxPages": 4,
+        "attempts": [
+          {
+            "pageId": "page-2",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/",
+            "mode": "render",
+            "fields": [
+              "管理費・共益費",
+              "駅徒歩",
+              "初期費用"
+            ],
+            "result": "verified"
+          },
+          {
+            "pageId": "page-2",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/#shashinayamali",
+            "mode": "link",
+            "fields": [
+              "管理費・共益費",
+              "駅徒歩",
+              "初期費用"
+            ],
+            "result": "verified"
+          },
+          {
+            "pageId": "page-1",
+            "url": "https://suumo.jp/chintai/jnc_000110455233/#shashinayamali",
+            "mode": "link",
+            "fields": [
+              "駅徒歩",
+              "管理費・共益費"
+            ],
+            "result": "verified"
+          }
+        ]
+      }
+    }
+  ]
+}

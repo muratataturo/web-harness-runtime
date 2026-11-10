@@ -302,9 +302,11 @@ function render() {
   $("#mode-description").textContent =
     mode === "demo"
       ? "架空のデータで、チームとの進め方を試せます"
-      : state.config?.agent === "codex"
-        ? "公開サイトから調査 · Codexの利用枠を使用"
-        : "公開サイトから調査 · OpenRouter無料モデル";
+      : state.config?.agent === "claude-code"
+        ? "公開サイトから調査 · Claude Codeの利用枠を使用"
+        : state.config?.agent === "codex"
+          ? "公開サイトから調査 · Codexの利用枠を使用"
+          : "公開サイトから調査 · OpenRouter無料モデル";
   $("#mode-button").textContent =
     mode === "demo" ? "実調査に切り替え ↗" : "体験モードに戻る ↗";
   $("#composer-input").placeholder = goal
@@ -434,7 +436,7 @@ async function environment() {
     sandbox = { available: false };
   }
   $("#environment-content").innerHTML =
-    `<div class="env-row">実行モード<span>${state.goal?.mode === "live" ? "ローカル実調査" : "シナリオ体験（API使用なし）"}</span></div><div class="env-row">調査エンジン<span>${state.config?.agent === "codex" ? (state.config?.codexReady ? "Codex · ChatGPTログイン確認済み" : "Codex · ログインを確認してください") : state.config?.localKeyConfigured ? "pi + OpenRouter · 無料モデル" : "OpenRouter認証を確認してください"}</span></div><div class="env-row">OpenShell CLI<span>${sandbox.available ? "導入済み（gatewayは未確認）" : "未導入"}</span></div><div class="env-row">self-host VM<span>${state.config?.executor === "openshell" ? "OpenShell adapter選択済み・接続状態はCLIで確認" : "未接続 · 発行していません"}</span></div><div class="env-row">エージェント間通信<span>内部A2A · 配送ID/改訂/引き継ぎ上限あり</span></div><p class="env-description">この画面のComputerは体験表示です。実調査モードは設定された local/OpenShell executor で選択した調査エンジンと agent-browser を使います。Codexは現在ローカル実行のみです。OpenShellの発行計画は既存のpi + OpenRouter構成を使います。</p><pre class="env-code">npm start -- sandbox plan '調査すること' \\\n  --gateway my-vm --url https://www.jalan.net/</pre><p class="dialog-note">OpenShellの実キーはgateway側のproviderで保持します。ブラウザにAPIキーは送信しません。</p>`;
+    `<div class="env-row">実行モード<span>${state.goal?.mode === "live" ? "ローカル実調査" : "シナリオ体験（API使用なし）"}</span></div><div class="env-row">調査エンジン<span>${state.config?.agent === "claude-code" ? (state.config?.claudeReady ? "Claude Code · サブスク認証確認済み" : "Claude Code · 認証を確認してください") : state.config?.agent === "codex" ? (state.config?.codexReady ? "Codex · ChatGPTログイン確認済み" : "Codex · ログインを確認してください") : state.config?.localKeyConfigured ? "pi + OpenRouter · 無料モデル" : "OpenRouter認証を確認してください"}</span></div><div class="env-row">OpenShell CLI<span>${sandbox.available ? "導入済み（gatewayは未確認）" : "未導入"}</span></div><div class="env-row">self-host VM<span>${state.config?.executor === "openshell" ? "OpenShell adapter選択済み・接続状態はCLIで確認" : "未接続 · 発行していません"}</span></div><div class="env-row">エージェント間通信<span>内部A2A · 配送ID/改訂/引き継ぎ上限あり</span></div><p class="env-description">この画面のComputerは体験表示です。実調査モードは設定された local/OpenShell executor で選択した調査エンジンと agent-browser を使います。Codex / Claude Codeは現在ローカル実行のみです。OpenShellの発行計画は既存のpi + OpenRouter構成を使います。</p><pre class="env-code">npm start -- sandbox plan '調査すること' \\\n  --gateway my-vm --url https://www.jalan.net/</pre><p class="dialog-note">OpenShellの実キーはgateway側のproviderで保持します。ブラウザにAPIキーは送信しません。</p>`;
 }
 document.addEventListener("click", async (event) => {
   const button = event.target.closest("button");
@@ -551,9 +553,11 @@ $("#mode-button").onclick = () => {
   if (current === "demo") {
     if (!state.config?.liveAvailable) {
       notify(
-        state.config?.agent === "codex"
-          ? "codex login と npm start -- codex-doctor でログインを確認してください。"
-          : ".envにOPENROUTER_API_KEYを設定してください。",
+        state.config?.agent === "claude-code"
+          ? "claude auth login と npm start -- claude-doctor で認証を確認してください。"
+          : state.config?.agent === "codex"
+            ? "codex login と npm start -- codex-doctor でログインを確認してください。"
+            : ".envにOPENROUTER_API_KEYを設定してください。",
       );
       return;
     }

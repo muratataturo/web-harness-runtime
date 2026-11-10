@@ -1,3 +1,4 @@
+import { productOffer, offerText } from "./product-offer.js";
 import * as cheerio from "cheerio";
 import { checkNavigation } from "./sources.js";
 import { publicTarget, type HostResolver } from "./net-policy.js";
@@ -66,6 +67,7 @@ export function extractPublicHtml(
   url: string,
   hosts: string[],
 ): Omit<Page, "id" | "capturedAt" | "acquisition"> {
+  const offer = productOffer(html, url);
   const $ = cheerio.load(html);
   const title = $("title").first().text().replace(/\s+/g, " ").trim();
   // Hidden anchors are discovery hints only. Their text never enters citation evidence.
@@ -144,10 +146,11 @@ export function extractPublicHtml(
     .map((l) => l.replace(/[\t \u00a0\u3000]+/g, " ").trim())
     .filter(Boolean)
     .join("\n");
-  const text = title + "\n" + body;
+  const text = title + "\n" + (offer ? offerText(offer) + "\n" : "") + body;
   return {
     url,
     title,
+    productOffer: offer,
     text: text.slice(0, 32000),
     links: links.slice(0, 220),
     truncated: text.length > 32000,

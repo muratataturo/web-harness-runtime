@@ -80,3 +80,12 @@ ChatGPTログイン済みのCodex CLI 0.167.0 / gpt-6.1-solで楽天トラベル
 CodexのChatGPTログインで実行し、succeeded 9 / partial 3 / blocked 4。詳細取得の完了条件は11サービスで達成。楽天市場は価格不足を検出し、クーポン・関連商品価格の誤検出を修正して再実行、trustedの2URLを除外した。現行台帳は11サービス22URL。以前の14URL/24URLという初期登録数を訂正する。[全結果](codex-family-results.md)。
 
 価格判定修正後の全80テスト、型チェック・ビルド・整形、既存イメージのビルドとnetwork noneのCLI/ブラウザsmokeが成功。
+
+
+## Claude Code・回復したpi・深掘り・レベル分類
+
+Sonnet 5.5とHaiku 5.5（Claude Code 2.1.307 / サブスク認証）、pi/OpenRouter無料（nvidia/nemotron-3.5-super-vl:free）でRecruit/Rakutenの代表ケースを実行。Codexも共通機能追加後に回帰確認した。本文不足を同一対象の子ページ・描画で追加調査し、アイドル根拠や管理費「-」は未確認のまま返すケースも確認。[実行記録と仕様](engines-and-depth.md)。
+
+楽天市場は本人Microdataの価格帯を取得でき、サンプルは6,990〜7,990円 / 8,990〜10,190円。SKU確定額や送料込み総額ではない。16サービスの再検証後のtrustedは24URL（L3:4 / L4:20）。旧台帳は証拠からレベルを計算し、根拠なくL4にしない。
+
+全100テスト、型・ビルド・整形、Web8フローを確認。既存のSIGKILL検証はNode起動時間を含む猶予を1.5秒へ調整し、負荷中の起動前timeoutでREADYが出ない不安定さを軽減した。

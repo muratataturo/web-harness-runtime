@@ -12,6 +12,7 @@ import {
   sourceCatalog,
   activeTrustedUrls,
 } from "./trusted.js";
+import { claudeAuthentication, claudeModels } from "./claude.js";
 import { freeQuota } from "./quota.js";
 import { CodexAgent, agentEngine } from "./codex.js";
 import { freeModels } from "./models.js";
@@ -45,7 +46,7 @@ const integer = (value: string) => {
 };
 const withRunOptions = (command: Command) =>
   command
-    .option("--agent <engine>", "codex（既定）または pi-openrouter")
+    .option("--agent <engine>", "codex（既定）/ claude-code / pi-openrouter")
     .option("--model <id>", "選択エンジンのモデルID（既定: 各カタログ）")
     .option(
       "--max-steps <n>",
@@ -55,6 +56,17 @@ const withRunOptions = (command: Command) =>
     )
     .option("--timeout <seconds>", "タスク全体の制限時間", integer, 600)
     .option("--max-pages <n>", "閲覧ページ上限", integer, 12)
+    .option(
+      "--deepen-rounds <n>",
+      "不足情報の追加調査ラウンド0〜3",
+      (value) => {
+        const n = Number(value);
+        if (!Number.isInteger(n) || n < 0 || n > 3)
+          throw new InvalidArgumentError("0〜3を指定してください");
+        return n;
+      },
+      2,
+    )
     .option("--headed", "ブラウザを画面表示")
     .option("--json", "JSON形式で結果を出力");
 async function execute(
@@ -77,6 +89,7 @@ async function execute(
       timeoutSeconds: opts.timeout,
       maxPages: opts.maxPages,
       headed: opts.headed,
+      deepenRounds: opts.deepenRounds,
       parentId,
       signal: controller.signal,
       onProgress: (m) => process.stderr.write(m + "\n"),
@@ -136,8 +149,13 @@ program
 program
   .command("models")
   .description("選択エンジンで利用可能なモデル一覧")
-  .option("--agent <engine>", "codex または pi-openrouter")
+  .option("--agent <engine>", "codex / claude-code / pi-openrouter")
   .action(async (opts) => {
+    if (agentEngine(opts.agent) === "claude-code") {
+      await claudeAuthentication();
+      for (const m of claudeModels) console.log(m);
+      return;
+    }
     if (agentEngine(opts.agent) === "pi-openrouter") {
       for (const m of await freeModels())
         console.log(`${m.id}\tcontext=${m.context_length}\t${m.name}`);
@@ -213,7 +231,7 @@ withRunOptions(
 program
   .command("doctor")
   .description("実行エンジンの認証・モデル・ブラウザを確認")
-  .option("--agent <engine>", "codex または pi-openrouter")
+  .option("--agent <engine>", "codex / claude-code / pi-openrouter")
   .action(async (opts) => {
     let ok = true;
     console.log(`Node: ${process.version}`);
@@ -228,7 +246,17 @@ program
       ok = false;
       console.log(`browser: ${e.message}`);
     }
-    if (engine === "codex") {
+    if (engine === "claude-code") {
+      try {
+        const auth = await claudeAuthentication();
+        console.log(
+          `Claude Code: ${auth.authentication} / ${auth.subscriptionType}`,
+        );
+      } catch (e: any) {
+        ok = false;
+        console.log(e.message);
+      }
+    } else if (engine === "codex") {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 30000);
       const client = new CodexAgent({
@@ -332,7 +360,7 @@ program
   )
   .option("--retrieval-only", "取得のみ検証する（--browser-onlyの別名）")
   .option("--parallel <n>", "並列数1または2", integer, 1)
-  .option("--agent <engine>", "codex または pi-openrouter")
+  .option("--agent <engine>", "codex / claude-code / pi-openrouter")
   .option("--model <id>")
   .option("--timeout <seconds>", "ケースごとの制限時間", integer, 180)
   .action(async (opts) => {
@@ -393,19 +421,45 @@ program
       await client.close();
     }
   });
+program
+  .command("claude-doctor")
+  .description("Claude Codeのサブスク認証と対応モデルを確認（推論なし）")
+  .action(async () =>
+    console.log(
+      JSON.stringify(
+        { ...(await claudeAuthentication()), models: claudeModels },
+        null,
+        2,
+      ),
+    ),
+  );
 const trusted = program
   .command("trusted")
   .description("個別詳細を実取得できたURLだけを台帳に登録する");
 trusted
   .command("list")
   .option("--all", "未確認・失敗のsourceも表示")
+  .option(
+    "--min-level <n>",
+    "L3またはL4",
+    (value) => {
+      const n = Number(value);
+      if (n !== 3 && n !== 4) throw new InvalidArgumentError("3または4を指定");
+      return n;
+    },
+    3,
+  )
   .option("--json")
   .action(async (opts) => {
     const registry = await new TrustedStore().load();
     if (opts.json) {
       console.log(
         JSON.stringify(
-          opts.all ? registry : activeTrustedUrls(registry),
+          opts.all
+            ? registry
+            : activeTrustedUrls(registry).filter(
+                (u) => (u.level ?? 3) >= opts.minLevel,
+              ),
           null,
           2,
         ),
@@ -414,12 +468,15 @@ trusted
     }
     for (const source of await sourceCatalog()) {
       const urls = activeTrustedUrls(registry).filter(
-        (u) => u.sourceId === source.id,
+        (u) => u.sourceId === source.id && (u.level ?? 3) >= opts.minLevel,
       );
       const audit = registry.audits.find((a) => a.sourceId === source.id);
+      const level = urls.length
+        ? `L${Math.min(...urls.map((u) => u.level ?? 3))}–L${Math.max(...urls.map((u) => u.level ?? 3))}`
+        : `L${audit?.status === "blocked" || audit?.status === "retired" ? 0 : Math.max(0, ...(audit?.details ?? []).map((d) => d.level ?? (d.status === "verified" ? 3 : 2)))}`;
       if (opts.all || urls.length)
         console.log(
-          `${source.id}\t${urls.length ? "trusted" : audit?.status === "verified" ? "expired" : (audit?.status ?? "unverified")}\t${urls.length} URL\t${source.label}`,
+          `${source.id}\t${urls.length ? "trusted" : audit?.status === "verified" ? "expired" : (audit?.status ?? "unverified")}\t${urls.length} URL\t${level}\t${source.label}`,
         );
     }
   });
@@ -444,9 +501,24 @@ withRunOptions(
   trusted
     .command("run")
     .argument("<query>")
-    .requiredOption("--source <ids...>", "有効なtrusted source ID"),
+    .requiredOption("--source <ids...>", "有効なtrusted source ID")
+    .option(
+      "--min-level <n>",
+      "L3またはL4",
+      (value) => {
+        const n = Number(value);
+        if (n !== 3 && n !== 4)
+          throw new InvalidArgumentError("3または4を指定");
+        return n;
+      },
+      3,
+    ),
 ).action(async (query, opts) =>
-  execute(query, await new TrustedStore().urlsFor(opts.source), opts),
+  execute(
+    query,
+    await new TrustedStore().urlsFor(opts.source, opts.minLevel),
+    opts,
+  ),
 );
 trusted
   .command("plan")

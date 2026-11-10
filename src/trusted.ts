@@ -9,6 +9,7 @@ import {
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
+import { verificationLevel, type TrustLevel } from "./trust-levels.js";
 import { Browser } from "./browser.js";
 import { allowedHosts, routeSources, entityKey } from "./sources.js";
 import {
@@ -40,10 +41,12 @@ export interface SourceAudit {
     url: string;
     title: string;
     assessment: ReturnType<typeof assessPage>;
+    level?: TrustLevel;
   }[];
   error?: string;
 }
 export interface TrustedUrl {
+  level?: TrustLevel;
   url: string;
   sourceId: string;
   service: string;
@@ -106,27 +109,29 @@ export function activeTrustedUrls(
   registry: TrustedRegistry,
   at = new Date(),
 ): TrustedUrl[] {
-  return registry.urls.filter(
-    (u) =>
-      new Date(u.expiresAt) > at &&
-      new Date(u.checkedAt) <= at &&
-      u.purpose === "detail-retrieval-only" &&
-      validDetail(u.evidence) &&
-      u.evidence.url === u.url &&
-      u.evidence.entityId === u.entityId &&
-      u.evidence.service === u.service &&
-      registry.audits.some(
-        (a) =>
-          a.sourceId === u.sourceId &&
-          a.service === u.service &&
-          a.checkedAt === u.checkedAt &&
-          a.expiresAt === u.expiresAt &&
-          auditComplete(a) &&
-          a.details.some(
-            (d) => d.url === u.url && d.bodySha256 === u.evidence.bodySha256,
-          ),
-      ),
-  );
+  return registry.urls
+    .map((u) => ({ ...u, level: verificationLevel(u.evidence) }))
+    .filter(
+      (u) =>
+        new Date(u.expiresAt) > at &&
+        new Date(u.checkedAt) <= at &&
+        u.purpose === "detail-retrieval-only" &&
+        validDetail(u.evidence) &&
+        u.evidence.url === u.url &&
+        u.evidence.entityId === u.entityId &&
+        u.evidence.service === u.service &&
+        registry.audits.some(
+          (a) =>
+            a.sourceId === u.sourceId &&
+            a.service === u.service &&
+            a.checkedAt === u.checkedAt &&
+            a.expiresAt === u.expiresAt &&
+            auditComplete(a) &&
+            a.details.some(
+              (d) => d.url === u.url && d.bodySha256 === u.evidence.bodySha256,
+            ),
+        ),
+    );
 }
 /** A failed revalidation removes current trust; per-run evidence remains in audit artifacts. */
 export function reconcileAudit(
@@ -157,6 +162,7 @@ export function reconcileAudit(
         expiresAt: audit.expiresAt,
         purpose: "detail-retrieval-only",
         evidence: d,
+        level: verificationLevel(d),
       });
     }
   return {
@@ -192,7 +198,13 @@ export class TrustedStore {
         !Array.isArray(r.audits)
       )
         throw new Error("trusted URL台帳の形式が不正です");
-      return r;
+      return {
+        ...r,
+        urls: r.urls.map((u: TrustedUrl) => ({
+          ...u,
+          level: verificationLevel(u.evidence),
+        })),
+      };
     } catch (e: any) {
       if (e.code === "ENOENT") {
         if (this.bootstrap)
@@ -205,7 +217,13 @@ export class TrustedStore {
               !Array.isArray(bundled.audits)
             )
               throw new Error("bundled trusted URL台帳の形式が不正です");
-            return bundled;
+            return {
+              ...bundled,
+              urls: bundled.urls.map((u: TrustedUrl) => ({
+                ...u,
+                level: verificationLevel(u.evidence),
+              })),
+            };
           } catch (error: any) {
             if (error.code !== "ENOENT") throw error;
           }
@@ -247,10 +265,12 @@ export class TrustedStore {
       await unlink(lock);
     }
   }
-  async urlsFor(sourceIds: string[]): Promise<string[]> {
+  async urlsFor(sourceIds: string[], minLevel: 3 | 4 = 3): Promise<string[]> {
+    if (minLevel !== 3 && minLevel !== 4)
+      throw new Error("trusted実行にはL3またはL4が必要です");
     if (!sourceIds.length) throw new Error("trusted source IDが必要です");
     const r = await this.load(),
-      active = activeTrustedUrls(r);
+      active = activeTrustedUrls(r).filter((u) => (u.level ?? 3) >= minLevel);
     const missing = sourceIds.filter(
       (id) => !active.some((u) => u.sourceId === id),
     );
@@ -337,7 +357,12 @@ export async function auditSource(
         { mode: 0o600 },
       );
       const assessment = assessPage(page);
-      audit.pages.push({ url: page.url, title: page.title, assessment });
+      audit.pages.push({
+        url: page.url,
+        title: page.title,
+        assessment,
+        level: verifyDetail(page, source.service).level,
+      });
       if (assessment.shouldStop) {
         audit.status = assessment.kind === "retired" ? "retired" : "blocked";
         break;

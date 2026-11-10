@@ -112,10 +112,10 @@ export class Browser {
       );
     return result.data;
   }
-  async open(value: string): Promise<Page> {
+  async open(value: string, options: { render?: boolean } = {}): Promise<Page> {
     const url = await publicTarget(value, this.hosts);
     this.htmlPage = undefined;
-    if (prefersPublicHtml(url)) {
+    if (prefersPublicHtml(url) && !options.render) {
       try {
         const extracted = await readPublicHtml(url, this.hosts, this.signal);
         const quality = assessPage(extracted);

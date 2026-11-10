@@ -7,6 +7,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { GoalEngine, scenarioDefaults } from "./goals.js";
 import { Store } from "./store.js";
+import { claudeAuthentication } from "./claude.js";
 import { agentEngine, CodexAgent } from "./codex.js";
 import { runtimeTarget } from "./executors.js";
 import { doctorOpenShell } from "./sandbox.js";
@@ -70,15 +71,24 @@ export function createWorkbenchServer(engine = new GoalEngine()) {
             await client.close();
           }
         }
+        let claudeReady = false;
+        if (agent === "claude-code" && runtimeTarget() === "local")
+          try {
+            await claudeAuthentication(undefined, AbortSignal.timeout(10000));
+            claudeReady = true;
+          } catch {}
         send(res, 200, {
+          claudeReady,
           scenarios: scenarioDefaults,
           agent,
           liveAvailable:
-            agent === "codex"
-              ? codexReady
-              : runtimeTarget() === "openshell"
-                ? !!process.env.OPENSHELL_GATEWAY
-                : !!process.env.OPENROUTER_API_KEY,
+            agent === "claude-code"
+              ? claudeReady
+              : agent === "codex"
+                ? codexReady
+                : runtimeTarget() === "openshell"
+                  ? !!process.env.OPENSHELL_GATEWAY
+                  : !!process.env.OPENROUTER_API_KEY,
           executor: runtimeTarget(),
           localKeyConfigured: !!process.env.OPENROUTER_API_KEY,
           codexReady,

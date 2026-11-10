@@ -36,9 +36,9 @@ export function createOpenShellExecutor(
 ): RuntimeExecutor {
   return async (options, store = new Store()) => {
     options.signal?.throwIfAborted();
-    if (agentEngine(options.agent) === "codex")
+    if (agentEngine(options.agent) !== "pi-openrouter")
       throw new Error(
-        "CodexのOpenShell実行は認証連携が未対応です。RUNTIME_EXECUTOR=localで利用してください。",
+        "選択エンジンのOpenShell実行は認証連携が未対応です。RUNTIME_EXECUTOR=localで利用してください。",
       );
     const plan = planOpenShellTask({
       query: options.query,

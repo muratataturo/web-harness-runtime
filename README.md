@@ -1,6 +1,6 @@
 # Relay / web-harness-runtime
 
-**目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** 公式CodexのChatGPTログインを既定の調査エンジンとし、pi + OpenRouter無料モデルも選択できるCLIです。Vercel agent-browserで調査し、Grok Bot / OpenMausBot / Rakazoの公開画面を参照した会話中心のWeb Mockと、self-host VM向けNVIDIA OpenShell executorを備えています。
+**目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** 公式CodexのChatGPTログインを既定の調査エンジンとし、Claude Code Sonnet 5.5 / Haiku 5.5、pi + OpenRouter無料モデルも選択できるCLIです。Vercel agent-browserで調査し、Grok Bot / OpenMausBot / Rakazoの公開画面を参照した会話中心のWeb Mockと、self-host VM向けNVIDIA OpenShell executorを備えています。
 
 ## Web Mock を試す
 
@@ -66,9 +66,22 @@ Codexは公式App Serverのモデル一覧からアカウントの既定モデ�
 
 Codexでの実測は、楽天トラベル2宿と複数ドメインから選んだSUUMO2物件が `succeeded`。Hot Pepper Beautyはサロン2件の詳細取得と日本語比較を完了し、「韓国アイドル風」への厳密な適合を未確認として `partial`。79テストと実測の詳細は [Codex接続と検証](docs/codex.md) を参照。
 
+## Claude Code・追加調査・trustedレベル
+
+```sh
+npm start -- claude-doctor
+npm start -- trusted run 'この2宿を比較して' --source rakuten-travel --agent claude-code --model claude-sonnet-5-5
+npm start -- trusted run 'この2宿を比較して' --source rakuten-travel --agent claude-code --model claude-haiku-5-5
+npm start -- trusted run 'この2宿を比較して' --source rakuten-travel --agent pi-openrouter
+npm start -- trusted list --all
+npm start -- trusted list --min-level 4 --json
+```
+
+不足情報は同一対象の子ページ・描画を追加調査し、解消しなければ未確認を残します。楽天市場は対象商品の公開Microdataから価格帯を取得できるようになりました。trustedはL0〜L4で情報量を分類し、L3以上を登録・実行対象とします。現行台帳はL3:4URL / L4:20URL。L4は希望条件への完全適合や在庫の保証ではありません。[接続・深掘り・レベルの仕様と実測](docs/engines-and-depth.md)。
+
 ## Recruit・楽天の実行結果
 
-[16サービスのCodex実測](docs/codex-family-results.md)を追加しました。11サービスで詳細2件以上を取得。楽天市場は仕様を読めても販売価格が不足し、trustedから除外しました。Indeed・楽天不動産・楽天Car中古車・楽天Careersは個別比較に進めていません。
+[16サービスのCodex実測](docs/codex-family-results.md)を追加しました。11サービスで詳細2件以上を取得。当時は楽天市場の仕様を読めても販売価格が不足し、trustedから除外しました。その後のMicrodata対応で対象商品の価格帯を取得し、再検証して登録しています。Indeed・楽天不動産・楽天Car中古車・楽天Careersは個別比較に進めていません。
 
 ```sh
 npm run build

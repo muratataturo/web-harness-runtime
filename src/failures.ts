@@ -12,6 +12,32 @@ export function classifyRuntimeFailure(
   message: string,
   engine?: string,
 ): RuntimeFailure {
+  if (engine === "claude-code") {
+    if (
+      /usage.limit|rate.limit|limit.reached|quota|credit.balance|利用上限/i.test(
+        message,
+      )
+    )
+      return {
+        kind: "quota_exhausted",
+        retryable: false,
+        action:
+          "Claude Codeの利用枠の回復を待ってください。APIキーや別モデルには切り替えません。",
+      };
+    if (/login|auth|ログイン|認証|401|403/i.test(message))
+      return {
+        kind: "authentication",
+        retryable: false,
+        action: "claude auth loginでサブスク認証を確認してください。",
+      };
+    if (/model|モデル/.test(message))
+      return {
+        kind: "model_unavailable",
+        retryable: false,
+        action:
+          "指定したClaude 5.5モデルの利用権限とClaude Codeのバージョンを確認してください。",
+      };
+  }
   if (engine === "codex") {
     if (
       /usage.limit|quota|limit.reached|利用上限|再開|usage_limit_reached/i.test(

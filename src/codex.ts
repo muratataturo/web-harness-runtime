@@ -2,12 +2,12 @@ import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { createInterface } from "node:readline";
 import { Value } from "@sinclair/typebox/value";
 import type { ToolDefinition } from "@earendil-works/pi-coding-agent";
-export type AgentEngine = "codex" | "pi-openrouter";
+export type AgentEngine = "codex" | "pi-openrouter" | "claude-code";
 export function agentEngine(
   value = process.env.RUNTIME_AGENT ?? "codex",
 ): AgentEngine {
-  if (value !== "codex" && value !== "pi-openrouter")
-    throw new Error("agent は codex または pi-openrouter です");
+  if (value !== "codex" && value !== "pi-openrouter" && value !== "claude-code")
+    throw new Error("agent は codex / claude-code / pi-openrouter です");
   return value;
 }
 /** Keep provider credentials in the official CLI. Never pass API keys or repository env to it. */

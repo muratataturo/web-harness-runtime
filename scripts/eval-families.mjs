@@ -1,6 +1,8 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { randomUUID } from "node:crypto";
+import { Command } from "commander";
+import { agentEngine } from "../dist/codex.js";
 import { config } from "dotenv";
 import { runTask } from "../dist/runtime.js";
 import { verifyDetail } from "../dist/detail-contracts.js";
@@ -11,7 +13,14 @@ const definitions = JSON.parse(
     "utf8",
   ),
 );
-const ids = process.argv.slice(2);
+const cli = new Command()
+  .option("--agent <engine>", "codex / claude-code / pi-openrouter", "codex")
+  .option("--model <id>")
+  .argument("[sources...]")
+  .parse();
+const ids = cli.args,
+  engine = agentEngine(cli.opts().agent),
+  model = cli.opts().model;
 const cases = definitions.cases.filter(
   (c) => !ids.length || ids.includes(c.id),
 );
@@ -35,7 +44,8 @@ let quotaExhausted = false;
 async function save() {
   await writeFile(
     join(directory, "results.json"),
-    JSON.stringify({ agent: "codex", directory, results }, null, 2) + "\n",
+    JSON.stringify({ agent: engine, model, directory, results }, null, 2) +
+      "\n",
     { mode: 0o600 },
   );
 }
@@ -46,7 +56,8 @@ async function worker() {
     if (!test) return;
     process.stderr.write(`START ${test.id}\n`);
     const task = await runTask({
-      agent: "codex",
+      agent: engine,
+      model,
       query: test.query,
       urls: [test.seedUrl],
       maxSteps: definitions.maxSteps,
@@ -106,7 +117,7 @@ try {
       sourceId: c.id,
       label: c.label,
       status: "not_started",
-      reason: quotaExhausted ? "Codex quota exhausted" : "Cancelled",
+      reason: quotaExhausted ? "Provider quota exhausted" : "Cancelled",
     });
   results.sort(
     (a, b) =>

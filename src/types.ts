@@ -22,6 +22,7 @@ export interface Source {
   guidance: string;
 }
 export interface Page {
+  productOffer?: import("./product-offer.js").ProductOffer;
   acquisition?: {
     kind: "browser-dom" | "public-html";
     status?: number;
@@ -74,6 +75,19 @@ export interface Task {
   agent?: import("./codex.js").AgentEngine;
   sources: Source[];
   failure?: import("./failures.js").RuntimeFailure;
+  research?: {
+    rounds: number;
+    maxRounds: number;
+    pagesOpened: number;
+    maxPages: number;
+    attempts: {
+      pageId: string;
+      url: string;
+      mode: string;
+      fields: string[];
+      result: string;
+    }[];
+  };
   retrieval?: {
     status: "verified" | "insufficient_detail";
     verifiedDetailUrls: string[];

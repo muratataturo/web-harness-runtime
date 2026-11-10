@@ -89,6 +89,13 @@ export function validateAnswer(
   )
     throw new Error("候補は URL が重複しない最大 10 件です");
   const candidates = input
+    .map((c) => ({
+      ...c,
+      matches: c.matches.map((m) => ({
+        ...m,
+        evidenceIds: [...m.evidenceIds],
+      })),
+    }))
     .map((candidate) => {
       if (!candidate.name.trim()) throw new Error("候補名が必要です");
       const key = entityKey(candidate.url);
@@ -136,6 +143,48 @@ export function validateAnswer(
             throw new Error(`別候補の根拠を流用できません: ${id}`);
         }
       }
+      for (const m of candidate.matches) {
+        const criterion = task.criteria.find((c) => c.id === m.criterionId)!;
+        if (
+          m.status === "supported" &&
+          /アイドル/.test(task.query) &&
+          /アイドル/.test(criterion.description) &&
+          !m.evidenceIds.some((id) =>
+            /アイドル/.test(task.evidence.find((e) => e.id === id)!.quote),
+          )
+        ) {
+          m.status = "unknown";
+          m.explanation =
+            "引用にアイドル風への対応を示す記載がなく、一般的な韓国風だけでは確認できません。" +
+            m.explanation;
+        }
+      }
+      if (key.startsWith("suumo:"))
+        for (const match of candidate.matches) {
+          const criterion = task.criteria.find(
+            (c) => c.id === match.criterionId,
+          )!;
+          const body = task.pages
+            .filter((p) => entityKey(p.url) === key)
+            .map((p) => p.text)
+            .join("\n");
+          const quotes = match.evidenceIds
+            .map((id) => task.evidence.find((e) => e.id === id)!.quote)
+            .join("\n");
+          if (
+            match.status === "supported" &&
+            /合計|月額|予算|管理費/.test(criterion.description) &&
+            /管理費(?:・共益費)?[：:\s]*[-−―ー](?:\s|$)/.test(body) &&
+            !/管理費(?:・共益費)?[：:\s]*(?:[\d,]+円|なし|無し|不要)/.test(
+              quotes,
+            )
+          ) {
+            match.status = "unknown";
+            match.explanation =
+              "管理費「-」を0円と確定できず、合計月額は未確認。" +
+              match.explanation;
+          }
+        }
       const weight = task.criteria.reduce((sum, c) => sum + c.weight, 0);
       const score = Math.round(
         (100 *
