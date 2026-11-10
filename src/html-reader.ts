@@ -6,6 +6,14 @@ import type { Page } from "./types.js";
 const MAX_BYTES = 4 * 1024 * 1024;
 export const prefersPublicHtml = (value: string) =>
   [
+    "www.tokyo-zoo.net",
+    "www.kahaku.go.jp",
+    "www.tokyo-park.or.jp",
+    "www.miraikan.jst.go.jp",
+    "sumida-aquarium.com",
+    "www.sumida-aquarium.com",
+    "www.maruka.net",
+    "maruka.net",
     "www.jalan.net",
     "jalan.net",
     "suumo.jp",

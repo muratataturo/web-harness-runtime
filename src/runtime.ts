@@ -121,6 +121,7 @@ export async function runTask(
   options: RunOptions,
   store = new Store(),
 ): Promise<Task> {
+  const started = performance.now();
   const task = newTask(options);
   const instructions =
     SYSTEM_PROMPT +
@@ -793,6 +794,26 @@ export async function runTask(
     } catch (e) {
       cleanupWarning = redact(e instanceof Error ? e.message : String(e));
     }
+    task.metrics = {
+      elapsedMs: Math.round(performance.now() - started),
+      tokenAccounting: codex?.usage
+        ? controller.signal.aborted
+          ? "last-observed-partial"
+          : "provider-reported"
+        : "unavailable",
+      tokens: codex?.usage ?? null,
+      billing: {
+        mode:
+          task.agent === "codex"
+            ? "chatgpt-subscription"
+            : task.agent === "claude-code"
+              ? "claude-subscription"
+              : "openrouter-free",
+        additionalApiUsd: task.model ? 0 : null,
+        subscriptionAllocationUsd: null,
+        note: "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません",
+      },
+    };
     await store.save(task);
     if (cleanupWarning)
       await store.event(task.id, "cleanup_warning", { error: cleanupWarning });

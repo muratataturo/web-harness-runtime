@@ -35,6 +35,23 @@ const hotel = [
   },
 ];
 export const detailContracts: Record<string, DetailField[]> = {
+  "official-visit": [
+    {
+      id: "opening-conditions",
+      pattern:
+        /(?:開園時間|開館時間|営業時間|休館|休園)[\s\S]{0,90}(?:\d|午前|午後|無休|月曜|火曜)/,
+    },
+    {
+      id: "admission",
+      pattern: /(?:入園料|入館料|一般料金|大人|一般)[\s\S]{0,45}[0-9,]+\s*円/,
+    },
+  ],
+  "official-dining": [
+    access,
+    price,
+    { id: "menu", pattern: /メニュー|そば|うどん|天丼/ },
+    { id: "hours", pattern: /営業時間[\s\S]{0,30}\d{1,2}[:：]/ },
+  ],
   "hotpepper-beauty": salon,
   "rakuten-beauty": salon,
   "hotpepper-gourmet": [

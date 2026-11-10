@@ -261,3 +261,11 @@ npm start -- feedback summary
 ```
 
 口コミはサービスの評判、feedbackは回答への評価です。取得元・件数・期間を分け、口コミの星を回答の満足率へ変換しません。[仕様・評価の範囲・実測](docs/semantic-quality.md)。
+
+## 3ペルソナの一日遊び提案を実行
+
+```sh
+npm run eval:day-out -- --agent codex --model gpt-6.1-sol --parallel 2
+```
+
+カップル・5歳児連れ家族・一人向けに、実サイトから提案・予算・雨天代替を生成します。実測は [一日遊びの提案結果](docs/day-out-results.md)。Codexのネイティブ入力/出力/キャッシュトークンと実行時間を保存し、サブスク費用の未配賦や中断時の観測不足を明示します。API追加課金0を総コスト0とは扱いません。

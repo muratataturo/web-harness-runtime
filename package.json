@@ -19,7 +19,8 @@
     "test:image": "sh infra/openshell/smoke.sh",
     "format": "prettier --write src web test scripts examples benchmarks config .github",
     "format:check": "prettier --check src web test scripts examples benchmarks config .github",
-    "eval:families": "node scripts/eval-families.mjs"
+    "eval:families": "node scripts/eval-families.mjs",
+    "eval:day-out": "node scripts/eval-day-out.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -1,3 +1,4 @@
+import { codexUsage, type TokenUsage } from "./metrics.js";
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { createInterface } from "node:readline";
 import { Value } from "@sinclair/typebox/value";
@@ -86,6 +87,7 @@ export class CodexAgent {
   private abortListener: () => void;
   private exit: Promise<void>;
   private bufferBytes = 0;
+  usage?: TokenUsage;
   model?: string;
   thread?: string;
   constructor(
@@ -177,6 +179,14 @@ export class CodexAgent {
     this.child.kill("SIGTERM");
   }
   private receive(message: Rpc) {
+    if (
+      message.method === "thread/tokenUsage/updated" &&
+      message.params?.threadId === this.threadId
+    ) {
+      const usage = codexUsage(message.params.tokenUsage?.total);
+      if (usage) this.usage = usage;
+      return;
+    }
     if (message.id !== undefined && !message.method) {
       const p = this.pending.get(Number(message.id));
       if (p) {

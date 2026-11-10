@@ -8,6 +8,27 @@ export interface Adapter {
 }
 export const adapters: Adapter[] = [
   {
+    id: "official-visit",
+    hosts: [
+      "www.tokyo-zoo.net",
+      "www.kahaku.go.jp",
+      "www.tokyo-park.or.jp",
+      "www.miraikan.jst.go.jp",
+      "sumida-aquarium.com",
+      "www.sumida-aquarium.com",
+    ],
+    keywords: /遊び|日帰り|観光|公園|博物館|水族館|動物園|庭園/,
+    guidance:
+      "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。",
+  },
+  {
+    id: "official-dining",
+    hosts: ["www.maruka.net", "maruka.net"],
+    keywords: /食|ランチ|蕎麦|浅草/,
+    guidance:
+      "店舗公式の所在地、営業時間、メニューの税込価格を確認。当日の空席・営業の確約はしない。",
+  },
+  {
     id: "hotpepper-beauty",
     hosts: ["beauty.hotpepper.jp"],
     keywords: /髪|美容|サロン|ヘア|韓国|アイドル|縮毛|salon|hair/i,
@@ -174,6 +195,32 @@ export function entityKey(value: string): string | undefined {
   const adapter = adapters.find((a) => a.hosts.includes(url.hostname));
   if (!adapter) return `generic:${url.href}`;
   let id: string | undefined;
+  if (adapter.id === "official-visit") {
+    if (url.hostname === "www.tokyo-zoo.net")
+      id = url.pathname.match(
+        /^\/(ueno|kasai)\/visitor-info\/(?:tickets|access)\//,
+      )?.[1];
+    if (
+      url.hostname === "www.kahaku.go.jp" &&
+      /^\/riyou\/(?:nyukan-annai|access)/.test(url.pathname)
+    )
+      id = "kahaku-ueno";
+    if (url.hostname === "www.tokyo-park.or.jp")
+      id = url.pathname.match(/^\/park\/(hama-rikyu)\//)?.[1];
+    if (
+      url.hostname === "www.miraikan.jst.go.jp" &&
+      /^\/visit\/(?:admission|access)/.test(url.pathname)
+    )
+      id = "miraikan";
+    if (
+      ["sumida-aquarium.com", "www.sumida-aquarium.com"].includes(
+        url.hostname,
+      ) &&
+      /^\/about\/(?:price|access)\//.test(url.pathname)
+    )
+      id = "sumida-aquarium";
+  }
+  if (adapter.id === "official-dining" && url.pathname === "/") id = "maruka";
   if (adapter.id === "hotpepper-beauty")
     id = url.pathname.match(/^\/sln\/?(H[0-9a-z]+)(?:\/|$)/i)?.[1];
   if (adapter.id === "hotpepper-gourmet")

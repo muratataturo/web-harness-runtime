@@ -63,6 +63,18 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  metrics?: {
+    elapsedMs: number;
+    tokenAccounting?:
+      "provider-reported" | "last-observed-partial" | "unavailable";
+    tokens: import("./metrics.js").TokenUsage | null;
+    billing: {
+      mode: string;
+      additionalApiUsd: number | null;
+      subscriptionAllocationUsd: null;
+      note: string;
+    };
+  };
   evaluation?: { mode: "frozen-replay"; caseId: string; fixtureSha256: string };
   reviewSignals?: import("./reviews.js").ReviewSignal[];
   improvement?: import("./improvement-context.js").ImprovementContext;

@@ -84,6 +84,36 @@ createInterface({ input: process.stdin }).on("line", (line) => {
       });
       return;
     }
+    if (mode === "usage") {
+      const notify = (
+        threadId,
+        inputTokens,
+        outputTokens,
+        cachedInputTokens,
+        reasoningOutputTokens,
+      ) =>
+        send({
+          method: "thread/tokenUsage/updated",
+          params: {
+            threadId,
+            turnId: "turn-1",
+            tokenUsage: {
+              last: {},
+              total: {
+                inputTokens,
+                outputTokens,
+                cachedInputTokens,
+                reasoningOutputTokens,
+                totalTokens: inputTokens + outputTokens,
+              },
+            },
+          },
+        });
+      notify("thread-1", 100, 20, 80, 5);
+      notify("thread-1", 150, 30, 100, 8);
+      notify("thread-1", 150, 30, 100, 8);
+      notify("other-thread", 999, 999, 900, 800);
+    }
     const params = {
       threadId: "thread-1",
       turnId: "turn-1",

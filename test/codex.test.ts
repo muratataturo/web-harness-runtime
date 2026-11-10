@@ -213,3 +213,18 @@ test("Codex requests cannot allocate an OpenRouter-only OpenShell sandbox", asyn
     /認証連携が未対応/,
   );
 });
+
+test("Codex usage keeps cumulative native totals without counting duplicate updates or other threads", async () => {
+  const f = fixture("usage");
+  try {
+    await f.client.initialize();
+    await f.client.start([f.tool], "Use lookup");
+    await f.client.prompt("lookup");
+    assert.equal(f.client.usage!.inputTokens, 150);
+    assert.equal(f.client.usage!.cachedInputTokens, 100);
+    assert.equal(f.client.usage!.outputTokens, 30);
+    assert.equal(f.client.usage!.totalTokens, 180);
+  } finally {
+    await f.client.close();
+  }
+});
