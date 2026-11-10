@@ -127,7 +127,6 @@ export function createWorkbenchServer(
             "X-Accel-Buffering": "no",
             "X-Content-Type-Options": "nosniff",
           });
-          streams.add(res);
           const sendEvent = (record: typeof current) =>
             res.write(
               `id: ${record.updatedAt}\nevent: run\ndata: ${JSON.stringify(record)}\n\n`,
@@ -137,6 +136,7 @@ export function createWorkbenchServer(
             res.end();
             return;
           }
+          streams.add(res);
           const unsub = runs.subscribe(current.id, (record) => {
             if (res.destroyed || res.writableEnded) return;
             sendEvent(record);
