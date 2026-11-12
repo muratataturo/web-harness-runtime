@@ -1,0 +1,100 @@
+{
+  "capturedAt": "2026-11-12T16:04:11.879Z",
+  "source": "committed-public-evidence-replay",
+  "example": "day-out",
+  "modelInference": false,
+  "isolatedHistory": true,
+  "visualFetch": "public page images and browser screenshot fetched separately at capture time",
+  "notes": "Real app UI; no source-response mocking. Private histories and authentication are not loaded. Wide-screen execution-ID inspector is outside this viewport.",
+  "totalBytes": 715571,
+  "screenshots": [
+    {
+      "file": "chat-welcome.jpg",
+      "caption": "相談内容・進め方・使うデータを選ぶ初期画面",
+      "kind": "ui",
+      "viewport": {
+        "width": 1240,
+        "height": 960
+      },
+      "bytes": 79313,
+      "sha256": "884a950939af9d905b5e7880ea2377fadc220f417f611d85f220053b31ddc19d"
+    },
+    {
+      "file": "chat-approval.jpg",
+      "caption": "調査前の方針選択。推奨案もクリックするまで承認されない",
+      "kind": "ui",
+      "viewport": {
+        "width": 1240,
+        "height": 960
+      },
+      "bytes": 82649,
+      "sha256": "b03d7734f210d6322d4a6f3879a673fca55f0bc0205f429ad099886f0723f6e6"
+    },
+    {
+      "file": "chat-answer.jpg",
+      "caption": "保存済み実測から構成した行程のフロー",
+      "kind": "ui",
+      "viewport": {
+        "width": 1240,
+        "height": 960
+      },
+      "bytes": 96361,
+      "sha256": "026ce4b340384f9e670eb5f666be4b0c2b79f08ed3fa73bcc4b7fb67e7eb14bf"
+    },
+    {
+      "file": "chat-candidates.jpg",
+      "caption": "候補・掲載画像・条件照合をまとめたカード",
+      "kind": "ui",
+      "viewport": {
+        "width": 1240,
+        "height": 960
+      },
+      "bytes": 115512,
+      "sha256": "5dfdfa0566b2d86e210c785240117832b4cd449947a0c110d019974d7e635181"
+    },
+    {
+      "file": "chat-markdown.jpg",
+      "caption": "行程・予算・未確認事項・出典を読むMarkdownノート",
+      "kind": "ui",
+      "viewport": {
+        "width": 1240,
+        "height": 960
+      },
+      "bytes": 115908,
+      "sha256": "03f135381627b3cf038f553d7a5ccc7109026cb8428eb4dee9b6a0251acd9978"
+    },
+    {
+      "file": "chat-source-photo.jpg",
+      "caption": "掲載元から表示用に取得した画像。本文の取得日時とは別",
+      "kind": "public-source-image",
+      "viewport": {
+        "width": 1240,
+        "height": 960
+      },
+      "bytes": 87646,
+      "sha256": "c8f376fec58568e34b76003bce1506bdb407fa774df6c99ae755e55ffb36d6ca"
+    },
+    {
+      "file": "chat-source-screen.jpg",
+      "caption": "agent-browserで実際に撮影したホットペッパーグルメの画面",
+      "kind": "public-page-capture",
+      "viewport": {
+        "width": 1240,
+        "height": 960
+      },
+      "bytes": 94177,
+      "sha256": "00b472a0f2faf12e125c0bd4d35cff3022961bd9d4e32959f5d292de9c3f5c21"
+    },
+    {
+      "file": "chat-mobile.jpg",
+      "caption": "390px幅での行程フローと入力欄の折り畳み",
+      "kind": "ui",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "bytes": 44005,
+      "sha256": "6e45eb9510736d9f417af949ff19e0393e2cf58cbc2b0bf6d05b105f07c371ed"
+    }
+  ]
+}
