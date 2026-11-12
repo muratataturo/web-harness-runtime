@@ -1,0 +1,9 @@
+FROM web-harness-runtime:local
+USER root
+ARG CODEX_VERSION=0.167.0
+RUN npm install --global @openai/codex@${CODEX_VERSION} \
+    && node -e 'const f=require("node:fs"),p=require("node:path");const found=[];function walk(d){for(const e of f.readdirSync(d,{withFileTypes:true})){const x=p.join(d,e.name);if(e.isDirectory())walk(x);else if(e.name==="codex"&&x.includes("/vendor/"))found.push(x)}}walk("/usr/local/lib/node_modules/@openai/codex");if(found.length!==1)throw Error("Expected one native Codex executable");f.copyFileSync(found[0],"/usr/local/bin/codex-native");f.chmodSync("/usr/local/bin/codex-native",0o755)' \
+    && /usr/local/bin/codex-native --version
+ENV CODEX_BIN=/usr/local/bin/codex CODEX_HOME=/sandbox/.codex
+USER node
+CMD ["/usr/local/bin/node", "/opt/web-harness/dist/codex-worker.js"]

@@ -1,0 +1,64 @@
+{
+  "observedAt": "2026-11-10T14:59:03.167Z",
+  "checks": {
+    "types": true,
+    "tests": 160,
+    "testsFailed": 0,
+    "format": true,
+    "build": true,
+    "benchmark": {
+      "cases": 8,
+      "labels": 28,
+      "humanReviewed": 0
+    },
+    "chatFlows": {
+      "passed": 7,
+      "checks": [
+        "Recruit desktop welcome, sample query and source disclosure",
+        "Rakuten theme persists after reload",
+        "Approval waits before any lookup; recommended choice is not auto-submitted",
+        "Approval result gate + durable reload + accept partial without fabricated success",
+        "Auto makes a visible runtime decision, no input gates, saved answer restored",
+        "390px mobile: no horizontal overflow, navigation and saved answer usable",
+        "No browser JavaScript errors"
+      ],
+      "artifacts": "/workspace/web-harness-runtime/.runtime/chat-qa"
+    },
+    "workbenchFlows": 11
+  },
+  "package": {
+    "artifact": "/workspace/web-harness-runtime/.runtime/releases/web-harness-runtime-0.3.0.tgz",
+    "shasum": "74f442a2cfa95972ae50147d531b70fc3e59ac6c",
+    "integrity": "sha512-4lzQfkjWNGQnRovyUyXri69SqicOGPes7320UjunzouHu/08uu5AQ4am8j6LrCPG75ynQTdsRqohj6a57DYFsA==",
+    "size": 264725,
+    "fileCount": 71,
+    "privateFilesAbsent": true,
+    "requiredAssetsPresent": true
+  },
+  "installedCli": {
+    "version": "0.3.0",
+    "chatHttp": 200,
+    "snapshotGeneratedWithoutPackageLock": true,
+    "installPrefix": "/private/tmp/whr-cli-install",
+    "benchmark": {
+      "cases": 8,
+      "labels": 28,
+      "humanReviewed": 0,
+      "scope": "targeted-entailment-regression",
+      "freeTextReview": "not_evaluated"
+    }
+  },
+  "container": {
+    "chatHttp": 200,
+    "brandUi": true,
+    "replay": "completed_partial",
+    "inference": false,
+    "codeVersion": "0.3.0"
+  },
+  "image": "web-harness-codex:delivery",
+  "limitations": [
+    "Clean base build waited on registry metadata and was cancelled; offline release from existing image succeeded",
+    "Remote self-host VM deployment not executed; current research VM is the local OpenShell MicroVM",
+    "No claim that Indeed HTTP 403 or MicroVM Chromium DOM was fixed"
+  ]
+}

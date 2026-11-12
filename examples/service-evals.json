@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "gourmet-kyoto-lunch",
+      "service": "hotpepper-gourmet",
+      "query": "京都駅から徒歩10分以内で、旅行中に和食ランチを楽しめるお店を2件比較してください。ランチ予算は1人3000円以内を希望します。駅徒歩、ランチ価格、和食の根拠を店舗詳細で確認し、未確認条件は明示してください。予約はしません。",
+      "urls": ["https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/"],
+      "minCandidates": 2,
+      "expectedCriteria": ["京都", "徒歩", "ランチ", "3000", "和食"]
+    },
+    {
+      "id": "jalan-hakone-onsen",
+      "service": "jalan",
+      "query": "2泊3日の箱根旅行を考えています。温泉と露天風呂を楽しめる宿を2件比較してください。日付は未定なので空室や実際の宿泊総額は確約せず、アクセス、温泉、露天風呂を宿の詳細ページで確認して提案してください。予約はしません。",
+      "urls": ["https://www.jalan.net/140000/LRG_141600/"],
+      "minCandidates": 2,
+      "expectedCriteria": ["箱根", "温泉", "露天", "アクセス"]
+    },
+    {
+      "id": "carsensor-family-sienta",
+      "service": "carsensor",
+      "query": "家族で近場の週末旅行に使う中古のトヨタ・シエンタを2台比較してください。支払総額150万円以下、走行距離8万km以下、修復歴なしを希望します。車両詳細で総額・年式・走行距離・修復歴を確認し、条件未達や在庫未確認を明示してください。購入や問い合わせはしません。",
+      "urls": ["https://www.carsensor.net/usedcar/bTO/s077/index.html"],
+      "minCandidates": 2,
+      "expectedCriteria": ["シエンタ", "150", "8万", "修復"]
+    },
+    {
+      "id": "suumo-kosugi-rental",
+      "service": "suumo",
+      "query": "武蔵小杉駅から徒歩10分以内で、1LDK、家賃と管理費の合計が月15万円以下の賃貸を2件比較してください。間取り、駅徒歩、家賃、管理費を個別物件で確認し、空室や入居可否は未確認と明示してください。問い合わせや申込みはしません。",
+      "urls": ["https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/"],
+      "minCandidates": 2,
+      "expectedCriteria": ["武蔵小杉", "徒歩", "1LDK", "15", "管理"]
+    },
+    {
+      "id": "indeed-tokyo-cs",
+      "service": "indeed",
+      "query": "東京でSaaSのカスタマーサクセスに転職したいです。正社員、年収500万円以上を希望し、勤務地・給与・雇用形態・必須経験を確認できる求人を2件比較してください。給与の下限が希望に届かない求人は条件未達としてください。応募はせず、アクセス拒否なら回避せず報告してください。",
+      "urls": [
+        "https://jp.indeed.com/jobs?q=%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B5%E3%82%AF%E3%82%BB%E3%82%B9&l=%E6%9D%B1%E4%BA%AC%E9%83%BD"
+      ],
+      "minCandidates": 2,
+      "expectedCriteria": ["東京", "正社員", "500", "経験"]
+    }
+  ]
+}

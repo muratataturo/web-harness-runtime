@@ -1,0 +1,132 @@
+{
+  "checkedAt": "2026-11-10T06:55:35+09:00",
+  "method": "public-html",
+  "inferenceRequests": 0,
+  "cases": [
+    {
+      "caseId": "jalan-hakone-onsen",
+      "outcome": "details_read",
+      "artifactDir": ".runtime/service-probes/5ebcb4b7-7b3e-43ef-a0c1-1714e9694fc4/jalan-hakone-onsen",
+      "pages": [
+        {
+          "url": "https://www.jalan.net/140000/LRG_141600/",
+          "title": "箱根のホテル・旅館 - 宿泊予約【じゃらんnet】",
+          "capturedAt": "2026-11-09T21:55:34.112Z",
+          "textLength": 32000,
+          "truncated": true,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "fieldsPresent": [
+            "温泉",
+            "露天",
+            "アクセス"
+          ]
+        },
+        {
+          "url": "https://www.jalan.net/yad330299/?adultNum=2&stayDay=&stayYear=&stayMonth=&dateUndecided=1&distCd=01&stayCount=1&roomCount=1&roomCrack=200000&screenId=UWW1402&yadNo=330299&callbackHistFlg=1",
+          "title": "箱根湯本温泉 天成園 - 宿泊予約は＜じゃらんnet＞",
+          "capturedAt": "2026-11-09T21:55:34.536Z",
+          "textLength": 5375,
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "fieldsPresent": [
+            "温泉",
+            "露天",
+            "アクセス"
+          ]
+        },
+        {
+          "url": "https://www.jalan.net/yad385995/?adultNum=2&stayDay=&stayYear=&stayMonth=&dateUndecided=1&distCd=01&stayCount=1&roomCount=1&roomCrack=200000&screenId=UWW1402&yadNo=385995&callbackHistFlg=1",
+          "title": "箱根湯本温泉 ホテル南風荘 - 宿泊予約は＜じゃらんnet＞",
+          "capturedAt": "2026-11-09T21:55:34.909Z",
+          "textLength": 4503,
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "fieldsPresent": [
+            "温泉",
+            "露天",
+            "アクセス"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "suumo-kosugi-rental",
+      "outcome": "details_read",
+      "artifactDir": ".runtime/service-probes/93e731df-3e35-4c31-b32a-7caaa299b5c1/suumo-kosugi-rental",
+      "pages": [
+        {
+          "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+          "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）",
+          "capturedAt": "2026-11-09T21:55:33.414Z",
+          "textLength": 13676,
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "fieldsPresent": [
+            "賃料",
+            "管理費",
+            "1LDK",
+            "武蔵小杉"
+          ]
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110384935/",
+          "title": "【SUUMO】1LDK/6階/31.75m2／神奈川県川崎市中原区小杉町２／新丸子駅の賃貸・部屋探し情報（000110384935） | 賃貸マンション・賃貸アパート",
+          "capturedAt": "2026-11-09T21:55:33.521Z",
+          "textLength": 5228,
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "fieldsPresent": [
+            "賃料",
+            "管理費",
+            "1LDK",
+            "武蔵小杉"
+          ]
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110464466/",
+          "title": "【SUUMO】1LDK/6階/30.18m2／神奈川県川崎市中原区小杉町２／武蔵小杉駅の賃貸・部屋探し情報（000110464466） | 賃貸マンション・賃貸アパート",
+          "capturedAt": "2026-11-09T21:55:33.632Z",
+          "textLength": 4930,
+          "truncated": false,
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "fieldsPresent": [
+            "賃料",
+            "管理費",
+            "1LDK",
+            "武蔵小杉"
+          ]
+        }
+      ]
+    }
+  ]
+}

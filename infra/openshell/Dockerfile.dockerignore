@@ -1,0 +1,23 @@
+# Dockerfile-specific context allowlist; prevents .env/runtime/Git data reaching daemon.
+**
+!package.json
+!package-lock.json
+!tsconfig.json
+!src/
+!src/**
+!infra/
+!infra/openshell/
+!infra/openshell/chromium
+
+!examples/
+!examples/*.json
+!web/
+!web/index.html
+!web/app.js
+!web/style.css
+
+!config/
+!config/*.json
+
+!benchmarks/
+!benchmarks/*.json

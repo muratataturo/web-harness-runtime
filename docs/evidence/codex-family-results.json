@@ -1,0 +1,4615 @@
+{
+  "dateJapan": "2026-11-10",
+  "agent": "codex",
+  "model": "gpt-6.1-sol",
+  "authentication": "chatgpt",
+  "parallel": 2,
+  "limits": {
+    "maxSteps": 55,
+    "maxPages": 9,
+    "timeoutSeconds": 240
+  },
+  "initialRun": "2026-11-10T02-06-26.766Z-81c276c3",
+  "marketRecheck": "2026-11-10T02-17-01.252Z-eee99e6f",
+  "runtimeStatuses": {
+    "succeeded": 9,
+    "blocked": 4,
+    "partial": 3
+  },
+  "retrievalCompleteServices": 11,
+  "results": [
+    {
+      "sourceId": "recruit-beauty",
+      "family": "recruit",
+      "label": "Hot Pepper Beauty",
+      "query": "渋谷駅から徒歩5分以内で、髪質改善と韓国アイドル風ヘアに対応できる美容室を2件比較してください。アクセス・料金・口コミ数や評価の根拠を個別詳細で確認し、韓国風と特定アイドル風を区別してください。未確認は未確認とし、予約はしません。",
+      "seedUrl": "https://beauty.hotpepper.jp/svcSA/macAD/salon/",
+      "taskId": "a5bc6844-ccea-4cb0-b486-2329b72fd59d",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:06:26.770Z",
+      "finishedAt": "2026-11-10T02:07:24.108Z",
+      "pages": [
+        {
+          "url": "https://beauty.hotpepper.jp/svcSA/macAD/salon/",
+          "title": "渋谷で人気の美容院・美容室・ヘアサロン｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://beauty.hotpepper.jp/svcSA/macAD/salon/",
+            "service": "hotpepper-beauty",
+            "title": "渋谷で人気の美容院・美容室・ヘアサロン｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T02:06:40.490Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "0e22ec1a57b49007b609d7df6e74c6c5b00304aeca942856372d9c53b025c32f",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "title": "アコテアット ヘア(acote @)｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000074059",
+            "title": "アコテアット ヘア(acote @)｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T02:06:44.536Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "集計です。\n詳細を見る\n東京都渋谷区渋谷３-16-5　SHOKAIビルB1～2F\n渋谷駅新南口2分/C2出口4分[髪質改善/韓国/渋谷駅/前髪カット/"
+              },
+              {
+                "id": "price",
+                "quote": "定価格♪】カット+カラー￥6500/ロコミ4.8★渋谷/髪質改善/韓国/レイヤーカット/縮毛矯正\n\n＜＞"
+              },
+              {
+                "id": "menu",
+                "quote": "改善/韓国/渋谷駅/前髪カット/顔周り/縮毛矯正/渋谷］\nサロン情報\nクーポン\nメニュー\nこだわり"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "ea198f56510d40a848874236f1261a23ce5a94180e3598bce91adc2f78ba575b",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000743923/",
+          "title": "ソレイユトウキョウシブヤ(SOLEIL TOKYO shibuya)｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000743923/",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000743923",
+            "title": "ソレイユトウキョウシブヤ(SOLEIL TOKYO shibuya)｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T02:06:44.828Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "集計です。\n詳細を見る\n東京都渋谷区宇田川町１０－２　いちご渋谷宇田川町ビル１Ｆ\n渋谷駅8分/当日予約OK/レイヤーカット・ブリーチ・顔周りならお任せ"
+              },
+              {
+                "id": "price",
+                "quote": ")～12/31(木)\n\n¥4,900\n\n似合わせカット+透明感カラー　『理想の韓国Hair♪』\n\n\t\n\nお"
+              },
+              {
+                "id": "menu",
+                "quote": "/当日予約OK/レイヤーカット・ブリーチ・顔周りならお任せ\nサロン情報\nクーポン\nメニュー\nこだわり"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "24fab584adc0b09e6dd938b95bad9ad8eca1cbafb0e8b87f30b92b06d59292f1",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://beauty.hotpepper.jp/slnH000651996/?cstt=14",
+          "title": "ソア 渋谷(soar)｜ホットペッパービューティー",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://beauty.hotpepper.jp/slnH000651996/?cstt=14",
+            "service": "hotpepper-beauty",
+            "entityId": "hotpepper-beauty:H000651996",
+            "title": "ソア 渋谷(soar)｜ホットペッパービューティー",
+            "capturedAt": "2026-11-10T02:06:47.779Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "集計です。\n詳細を見る\n東京都渋谷区神南１－２０－１１渋谷造園会館３Ｆ\n【NEWオープン記念クーポンあり/当日予約OK】渋谷駅5分/縮毛矯正"
+              },
+              {
+                "id": "price",
+                "quote": "新\n規\t\n縮毛矯正\n\n¥17,500\n\n【人気NO.1】soar式髪質改善酸性ストレート＋（前髪カットOK"
+              },
+              {
+                "id": "menu",
+                "quote": "ar 髪質改善 レイヤーカット【渋谷 髪質改善サロン】\n\nソア　カミシツカイゼン　レイヤーカット"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "fbc90dfc41d593fbf8dd223b28c02035336f02f494d623c9f3267f9e1f98b263",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 3,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 8,
+      "criteria": [
+        {
+          "id": "access",
+          "description": "渋谷駅徒歩5分以内をアクセス欄で確認",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "care",
+          "description": "髪質改善に対応",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "korean",
+          "description": "韓国風ヘア対応。特定アイドル風とは区別",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "idol",
+          "description": "特定の韓国アイドル名・アイドル風への対応を確認",
+          "required": false,
+          "weight": 1
+        },
+        {
+          "id": "price",
+          "description": "具体的施術料金",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "reviews",
+          "description": "口コミ件数と評価",
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "answer": {
+        "summary": "駅近と掲載価格を優先するならacote @が第一候補。soarは口コミ件数が多い。両店とも徒歩5分以内・髪質改善・韓国風は確認できたが、特定の韓国アイドル風への対応は未確認で、完全適合とは断定できない。",
+        "candidates": [
+          {
+            "name": "acote @",
+            "url": "https://beauty.hotpepper.jp/slnH000074059/",
+            "matches": [
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "新南口2分、C2出口4分。"
+              },
+              {
+                "criterionId": "care",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "1step髪質改善TRあり。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "新規カット＋1step髪質改善TR 6,000円。10～20時、系列店含む初来店・併用不可。"
+              },
+              {
+                "criterionId": "korean",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "韓国風顔周り・レイヤー対応。"
+              },
+              {
+                "criterionId": "idol",
+                "status": "unknown",
+                "evidenceIds": [],
+                "explanation": "特定アイドル風の対応実績は未確認。"
+              },
+              {
+                "criterionId": "reviews",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "評価4.81、978件。"
+              }
+            ],
+            "score": 92,
+            "eligible": true
+          },
+          {
+            "name": "soar 渋谷",
+            "url": "https://beauty.hotpepper.jp/slnH000651996/?cstt=14",
+            "matches": [
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "渋谷駅5分。"
+              },
+              {
+                "criterionId": "care",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "髪質改善超音波TR対応。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "新規髪質改善超音波TR＋カット7,800円。STARTOKYOグループ初来店対象。"
+              },
+              {
+                "criterionId": "korean",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8"
+                ],
+                "explanation": "韓国ヘア提案の記載。"
+              },
+              {
+                "criterionId": "idol",
+                "status": "unknown",
+                "evidenceIds": [],
+                "explanation": "特定アイドル風の対応実績は未確認。"
+              },
+              {
+                "criterionId": "reviews",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "評価4.80、1997件。"
+              }
+            ],
+            "score": 92,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "2026年11月10日の個別詳細掲載情報。評価平均は直近1年間の集計で、件数と集計期間は同一とは限らない。",
+          "韓国風という広告・メニュー記載は特定アイドルの再現実績を意味しない。スタイル子ページでの特定アイドル実績は未確認。",
+          "6,000円と7,800円は施術内容の異なる新規クーポンで単純な品質比較はできない。最終料金・空席は確約せず、予約はしていない。"
+        ]
+      },
+      "review": {
+        "verdict": "条件付き",
+        "summary": "acote @、soar 渋谷。渋谷駅徒歩5分以内、髪質改善、韓国風、料金・口コミを確認。特定アイドルの再現実績は未確認。",
+        "note": "ランタイムはidol条件を任意としたためsucceededだが、今回の人による結果整理では条件付きとする。楽天ビューティでは同条件が必須となりpartialだった。必須条件の自動分類に揺れが残る。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-2",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "渋谷駅新南口2分/C2出口4分",
+          "capturedAt": "2026-11-10T02:06:44.536Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "4.81\n（978件）",
+          "capturedAt": "2026-11-10T02:06:44.536Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "¥6,000\n\n【艶髪】カット＋1step髪質改善トリートメント｜渋谷",
+          "capturedAt": "2026-11-10T02:06:44.536Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://beauty.hotpepper.jp/slnH000074059/",
+          "quote": "最旬韓国風！顔周りの似合わせカットと軽やかレイヤー",
+          "capturedAt": "2026-11-10T02:06:44.536Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-4",
+          "url": "https://beauty.hotpepper.jp/slnH000651996/?cstt=14",
+          "quote": "渋谷駅5分/縮毛矯正.髪質改善",
+          "capturedAt": "2026-11-10T02:06:47.779Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-4",
+          "url": "https://beauty.hotpepper.jp/slnH000651996/?cstt=14",
+          "quote": "4.80\n（1997件）",
+          "capturedAt": "2026-11-10T02:06:47.779Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-4",
+          "url": "https://beauty.hotpepper.jp/slnH000651996/?cstt=14",
+          "quote": "【人気No.3】soar式髪質改善超音波Tr + カット/レイヤーカット ￥13750→￥7800",
+          "capturedAt": "2026-11-10T02:06:47.779Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-4",
+          "url": "https://beauty.hotpepper.jp/slnH000651996/?cstt=14",
+          "quote": "カットで結んでも可愛い*本格韓国ヘアをご提案♪",
+          "capturedAt": "2026-11-10T02:06:47.779Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "recruit-gourmet",
+      "family": "recruit",
+      "label": "Hot Pepper グルメ",
+      "query": "京都駅から徒歩10分以内で、和食ランチを楽しめるお店を2件比較してください。1人3000円以内を希望します。駅徒歩、昼のメニュー、ランチ料金を個別詳細で確認し、未達や未確認の条件を明示してください。予約はしません。",
+      "seedUrl": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/",
+      "taskId": "deb4b106-c3a7-44de-af42-bcd488d7a21a",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:06:26.771Z",
+      "finishedAt": "2026-11-10T02:07:21.329Z",
+      "pages": [
+        {
+          "url": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/",
+          "title": "和食ランチならここ！京都駅でお昼ご飯におすすめなお店 | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/",
+            "service": "hotpepper-gourmet",
+            "title": "和食ランチならここ！京都駅でお昼ご飯におすすめなお店 | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T02:06:39.239Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "9756e4d1451b0b0ae8cb43990e829f6fffea0075dbb8762bd7ad253e90a8475a",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ004577270/lunch/",
+          "title": "美味酒肴 京すいしん(和食)のランチ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "insufficient_detail",
+            "url": "https://www.hotpepper.jp/strJ004577270/lunch/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J004577270",
+            "title": "美味酒肴 京すいしん(和食)のランチ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T02:06:43.555Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "price",
+                "quote": "48件\n予算\n4001～5000円 1501～2000円\nジャンル\n\n和食\n\n日本料理・懐石・割烹\n寿司"
+              },
+              {
+                "id": "menu",
+                "quote": "ランチ | 美味酒肴 京すいしん - クーポン・予約のホットペッパーグルメ"
+              }
+            ],
+            "missingFields": [
+              "access"
+            ],
+            "bodySha256": "b9ee0828c450df132a4455ef555c80b085cb396da3c8b41b5e3ec1d40fd166a5",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ000805841/lunch/",
+          "title": "串の坊 京都駅店(和食)のランチ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "insufficient_detail",
+            "url": "https://www.hotpepper.jp/strJ000805841/lunch/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J000805841",
+            "title": "串の坊 京都駅店(和食)のランチ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T02:06:43.983Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "price",
+                "quote": "57件\n予算\n5001～6000円 2001～3000円\nジャンル\n\n和食\n\n和食全般\n烏丸五条・京都駅"
+              },
+              {
+                "id": "menu",
+                "quote": "ランチ | 串の坊 京都駅店 - クーポン・予約のホットペッパーグルメ\n\n最"
+              }
+            ],
+            "missingFields": [
+              "access"
+            ],
+            "bodySha256": "47bab26e394a0db95b05f637b5fee7118269a9f0792dc18213f6026101776d9d",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ004577270/",
+          "title": "美味酒肴 京すいしん(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://www.hotpepper.jp/strJ004577270/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J004577270",
+            "title": "美味酒肴 京すいしん(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T02:06:47.359Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "も喜んでくださいます\n\n京都駅徒歩3分の立地\n\nご利用シーンに合わせたお席をバリエーション豊富にご用意してお"
+              },
+              {
+                "id": "price",
+                "quote": "48件\n予算\n4001～5000円 1501～2000円\nジャンル\n\n和食\n\n日本料理・懐石・割烹\n寿司"
+              },
+              {
+                "id": "menu",
+                "quote": "最近見たお店\n\nマイメニュー\nマイページTOP\n予約の確認\nお店からのメッセージ一覧\nグルメ手帳"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "9f5076411504892e9f55b49cfcb5bab9b57892a29d8570cb4a6fe828708a08cb",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ000805841/",
+          "title": "串の坊 京都駅店(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://www.hotpepper.jp/strJ000805841/",
+            "service": "hotpepper-gourmet",
+            "entityId": "hotpepper-gourmet:J000805841",
+            "title": "串の坊 京都駅店(京都駅/和食)＜ネット予約可＞ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-10T02:06:47.802Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "の坊　京都駅店\n住所\t\n京都府京都市下京区東塩小路町６５７ 京都駅ビル11F\n\nアクセス\tJR京都駅徒歩3分\n電話\t電話番号を表示する\n\n営業時間"
+              },
+              {
+                "id": "price",
+                "quote": "57件\n予算\n5001～6000円 2001～3000円\nジャンル\n\n和食\n\n和食全般\n烏丸五条・京都駅"
+              },
+              {
+                "id": "menu",
+                "quote": "最近見たお店\n\nマイメニュー\nマイページTOP\n予約の確認\nお店からのメッセージ一覧\nグルメ手帳"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "4a5976ad24f83ae8da8a68cba6ef65d35071ff2477a92134b627f530619b92d5",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 4,
+      "criteria": [
+        {
+          "id": "walk",
+          "description": "京都駅から徒歩10分以内",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "food",
+          "description": "和食の昼メニューがある",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "price",
+          "description": "ランチ1人3000円以内",
+          "required": true,
+          "weight": 3
+        }
+      ],
+      "answer": {
+        "summary": "おすすめは京すいしん。両店ともJR京都駅徒歩3分で、和食ランチ3000円以内の掲載メニューを確認。京すいしんの寿司膳1870円は串の坊の潮騒2420円より550円安い。串揚げを楽しみたい場合は串の坊。選定メニューについて未達・未確認の必須条件はありません。",
+        "candidates": [
+          {
+            "name": "美味酒肴 京すいしん",
+            "url": "https://www.hotpepper.jp/strJ004577270/",
+            "matches": [
+              {
+                "criterionId": "walk",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "JR京都駅徒歩3分で10分以内。"
+              },
+              {
+                "criterionId": "food",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "個別ランチ詳細で寿司膳（寿司、小うどん、天ぷら、小鉢）を確認。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "寿司膳1870円税込で3000円以下。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "串の坊 京都駅店",
+            "url": "https://www.hotpepper.jp/strJ000805841/",
+            "matches": [
+              {
+                "criterionId": "walk",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "JR京都駅徒歩3分で10分以内。"
+              },
+              {
+                "criterionId": "food",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "個別ランチ詳細で海老・豚フィレなどの串揚げ8種「潮騒」を確認。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "潮騒2420円税込で3000円以下。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "2026年11月10日閲覧時の掲載情報。飲み物・追加注文を含む総支払額や当日の提供・空席は未確認。予約はしていません。",
+          "串の坊のランチ情報は2023年12月1日更新で、表示金額と異なる場合がある旨の注意書きがあります。実売価格は確約できません。",
+          "3000円以内は選定メニューの条件で、全メニューではありません。京すいしんの京御膳3080円、串の坊の彷徨3300円などは予算超過です。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可（掲載情報）",
+        "summary": "京すいしん：寿司膳1,870円／串の坊 京都駅店：潮騒2,420円。両店ともJR京都駅徒歩3分。",
+        "note": "串の坊のランチページの更新日は2023年12月1日。現在の実売価格と当日提供は未確認。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-4",
+          "url": "https://www.hotpepper.jp/strJ004577270/",
+          "quote": "ＪＲ 京都駅 徒歩3分",
+          "capturedAt": "2026-11-10T02:06:47.359Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-5",
+          "url": "https://www.hotpepper.jp/strJ000805841/",
+          "quote": "JR京都駅徒歩3分",
+          "capturedAt": "2026-11-10T02:06:47.802Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://www.hotpepper.jp/strJ004577270/lunch/",
+          "quote": "寿司膳\n\n上にぎり寿司　　小うどん　　天ぷら　　小鉢\n\n1,870円（税込）",
+          "capturedAt": "2026-11-10T02:06:43.555Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-3",
+          "url": "https://www.hotpepper.jp/strJ000805841/lunch/",
+          "quote": "潮騒(しおさい）串揚げ8種\n\n海老・豚フィレ・生椎茸・その他\n\n2,420円（税込）",
+          "capturedAt": "2026-11-10T02:06:43.983Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "recruit-jalan",
+      "family": "recruit",
+      "label": "じゃらん",
+      "query": "2泊3日の箱根旅行を考えています。温泉と露天風呂を楽しめる宿を2件比較してください。所在地、駅からのアクセス、温泉、露天風呂を個別詳細で確認してください。日付は未定なので空室や2泊の総額は未確認とし、予約はしません。",
+      "seedUrl": "https://www.jalan.net/140000/LRG_141600/",
+      "taskId": "0d293b82-a113-48c7-b2e2-1631d811d6f3",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:07:21.332Z",
+      "finishedAt": "2026-11-10T02:08:23.484Z",
+      "pages": [
+        {
+          "url": "https://www.jalan.net/140000/LRG_141600/",
+          "title": "箱根のホテル・旅館 - 宿泊予約【じゃらんnet】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://www.jalan.net/140000/LRG_141600/",
+            "service": "jalan",
+            "title": "箱根のホテル・旅館 - 宿泊予約【じゃらんnet】",
+            "capturedAt": "2026-11-10T02:07:34.229Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "shift_jis",
+              "contentType": "text/html;charset=Windows-31J"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "afb0c1da2de3dee647485ae17bcbf954662a21967bb449a2464f46a265238d9e",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": true
+          }
+        },
+        {
+          "url": "https://www.jalan.net/140000/LRG_141600/",
+          "title": "箱根のホテル・旅館 - 宿泊予約【じゃらんnet】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://www.jalan.net/140000/LRG_141600/",
+            "service": "jalan",
+            "title": "箱根のホテル・旅館 - 宿泊予約【じゃらんnet】",
+            "capturedAt": "2026-11-10T02:07:41.896Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "shift_jis",
+              "contentType": "text/html;charset=Windows-31J"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "4ac0b0afa833b124e0f0ba96e4d9167263a2ca249192c473b26853ecf1f6b609",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": true
+          }
+        },
+        {
+          "url": "https://www.jalan.net/140000/LRG_141600/",
+          "title": "箱根のホテル・旅館 - 宿泊予約【じゃらんnet】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://www.jalan.net/140000/LRG_141600/",
+            "service": "jalan",
+            "title": "箱根のホテル・旅館 - 宿泊予約【じゃらんnet】",
+            "capturedAt": "2026-11-10T02:07:49.002Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "shift_jis",
+              "contentType": "text/html;charset=Windows-31J"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "799e918bb0984db439dc84fa2151d360c0f837eaf0997c6312e1ca7ce5563cee",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": true
+          }
+        },
+        {
+          "url": "https://www.jalan.net/yad330299/",
+          "title": "箱根湯本温泉 天成園 - 宿泊予約は＜じゃらんnet＞",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://www.jalan.net/yad330299/",
+            "service": "jalan",
+            "entityId": "jalan:330299",
+            "title": "箱根湯本温泉 天成園 - 宿泊予約は＜じゃらんnet＞",
+            "capturedAt": "2026-11-10T02:07:52.033Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "shift_jis",
+              "contentType": "text/html;charset=Windows-31J"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "天成園\n箱根湯本温泉\n箱根湯本駅より【旅館組合バス】Aコース『滝通り行』約5分（有料200円/最終17：45発）【タクシー】約3分\nふるさと納税対象"
+              },
+              {
+                "id": "facilities",
+                "quote": ">\n箱根 >\n箱根湯本温泉 天成園\n箱根湯本温泉 天成園\n箱根湯本温泉\n箱根湯本駅より【旅館組合"
+              },
+              {
+                "id": "rooms",
+                "quote": "概要\n空室情報\n○：空室10室以上\n×：空室なし\n▲：残4～9部屋\n1～3部屋：残室数\n※現在の検索"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "74e128f8dac2442b1d86ebda9c55f44f051c5dfee8ba0ed6a6170f179c6d4138",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.jalan.net/yad371898/",
+          "title": "季の湯 雪月花（共立リゾート） - 宿泊予約は＜じゃらんnet＞",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "shift_jis",
+            "contentType": "text/html;charset=Windows-31J"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://www.jalan.net/yad371898/",
+            "service": "jalan",
+            "entityId": "jalan:371898",
+            "title": "季の湯 雪月花（共立リゾート） - 宿泊予約は＜じゃらんnet＞",
+            "capturedAt": "2026-11-10T02:07:52.634Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "shift_jis",
+              "contentType": "text/html;charset=Windows-31J"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "立リゾート）\n強羅温泉\n箱根登山鉄道終点「強羅駅」より徒歩約１分。小田原厚木道路～小田原箱根道路出口より国道１号線経由25分\nハイクラ"
+              },
+              {
+                "id": "facilities",
+                "quote": "花（共立リゾート）\n強羅温泉\n箱根登山鉄道終点「強羅駅」より徒歩約１分。小田原厚木道路～小田原箱根"
+              },
+              {
+                "id": "rooms",
+                "quote": "概要\n空室情報\n○：空室10室以上\n×：空室なし\n▲：残4～9部屋\n1～3部屋：残室数\n※現在の検索"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "e235bab8911b3f58f765bf08713b05abe6cd3d28617bc63f8ef041a563fc90ea",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 9,
+      "criteria": [
+        {
+          "id": "location",
+          "description": "箱根の所在地を個別詳細で確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "access",
+          "description": "駅からのアクセスを個別詳細で確認（駅近の指定なし）",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "onsen",
+          "description": "温泉を楽しめる",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "roten",
+          "description": "施設の露天風呂を確認。露天風呂付き客室とは区別",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "駅からの移動の容易さを重視するなら、強羅駅徒歩約1分で温泉・施設露天風呂がある雪月花がおすすめです。箱根湯本駅を拠点にするならバス約5分の天成園も適します。両宿とも所在地・駅アクセス・温泉・露天風呂を個別詳細で確認しました。",
+        "candidates": [
+          {
+            "name": "箱根湯本温泉 天成園",
+            "url": "https://www.jalan.net/yad330299/",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "神奈川県足柄下郡箱根町湯本682。"
+              },
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "箱根湯本駅から旅館組合バス約5分（200円、最終17:45発）、タクシー約3分。"
+              },
+              {
+                "criterionId": "onsen",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "箱根湯本温泉。加温・循環ろ過。"
+              },
+              {
+                "criterionId": "roten",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "施設の男女露天風呂あり。露天風呂は貸切不可。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "季の湯 雪月花（共立リゾート）",
+            "url": "https://www.jalan.net/yad371898/",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "神奈川県足柄下郡箱根町強羅1300-34。"
+              },
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "箱根登山鉄道の強羅駅より徒歩約1分。"
+              },
+              {
+                "criterionId": "onsen",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "強羅温泉。加温、温泉掛け流しの記載あり。"
+              },
+              {
+                "criterionId": "roten",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8",
+                  "ev-9"
+                ],
+                "explanation": "施設の男女露天風呂・貸切あり。全室の客室露天風呂は温泉ではない点に注意。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "日付未定のため、2泊連続の空室と2泊の総額は未確認です。予約は行っていません。",
+          "2026年11月10日閲覧の公開HTMLに基づきます。動的な空室・料金は確認しておらず、掲載内容は変更される可能性があります。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可",
+        "summary": "天成園／雪月花。駅アクセス・温泉・施設露天風呂を確認。雪月花は強羅駅徒歩約1分。",
+        "note": "客室露天風呂と温泉を区別。雪月花の客室露天風呂のお湯は温泉ではない。日付未定のため2泊総額・空室は未確認。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-4",
+          "url": "https://www.jalan.net/yad330299/",
+          "quote": "神奈川県足柄下郡箱根町湯本682",
+          "capturedAt": "2026-11-10T02:07:52.033Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-4",
+          "url": "https://www.jalan.net/yad330299/",
+          "quote": "箱根湯本駅より【旅館組合バス】Aコース『滝通り行』約5分（有料200円/最終17：45発）【タクシー】約3分",
+          "capturedAt": "2026-11-10T02:07:52.033Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-4",
+          "url": "https://www.jalan.net/yad330299/",
+          "quote": "箱根湯本温泉(加温・循環ろ過)",
+          "capturedAt": "2026-11-10T02:07:52.033Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-4",
+          "url": "https://www.jalan.net/yad330299/",
+          "quote": "露天風呂\nあり（男女ともあり（時間交代含む）・貸切不可）",
+          "capturedAt": "2026-11-10T02:07:52.033Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-5",
+          "url": "https://www.jalan.net/yad371898/",
+          "quote": "神奈川県足柄下郡箱根町強羅１３００－３４",
+          "capturedAt": "2026-11-10T02:07:52.634Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-5",
+          "url": "https://www.jalan.net/yad371898/",
+          "quote": "箱根登山鉄道終点「強羅駅」より徒歩約１分。",
+          "capturedAt": "2026-11-10T02:07:52.634Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-5",
+          "url": "https://www.jalan.net/yad371898/",
+          "quote": "強羅温泉(加温)\n温泉掛け流し※人工温泉含まず",
+          "capturedAt": "2026-11-10T02:07:52.634Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-5",
+          "url": "https://www.jalan.net/yad371898/",
+          "quote": "露天風呂\nあり（男女ともあり（時間交代含む）・貸切可）",
+          "capturedAt": "2026-11-10T02:07:52.634Z"
+        },
+        {
+          "id": "ev-9",
+          "pageId": "page-5",
+          "url": "https://www.jalan.net/yad371898/",
+          "quote": "全室露天風呂付き（※客室露天は温泉ではございません）",
+          "capturedAt": "2026-11-10T02:07:52.634Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "recruit-carsensor",
+      "family": "recruit",
+      "label": "カーセンサー",
+      "query": "家族の週末旅行に使うトヨタ・シエンタの中古車を2台比較してください。支払総額150万円以下、走行距離8万km以下、修復歴なしを希望します。車両詳細で総額・年式・走行距離・修復歴を確認し、未達条件や在庫未確認を明示してください。本体価格を支払総額と混同しないでください。購入や問い合わせはしません。",
+      "seedUrl": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+      "taskId": "b713880c-13e8-4a59-ba04-3e309ffcffdc",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:07:24.111Z",
+      "finishedAt": "2026-11-10T02:08:12.493Z",
+      "pages": [
+        {
+          "url": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+          "title": "シエンタ（トヨタ）の中古車を探す【カーセンサー】",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+            "service": "carsensor",
+            "title": "シエンタ（トヨタ）の中古車を探す【カーセンサー】",
+            "capturedAt": "2026-11-10T02:07:35.213Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "c3e6be65a7e3167d2459999fd26d664c806bcd73ae8954634924bb1b8843bc70",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+          "title": "シエンタ（トヨタ）の中古車を探す【カーセンサー】",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+            "service": "carsensor",
+            "title": "シエンタ（トヨタ）の中古車を探す【カーセンサー】",
+            "capturedAt": "2026-11-10T02:07:38.536Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "39b8f2d7ce9bc5a943942329d9368c4f5ab06cfa9a9ceed66949b7188d72d5ce",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+          "title": "シエンタ（トヨタ）の中古車を探す【カーセンサー】",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://www.carsensor.net/usedcar/bTO/s077/index.html",
+            "service": "carsensor",
+            "title": "シエンタ（トヨタ）の中古車を探す【カーセンサー】",
+            "capturedAt": "2026-11-10T02:07:41.941Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "20597c2e154c31c4605771f9ce49ea9fbdfe767582c8b8912ae0d8f4db9991ec",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.carsensor.net/usedcar/detail/AU7443259107/index.html",
+          "title": "シエンタ 1.5 G トヨタセーフティーセンス(大阪)の中古車詳細 | 中古車なら【カーセンサー】",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://www.carsensor.net/usedcar/detail/AU7443259107/index.html",
+            "service": "carsensor",
+            "entityId": "carsensor:AU7443259107",
+            "title": "シエンタ 1.5 G トヨタセーフティーセンス(大阪)の中古車詳細 | 中古車なら【カーセンサー】",
+            "capturedAt": "2026-11-10T02:07:47.166Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "total_price",
+                "quote": "クハイビーム・CD！\n\n支払総額（税込）\n\n82.5万円\n\n（諸費用7.7万円含む）\n\n車両本体価格（"
+              },
+              {
+                "id": "mileage",
+                "quote": "015\n\n(H27)\n\n走行距離\n\n4.8\n\n万km\n\n修復歴\n\nなし\n\n法定整備\n\n付き\n\n車検有無"
+              },
+              {
+                "id": "repair_history",
+                "quote": "4.8\n\n万km\n\n修復歴\n\nなし\n\n法定整備\n\n付き\n\n車検有無\n\n2028(R10)\n\n年4"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "5a1a79fca5dce845ad4685047a074377806794a73a613923461c8325a39b4b92",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+          "title": "シエンタ ハイブリッド 1.5 G トヨタセーフティセンス(大阪)の中古車詳細 | 中古車なら【カーセンサー】",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+            "service": "carsensor",
+            "entityId": "carsensor:AU7280501978",
+            "title": "シエンタ ハイブリッド 1.5 G トヨタセーフティセンス(大阪)の中古車詳細 | 中古車なら【カーセンサー】",
+            "capturedAt": "2026-11-10T02:07:48.113Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [
+              {
+                "id": "total_price",
+                "quote": "一括照会が可能です！\n\n支払総額（税込）\n\n101.8万円\n\n（諸費用5.4万円含む）\n\n車両本体価格"
+              },
+              {
+                "id": "mileage",
+                "quote": "016\n\n(H28)\n\n走行距離\n\n6.2\n\n万km\n\n修復歴\n\nなし\n\n法定整備\n\n付き\n\n車検有無"
+              },
+              {
+                "id": "repair_history",
+                "quote": "6.2\n\n万km\n\n修復歴\n\nなし\n\n法定整備\n\n付き\n\n車検有無\n\n2027(R09)\n\n年1"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "2f22927d2dbd686a647bc126012bc521d3ec270be01bba53213e55ecf594c29e",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 6,
+      "criteria": [
+        {
+          "id": "model",
+          "description": "トヨタ・シエンタである",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "price",
+          "description": "諸費用込み支払総額150万円以下",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "km",
+          "description": "走行距離8万km以下",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "repair",
+          "description": "修復歴なし",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "year",
+          "description": "車両詳細で年式を確認できる",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "価格と走行距離を優先するなら高槻市の1.5 Gが最適。支払総額82.5万円、2015年式、4.8万km、修復歴なし。枚方市のハイブリッド1.5 Gは101.8万円、2016年式、6.2万km、修復歴なしで、19.3万円高いが1年新しい。両車とも掲載上の希望条件を満たし、未達条件はない。",
+        "candidates": [
+          {
+            "name": "シエンタ 1.5 G（高槻市）",
+            "url": "https://www.carsensor.net/usedcar/detail/AU7443259107/index.html",
+            "matches": [
+              {
+                "criterionId": "model",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "トヨタ・シエンタの詳細を確認。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "支払総額82.5万円で150万円以下。本体価格とは区別。"
+              },
+              {
+                "criterionId": "km",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "4.8万kmで8万km以下。"
+              },
+              {
+                "criterionId": "repair",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "修復歴なしと記載。"
+              },
+              {
+                "criterionId": "year",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "2015年式と確認。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "シエンタ ハイブリッド 1.5 G（枚方市）",
+            "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+            "matches": [
+              {
+                "criterionId": "model",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "トヨタ・シエンタの詳細を確認。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "支払総額101.8万円で150万円以下。本体価格とは区別。"
+              },
+              {
+                "criterionId": "km",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "6.2万kmで8万km以下。"
+              },
+              {
+                "criterionId": "repair",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "修復歴なしと記載。"
+              },
+              {
+                "criterionId": "year",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "2016年式と確認。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "2026年11月10日閲覧時の掲載情報。在庫は販売店への確認をしておらず未確認で、価格・販売継続を確約しない。",
+          "支払総額は掲載の基本プラン。遠方納車や希望オプションなどで支払いが変わる可能性がある。",
+          "購入・予約・問い合わせは行っていない。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可（在庫未確認）",
+        "summary": "シエンタ1.5 G：総額82.5万円、2015年式、4.8万km／ハイブリッド1.5 G：101.8万円、2016年式、6.2万km。両車とも修復歴なし。",
+        "note": "掲載の基本プランによる比較。在庫、遠方納車や追加オプション込みの支払額は未確認。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-4",
+          "url": "https://www.carsensor.net/usedcar/detail/AU7443259107/index.html",
+          "quote": "支払総額（税込）\n\n82.5万円",
+          "capturedAt": "2026-11-10T02:07:47.166Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-4",
+          "url": "https://www.carsensor.net/usedcar/detail/AU7443259107/index.html",
+          "quote": "年式\n\n2015\n\n(H27)\n\n走行距離\n\n4.8\n\n万km\n\n修復歴\n\nなし",
+          "capturedAt": "2026-11-10T02:07:47.166Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-4",
+          "url": "https://www.carsensor.net/usedcar/detail/AU7443259107/index.html",
+          "quote": "トヨタ シエンタ",
+          "capturedAt": "2026-11-10T02:07:47.166Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-5",
+          "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+          "quote": "支払総額（税込）\n\n101.8万円",
+          "capturedAt": "2026-11-10T02:07:48.113Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-5",
+          "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+          "quote": "年式\n\n2016\n\n(H28)\n\n走行距離\n\n6.2\n\n万km\n\n修復歴\n\nなし",
+          "capturedAt": "2026-11-10T02:07:48.113Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-5",
+          "url": "https://www.carsensor.net/usedcar/detail/AU7280501978/index.html",
+          "quote": "トヨタ シエンタ",
+          "capturedAt": "2026-11-10T02:07:48.113Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "recruit-suumo",
+      "family": "recruit",
+      "label": "SUUMO",
+      "query": "武蔵小杉駅から徒歩10分以内で、1LDK、家賃と管理費の合計が月15万円以下の賃貸を2件比較してください。駅徒歩、家賃、管理費、合計月額、間取りを個別詳細で確認してください。上限を超える場合は条件未達とし、空室や入居可否は未確認としてください。問い合わせや申込みはしません。",
+      "seedUrl": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+      "taskId": "b5df79c2-7c6a-4616-aa95-80df33110282",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:08:12.498Z",
+      "finishedAt": "2026-11-10T02:08:51.193Z",
+      "pages": [
+        {
+          "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+          "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+            "service": "suumo",
+            "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）",
+            "capturedAt": "2026-11-10T02:08:21.310Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "32c11f61106c6ef93281103d3b2ee604db428500d5cd95dfe9cf189263f5ff60",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "title": "【SUUMO】D Paina 中丸子／神奈川県川崎市中原区中丸子／武蔵小杉駅の賃貸・部屋探し情報（000110455233） | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://suumo.jp/chintai/jnc_000110455233/",
+            "service": "suumo",
+            "entityId": "suumo:jnc_000110455233",
+            "title": "【SUUMO】D Paina 中丸子／神奈川県川崎市中原区中丸子／武蔵小杉駅の賃貸・部屋探し情報（000110455233） | 賃貸マンション・賃貸アパート",
+            "capturedAt": "2026-11-10T02:08:24.344Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "D Paina 中丸子／神奈川県川崎市中原区中丸子／武蔵小杉駅の賃貸物件情報 - SUUMO(スーモ)賃貸\n全国へ\n関東版\n借りる\n賃貸\nマンションを買う\n新築\n中古\n一戸建て"
+              },
+              {
+                "id": "rent",
+                "quote": "回：１８０００円、月額：賃料等の１％＋８００円／月\nほか初期費用\n合計6.88万円（内訳：室内清掃"
+              },
+              {
+                "id": "fees",
+                "quote": "りに追加済み\n14万円\n管理費・共益費: 6000円\n敷金: -\n礼金: 21万円\n保証金: -\n敷"
+              },
+              {
+                "id": "layout",
+                "quote": "武線/平間駅 歩16分\n間取り\n1LDK\n専有面積\n33.53m2\n築年数\n築2年\n階\n1階\n向き"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "9e34784f521d33ed9a1e5dee352f0938f20350bd86e8941090385da663632948",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/",
+            "service": "suumo",
+            "entityId": "suumo:jnc_000094254501",
+            "title": "【SUUMO】フレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸・部屋探し情報（000094254501） | 賃貸マンション・賃貸アパート",
+            "capturedAt": "2026-11-10T02:08:24.535Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": ":H:0\"\nフレメゾン／神奈川県川崎市中原区今井南町／武蔵小杉駅の賃貸物件情報 - SUUMO(スーモ)賃貸\n全国へ\n関東版\n借りる\n賃貸\nマンションを買う\n新築\n中古\n一戸建て"
+              },
+              {
+                "id": "rent",
+                "quote": "用品の収納に重宝します。賃料は13.5万円です。\nこの物件にお問い合わせ\nお問い合わせの内容を選択"
+              },
+              {
+                "id": "fees",
+                "quote": "追加済み\n13.5万円\n管理費・共益費: -\n敷金: 13.5万円\n礼金: 13.5万円\n保証金:"
+              },
+              {
+                "id": "layout",
+                "quote": "線/向河原駅 歩15分\n間取り\n1LDK\n専有面積\n52.8m2\n築年数\n築37年\n階\n3階\n向き"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "b4ded5a8feccbb6ac3e8a9bf70bb2dcc8dacea28364a6bb5344b19bd5a713381",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 6,
+      "criteria": [
+        {
+          "id": "walk",
+          "description": "武蔵小杉駅から徒歩10分以内",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "layout",
+          "description": "間取り1LDK",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "cost",
+          "description": "家賃と管理費・共益費の合計月額15万円以下。個別に確認し合算",
+          "required": true,
+          "weight": 3
+        }
+      ],
+      "answer": {
+        "summary": "2件とも掲載条件を満たします。費用と駅徒歩を優先するならフレメゾンが最適：徒歩7分、家賃13.5万円、管理費「-」、合計13.5万円。D Paina 中丸子は徒歩10分、家賃14万円＋管理費6,000円＝14.6万円。いずれも1LDK。空室・入居可否は未確認です。",
+        "candidates": [
+          {
+            "name": "D Paina 中丸子（1階）",
+            "url": "https://suumo.jp/chintai/jnc_000110455233/",
+            "matches": [
+              {
+                "criterionId": "walk",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "武蔵小杉駅（JR横須賀線）徒歩10分で上限以内。"
+              },
+              {
+                "criterionId": "layout",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "1LDK。"
+              },
+              {
+                "criterionId": "cost",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "家賃140,000円＋管理費6,000円＝月146,000円。15万円以下。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "フレメゾン（3階）",
+            "url": "https://suumo.jp/chintai/jnc_000094254501/",
+            "matches": [
+              {
+                "criterionId": "walk",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "武蔵小杉駅（東急東横線）徒歩7分。"
+              },
+              {
+                "criterionId": "layout",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "1LDK。"
+              },
+              {
+                "criterionId": "cost",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "家賃135,000円、管理費・共益費は「-」（掲載上なし）として合計月135,000円。15万円以下。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "2026年11月10日閲覧の公開HTML掲載情報であり、動的な空室や入居可否は未確認。問い合わせ・申込みは実施していません。",
+          "合計月額は指定どおり家賃と管理費・共益費のみ。保証料、保険、初期費用等は含みません。フレメゾンの管理費は掲載の「-」をなしとして計算しています。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可・一部要確認",
+        "summary": "D Paina 中丸子：家賃14万円＋管理費6,000円＝14.6万円、武蔵小杉駅徒歩10分／フレメゾン：家賃13.5万円、管理費「-」、同駅徒歩7分。いずれも1LDK。",
+        "note": "フレメゾンは「-」をなしとして13.5万円と試算。管理費が明示的に0円と確認できたわけではなく、厳格な予算判定では追加確認が必要。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "14万円\n管理費・共益費: 6000円",
+          "capturedAt": "2026-11-10T02:08:24.344Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "ＪＲ横須賀線/武蔵小杉駅 歩10分",
+          "capturedAt": "2026-11-10T02:08:24.344Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://suumo.jp/chintai/jnc_000110455233/",
+          "quote": "間取り\n1LDK",
+          "capturedAt": "2026-11-10T02:08:24.344Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-3",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "13.5万円\n管理費・共益費: -",
+          "capturedAt": "2026-11-10T02:08:24.535Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-3",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "東急東横線/武蔵小杉駅 歩7分",
+          "capturedAt": "2026-11-10T02:08:24.535Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-3",
+          "url": "https://suumo.jp/chintai/jnc_000094254501/",
+          "quote": "間取り\n1LDK",
+          "capturedAt": "2026-11-10T02:08:24.535Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "recruit-indeed",
+      "family": "recruit",
+      "label": "Indeed",
+      "query": "東京でSaaSのカスタマーサクセスに転職したいです。正社員、年収500万円以上を希望します。勤務地・給与・雇用形態・必須経験が確認できる個別求人を2件比較してください。給与下限が500万円に届かない場合は条件未達です。アクセス拒否やログインを回避せず報告してください。応募はしません。",
+      "seedUrl": "https://jp.indeed.com/jobs?q=customer+success&l=Tokyo",
+      "taskId": "09957b84-5921-4701-baf1-bcbef3526f02",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "blocked",
+      "startedAt": "2026-11-10T02:08:23.488Z",
+      "finishedAt": "2026-11-10T02:08:44.493Z",
+      "pages": [
+        {
+          "url": "https://jp.indeed.com/jobs?q=customer+success&l=Tokyo",
+          "title": "Blocked - Indeed.com",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "blocked",
+            "url": "https://jp.indeed.com/jobs?q=customer+success&l=Tokyo",
+            "service": "indeed",
+            "title": "Blocked - Indeed.com",
+            "capturedAt": "2026-11-10T02:08:34.015Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "81f8789867d090acb90c5c96868a2f2f6dde1543f7ca4c1bf2862547f60ae5f8",
+            "reason": "アクセス制限・人間確認が表示されています。回避せず別の許可ソースか未確認回答へ進んでください。",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 0,
+      "candidates": 0,
+      "eligible": 0,
+      "evidenceCount": 0,
+      "criteria": [
+        {
+          "id": "role",
+          "description": "SaaSのカスタマーサクセス職",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "location",
+          "description": "勤務地が東京都",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "employment",
+          "description": "正社員",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "salary",
+          "description": "年収の下限が500万円以上。上限のみで判断しない",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "experience",
+          "description": "必須経験が求人詳細に明記されている",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "指定されたIndeedの検索ページで「Request Blocked」が表示されたため、アクセス制限を回避せず調査を終了しました。個別求人を閲覧できず、2件の比較および最適候補の選定はできません。勤務地・給与下限500万円以上・正社員・SaaSカスタマーサクセス職・必須経験はいずれも未確認です。応募は行っていません。",
+        "candidates": [],
+        "limitations": [
+          "指定ソース https://jp.indeed.com/jobs?q=customer+success&l=Tokyo はアクセス拒否（Request Blocked）。ログインや制限回避は行っていません。",
+          "個別求人詳細に到達できず、検証済み候補は0件で、希望の2件に不足しています。",
+          "給与レンジ・固定残業代・勤務地・雇用形態・必須経験・掲載日は確認できていません。条件を満たす求人が存在しないという意味ではありません。"
+        ]
+      },
+      "review": {
+        "verdict": "取得不可",
+        "summary": "検索ページがRequest Blocked。個別求人0件。",
+        "note": "制限回避・ログイン・応募は行っていない。"
+      },
+      "evidence": []
+    },
+    {
+      "sourceId": "rakuten-beauty",
+      "family": "rakuten",
+      "label": "楽天ビューティ",
+      "query": "渋谷駅から徒歩5分以内で、髪質改善と韓国アイドル風ヘアに対応できる美容室を2件比較してください。渋谷区でも新宿駅や表参道駅の店を渋谷駅近として扱わないでください。アクセス・料金・口コミ数や評価を個別詳細で確認し、韓国風と特定アイドル風を区別してください。予約はしません。",
+      "seedUrl": "https://beauty.rakuten.co.jp/addr13113/",
+      "taskId": "9693321e-20bd-4e43-b7a7-09c6baf40985",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "startedAt": "2026-11-10T02:08:44.495Z",
+      "finishedAt": "2026-11-10T02:09:33.566Z",
+      "pages": [
+        {
+          "url": "https://beauty.rakuten.co.jp/addr13113/",
+          "title": "【渋谷区でオススメ】美容院・美容室30選 | 楽天ビューティ",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html; charset=UTF-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://beauty.rakuten.co.jp/addr13113/",
+            "service": "rakuten-beauty",
+            "title": "【渋谷区でオススメ】美容院・美容室30選 | 楽天ビューティ",
+            "capturedAt": "2026-11-10T02:08:55.264Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html; charset=UTF-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "568d2ed058e216d9870a6a78616aa68f26f8959e75d189ab1ddfe287c58ba20e",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://beauty.rakuten.co.jp/s4000052938/",
+          "title": "Dijon 髪質改善×ダブルカラー×縮毛矯正 渋谷 原宿 表参道【ディジョン】(ディジョン カミシツカイゼン ダブルカラー シュクモウキョウセイ シブヤ ハラジュク オモテサンドウ)の予約＆サロン情報 | 美容院・美容室を予約するなら楽天ビューティ",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html; charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://beauty.rakuten.co.jp/s4000052938/",
+            "service": "rakuten-beauty",
+            "entityId": "rakuten-beauty:s4000052938",
+            "title": "Dijon 髪質改善×ダブルカラー×縮毛矯正 渋谷 原宿 表参道【ディジョン】(ディジョン カミシツカイゼン ダブルカラー シュクモウキョウセイ シブヤ ハラジュク オモテサンドウ)の予約＆サロン情報 | 美容院・美容室を予約するなら楽天ビューティ",
+            "capturedAt": "2026-11-10T02:09:01.853Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html; charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": ",000～\n最寄り駅：\nJR各線 渋谷駅 徒歩5分 ファミリーマートのあるビルの右手階段が入り口です＊\n営業時間：\n営業"
+              },
+              {
+                "id": "price",
+                "quote": "：4.6\nカット単価：\n￥1,000～\n最寄り駅：\nJR各線 渋谷駅 徒歩5分 ファミリーマートのあるビル"
+              },
+              {
+                "id": "menu",
+                "quote": "は違う質感◆りんご幹細胞トリートメント考案サロン◆\nメンズ優先OFF\n口コミ投稿(24)\n4.5\n(24件)"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "74c8d7a34dc15f67959d599ed78e529330b6dd22fd48879ad7aee8ec448c4a37",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://beauty.rakuten.co.jp/s8000039947/",
+          "title": "Feria 渋谷 (filo by Feria 渋谷)(フェリア シブヤ)の予約＆サロン情報 | 美容院・美容室を予約するなら楽天ビューティ",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html; charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://beauty.rakuten.co.jp/s8000039947/",
+            "service": "rakuten-beauty",
+            "entityId": "rakuten-beauty:s8000039947",
+            "title": "Feria 渋谷 (filo by Feria 渋谷)(フェリア シブヤ)の予約＆サロン情報 | 美容院・美容室を予約するなら楽天ビューティ",
+            "capturedAt": "2026-11-10T02:09:02.868Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html; charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": ",500～\n最寄り駅：\nJR山手線・東急田園都市線・東急東横線・井の頭線 渋谷駅 徒歩2分\n営業時間：\n【平日】10：00～22：00／【土曜】9：00～21："
+              },
+              {
+                "id": "price",
+                "quote": "想の美髪へ☆メンズカット¥3500【渋谷】\nメンズ優先OFF\n口コミ投稿(76)\n4.3\n(76件)\n技"
+              },
+              {
+                "id": "menu",
+                "quote": "毛を理想の美髪へ☆メンズカット¥3500【渋谷】\nメンズ優先OFF\n口コミ投稿(76)\n4.3\n(7"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "b63f51b9263d8f243ed3aea092c7ef3cf0bcb197ccd5c7d30a99ecfb5cc66d5c",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 0,
+      "evidenceCount": 8,
+      "criteria": [
+        {
+          "id": "access",
+          "description": "渋谷駅から徒歩5分以内（他駅不可）",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "care",
+          "description": "髪質改善に対応",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "korean",
+          "description": "韓国アイドル風対応。一般的韓国風と特定アイドル風を区別",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "price",
+          "description": "個別詳細で料金確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "reviews",
+          "description": "個別詳細で口コミ数と評価確認",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "暫定第一候補はFeria渋谷。渋谷駅徒歩2分で韓国系スタイルと髪質改善を明示し、口コミ76件。Dijonは徒歩5分、初回カラー込み7,000円で価格重視向き。両店とも一般的韓国風は確認できたが、必須の韓国アイドル風、とくに特定アイドルの再現対応は未確認で、完全適合とは断定できない。",
+        "candidates": [
+          {
+            "name": "Dijon 渋谷",
+            "url": "https://beauty.rakuten.co.jp/s4000052938/",
+            "matches": [
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "JR渋谷駅徒歩5分。"
+              },
+              {
+                "criterionId": "care",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "髪質改善カラーあり。"
+              },
+              {
+                "criterionId": "korean",
+                "status": "unknown",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "韓国顔まわりレイヤーは確認。特定アイドル風の実績・対応は未確認。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "初回カット＋髪質改善カラー＋TR7,000円、ロング料無料。福裕登対象外。"
+              },
+              {
+                "criterionId": "reviews",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "評価4.5、24件。"
+              }
+            ],
+            "score": 78,
+            "eligible": false
+          },
+          {
+            "name": "Feria 渋谷",
+            "url": "https://beauty.rakuten.co.jp/s8000039947/",
+            "matches": [
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "渋谷駅徒歩2分。"
+              },
+              {
+                "criterionId": "care",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "サブリミック髪質改善TRあり。"
+              },
+              {
+                "criterionId": "korean",
+                "status": "unknown",
+                "evidenceIds": [
+                  "ev-8"
+                ],
+                "explanation": "暗髪透明感の韓国系スタイルに対応。特定アイドル風は未確認。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "新規限定カット＋サブリミックTR10,500円。"
+              },
+              {
+                "criterionId": "reviews",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "評価4.3、76件。"
+              }
+            ],
+            "score": 78,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "2026年11月10日の個別詳細の公開HTML掲載情報。動的空席や最終料金の確約ではない。予約・問い合わせは行っていない。",
+          "韓国風を特定アイドル風と同一視していない。希望アイドルの写真に沿った再現可否は未確認。",
+          "掲載徒歩分数で比較し、新宿駅・表参道駅の徒歩を渋谷駅近として採用していない。口コミ評価は人気順位や技術保証ではない。"
+        ]
+      },
+      "review": {
+        "verdict": "条件付き",
+        "summary": "Feria 渋谷：駅徒歩2分／Dijon 渋谷：徒歩5分。髪質改善・韓国風、料金・口コミを取得。",
+        "note": "特定アイドル風への対応は未確認。新宿や表参道の店を渋谷駅近として扱わず選定。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-2",
+          "url": "https://beauty.rakuten.co.jp/s4000052938/",
+          "quote": "JR各線 渋谷駅 徒歩5分",
+          "capturedAt": "2026-11-10T02:09:01.853Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://beauty.rakuten.co.jp/s4000052938/",
+          "quote": "4.5\n(24件)",
+          "capturedAt": "2026-11-10T02:09:01.853Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://beauty.rakuten.co.jp/s4000052938/",
+          "quote": "カット＋髪質改善カラー＋トリートメント ¥7,000【レイヤーカット、透明感】",
+          "capturedAt": "2026-11-10T02:09:01.853Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://beauty.rakuten.co.jp/s4000052938/",
+          "quote": "韓国顔まわりレイヤーカットグレージュオリーブベージュブラウン",
+          "capturedAt": "2026-11-10T02:09:01.853Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-3",
+          "url": "https://beauty.rakuten.co.jp/s8000039947/",
+          "quote": "渋谷駅 徒歩2分",
+          "capturedAt": "2026-11-10T02:09:02.868Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-3",
+          "url": "https://beauty.rakuten.co.jp/s8000039947/",
+          "quote": "4.3\n(76件)",
+          "capturedAt": "2026-11-10T02:09:02.868Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-3",
+          "url": "https://beauty.rakuten.co.jp/s8000039947/",
+          "quote": "【髪質改善】サブリミックTr付き♪カット¥15300→¥10500【渋谷】",
+          "capturedAt": "2026-11-10T02:09:02.868Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-3",
+          "url": "https://beauty.rakuten.co.jp/s8000039947/",
+          "quote": "暗髪透明感な韓国系スタイルや小顔レイヤーカットも得意♪",
+          "capturedAt": "2026-11-10T02:09:02.868Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-travel",
+      "family": "rakuten",
+      "label": "楽天トラベル",
+      "query": "2泊3日の箱根旅行を考えています。温泉と露天風呂を楽しめる宿を2件比較してください。所在地、駅からのアクセス、温泉、露天風呂を個別詳細で確認してください。部屋情報も詳細情報ページで確認してください。日付は未定なので空室や2泊の総額は未確認とし、予約はしません。",
+      "seedUrl": "https://travel.rakuten.co.jp/yado/kanagawa/hakone.html",
+      "taskId": "b35c367e-aff7-4eb2-96b9-45e5d28a4b14",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:08:51.196Z",
+      "finishedAt": "2026-11-10T02:09:39.142Z",
+      "pages": [
+        {
+          "url": "https://travel.rakuten.co.jp/yado/kanagawa/hakone.html",
+          "title": "箱根のホテル・旅館 宿泊予約 【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://travel.rakuten.co.jp/yado/kanagawa/hakone.html",
+            "service": "rakuten-travel",
+            "title": "箱根のホテル・旅館 宿泊予約 【楽天トラベル】",
+            "capturedAt": "2026-11-10T02:08:59.553Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "16889a5a930fc0a28b6913c827154271d46a0775c297629075a322f3d66429e9",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721.html",
+          "title": "箱根湯本温泉 天成園 宿泊予約【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "insufficient_detail",
+            "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721.html",
+            "service": "rakuten-travel",
+            "entityId": "rakuten-travel:84721",
+            "title": "箱根湯本温泉 天成園 宿泊予約【楽天トラベル】",
+            "capturedAt": "2026-11-10T02:09:02.919Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "件)\n〒250-0311神奈川県足柄下郡箱根町湯本682\nサステナブルな取り組み\nメルマガ登録\nお気に入り追加\n施設紹介\nプラ"
+              },
+              {
+                "id": "facilities",
+                "quote": "神奈川県\n箱根\n箱根湯本温泉\n箱根湯本温泉 天成園 宿泊予約\nこちらの宿泊施設は楽天トラベルボーナ"
+              }
+            ],
+            "missingFields": [
+              "rooms"
+            ],
+            "bodySha256": "1bde1e1b217eb920ab0ab25a4d55e00e2fb07bad1d41dd9bc03346e1b76df385",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102.html",
+          "title": "季の湯 雪月花（共立リゾート） 宿泊予約【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "insufficient_detail",
+            "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102.html",
+            "service": "rakuten-travel",
+            "entityId": "rakuten-travel:54102",
+            "title": "季の湯 雪月花（共立リゾート） 宿泊予約【楽天トラベル】",
+            "capturedAt": "2026-11-10T02:09:03.070Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "件)\n〒250-0408神奈川県足柄下郡箱根町強羅1300-34\nメルマガ登録\nお気に入り追加\n施設紹介\n宿ニュース\nプラン一覧\n宿泊"
+              },
+              {
+                "id": "facilities",
+                "quote": "国\n神奈川県\n箱根\n強羅温泉\n季の湯 雪月花（共立リゾート） 宿泊予約\nこちらの宿泊施設は楽天トラ"
+              }
+            ],
+            "missingFields": [
+              "rooms"
+            ],
+            "bodySha256": "dead0430c4499d0fd3a79856cb0a0413e10b257d3bde15768cfa14258a94ae82",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+          "title": "箱根湯本温泉 天成園 設備・アメニティ・基本情報【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+            "service": "rakuten-travel",
+            "entityId": "rakuten-travel:84721",
+            "title": "箱根湯本温泉 天成園 設備・アメニティ・基本情報【楽天トラベル】",
+            "capturedAt": "2026-11-10T02:09:05.805Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "件)\n〒250-0311神奈川県足柄下郡箱根町湯本682\nサステナブルな取り組み\nメルマガ登録\nお気に入り追加\n施設紹介\nプラ"
+              },
+              {
+                "id": "facilities",
+                "quote": "神奈川県\n箱根\n箱根湯本温泉\n箱根湯本温泉 天成園 設備・アメニティ・基本情報\nこちらの宿泊施設は"
+              },
+              {
+                "id": "rooms",
+                "quote": "泉情報を見る\n基本情報\n総部屋数\n198室\n館内設備\nティーラウンジ\nバーラウンジ\n夜食コーナー\n宴会場\n会議"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "eb1e3537ea1eab9568900c85f329fd8452e9ff5d58293a1288027b43f6cf1aa7",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+          "title": "季の湯 雪月花（共立リゾート） 設備・アメニティ・基本情報【楽天トラベル】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+            "service": "rakuten-travel",
+            "entityId": "rakuten-travel:54102",
+            "title": "季の湯 雪月花（共立リゾート） 設備・アメニティ・基本情報【楽天トラベル】",
+            "capturedAt": "2026-11-10T02:09:06.118Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "件)\n〒250-0408神奈川県足柄下郡箱根町強羅1300-34\nメルマガ登録\nお気に入り追加\n施設紹介\n宿ニュース\nプラン一覧\n宿泊"
+              },
+              {
+                "id": "facilities",
+                "quote": "国\n神奈川県\n箱根\n強羅温泉\n季の湯 雪月花（共立リゾート） 設備・アメニティ・基本情報\nこちらの"
+              },
+              {
+                "id": "rooms",
+                "quote": "強羅駅前に位置し、全客室１５８室に露天風呂をご用意、温泉は源泉かけ流しをお愉しめる宿。\n宿の注目ポイン"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "05a8b4ea6fcad71d846c51e8659b3a7cce87b67ca60f00bfc20e8f66cef202c7",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 11,
+      "criteria": [
+        {
+          "id": "location",
+          "description": "箱根の所在地を確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "access",
+          "description": "駅からのアクセスを確認（近さの指定なし）",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "onsen",
+          "description": "温泉あり",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "roten",
+          "description": "露天風呂あり",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "room",
+          "description": "詳細情報ページで部屋情報を確認",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "駅からの移動のしやすさを重視するなら強羅駅徒歩1分の雪月花が最適候補。全室露天風呂付きですが客室のお湯は温泉ではありません。屋上の開放的な温泉露天風呂を重視するなら天成園が候補です。2件とも所在地・駅アクセス・温泉・露天風呂・部屋情報を詳細情報ページで確認しました。",
+        "candidates": [
+          {
+            "name": "箱根湯本温泉 天成園",
+            "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "箱根町湯本682。"
+              },
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "箱根湯本駅徒歩15分、または有料200円の共同送迎バスAコースで5分。"
+              },
+              {
+                "criterionId": "onsen",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "自家湧出の天然温泉。"
+              },
+              {
+                "criterionId": "roten",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "屋上天空大露天風呂あり。"
+              },
+              {
+                "criterionId": "room",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "詳細情報で総部屋数198室を確認。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "季の湯 雪月花（共立リゾート）",
+            "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "箱根町強羅1300-34。"
+              },
+              {
+                "criterionId": "access",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "強羅駅徒歩1分。"
+              },
+              {
+                "criterionId": "onsen",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8"
+                ],
+                "explanation": "2か所の源泉からかけ流しの天然温泉。内湯は一部加水・加温。"
+              },
+              {
+                "criterionId": "roten",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-9"
+                ],
+                "explanation": "大露天風呂「篝火」あり。"
+              },
+              {
+                "criterionId": "room",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-10",
+                  "ev-11"
+                ],
+                "explanation": "全158室に露天風呂付き。ただし客室露天風呂は温泉ではない。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "日程未定のため空室、連泊可否、2泊の総額は未確認。予約はしていません。",
+          "2026年11月10日取得の公開HTMLに基づき、動的な空室や料金は確認していません。",
+          "部屋情報は詳細情報ページの室数・客室設備の範囲で確認し、個別の部屋タイプや広さは未確認。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可",
+        "summary": "天成園／雪月花。所在地、駅アクセス、温泉、露天風呂、詳細情報ページの部屋情報を取得。",
+        "note": "じゃらんと同じ2宿を選定。雪月花の客室のお湯と温泉施設を区別。部屋タイプ・広さ・2泊総額・空室は未確認。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-4",
+          "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+          "quote": "神奈川県足柄下郡箱根町湯本682",
+          "capturedAt": "2026-11-10T02:09:05.805Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-4",
+          "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+          "quote": "箱根湯本駅から徒歩で15分。または旅館協同組合の送迎バス（有料200円）Aコース『滝通り行き』にて5分。",
+          "capturedAt": "2026-11-10T02:09:05.805Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-4",
+          "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+          "quote": "自家湧出の天然温泉",
+          "capturedAt": "2026-11-10T02:09:05.805Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-4",
+          "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+          "quote": "屋上天空大露天風呂",
+          "capturedAt": "2026-11-10T02:09:05.805Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-4",
+          "url": "https://travel.rakuten.co.jp/HOTEL/84721/84721_std.html",
+          "quote": "総部屋数\n198室",
+          "capturedAt": "2026-11-10T02:09:05.805Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-5",
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+          "quote": "神奈川県足柄下郡箱根町強羅1300-34",
+          "capturedAt": "2026-11-10T02:09:06.118Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-5",
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+          "quote": "箱根登山鉄道 強羅駅より徒歩1分",
+          "capturedAt": "2026-11-10T02:09:06.118Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-5",
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+          "quote": "湯量豊富な二ヶ所の源泉から、かけ流しの天然温泉。",
+          "capturedAt": "2026-11-10T02:09:06.118Z"
+        },
+        {
+          "id": "ev-9",
+          "pageId": "page-5",
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+          "quote": "大露天風呂「篝火」",
+          "capturedAt": "2026-11-10T02:09:06.118Z"
+        },
+        {
+          "id": "ev-10",
+          "pageId": "page-5",
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+          "quote": "全客室１５８室に露天風呂をご用意",
+          "capturedAt": "2026-11-10T02:09:06.118Z"
+        },
+        {
+          "id": "ev-11",
+          "pageId": "page-5",
+          "url": "https://travel.rakuten.co.jp/HOTEL/54102/54102_std.html",
+          "quote": "客室露天風呂は温泉ではありません。",
+          "capturedAt": "2026-11-10T02:09:06.118Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-gourmet",
+      "family": "rakuten-associated",
+      "label": "楽天ぐるなび（提携サービス）",
+      "query": "渋谷駅から徒歩5分以内で、夕食を楽しめる和食・居酒屋を2件比較してください。1人5000円以内を希望します。住所、駅徒歩、夜のメニューと料金、営業時間を個別詳細で確認してください。平均予算とコース総額を区別し、飲み放題込みか不明なら未確認としてください。予約はしません。",
+      "seedUrl": "https://r.gnavi.co.jp/area/aream2126/japanese/rs/",
+      "taskId": "3b930a36-0635-444f-87d5-5e98b9216746",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:09:33.571Z",
+      "finishedAt": "2026-11-10T02:10:28.584Z",
+      "pages": [
+        {
+          "url": "https://r.gnavi.co.jp/area/aream2126/japanese/rs/",
+          "title": "渋谷で和食 見つかる！ネット予約で楽天ポイント貯まる！-楽天ぐるなび",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html; charset=utf-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://r.gnavi.co.jp/area/aream2126/japanese/rs/",
+            "service": "rakuten-gourmet",
+            "title": "渋谷で和食 見つかる！ネット予約で楽天ポイント貯まる！-楽天ぐるなび",
+            "capturedAt": "2026-11-10T02:09:45.332Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html; charset=utf-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "2787d5aa705776e712491b187a564dbaa7065f40c4bab543561e95d2de6ab520",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://r.gnavi.co.jp/a40x11bk0000/",
+          "title": "寿司と天ぷらと焼鳥 海王 渋谷店（渋谷/居酒屋） - 楽天ぐるなび",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://r.gnavi.co.jp/a40x11bk0000/",
+            "service": "rakuten-gourmet",
+            "entityId": "rakuten-gourmet:a40x11bk0000",
+            "title": "寿司と天ぷらと焼鳥 海王 渋谷店（渋谷/居酒屋） - 楽天ぐるなび",
+            "capturedAt": "2026-11-10T02:09:51.990Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "しめます。\n詳しく見る\n【渋谷駅徒歩2分】当日予約可能◎寿司と天ぷらを気軽に堪能できる海王寿司酒場\nお仕事帰り"
+              },
+              {
+                "id": "price",
+                "quote": "焼酎をご堪能◎飲み放題は1800円で気軽に楽しめます。\n詳しく見る\n【渋谷駅徒歩2分】当日予約可能◎寿司"
+              },
+              {
+                "id": "hours",
+                "quote": "エリアをご利用下さい）\n営業時間\n月～金・祝前日\n居酒屋タイム 15:00～24:00\n（L.O.23"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "7dc201ebe42669028177ee58ab672aba94439228198b4f3fcbd749766ba6099c",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://r.gnavi.co.jp/5vuwaafv0000/",
+          "title": "個室居酒屋 小江戸鳥や 渋谷店（渋谷/居酒屋） - 楽天ぐるなび",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://r.gnavi.co.jp/5vuwaafv0000/",
+            "service": "rakuten-gourmet",
+            "entityId": "rakuten-gourmet:5vuwaafv0000",
+            "title": "個室居酒屋 小江戸鳥や 渋谷店（渋谷/居酒屋） - 楽天ぐるなび",
+            "capturedAt": "2026-11-10T02:09:52.496Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "ください。\n詳しく見る\n【渋谷駅徒歩1分×扉付き完全個室】\n大山どりの焼き鳥や創作串焼き×直送海鮮×和牛に舌鼓"
+              },
+              {
+                "id": "price",
+                "quote": "◆全8種のご宴会コース（3500円～8000円）\n曜日限定のお手軽6品～特別な日の贅沢11品までご用意。"
+              },
+              {
+                "id": "hours",
+                "quote": "徒歩1分\n駐車場\n無\n営業時間\n月～木・日\n11:00～翌6:00\n（L.O.5:00、ドリンクL."
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "c465efe4837f7b082fc1fb9382eb723d6fd3e2232c6b2faefaf84974884ca751",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 6,
+      "criteria": [
+        {
+          "id": "area",
+          "description": "渋谷駅徒歩5分以内、住所を詳細で確認",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "food",
+          "description": "夕食向け和食・居酒屋で夜メニュー確認",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "price",
+          "description": "1人5000円以内。平均予算とコース総額、飲み放題を区別",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "hours",
+          "description": "営業時間を詳細で確認",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "価格重視なら海王（飲み放題付き3500円）、駅近重視なら小江戸鳥や（同4000円）。両店の通常平均予算は3500円、宴会平均4000円で、コース総額とは別の目安です。住所・徒歩・夜メニュー・営業時間を店舗詳細で確認しました。",
+        "candidates": [
+          {
+            "name": "寿司と天ぷらと焼鳥 海王 渋谷店",
+            "url": "https://r.gnavi.co.jp/a40x11bk0000/",
+            "matches": [
+              {
+                "criterionId": "area",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "宇田川町31-9 ハナテイビル6F。店舗情報のJR渋谷駅徒歩4分を採用。"
+              },
+              {
+                "criterionId": "food",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "握り寿司・天ぷら4種・鶏焼など8品。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "お手頃コース表示3500円、2時間飲み放題込み。5000円以内。"
+              },
+              {
+                "criterionId": "hours",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "平日・祝前15～24時、土日祝12～24時。料理LO23時、飲料23時半。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "個室居酒屋 小江戸鳥や 渋谷店",
+            "url": "https://r.gnavi.co.jp/5vuwaafv0000/",
+            "matches": [
+              {
+                "criterionId": "area",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "道玄坂2-7-4 CENT渋谷ビル。JR渋谷駅徒歩1分。"
+              },
+              {
+                "criterionId": "food",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "梅コースは串焼き・大山どり・鮮魚造り・あて巻きなど8品。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "梅コース表示4000円、2時間飲み放題込み。5000円以内。"
+              },
+              {
+                "criterionId": "hours",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "月～木・日11時～翌6時（LO5時）、金土祝前11時～翌8時（LO7時）。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "2026年11月10日の公開HTML情報。動的空席は未確認。予約はしていません。",
+          "表示割引コースの適用条件・利用人数・追加注文やお通し等を含む最終支払額は未確認で、5000円以内を確約しません。",
+          "海王は紹介文に徒歩2分・3分も混在するため店舗情報欄の4分を採用。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可（掲載情報）",
+        "summary": "海王 渋谷店：飲み放題付き掲載コース3,500円／小江戸鳥や 渋谷店：同4,000円。住所、駅徒歩、営業時間も取得。",
+        "note": "通常・宴会平均予算とコース額を区別。割引の適用条件、人数、お通しや追加料金を含む最終額は未確認。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-2",
+          "url": "https://r.gnavi.co.jp/a40x11bk0000/",
+          "quote": "東京都渋谷区宇田川町31-9 ハナテイビル6F\n大きな地図で見る\n地図印刷\nアクセス\nＪＲ 渋谷駅 徒歩4分",
+          "capturedAt": "2026-11-10T02:09:51.990Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://r.gnavi.co.jp/a40x11bk0000/",
+          "quote": "『海王のお手頃コース』握り寿司・天ぷら4種・鶏焼含8品 2時間飲み放題付 4500円⇒3500円",
+          "capturedAt": "2026-11-10T02:09:51.990Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://r.gnavi.co.jp/a40x11bk0000/",
+          "quote": "月～金・祝前日\n居酒屋タイム 15:00～24:00\n（L.O.23:00、ドリンクL.O.23:30）\n土・日・祝日\n12:00～24:00",
+          "capturedAt": "2026-11-10T02:09:51.990Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-3",
+          "url": "https://r.gnavi.co.jp/5vuwaafv0000/",
+          "quote": "東京都渋谷区道玄坂2-7-4 CENT渋谷ビル\n大きな地図で見る\n地図印刷\nアクセス\nＪＲ 渋谷駅 徒歩1分",
+          "capturedAt": "2026-11-10T02:09:52.496Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-3",
+          "url": "https://r.gnavi.co.jp/5vuwaafv0000/",
+          "quote": "【2時間飲み放題付】串焼食べ比べや大山どりの逸品×鮮魚造りや特製あて巻きなど全8品『梅』4890円⇒4000円",
+          "capturedAt": "2026-11-10T02:09:52.496Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-3",
+          "url": "https://r.gnavi.co.jp/5vuwaafv0000/",
+          "quote": "月～木・日\n11:00～翌6:00\n（L.O.5:00、ドリンクL.O.5:00）\n金・土・祝前日\n11:00～翌8:00",
+          "capturedAt": "2026-11-10T02:09:52.496Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-realestate",
+      "family": "rakuten",
+      "label": "楽天不動産",
+      "query": "武蔵小杉駅から徒歩10分以内で、1LDK、家賃と管理費の合計が月15万円以下の賃貸を2件比較してください。個別物件の家賃・管理費・間取り・駅徒歩が取得できたときだけ候補にしてください。ログインや人間確認を回避せず、取得できなければ理由を報告してください。問い合わせや申込みはしません。",
+      "seedUrl": "https://realestate.rakuten.co.jp/rent/",
+      "taskId": "3dd64c2a-15e6-4af6-8f76-9baee352c3ea",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "blocked",
+      "startedAt": "2026-11-10T02:09:39.144Z",
+      "finishedAt": "2026-11-10T02:10:02.030Z",
+      "pages": [
+        {
+          "url": "https://realestate.rakuten.co.jp/rent/",
+          "title": "賃貸物件（賃貸マンション・アパート・一戸建て）情報でお部屋探し｜楽天不動産",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://realestate.rakuten.co.jp/rent/",
+            "service": "rakuten-realestate",
+            "title": "賃貸物件（賃貸マンション・アパート・一戸建て）情報でお部屋探し｜楽天不動産",
+            "capturedAt": "2026-11-10T02:09:47.286Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "2afe71b92420e1255f38d97e598829843d122334311bcff555def26999542b22",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://realestate.rakuten.co.jp/rent/item/",
+          "title": "ログイン・認証先への転送",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 302
+          },
+          "detail": {
+            "status": "blocked",
+            "url": "https://realestate.rakuten.co.jp/rent/item/",
+            "service": "rakuten-realestate",
+            "title": "ログイン・認証先への転送",
+            "capturedAt": "2026-11-10T02:09:49.679Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 302
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "d90ff2cabf0bbefc04508902d671d9a2a2a509f6c79fcd04254b7f7888121448",
+            "reason": "ログインが必要なページです。公開詳細として登録しません。",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 0,
+      "candidates": 0,
+      "eligible": 0,
+      "evidenceCount": 0,
+      "criteria": [
+        {
+          "id": "station",
+          "description": "武蔵小杉駅から徒歩10分以内",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "layout",
+          "description": "間取り1LDK",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "budget",
+          "description": "個別物件の家賃と管理費を取得し合計月150000円以下",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "条件を満たす個別物件を確認できなかったため、2件の比較はできませんでした。楽天不動産の賃貸トップは取得できましたが、掲載リンク「賃貸」の遷移先はログイン認証へ転送されました。認証は回避していません。",
+        "candidates": [],
+        "limitations": [
+          "取得した賃貸トップの公開HTMLには地域・駅検索の実在リンクや個別物件リンクが含まれていませんでした。",
+          "掲載リンク https://realestate.rakuten.co.jp/rent/item/ は認証用URLへ転送され、ツールがログイン必須と判定したため取得を停止しました。",
+          "家賃・管理費・間取り・武蔵小杉駅徒歩を個別詳細で取得できた物件は0件で、希望の2件に未達です。条件に合う物件が存在しないという意味ではありません。",
+          "公開HTMLのみ取得し、動的な空室情報は確認していません。問い合わせ・申込み・ログインは行っていません。"
+        ]
+      },
+      "review": {
+        "verdict": "取得不可",
+        "summary": "賃貸トップは取得。今回の/rent/item/への導線は認証用URLへ転送され、個別物件0件。",
+        "note": "楽天不動産全体に公開物件が存在しないという意味ではない。今回確認した導線での制約。"
+      },
+      "evidence": []
+    },
+    {
+      "sourceId": "rakuten-car-shaken",
+      "family": "rakuten",
+      "label": "楽天Car車検（中古車購入とは別）",
+      "query": "東京都内で家族用の普通乗用車の車検を受けられる店舗を2件比較してください。所在地、車検料金、法定費用を含むか、営業時間や受付時間を個別詳細で確認してください。車重や車種が未指定なので最安料金を自分の車の確定見積りとして扱わないでください。予約はしません。",
+      "seedUrl": "https://car.rakuten.co.jp/shaken/area/tokyo/",
+      "taskId": "780b45d6-3928-41a8-a04d-5008f4ce91cc",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "startedAt": "2026-11-10T02:10:02.034Z",
+      "finishedAt": "2026-11-10T02:10:52.750Z",
+      "pages": [
+        {
+          "url": "https://car.rakuten.co.jp/shaken/area/tokyo/",
+          "title": "東京都の車検予約・費用比較・店舗一覧｜楽天Car車検",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://car.rakuten.co.jp/shaken/area/tokyo/",
+            "service": "rakuten-car",
+            "title": "東京都の車検予約・費用比較・店舗一覧｜楽天Car車検",
+            "capturedAt": "2026-11-10T02:10:11.705Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "83703649b0f8ed996630b3d8c078ade833a24901be9011f0354bfa1eb0383d4f",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://car.rakuten.co.jp/shaken/shop/12061/",
+          "title": "車検の速太郎 三鷹店の車検予約・費用・口コミ｜楽天Car車検",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://car.rakuten.co.jp/shaken/shop/12061/",
+            "service": "rakuten-car",
+            "entityId": "rakuten-car:12061",
+            "title": "車検の速太郎 三鷹店の車検予約・費用・口コミ｜楽天Car車検",
+            "capturedAt": "2026-11-10T02:10:14.818Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "車検の速太郎 三鷹店\n東京都三鷹市牟礼6-24-17\n地図確認\nカード払いOK\n店舗トップ\nコース・費用\n割引・特典\n評判"
+              },
+              {
+                "id": "price",
+                "quote": "価格\n（法定費用含む）\n42,760\n円\nネット特典\n①ガソリン5/L円引きクーポン②エンジンオイル交換特別価"
+              },
+              {
+                "id": "service",
+                "quote": "2件）\n参考車検価格\n（法定費用含む）\n42,760\n円\nネット特典\n①ガソリン5/L円引きクーポン②"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "c54f7b3b6da43045a24121fa7425dc6b94f0d399a86e1757bebab7fc8316f16d",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://car.rakuten.co.jp/shaken/shop/10616/",
+          "title": "車検館 堀之内店の車検予約・費用・口コミ｜楽天Car車検",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://car.rakuten.co.jp/shaken/shop/10616/",
+            "service": "rakuten-car",
+            "entityId": "rakuten-car:10616",
+            "title": "車検館 堀之内店の車検予約・費用・口コミ｜楽天Car車検",
+            "capturedAt": "2026-11-10T02:10:15.063Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "村市\n車検館 堀之内店\n東京都八王子市堀之内 3-27\n地図確認\nカード払いOK\n店舗トップ\nコース・費用\n割引・特典\n評判"
+              },
+              {
+                "id": "price",
+                "quote": "価格\n（法定費用含む）\n47,160\n円\nネット特典\n洗車＆室内清掃無料！平日に車検を実施いただいたお客様には"
+              },
+              {
+                "id": "service",
+                "quote": "8件）\n参考車検価格\n（法定費用含む）\n47,160\n円\nネット特典\n洗車＆室内清掃無料！平日に車検を"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "ece9c53b9f83ba9c05f410752cb534eacd53f4fa20ad6a43897a41b90d948ec1",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://car.rakuten.co.jp/shaken/shop/12061/price/",
+          "title": "車検の速太郎 三鷹店の車検料金・費用一覧｜楽天Car車検",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://car.rakuten.co.jp/shaken/shop/12061/price/",
+            "service": "rakuten-car",
+            "entityId": "rakuten-car:12061",
+            "title": "車検の速太郎 三鷹店の車検料金・費用一覧｜楽天Car車検",
+            "capturedAt": "2026-11-10T02:10:17.673Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "鷹店\n（コース・費用）\n東京都三鷹市牟礼6-24-17\nカード払いOK\n店舗トップ\nコース・費用\n割引・特典\n評判・口コミ"
+              },
+              {
+                "id": "price",
+                "quote": "★指定日割引★\nネット割42,760円\n47,160円\n★基本コース★\nネット割46,060円\n47,160"
+              },
+              {
+                "id": "service",
+                "quote": "らでも受付可能です。（⭐法定費用もクレジット払い可能です⭐）\n※自賠責保険の更新は、車検時に当店にて承"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "2160c20541e5a0d1545928635c28a8794edc07d5e109e659b8dbf75207ed3c50",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://car.rakuten.co.jp/shaken/shop/10616/price/",
+          "title": "車検館 堀之内店の車検料金・費用一覧｜楽天Car車検",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "insufficient_detail",
+            "url": "https://car.rakuten.co.jp/shaken/shop/10616/price/",
+            "service": "rakuten-car",
+            "entityId": "rakuten-car:10616",
+            "title": "車検館 堀之内店の車検料金・費用一覧｜楽天Car車検",
+            "capturedAt": "2026-11-10T02:10:17.816Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "内店\n（コース・費用）\n東京都八王子市堀之内 3-27\nカード払いOK\n店舗トップ\nコース・費用\n割引・特典\n評判・口コミ"
+              },
+              {
+                "id": "price",
+                "quote": "PIT45SHAKEN\n47,160円\n内訳\n基本 料金\n19,800円\n法定 費用 合計\n27,360円"
+              }
+            ],
+            "missingFields": [
+              "service"
+            ],
+            "bodySha256": "95304cc0ea65c7bcca71dd1849e0f4d2864214de877bccfafbab728db1703c8c",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 0,
+      "evidenceCount": 8,
+      "criteria": [
+        {
+          "id": "location",
+          "description": "東京都内の店舗所在地",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "car",
+          "description": "普通乗用車の車検対応と車重別料金。最安値は確定見積りとしない",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "fees",
+          "description": "車検料金に法定費用を含むか",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "hours",
+          "description": "営業時間または車検受付時間",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "表示参考額と受付開始の早さを重視するなら三鷹店が暫定候補。ただし普通乗用車の車重別金額という必須条件が未確認のため、実際の総額で優劣は断定できません。2店の個別詳細と料金子ページを確認し、予約はしていません。",
+        "candidates": [
+          {
+            "name": "車検の速太郎 三鷹店",
+            "url": "https://car.rakuten.co.jp/shaken/shop/12061/",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "東京都三鷹市牟礼6-24-17。"
+              },
+              {
+                "criterionId": "car",
+                "status": "unknown",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "表示料金は指定日ネット割42,760円、基本コースのネット割46,060円。普通乗用車の車重別料金は取得本文で確認できず、本人の車への適用額は未確認。"
+              },
+              {
+                "criterionId": "fees",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "表示料金は法定費用27,360円（自賠責18,660円、重量税6,600円、印紙2,100円）を含む。"
+              },
+              {
+                "criterionId": "hours",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "受付9:00～18:00。"
+              }
+            ],
+            "score": 71,
+            "eligible": false
+          },
+          {
+            "name": "車検館 堀之内店",
+            "url": "https://car.rakuten.co.jp/shaken/shop/10616/",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "東京都八王子市堀之内3-27。"
+              },
+              {
+                "criterionId": "car",
+                "status": "unknown",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "PIT45SHAKEN表示47,160円。普通乗用車の車重別料金は取得本文で確認できず、本人の車への適用額は未確認。"
+              },
+              {
+                "criterionId": "fees",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8"
+                ],
+                "explanation": "表示料金は法定費用27,360円（自賠責18,660円、重量税6,600円、印紙2,100円）を含む。"
+              },
+              {
+                "criterionId": "hours",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "受付10:00～18:00。"
+              }
+            ],
+            "score": 71,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "2026年11月10日閲覧の公開HTML情報。動的な車種・車重選択後の料金や予約枠は未確認。表示最安料金を利用者の普通乗用車の確定見積りとして扱っていません。",
+          "車種、重量、年式、追加整備等により総額は変動。三鷹店はOBD検査3,300円、堀之内店はミニバン等3,300円、OBD検査1,980円の別途加算記載あり。",
+          "堀之内店の料金子ページはservice項目不足判定ですが、店舗本体詳細はverified。料金子ページから車重別料金は取得できていません。"
+        ]
+      },
+      "review": {
+        "verdict": "条件付き",
+        "summary": "車検の速太郎 三鷹店／車検館 堀之内店。所在地、表示料金、法定費用、受付時間を取得。",
+        "note": "普通乗用車の車重別金額は取得できず、表示最安料金を本人の車の確定見積りにはしない。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-2",
+          "url": "https://car.rakuten.co.jp/shaken/shop/12061/",
+          "quote": "東京都三鷹市牟礼6-24-17",
+          "capturedAt": "2026-11-10T02:10:14.818Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://car.rakuten.co.jp/shaken/shop/12061/",
+          "quote": "受付時間\n9:00～18:00",
+          "capturedAt": "2026-11-10T02:10:14.818Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-3",
+          "url": "https://car.rakuten.co.jp/shaken/shop/10616/",
+          "quote": "東京都八王子市堀之内 3-27",
+          "capturedAt": "2026-11-10T02:10:15.063Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-3",
+          "url": "https://car.rakuten.co.jp/shaken/shop/10616/",
+          "quote": "受付時間\n10:00～18:00",
+          "capturedAt": "2026-11-10T02:10:15.063Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-4",
+          "url": "https://car.rakuten.co.jp/shaken/shop/12061/price/",
+          "quote": "★指定日割引★\nネット割42,760円\n47,160円\n★基本コース★\nネット割46,060円\n47,160円",
+          "capturedAt": "2026-11-10T02:10:17.673Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-5",
+          "url": "https://car.rakuten.co.jp/shaken/shop/10616/price/",
+          "quote": "PIT45SHAKEN\n47,160円",
+          "capturedAt": "2026-11-10T02:10:17.816Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-4",
+          "url": "https://car.rakuten.co.jp/shaken/shop/12061/price/",
+          "quote": "法定 費用 合計\n27,360円\n（自賠責保険料18,660円＋重量税6,600円＋印紙代2,100円）",
+          "capturedAt": "2026-11-10T02:10:17.673Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-5",
+          "url": "https://car.rakuten.co.jp/shaken/shop/10616/price/",
+          "quote": "法定 費用 合計\n27,360円\n（自賠責保険料18,660円＋重量税6,600円＋印紙代2,100円）",
+          "capturedAt": "2026-11-10T02:10:17.816Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-car-used",
+      "family": "rakuten",
+      "label": "楽天Car中古車",
+      "query": "家族の週末旅行に使うトヨタ・シエンタの中古車を2台比較してください。支払総額150万円以下、走行距離8万km以下、修復歴なしを希望します。個別車両の情報が取得できた場合だけ候補にしてください。サービス終了やアクセス制限であればその事実を報告し、車検店舗を中古車として代用しないでください。購入や問い合わせはしません。",
+      "seedUrl": "https://car.rakuten.co.jp/sales/usedcar/search",
+      "taskId": "2630b9f1-c6d6-4d0c-acf8-3f4eea37510d",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "blocked",
+      "startedAt": "2026-11-10T02:10:28.588Z",
+      "finishedAt": "2026-11-10T02:10:49.883Z",
+      "pages": [
+        {
+          "url": "https://car.rakuten.co.jp/campaign/announce/usedcar/service_close/",
+          "title": "【重要】楽天Car 中古車サービス 終了のお知らせ",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "blocked",
+            "url": "https://car.rakuten.co.jp/campaign/announce/usedcar/service_close/",
+            "service": "rakuten-car",
+            "title": "【重要】楽天Car 中古車サービス 終了のお知らせ",
+            "capturedAt": "2026-11-10T02:10:37.893Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "e5cf2bb231f549f9e2347eba06794ce5edd7229f51899dd0baa4d991e8aa6ed2",
+            "reason": "サービス終了の告知です。現行の詳細情報源として登録しません。",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 0,
+      "candidates": 0,
+      "eligible": 0,
+      "evidenceCount": 1,
+      "criteria": [
+        {
+          "id": "model",
+          "description": "トヨタ・シエンタの個別中古車両である",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "price",
+          "description": "支払総額150万円以下",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "mileage",
+          "description": "走行距離8万km以下",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "repair",
+          "description": "修復歴なし",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "指定ソースはサービス終了のため、条件を検証できる個別中古車候補はありません。最適候補の選定と2台比較はできません。終了告知に2026年01月07日(水)08:59でサービス終了と明記されています。",
+        "candidates": [],
+        "limitations": [
+          "指定の検索URLはサービス終了告知へ転送されました。楽天Car中古車は2026年1月7日08:59に終了しており、個別車両情報を取得できませんでした。",
+          "候補は0台で、希望の2台比較はできません。支払総額150万円以下・走行距離8万km以下・修復歴なしはすべて未確認です。",
+          "車検店舗や自動車カタログを中古車在庫として代用していません。購入・問い合わせは行っていません。"
+        ]
+      },
+      "review": {
+        "verdict": "サービス終了",
+        "summary": "中古車検索が2026年1月7日08:59の終了告知へ転送。車両0件。",
+        "note": "車検店舗や自動車カタログを中古車在庫の代わりにはしていない。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://car.rakuten.co.jp/campaign/announce/usedcar/service_close/",
+          "quote": "【重要】楽天Car中古車は2026年01月07日(水) 08:59をもってサービス終了致します。",
+          "capturedAt": "2026-11-10T02:10:37.893Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-careers",
+      "family": "rakuten",
+      "label": "楽天Careers（楽天自社求人。一般求人とは別）",
+      "query": "東京でカスタマーサクセスに近い職種への転職を考えています。年収500万円以上、正社員を希望します。楽天の自社採用サイトとして扱い、一般求人検索と混同せず、個別求人2件の勤務地・給与・雇用形態・仕事内容を確認して比較してください。詳細取得の仕組みが未対応、または条件が未確認ならその旨を明示してください。応募やログインはしません。",
+      "seedUrl": "https://corp.rakuten.co.jp/careers/",
+      "taskId": "978bab48-699b-4254-b516-029adc4570a8",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "blocked",
+      "startedAt": "2026-11-10T02:10:49.884Z",
+      "finishedAt": "2026-11-10T02:12:11.827Z",
+      "pages": [
+        {
+          "url": "https://corp.rakuten.co.jp/careers/",
+          "title": "採用情報 | 楽天グループ株式会社",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "unsupported",
+            "url": "https://corp.rakuten.co.jp/careers/",
+            "service": "generic",
+            "entityId": "generic:https://corp.rakuten.co.jp/careers/",
+            "title": "採用情報 | 楽天グループ株式会社",
+            "capturedAt": "2026-11-10T02:11:23.908Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "e0dc5639459232b398a614ad9e99867d11bf934bdfb22b353035de81216735d2",
+            "reason": "詳細取得の検証契約がありません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://corp.rakuten.co.jp/careers/midcareer/",
+          "title": "中途採用 | 楽天グループ株式会社",
+          "acquisition": {
+            "kind": "browser-dom"
+          },
+          "detail": {
+            "status": "unsupported",
+            "url": "https://corp.rakuten.co.jp/careers/midcareer/",
+            "service": "generic",
+            "entityId": "generic:https://corp.rakuten.co.jp/careers/midcareer/",
+            "title": "中途採用 | 楽天グループ株式会社",
+            "capturedAt": "2026-11-10T02:11:45.557Z",
+            "acquisition": {
+              "kind": "browser-dom"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "f3ccd87a4d6ce30ddaec984830c98d1e8489fe05ffb6978c38fdabd88b0f92a5",
+            "reason": "詳細取得の検証契約がありません",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 0,
+      "candidates": 0,
+      "eligible": 0,
+      "evidenceCount": 0,
+      "criteria": [
+        {
+          "id": "location",
+          "description": "勤務地が東京",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "salary",
+          "description": "年収下限500万円以上",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "employment",
+          "description": "正社員",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "duties",
+          "description": "カスタマーサクセスに近い顧客支援・活用促進等の仕事内容",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "楽天の自社採用サイトとして公式採用トップと中途採用ページを確認しました。一般求人検索としては扱っていません。詳細取得の検証契約が未対応（detailVerification.status=unsupported）のため、検証済みの個別求人2件を提示・比較できず、最適候補は選定できません。東京勤務・年収下限500万円以上・正社員・カスタマーサクセスに近い仕事内容は、いずれも個別求人では未確認です。",
+        "candidates": [],
+        "limitations": [
+          "取得ツールは楽天公式ページについて「詳細取得の検証契約がありません」と返しました。verifiedの個別求人は0件で、希望の2件に不足しています。",
+          "中途採用ページには営業・コンサルタント、カスタマーサポート・運用管理の職種表示がありましたが、取得したリンクから個別求人の詳細導線を確認できませんでした。職種紹介や一覧を個別求人の代わりにはしていません。",
+          "勤務地・給与・雇用形態・仕事内容の個別求人比較は未実施です。未確認は条件不適合や求人不存在を意味しません。",
+          "応募、問い合わせ、ログインは行っていません。"
+        ]
+      },
+      "review": {
+        "verdict": "詳細検証未対応",
+        "summary": "楽天の採用トップ・中途採用を取得。現行の詳細取得契約がunsupportedで、検証済み個別求人0件。",
+        "note": "楽天自社採用を一般転職求人検索と区別。職種紹介を個別求人の代わりにしていない。"
+      },
+      "evidence": []
+    },
+    {
+      "sourceId": "rakuten-gora",
+      "family": "rakuten",
+      "label": "楽天GORA",
+      "query": "千葉県で日帰りゴルフを楽しむためのゴルフ場を2件比較してください。個別詳細で所在地、車でのアクセス、ホール数、練習場や設備の特徴を確認してください。日付未定なのでプレー料金や空き枠は未確認とし、予約はしません。",
+      "seedUrl": "https://gora.golf.rakuten.co.jp/doc/area/chiba/",
+      "taskId": "58db52db-da94-4a1b-b864-bd2e49903ac8",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:10:52.753Z",
+      "finishedAt": "2026-11-10T02:11:46.307Z",
+      "pages": [
+        {
+          "url": "https://gora.golf.rakuten.co.jp/doc/area/chiba/",
+          "title": "千葉県のゴルフ場一覧・予約 | 楽天GORA（ゴーラ）",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://gora.golf.rakuten.co.jp/doc/area/chiba/",
+            "service": "rakuten-gora",
+            "title": "千葉県のゴルフ場一覧・予約 | 楽天GORA（ゴーラ）",
+            "capturedAt": "2026-11-10T02:11:02.099Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "c07baa28ff9065eef90b481e68da038e7bd5a014b43456a86d9d45ed284a62dc",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/120033/?l-id=area-chiba",
+          "title": "アクアラインゴルフクラブ【アコーディア・ゴルフ】 |【楽天GORA】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=utf-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/120033/?l-id=area-chiba",
+            "service": "rakuten-gora",
+            "entityId": "rakuten-gora:120033",
+            "title": "アクアラインゴルフクラブ【アコーディア・ゴルフ】 |【楽天GORA】",
+            "capturedAt": "2026-11-10T02:11:06.457Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=utf-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "枠検索\nトップページへ\n千葉県お気に入り\nアクアラインゴルフクラブ【アコーディア・ゴルフ】\n5つ星評価中、3."
+              },
+              {
+                "id": "course",
+                "quote": "だ、挑戦意欲をかき立てる18ホール。設計者の加藤俊輔氏はコースの特徴として4つあるショートホールが全く違"
+              },
+              {
+                "id": "facilities",
+                "quote": "部会員新規登録はこちら\n設備・サービス\n練習場\n20Y 14打席\nアプローチ練習場\nバンカー練習場\n乗用カー"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "8585d1415f54a447f6a7c47d0498138b59ab6e8b87a7c467c67074adc2c994bf",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/520099/?l-id=area-chiba",
+          "title": "イーグルレイクゴルフクラブ【ＰＧＭ】 |【楽天GORA】",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=utf-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/520099/?l-id=area-chiba",
+            "service": "rakuten-gora",
+            "entityId": "rakuten-gora:520099",
+            "title": "イーグルレイクゴルフクラブ【ＰＧＭ】 |【楽天GORA】",
+            "capturedAt": "2026-11-10T02:11:07.066Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=utf-8"
+            },
+            "fields": [
+              {
+                "id": "access",
+                "quote": "枠検索\nトップページへ\n千葉県お気に入り\nイーグルレイクゴルフクラブ【ＰＧＭ】\n5つ星評価中、3.842105"
+              },
+              {
+                "id": "course",
+                "quote": "本情報詳細\nコース情報\nホール数\n18ホール\n距離\n6,506Y\nパー\n72\n種別\n丘陵\nグリーン数\n1グリ"
+              },
+              {
+                "id": "facilities",
+                "quote": "部会員新規登録はこちら\n設備・サービス\n練習場\n110Y 11打席\nアプローチ練習場\nバンカー練習場\n乗用カ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "1bd2830d07a9485f2b308a3192a54d34b27b567514b7dc1d4307643dd352ddf3",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 8,
+      "criteria": [
+        {
+          "id": "location",
+          "description": "千葉県内の所在地",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "car",
+          "description": "車でのアクセスを確認",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "holes",
+          "description": "ホール数を確認",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "facilities",
+          "description": "練習場や設備の特徴を確認",
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "answer": {
+        "summary": "ICからの近さ重視ならアクアラインゴルフクラブを推奨。練習場の距離重視ならイーグルレイクゴルフクラブが適しています。両場の個別詳細で所在地、車アクセス、ホール数、設備を確認しました。",
+        "candidates": [
+          {
+            "name": "アクアラインゴルフクラブ",
+            "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/120033/?l-id=area-chiba",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "千葉県木更津市真里谷4345-3"
+              },
+              {
+                "criterionId": "car",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "圏央道・木更津東ICから5km以内"
+              },
+              {
+                "criterionId": "holes",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "18ホール"
+              },
+              {
+                "criterionId": "facilities",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "20Y・14打席。アプローチ・バンカー練習場、GPSナビ付きカート"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "イーグルレイクゴルフクラブ",
+            "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/520099/?l-id=area-chiba",
+            "matches": [
+              {
+                "criterionId": "location",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5"
+                ],
+                "explanation": "千葉県山武郡芝山町境字五丈201"
+              },
+              {
+                "criterionId": "car",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "東関東道・成田ICから15km以内"
+              },
+              {
+                "criterionId": "holes",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "18ホール"
+              },
+              {
+                "criterionId": "facilities",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8"
+                ],
+                "explanation": "110Y・11打席。アプローチ・バンカー練習場、GPSナビ付きカート、60名コンペルーム"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "2026年11月10日閲覧の公開HTML情報。設備の当日利用可否は未確認。",
+          "日付未定のためプレー料金・空き枠は未確認。予約は行っていません。",
+          "出発地未指定のため総移動時間は未確認。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可",
+        "summary": "アクアラインゴルフクラブ／イーグルレイクゴルフクラブ。千葉県の所在地、ICアクセス、各18ホール、練習場・設備を取得。",
+        "note": "練習場はそれぞれ20Y・14打席、110Y・11打席。日付未定のため料金・空き枠は未確認。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-2",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/120033/?l-id=area-chiba",
+          "quote": "千葉県 木更津市真里谷4345-3",
+          "capturedAt": "2026-11-10T02:11:06.457Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/120033/?l-id=area-chiba",
+          "quote": "首都圏中央連絡自動車道・木更津東 5km以内",
+          "capturedAt": "2026-11-10T02:11:06.457Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/120033/?l-id=area-chiba",
+          "quote": "ホール数\n18ホール",
+          "capturedAt": "2026-11-10T02:11:06.457Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/120033/?l-id=area-chiba",
+          "quote": "練習場\n20Y 14打席\nアプローチ練習場\nバンカー練習場\n乗用カート\nGPSナビ付",
+          "capturedAt": "2026-11-10T02:11:06.457Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-3",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/520099/?l-id=area-chiba",
+          "quote": "千葉県 山武郡芝山町境字五丈201",
+          "capturedAt": "2026-11-10T02:11:07.066Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-3",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/520099/?l-id=area-chiba",
+          "quote": "東関東自動車道・成田 15km以内",
+          "capturedAt": "2026-11-10T02:11:07.066Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-3",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/520099/?l-id=area-chiba",
+          "quote": "ホール数\n18ホール",
+          "capturedAt": "2026-11-10T02:11:07.066Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-3",
+          "url": "https://booking.gora.golf.rakuten.co.jp/guide/disp/c_id/520099/?l-id=area-chiba",
+          "quote": "練習場\n110Y 11打席\nアプローチ練習場\nバンカー練習場\n乗用カート\nGPSナビ付\nコンペルーム\n60名",
+          "capturedAt": "2026-11-10T02:11:07.066Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-books",
+      "family": "rakuten",
+      "label": "楽天ブックス",
+      "query": "初めての箱根2泊3日旅行に持っていくガイドブックを2冊比較してください。書名、版や発売日、税込価格、ISBN、サイズや内容の違いを個別商品詳細で確認してください。同じ本の通常版と小型版ならその違いを明示してください。購入はしません。",
+      "seedUrl": "https://books.rakuten.co.jp/search?sitem=%E7%AE%B1%E6%A0%B9",
+      "taskId": "fe7c7a68-e766-48be-9828-1ef5ae0b2acb",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "succeeded",
+      "startedAt": "2026-11-10T02:11:46.309Z",
+      "finishedAt": "2026-11-10T02:12:40.091Z",
+      "pages": [
+        {
+          "url": "https://books.rakuten.co.jp/search?sitem=%E7%AE%B1%E6%A0%B9",
+          "title": "楽天ブックス: 箱根 の検索結果1／84 ページ",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://books.rakuten.co.jp/search?sitem=%E7%AE%B1%E6%A0%B9",
+            "service": "rakuten-books",
+            "title": "楽天ブックス: 箱根 の検索結果1／84 ページ",
+            "capturedAt": "2026-11-10T02:11:55.926Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "a80b5bdbd651bbe0b932fec9d3531dbf67a059fff1e22f576ef10085e8dedbef",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "service": "rakuten-books",
+            "entityId": "rakuten-books:18577690",
+            "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+            "capturedAt": "2026-11-10T02:11:59.354Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "price",
+                "quote": "）\n| レビューを書く\n1,430円（税込）\n送料無料\nこの商品が関連するクーポン・キャンペーンがあります"
+              },
+              {
+                "id": "publication",
+                "quote": "でクーポン★\n商品情報\n発売日：\n2026年05月08日\n著者／編集：\nJTBパブリッシング 旅行ガ"
+              },
+              {
+                "id": "identifier",
+                "quote": "ページ数：\n160p\nISBN：\n9784533172731\n旧版：\nるるぶ箱根'26\n商品説明\n内"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "9e74f6936da319a943cf7ecc67230309e314a4aeda1eaa27bec4e6a6b5ee3227",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "title": "楽天ブックス: るるぶ 箱根 '27 超ちいサイズ - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172748 : 本",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "detail": {
+            "status": "verified",
+            "url": "https://books.rakuten.co.jp/rb/18577689/",
+            "service": "rakuten-books",
+            "entityId": "rakuten-books:18577689",
+            "title": "楽天ブックス: るるぶ 箱根 '27 超ちいサイズ - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172748 : 本",
+            "capturedAt": "2026-11-10T02:11:59.996Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "fields": [
+              {
+                "id": "price",
+                "quote": "）\n| レビューを書く\n1,430円（税込）\n送料無料\nこの商品が関連するクーポン・キャンペーンがあります"
+              },
+              {
+                "id": "publication",
+                "quote": "でクーポン★\n商品情報\n発売日：\n2026年05月08日\n著者／編集：\nJTBパブリッシング 旅行ガ"
+              },
+              {
+                "id": "identifier",
+                "quote": "ページ数：\n160p\nISBN：\n9784533172748\n旧版：\nるるぶ箱根'26超ちいサイズ"
+              }
+            ],
+            "missingFields": [],
+            "bodySha256": "6b3ba629b4a0e0ff7025f66cd7afa431e126dd844ffec98a3202d054ae1cacc2",
+            "reason": "個別対象の本文と領域別必須項目を取得しました",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 2,
+      "candidates": 2,
+      "eligible": 2,
+      "evidenceCount": 14,
+      "criteria": [
+        {
+          "id": "identity",
+          "description": "箱根旅行向けガイドブックの書名・出版社を個別詳細で確認",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "edition",
+          "description": "版や発売日を確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "price",
+          "description": "税込価格を確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "isbn",
+          "description": "ISBNを確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "difference",
+          "description": "サイズと内容の違い、通常版と小型版ならその関係を確認",
+          "required": true,
+          "weight": 2
+        }
+      ],
+      "answer": {
+        "summary": "初めての箱根2泊3日で持ち歩くなら『るるぶ 箱根 '27 超ちいサイズ』を推奨。通常版と同額・同ページ数で小さく携帯しやすい。見やすさ重視なら通常版。両者は別内容の2冊ではなく同じガイドのサイズ違いで、商品説明上の特集・2点の別冊付録は共通。芦ノ湖、大涌谷、美術館、グルメ、日帰り温泉などの選定に利用できる。",
+        "candidates": [
+          {
+            "name": "るるぶ 箱根 '27",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "matches": [
+              {
+                "criterionId": "identity",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "箱根向けのるるぶ情報版。編集・出版はJTBパブリッシング。"
+              },
+              {
+                "criterionId": "edition",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1",
+                  "ev-2"
+                ],
+                "explanation": "'27版、2026年5月8日発売。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "税込1,430円。"
+              },
+              {
+                "criterionId": "isbn",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "9784533172731、160ページ。"
+              },
+              {
+                "criterionId": "difference",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5",
+                  "ev-6",
+                  "ev-7"
+                ],
+                "explanation": "通常版25.7×21cm。箱根湯本駅ガイドなどを収録。小型版と掲載特集・付録の説明は共通で、見やすさを優先する選択。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          },
+          {
+            "name": "るるぶ 箱根 '27 超ちいサイズ",
+            "url": "https://books.rakuten.co.jp/rb/18577689/",
+            "matches": [
+              {
+                "criterionId": "identity",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8"
+                ],
+                "explanation": "同じ箱根ガイドの小型版。編集・出版はJTBパブリッシング。"
+              },
+              {
+                "criterionId": "edition",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-8",
+                  "ev-9"
+                ],
+                "explanation": "'27版、2026年5月8日発売。"
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-10"
+                ],
+                "explanation": "税込1,430円。通常版と同額。"
+              },
+              {
+                "criterionId": "isbn",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-11"
+                ],
+                "explanation": "9784533172748、160ページ。"
+              },
+              {
+                "criterionId": "difference",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-12",
+                  "ev-13",
+                  "ev-14"
+                ],
+                "explanation": "18×14.7cmの小型版。箱根湯本駅ガイドなど掲載特集は通常版と共通。携帯性重視に向く。"
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "価格は2026年11月10日閲覧時点。購入操作は行っていない。",
+          "公開HTMLの商品説明を確認。全ページの内容や紙面の文字サイズ・重量、2泊3日専用モデルコースの有無は未確認。内容の完全一致を実物で照合したものではない。"
+        ]
+      },
+      "review": {
+        "verdict": "比較可",
+        "summary": "るるぶ 箱根'27の通常版／超ちいサイズ。両方1,430円、160ページ。ISBN・発売日・サイズの違いを取得。",
+        "note": "同じガイドのサイズ違いと説明。通常版25.7×21cm、小型版18×14.7cm。実物の全内容は未照合。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+          "capturedAt": "2026-11-10T02:11:59.354Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "発売日：\n2026年05月08日",
+          "capturedAt": "2026-11-10T02:11:59.354Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "1,430円（税込）",
+          "capturedAt": "2026-11-10T02:11:59.354Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "ページ数：\n160p\nISBN：\n9784533172731",
+          "capturedAt": "2026-11-10T02:11:59.354Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "通常版／25.7×21cm",
+          "capturedAt": "2026-11-10T02:11:59.354Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "「超ちいサイズ」（18×14.7cm）",
+          "capturedAt": "2026-11-10T02:11:59.354Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-2",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "・箱根の玄関口！箱根湯本駅パーフェクトガイド",
+          "capturedAt": "2026-11-10T02:11:59.354Z"
+        },
+        {
+          "id": "ev-8",
+          "pageId": "page-3",
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "quote": "るるぶ 箱根 '27 超ちいサイズ （るるぶ情報版 小型）",
+          "capturedAt": "2026-11-10T02:11:59.996Z"
+        },
+        {
+          "id": "ev-9",
+          "pageId": "page-3",
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "quote": "発売日：\n2026年05月08日",
+          "capturedAt": "2026-11-10T02:11:59.996Z"
+        },
+        {
+          "id": "ev-10",
+          "pageId": "page-3",
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "quote": "1,430円（税込）",
+          "capturedAt": "2026-11-10T02:11:59.996Z"
+        },
+        {
+          "id": "ev-11",
+          "pageId": "page-3",
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "quote": "ページ数：\n160p\nISBN：\n9784533172748",
+          "capturedAt": "2026-11-10T02:11:59.996Z"
+        },
+        {
+          "id": "ev-12",
+          "pageId": "page-3",
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "quote": "通常版／25.7×21cm",
+          "capturedAt": "2026-11-10T02:11:59.996Z"
+        },
+        {
+          "id": "ev-13",
+          "pageId": "page-3",
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "quote": "「超ちいサイズ」（18×14.7cm）",
+          "capturedAt": "2026-11-10T02:11:59.996Z"
+        },
+        {
+          "id": "ev-14",
+          "pageId": "page-3",
+          "url": "https://books.rakuten.co.jp/rb/18577689/",
+          "quote": "・箱根の玄関口！箱根湯本駅パーフェクトガイド",
+          "capturedAt": "2026-11-10T02:11:59.996Z"
+        }
+      ]
+    },
+    {
+      "sourceId": "rakuten-ichiba",
+      "family": "rakuten",
+      "label": "楽天市場",
+      "query": "2泊3日の旅行向けのリュックを2商品比較してください。価格、容量またはサイズ、素材や機能、販売ショップを個別商品ページで確認してください。予算は1万円以内ですが、クーポン適用前後や送料を混同せず、未確認は未確認としてください。購入はしません。",
+      "seedUrl": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+      "taskId": "3af90c38-a975-42ea-b569-9c65f2cb0534",
+      "agent": "codex",
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "startedAt": "2026-11-10T02:17:01.256Z",
+      "finishedAt": "2026-11-10T02:18:00.073Z",
+      "pages": [
+        {
+          "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+          "title": "【楽天市場】旅行リュックの通販",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html; charset=utf-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+            "service": "rakuten-ichiba",
+            "title": "【楽天市場】旅行リュックの通販",
+            "capturedAt": "2026-11-10T02:17:13.043Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html; charset=utf-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "888639f220218640ca179dba8d3008a42324e6e96f5073cb2bfe480807615e5f",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+          "title": "【楽天市場】旅行リュックの通販",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html; charset=utf-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+            "service": "rakuten-ichiba",
+            "title": "【楽天市場】旅行リュックの通販",
+            "capturedAt": "2026-11-10T02:17:17.766Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html; charset=utf-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "6463c35816cb3d9e4c6d92e508e21f23d63639c5ec8771573a6e5d718aa86f50",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+          "title": "【楽天市場】旅行リュックの通販",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html; charset=utf-8"
+          },
+          "detail": {
+            "status": "not_detail",
+            "url": "https://search.rakuten.co.jp/search/mall/%E6%97%85%E8%A1%8C%E3%83%AA%E3%83%A5%E3%83%83%E3%82%AF/",
+            "service": "rakuten-ichiba",
+            "title": "【楽天市場】旅行リュックの通販",
+            "capturedAt": "2026-11-10T02:17:23.318Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html; charset=utf-8"
+            },
+            "fields": [],
+            "missingFields": [],
+            "bodySha256": "6463c35816cb3d9e4c6d92e508e21f23d63639c5ec8771573a6e5d718aa86f50",
+            "reason": "一覧・トップ・未知の詳細形式は完了条件を満たしません",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "detail": {
+            "status": "insufficient_detail",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "service": "rakuten-ichiba",
+            "entityId": "rakuten-ichiba:samfolk:sa80ss",
+            "title": "【楽天市場】【マラソン限定1000円CP付き】【楽天1位】 リュック トラベル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全開 2泊3日 17インチ 防水 3way PC ビジネス リュックサック メンズ レディース 丈夫 軽量 海外旅行 家族旅行 出張 【2年保証】：samfolk",
+            "capturedAt": "2026-11-10T02:17:29.001Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "euc-jp",
+              "contentType": "text/html;charset=EUC-JP"
+            },
+            "fields": [
+              {
+                "id": "specification",
+                "quote": "ル 旅行 出張 防災 大容量 自立式 40L カバン 1680Dナイロン 機内持ち込み 180°全"
+              },
+              {
+                "id": "seller",
+                "quote": "S\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+              }
+            ],
+            "missingFields": [
+              "price"
+            ],
+            "bodySha256": "5e00fbd0e496cffd5d2568dd38bf50d3fc4b55f7da586711722457f412f6da70",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false
+          }
+        },
+        {
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "euc-jp",
+            "contentType": "text/html;charset=EUC-JP"
+          },
+          "detail": {
+            "status": "insufficient_detail",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "service": "rakuten-ichiba",
+            "entityId": "rakuten-ichiba:samfolk:sa80pross",
+            "title": "【楽天市場】＼マラソン限定15%CP付き+P10／【楽天1位】 リュック 40L 旅行 RFIDスキミング防止 トラベル ビジネス 出張 大容量 自立式 機内持ち込み SAMFOLK 2泊3日 A4 17インチ 撥水 防災 4way 防犯 YKK ノートPC リュックサック バックパック メンズ レディース SA80PRO：samfolk",
+            "capturedAt": "2026-11-10T02:17:29.399Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "euc-jp",
+              "contentType": "text/html;charset=EUC-JP"
+            },
+            "fields": [
+              {
+                "id": "specification",
+                "quote": "FIDスキミング防止・大容量収納を備えた高機能バックパック。\n＼マラソン限定15%CP付き+P10"
+              },
+              {
+                "id": "seller",
+                "quote": "o\n不適切な商品を報告\nメーカー希望小売価格はメーカーサイトに基づいて掲載しています\n商品情報\nメーカ"
+              }
+            ],
+            "missingFields": [
+              "price"
+            ],
+            "bodySha256": "44c4fc554da8411f8480d857fbd870af0e2ba470cc945379407ad01a46112878",
+            "reason": "詳細本文・文字品質・必須項目が不足しています",
+            "truncated": false
+          }
+        }
+      ],
+      "verifiedDetails": 0,
+      "candidates": 2,
+      "eligible": 0,
+      "evidenceCount": 7,
+      "criteria": [
+        {
+          "id": "trip",
+          "description": "2泊3日の旅行向けの容量や用途の記載",
+          "required": true,
+          "weight": 2
+        },
+        {
+          "id": "price",
+          "description": "商品価格1万円以内。クーポン適用前後と送料を分離して確認",
+          "required": true,
+          "weight": 3
+        },
+        {
+          "id": "size",
+          "description": "容量またはサイズを確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "features",
+          "description": "素材や機能を確認",
+          "required": true,
+          "weight": 1
+        },
+        {
+          "id": "shop",
+          "description": "販売ショップを確認",
+          "required": true,
+          "weight": 1
+        }
+      ],
+      "answer": {
+        "summary": "仕様重視ならYKKファスナーを備えるSA80PROが候補。ただし両商品の個別ページで価格が取得できず、必須の1万円以内は未確認のため最適商品を確定できません。",
+        "candidates": [
+          {
+            "name": "SAMFOLK SA80SS",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+            "matches": [
+              {
+                "criterionId": "trip",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "3～5泊収納の説明があり2泊旅行向けの容量を備える。"
+              },
+              {
+                "criterionId": "price",
+                "status": "unknown",
+                "evidenceIds": [],
+                "explanation": "個別ページ本文に本商品の価格が取得できず、1万円以内か未確認。クーポン適用価格・送料も未確認。"
+              },
+              {
+                "criterionId": "size",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-1"
+                ],
+                "explanation": "約40L、52×34×23cm、約1.2kg。"
+              },
+              {
+                "criterionId": "features",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-2"
+                ],
+                "explanation": "1680Dナイロン、防水生地、180度全開。"
+              },
+              {
+                "criterionId": "shop",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-3"
+                ],
+                "explanation": "販売ショップはsamfolk。"
+              }
+            ],
+            "score": 63,
+            "eligible": false
+          },
+          {
+            "name": "SAMFOLK SA80PRO",
+            "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+            "matches": [
+              {
+                "criterionId": "trip",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-6"
+                ],
+                "explanation": "3～5泊分の衣類収納の説明あり。"
+              },
+              {
+                "criterionId": "price",
+                "status": "unknown",
+                "evidenceIds": [],
+                "explanation": "個別ページの本商品価格、クーポン適用後価格、送料は未確認。予算適合は断定しない。"
+              },
+              {
+                "criterionId": "size",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-4"
+                ],
+                "explanation": "約40L、53×35×22cm。"
+              },
+              {
+                "criterionId": "features",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-5",
+                  "ev-6"
+                ],
+                "explanation": "840Dナイロン／400Dポリエステル、YKKファスナー、180度開閉。"
+              },
+              {
+                "criterionId": "shop",
+                "status": "supported",
+                "evidenceIds": [
+                  "ev-7"
+                ],
+                "explanation": "販売ショップはsamfolk。"
+              }
+            ],
+            "score": 63,
+            "eligible": false
+          }
+        ],
+        "limitations": [
+          "両詳細はdetailVerification.status=insufficient_detail、missingFields=price。取得できた本文に本商品価格がなく、詳細確認は不完全です。",
+          "検索一覧の価格を個別ページで確認済みの価格として扱っていません。クーポン表示はありますが適用条件・適用後金額・送料込み総額は未確認です。",
+          "公開HTMLのみ確認。動的な価格・在庫や注文画面は確認していません。購入はしていません。",
+          "2026年11月10日閲覧時の情報。収納量は荷物によります。",
+          "詳細取得の必須項目を確認できていない候補があります: https://item.rakuten.co.jp/samfolk/sa80ss/, https://item.rakuten.co.jp/samfolk/sa80pross/"
+        ]
+      },
+      "review": {
+        "verdict": "詳細未完了・条件付き",
+        "summary": "Samfolk sa80SS／SA80PROの容量・サイズ・素材・機能は取得。対象商品の販売価格・送料を個別ページ本文で確認できず、1万円以内かは未確認。",
+        "note": "クーポン額・関連商品価格の誤検出を修正し再実行。詳細verifiedは2件→0件になり、trustedから2URLを除外。"
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-4",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "外寸：52 x 34 x 23cm\n容量：約40L\n重量：約1.2 kg",
+          "capturedAt": "2026-11-10T02:17:29.001Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-4",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "高級感溢れる1680D高密度防水ナイロンを採用。180度全開設計で3～5泊の荷物もスーツケース級に収納。",
+          "capturedAt": "2026-11-10T02:17:29.001Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-4",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80ss/",
+          "quote": "出張 【2年保証】：samfolk",
+          "capturedAt": "2026-11-10T02:17:29.001Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-5",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "【本体サイズ】約 53 × 35 × 22 cm\n【容量】約 40 L",
+          "capturedAt": "2026-11-10T02:17:29.399Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-5",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "・表地：840Dナイロン / 400Dポリエステル\n・裏地：ポリエステル\n・ファスナー：YKKファスナー",
+          "capturedAt": "2026-11-10T02:17:29.399Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-5",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "メインポケットはスーツケースのように180度開閉可能で、3～5泊分の衣類も簡単に出し入れできます。",
+          "capturedAt": "2026-11-10T02:17:29.399Z"
+        },
+        {
+          "id": "ev-7",
+          "pageId": "page-5",
+          "url": "https://item.rakuten.co.jp/samfolk/sa80pross/",
+          "quote": "SA80PRO：samfolk",
+          "capturedAt": "2026-11-10T02:17:29.399Z"
+        }
+      ]
+    }
+  ]
+}

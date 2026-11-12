@@ -1,0 +1,17 @@
+# Offline upgrade of an existing, reviewed Codex runtime image. Run npm ci && npm run build first.
+ARG BASE_IMAGE=web-harness-codex:local
+FROM ${BASE_IMAGE}
+USER root
+WORKDIR /opt/web-harness
+COPY package.json package-lock.json ./
+COPY dist ./dist
+COPY web ./web
+COPY examples ./examples
+COPY config ./config
+COPY docs/evidence/codex-strata.json docs/evidence/recruit-theme-results.json docs/evidence/delivery-results.json ./docs/evidence/
+RUN node dist/cli.js benchmark check \
+    && mkdir -p /sandbox/.codex && chown node:node /sandbox/.codex
+ENV CODEX_BIN=/usr/local/bin/codex
+USER node
+WORKDIR /workspace
+CMD ["/usr/local/bin/node", "/opt/web-harness/dist/cli.js", "chat", "--port", "4311"]
