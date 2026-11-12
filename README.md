@@ -4,6 +4,46 @@
 
 Chatは白黒を基調に青・シアンを合わせたローカルUIです。調査の進捗を順次表示し、回答を行程フロー・写真付き候補カードで見渡せます。カードを押すとMarkdownの詳細、取得リンクを押すと「ページ画像／Web画面／本文・引用」を開けます。
 
+## 実際の画面とアウトプット
+
+次は、上野の一日遊びについて**保存済みの実調査結果を表示した実画面**です。行程を図解で見渡し、候補・予算・雨天代替を押して詳しく読めます。表示変換で新しい推薦を生成せず、元の回答にある未確認事項も残します。
+
+![実際のChatで上野の行程を図解表示](docs/screenshots/chat-answer.jpg)
+
+| クリックして読むMarkdown詳細 | 元のWeb画面を確認するプレビュー |
+| --- | --- |
+| ![Markdownの詳細ノート](docs/screenshots/chat-markdown.jpg) | ![agent-browserで撮影したホットペッパーグルメの画面](docs/screenshots/chat-source-screen.jpg) |
+| 行程、条件の照合、予算、引用、未確認事項を読みやすく整形 | 「ページ画像／Web画面／本文・引用」を切替。元ページへのリンクも表示 |
+
+- **入力例**：大人2人と5歳児で上野を一日楽しみたい。家族16,000円以内、休憩2回、雨天の案もほしい。
+- **回答例**：動物園と昼食を中心に、疲れたら早めに帰り、元気なら科博を追加する行程。掲載料金と未確認の予算枠を分け、対象日の営業・空席は未確認として返却。
+- **受け取れるもの**：図解、候補カード、Markdownの詳細、取得URLと引用、機械可読JSON、取得できた時間・トークン・費用の記録。
+
+**[画面・出力・構成ガイド](docs/product-guide.md)**に、初期画面、承認、候補、写真、Web画面、スマートフォンの計8枚と、具体的な操作・出力・保存データの読み方を載せています。掲載画像は個人の履歴・認証を使わない一時環境で撮影し、写真・Web画面だけを表示用に別途取得しました。撮影情報は[manifest](docs/screenshots/chat-manifest.json)に記録しています。
+
+## 全体の構成
+
+```mermaid
+flowchart TB
+  CHAT["Chat UI"] --> DAEMON["共有daemon：相談・承認・進捗・結果"]
+  RUNS["CLI runs"] --> DAEMON
+  AGENTS["Codex / Claude Code / pi / OpenCode"] --> MCP["stdio MCP bridge"]
+  MCP --> DAEMON
+  SINGLE["CLI run / improve"] --> EXEC["共通executor：実行先を選択"]
+  DAEMON --> EXEC
+  EXEC --> LOCAL["ホスト上の調査プロセス"]
+  EXEC --> VM["OpenShell MicroVM：Codex / pi"]
+  LOCAL --> SOURCE["公開HTML / agent-browser"]
+  VM --> SOURCE
+  SOURCE --> RESULT["詳細・引用・条件を検証して回答を保存"]
+  RESULT --> DAEMON
+  DAEMON -->|SSEで状態更新| CHAT
+```
+
+Chat・CLIの`runs`・MCPは同じ相談を操作し、単発の`run`はexecutorを直接使います。Chat/APIの制御と表示用プレビューはホスト、調査プロセスは選んだlocalまたはMicroVMで動きます。localへ暗黙にfallbackしません。図解とMarkdownは保存された回答を整形した表示です。
+
+詳細な境界、Auto/Approvalの状態遷移、1回の調査の流れ、コード配置は[構成ガイド](docs/product-guide.md#architecture)を参照してください。
+
 ## 1. キーなしでChatを体験する
 
 必要なものはNode.js 22以降とnpmです。リポジトリのディレクトリで実行します。
