@@ -88,6 +88,45 @@ export function extractPublicHtml(
   const offer = productOffer(html, url);
   const $ = cheerio.load(html);
   const title = $("title").first().text().replace(/\s+/g, " ").trim();
+  const images: { url: string; alt: string }[] = [];
+  const imageUrls = new Set<string>();
+  const addImage = (value: string | undefined, alt: string) => {
+    if (!value || images.length >= 8) return;
+    try {
+      const u = new URL(value, url);
+      if (
+        u.protocol !== "https:" ||
+        u.username ||
+        u.password ||
+        imageUrls.has(u.pathname) ||
+        /(?:logo|icon|badge|banner|tracking|pixel|spacer|noimage|no_image|\/SYS\/|\/common\/|_98\.)/i.test(
+          u.pathname,
+        )
+      )
+        return;
+      imageUrls.add(u.pathname);
+      images.push({ url: u.href, alt: alt.slice(0, 180) });
+    } catch {
+      /* invalid media metadata */
+    }
+  };
+  $('meta[property="og:image"],meta[name="twitter:image"]').each((_i, el) =>
+    addImage($(el).attr("content"), title),
+  );
+  $(
+    "main img,article img,#main img,#mainContents img,#mainContent img,.mainContents img",
+  ).each((_i, el) => {
+    const img = $(el),
+      w = Number(img.attr("width")),
+      h = Number(img.attr("height"));
+    if (
+      (w > 0 && w < 160) ||
+      (h > 0 && h < 90) ||
+      img.closest("nav,header,footer,[hidden]").length
+    )
+      return;
+    addImage(img.attr("data-src") || img.attr("src"), img.attr("alt") || title);
+  });
   // Hidden anchors are discovery hints only. Their text never enters citation evidence.
   $("script,style,noscript,template,svg,canvas").remove();
   const links: { text: string; url: string }[] = [];
@@ -174,6 +213,7 @@ export function extractPublicHtml(
     url,
     title,
     productOffer: offer,
+    images,
     text: text.slice(0, 32000),
     links: links.slice(0, 220),
     truncated: text.length > 32000,

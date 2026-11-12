@@ -78,6 +78,9 @@
         </div>
       </section>
       <section class="compose-panel">
+        <button id="compose-toggle" type="button" aria-expanded="false">
+          <span>条件を変えて、もう一度相談する</span><b>＋</b>
+        </button>
         <div class="settings">
           <label
             >進め方<select id="chat-mode">
@@ -170,7 +173,14 @@ node /absolute/path/dist/cli.js mcp
       </button>
       <div id="artifact-content"></div>
     </dialog>
+    <dialog id="answer-dialog" aria-labelledby="answer-detail-title">
+      <div class="detail-bar">
+        <span>RESEARCH NOTE</span
+        ><button id="answer-close" aria-label="詳細を閉じる">×</button>
+      </div>
+      <div id="answer-detail"></div>
+    </dialog>
     <div id="notice" role="status" aria-live="polite"></div>
-    <script src="/chat.js"></script>
+    <script type="module" src="/chat.js"></script>
   </body>
 </html>

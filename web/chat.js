@@ -1,3 +1,4 @@
+import { markdown, normalizeMarkdown, presentation } from "./presentation.js";
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
   String(s ?? "").replace(
@@ -68,6 +69,7 @@ function modeHint() {
       : "保存済みの当時の回答を再生。入力を変えて新しく調べるには実調査を選んでください。";
 }
 function sample(id) {
+  document.body.classList.remove("has-answer", "compose-expanded");
   state.example = id;
   const p = state.examples.find((p) => p.id === id);
   if (!p) return;
@@ -151,10 +153,143 @@ function progressHtml(r) {
     '<li><span class="event-dot">◌</span><div><strong>実行環境の応答を待っています</strong><small>取得の開始が届き次第、ここに順次表示します。</small></div></li>'
   }</ol>`;
 }
+function visualSlot(r, id, label = "掲載ページの画像") {
+  return `<div class="media-slot ${r.artifacts?.find((a) => a.id === id)?.url.includes("books.rakuten.co.jp") ? "book-media" : ""}" data-visual-slot="${esc(id)}" data-visual-run="${esc(r.id)}"><div class="media-placeholder"><span class="media-symbol" aria-hidden="true">▧</span><small>${esc(label)}</small></div></div>`;
+}
+function answerOverview(r) {
+  const p = presentation(r),
+    candidates = r.task.answer.candidates ?? [],
+    sections = p.sections;
+  const timeline = p.timeline.slice(0, 6);
+  const flow = timeline.length
+    ? `<section class="answer-journey"><div class="overview-section-title"><span>01 / YOUR DAY</span><h3>一日の流れを、ひと目で。</h3><small>回答に記載された行程案</small></div><ol class="journey-track">${timeline.map((item, i) => `<li><button data-answer-detail="all"><span class="journey-index">${String(i + 1).padStart(2, "0")}</span><time>${esc(item.time)}</time><p>${esc(item.text)}</p><span class="journey-open">詳細を見る ↗</span></button></li>`).join("")}</ol>${p.timeline.length > 6 ? `<button class="text-link" data-answer-detail="all">この先の行程も読む（全${p.timeline.length}項目） →</button>` : ""}</section>`
+    : "";
+  const cards = candidates.length
+    ? `<section class="answer-candidates"><div class="overview-section-title"><span>${timeline.length ? "02" : "01"} / OPTIONS</span><h3>${timeline.length ? "この日に選ぶ場所。" : "次の一歩につながる選択肢。"}</h3><small>候補ごとの根拠と未確認事項を確認できます</small></div><div class="candidate-grid">${candidates
+        .slice(0, 6)
+        .map((c, i) => {
+          const artifact = r.artifacts?.find((a) => a.url === c.url);
+          const supported =
+            c.matches?.filter((m) => m.status === "supported").length ?? 0;
+          const unknown =
+            c.matches?.filter((m) => m.status !== "supported").length ?? 0;
+          return `<button class="candidate-card" data-answer-detail="candidate-${i}">${artifact ? visualSlot(r, artifact.id) : '<div class="candidate-no-media"><span>OPTION</span></div>'}<div class="candidate-content"><span class="candidate-kicker">候補 ${String(i + 1).padStart(2, "0")} · ${esc(new URL(c.url).hostname)}</span><h4>${esc(c.name)}</h4><p>${esc(c.matches?.find((m) => m.status === "supported")?.explanation ?? "詳しい評価を確認する")}</p><div class="candidate-checks"><span class="check-supported">● 根拠あり ${supported}</span>${unknown ? `<span>○ 未確認・要確認 ${unknown}</span>` : ""}</div><div class="candidate-bottom">根拠と詳細を読む <span>↗</span></div></div></button>`;
+        })
+        .join("")}</div></section>`
+    : "";
+  const topics = sections
+    .filter((s) => s.title !== p.title && s.title !== "提案の概要")
+    .slice(0, 4);
+  return `<article class="answer answer-overview"><div class="answer-eyebrow"><span class="answer-spark">✦</span> HARNESS / RESEARCH CANVAS</div><h2>${esc(p.title)}</h2><p class="answer-lead">${esc(p.intro)}</p><div class="answer-meta"><span>${r.input.source === "replay" ? "保存済み実測からの提案" : "取得した根拠からの提案"}</span><span>${r.task.evidence?.length ?? 0}件の引用</span>${r.task.answer.limitations?.length ? `<span>未確認事項あり</span>` : ""}</div>${flow}${cards}${topics.length ? `<div class="answer-topic-grid">${topics.map((section, i) => `<button data-answer-detail="section-${sections.indexOf(section)}"><span>NOTE ${String(i + 1).padStart(2, "0")}</span><strong>${esc(section.title)}</strong><small>${esc(section.lines.find((l) => l.trim()) ?? "")}</small><b>詳しく読む ↗</b></button>`).join("")}</div>` : ""}<button class="read-answer" data-answer-detail="all"><span>提案の詳細を読む<small>行程・予算・根拠をMarkdownで</small></span><span>↗</span></button></article>`;
+}
+function showAnswerDetail(key) {
+  const r = state.run;
+  if (!r?.task?.answer) return;
+  const p = presentation(r);
+  let title = "提案の詳細",
+    content = p.raw;
+  if (key.startsWith("candidate-")) {
+    const c = r.task.answer.candidates[Number(key.slice(10))];
+    if (!c) return;
+    title = c.name;
+    content = `## 条件との照合\n\n${c.matches
+      .map(
+        (m, index) =>
+          `### ${{ supported: "根拠あり", unknown: "未確認", contradicted: "条件に合わない" }[m.status]} · 条件 ${index + 1}\n\n**評価条件**：${r.task.criteria?.find((c) => c.id === m.criterionId)?.description ?? m.criterionId}\n\n**確認結果**：${m.explanation}\n\n${m.evidenceIds
+            .map((id) => {
+              const ev = r.task.evidence?.find((e) => e.id === id);
+              return ev
+                ? `> ${ev.quote.replaceAll("\n", "\n> ")}\n\n[出典を開く](${ev.url})\n`
+                : "";
+            })
+            .join("\n")}`,
+      )
+      .join("\n\n")}\n\n[掲載元を開く](${c.url})`;
+  } else if (key.startsWith("section-")) {
+    const section = p.sections[Number(key.slice(8))];
+    if (!section) return;
+    title = section.title;
+    content = section.lines.join("\n");
+  }
+  if (key === "all") {
+    const sources = [
+      ...new Map((r.task.evidence ?? []).map((e) => [e.url, e])).values(),
+    ];
+    if (sources.length)
+      content +=
+        "\n\n## 参照した出典\n\n" +
+        sources
+          .map(
+            (e) =>
+              `- [${r.artifacts?.find((a) => a.url === e.url)?.title ?? new URL(e.url).hostname}](${e.url})`,
+          )
+          .join("\n");
+  }
+  const warnings = [
+    ...(r.reviewWarnings ?? []),
+    ...(r.task.answer.limitations ?? []),
+  ];
+  $("#answer-detail").innerHTML =
+    `<div class="note-heading"><span>調査からの提案 · ${r.input.source === "replay" ? "保存済み実測" : "実調査"}</span><h2 id="answer-detail-title">${esc(title)}</h2></div><div class="markdown-body">${markdown(content)}</div>${warnings.length ? `<aside class="note-limitations"><h3>未確認事項・確認しておきたいこと</h3>${warnings.map((w) => `<p>${esc(w)}</p>`).join("")}</aside>` : ""}<footer class="note-footer">元の回答と引用を整形して表示しています。予約・購入を行う画面ではありません。</footer>`;
+  $("#answer-dialog").showModal();
+  $("#answer-dialog").scrollTop = 0;
+}
+const visualCache = new Map(),
+  visualPending = new Map();
+async function loadVisual(rid, id, capture = false) {
+  const key = rid + ":" + id;
+  if (!capture && visualCache.has(key)) return visualCache.get(key);
+  if (!capture && visualPending.has(key)) return visualPending.get(key);
+  const pending = api(`/api/runs/${rid}/artifacts/${id}/visual`, {
+    capture,
+  }).then((v) => {
+    visualCache.set(key, v);
+    return v;
+  });
+  if (!capture) visualPending.set(key, pending);
+  try {
+    return await pending;
+  } finally {
+    if (!capture) visualPending.delete(key);
+  }
+}
+function paintVisualSlots(rid, id, v) {
+  const photo = v?.images?.[0];
+  document
+    .querySelectorAll(`[data-visual-slot="${id}"][data-visual-run="${rid}"]`)
+    .forEach((el) => {
+      el.innerHTML = photo
+        ? `<img src="/api/runs/${rid}/artifacts/${id}/visual/${esc(photo.file)}" alt="${esc(photo.alt || "掲載ページの画像")}" loading="lazy"><span class="media-caption">掲載ページの画像</span>`
+        : `<div class="media-placeholder"><span class="media-symbol" aria-hidden="true">▧</span><small>画像なし · 本文・Web画面を確認</small></div>`;
+    });
+}
+const visualObserver = new IntersectionObserver(
+  (entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      visualObserver.unobserve(e.target);
+      const { visualRun: rid, visualSlot: id } = e.target.dataset;
+      loadVisual(rid, id)
+        .then((v) => paintVisualSlots(rid, id, v))
+        .catch(() => paintVisualSlots(rid, id, null));
+    }
+  },
+  { rootMargin: "120px" },
+);
+function hydrateVisuals() {
+  document.querySelectorAll("[data-visual-slot]").forEach((el) => {
+    if (el.dataset.observed) return;
+    el.dataset.observed = "true";
+    const { visualRun: rid, visualSlot: id } = el.dataset;
+    const cached = visualCache.get(rid + ":" + id);
+    if (cached) paintVisualSlots(rid, id, cached);
+    else visualObserver.observe(el);
+  });
+}
 function artifactsHtml(r) {
   const cards = r.artifacts ?? [];
   if (!cards.length) return "";
-  return `<section class="artifact-shelf"><h3 class="shelf-heading">調査で確認したリンク <small>${cards.filter((a) => a.state === "captured").length}件取得 · ${r.input.source === "replay" ? "保存済み実測" : "調査成果物"}</small></h3><div class="artifact-grid">${cards.map((a) => `<article class="artifact-card"><button class="artifact-open" data-artifact="${esc(a.id)}" title="${esc(a.url)}"><div class="artifact-domain"><span>${esc(new URL(a.url).hostname)}</span><b class="artifact-status ${a.state === "unavailable" ? "error" : ""}">${a.state === "unavailable" ? "取得不可" : "取得済み"}${a.statusCode ? " / " + a.statusCode : ""}</b></div><strong>${esc(a.title)}</strong><p>${esc(a.preview)}</p></button><footer><button class="artifact-preview-link" data-artifact="${esc(a.id)}">プレビューを開く</button><a href="${link(a.url)}" title="${esc(a.url)}" target="_blank" rel="noopener noreferrer">元のページ ↗</a></footer></article>`).join("")}</div></section>`;
+  return `<section class="artifact-shelf"><h3 class="shelf-heading">調査で確認したリンク <small>${cards.filter((a) => a.state === "captured").length}件取得 · ${r.input.source === "replay" ? "保存済み実測" : "調査成果物"}</small></h3><div class="artifact-grid">${cards.map((a) => `<article class="artifact-card"><button class="artifact-open" data-artifact="${esc(a.id)}" title="${esc(a.url)}">${a.state === "captured" ? visualSlot(r, a.id) : ""}<div class="artifact-copy"><div class="artifact-domain"><span>${esc(new URL(a.url).hostname)}</span><b class="artifact-status ${a.state === "unavailable" ? "error" : ""}">${a.state === "unavailable" ? "取得不可" : "取得済み"}${a.statusCode ? " / " + a.statusCode : ""}</b></div><strong>${esc(a.title)}</strong><p>${esc(a.preview)}</p></div></button><footer><button class="artifact-preview-link" data-artifact="${esc(a.id)}">プレビューを開く</button><a href="${link(a.url)}" title="${esc(a.url)}" target="_blank" rel="noopener noreferrer">元のページ ↗</a></footer></article>`).join("")}</div></section>`;
 }
 
 function updateLive(r) {
@@ -172,6 +307,7 @@ function updateLive(r) {
   const count = r.artifacts?.length ?? 0;
   jump.hidden = !count;
   jump.textContent = `取得リンク ${count}`;
+  hydrateVisuals();
   const badge = $("#stream-state");
   if (badge)
     badge.textContent =
@@ -210,19 +346,89 @@ function watch(r) {
     if (b) b.textContent = "再接続中";
   };
 }
+function paintPreviewVisual() {
+  const p = state.preview;
+  if (!p) return;
+  const panel = $("#artifact-visual");
+  if (!panel) return;
+  const v = p.visual,
+    base = `/api/runs/${p.rid}/artifacts/${p.id}/visual/`;
+  if (p.loading) {
+    panel.innerHTML = `<div class="visual-loading"><span class="visual-spinner"></span><strong>${p.tab === "screen" ? "Web画面を撮影しています" : "ページの画像を読み込んでいます"}</strong><p>${p.tab === "screen" ? "新しいブラウザで元ページを表示し、実際の画面を保存します。" : "掲載元の公開画像を確認しています。"}</p></div>`;
+    return;
+  }
+  if (p.tab === "screen") {
+    panel.innerHTML = v?.screen
+      ? `<div class="browser-frame"><div class="browser-chrome"><span>● ● ●</span><small>${esc(v.screen.url ?? p.artifact.url)}</small><a href="${link(p.artifact.url)}" target="_blank" rel="noopener noreferrer">↗</a></div><div class="web-screen-scroll"><img class="web-screen" src="${base}screen.png" alt="${esc(p.artifact.title)}のWeb画面"></div></div><p class="visual-disclosure">Web画面を表示用にローカルで撮影 · ${esc(v.screen.capturedAt)} · 1280 × 900<br>調査本文の取得日時とは異なります。操作する場合は元のページを開いてください。</p>`
+      : `<div class="visual-empty"><span>▧</span><h3>Web画面を表示できませんでした</h3><p>${esc(v?.screenError ?? p.error ?? "ページ画像または本文をご確認ください。")}</p><button class="secondary-button" data-preview-tab="screen">もう一度取得する</button></div>`;
+  } else {
+    const photos = v?.images ?? [],
+      photo = photos[p.imageIndex ?? 0] ?? photos[0];
+    panel.innerHTML = photo
+      ? `<div class="photo-stage"><img class="preview-photo" src="${base}${esc(photo.file)}" alt="${esc(photo.alt || p.artifact.title)}"></div>${photos.length > 1 ? `<div class="photo-thumbs">${photos.map((img, i) => `<button data-gallery-index="${i}" aria-label="画像${i + 1}を表示" aria-pressed="${i === (p.imageIndex ?? 0)}"><img src="${base}${esc(img.file)}" alt="${esc(img.alt)}"></button>`).join("")}</div>` : ""}<p class="visual-disclosure">掲載ページの画像 · 表示用に取得 ${esc(v.capturedAt)}<br>ページの画面キャプチャではありません。調査の引用とは別に取得しています。</p>`
+      : `<div class="visual-empty"><span>▧</span><h3>表示できるページ画像がありません</h3><p>${esc(v?.imageError ?? p.error ?? "Web画面または保存本文で内容を確認できます。")}</p><button class="secondary-button" data-preview-tab="screen">Web画面を取得する ↗</button></div>`;
+  }
+}
+async function switchPreviewTab(tab) {
+  const p = state.preview;
+  if (!p || !["images", "screen", "text"].includes(tab)) return;
+  p.tab = tab;
+  document
+    .querySelectorAll("[data-preview-tab]")
+    .forEach((b) =>
+      b.setAttribute("aria-selected", String(b.dataset.previewTab === tab)),
+    );
+  $("#artifact-text").hidden = tab !== "text";
+  $("#artifact-visual").hidden = tab === "text";
+  if (tab === "text") return;
+  if (
+    (tab === "screen" && !p.visual?.screen) ||
+    (tab === "images" && !p.visual)
+  ) {
+    p.loading = true;
+    paintPreviewVisual();
+    try {
+      const v = await loadVisual(p.rid, p.id, tab === "screen");
+      if (state.preview !== p) return;
+      p.visual = v;
+      p.error = null;
+      paintVisualSlots(p.rid, p.id, v);
+    } catch (e) {
+      if (state.preview !== p) return;
+      p.error = e.message;
+    } finally {
+      if (state.preview === p) {
+        p.loading = false;
+        paintPreviewVisual();
+      }
+    }
+  } else paintPreviewVisual();
+}
 async function previewArtifact(id) {
   const r = state.run;
   if (!r) return;
+  const pending = { rid: r.id, id };
+  state.preview = pending;
   $("#artifact-content").innerHTML =
-    "<p>保存された取得内容を読み込んでいます…</p>";
+    "<div class='visual-loading'>保存された取得内容を読み込んでいます…</div>";
   $("#artifact-dialog").showModal();
   try {
     const a = await api(`/api/runs/${r.id}/artifacts/${id}`);
-    if (state.run?.id !== r.id) return;
+    if (state.preview !== pending) return;
+    state.preview = {
+      rid: r.id,
+      id,
+      artifact: a,
+      visual: visualCache.get(r.id + ":" + id),
+      tab: "images",
+      imageIndex: 0,
+    };
     $("#artifact-content").innerHTML =
-      `<span class="run-tag">${a.state === "unavailable" ? "取得できなかったページ" : "取得したページの成果物"}</span><h2>${esc(a.title)}</h2><div class="artifact-meta">${esc(a.url)}<br>${esc(a.capturedAt)} · ${esc(a.method)}${a.statusCode ? " · HTTP " + a.statusCode : ""}</div><div class="artifact-preview-body">${esc(a.body)}</div><p class="artifact-meta">${a.state === "unavailable" ? "取得に失敗した記録です。ページ本文の取得成功を示すものではありません。" : a.excerptOnly ? "この表示は保存された本文抜粋・引用です。全文取得ではありません。" : "取得した時点の本文です。現在のページを埋め込んだ表示ではありません。"}</p>${a.quotes.length ? "<h3>回答に使った引用</h3>" + a.quotes.map((q) => `<blockquote class="artifact-quote">${esc(q.quote)}</blockquote>`).join("") : ""}<a class="artifact-external" href="${link(a.url)}" target="_blank" rel="noopener noreferrer">元のページを開く ↗</a>`;
+      `<div class="preview-heading"><span class="run-tag">${a.state === "unavailable" ? "取得できなかったページ" : "SOURCE PREVIEW"}</span><h2>${esc(a.title)}</h2><a class="artifact-external" href="${link(a.url)}" target="_blank" rel="noopener noreferrer">${esc(new URL(a.url).hostname)} ↗</a></div><div class="preview-tabs" role="tablist" aria-label="プレビューの表示方法"><button role="tab" aria-selected="true" data-preview-tab="images">ページ画像</button><button role="tab" aria-selected="false" data-preview-tab="screen">Web画面</button><button role="tab" aria-selected="false" data-preview-tab="text">本文・引用</button></div><div id="artifact-visual"></div><div id="artifact-text" hidden><div class="artifact-meta">調査本文の取得 ${esc(a.capturedAt)} · ${esc(a.method)}${a.statusCode ? " · HTTP " + a.statusCode : ""}</div><div class="artifact-preview-body">${esc(a.body)}</div><p class="artifact-meta">${a.state === "unavailable" ? "取得に失敗した記録です。" : a.excerptOnly ? "保存された抜粋・引用です。全文取得ではありません。" : "取得時点に保存した範囲の本文です。"}</p>${a.quotes.length ? "<h3>回答に使った引用</h3>" + a.quotes.map((q) => `<blockquote class="artifact-quote">${esc(q.quote)}</blockquote>`).join("") : ""}</div>`;
+    await switchPreviewTab(a.state === "unavailable" ? "text" : "images");
   } catch (e) {
-    $("#artifact-content").textContent = e.message;
+    if (state.preview === pending)
+      $("#artifact-content").textContent = e.message;
   }
 }
 function render(r) {
@@ -237,6 +443,9 @@ function render(r) {
     $("#chat-agent").value = r.input.agent;
     modeHint();
   }
+  document.body.classList.toggle("has-answer", Boolean(r.task?.answer));
+  if (state.run?.id !== r.id)
+    document.body.classList.remove("compose-expanded");
   state.run = r;
   localStorage.setItem("harness.run", r.id);
   watch(r);
@@ -266,8 +475,7 @@ function render(r) {
         `<div class="decision-receipt">✓ ${d.decidedBy === "runtime" ? "Auto が推奨案を選択" : "あなたが選択"} · ${esc({ balance: "余白と予算を大切に", experience: "体験・こだわりを優先", return_partial: "未確認を明記して受け取る", research_more: "同じ条件で追加調査", add_url: "公式URLを追加" }[d.choiceId] ?? d.choiceId)}</div>`,
     )
     .join("");
-  if (r.task?.answer)
-    html += `<article class="message"><div class="speaker">HARNESS / 根拠をつないだ提案</div><div class="answer">${esc(r.task.answer.summary.replaceAll("\\n", "\n"))}</div></article>`;
+  if (r.task?.answer) html += answerOverview(r);
   if (r.error)
     html += `<div class="message">${esc(r.error)}<p>取得できなかった内容を、確認済みとして表示していません。</p></div>`;
   if (r.gate) {
@@ -323,7 +531,7 @@ function render(r) {
           r.reviewWarnings?.length
             ? "掲載情報の照合結果：\n" + r.reviewWarnings.join("\n")
             : "",
-          r.task.answer.summary.replaceAll("\\n", "\n"),
+          normalizeMarkdown(r.task.answer.summary),
         ]
           .filter(Boolean)
           .join("\n\n"),
@@ -334,7 +542,9 @@ function render(r) {
     }
   });
   if (r.status !== "needs_input" || r.gate?.kind !== "direction")
-    $("#conversation").scrollTop = $("#conversation").scrollHeight;
+    if (r.task?.answer)
+      $(".answer-overview")?.scrollIntoView({ block: "start" });
+    else $("#conversation").scrollTop = $("#conversation").scrollHeight;
 }
 $("#chat-form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -367,6 +577,22 @@ $("#chat-form").addEventListener("submit", async (e) => {
   }
 });
 document.addEventListener("click", async (e) => {
+  const answer = e.target.closest("[data-answer-detail]");
+  if (answer) {
+    showAnswerDetail(answer.dataset.answerDetail);
+    return;
+  }
+  const previewTab = e.target.closest("[data-preview-tab]");
+  if (previewTab) {
+    await switchPreviewTab(previewTab.dataset.previewTab);
+    return;
+  }
+  const gallery = e.target.closest("[data-gallery-index]");
+  if (gallery && state.preview) {
+    state.preview.imageIndex = Number(gallery.dataset.galleryIndex);
+    paintPreviewVisual();
+    return;
+  }
   const artifact = e.target.closest("[data-artifact]");
   if (artifact) {
     await previewArtifact(artifact.dataset.artifact);
@@ -397,9 +623,18 @@ $("#new-chat").onclick = () => {
 $("#mobile-nav").onclick = () => $(".rail").classList.toggle("open");
 $("#usage-toggle").onclick = () => $("#usage").showModal();
 $("#artifact-close").onclick = () => $("#artifact-dialog").close();
+$("#artifact-dialog").addEventListener("close", () => {
+  state.preview = null;
+});
+$("#answer-close").onclick = () => $("#answer-dialog").close();
 $("#artifact-jump").onclick = () =>
   $(".artifact-shelf")?.scrollIntoView({ block: "start" });
 $("#usage-close").onclick = () => $("#usage").close();
+$("#compose-toggle").onclick = () => {
+  const expanded = document.body.classList.toggle("compose-expanded");
+  $("#compose-toggle").setAttribute("aria-expanded", String(expanded));
+  if (expanded) $("#chat-query").focus();
+};
 $("#chat-mode").onchange = modeHint;
 $("#data-source").onchange = modeHint;
 async function init() {

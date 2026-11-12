@@ -77,6 +77,41 @@ try {
   const page = await browser.newPage({
     viewport: { width: 1440, height: 1000 },
   });
+  // Visual fixtures isolate browser UX tests from third-party availability.
+  const png = Buffer.from(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aotkAAAAASUVORK5CYII=",
+    "base64",
+  );
+  await page.route("**/artifacts/*/visual", async (route) => {
+    const data = route.request().postDataJSON() ?? {};
+    await route.fulfill({
+      json: {
+        url: "https://books.rakuten.co.jp/rb/18577690/",
+        capturedAt: new Date().toISOString(),
+        images: [
+          {
+            file: "image-0",
+            alt: "QA用の画像",
+            sourceUrl: "https://example.com/photo.png",
+            type: "image/png",
+          },
+        ],
+        ...(data.capture
+          ? {
+              screen: {
+                file: "screen.png",
+                width: 1280,
+                height: 900,
+                capturedAt: new Date().toISOString(),
+              },
+            }
+          : {}),
+      },
+    });
+  });
+  await page.route("**/artifacts/*/visual/*", (route) =>
+    route.fulfill({ body: png, contentType: "image/png" }),
+  );
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(base + "/chat");
@@ -145,6 +180,25 @@ try {
   checks.push(
     "Auto makes a visible runtime decision, no input gates, saved answer restored",
   );
+  assert.ok((await page.locator(".journey-track li").count()) > 0);
+  await page.locator(".read-answer").click();
+  await page.locator("#answer-dialog .markdown-body h3").first().waitFor();
+  assert.ok(
+    (
+      await page.locator("#answer-dialog .markdown-body").textContent()
+    ).includes("未確認"),
+  );
+  await page.screenshot({ path: join(artifacts, "answer-note.png") });
+  await page.locator("#answer-close").click();
+  await page.locator(".candidate-card").first().click();
+  await page
+    .locator("#answer-dialog .markdown-body blockquote")
+    .first()
+    .waitFor();
+  await page.locator("#answer-close").click();
+  checks.push(
+    "Diagram shows source-backed itinerary and candidates; click opens formatted Markdown with original caveats and citations",
+  );
   assert.ok((await page.locator(".artifact-card").count()) > 0);
   await page.locator("#artifact-jump").click();
   const original = await page
@@ -153,6 +207,7 @@ try {
     .getAttribute("href");
   assert.match(original, /^https:\/\//);
   await page.locator(".artifact-open").first().click();
+  await page.getByRole("tab", { name: "本文・引用", exact: true }).click();
   await page.locator(".artifact-preview-body").waitFor();
   assert.ok(
     (await page.locator(".artifact-preview-body").textContent()).length > 10,
@@ -160,6 +215,13 @@ try {
   assert.equal(
     await page.locator(".artifact-external").getAttribute("href"),
     original,
+  );
+  await page.getByRole("tab", { name: "ページ画像", exact: true }).click();
+  await page.locator(".preview-photo").waitFor();
+  await page.getByRole("tab", { name: "Web画面", exact: true }).click();
+  await page.locator(".web-screen").waitFor();
+  checks.push(
+    "Preview switches among page imagery, captured browser screen and saved text with separate timestamps",
   );
   await page.screenshot({ path: join(artifacts, "artifact-preview.png") });
   await page.locator("#artifact-close").click();
@@ -176,6 +238,7 @@ try {
       `overflow at ${width}px`,
     );
     await page.locator(".artifact-open").first().click();
+    await page.getByRole("tab", { name: "本文・引用", exact: true }).click();
     await page.locator(".artifact-preview-body").waitFor();
     const box = await page.locator("#artifact-dialog").boundingBox();
     assert.ok(
@@ -183,9 +246,16 @@ try {
       `preview at ${width}px`,
     );
     await page.locator("#artifact-close").click();
+    await page.locator(".read-answer").click();
+    const noteBox = await page.locator("#answer-dialog").boundingBox();
+    assert.ok(
+      noteBox.x >= 0 && noteBox.x + noteBox.width <= width + 1,
+      `Markdown note at ${width}px`,
+    );
+    await page.locator("#answer-close").click();
   }
   checks.push(
-    "Answer, source cards and preview dialog fit seven viewport widths from 320 to 1440px",
+    "Answer, Markdown note, source cards and preview dialog fit seven viewport widths from 320 to 1440px",
   );
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: join(artifacts, "auto-mobile.png") });
@@ -222,6 +292,7 @@ try {
   assert.equal(await page.locator(".answer").count(), 0);
   await page.screenshot({ path: join(artifacts, "stream-artifact.png") });
   await page.locator(".artifact-open").click();
+  await page.getByRole("tab", { name: "本文・引用", exact: true }).click();
   await page.locator(".artifact-preview-body").waitFor();
   assert.ok(
     (await page.locator("#artifact-content h2").textContent()).includes(
@@ -233,6 +304,7 @@ try {
   finishStream();
   await page.locator(".answer").waitFor();
   await page.locator(".artifact-open").click();
+  await page.getByRole("tab", { name: "本文・引用", exact: true }).click();
   await page.locator(".artifact-preview-body").waitFor();
   assert.ok(
     (await page.locator(".artifact-preview-body").textContent()).length > 420,

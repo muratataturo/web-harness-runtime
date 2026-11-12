@@ -24,6 +24,7 @@ for (const required of [
   "dist/cli.js",
   "dist/public-mcp.js",
   "web/chat.html",
+  "web/presentation.js",
   "config/runtime-dependencies.json",
   "docs/evidence/delivery-results.json",
 ])

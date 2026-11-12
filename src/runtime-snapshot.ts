@@ -11,6 +11,7 @@ export const snapshotAssets = [
   "web/style.css",
   "web/chat.html",
   "web/chat.js",
+  "web/presentation.js",
   "web/chat.css",
   "config/trusted-urls.json",
   "config/runtime-dependencies.json",

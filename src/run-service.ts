@@ -227,6 +227,7 @@ export class RunService {
     return {
       ...a,
       body: page?.text || a.preview,
+      images: page?.images,
       excerptOnly: !page?.text,
       quotes: (full?.evidence ?? r.task?.evidence ?? []).filter(
         (e) => e.url === a.url,

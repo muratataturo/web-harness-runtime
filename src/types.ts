@@ -22,6 +22,7 @@ export interface Source {
   guidance: string;
 }
 export interface Page {
+  images?: { url: string; alt: string }[];
   productOffer?: import("./product-offer.js").ProductOffer;
   acquisition?: {
     kind: "browser-dom" | "public-html";

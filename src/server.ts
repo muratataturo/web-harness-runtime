@@ -14,6 +14,7 @@ import { doctorOpenShell } from "./sandbox.js";
 import { ImprovementStore, decideImprovement } from "./improvement.js";
 import { codexSandboxStatus } from "./codex-sandbox.js";
 import { strataConnection } from "./opencode.js";
+import { VisualPreviewStore } from "./visual-preview.js";
 import { RunService, runtimeCapabilities } from "./run-service.js";
 const webRoot = fileURLToPath(new URL("../web/", import.meta.url));
 function send(res: ServerResponse, status: number, body: unknown) {
@@ -40,6 +41,7 @@ export function createWorkbenchServer(
   runs = new RunService(taskStore),
 ) {
   const streams = new Set<ServerResponse>();
+  const visuals = new VisualPreviewStore(taskStore.root);
   const server = createServer(async (req, res) => {
     try {
       const host = req.headers.host ?? "";
@@ -100,6 +102,27 @@ export function createWorkbenchServer(
         if (req.method === "GET") send(res, 200, await runs.list());
         else if (req.method === "POST")
           send(res, 202, await runs.create(await body(req)));
+        else send(res, 405, { error: "GET / POST only" });
+        return;
+      }
+      const visualMatch = path.match(
+        /^\/api\/runs\/([a-zA-Z0-9-]+)\/artifacts\/([a-zA-Z0-9-]+)\/visual(?:\/(image-[0-2]|screen\.png))?$/,
+      );
+      if (visualMatch) {
+        const artifact = await runs.artifact(visualMatch[1]!, visualMatch[2]!);
+        if (req.method === "GET" && visualMatch[3]) {
+          const image = await visuals.file(artifact, visualMatch[3]);
+          res.writeHead(200, {
+            "Content-Type": image.type,
+            "Cache-Control": "private, max-age=600",
+            "X-Content-Type-Options": "nosniff",
+          });
+          res.end(image.bytes);
+        } else if (req.method === "POST" && !visualMatch[3]) {
+          const input = await body(req);
+          send(res, 200, await visuals.load(artifact, input.capture === true));
+        } else if (req.method === "GET" && !visualMatch[3])
+          send(res, 200, (await visuals.cached(artifact)) ?? null);
         else send(res, 405, { error: "GET / POST only" });
         return;
       }
@@ -301,6 +324,7 @@ export function createWorkbenchServer(
       const staticFiles: Record<string, [string, string]> = {
         "/": ["index.html", "text/html"],
         "/chat": ["chat.html", "text/html"],
+        "/presentation.js": ["presentation.js", "text/javascript"],
         "/chat.js": ["chat.js", "text/javascript"],
         "/chat.css": ["chat.css", "text/css"],
         "/app.js": ["app.js", "text/javascript"],
