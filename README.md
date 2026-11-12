@@ -1,279 +1,239 @@
-# Relay / web-harness-runtime
+# web-harness-runtime
 
-**ローカル Chat / MCP / 配布CLIを追加しました。** [具体的なusage](docs/usage.md) / [今回の実回答・時間・費用](docs/delivery-results.md)。起動済みの画面: http://127.0.0.1:4311/chat 。Recruit/Rakutenスタイル、Approval/Auto、保存済み実測の再生と実調査を切り替えられます。`npm run sandbox:local -- run-codex chat --port 4311` でCodex MicroVMを使うChatを起動し、`npm start -- clients --url http://127.0.0.1:4311` で4種類のcoding agent用MCP設定を生成できます。
+自然言語の相談と複数の公開URLを受け取り、ページの詳細取得・引用・条件の照合を行う自律調査runtimeです。同じ調査を **Chat UI・CLI・MCP** から利用できます。Recruit／楽天の美容、宿泊、飲食、住居、車、求人などを対象にしています。予約・購入・応募は行いません。
 
-**目標をチームで調べ、互いに見直し、大切な選択を人に戻す自律タスク runtime。** 公式CodexのChatGPTログインを既定の調査エンジンとし、Claude Code Sonnet 5.5 / Haiku 5.5、pi + OpenRouter無料モデル、既存OpenCode × Strataも選択できるCLIです。Vercel agent-browserで調査し、Grok Bot / OpenMausBot / Rakazoの公開画面を参照した会話中心のWeb Mockと、self-host VM向けNVIDIA OpenShell executorを備えています。
+Chatは白黒を基調に青・シアンを合わせたローカルUIです。調査の進捗を順次表示し、回答を行程フロー・写真付き候補カードで見渡せます。カードを押すとMarkdownの詳細、取得リンクを押すと「ページ画像／Web画面／本文・引用」を開けます。
 
-## Web Mock を試す
+## 1. キーなしでChatを体験する
+
+必要なものはNode.js 22以降とnpmです。リポジトリのディレクトリで実行します。
 
 ```sh
 npm ci
-npm run web
-# http://127.0.0.1:4310
-```
-
-API キーなしで体験できます。左の Bot 一覧、中央のチーム会話、右の Team Computer を使い、「箱根の2泊3日」と「湘南の暮らし」の2シナリオを操作できます。体験データは架空で、宿・店・求人・物件・車両の実在や価格を保証しません。独自の目標文や追加のこだわりは保存しますが、体験モードの旅程・レビューはこの2シナリオのテンプレートです。
-
-1. 旅／暮らしの主役を、おすすめ案と代替案から選ぶ。予算やこだわりも入力。
-2. 独立タスクは最大2件を並列実行。依存タスクは前提が揃うまで待つ。
-3. チーム会話でレビュー指摘→担当への差し戻し→再調査を確認。
-4. 温泉・夕食などのご褒美、または仕事・内見・固定費など次の一歩を選ぶ。
-5. 選んだ内容に合わせたプランを見る。更新しても履歴と承認が残る。
-
-方針変更では旧承認を再利用せず、改訂番号を上げて再計画します。現段階では影響タスク限定の差分再計画ではなく、同じ目標の全タスクを作り直します。停止後に古い処理が結果を書き戻さないことも検証しています。
-
-UI の「実調査に切り替え」は、選択エンジンの利用枠（既定はCodexのChatGPTログイン）を実際に使う操作です。実調査は数分かかり、公開サイトにアクセスできない場合もあります。体験モードとは別の明示操作にしています。
-
-![会話とComputerの画面](docs/screenshots/welcome.png)
-
-## CLI で実サイトを調べる
-
-Node.js 22 以降が必要です。既存 `.env` は上書きしないでください。
-
-```sh
-# 公式Codex CLIをインストール済みであること（動作確認: 0.167.0）
-codex login
-# .envはOpenRouterなど追加設定にのみ必要。既存ファイルを上書きしない。
-npm run browser:install
 npm run build
-npm start -- codex-doctor
-npm start -- doctor
-
-npm start -- run '髪質改善で有名な渋谷の駅から近い韓国アイドル風になれるサロンを教えて欲しい'
-
-npm start -- run '京都駅から近い和食ランチを予算3000円以内で2件比較して' \
-  --url https://www.hotpepper.jp/top_party38/SA22/Y435/X434/G004/
-
-# 複数URLの初期優先順と、モデルによる必要な情報源の選択
-npm start -- run '渋谷で髪質改善と韓国風ヘアが得意なサロンを比較して' \
-  --url https://www.jalan.net/ https://beauty.hotpepper.jp/ https://www.hotpepper.jp/
+npm run chat -- --port 4311
+# ブラウザで http://127.0.0.1:4311/chat を開く
 ```
 
-`run` の既定 URL は Hot Pepper Beauty。検索・エリア・個別詳細 URL を起点にもできます。開発時は `npm start --` の代わりに `npm run dev --`。`--max-steps`、`--max-pages`、`--timeout`、`--model`、`--json` を指定できます。
+左側で「一日のお出かけ」「これからの暮らし」「根拠から選ぶ」を選び、「保存済み実測で体験」のまま相談を始めます。保存済みの公開サイト調査を再生するため、APIキー・モデルへのログイン・OpenShellは不要です。新しい質問に対する推論ではありません。条件を変えるときは「実調査」を選びます。
+
+| 進め方 | 動作 |
+| --- | --- |
+| Approval | 調査前に推奨案と選択肢を表示。「この選択で進む」を押すまで実調査を始めません。調査後に未確認が残ると、受領・追加調査・同一候補のURL追加を選べます |
+| Auto | 推奨方針をruntimeが選び、承認待ちを作りません。未確認は未確認と明記して部分回答を返します |
+
+回答後は入力欄を折り畳みます。「条件を変えて、もう一度相談する」から再度開けます。上部の「取得リンク」から出典一覧へ移動できます。本文は保存済みの取得記録です。写真は掲載元の公開画像、Web画面はagent-browserによる実際のキャプチャで、調査本文とは別の取得日時を表示します。表示用の取得はローカルChat側で行い、調査の判断や引用を更新しません。取得できない画像・画面は代替の写真で埋めません。
+
+従来のチーム会話型Workbenchは `http://127.0.0.1:4311/`。単独で試す場合は `npm run web`（既定ポート4310）です。Workbenchの体験モードは旅行・暮らしの架空テンプレートで、Chatの保存済み実測とは異なります。
+
+終了は起動したターミナルでCtrl+C。同じ保存先を使うdaemonは1つにし、ブラウザ・CLI・MCPで共有してください。Chat/APIはloopback専用です。
+
+## 2. 環境変数を設定する
+
+保存済み実測の再生には `.env` は不要です。実調査で追加設定が必要なら、既存ファイルを上書きせず作成します。
 
 ```sh
-npm start -- run-file examples/beauty.json
-npm start -- plan '温泉旅館を比較して' --url https://www.jalan.net/ https://beauty.hotpepper.jp/
-npm start -- models
-npm start -- quota # OpenRouter無料枠のみ。Codex利用枠とは別
-npm start -- sources
-npm start -- tasks
-npm start -- show TASK_ID --json
-npm start -- retry TASK_ID
+test -e .env || cp .env.example .env
+# .envをローカルのエディタで編集する
 ```
 
-Codexは公式App Serverのモデル一覧からアカウントの既定モデルを選び、APIキーではなくChatGPTログインを要求します。`--model` または `CODEX_MODEL` で利用可能なモデルを指定できます。APIキーやOpenRouterへの自動fallbackは行いません。実行結果に `agent` と `model` を保存します。
+CLIは作業ディレクトリの `.env` を読みます。既にプロセスへ設定された環境変数を優先します。値を変更したらdaemonを再起動してください。`.env`、認証ファイル、キーの内容をチャット・Git・コマンド引数へ貼り付けないでください。[.env.example](.env.example)には空値と設定例だけを置いています。
 
-`--agent pi-openrouter`（または `RUNTIME_AGENT=pi-openrouter`）の場合、モデルは現行 OpenRouter カタログから、無料 ID、全料金ゼロ、tools 対応、16K 以上のコンテキストを確認して選びます。`provider.max_price` もゼロに設定し、有料への fallback はしません。`OPENROUTER_MODEL` で特定の無料モデルを選べます。開始前にキー情報APIで無料残量を確認できた場合、残量0ならモデル要求を送らず次の回復時刻を返します。日次枠切れと短期の429を区別し、エラー後に同じ要求を繰り返しません。
+### 共通設定
 
-Codexでの実測は、楽天トラベル2宿と複数ドメインから選んだSUUMO2物件が `succeeded`。Hot Pepper Beautyはサロン2件の詳細取得と日本語比較を完了し、「韓国アイドル風」への厳密な適合を未確認として `partial`。79テストと実測の詳細は [Codex接続と検証](docs/codex.md) を参照。
+| 変数 | 既定値 | 用途 |
+| --- | --- | --- |
+| `RUNTIME_AGENT` | `codex` | `codex` / `claude-code` / `pi-openrouter` / `opencode` |
+| `RUNTIME_EXECUTOR` | `local` | `local`はホストプロセス、`openshell`は設定済みsandbox。未接続時にlocalへ自動切替しません |
+| `RUNTIME_DIR` | `.runtime` | タスク・相談・承認・ページ本文・画像・ログ等の保存先 |
+| `HARNESS_URL` | `http://127.0.0.1:4310` | `runs` CLI / MCP bridgeの接続先daemon。このREADMEのChat例は4311なので、接続先を4311へ設定するか`--endpoint` / `--url`を明示 |
+| `TRUSTED_URLS_FILE` | `RUNTIME_DIR/trusted-urls.json` | 実行時のtrusted URL台帳。未作成なら同梱台帳を期限確認して利用 |
+| `AGENT_BROWSER_EXECUTABLE_PATH` | agent-browserのブラウザ | 既存Chrome/Chromiumを使う場合の実行ファイルの絶対パス |
 
-## Claude Code・追加調査・trustedレベル
+### エンジン別設定
+
+| 変数 | 必要な場合・意味 |
+| --- | --- |
+| `CODEX_BIN` | Codex CLIのパス。未指定はPATH上の`codex` |
+| `CODEX_MODEL` | `codex-doctor`で利用可能なモデルを指定。未指定はアカウントの既定モデル |
+| `CLAUDE_BIN` | Claude Code CLIのパス。未指定はPATH上の`claude` |
+| `CLAUDE_MODEL` | 実装が対応する`claude-sonnet-5-5`（既定）または`claude-haiku-5-5`。利用できる契約・CLIが必要 |
+| `OPENROUTER_API_KEY` | pi/OpenRouterでのみ必要な秘密値。Codex・Claudeのサブスク認証とは別 |
+| `OPENROUTER_MODEL` | 現在のカタログに存在する無料・全料金ゼロ・ツール対応モデル。未指定は条件を満たすモデルを選択 |
+| `OPENCODE_BIN` | 既存OpenCodeの実行パス。検証構成の既定値は`/private/tmp/strata-opencode/node_modules/.bin/opencode`。別環境では明示設定 |
+| `OPENCODE_MODEL` | 既定は`strata-colab/qwen3.8-flash-next-iq2_xs`。既存Strataのモデル一覧に一致する必要あり |
+| `STRATA_BASE_URL` | 既存StrataのOpenAI互換endpoint。既定は`http://127.0.0.1:18081/v1` |
+| `STRATA_KEY_FILE` | Strataキーを保存したファイルの絶対パス。既定は`/private/tmp/strata-colab-api-key`。Git管理外に置く |
+| `STRATA_API_KEY` | キーファイルの代わりに環境から渡す秘密値。指定時は`STRATA_KEY_FILE`より優先 |
+
+CodexはChatGPTログイン、Claude Codeは自身のサブスクログインを使います。この接続でOpenAI / Anthropic APIキーを代用しません。モデル名は実装・実測時点の対応名で、契約や提供状況により使用できない場合は停止します。pi/OpenRouterは無料枠切れでも有料モデルへfallbackしません。
+
+## 3. ローカルで実調査する
+
+利用する公式エージェントCLIを別途導入・ログインしてください。Codexの場合：
+
+```sh
+codex login
+npm run browser:install
+npm start -- codex-doctor
+RUNTIME_EXECUTOR=local RUNTIME_AGENT=codex npm run chat -- --port 4311
+```
+
+Chatで「実調査」を選び、質問と公開URLを入力します。`AGENT_BROWSER_EXECUTABLE_PATH`で既存Chromeを指定するならブラウザのダウンロードを省略できます。実調査はモデルの利用枠と外部サイト通信を使い、数分かかる場合があります。localはMicroVM隔離ではありません。
+
+CLIから直接調べる例：
+
+```sh
+npm start -- run 'この本の書名・税込価格・ISBNを引用つきで教えて' \
+  --agent codex --url https://books.rakuten.co.jp/rb/18577690/ \
+  --mode auto --json
+
+npm start -- run-file examples/recruit-day-out.json --mode approval --json
+npm start -- run-file examples/recruit-life-plan.json --mode auto --json
+
+# 既存の未達を診断・追加調査。条件を満たせなければ部分回答を保持
+npm start -- improve TASK_ID --mode auto --iterations 1 --timeout 180 --json
+npm start -- show TASK_ID --json
+```
+
+別のエンジンを使う場合：
 
 ```sh
 npm start -- claude-doctor
-npm start -- trusted run 'この2宿を比較して' --source rakuten-travel --agent claude-code --model claude-sonnet-5-5
-npm start -- trusted run 'この2宿を比較して' --source rakuten-travel --agent claude-code --model claude-haiku-5-5
-npm start -- trusted run 'この2宿を比較して' --source rakuten-travel --agent pi-openrouter
-npm start -- trusted list --all
-npm start -- trusted list --min-level 4 --json
+npm start -- run-file examples/recruit-day-out.json \
+  --agent claude-code --model claude-sonnet-5-5 --mode auto --json
+npm start -- models --agent pi-openrouter
+npm start -- quota
+npm start -- run-file examples/recruit-day-out.json --agent pi-openrouter --mode auto --json
+npm start -- doctor --agent opencode
+npm start -- run-file examples/recruit-day-out.json --agent opencode --mode auto --json
 ```
 
-不足情報は同一対象の子ページ・描画を追加調査し、解消しなければ未確認を残します。楽天市場は対象商品の公開Microdataから価格帯を取得できるようになりました。trustedはL0〜L4で情報量を分類し、L3以上を登録・実行対象とします。現行台帳はL3:4URL / L4:20URL。L4は希望条件への完全適合や在庫の保証ではありません。[接続・深掘り・レベルの仕様と実測](docs/engines-and-depth.md)。
+OpenCodeは既存Strataへの接続に限定します。元の会話へattachせず独立したセッションを作り、GPUの新規割当・再起動はしません。詳しくは[エンジンと追加調査](docs/engines-and-depth.md)、[Codex / Strata](docs/codex-strata.md)。
 
-## Recruit・楽天の実行結果
+## 4. OpenShell / MicroVMでCodexを実行する
 
-[16サービスのCodex実測](docs/codex-family-results.md)を追加しました。11サービスで詳細2件以上を取得。当時は楽天市場の仕様を読めても販売価格が不足し、trustedから除外しました。その後のMicrodata対応で対象商品の価格帯を取得し、再検証して登録しています。Indeed・楽天不動産・楽天Car中古車・楽天Careersは個別比較に進めていません。
+| 調査エンジン | local | OpenShell |
+| --- | --- | --- |
+| Codex | 対応 | VM内でログインした専用workerを直列で再利用し、実行後stop |
+| pi / OpenRouter | 対応 | gateway providerを使い、調査ごとにsandboxを作成 |
+| Claude Code / OpenCode | 対応 | 調査プロセスのVM内認証は未対応。MCPクライアントとしての利用は可能 |
+
+Apple Silicon MacのローカルMicroVM手順です。Docker、`e2fsprogs`、OpenShell gateway用とChat用の別ターミナルが必要です。Linux / remote self-host環境は[OpenShell手順](docs/openshell.md)を参照してください。
 
 ```sh
+# 初回：依存とイメージを準備
+brew install e2fsprogs
 npm run build
-npm run eval:families
-npm run eval:families -- recruit-jalan rakuten-travel
+docker build -f infra/openshell/Dockerfile -t web-harness-runtime:local .
+docker build -f infra/openshell/Dockerfile.codex -t web-harness-codex:local .
+npm run sandbox:local -- setup
+npm run sandbox:local -- start
+# gatewayはこのターミナルで維持する
 ```
 
-## サービスごとの品質を確認する
+別ターミナルで初回登録・本人ログインを行います。ホストの認証ファイルをコピーしません。
 
 ```sh
-npm start -- eval --list
-# APIを使わず、検索一覧→個別詳細の導線だけを切り分ける
-npm start -- eval --browser-only --case gourmet-kyoto-lunch --timeout 90
-npm start -- eval --browser-only --case carsensor-family-sienta --timeout 90
-# Codexで自然言語から比較回答までを評価（OpenRouter版は --agent pi-openrouter）
-npm start -- eval --case gourmet-kyoto-lunch --parallel 1 --timeout 360
+npm run sandbox:local -- register
+npm run sandbox:local -- codex-setup
+npm run sandbox:local -- codex-login
+# 公式のdevice-code画面で本人がログイン。コードや認証ファイルを共有しない
+npm run sandbox:local -- run-codex chat --port 4311
 ```
 
-5サービスの条件付きクエリは [examples/service-evals.json](examples/service-evals.json)。`--retrieval-only`（`--browser-only`と互換）で返る `mode: retrieval-only / details_verified` は領域別必須項目まで確認した詳細取得の成功であり、自然言語回答の合格ではありません。
+導入済みならgatewayを起動し、最後の`run-codex chat`だけで再利用します。認証済みworkerを再作成しないでください。結果は回収後にVMをstopしますが、認証ディスクは保持します。piを使う場合は `.env` のOpenRouterキーを設定したうえで `npm run sandbox:local -- init-provider` を実行し、`npm run sandbox:local -- run chat --port 4311` を使います。
 
-| サービス | 今回の実測 |
+通常CLIから設定する場合の環境変数：
+
+| 変数 | 用途 |
 | --- | --- |
-| Hot Pepper Beauty | 正式な `/slnH.../` 形式を修正し、一覧→個別サロン2件の詳細を取得 |
-| Hot Pepper グルメ | 検索一覧→ランチ詳細2件の取得成功。引用修復を改善、改善後LLM回答は再評価が必要 |
-| カーセンサー | 一覧→個別車両2台の取得成功。総額・走行距離の不一致事例を確認 |
-| じゃらん | 公開HTMLをWindows-31Jで解析し、箱根一覧→宿詳細2件を取得。温泉・露天風呂・アクセスの本文を確認 |
-| SUUMO | 公開HTMLから検索結果本体→物件詳細2件を取得。家賃・管理費・間取り・対象駅の本文を確認 |
-| Indeed | Request Blocked。回避せず、取得不可として扱う |
+| `OPENSHELL_GATEWAY` | 登録済みgateway名。通常のopenshell executorでは必須 |
+| `OPENSHELL_BIN` | OpenShell CLIの絶対パス。未指定はPATH上の`openshell` |
+| `OPENSHELL_IMAGE` | pi用イメージ。既定は`web-harness-runtime:local` |
+| `OPENSHELL_PROVIDER` | OpenRouter用gateway provider名。既定は`wh-pi-router`。登録済みprovider名と一致させる |
+| `OPENSHELL_CODEX_SANDBOX` | Codex専用worker名。既定は`wh-codex` |
+| `OPENSHELL_CODEX_IMAGE` | Codex用イメージ。既定は`web-harness-codex:local` |
 
-じゃらん・SUUMOはサーバーが公開するHTMLを優先し、他サイトや動的ページにはagent-browserを利用します。取得方式・HTTP状態・文字コードをページに記録し、公開HTMLの取得をブラウザ描画確認と混同しません。両方式とも同じ引用・候補検証を通します。
+Chat/APIと承認処理はホスト、調査プロセスはMicroVMです。表示用の画像・Web画面はローカルChat側で取得します。MicroVM内で成功した調査の取得経路は公開HTMLで、ChromiumのDOM取得には未解決の制約があります。直近の再実行ではポリシー適用待ちによる失敗もあり、接続障害を取得成功とは扱いません。[構成・実測・制約](docs/codex-strata.md)、[2モードとVM運用](docs/runtime-modes.md)。
 
-以前のOpenRouter実評価では無料日次枠（50件）を消費したため、当時の5サービスの自然言語回答品質が合格したとはしていません。[実測レポート](docs/cli-service-validation.md) に task ID、具体的な失敗、改善、再評価手順を記録しました。引用は取得本文との一致と同一対象への対応を検証し、一覧ページや制限画面の候補化を拒否します。引用の意味と主張が一致するかには、モデルの誤りが残り得ます。
+## 5. daemonをCLI / MCPから操作する
 
-## 詳細取得を完了条件にする trusted URL台帳
+Chatを先に起動しておきます。`runs`は相談IDを返し、同じ相談がChatの履歴にも出ます。
 
 ```sh
-# 推論APIを使わず一覧→個別詳細を確認。楽天ぐるなびも含む
-npm start -- trusted verify --family rakuten --parallel 2 --timeout 75
-# 制限・終了・未対応が含まれる一括検証の終了コードは2
+npm start -- runs start 'この本の税込価格と直筆サイン付きを確認して' \
+  --url https://books.rakuten.co.jp/rb/18577690/ \
+  --agent codex --mode approval --confirm-live --endpoint http://127.0.0.1:4311
+npm start -- runs list --endpoint http://127.0.0.1:4311
+npm start -- runs get RUN_ID --endpoint http://127.0.0.1:4311
+# getのgate.id / revision / choices[].idを指定
+npm start -- runs decide RUN_ID --gate GATE_ID --revision 1 --choice balance \
+  --endpoint http://127.0.0.1:4311
+npm start -- runs cancel RUN_ID --endpoint http://127.0.0.1:4311
+
+# エージェント用設定を生成する。既存のユーザー設定は変更しない
+npm start -- clients --url http://127.0.0.1:4311
+```
+
+`.runtime/clients/`にCodex / Claude Code / pi / OpenCode用設定ができます。生成された絶対パスを各クライアント設定へ組み込みます。MCPサーバーは `node /absolute/path/to/repository/dist/cli.js mcp --url http://127.0.0.1:4311` のstdio bridgeです。MCPのstdoutを壊さないよう、クライアントからは`npm start`ではなくNodeを直接起動します。
+
+主なツールは `harness_start` / `harness_get` / `harness_decide` / `harness_cancel`。Approvalの選択は返されたgateとrevisionを使います。MCPクライアントを閉じてもdaemon側の調査は続きます。Chat / CLI / MCPの設定例、HTTP進捗配信、Docker・SSH tunnelでの利用は[詳細usage](docs/usage.md)を参照してください。
+
+配布CLIの作成は `npm run package:cli`。`.runtime/releases/`へtarballを生成し、必要ファイルと秘密ファイルの非混入を検査します。別環境では依存・各エージェントのログイン・daemonの起動が別途必要です。
+
+## 6. trusted URL・自己改善・評価
+
+トップや一覧が開くだけでは取得成功にしません。個別対象の本文、文字品質、領域別の必須項目を確認してtrustedへ登録します。台帳はL0〜L4の情報量分類と有効期限を持ちます。詳細を取得できたことと、希望条件を満たすことは別です。
+
+```sh
 npm start -- trusted list --all
-npm start -- trusted list --json
-npm start -- trusted plan '箱根の温泉宿を比較して'
-npm start -- trusted run '温泉とアクセスを重視して2件比較して' --source rakuten-travel
+npm start -- trusted verify --family rakuten --parallel 2 --timeout 75
+npm start -- trusted run '温泉とアクセスを重視して比較して' --source rakuten-travel
+npm start -- run-file examples/recruit-day-out.json --self-improve --mode auto --json
+npm start -- benchmark check
+npm start -- feedback add TASK_ID --rating 4 --helpful yes
 ```
 
-トップや一覧が開くだけでは完了にしません。個別対象のURL、本文、文字品質、住所や価格など領域別必須項目を検査し、各候補の詳細取得を満たした場合だけ調査タスクを `succeeded` にします。推薦条件への適合も従来通り別途検査します。未知のドメイン・詳細形式は `unsupported` になり、取得成功にはしません。
+未達が残れば、同じ対象の子ページ・描画・引用を追加確認します。条件を勝手に変更せず、予算・回数の上限で止めます。未達ゼロを保証する機能ではありません。外部A2A標準の互換実装ではなく、内部メッセージによる割当・レビューです。口コミは店舗等への評判、feedbackは回答への評価として分けます。凍結ベンチマークは暫定ラベルであり、自由文全体の意味的正しさを保証しません。
 
-source登録の検証では異なる対象IDの詳細2件以上を確認し、合格した**個別URLだけ**を台帳に記録します。タイトル、確認日時、方式、項目の短い引用、本文SHA-256を保持。有効期限は7日、期限切れは使用不可、再検証失敗では登録を外します。台帳の更新はプロセス間ロックで保護します。trustedは「詳細取得できた」という意味で、ページの命令・広告や推薦品質を信頼する意味ではありません。価格・在庫・空室は再取得時点でも確認が必要です。
+- [trusted URLの仕様](docs/trusted-urls.md)
+- [自己改善ループ](docs/self-improvement.md)
+- [正解ラベル・口コミ・回答評価](docs/semantic-quality.md)
+- [実回答・時間・費用・現在の制約](docs/delivery-results.md)
+- [Recruit / 楽天の実測](docs/codex-family-results.md)
+- [3ペルソナの一日遊び結果](docs/day-out-results.md)
 
-[検証済み台帳](config/trusted-urls.json)を初期データとして同梱し、実行時の更新はgitignore対象の `.runtime/trusted-urls.json` に保存します。`TRUSTED_URLS_FILE` または `RUNTIME_DIR` で保存先を変更できます。未作成の実行時台帳は同梱データを読み、期限判定を通して利用します。新しい検証対象の入口は [source-catalog.json](config/source-catalog.json)、詳細URL形式は `src/sources.ts`、必須項目は `src/detail-contracts.ts` に追加します。
+## 7. 保存先と安全な共有
 
-楽天の対象は美容・宿泊・飲食・住居・車・求人と、旅行/生活に関連するゴルフ・本・買い物です。金融や通信を含む楽天全サービスを検証したものではありません。実測の対象URLと失敗・未対応の区分は [楽天・trusted URL検証](docs/trusted-urls.md) に記録しています。
+`.runtime/`にはページ本文、会話、承認、画像、ログ、VM設定や認証関連の状態が入ります。実際の利用では相談内容に個人情報が含まれ得るため、ディレクトリ全体を共有しないでください。`.env`、各エージェントの認証、鍵・証明書、DB、VMディスク、生成パッケージ・大きな成果物もGitへ入れません。`.gitignore`とDocker contextのallowlistで除外しています。
 
-## 目標ルーターと内部A2A
+`docs/evidence/`は公開URLを調べた検証例です。ローカルユーザー名を含むパスは匿名化しています。時間・トークン・費用はその当時の実測で、再生時の費用ではありません。サブスクの追加API課金0を、VM/GPUや契約料金も含む総実費0とは扱いません。
 
-```mermaid
-flowchart TD
-  G[目標] --> A{方針の承認}
-  A -->|旅行| T1[宿]
-  A -->|旅行| T2[食事]
-  A -->|旅行| T3[観光]
-  A -->|暮らし| L1[仕事]
-  A -->|暮らし| L2[住居]
-  L1 --> L3[車]
-  L2 --> L3
-  T1 --> R[横断レビュー]
-  T2 --> R
-  T3 --> R
-  L1 --> R
-  L2 --> R
-  L3 --> R
-  R --> F[差し戻し・再調査]
-  F --> D{こだわりの選択}
-  D --> P[統合・候補表示]
-```
+共有前に `npm run release:check` を実行してください。追跡対象の秘密ファイル名、既知の認証情報パターン、個人ホームの絶対パス、1MiBを超えるファイルを検査します。実行ログやスクリーンショットの共有内容は別途確認が必要です。サイトのCAPTCHA・ログイン・アクセス制限を回避しません。
 
-旅行なら宿・食事・観光が独立し、最大2件同時実行。暮らしなら仕事と住居を並列に、車は両方の条件を確認後に実行します。前提が失敗・未確認なら依存タスクを進めません。
-
-目標・改訂・タスク・配送・関連 ID、送信元・送信先、message kind、hop を持つ内部メッセージで引き継ぎます。メンバー確認、重複配送防止、hop上限を設けています。**外部 A2A 標準の互換実装ではありません。** 体験モードのレビューはスクリプト。実調査モードの横断レビューは未確認条件等のルール検証で、交通・料金・生活の成立性を推論する独立 LLM reviewer は未実装です。
-
-実調査では複数の pi runtime を呼び出し、こだわり承認後に該当分野の確認済み候補があれば1回再調査します。生成した候補だけを表示し、取得できない分野を Mock で埋めません。実旅程の最適化・費用合算や予約実行は範囲外です。
-
-```sh
-npm start -- goal create --scenario travel
-npm start -- goal show GOAL_ID
-# show が返した gate ID、revision、choice ID を使用
-npm start -- goal decide GOAL_ID --gate GATE_ID --revision 1 --choice relax
-npm start -- goal list
-npm start -- goal revise GOAL_ID
-npm start -- goal cancel GOAL_ID
-```
-
-CLI の `goal` 操作は一つの制御プロセスで使用します。同じ保存先を複数の Web サーバーや CLI プロセスから同時に書き換える分散ロックは未実装です。Web の同一プロセス内の二重承認と競合はテストしています。
-
-## self-host VM / OpenShell
-
-[導入手順・ポリシー・検証状況](docs/openshell.md) を参照してください。
-
-```sh
-docker build -t web-harness-runtime:local -f infra/openshell/Dockerfile .
-npm run test:image
-
-# dry-run: VMへ接続せず、発行計画とpolicyを保存
-npm start -- sandbox plan '箱根で温泉のある宿を比較して' \
-  --gateway selfhost --url https://www.jalan.net/
-
-npm start -- sandbox doctor --gateway selfhost
-# 設定済みgateway/providerへ実sandboxを発行
-npm start -- sandbox run '箱根で温泉のある宿を比較して' \
-  --gateway selfhost --url https://www.jalan.net/
-```
-
-Web/goal router の実調査を sandbox ごとに発行する場合、ホストの `.env` に設定します。
-
-```dotenv
-RUNTIME_EXECUTOR=openshell
-OPENSHELL_GATEWAY=selfhost
-OPENSHELL_IMAGE=web-harness-runtime:local
-OPENSHELL_PROVIDER=web-harness-openrouter
-```
-
-`src/executors.ts` が各調査を別 sandbox に割り当て、downloadした `task.json` を目標に関連付けます。実キーは gateway provider で保持し、sandbox 内は placeholder を使います。APIキーを image、task JSON、ブラウザに渡しません。control plane の承認とルールレビューはホスト側です。
-
-Linux arm64 イメージのビルドと、秘密・ネットワークなしコンテナ内での Node/Pi/agent-browser/Chromium 起動・ページ取得を確認しました。**接続先 VM/gateway が未指定のため、実 OpenShell 発行・credential rewrite・Landlock 下での起動は未検証**です。Docker の検証を OpenShell の検証と同一視しません。sandbox は成果物回収後も retain するため、状態を確認して stop/delete する運用が必要です。
-
-## 保存・制限
-
-`.runtime/tasks/` にタスク、ページ本文、引用、JSONLイベント、pi会話、回答を保存。`.runtime/goals/` に目標・選択・改訂・メッセージ・プラン、`.runtime/sandbox-plans/` に発行計画と成果物を保存します。`.env` / `.runtime` / `.pi` / node_modules / dist は Git から除外し、Docker context も allowlist に制限します。
-
-単一調査の既定は70ステップ（モデル要求＋ツール呼び出し）、12ページ、600秒。目標内の初回実調査は各50ステップ・7ページ・210秒、こだわり再調査は1回・35ステップ・5ページ・180秒です。並列上限2は目標ごとの上限で、目標を横断する分散的な同時実行制御ではありません。
-
-単一タスクの終了コードは成功0、部分回答2、失敗・時間切れ・候補なし1、中断130。`retry` は新規調査で、元会話の途中からの再開ではありません。強制終了の途中状態は Web 再起動時に interrupted とし、再計画します。
-
-提供ツール以外の shell/ファイル編集をモデルに渡さず、公開HTTPS・許可host・固定DOM抽出コードで閲覧します。公開HTMLの転送先もホストと公開IPを検証し、スクリプトを実行せず、本文を4MiBで制限します。サイトのCAPTCHA・ログイン・制限を回避しません。予約・購入・応募はしません。
-
-## 検証とレビュー
+## 8. 検証と困ったとき
 
 ```sh
 npm run check
 npm test
 npm run build
-npm run test:ui
+npm run release:check
+npm run test:chat
+UI_TEST_PORT=4326 npm run test:ui
 ```
 
-UI試験は Playwright を使います。既存 Chrome/Chromium を自動検出し、なければ `npx playwright install chromium`。`PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` も指定できます。試験では APIキーを無効にし、隔離保存先で実行します。画面画像と結果は `.runtime/ui-qa/` に出力します。GitHub Actions に型・テスト・ビルドと、APIキーなしのUX試験を設定しています。
+ブラウザ試験は既存Chrome/Chromiumを検出します。なければ `npx playwright install chromium`、独自の場所なら`PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`を設定します。結果はGit管理外の `.runtime/chat-qa/` と `.runtime/ui-qa/`。CIでは実アカウント・実キーを使いません。
 
-- [検証計画](docs/verification-plan.md)
-- [検証結果と残課題](docs/verification-results.md)
-- [参照実装と再現対応](docs/reference-ux.md)
-- [PR説明](docs/pr.md)
+| 状態 | 確認すること |
+| --- | --- |
+| ポートが使用中 | 既存daemonを利用するか`--port`と`HARNESS_URL`を揃えて変更。無関係なプロセスを停止しない |
+| 認証・モデルが見つからない | 対象エージェントのdoctorとログイン状態・モデル一覧を確認。VMとホストの認証は別 |
+| OpenRouterの無料枠切れ | `npm start -- quota`で返された回復時刻を確認。有料へ切替しない |
+| `needs_input` | Approvalの選択待ち。Chatで選ぶか`runs get`のgateを`runs decide`へ渡す |
+| ページ・画像・Web画面が取れない | 取得不可を確認し、保存本文または掲載元を開く。制限画面を確認済み情報として扱わない |
+| daemon再起動で`interrupted` | 処理は自動再送しない。保存結果を確認して新しい調査を開始する |
 
-参照: [agent-browser](https://github.com/vercel-labs/agent-browser)、[pi SDK](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/sdk.md)、[OpenRouter無料モデル](https://openrouter.ai/docs/guides/routing/model-variants/free)、[NVIDIA OpenShell](https://github.com/NVIDIA/OpenShell)、[Grok Bot](https://x.ai/bot)、[OpenMausBot](https://github.com/milind-soni/OpenMausBot)、[Rakazo](https://github.com/elie222/rakazo)。
+単発調査の終了コードは成功0、部分回答2、失敗・時間切れ1、中断130。`retry`は新規調査で、元会話の途中再開ではありません。対象範囲と未検証項目は各実測文書に記載しています。
 
-## CLIの自己改善ループ
-
-`run --self-improve` で初回の未達を診断・再計画・再実行・独立検証します。保存済みタスクは `improve TASK_ID`。既定3回、条件と必要件数は保持し、改善を採用するか旧情報を訂正した履歴を残します。許可した場合だけ `--allow-replacements` で別候補を探索します。`--mode approval`（既定）は未確認が残れば `needs_input` と選択肢を保存し、`--mode auto` は承認待ちを作らず未確認を明記した部分回答を返します。
-
-```sh
-npm start -- improve TASK_ID --iterations 3 --timeout 600
-npm start -- improve TASK_ID --allow-replacements --iterations 3
-npm start -- improvements diagnose TASK_ID
-npm start -- improvements list
-```
-
-楽天ブックスではCodexとpi/OpenRouter無料モデルの両方で、実際に初回未完了から改善1回で2冊・全10条件の比較へ回復しました。美容室のアイドル風根拠やSUUMO管理費は追加調査後も未確認が残り、未達ゼロを装わず停止しています。[仕様・CLI・実測結果](docs/self-improvement.md)。
-
-## 正解ラベル・口コミ・回答満足度
-
-8ケース28判定の凍結回帰ベンチマークと、口コミ指標・回答フィードバックを追加しました。ラベルは人の独立レビュー前の暫定版で、自由文全体の採点は別途必要です。同じ資料でCodex/Haikuを実行し、どちらも28判定が一致しました。
-
-```sh
-npm start -- benchmark check
-npm start -- benchmark run --agent codex --json
-npm start -- reviews TASK_ID --json
-npm start -- feedback add TASK_ID --rating 4 --helpful yes
-npm start -- feedback summary
-```
-
-口コミはサービスの評判、feedbackは回答への評価です。取得元・件数・期間を分け、口コミの星を回答の満足率へ変換しません。[仕様・評価の範囲・実測](docs/semantic-quality.md)。
-
-## 3ペルソナの一日遊び提案を実行
-
-```sh
-npm run eval:day-out -- --agent codex --model gpt-6.1-sol --parallel 2
-```
-
-カップル・5歳児連れ家族・一人向けに、実サイトから提案・予算・雨天代替を生成します。実測は [一日遊びの提案結果](docs/day-out-results.md)。Codexのネイティブ入力/出力/キャッシュトークンと実行時間を保存し、サブスク費用の未配賦や中断時の観測不足を明示します。API追加課金0を総コスト0とは扱いません。
-
-## Auto / Approval とローカルMicroVM
-
-`run` / `improve` / `goal create` に `--mode auto|approval` を追加しました。Webの「進め方」からも選択し、CLIの確認待ちはWebの「調査の確認待ち」から再開できます。通常CLIと自己改善も設定されたexecutorを使用し、OpenShell指定からホストへの暗黙の切替を拒否します。
-
-Apple Silicon Macの実OpenShell MicroVMで、pi/OpenRouter無料モデルに加え、CodexのChatGPTサブスクによる詳細取得・引用・回答回収を確認しました。CodexはVM内で初回ログインし、専用workerを停止・再開して使います。既存のOpenCode × Strata（Qwen3.8 Flash Next）も独立した調査セッションとして利用できます。OpenCodeのエージェントはローカル実行です。[Codex MicroVM / Strataの手順と実測](docs/codex-strata.md)、[2モードの仕様](docs/runtime-modes.md)。以前のCodexの3ペルソナ実測は引き続きローカル実行の記録です。
+参照：[agent-browser](https://github.com/vercel-labs/agent-browser)、[pi](https://github.com/badlogic/pi-mono)、[NVIDIA OpenShell](https://github.com/NVIDIA/OpenShell)。UIはRecruit／楽天の非公式ローカル実装で、各社が提供・保証するサービスではありません。

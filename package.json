@@ -27,7 +27,8 @@
     "test:chat": "node --import tsx scripts/chat-smoke.mjs",
     "clients:config": "node dist/cli.js clients",
     "opencode:client": "node scripts/opencode-client.mjs",
-    "package:cli": "npm run build && node scripts/package-cli.mjs"
+    "package:cli": "npm run build && node scripts/package-cli.mjs",
+    "release:check": "node scripts/release-preflight.mjs"
   },
   "engines": {
     "node": ">=22"

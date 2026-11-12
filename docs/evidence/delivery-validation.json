@@ -22,12 +22,12 @@
         "390px mobile: no horizontal overflow, navigation and saved answer usable",
         "No browser JavaScript errors"
       ],
-      "artifacts": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/chat-qa"
+      "artifacts": "/workspace/web-harness-runtime/.runtime/chat-qa"
     },
     "workbenchFlows": 11
   },
   "package": {
-    "artifact": "/Users/muratatatsurou/Documents/work/web-harness-runtime/.runtime/releases/web-harness-runtime-0.3.0.tgz",
+    "artifact": "/workspace/web-harness-runtime/.runtime/releases/web-harness-runtime-0.3.0.tgz",
     "shasum": "74f442a2cfa95972ae50147d531b70fc3e59ac6c",
     "integrity": "sha512-4lzQfkjWNGQnRovyUyXri69SqicOGPes7320UjunzouHu/08uu5AQ4am8j6LrCPG75ynQTdsRqohj6a57DYFsA==",
     "size": 264725,

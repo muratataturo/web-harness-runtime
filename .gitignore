@@ -13,3 +13,28 @@ playwright-report/
 test-results/
 core
 core.*
+
+# Local agent authentication, credentials and generated data
+.codex/
+.claude/
+.opencode/
+auth.json
+credentials*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+*.db
+
+# Release archives and VM / disk images belong outside Git
+*.tgz
+*.tar
+*.tar.gz
+*.zip
+*.qcow2
+*.vmdk
+*.vhdx
+*.img
+*.iso
