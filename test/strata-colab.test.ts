@@ -245,3 +245,13 @@ test("up refuses an unknown live session or occupied forwarding port before allo
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("corrupt managed connection does not silently fall back to a legacy key", async () => {
+  const root = await mkdtemp(join(tmpdir(), "strata-corrupt-"));
+  try {
+    await writeFile(join(root, "connection.json"), "{}");
+    await assert.rejects(strataSettings(root), /fallback/);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});

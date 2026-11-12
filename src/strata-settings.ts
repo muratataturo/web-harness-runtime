@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { resolve, join } from "node:path";
+import { resolve, join, isAbsolute } from "node:path";
 export const strataStateRoot = () =>
   resolve(
     process.env.STRATA_STATE_DIR ??
@@ -12,6 +12,15 @@ export async function strataSettings(root = strataStateRoot()) {
       if (e.code === "ENOENT") return undefined;
       throw e;
     });
+  if (
+    managed &&
+    (typeof managed.baseUrl !== "string" ||
+      typeof managed.keyFile !== "string" ||
+      !isAbsolute(managed.keyFile) ||
+      typeof managed.model !== "string" ||
+      !/^strata-colab\/[a-zA-Z0-9._:-]+$/.test(managed.model))
+  )
+    throw Error("Strataの管理接続が不正です。legacy設定へfallbackしません");
   return {
     baseUrl:
       process.env.STRATA_BASE_URL ??

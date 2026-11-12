@@ -715,6 +715,18 @@ export class StrataColab {
   }
   async discover() {
     const settings = await strataSettings(this.root);
+    if (!process.env.STRATA_API_KEY) {
+      const info = await lstat(settings.keyFile);
+      if (
+        !info.isFile() ||
+        info.isSymbolicLink() ||
+        (info.mode & 0o077) !== 0 ||
+        info.uid !== process.getuid?.()
+      )
+        throw Error(
+          "Strataキーファイルは本人所有の通常ファイル、権限0600で指定してください",
+        );
+    }
     const key =
       process.env.STRATA_API_KEY ??
       (await readFile(settings.keyFile, "utf8")).trim();
