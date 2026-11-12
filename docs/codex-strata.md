@@ -38,7 +38,11 @@ workerのホスト側leaseで同一アカウントの同時実行を防ぎ、Goa
 
 Codexのホスト実行は従来のread-onlyです。管理されたゲスト内だけ公式App Serverの externalSandbox を指定し、OpenShellのLandlock・非root・送信先/実行バイナリ制約を外側の隔離として使用します。公式パッケージのJSラッパーからnative本体を起動し、隣接するcodex-code-mode-hostを利用します。native本体だけを別パスへコピーして調査起動するとツールが起動せず、当初の失敗原因になりました。
 
-## 既存Strataで実行
+## Strataの起動管理と既存接続
+
+Colabの割当・モデル起動・鍵回収・SSH転送・無操作停止を行う`strata` CLIを追加しました。[新しい起動・接続ガイド](strata-colab.md)を参照してください。以下は既存endpointを利用する従来の構成と当時の実測です。通常の調査コマンドではGPUを自動割当しません。
+
+### 既存Strataで実行
 
 ```sh
 npm start -- models --agent opencode

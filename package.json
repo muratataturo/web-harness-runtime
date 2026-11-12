@@ -62,6 +62,8 @@
     "docs/evidence/recruit-theme-results.json",
     "docs/evidence/delivery-results.json",
     "scripts/opencode-client.mjs",
-    "benchmarks/*.json"
+    "benchmarks/*.json",
+    "infra/strata/*.py",
+    "docs/strata-colab.md"
   ]
 }

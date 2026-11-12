@@ -38,3 +38,8 @@ credentials*.json
 *.vhdx
 *.img
 *.iso
+
+# Python bootstrap caches and local virtual environments
+__pycache__/
+*.py[cod]
+.venv/

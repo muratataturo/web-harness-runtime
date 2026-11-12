@@ -1,5 +1,6 @@
 /** Start the existing OpenCode client with the generated MCP+Strata profile. No GPU allocation. */
 import { readFile } from "node:fs/promises";
+import { strataSettings } from "../dist/strata-settings.js";
 import { spawn } from "node:child_process";
 import { resolve } from "node:path";
 import { config } from "dotenv";
@@ -8,14 +9,10 @@ config({ quiet: true });
 const args = process.argv.slice(2);
 const discovery = args[0] === "mcp";
 if (!discovery) await strataConnection();
+const settings = await strataSettings();
 const key =
   process.env.STRATA_API_KEY ??
-  (
-    await readFile(
-      process.env.STRATA_KEY_FILE ?? "/private/tmp/strata-colab-api-key",
-      "utf8",
-    )
-  ).trim();
+  (await readFile(settings.keyFile, "utf8")).trim();
 const child = spawn(opencodeBinary(), args, {
   stdio: "inherit",
   shell: false,

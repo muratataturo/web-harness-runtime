@@ -1,3 +1,4 @@
+import { strataSettings } from "./strata-settings.js";
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import {
   spawn,
@@ -26,9 +27,8 @@ export async function strataConnection(
     throw new Error(
       "OpenCodeは既存strata-colabの明示モデルだけに対応します。別providerへ切り替えません",
     );
-  const endpoint = new URL(
-    process.env.STRATA_BASE_URL ?? "http://127.0.0.1:18081/v1",
-  );
+  const settings = await strataSettings();
+  const endpoint = new URL(settings.baseUrl);
   if (
     endpoint.username ||
     endpoint.password ||
@@ -37,8 +37,7 @@ export async function strataConnection(
     !["http:", "https:"].includes(endpoint.protocol)
   )
     throw new Error("不正なStrata endpoint");
-  const keyFile =
-    process.env.STRATA_KEY_FILE ?? "/private/tmp/strata-colab-api-key";
+  const keyFile = settings.keyFile;
   if (!isAbsolute(keyFile))
     throw new Error("STRATA_KEY_FILEは絶対パスで指定してください");
   const key =
@@ -148,7 +147,10 @@ export class OpenCodeAgent {
         share: "disabled",
         permission: permissions,
         tools: toolMap,
-        compaction: { auto: false },
+        compaction: {
+          auto: true,
+          buffer: Math.min(16384, connection.context / 4),
+        },
         provider: {
           "strata-colab": {
             name: "Existing Strata Colab",

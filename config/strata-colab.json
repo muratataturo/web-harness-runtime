@@ -1,0 +1,17 @@
+{
+  "colabCliVersion": "0.7.5",
+  "strataRelease": "v0.2.13",
+  "installerSha256": "d47754af1f74c95bf763e0b8d484232443466decd1a22d0be3208760a2f53822",
+  "family": "qwen",
+  "quantization": "iq2_xs",
+  "modelId": "qwen3.8-flash-next-iq2_xs",
+  "context": 65536,
+  "parallel": 1,
+  "gpu": "L4",
+  "vision": "gpu",
+  "vramReserveMiB": 3072,
+  "remotePort": 18082,
+  "localPort": 18081,
+  "session": "web-harness-qwen",
+  "idleMinutes": 30
+}
