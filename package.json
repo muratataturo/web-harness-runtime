@@ -64,6 +64,7 @@
     "scripts/opencode-client.mjs",
     "benchmarks/*.json",
     "infra/strata/*.py",
-    "docs/strata-colab.md"
+    "docs/strata-colab.md",
+    "docs/evidence/strata-colab-results.json"
   ]
 }
