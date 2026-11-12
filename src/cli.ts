@@ -405,6 +405,78 @@ program
     const { startPublicMcp } = await import("./public-mcp.js");
     await startPublicMcp(opts.url);
   });
+const strataCommand = program
+  .command("strata")
+  .description("Colab上のStrata/Qwenを起動・接続・検証・停止");
+const strataManager = async () => {
+  const { StrataColab } = await import("./strata-colab.js");
+  return new StrataColab(undefined, (m) => process.stderr.write(m + "\n"));
+};
+for (const action of [
+  "plan",
+  "status",
+  "install",
+  "login",
+  "stop",
+  "probe",
+] as const)
+  strataCommand.command(action).action(async () => {
+    const manager = await strataManager();
+    const result = await manager[action]();
+    if (result) console.log(JSON.stringify(result, null, 2));
+  });
+strataCommand
+  .command("up")
+  .description("専用Colab L4を起動。計算ユニットを使用")
+  .option("--session <name>")
+  .option("--vision <mode>")
+  .option("--idle-minutes <minutes>", "無操作停止までの分", integer)
+  .action(async (opts) => {
+    const overrides = Object.fromEntries(
+      Object.entries({
+        session: opts.session,
+        vision: opts.vision,
+        idleMinutes: opts.idleMinutes,
+      }).filter(([, v]) => v !== undefined),
+    );
+    console.log(
+      JSON.stringify(await (await strataManager()).up(overrides), null, 2),
+    );
+  });
+strataCommand
+  .command("connect")
+  .description("既存endpointへ接続。GPUの割当や停止はしない")
+  .requiredOption("--url <url>")
+  .requiredOption("--key-file <path>")
+  .action(async (opts) =>
+    console.log(
+      JSON.stringify(
+        await (await strataManager()).connect(opts.url, opts.keyFile),
+        null,
+        2,
+      ),
+    ),
+  );
+strataCommand
+  .command("client")
+  .argument("<agent>", "pi / opencode")
+  .argument("[args...]")
+  .allowUnknownOption()
+  .action(async (agent, args) => {
+    process.exitCode = await (await strataManager()).client(agent, args);
+  });
+strataCommand
+  .command("chat")
+  .option("--port <port>", "loopback port", integer, 4311)
+  .action(async (opts) => {
+    await (await strataManager()).discover();
+    process.env.RUNTIME_AGENT = "opencode";
+    process.env.RUNTIME_EXECUTOR = "local";
+    await startWorkbench(opts.port);
+  });
+strataCommand.command("_watch", { hidden: true }).action(async () => {
+  await (await strataManager()).watch();
+});
 program
   .command("chat")
   .description("Recruit / RakutenスタイルのローカルChat UIと共有runtime API")

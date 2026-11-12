@@ -1,3 +1,4 @@
+import { strataSettings } from "./strata-settings.js";
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import {
   spawn,
@@ -26,9 +27,8 @@ export async function strataConnection(
     throw new Error(
       "OpenCodeは既存strata-colabの明示モデルだけに対応します。別providerへ切り替えません",
     );
-  const endpoint = new URL(
-    process.env.STRATA_BASE_URL ?? "http://127.0.0.1:18081/v1",
-  );
+  const settings = await strataSettings();
+  const endpoint = new URL(settings.baseUrl);
   if (
     endpoint.username ||
     endpoint.password ||
@@ -37,8 +37,7 @@ export async function strataConnection(
     !["http:", "https:"].includes(endpoint.protocol)
   )
     throw new Error("不正なStrata endpoint");
-  const keyFile =
-    process.env.STRATA_KEY_FILE ?? "/private/tmp/strata-colab-api-key";
+  const keyFile = settings.keyFile;
   if (!isAbsolute(keyFile))
     throw new Error("STRATA_KEY_FILEは絶対パスで指定してください");
   const key =
@@ -148,7 +147,10 @@ export class OpenCodeAgent {
         share: "disabled",
         permission: permissions,
         tools: toolMap,
-        compaction: { auto: false },
+        compaction: {
+          auto: true,
+          buffer: Math.min(16384, connection.context / 4),
+        },
         provider: {
           "strata-colab": {
             name: "Existing Strata Colab",
@@ -242,6 +244,7 @@ export class OpenCodeAgent {
       },
     ));
     let eventQueue: Promise<void> = Promise.resolve();
+    let completed = false;
     let error: Error | undefined,
       steps = 0,
       bytes = 0;
@@ -267,7 +270,11 @@ export class OpenCodeAgent {
         if (value.type === "step_start") {
           eventQueue = eventQueue
             .then(() => {
-              if (this.options.isComplete?.()) return;
+              if (this.options.isComplete?.()) {
+                completed = true;
+                this.stop();
+                return;
+              }
               return this.options.onStep("model_request", {
                 engine: "opencode",
                 model: this.model,
@@ -287,8 +294,14 @@ export class OpenCodeAgent {
           if (usage)
             this.usages.set(`${value.sessionID}:${value.part.id}`, usage);
         }
-        if (value.type === "step_finish") steps++;
-        if (value.type === "error")
+        if (value.type === "step_finish") {
+          steps++;
+          if (this.options.isComplete?.()) {
+            completed = true;
+            this.stop();
+          }
+        }
+        if (value.type === "error" && !completed)
           throw new Error(
             "OpenCode/Strataが推論エラーを返しました。別providerへ切り替えません",
           );
@@ -304,7 +317,7 @@ export class OpenCodeAgent {
           await eventQueue;
           error
             ? no(error)
-            : code !== 0 || !steps
+            : (!completed && code !== 0) || !steps
               ? no(new Error(`OpenCodeが正常終了しませんでした (${code})`))
               : ok();
         });

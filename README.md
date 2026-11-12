@@ -102,8 +102,8 @@ CLIは作業ディレクトリの `.env` を読みます。既にプロセスへ
 | `OPENROUTER_MODEL` | 現在のカタログに存在する無料・全料金ゼロ・ツール対応モデル。未指定は条件を満たすモデルを選択 |
 | `OPENCODE_BIN` | 既存OpenCodeの実行パス。検証構成の既定値は`/private/tmp/strata-opencode/node_modules/.bin/opencode`。別環境では明示設定 |
 | `OPENCODE_MODEL` | 既定は`strata-colab/qwen3.8-flash-next-iq2_xs`。既存Strataのモデル一覧に一致する必要あり |
-| `STRATA_BASE_URL` | 既存StrataのOpenAI互換endpoint。既定は`http://127.0.0.1:18081/v1` |
-| `STRATA_KEY_FILE` | Strataキーを保存したファイルの絶対パス。既定は`/private/tmp/strata-colab-api-key`。Git管理外に置く |
+| `STRATA_BASE_URL` | StrataのOpenAI互換endpoint。未指定は管理接続、なければ`http://127.0.0.1:18081/v1` |
+| `STRATA_KEY_FILE` | Strataキーの絶対パス。未指定は管理接続、なければ`/private/tmp/strata-colab-api-key`。Git管理外に置く |
 | `STRATA_API_KEY` | キーファイルの代わりに環境から渡す秘密値。指定時は`STRATA_KEY_FILE`より優先 |
 
 CodexはChatGPTログイン、Claude Codeは自身のサブスクログインを使います。この接続でOpenAI / Anthropic APIキーを代用しません。モデル名は実装・実測時点の対応名で、契約や提供状況により使用できない場合は停止します。pi/OpenRouterは無料枠切れでも有料モデルへfallbackしません。
@@ -149,7 +149,28 @@ npm start -- doctor --agent opencode
 npm start -- run-file examples/recruit-day-out.json --agent opencode --mode auto --json
 ```
 
-OpenCodeは既存Strataへの接続に限定します。元の会話へattachせず独立したセッションを作り、GPUの新規割当・再起動はしません。詳しくは[エンジンと追加調査](docs/engines-and-depth.md)、[Codex / Strata](docs/codex-strata.md)。
+通常のOpenCode調査は接続済みStrataを使います。元の会話へattachせず独立したセッションを作り、調査の開始や接続失敗だけでGPUの新規割当・再起動はしません。明示的な起動管理は次の`strata`コマンドを使います。詳しくは[エンジンと追加調査](docs/engines-and-depth.md)、[Codex / Strata](docs/codex-strata.md)。
+
+### Strata × Qwen3.8をColabで起動・接続する
+
+参照セッションのL4・IQ2_XS・64K・SSH転送・無操作停止をCLIに組み込みました。Colabの本人認証は別途必要です。`up`は計算ユニットとモデル取得の通信を使います。
+
+```sh
+npm run build
+npm start -- strata install  # Python 3.12以降。既存CLIはCOLAB_BINで指定可能
+npm start -- strata login    # 本人がGoogleへログイン
+npm start -- strata plan     # 割当なしで設定確認
+npm start -- strata up       # 専用L4を起動・接続。既定30分の無操作停止監視
+npm start -- strata probe    # 認証 / SSE / tool call→resultを検証
+npm start -- strata chat --port 4311
+# 使い終わったらGPU全体の解放を確認
+npm start -- strata stop
+npm start -- strata status
+```
+
+管理接続はGit管理外の`connection.json`からOpenCode adapterへ自動的に渡します。通常の`run --agent opencode`や対話型`strata client pi` / `strata client opencode`は新規GPUを割り当てません。既存endpointだけ使う場合は`strata connect --url ... --key-file ...`を使い、他ツールが所有するColabは停止しません。
+
+**[起動・接続・停止・環境変数の詳細](docs/strata-colab.md)**。OpenCodeの調査はホスト、推論はColabであり、OpenShell隔離とは別です。通信断やホストのスリープ中は停止監視を継続できないため、利用終了時は`stop`と`status`で確認します。
 
 ## 4. OpenShell / MicroVMでCodexを実行する
 

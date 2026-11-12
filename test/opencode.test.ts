@@ -10,7 +10,7 @@ import {
   strataModel,
   strataConnection,
 } from "../src/opencode.js";
-for (const mode of ["duplicate", "invalid"])
+for (const mode of ["duplicate", "invalid", "repeat"])
   test(`OpenCode Strata ${mode}: isolated provider, capability MCP, no paid credentials or duplicate spend`, async () => {
     const root = await mkdtemp(join(tmpdir(), "opencode-test-"));
     const old = {

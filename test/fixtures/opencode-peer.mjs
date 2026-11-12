@@ -7,7 +7,9 @@ if (process.argv.includes("--version")) {
 }
 const mode = basename(process.argv[1]).includes("invalid")
   ? "invalid"
-  : "duplicate";
+  : basename(process.argv[1]).includes("repeat")
+    ? "repeat"
+    : "duplicate";
 const config = JSON.parse(readFileSync(process.env.OPENCODE_CONFIG, "utf8"));
 if (
   config.permission["*"] !== "deny" ||
@@ -82,3 +84,6 @@ console.log(
     part: { id: "final" },
   }),
 );
+
+// A provider may keep its process alive after the authoritative finish tool.
+if (mode === "repeat") setInterval(() => {}, 100);

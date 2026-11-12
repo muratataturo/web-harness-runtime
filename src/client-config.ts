@@ -1,3 +1,4 @@
+import { strataSettings } from "./strata-settings.js";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,6 +18,7 @@ export async function writeClientConfigs(
     url.pathname !== "/"
   )
     throw Error("loopback originを指定してください");
+  const settings = await strataSettings();
   const root = fileURLToPath(new URL("../", import.meta.url)),
     node = process.execPath,
     args = [join(root, "dist/cli.js"), "mcp", "--url", url.origin];
@@ -41,11 +43,12 @@ export async function writeClientConfigs(
     small_model: strataModel,
     enabled_providers: ["strata-colab"],
     share: "disabled",
+    compaction: { auto: true, buffer: 16384 },
     provider: {
       "strata-colab": {
         npm: "@ai-sdk/openai-compatible",
         options: {
-          baseURL: process.env.STRATA_BASE_URL ?? "http://127.0.0.1:18081/v1",
+          baseURL: settings.baseUrl,
           apiKey: "{env:STRATA_API_KEY}",
         },
         models: {
