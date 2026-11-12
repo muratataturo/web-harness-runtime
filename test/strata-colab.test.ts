@@ -223,6 +223,18 @@ test("up refuses an unknown live session or occupied forwarding port before allo
     manager.endpoint = async () => "someone-elses-endpoint";
     await assert.rejects(manager.up(), /所有/);
     assert.equal(calls.includes("allocate"), false);
+    await writeFile(
+      join(root, "state.json"),
+      JSON.stringify({
+        session: "previous-qwen",
+        endpoint: "old-owned",
+        owned: true,
+        phase: "ready",
+      }),
+    );
+    await assert.rejects(manager.up(), /別名の所有/);
+    assert.equal(calls.includes("allocate"), false);
+    await rm(join(root, "state.json"));
     manager.endpoint = async () => undefined;
     manager.freePort = async () => {
       throw Error("port in use");

@@ -62,7 +62,7 @@ npm start -- strata status
 | ローカル転送 | 127.0.0.1:18081のみ。SSHは専用鍵と専用known-hostsを使用 |
 | 無操作停止 | 既定30分。`strata up --idle-minutes 60`で変更 |
 
-起動前にColabのsessionを照会し、不在を確認できた場合だけ新規割当します。存在する場合は、自分の管理記録と接続先が一致するsessionを再利用します。知らない既存sessionや、使用中のローカルポートを上書きしません。
+起動前にColabのsessionを照会し、不在を確認できた場合だけ新規割当します。存在する場合は、自分の管理記録と接続先が一致するsessionを再利用します。session名・転送ポート・visionを変更する場合は、先に所有Colabを停止してから起動してください。知らない既存sessionや、使用中のローカルポートを上書きしません。
 
 新規カーネルの接続準備待ちは、副作用のないディレクトリ作成だけを限定回数再試行します。モデル起動や推論を無条件に再送しません。起動失敗時には、この操作で所有を確認したColabの解放を試み、解放を確認できなければ明示します。通信障害や強制終了後は`status`と`stop`でも確認してください。
 
@@ -153,7 +153,7 @@ npm start -- strata stop
 
 | 変数 | 意味 |
 | --- | --- |
-| `COLAB_BIN` | 既存Colab CLIのパス。未指定は専用venv、なければPATHから検索 |
+| `COLAB_BIN` | 既存Colab CLIのパス。未指定は専用venv、以前の管理記録にあるCLI、PATHの順で確認 |
 | `COLAB_PYTHON` | Colab CLIのvenv Pythonを明示する場合 |
 | `STRATA_PYTHON` | `strata install`でvenvを作るPython。3.12以降が必要 |
 | `STRATA_STATE_DIR` | 管理データの保存先。既定は`RUNTIME_DIR/strata-colab` |
@@ -170,3 +170,22 @@ npm start -- strata stop
 配布するのは起動用のPythonスクリプト、CLIコード、秘密のない固定設定だけです。`npm run package:cli`と`release:check`で確認します。ログは秘密値を含み得るため、丸ごと共有せず、マスクした診断だけを共有してください。
 
 参照：[Strata](https://github.com/Niko1221/Strata)、[Terminal起動手順](https://github.com/Niko1221/Strata/blob/main/docs/TERMINAL_LAUNCH.md)、[Google Colab CLI](https://github.com/googlecolab/google-colab-cli)。参照セッションの運用を元に、このリポジトリ用の独立session・接続先固定・失敗時解放・検証を追加しています。
+
+## 実行結果（2026-11-13 JST）
+
+[秘密を除いた実測JSON](evidence/strata-colab-results.json)を記録しています。専用Colab L4で、指定Qwen・64K・GPU画像エンコーダーを起動し、モデル一覧、認証なし401、SSEの本文と完了、tool call/result後の最終回答を確認しました。再度の`up`は追加割当せず既存sessionを再利用しました。
+
+| 経路 | 結果 | 時間 | トークン |
+| --- | --- | --- | --- |
+| API probe | 認証・SSE・ツール往復を確認 | 50.511秒 | 未集計。最初の調査と同時に実行 |
+| piの専用クライアント | `STRATA_CONNECTED`を実際に受信 | 個別の時間は未記録 | 未集計 |
+| OpenCode research CLI | 楽天ブックス1ページ・3引用・`succeeded` | 33.268秒 | 入力52,352／出力895／合計53,247。入力内cache40,685 |
+| Chat → OpenCode runtime | 同じ本の実調査・1成果物・`succeeded` | 41.466秒 | 入力90,308／出力1,249／合計91,557。入力内cache78,247 |
+
+実際に返った情報は、書名「るるぶ 箱根 '27」（るるぶ情報版）、税込価格1,430円、ISBN 9784533172731です。[対象ページ](https://books.rakuten.co.jp/rb/18577690/)の本文を引用し、購入操作は行っていません。
+
+初回のColabカーネル接続は失敗し、その割当は解放しました。その後の最初のOpenCode調査では、回答確定後にツール呼び出しを繰り返す問題を観測して検証プロセスを中断しました。この試行は237.281秒・1,258,113トークン（大部分は入力cache）で、正常な完了として数えていません。確定後にプロセスを終える修正と回帰テストを追加し、上表の33.268秒の実行では正常返却を確認しました。失敗と修正後の使用量を混ぜたり、開発中の追加消費を隠したりしないため、両方をJSONに残しています。
+
+これらは異なるcache状態での機能検証で、速度改善の公平な比較ではありません。API probeは初回調査と同時に動いており待機を含み得ます。Colab計算ユニット・GPU費・契約料金配賦は未測定で、実費0とはしません。
+
+停止監視は実機で`monitoring`とheartbeatを確認しました。30分待って実際に自動停止させる試験は今回行っていません。失敗時の所有Colab解放、接続先置換の停止拒否、通信断時のタイマーリセット、SSHの無断割当拒否はそれぞれ実機または非課金の回帰テストで検証しています。

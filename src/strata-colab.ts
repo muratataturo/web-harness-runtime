@@ -235,17 +235,29 @@ export class StrataColab {
   async cli() {
     if (!["darwin", "linux"].includes(process.platform))
       throw Error("Colab起動管理はmacOS / Linux対応です");
-    let cli = process.env.COLAB_BIN ?? join(this.root, "colab-cli/bin/colab");
-    if (!existsSync(cli)) {
+    let cli = process.env.COLAB_BIN;
+    if (!cli) {
+      const local = join(this.root, "colab-cli/bin/colab"),
+        saved = (await this.state())?.cli;
+      cli = existsSync(local)
+        ? local
+        : saved && existsSync(saved)
+          ? saved
+          : "colab";
+    }
+    if (!cli.startsWith("/")) {
       try {
-        cli = (await exec("which", ["colab"])).stdout.trim();
+        cli = (await exec("which", [cli])).stdout.trim();
       } catch {
         throw Error(
-          "Colab CLIがありません。strata installを実行するかCOLAB_BINを設定してください。",
+          "Colab CLIがありません。strata installまたはCOLAB_BINを設定してください。",
         );
       }
     }
-    if (!cli.startsWith("/")) cli = (await exec("which", [cli])).stdout.trim();
+    if (!existsSync(cli))
+      throw Error(
+        "指定したColab CLIがありません。COLAB_BINを確認してください。",
+      );
     const first = (await readFile(cli, "utf8")).split("\n")[0]!;
     const python = process.env.COLAB_PYTHON ?? first.match(/^#!(\/\S+)$/)?.[1];
     if (!python || !existsSync(python) || !/python[0-9.]*$/.test(python))
@@ -407,6 +419,34 @@ export class StrataColab {
       const c = await this.config(options);
       const { cli, python } = await this.cli();
       const previous = await this.state();
+      if (
+        previous?.owned &&
+        previous.phase !== "stopped" &&
+        previous.session !== c.session
+      )
+        throw Error(
+          "別名の所有Colabが残っています。strata stopで解放してからsessionを変更してください",
+        );
+      if (
+        previous?.phase === "ready" &&
+        (previous.localPort !== c.localPort ||
+          previous.remotePort !== c.remotePort)
+      )
+        throw Error(
+          "稼働中の転送ポートは変更しません。strata stop後に設定してください",
+        );
+      if (options.vision && previous?.phase === "ready") {
+        const report = await readFile(
+          join(this.root, "remote-report.json"),
+          "utf8",
+        )
+          .then(JSON.parse)
+          .catch(() => undefined);
+        if (report?.vision && report.vision !== options.vision)
+          throw Error(
+            "稼働中のvision設定は変更しません。strata stop後に起動してください",
+          );
+      }
       let endpoint = await this.endpoint(cli, c.session);
       if (
         endpoint &&
@@ -420,25 +460,18 @@ export class StrataColab {
       if (endpoint && previous) {
         try {
           await this.discover();
+          previous.phase = "ready";
           await this.startMonitor(previous, c.idleMinutes);
           return { ...(await this.status()), reused: true };
         } catch {}
         await this.tunnel(previous);
         await this.publish(previous);
         await this.discover();
+        previous.phase = "ready";
         await this.startMonitor(previous, c.idleMinutes);
         return { ...(await this.status()), reused: true };
       }
       await this.freePort(c.localPort);
-      this.progress("Colab L4を割当（計算ユニットを使用）");
-      await this.command(
-        cli,
-        ["new", "-s", c.session, "--gpu", c.gpu],
-        "allocate",
-        180000,
-      );
-      endpoint = await this.endpoint(cli, c.session);
-      if (!endpoint) throw Error("Colabの割当を確認できません");
       const control = join(
         tmpdir(),
         "whr-strata-" +
@@ -455,6 +488,16 @@ export class StrataColab {
         info.uid !== process.getuid?.()
       )
         throw Error("SSH controlディレクトリの所有を確認できません");
+      await chmod(control, 0o700);
+      this.progress("Colab L4を割当（計算ユニットを使用）");
+      await this.command(
+        cli,
+        ["new", "-s", c.session, "--gpu", c.gpu],
+        "allocate",
+        180000,
+      );
+      endpoint = await this.endpoint(cli, c.session);
+      if (!endpoint) throw Error("Colabの割当を確認できません");
       const state: ColabState = {
         session: c.session,
         endpoint,
@@ -693,6 +736,8 @@ export class StrataColab {
     if (!res.ok) throw Error(`Strata models HTTP ${res.status}`);
     const data = (await res.json()) as any;
     const id = settings.model.replace(/^strata-colab\//, "");
+    if (id !== "qwen3.8-flash-next-iq2_xs")
+      throw Error("Strata管理接続は指定のQwen3.8 IQ2_XSに固定しています");
     const m = data.data?.find((x: any) => x.id === id);
     if (!m || m.meta?.n_ctx !== 65536)
       throw Error(

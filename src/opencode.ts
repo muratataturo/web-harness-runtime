@@ -244,6 +244,7 @@ export class OpenCodeAgent {
       },
     ));
     let eventQueue: Promise<void> = Promise.resolve();
+    let completed = false;
     let error: Error | undefined,
       steps = 0,
       bytes = 0;
@@ -269,7 +270,11 @@ export class OpenCodeAgent {
         if (value.type === "step_start") {
           eventQueue = eventQueue
             .then(() => {
-              if (this.options.isComplete?.()) return;
+              if (this.options.isComplete?.()) {
+                completed = true;
+                this.stop();
+                return;
+              }
               return this.options.onStep("model_request", {
                 engine: "opencode",
                 model: this.model,
@@ -289,8 +294,14 @@ export class OpenCodeAgent {
           if (usage)
             this.usages.set(`${value.sessionID}:${value.part.id}`, usage);
         }
-        if (value.type === "step_finish") steps++;
-        if (value.type === "error")
+        if (value.type === "step_finish") {
+          steps++;
+          if (this.options.isComplete?.()) {
+            completed = true;
+            this.stop();
+          }
+        }
+        if (value.type === "error" && !completed)
           throw new Error(
             "OpenCode/Strataが推論エラーを返しました。別providerへ切り替えません",
           );
@@ -306,7 +317,7 @@ export class OpenCodeAgent {
           await eventQueue;
           error
             ? no(error)
-            : code !== 0 || !steps
+            : (!completed && code !== 0) || !steps
               ? no(new Error(`OpenCodeが正常終了しませんでした (${code})`))
               : ok();
         });

@@ -1,0 +1,290 @@
+{
+  "observedAt": "2026-11-12T17:05:56.130919+00:00",
+  "scope": "Live Colab bootstrap, OpenAI-compatible protocol probes, pi client, OpenCode research CLI and Chat. Public book page only; no purchase.",
+  "bootstrap": {
+    "remote": {
+      "phase": "ready",
+      "model": "qwen3.8-flash-next-iq2_xs",
+      "context": 65536,
+      "gpu": "NVIDIA L4, 23034 MiB",
+      "vision": "gpu"
+    },
+    "ownedDedicatedSession": true,
+    "localBind": "127.0.0.1:18081",
+    "remoteBind": "127.0.0.1:18082",
+    "apiKeyPermissions": "0600",
+    "reusedWithoutAllocation": true,
+    "firstAttempt": {
+      "failure": "Colab kernel connection lost during idempotent directory initialization",
+      "allocatedRuntimeReleased": true
+    },
+    "idleMonitor": {
+      "configuredMinutes": 30,
+      "state": "monitoring",
+      "heartbeatObserved": true,
+      "realThirtyMinuteShutdownTested": false
+    },
+    "downloadSizeGBReported": 68.9
+  },
+  "probe": {
+    "observedAt": "2026-11-12T16:54:27.650Z",
+    "model": "qwen3.8-flash-next-iq2_xs",
+    "context": 65536,
+    "unauthorizedStatus": 401,
+    "sseDone": true,
+    "firstTextMs": 5939,
+    "sseMs": 6011,
+    "toolRoundTrip": true,
+    "elapsedMs": 50511
+  },
+  "piClient": {
+    "expectedOutput": "STRATA_CONNECTED",
+    "actualOutput": "STRATA_CONNECTED",
+    "exitCode": 0,
+    "sessionPersistence": false
+  },
+  "openCodeCli": {
+    "status": "succeeded",
+    "agent": "opencode",
+    "model": "strata-colab/qwen3.8-flash-next-iq2_xs",
+    "query": "この楽天ブックスの本の書名・税込価格・ISBNを引用つきで確認してください。購入操作はしません。",
+    "pageCount": 1,
+    "acquisition": [
+      {
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "kind": "public-html",
+        "status": 200
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev-1",
+        "pageId": "page-1",
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "quote": "るるぶ 箱根 '27 （るるぶ情報版）\nJTBパブリッシング 旅行ガイドブック 編集部",
+        "capturedAt": "2026-11-12T16:58:38.805Z"
+      },
+      {
+        "id": "ev-2",
+        "pageId": "page-1",
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "quote": "1,430円（税込）\n送料無料",
+        "capturedAt": "2026-11-12T16:58:38.805Z"
+      },
+      {
+        "id": "ev-3",
+        "pageId": "page-1",
+        "url": "https://books.rakuten.co.jp/rb/18577690/",
+        "quote": "ISBN：\n9784533172731",
+        "capturedAt": "2026-11-12T16:58:38.805Z"
+      }
+    ],
+    "answer": {
+      "summary": "楽天ブックス商品詳細（/rb/18577690/）を閲覧し、書名・税込価格・ISBNを確認しました。書名は「るるぶ 箱根 '27」（るるぶ情報版）、JTBパブリッシング 旅行ガイドブック 編集部編。税込価格は1,430円（本文に「1,430円（税込）」と記載、構造化データでも1430 JPY）。ISBNは9784533172731。発売日2026年05月08日、160p（閲覧日時2026-11-12の情報）。購入操作は行っていません。",
+      "candidates": [
+        {
+          "name": "るるぶ 箱根 '27（るるぶ情報版）",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "matches": [
+            {
+              "criterionId": "title",
+              "status": "supported",
+              "explanation": "本文に書名「るるぶ 箱根 '27 （るるぶ情報版）」および編者「JTBパブリッシング 旅行ガイドブック 編集部」が記載。",
+              "evidenceIds": ["ev-1"]
+            },
+            {
+              "criterionId": "price",
+              "status": "supported",
+              "explanation": "本文に「1,430円（税込）」と記載（構造化データの販売価格1430 JPYとも一致）。",
+              "evidenceIds": ["ev-2"]
+            },
+            {
+              "criterionId": "isbn",
+              "status": "supported",
+              "explanation": "商品情報欄にISBN 9784533172731が記載。",
+              "evidenceIds": ["ev-3"]
+            }
+          ],
+          "score": 100,
+          "eligible": true
+        }
+      ],
+      "limitations": [
+        "取得は公開HTMLであり、在庫（残り15個）や送料・SKUの確定値として購入時点での保証は確認していない。",
+        "価格・在庫は閲覧日時（2026-11-12）時点の情報で、変動する可能性がある。"
+      ]
+    },
+    "metrics": {
+      "elapsedMs": 33268,
+      "tokenAccounting": "provider-reported",
+      "tokens": {
+        "inputTokens": 52352,
+        "outputTokens": 895,
+        "cachedInputTokens": 40685,
+        "cacheWriteInputTokens": 0,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 53247,
+        "source": "opencode-step-total"
+      },
+      "billing": {
+        "mode": "strata-existing-gpu",
+        "additionalApiUsd": null,
+        "subscriptionAllocationUsd": null,
+        "note": "既存Colab GPUの利用時間・クレジット消費額は未取得です。OpenCodeの設定単価0を実費0とは扱いません"
+      }
+    },
+    "executionScope": "Research process on host; inference on Colab L4 through loopback SSH. Not an OpenShell guest."
+  },
+  "chat": {
+    "runStatus": "succeeded",
+    "artifactCount": 1,
+    "task": {
+      "status": "succeeded",
+      "agent": "opencode",
+      "model": "strata-colab/qwen3.8-flash-next-iq2_xs",
+      "query": "この楽天ブックスの本の書名・税込価格・ISBNを引用つきで教えてください。購入はしません。\n優先方針：余白と予算を大切に",
+      "pageCount": 1,
+      "acquisition": [
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "kind": "public-html",
+          "status": 200
+        }
+      ],
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+          "capturedAt": "2026-11-12T17:01:59.454Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "1,430円（税込）\n送料無料",
+          "capturedAt": "2026-11-12T17:01:59.454Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "ISBN：\n9784533172731",
+          "capturedAt": "2026-11-12T17:01:59.454Z"
+        },
+        {
+          "id": "ev-4",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "発売日：\n2026年05月08日",
+          "capturedAt": "2026-11-12T17:01:59.454Z"
+        },
+        {
+          "id": "ev-5",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "出版社：\nJTBパブリッシング",
+          "capturedAt": "2026-11-12T17:01:59.454Z"
+        },
+        {
+          "id": "ev-6",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "JTBパブリッシング 旅行ガイドブック 編集部(編)",
+          "capturedAt": "2026-11-12T17:01:59.454Z"
+        }
+      ],
+      "answer": {
+        "summary": "楽天ブックス商品詳細（/rb/18577690/）を閲覧し、書名・税込価格・ISBNを確認しました。\\n\\n- 書名: 「るるぶ 箱根 '27 （るるぶ情報版）」\\n- 税込価格: 1,430円（税込）／送料無料。構造化データでも「対象商品の販売価格: 1430円（JPY）」\\n- ISBN: 9784533172731\\n- 補助情報（余白): 発売日 2026年05月08日、編者 JTBパブリッシング 旅行ガイドブック 編集部(編)、出版社 JTBパブリッシング、ページ数 160p、発行形態 ムックその他、レーベル「るるぶ情報版」、旧版「るるぶ箱根'26」。\\n\\n閲覧日時は 2026-11-12（UTC）で、購入操作は行っていません。価格は楽天ブックスの総額表示（税込）です。",
+        "candidates": [
+          {
+            "name": "るるぶ 箱根 '27 （るるぶ情報版）",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "matches": [
+              {
+                "criterionId": "title",
+                "status": "supported",
+                "explanation": "商品詳細本文の書名行に「るるぶ 箱根 '27 （るるぶ情報版）」と記載（ページタイトルにも同表記）。",
+                "evidenceIds": ["ev-1"]
+              },
+              {
+                "criterionId": "price",
+                "status": "supported",
+                "explanation": "商品詳細本文に「1,430円（税込）」、microdata構造化データにも「対象商品の販売価格: 1430円（JPY）」と一致。",
+                "evidenceIds": ["ev-2"]
+              },
+              {
+                "criterionId": "isbn",
+                "status": "supported",
+                "explanation": "商品情報のISBN欄に13桁のISBNが記載。",
+                "evidenceIds": ["ev-3"]
+              },
+              {
+                "criterionId": "publisher_author",
+                "status": "supported",
+                "explanation": "発売日・編者・出版社が商品情報欄に記載されている。",
+                "evidenceIds": ["ev-4", "ev-5", "ev-6"]
+              }
+            ],
+            "score": 100,
+            "eligible": true
+          }
+        ],
+        "limitations": [
+          "価格は閲覧時点（2026-11-12）の表示で、在庫状況（本文に「在庫あり 残りあと15個」）や送料・SKU（通常版／超ちいサイズの2サイズ展開のうち通常版ページ）は選択SKUとして確認した範囲内。購入・注文は行っていません。",
+          "レビューは0件で、評価に基づく判断は行っていません。"
+        ]
+      },
+      "metrics": {
+        "elapsedMs": 41466,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 90308,
+          "outputTokens": 1249,
+          "cachedInputTokens": 78247,
+          "cacheWriteInputTokens": 0,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 91557,
+          "source": "opencode-step-total"
+        },
+        "billing": {
+          "mode": "strata-existing-gpu",
+          "additionalApiUsd": null,
+          "subscriptionAllocationUsd": null,
+          "note": "既存Colab GPUの利用時間・クレジット消費額は未取得です。OpenCodeの設定単価0を実費0とは扱いません"
+        }
+      },
+      "executionScope": "Research process on host; inference on Colab L4 through loopback SSH. Not an OpenShell guest."
+    }
+  },
+  "preFixResearchAttempt": {
+    "status": "cancelled",
+    "reason": "OpenCode continued tool calls after an accepted finish_task. Validation process interrupted; fixed by terminating after authoritative completion, retaining observed usage.",
+    "metrics": {
+      "elapsedMs": 237281,
+      "tokenAccounting": "last-observed-partial",
+      "tokens": {
+        "inputTokens": 1245652,
+        "outputTokens": 12461,
+        "cachedInputTokens": 1231847,
+        "cacheWriteInputTokens": 0,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 1258113,
+        "source": "opencode-step-total"
+      },
+      "billing": {
+        "mode": "strata-existing-gpu",
+        "additionalApiUsd": null,
+        "subscriptionAllocationUsd": null,
+        "note": "既存Colab GPUの利用時間・クレジット消費額は未取得です。OpenCodeの設定単価0を実費0とは扱いません"
+      }
+    }
+  },
+  "limitations": [
+    "Functional validation, not an isolated performance benchmark. The first CLI request overlapped protocol probes and later looped; cache state differs.",
+    "GPU/Colab compute-unit and subscription allocation were not measured; do not interpret model price configuration as zero actual cost.",
+    "Idle monitor heartbeat and metrics checks were observed; real 30-minute automatic GPU shutdown was not performed during this run.",
+    "Local operations/state/model logs, API keys, SSH keys, Google credentials, task IDs and local user paths are excluded from this report."
+  ]
+}
