@@ -6,6 +6,65 @@ export const escapeHtml = (s) =>
         c
       ],
   );
+
+/** A view of the saved answer, with no new recommendation or inferred facts. */
+export function answerBrief(task) {
+  const candidates = task?.answer?.candidates ?? [];
+  const matches = candidates.flatMap((c) => c.matches ?? []);
+  const budgetLine = normalizeMarkdown(task?.answer?.summary)
+    .split("\n")
+    .find(
+      (line) =>
+        /^(?:[ABＡＢ]|案[AB])?(?:合計|総額)/.test(line.trim()) &&
+        /円/.test(line),
+    );
+  const roleExcluded = (m) =>
+    m.status === "unknown" &&
+    /役割対象外|役割外|非適用/.test(m.explanation ?? "");
+  const concerns = candidates.flatMap((c) =>
+    (c.matches ?? [])
+      .filter((m) => m.status !== "supported" && !roleExcluded(m))
+      .map((m) => ({
+        status: m.status,
+        text:
+          m.explanation ||
+          task.criteria?.find((x) => x.id === m.criterionId)?.description,
+      })),
+  );
+  if (task?.specificity?.status === "needs_detail")
+    concerns.unshift({
+      status: "unknown",
+      text: `手順の具体性に確認不足：${task.specificity.issues?.[0] ?? "実行手順を確認してください"}`,
+    });
+  return {
+    supported: matches.filter((m) => m.status === "supported").length,
+    unknown: matches.filter((m) => m.status === "unknown").length,
+    contradicted: matches.filter((m) => m.status === "contradicted").length,
+    total: matches.length,
+    roleExcluded: matches.filter(roleExcluded).length,
+    budgetText:
+      budgetLine
+        ?.match(/[^。]+。?/g)
+        ?.slice(0, 2)
+        .join("") ?? null,
+    facts:
+      candidates[0]?.matches
+        ?.filter((m) => m.status === "supported")
+        .slice(0, 3)
+        .map((m) => ({
+          label:
+            task.criteria?.find((c) => c.id === m.criterionId)?.description ??
+            "確認内容",
+          text: m.explanation,
+        })) ?? [],
+    concerns,
+    limitation: task?.answer?.limitations?.[0] ?? null,
+    capturedAt:
+      task?.pages?.[0]?.capturedAt ??
+      task?.evidence?.[0]?.capturedAt ??
+      task?.updatedAt,
+  };
+}
 export function safeLink(value) {
   try {
     const u = new URL(value);
@@ -170,10 +229,18 @@ export function presentation(r) {
     } else current.lines.push(line);
   }
   if (current.lines.some((l) => l.trim())) sections.push(current);
-  const timeline = lines.flatMap((line) => {
-    const m = line.match(/^(\d{1,2}:\d{2}(?:[〜~～–-]\d{1,2}:\d{2})?)(.*)$/);
-    return m ? [{ time: m[1], text: m[2].trim() }] : [];
-  });
+  const timeline =
+    r.task?.answer?.actionPlan?.steps
+      ?.map((s, stepIndex) => ({
+        stepIndex,
+        time: s.when,
+        text: `${s.where} — ${s.action}${s.durationMinutes ? `（${s.durationMinutes}分の見積）` : ""}。${s.how} 完了の目安：${s.doneWhen}。${s.locationStatus === "unconfirmed" ? "場所の詳細は未確認。" : ""}`,
+      }))
+      .filter((s) => /^\d{1,2}:\d{2}$/.test(s.time)) ??
+    lines.flatMap((line) => {
+      const m = line.match(/^(\d{1,2}:\d{2}(?:[〜~～–-]\d{1,2}:\d{2})?)(.*)$/);
+      return m ? [{ time: m[1], text: m[2].trim() }] : [];
+    });
   return {
     raw,
     title,

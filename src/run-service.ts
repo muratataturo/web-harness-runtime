@@ -28,6 +28,7 @@ import {
 } from "./improvement.js";
 import type { Task } from "./types.js";
 import { roomConflicts } from "./improvement-conflicts.js";
+import { createResearchProfile, securityMode } from "./runtime-profile.js";
 const listingReview = (t: Task) => {
   const found = roomConflicts({
     ...t,
@@ -103,6 +104,13 @@ const summaryTask = (t: Task): Task => ({
 export function runtimeCapabilities() {
   return {
     version: "0.3.0",
+    securityMode: securityMode(),
+    deployment: "single-user",
+    retrieval:
+      securityMode() === "hardened"
+        ? "public-html-only"
+        : "public-html-and-browser",
+    runtimeProfiles: ["recruit", "rakuten", "public"],
     interfaces: ["cli", "mcp-stdio", "local-chat"],
     executor: runtimeTarget(),
     defaultAgent: agentEngine(),
@@ -117,6 +125,13 @@ export function runtimeCapabilities() {
     mcpProtocol: "2025-11-25",
     liveCosts:
       "Subscription/GPU/VM allocation unknown; no paid provider fallback",
+    stateSemantics: {
+      storage: "local-atomic-json",
+      processRestart: "interrupted-no-auto-resend",
+      improvementReplay: "new-task-and-fresh-evidence",
+      offlineExperience: "verified-procedural-priors-only",
+      uxAssessment: "automatic-gates-and-separate-explicit-human-reviews",
+    },
     sourcePolicy:
       "Public pages only. Access denial and retired listings stop retrieval.",
   };
@@ -257,6 +272,7 @@ export class RunService {
     )
       throw Error("質問と1〜12件の公開URLが必要です");
     routeSources(input.query, input.urls);
+    createResearchProfile(input.urls);
     if (input.source && !["live", "replay"].includes(input.source))
       throw Error("不正な実行データ設定");
     const source = input.source ?? "live";

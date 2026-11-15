@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "html": "docs/generated-answer.html",
+  "selfContained": true,
+  "networkRequests": 0,
+  "viewports": [
+    {
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "width": 1240,
+      "overflow": false
+    }
+  ],
+  "steps": 11,
+  "citations": 12,
+  "fullAnswerExpanded": true,
+  "sourcesExpanded": true,
+  "escapedUntrustedMarkup": true,
+  "scope": "Historical static HTML export; current generated-answer.html has been upgraded to an interactive map",
+  "supersededBy": "visual-artifact-qa.json"
+}

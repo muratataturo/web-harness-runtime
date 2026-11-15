@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "designVersion": "ten-second-v1",
+  "automatic": {
+    "savedAnswerVisibleMs": 10000,
+    "detailInteractionMs": 1000,
+    "criticalTextContrast": 4.5,
+    "primaryTargetPx": 44,
+    "viewportWidths": [
+      320,
+      390,
+      768,
+      1240
+    ],
+    "viewports": [
+      {
+        "width": 320,
+        "height": 568
+      },
+      {
+        "width": 390,
+        "height": 844
+      },
+      {
+        "width": 768,
+        "height": 1024
+      },
+      {
+        "width": 1240,
+        "height": 960
+      }
+    ],
+    "horizontalOverflowPx": 0,
+    "requiredAboveFold": [
+      "conclusion",
+      "uncertainty",
+      "primary-action"
+    ],
+    "unknownMustRemainVisible": true,
+    "pageErrors": 0
+  },
+  "human": {
+    "exposureMs": 10000,
+    "minimumReviewers": 5,
+    "understoodRate": 0.8,
+    "uncertaintyVisibleRate": 0.8,
+    "nextActionClearRate": 0.8,
+    "medianAppeal": 4,
+    "scale": "1-5",
+    "status": "requires-explicit-human-responses"
+  },
+  "rules": [
+    "10秒は保存回答を表示して理解する時間と、実調査の進捗が分かる時間の基準。実モデルの完了時間を10秒と保証しない",
+    "自動検査合格を人間の魅力評価に置き換えない",
+    "見た目や速度のために引用・未確認・不一致を変更しない",
+    "候補サイトの口コミ評価をruntimeの満足度や信頼度に転用しない",
+    "行程・人生計画の回答は目的に適合した視覚成果物を持つ。文章カードと装飾だけで合格にしない"
+  ],
+  "visualArtifacts": {
+    "version": "purposeful-visual-v1",
+    "requiredFor": {
+      "itinerary": "journey-map",
+      "life-plan": "life-roadmap"
+    },
+    "automatic": [
+      "first-viewport-has-visual",
+      "map-and-plan-selection-linked",
+      "optional-plan-costs-linked",
+      "roadmap-dependencies-acyclic",
+      "roadmap-next-action-visible",
+      "no-fabricated-coordinates",
+      "offline-geometry-survives",
+      "unknown-remains-visible",
+      "keyboard-usable"
+    ],
+    "humanTenSecondQuestions": [
+      "どこに行くか、または次に何をするかを図から理解できたか",
+      "この図を操作して検討したいと感じたか",
+      "確認できていない点を識別できたか"
+    ],
+    "acceptance": "自動検査の合格は、人間の魅力度・意味理解の合格を意味しない"
+  }
+}

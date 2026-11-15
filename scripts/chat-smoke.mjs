@@ -181,6 +181,20 @@ try {
     "Auto makes a visible runtime decision, no input gates, saved answer restored",
   );
   assert.ok((await page.locator(".journey-track li").count()) > 0);
+  await page.locator('[data-ux="primary-action"]').waitFor();
+  assert.equal(await page.locator(".decision-brief").count(), 1);
+  const primaryBox = await page
+    .locator('[data-ux="primary-action"]')
+    .boundingBox();
+  assert.ok(primaryBox.height >= 44);
+  assert.ok(
+    (await page.locator('[data-ux="uncertainty"]').textContent()).trim()
+      .length > 0,
+  );
+  assert.equal(await page.locator("#ux-review-form input:checked").count(), 0);
+  checks.push(
+    "First glance exposes the primary action, uncertainty and 44px target without preselected human ratings",
+  );
   await page.locator(".read-answer").click();
   await page.locator("#answer-dialog .markdown-body h3").first().waitFor();
   assert.ok(

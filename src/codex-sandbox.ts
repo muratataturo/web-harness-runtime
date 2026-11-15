@@ -18,6 +18,7 @@ import {
 import { Store } from "./store.js";
 import type { RunOptions } from "./runtime.js";
 import type { Task } from "./types.js";
+import { createResearchProfile } from "./runtime-profile.js";
 
 export interface CodexSandboxConfig {
   gateway: string;
@@ -350,6 +351,7 @@ export async function runCodexSandbox(
   const config = codexSandboxConfig(input);
   if (options.agent !== "codex" || options.benchmark || options.headed)
     throw new Error("Codex workerはcodexの公開調査のみ対応します");
+  const profile = createResearchProfile(options.urls);
   options.onProgress?.("Codex account-workerの空きと起動状態を確認しています");
   return lease(
     config,
@@ -435,6 +437,7 @@ export async function runCodexSandbox(
           options.signal,
           40000,
         );
+        const artifactNonce = randomUUID();
         const args = [
           "sandbox",
           "exec",
@@ -447,6 +450,10 @@ export async function runCodexSandbox(
           "--env",
           "WEB_HARNESS_MANAGED_WORKER=codex",
           "--env",
+          `RUNTIME_SECURITY_MODE=${profile.mode}`,
+          "--env",
+          `RUNTIME_PROFILE=${process.env.RUNTIME_PROFILE ?? "auto"}`,
+          "--env",
           "CODEX_BIN=/usr/local/bin/codex",
           "--",
           "/usr/local/bin/node",
@@ -456,6 +463,8 @@ export async function runCodexSandbox(
           "--agent",
           "codex",
           "--openshell-outer-sandbox",
+          "--artifact-nonce",
+          artifactNonce,
           "--mode",
           options.interactionMode ?? "approval",
           "--url",
@@ -502,7 +511,10 @@ export async function runCodexSandbox(
           undefined,
           90000,
         );
-        const task = await recoverSandboxTask(join(dir, "artifacts"), options);
+        const task = await recoverSandboxTask(join(dir, "artifacts"), {
+          ...options,
+          artifactNonce,
+        });
         task.parentId = options.parentId;
         task.goalId = options.goalId;
         task.execution = {

@@ -3,6 +3,8 @@ import * as cheerio from "cheerio";
 import { checkNavigation } from "./sources.js";
 import { publicTarget, type HostResolver } from "./net-policy.js";
 import type { Page } from "./types.js";
+import { publicFetch } from "./public-fetch.js";
+import { checkResearchNavigation, securityMode } from "./runtime-profile.js";
 const MAX_BYTES = 4 * 1024 * 1024;
 export const prefersPublicHtml = (value: string) =>
   [
@@ -87,6 +89,40 @@ export function extractPublicHtml(
 ): Omit<Page, "id" | "capturedAt" | "acquisition"> {
   const offer = productOffer(html, url);
   const $ = cheerio.load(html);
+  const structuredGeo: string[] = [];
+  $('script[type="application/ld+json"]')
+    .slice(0, 20)
+    .each((_i, el) => {
+      const raw = $(el).text();
+      if (raw.length > 100000) return;
+      try {
+        const walk = (v: any, depth = 0) => {
+          if (depth > 12 || !v || typeof v !== "object") return;
+          if (
+            v["@type"] === "GeoCoordinates" &&
+            v.latitude !== undefined &&
+            v.longitude !== undefined
+          ) {
+            const lat = Number(v.latitude),
+              lon = Number(v.longitude);
+            if (
+              Number.isFinite(lat) &&
+              Number.isFinite(lon) &&
+              Math.abs(lat) <= 85 &&
+              Math.abs(lon) <= 180 &&
+              structuredGeo.length < 8
+            )
+              structuredGeo.push(
+                `構造化データ GeoCoordinates latitude=${lat} longitude=${lon}（施設の代表位置。入口・経路は未確認）`,
+              );
+          }
+          Object.values(v).forEach((x) => walk(x, depth + 1));
+        };
+        walk(JSON.parse(raw));
+      } catch {
+        /* Unparseable scripts are never executed or cited. */
+      }
+    });
   const title = $("title").first().text().replace(/\s+/g, " ").trim();
   const images: { url: string; alt: string }[] = [];
   const imageUrls = new Set<string>();
@@ -139,7 +175,11 @@ export function extractPublicHtml(
         .trim();
     if (!text) return;
     try {
-      const target = checkNavigation(new URL(a.attr("href")!, url).href, hosts);
+      const target = (
+        securityMode() === "hardened"
+          ? checkResearchNavigation
+          : checkNavigation
+      )(new URL(a.attr("href")!, url).href, hosts);
       const mainResult = a.closest("#js-bukkenList,.cassetteitem").length > 0;
       if (mainResult) priority.set(target, 20);
       if (!seen.has(target)) {
@@ -208,7 +248,13 @@ export function extractPublicHtml(
     /^\/viewjob\/jk[a-z0-9]+\/?$/i.test(new URL(url).pathname)
   )
     body = body.split("\nあなたにおすすめの求人\n")[0]!;
-  const text = title + "\n" + (offer ? offerText(offer) + "\n" : "") + body;
+  const text =
+    title +
+    "\n" +
+    structuredGeo.join("\n") +
+    "\n" +
+    (offer ? offerText(offer) + "\n" : "") +
+    body;
   return {
     url,
     title,
@@ -226,9 +272,11 @@ export async function readPublicHtml(
   signal: AbortSignal,
   deps: { fetcher?: typeof fetch; resolveHost?: HostResolver } = {},
 ): Promise<Omit<Page, "id">> {
-  const fetcher = deps.fetcher ?? fetch;
+  const fetcher = deps.fetcher ?? publicFetch;
+  const navigation =
+    securityMode() === "hardened" ? checkResearchNavigation : checkNavigation;
   const deadline = AbortSignal.any([signal, AbortSignal.timeout(15000)]);
-  let url = checkNavigation(value, hosts);
+  let url = navigation(value, hosts);
   for (let redirects = 0; redirects <= 5; redirects++) {
     deadline.throwIfAborted();
     url = await publicTarget(url, hosts, deps.resolveHost);
@@ -265,7 +313,7 @@ export async function readPublicHtml(
           },
         };
       }
-      url = checkNavigation(target.href, hosts);
+      url = navigation(target.href, hosts);
       continue;
     }
     // Access-denied pages are returned with their status; callers must not retry to evade them.

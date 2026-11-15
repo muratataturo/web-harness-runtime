@@ -1,6 +1,31 @@
 # web-harness-runtime
 
+[背景地図の403画像対策](docs/map-background-fix.md) — ファイル直開き対応、HTTP状態検査、失敗時の概略表示を実装。
+
+[地図・人生ロードマップと視覚改善ループ](docs/visual-artifact-quality.md) — [実モデルで生成した行程地図](docs/generated-answer.html) / [人生ロードマップの操作例](docs/life-roadmap.html)。Astryxを実コンポーネントとして組み込み、文章だけの回答を視覚品質ゲートで差し戻します。
+[回答の具体性を検査・自律修正する仕組み](docs/answer-specificity.md) — 進め方・完了目安・切替条件・予算対象を検査し、実生成の11手順と記録を掲載。
+
+[Offline経験集約・10秒UXループ・実際の生成回答](docs/offline-and-ux-loop.md) — 論文の採否、品質基準、旧新画面、生成した行程と予算。
+
+[公開harnessの比較調査・品質改善・実生成での比較](docs/harness-quality-study.md) — 本文の部分読取、引用完全性、自己改善の計測と再現可能な評価。
+
 自然言語の相談と複数の公開URLを受け取り、ページの詳細取得・引用・条件の照合を行う自律調査runtimeです。同じ調査を **Chat UI・CLI・MCP** から利用できます。Recruit／楽天の美容、宿泊、飲食、住居、車、求人などを対象にしています。予約・購入・応募は行いません。
+
+NemoClaw・OpenShell・NeMo Fabricと照合した現状分析、Recruit／楽天runtimeの成立範囲、境界強化の実装順序は[セキュリティ境界の設計](docs/security-boundary-design.md)を参照してください。
+
+既定の`hardened`モードは公開HTML専用です。固定したサービス・host・pathで調査し、ブラウザ描画へ切り替えません。Recruit／楽天の実調査結果と検証範囲は[境界強化の実装・検証結果](docs/security-boundary-results.md)を参照してください。単一利用者向けで、共有SaaSとしてのtenant分離は未対応です。
+
+**Recruit／楽天ともチャットUI経由の実調査を確認済みです。** フォーム送信、Auto調査、SSE進捗、回答・引用表示、再読み込みを実機検証し、[チャットの必須動作確認](docs/chat-runtime-acceptance.md)に記録しています。`npm run package:cli`は現在のコードに対する24時間以内の両familyのlive UI成功記録がなければ失敗します。全必須検証は`npm run release:verify`、CI専用の未検証packageは`node scripts/package-cli.mjs --preview`です。
+
+```sh
+npm run build
+npm start -- security status
+RUNTIME_PROFILE=recruit npm start -- security plan --url https://www.hotpepper.jp/strJ001100102/
+RUNTIME_PROFILE=rakuten npm start -- run-file examples/rakuten-books.json --mode auto --json
+npm run security:check
+```
+
+`RUNTIME_PROFILE=recruit`／`rakuten`を指定したプロセスは、別familyの入力URLを拒否します。`auto`（既定）は提示URLから権限を固定します。従来のブラウザ取得を検証するときだけ`RUNTIME_SECURITY_MODE=development`を明示してください。
 
 Chatは白黒を基調に青・シアンを合わせたローカルUIです。調査の進捗を順次表示し、回答を行程フロー・写真付き候補カードで見渡せます。カードを押すとMarkdownの詳細、取得リンクを押すと「ページ画像／Web画面／本文・引用」を開けます。
 

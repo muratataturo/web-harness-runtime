@@ -5,6 +5,14 @@ import { resolve, join } from "node:path";
 import { randomUUID } from "node:crypto";
 import { allowedHosts, routeSources } from "./sources.js";
 import { interactionMode } from "./interaction.js";
+import {
+  createResearchProfile,
+  securityMode,
+  researchPaths,
+  forbiddenResearchPaths,
+  type ResearchProfile,
+} from "./runtime-profile.js";
+import { publicNetworkCidrs } from "./net-policy.js";
 
 export interface SandboxCommand {
   label: string;
@@ -31,6 +39,8 @@ export interface OpenShellTaskOptions {
   memoryGiB?: number;
 }
 export interface OpenShellPlan {
+  profile: ResearchProfile;
+  artifactNonce: string;
   adapter: "openshell";
   specVersion: "v0.1.7";
   sandboxName: string;
@@ -110,16 +120,37 @@ export function openShellPolicy(hosts: string[]): string {
     ...validated.flatMap((host) => [
       `      - host: ${JSON.stringify(host)}`,
       "        port: 443",
-      "        tls: skip",
+      ...(securityMode() === "hardened"
+        ? [
+            `        allowed_ips: ${JSON.stringify(publicNetworkCidrs)}`,
+            "        protocol: rest",
+            "        enforcement: enforce",
+            "        rules:",
+            ...researchPaths(host).flatMap((path) =>
+              ["GET", "HEAD"].flatMap((method) => [
+                "          - allow:",
+                `              method: ${method}`,
+                `              path: ${JSON.stringify(path)}`,
+              ]),
+            ),
+            "        deny_rules:",
+            ...forbiddenResearchPaths.flatMap((path) => [
+              "          - method: '*'",
+              `            path: ${JSON.stringify(path)}`,
+            ]),
+          ]
+        : ["        tls: skip"]),
     ]),
     "    binaries:",
-    "      - path: /usr/lib/chromium/chromium",
+    ...(securityMode() === "development"
+      ? ["      - path: /usr/lib/chromium/chromium"]
+      : []),
     // Rust agent-browser may fetch a page; Node performs source DNS lookup.
     "      - path: /usr/local/bin/node",
     "",
     "# OpenRouter access/credential rewrite is supplied by the attached provider profile.",
     "# No package registry access at runtime: the image contains the agent and browser.",
-    "# tls:skip permits HTTPS to source hosts, not HTTP-method inspection.",
+    "# Hardened research traffic uses enforced GET/HEAD inspection and public IP ranges.",
     "",
   ].join("\n");
 }
@@ -136,6 +167,8 @@ export function planOpenShellTask(
   if (!options.urls.length || options.urls.length > 20)
     throw new Error("Specify 1–20 source URLs");
   const sources = routeSources(options.query, options.urls);
+  const profile = createResearchProfile(options.urls);
+  const artifactNonce = randomUUID();
   interactionMode(options.interactionMode);
   if (
     !Number.isSafeInteger(options.deepenRounds ?? 2) ||
@@ -183,6 +216,12 @@ export function planOpenShellTask(
     "--env",
     "HOME=/sandbox",
     "--env",
+    `RUNTIME_SECURITY_MODE=${profile.mode}`,
+    "--env",
+    `RUNTIME_PROFILE=${process.env.RUNTIME_PROFILE ?? "auto"}`,
+    "--env",
+    "WEB_HARNESS_MANAGED_WORKER=pi",
+    "--env",
     "AGENT_BROWSER_EXECUTABLE_PATH=/opt/web-harness/infra/openshell/chromium",
     "--env",
     "PI_CODING_AGENT_DIR=/tmp/pi-agent",
@@ -200,7 +239,7 @@ export function planOpenShellTask(
     "--agent",
     "pi-openrouter",
     "--url",
-    ...sources.map((source) => source.url),
+    ...options.urls,
     "--max-steps",
     String(limits.maxSteps),
     "--max-pages",
@@ -208,6 +247,8 @@ export function planOpenShellTask(
     "--timeout",
     String(limits.timeoutSeconds),
     "--json",
+    "--artifact-nonce",
+    artifactNonce,
     "--mode",
     options.interactionMode ?? "approval",
     "--deepen-rounds",
@@ -233,6 +274,8 @@ export function planOpenShellTask(
     join(directory, "artifacts"),
   ]);
   return {
+    profile,
+    artifactNonce,
     adapter: "openshell",
     specVersion: "v0.1.7",
     sandboxName,

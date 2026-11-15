@@ -63,6 +63,15 @@ test("Untrusted goals stay a single argument, including shell metacharacters", (
   assert.equal(args.filter((arg) => arg === query).length, 1);
   assert.equal(args[args.indexOf("run") + 1], query);
 });
+test("sandbox request preserves original URL order for nonce-bound artifact matching", () => {
+  const urls = ["https://www.jalan.net/", "https://www.hotpepper.jp/"];
+  const p = planOpenShellTask({ ...options, urls });
+  const args = p.commands[0]!.args;
+  assert.deepEqual(
+    args.slice(args.indexOf("--url") + 1, args.indexOf("--max-steps")),
+    urls,
+  );
+});
 test("Sandbox names, gateway, provider, image and limits cannot inject flags or scripts", () => {
   for (const patch of [
     { gateway: "https://gateway.example.com" },
@@ -86,7 +95,7 @@ test("Sandbox names, gateway, provider, image and limits cannot inject flags or 
         ...options,
         urls: ["https://example.com/" + "x".repeat(33000)],
       }),
-    /argument size/,
+    /argument size|調査URLの長さ上限/,
   );
 });
 test("Browser egress policy is host-scoped, nonroot and fails closed on Landlock", () => {

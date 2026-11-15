@@ -1,0 +1,2047 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-14T00:31:14.852Z",
+  "scope": "local single-user public research; gpt-6.1-sol; one sample per variant; baseline includes preexisting uncommitted changes",
+  "implementationHashes": {
+    "before": {
+      "runtime.js": "59e3610b7806dabea17feadf592ebfff33c7984f8cab6d28e6abc7544a3df1c5",
+      "prompt.js": "140f8af78bf3bf2dc0d9fb7b152c7d1ede9cccd4229cb7337a243b77e5d6cd41",
+      "evidence.js": "947ab12daebe45bcbbaa73c312bf2d2b9b46b29ed329b55162a412292c9bb1e1",
+      "improvement.js": "d33bedc89c3a4cd95e2a0623f6d947597b9749dac28d519ef048e9fee18bb111",
+      "service-evals.js": "4c3668519f5ef69376a5a18df3d61c6fddaeecb2aabd903920292afbf3218b07"
+    },
+    "after": {
+      "runtime.js": "ec95357aa77610d141b8efe47a672cc51c213ca948b5de83b782859788727553",
+      "prompt.js": "096657bff85b54884a553b93dc8783095309d9178f07a88107d6687ff99531fb",
+      "evidence.js": "d7f14f7454b5975f912d9e719fad0204f236658b50f0d9f0145dafa92cabae87",
+      "improvement.js": "e083ebefc500b482af7140e025d5ed329def90124a8951967091fca8e0437cc4",
+      "service-evals.js": "06e428c672e60bb9bd761990a4eb38eb9f7a0ebbe46d44aa6ff0285b5a5e89ab",
+      "page-context.js": "034786d6c6d8331bba3b27ece951cae8307a8bda77d7655971bfc1a4143fe40e"
+    }
+  },
+  "runs": [
+    {
+      "name": "rakuten-live",
+      "before": {
+        "taskId": "1778f028-bfe2-4db0-adcd-c6647d928476",
+        "model": "gpt-6.1-sol",
+        "status": "succeeded",
+        "query": "この公開商品詳細から書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとし、finish_taskで保存してください。送料、在庫、将来の販売価格は確約しません。",
+        "urls": [
+          "https://books.rakuten.co.jp/rb/18577690/"
+        ],
+        "criteria": [
+          {
+            "id": "title",
+            "description": "指定の商品詳細に記載された書名を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "publisher",
+            "description": "指定の商品詳細に記載された出版社を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "price",
+            "description": "指定の商品詳細に記載された税込価格を確認。送料・在庫・将来価格は確約しない",
+            "required": true,
+            "weight": 1
+          }
+        ],
+        "steps": 7,
+        "metrics": {
+          "elapsedMs": 23491,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 56827,
+            "outputTokens": 644,
+            "cachedInputTokens": 41088,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 57471,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "answer": {
+          "summary": "指定された楽天ブックスの商品詳細で、書名「るるぶ 箱根 '27 （るるぶ情報版）」、出版社「JTBパブリッシング」、税込価格「1,430円」を引用付きで確認しました。3項目とも記載があり、unknownはありません。",
+          "candidates": [
+            {
+              "name": "るるぶ 箱根 '27",
+              "url": "https://books.rakuten.co.jp/rb/18577690/",
+              "matches": [
+                {
+                  "criterionId": "title",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "書名表記は「るるぶ 箱根 '27 （るるぶ情報版）」。"
+                },
+                {
+                  "criterionId": "publisher",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "出版社はJTBパブリッシング。"
+                },
+                {
+                  "criterionId": "price",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-3"
+                  ],
+                  "explanation": "閲覧時の税込価格は1,430円。"
+                }
+              ],
+              "score": 100,
+              "eligible": true
+            }
+          ],
+          "limitations": [
+            "公開HTMLを確認したもので、ブラウザ描画・動的在庫は確認していません。",
+            "価格は2026年11月14日の閲覧時点の表示です。送料、在庫、将来の販売価格は確約しません。購入・ログインは行っていません。"
+          ]
+        },
+        "evidence": [
+          {
+            "id": "ev-1",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+            "capturedAt": "2026-11-14T00:18:30.653Z"
+          },
+          {
+            "id": "ev-2",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "出版社：\nJTBパブリッシング",
+            "capturedAt": "2026-11-14T00:18:30.653Z"
+          },
+          {
+            "id": "ev-3",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "1,430円（税込）",
+            "capturedAt": "2026-11-14T00:18:30.653Z"
+          }
+        ],
+        "captures": [
+          {
+            "id": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "capturedAt": "2026-11-14T00:18:30.653Z",
+            "textChars": 3303,
+            "sha256": "b335e42c96b0441b61d475081ff8b2108ddb68d08921f7f3c762c2f8e2c29f2d"
+          }
+        ]
+      },
+      "after": {
+        "taskId": "628df432-1bc0-429e-88a0-f302d178c972",
+        "model": "gpt-6.1-sol",
+        "status": "succeeded",
+        "query": "この公開商品詳細から書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとし、finish_taskで保存してください。送料、在庫、将来の販売価格は確約しません。",
+        "urls": [
+          "https://books.rakuten.co.jp/rb/18577690/"
+        ],
+        "criteria": [
+          {
+            "id": "title",
+            "description": "商品詳細に記載された書名を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "publisher",
+            "description": "商品詳細に記載された出版社を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "price",
+            "description": "商品詳細に記載された税込価格を確認。送料・在庫・将来価格は確約しない",
+            "required": true,
+            "weight": 1
+          }
+        ],
+        "steps": 7,
+        "metrics": {
+          "elapsedMs": 24827,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 57937,
+            "outputTokens": 611,
+            "cachedInputTokens": 41856,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 58548,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "answer": {
+          "summary": "指定商品詳細で書名「るるぶ 箱根 '27」（るるぶ情報版）、出版社「JTBパブリッシング」、税込価格「1,430円」を引用付きで確認しました。3項目とも確認でき、unknownはありません。",
+          "candidates": [
+            {
+              "name": "るるぶ 箱根 '27",
+              "url": "https://books.rakuten.co.jp/rb/18577690/",
+              "matches": [
+                {
+                  "criterionId": "title",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "書名は「るるぶ 箱根 '27」、シリーズ表記は「るるぶ情報版」。",
+                  "status": "supported"
+                },
+                {
+                  "criterionId": "publisher",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "出版社はJTBパブリッシング。",
+                  "status": "supported"
+                },
+                {
+                  "criterionId": "price",
+                  "evidenceIds": [
+                    "ev-3"
+                  ],
+                  "explanation": "閲覧時の表示価格は1,430円（税込）。",
+                  "status": "supported"
+                }
+              ],
+              "score": 100,
+              "eligible": true
+            }
+          ],
+          "limitations": [
+            "2026年11月14日取得の公開HTMLの表示情報です。送料・在庫・将来の販売価格は確約しません。購入・ログインは行っていません。"
+          ]
+        },
+        "evidence": [
+          {
+            "id": "ev-1",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+            "capturedAt": "2026-11-14T00:22:31.502Z"
+          },
+          {
+            "id": "ev-2",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "出版社：\nJTBパブリッシング",
+            "capturedAt": "2026-11-14T00:22:31.502Z"
+          },
+          {
+            "id": "ev-3",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "1,430円（税込）",
+            "capturedAt": "2026-11-14T00:22:31.502Z"
+          }
+        ],
+        "captures": [
+          {
+            "id": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "capturedAt": "2026-11-14T00:22:31.502Z",
+            "textChars": 3303,
+            "sha256": "b335e42c96b0441b61d475081ff8b2108ddb68d08921f7f3c762c2f8e2c29f2d"
+          }
+        ]
+      }
+    },
+    {
+      "name": "recruit-live",
+      "before": {
+        "taskId": "2d5f811f-74a1-45e7-a613-24b1eeaff3bf",
+        "model": "gpt-6.1-sol",
+        "status": "succeeded",
+        "query": "この店舗1件の店名、所在地、掲載されている平均予算を引用付きで確認してください。予約や問い合わせはせず、未記載はunknownとしてください。",
+        "urls": [
+          "https://www.hotpepper.jp/strJ001100102/"
+        ],
+        "criteria": [
+          {
+            "id": "name",
+            "description": "店舗名を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "address",
+            "description": "所在地を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "budget",
+            "description": "掲載平均予算を確認。ランチとディナーを区別し未記載はunknown",
+            "required": true,
+            "weight": 1
+          }
+        ],
+        "steps": 7,
+        "metrics": {
+          "elapsedMs": 24072,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 66847,
+            "outputTokens": 652,
+            "cachedInputTokens": 47616,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 67499,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "answer": {
+          "summary": "指定店舗は「まいか -米香- アトレ上野店」。所在地は東京都台東区上野７－１－１ アトレ上野 ２Ｆ。掲載予算詳細は3000円です。",
+          "candidates": [
+            {
+              "name": "まいか -米香- アトレ上野店",
+              "url": "https://www.hotpepper.jp/strJ001100102/",
+              "matches": [
+                {
+                  "criterionId": "name",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "店名欄に「まいか -米香- アトレ上野店」と掲載。"
+                },
+                {
+                  "criterionId": "address",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "住所欄に「東京都台東区上野７－１－１ アトレ上野 ２Ｆ」と掲載。"
+                },
+                {
+                  "criterionId": "budget",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-3"
+                  ],
+                  "explanation": "詳細情報には「予算詳細 3000円」と掲載。昼夜の区分はこの欄には記載なし。"
+                }
+              ],
+              "score": 100,
+              "eligible": true
+            }
+          ],
+          "limitations": [
+            "2026年11月14日取得の公開HTML掲載情報です。予算詳細3000円のランチ・ディナー区分はunknown。実際の支払額を確約するものではありません。予約・問い合わせは行っていません。"
+          ]
+        },
+        "evidence": [
+          {
+            "id": "ev-1",
+            "pageId": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "quote": "店名\nまいか -米香- アトレ上野店",
+            "capturedAt": "2026-11-14T00:19:58.161Z"
+          },
+          {
+            "id": "ev-2",
+            "pageId": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "quote": "住所\n東京都台東区上野７－１－１ アトレ上野 ２Ｆ",
+            "capturedAt": "2026-11-14T00:19:58.161Z"
+          },
+          {
+            "id": "ev-3",
+            "pageId": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "quote": "予算詳細\n3000円",
+            "capturedAt": "2026-11-14T00:19:58.161Z"
+          }
+        ],
+        "captures": [
+          {
+            "id": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "capturedAt": "2026-11-14T00:19:58.161Z",
+            "textChars": 6994,
+            "sha256": "405df38aa1638f4a8ecb9ce058119f19a2146e51004e0c8c619b0254784ab935"
+          }
+        ]
+      },
+      "after": {
+        "taskId": "17cdce9f-aeba-4b3b-9292-15846158a37c",
+        "model": "gpt-6.1-sol",
+        "status": "succeeded",
+        "query": "この店舗1件の店名、所在地、掲載されている平均予算を引用付きで確認してください。予約や問い合わせはせず、未記載はunknownとしてください。",
+        "urls": [
+          "https://www.hotpepper.jp/strJ001100102/"
+        ],
+        "criteria": [
+          {
+            "id": "name",
+            "description": "店舗名を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "location",
+            "description": "所在地を確認",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "budget",
+            "description": "掲載されている平均予算を確認。ランチ・ディナーを区別し、未記載はunknown",
+            "required": true,
+            "weight": 1
+          }
+        ],
+        "steps": 7,
+        "metrics": {
+          "elapsedMs": 26212,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 68386,
+            "outputTokens": 740,
+            "cachedInputTokens": 29312,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 69126,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "answer": {
+          "summary": "指定の1店舗を確認。店名は「まいか -米香- アトレ上野店」、所在地は「東京都台東区上野７－１－１ アトレ上野 ２Ｆ」、掲載予算詳細は「3000円」。",
+          "candidates": [
+            {
+              "name": "まいか -米香- アトレ上野店",
+              "url": "https://www.hotpepper.jp/strJ001100102/",
+              "matches": [
+                {
+                  "criterionId": "name",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "店名は「まいか -米香- アトレ上野店」。"
+                },
+                {
+                  "criterionId": "location",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "所在地は東京都台東区上野７－１－１ アトレ上野 ２Ｆ。"
+                },
+                {
+                  "criterionId": "budget",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2",
+                    "ev-3"
+                  ],
+                  "explanation": "掲載の予算詳細は3000円。別途、予算欄に4001～5000円／1501～2000円の記載もあるが、取得本文では昼夜の対応はunknown。"
+                }
+              ],
+              "score": 100,
+              "eligible": true
+            }
+          ],
+          "limitations": [
+            "公開HTMLの2026年11月14日取得情報。掲載予算は実際の支払額の確約ではありません。予算帯の昼夜の対応は取得本文ではunknown。予約・問い合わせは行っていません。"
+          ]
+        },
+        "evidence": [
+          {
+            "id": "ev-1",
+            "pageId": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "quote": "店名\nまいか -米香- アトレ上野店\n住所\n東京都台東区上野７－１－１ アトレ上野 ２Ｆ",
+            "capturedAt": "2026-11-14T00:22:35.038Z"
+          },
+          {
+            "id": "ev-2",
+            "pageId": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "quote": "予算詳細\n3000円",
+            "capturedAt": "2026-11-14T00:22:35.038Z"
+          },
+          {
+            "id": "ev-3",
+            "pageId": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "quote": "予算\n4001～5000円\n1501～2000円",
+            "capturedAt": "2026-11-14T00:22:35.038Z"
+          }
+        ],
+        "captures": [
+          {
+            "id": "page-1",
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "capturedAt": "2026-11-14T00:22:35.038Z",
+            "textChars": 6994,
+            "sha256": "405df38aa1638f4a8ecb9ce058119f19a2146e51004e0c8c619b0254784ab935"
+          }
+        ]
+      }
+    },
+    {
+      "name": "improvement-live",
+      "before": {
+        "taskId": "70f139bc-b4e6-4f29-949e-7f2ff5607c6a",
+        "model": "gpt-6.1-sol",
+        "status": "succeeded",
+        "query": "この公開商品詳細から書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとし、finish_taskで保存してください。送料、在庫、将来の販売価格は確約しません。",
+        "urls": [
+          "https://books.rakuten.co.jp/rb/18577690/"
+        ],
+        "criteria": [
+          {
+            "id": "title",
+            "description": "商品詳細に記載された書名",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "publisher",
+            "description": "商品詳細に記載された出版社",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "price",
+            "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+            "required": true,
+            "weight": 1
+          }
+        ],
+        "steps": 6,
+        "metrics": {
+          "elapsedMs": 19218,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 59106,
+            "outputTokens": 508,
+            "cachedInputTokens": 42624,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 59614,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "answer": {
+          "summary": "指定の商品詳細で書名、出版社、税込価格の全3項目を引用確認しました。書名は『るるぶ 箱根 '27』（るるぶ情報版）、出版社はJTBパブリッシング、閲覧時の税込価格は1,430円です。",
+          "candidates": [
+            {
+              "name": "るるぶ 箱根 '27",
+              "url": "https://books.rakuten.co.jp/rb/18577690/",
+              "matches": [
+                {
+                  "criterionId": "title",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "書名の記載は「るるぶ 箱根 '27 （るるぶ情報版）」。"
+                },
+                {
+                  "criterionId": "publisher",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "出版社欄は「JTBパブリッシング」。"
+                },
+                {
+                  "criterionId": "price",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-3"
+                  ],
+                  "explanation": "閲覧時の税込価格は「1,430円（税込）」。"
+                }
+              ],
+              "score": 100,
+              "eligible": true
+            }
+          ],
+          "limitations": [
+            "2026年11月14日閲覧の公開HTMLに基づきます。送料、在庫、将来の販売価格は確約しません。購入・ログインは行っていません。"
+          ]
+        },
+        "evidence": [
+          {
+            "id": "ev-1",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+            "capturedAt": "2026-11-14T00:21:45.136Z"
+          },
+          {
+            "id": "ev-2",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "出版社：\nJTBパブリッシング",
+            "capturedAt": "2026-11-14T00:21:45.136Z"
+          },
+          {
+            "id": "ev-3",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "1,430円（税込）",
+            "capturedAt": "2026-11-14T00:21:45.136Z"
+          }
+        ],
+        "loop": {
+          "interactionMode": "auto",
+          "executionTarget": "local",
+          "id": "d285cb7b-c514-4a35-b4a4-7f69783e05b9",
+          "sourceTaskId": "d2b527b3-213c-414b-97e8-15bcd7942a54",
+          "query": "この公開商品詳細から書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとし、finish_taskで保存してください。送料、在庫、将来の販売価格は確約しません。",
+          "urls": [
+            "https://books.rakuten.co.jp/rb/18577690/"
+          ],
+          "criteria": [
+            {
+              "id": "title",
+              "description": "商品詳細に記載された書名",
+              "required": true,
+              "weight": 1
+            },
+            {
+              "id": "publisher",
+              "description": "商品詳細に記載された出版社",
+              "required": true,
+              "weight": 1
+            },
+            {
+              "id": "price",
+              "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+              "required": true,
+              "weight": 1
+            }
+          ],
+          "candidateUrls": [
+            "https://books.rakuten.co.jp/rb/18577690/"
+          ],
+          "minimumCandidates": 1,
+          "additionalUrls": [],
+          "allowReplacements": false,
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-14T00:21:39.591Z",
+          "updatedAt": "2026-11-14T00:21:58.814Z",
+          "status": "succeeded",
+          "maxIterations": 2,
+          "timeoutSeconds": 180,
+          "bestTaskId": "70f139bc-b4e6-4f29-949e-7f2ff5607c6a",
+          "baseline": {
+            "complete": false,
+            "verifiedDetails": 0,
+            "supportedRequired": 0,
+            "supportedOptional": 0,
+            "gaps": [
+              {
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "fields": [
+                  "個別詳細の必須項目",
+                  "商品詳細に記載された書名",
+                  "商品詳細に記載された出版社",
+                  "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                  "候補数1件以上（現在0件）"
+                ]
+              }
+            ],
+            "causes": [
+              "step_budget_exhausted",
+              "invalid_or_missing_answer",
+              "detail_missing",
+              "required_unknown",
+              "candidate_missing",
+              "candidate_count_missing"
+            ],
+            "achievements": [],
+            "validationError": "回答の要約が必要です"
+          },
+          "best": {
+            "complete": true,
+            "verifiedDetails": 1,
+            "supportedRequired": 3,
+            "supportedOptional": 0,
+            "gaps": [],
+            "causes": [],
+            "achievements": [
+              "detail:rakuten-books:18577690",
+              "rakuten-books:18577690:title",
+              "rakuten-books:18577690:publisher",
+              "rakuten-books:18577690:price"
+            ]
+          },
+          "iterations": [
+            {
+              "number": 1,
+              "taskId": "70f139bc-b4e6-4f29-949e-7f2ff5607c6a",
+              "plan": {
+                "minimumCandidates": 1,
+                "allowReplacements": false,
+                "loopId": "d285cb7b-c514-4a35-b4a4-7f69783e05b9",
+                "iteration": 1,
+                "criteria": [
+                  {
+                    "id": "title",
+                    "description": "商品詳細に記載された書名",
+                    "required": true,
+                    "weight": 1
+                  },
+                  {
+                    "id": "publisher",
+                    "description": "商品詳細に記載された出版社",
+                    "required": true,
+                    "weight": 1
+                  },
+                  {
+                    "id": "price",
+                    "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                    "required": true,
+                    "weight": 1
+                  }
+                ],
+                "candidateUrls": [
+                  "https://books.rakuten.co.jp/rb/18577690/"
+                ],
+                "gaps": [
+                  {
+                    "url": "https://books.rakuten.co.jp/rb/18577690/",
+                    "fields": [
+                      "個別詳細の必須項目",
+                      "商品詳細に記載された書名",
+                      "商品詳細に記載された出版社",
+                      "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                      "候補数1件以上（現在0件）"
+                    ]
+                  }
+                ],
+                "priorityUrls": [],
+                "visitedUrls": [
+                  "https://books.rakuten.co.jp/rb/18577690/"
+                ],
+                "strategy": "targeted-links"
+              },
+              "result": {
+                "complete": true,
+                "verifiedDetails": 1,
+                "supportedRequired": 3,
+                "supportedOptional": 0,
+                "gaps": [],
+                "causes": [],
+                "achievements": [
+                  "detail:rakuten-books:18577690",
+                  "rakuten-books:18577690:title",
+                  "rakuten-books:18577690:publisher",
+                  "rakuten-books:18577690:price"
+                ]
+              },
+              "accepted": true,
+              "corrections": [],
+              "newPages": 0,
+              "taskStatus": "succeeded"
+            }
+          ],
+          "promotedStrategies": [
+            "targeted-links"
+          ],
+          "questions": [],
+          "stopReason": "元の全候補・必須条件・詳細取得を検証済み"
+        },
+        "captures": [
+          {
+            "id": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "capturedAt": "2026-11-14T00:21:45.136Z",
+            "textChars": 3303,
+            "sha256": "b335e42c96b0441b61d475081ff8b2108ddb68d08921f7f3c762c2f8e2c29f2d"
+          }
+        ]
+      },
+      "after": {
+        "taskId": "71773e38-5177-4b72-b666-cc0a96dc381a",
+        "model": "gpt-6.1-sol",
+        "status": "succeeded",
+        "query": "この公開商品詳細から書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとし、finish_taskで保存してください。送料、在庫、将来の販売価格は確約しません。",
+        "urls": [
+          "https://books.rakuten.co.jp/rb/18577690/"
+        ],
+        "criteria": [
+          {
+            "id": "title",
+            "description": "商品詳細に記載された書名",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "publisher",
+            "description": "商品詳細に記載された出版社",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "price",
+            "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+            "required": true,
+            "weight": 1
+          }
+        ],
+        "steps": 6,
+        "metrics": {
+          "elapsedMs": 22581,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 60246,
+            "outputTokens": 505,
+            "cachedInputTokens": 43648,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 60751,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "answer": {
+          "summary": "指定の商品詳細で書名「るるぶ 箱根 '27 （るるぶ情報版）」、出版社「JTBパブリッシング」、税込価格1,430円を引用確認しました。3項目すべて確認済みです。",
+          "candidates": [
+            {
+              "name": "るるぶ 箱根 '27",
+              "url": "https://books.rakuten.co.jp/rb/18577690/",
+              "matches": [
+                {
+                  "criterionId": "title",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-1"
+                  ],
+                  "explanation": "書名の記載は「るるぶ 箱根 '27 （るるぶ情報版）」。"
+                },
+                {
+                  "criterionId": "publisher",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-2"
+                  ],
+                  "explanation": "出版社欄に「JTBパブリッシング」と記載。"
+                },
+                {
+                  "criterionId": "price",
+                  "status": "supported",
+                  "evidenceIds": [
+                    "ev-3"
+                  ],
+                  "explanation": "閲覧時の税込価格は「1,430円（税込）」。"
+                }
+              ],
+              "score": 100,
+              "eligible": true
+            }
+          ],
+          "limitations": [
+            "2026年11月14日閲覧時の公開HTMLの記載です。送料、在庫、将来の販売価格は確約しません。購入・ログインは行っていません。"
+          ]
+        },
+        "evidence": [
+          {
+            "id": "ev-1",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+            "capturedAt": "2026-11-14T00:22:36.469Z"
+          },
+          {
+            "id": "ev-2",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "出版社：\nJTBパブリッシング",
+            "capturedAt": "2026-11-14T00:22:36.469Z"
+          },
+          {
+            "id": "ev-3",
+            "pageId": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "quote": "1,430円（税込）",
+            "capturedAt": "2026-11-14T00:22:36.469Z"
+          }
+        ],
+        "loop": {
+          "interactionMode": "auto",
+          "executionTarget": "local",
+          "id": "aabf392b-de93-4a28-86c2-f57331ceafaa",
+          "sourceTaskId": "d2b527b3-213c-414b-97e8-15bcd7942a54",
+          "query": "この公開商品詳細から書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとし、finish_taskで保存してください。送料、在庫、将来の販売価格は確約しません。",
+          "urls": [
+            "https://books.rakuten.co.jp/rb/18577690/"
+          ],
+          "criteria": [
+            {
+              "id": "title",
+              "description": "商品詳細に記載された書名",
+              "required": true,
+              "weight": 1
+            },
+            {
+              "id": "publisher",
+              "description": "商品詳細に記載された出版社",
+              "required": true,
+              "weight": 1
+            },
+            {
+              "id": "price",
+              "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+              "required": true,
+              "weight": 1
+            }
+          ],
+          "candidateUrls": [
+            "https://books.rakuten.co.jp/rb/18577690/"
+          ],
+          "minimumCandidates": 1,
+          "additionalUrls": [],
+          "allowReplacements": false,
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "createdAt": "2026-11-14T00:22:30.970Z",
+          "updatedAt": "2026-11-14T00:22:53.558Z",
+          "status": "succeeded",
+          "maxIterations": 2,
+          "timeoutSeconds": 180,
+          "bestTaskId": "71773e38-5177-4b72-b666-cc0a96dc381a",
+          "baseline": {
+            "complete": false,
+            "verifiedDetails": 0,
+            "supportedRequired": 0,
+            "supportedOptional": 0,
+            "gaps": [
+              {
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "fields": [
+                  "個別詳細の必須項目",
+                  "商品詳細に記載された書名",
+                  "商品詳細に記載された出版社",
+                  "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                  "候補数1件以上（現在0件）"
+                ]
+              }
+            ],
+            "causes": [
+              "step_budget_exhausted",
+              "invalid_or_missing_answer",
+              "detail_missing",
+              "required_unknown",
+              "candidate_missing",
+              "candidate_count_missing"
+            ],
+            "achievements": [],
+            "validationError": "回答の要約が必要です"
+          },
+          "best": {
+            "complete": true,
+            "verifiedDetails": 1,
+            "supportedRequired": 3,
+            "supportedOptional": 0,
+            "gaps": [],
+            "causes": [],
+            "achievements": [
+              "detail:rakuten-books:18577690",
+              "rakuten-books:18577690:title",
+              "rakuten-books:18577690:publisher",
+              "rakuten-books:18577690:price"
+            ]
+          },
+          "iterations": [
+            {
+              "number": 1,
+              "taskId": "71773e38-5177-4b72-b666-cc0a96dc381a",
+              "plan": {
+                "minimumCandidates": 1,
+                "allowReplacements": false,
+                "loopId": "aabf392b-de93-4a28-86c2-f57331ceafaa",
+                "iteration": 1,
+                "criteria": [
+                  {
+                    "id": "title",
+                    "description": "商品詳細に記載された書名",
+                    "required": true,
+                    "weight": 1
+                  },
+                  {
+                    "id": "publisher",
+                    "description": "商品詳細に記載された出版社",
+                    "required": true,
+                    "weight": 1
+                  },
+                  {
+                    "id": "price",
+                    "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                    "required": true,
+                    "weight": 1
+                  }
+                ],
+                "candidateUrls": [
+                  "https://books.rakuten.co.jp/rb/18577690/"
+                ],
+                "gaps": [
+                  {
+                    "url": "https://books.rakuten.co.jp/rb/18577690/",
+                    "fields": [
+                      "個別詳細の必須項目",
+                      "商品詳細に記載された書名",
+                      "商品詳細に記載された出版社",
+                      "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                      "候補数1件以上（現在0件）"
+                    ]
+                  }
+                ],
+                "priorityUrls": [],
+                "visitedUrls": [
+                  "https://books.rakuten.co.jp/rb/18577690/"
+                ],
+                "strategy": "targeted-links"
+              },
+              "result": {
+                "complete": true,
+                "verifiedDetails": 1,
+                "supportedRequired": 3,
+                "supportedOptional": 0,
+                "gaps": [],
+                "causes": [],
+                "achievements": [
+                  "detail:rakuten-books:18577690",
+                  "rakuten-books:18577690:title",
+                  "rakuten-books:18577690:publisher",
+                  "rakuten-books:18577690:price"
+                ]
+              },
+              "accepted": true,
+              "corrections": [],
+              "newPages": 0,
+              "taskStatus": "succeeded",
+              "measurement": {
+                "elapsedMs": 22583,
+                "totalTokens": 60751,
+                "additionalApiUsd": 0,
+                "repeatedPages": 1,
+                "requiredDelta": 3,
+                "detailDelta": 1,
+                "retainedAchievements": true
+              }
+            }
+          ],
+          "promotedStrategies": [
+            "targeted-links"
+          ],
+          "questions": [],
+          "stopReason": "元の全候補・必須条件・詳細取得を検証済み"
+        },
+        "captures": [
+          {
+            "id": "page-1",
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "capturedAt": "2026-11-14T00:22:36.469Z",
+            "textChars": 3303,
+            "sha256": "b335e42c96b0441b61d475081ff8b2108ddb68d08921f7f3c762c2f8e2c29f2d"
+          }
+        ]
+      }
+    }
+  ],
+  "integrity": {
+    "protocol": "deterministic mutation of a successful live capture; finish_task validator, not semantic entailment",
+    "results": [
+      {
+        "name": "quote",
+        "before": "accepted",
+        "after": "rejected"
+      },
+      {
+        "name": "url",
+        "before": "accepted",
+        "after": "rejected"
+      },
+      {
+        "name": "timestamp",
+        "before": "accepted",
+        "after": "rejected"
+      },
+      {
+        "name": "duplicateEvidenceId",
+        "before": "accepted",
+        "after": "rejected"
+      },
+      {
+        "name": "duplicatePageId",
+        "before": "accepted",
+        "after": "rejected"
+      }
+    ]
+  },
+  "frozenExploratory": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-11-14T00:24:00.958Z",
+    "protocol": "same captured pages, criteria, query, model and budgets; baseline first; current independent structural verifier; one sample per case; not a statistical benchmark",
+    "syntheticNavigationPadding": 24000,
+    "cases": [
+      {
+        "sourceTaskId": "1778f028-bfe2-4db0-adcd-c6647d928476",
+        "fixtureSha256": "dd2b02c2f539e7d29d73594b0cbd1367d60f4d98799d2fbe8d4268c80f3d4c9d",
+        "results": {
+          "before": {
+            "taskId": "434f20ed-1e6e-4a11-bfa5-f0585f192ff0",
+            "model": "gpt-6.1-sol",
+            "status": "succeeded",
+            "diagnosis": {
+              "complete": true,
+              "verifiedDetails": 1,
+              "supportedRequired": 3,
+              "supportedOptional": 0,
+              "gaps": [],
+              "causes": [],
+              "achievements": [
+                "detail:rakuten-books:18577690",
+                "rakuten-books:18577690:title",
+                "rakuten-books:18577690:publisher",
+                "rakuten-books:18577690:price"
+              ]
+            },
+            "steps": 7,
+            "metrics": {
+              "elapsedMs": 24142,
+              "tokenAccounting": "provider-reported",
+              "tokens": {
+                "inputTokens": 74467,
+                "outputTokens": 605,
+                "cachedInputTokens": 52864,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 75072,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "指定商品詳細で書名『るるぶ 箱根 '27』、出版社JTBパブリッシング、税込価格1,430円を引用付きで確認した。全3項目supported。",
+              "candidates": [
+                {
+                  "name": "るるぶ 箱根 '27",
+                  "url": "https://books.rakuten.co.jp/rb/18577690/",
+                  "matches": [
+                    {
+                      "criterionId": "title",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "本文に「るるぶ 箱根 '27 （るるぶ情報版）」と記載され、書名を確認できる。"
+                    },
+                    {
+                      "criterionId": "publisher",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-2"
+                      ],
+                      "explanation": "商品情報に「出版社：\nJTBパブリッシング」と記載されている。"
+                    },
+                    {
+                      "criterionId": "price",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-3"
+                      ],
+                      "explanation": "対象商品の価格表示は「1,430円（税込）」で、税込価格を確認できる。"
+                    }
+                  ],
+                  "score": 100,
+                  "eligible": true
+                }
+              ],
+              "limitations": [
+                "凍結された公開HTMLの記載を確認したもので、送料・在庫・将来の販売価格は確約しない。購入・ログインは行っていない。"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "出版社：\nJTBパブリッシング",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-3",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "1,430円（税込）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              }
+            ]
+          },
+          "after": {
+            "taskId": "be8378cf-2202-4d3e-aa0d-72b961f7529b",
+            "model": "gpt-6.1-sol",
+            "status": "succeeded",
+            "diagnosis": {
+              "complete": true,
+              "verifiedDetails": 1,
+              "supportedRequired": 3,
+              "supportedOptional": 0,
+              "gaps": [],
+              "causes": [],
+              "achievements": [
+                "detail:rakuten-books:18577690",
+                "rakuten-books:18577690:title",
+                "rakuten-books:18577690:publisher",
+                "rakuten-books:18577690:price"
+              ]
+            },
+            "steps": 7,
+            "metrics": {
+              "elapsedMs": 23237,
+              "tokenAccounting": "provider-reported",
+              "tokens": {
+                "inputTokens": 68119,
+                "outputTokens": 634,
+                "cachedInputTokens": 48640,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 68753,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "指定の商品詳細で書名、出版社、税込価格の全3項目を確認しました。書名は『るるぶ 箱根 '27』、出版社はJTBパブリッシング、税込価格は1,430円です。",
+              "candidates": [
+                {
+                  "name": "るるぶ 箱根 '27",
+                  "url": "https://books.rakuten.co.jp/rb/18577690/",
+                  "matches": [
+                    {
+                      "criterionId": "title",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "本文に書名「るるぶ 箱根 '27 （るるぶ情報版）」と記載されています。"
+                    },
+                    {
+                      "criterionId": "publisher",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-2"
+                      ],
+                      "explanation": "出版社欄に「JTBパブリッシング」と明記されています。"
+                    },
+                    {
+                      "criterionId": "price",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-3"
+                      ],
+                      "explanation": "本文に「1,430円（税込）」と明記されています。"
+                    }
+                  ],
+                  "score": 100,
+                  "eligible": true
+                }
+              ],
+              "limitations": [
+                "凍結された公開HTMLの記載に基づく確認であり、ライブ検索やブラウザ描画の確認はしていません。",
+                "価格は取得資料の表示情報です。送料、在庫、将来の販売価格は確約しません。購入・ログインは行っていません。"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "出版社：\nJTBパブリッシング",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-3",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "1,430円（税込）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "sourceTaskId": "2d5f811f-74a1-45e7-a613-24b1eeaff3bf",
+        "fixtureSha256": "b2d6286ba62588507aa2f20a9586b126ac21e6720937a5af95eb8eb1c15747f7",
+        "results": {
+          "before": {
+            "taskId": "c71dc31b-93e2-438d-aece-0e0a2f9808b5",
+            "model": "gpt-6.1-sol",
+            "status": "failed",
+            "diagnosis": {
+              "complete": false,
+              "verifiedDetails": 1,
+              "supportedRequired": 2,
+              "supportedOptional": 0,
+              "gaps": [
+                {
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "fields": [
+                    "掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+                  ]
+                }
+              ],
+              "causes": [
+                "required_unknown"
+              ],
+              "achievements": [
+                "detail:hotpepper-gourmet:J001100102",
+                "hotpepper-gourmet:J001100102:name",
+                "hotpepper-gourmet:J001100102:address"
+              ]
+            },
+            "steps": 14,
+            "metrics": {
+              "elapsedMs": 39442,
+              "tokenAccounting": "last-observed-partial",
+              "tokens": {
+                "inputTokens": 118586,
+                "outputTokens": 1015,
+                "cachedInputTokens": 85760,
+                "reasoningOutputTokens": 12,
+                "totalTokens": 119601,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "店名と住所は確認。掲載予算数値は確認できるがランチ・ディナー別はunknown。",
+              "candidates": [
+                {
+                  "name": "まいか -米香- アトレ上野店",
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "matches": [
+                    {
+                      "criterionId": "name",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "店名「まいか -米香- アトレ上野店」。"
+                    },
+                    {
+                      "criterionId": "address",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "住所「東京都台東区上野７－１－１ アトレ上野 ２Ｆ」。"
+                    },
+                    {
+                      "criterionId": "budget",
+                      "status": "unknown",
+                      "evidenceIds": [
+                        "ev-2",
+                        "ev-3"
+                      ],
+                      "explanation": "予算詳細3000円、予算欄4001～5000円・1501～2000円。ランチ・ディナーの対応は本文で確認できずunknown。補完も失敗。"
+                    }
+                  ],
+                  "score": 67,
+                  "eligible": false
+                }
+              ],
+              "limitations": [
+                "追加取得は凍結資料にURLがなく失敗。時間帯別平均予算は未確認。予約・問い合わせは未実施。",
+                "追加確認しても未確認の項目: 掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "店名\nまいか -米香- アトレ上野店\n住所\n東京都台東区上野７－１－１ アトレ上野 ２Ｆ",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "予算詳細\n3000円",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              },
+              {
+                "id": "ev-3",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "予算\n4001～5000円\n1501～2000円",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              }
+            ],
+            "error": "回答確定済みです"
+          },
+          "after": {
+            "taskId": "e824a473-c6db-49c3-9c11-351116d39994",
+            "model": "gpt-6.1-sol",
+            "status": "partial",
+            "diagnosis": {
+              "complete": false,
+              "verifiedDetails": 1,
+              "supportedRequired": 2,
+              "supportedOptional": 0,
+              "gaps": [
+                {
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "fields": [
+                    "掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+                  ]
+                }
+              ],
+              "causes": [
+                "required_unknown"
+              ],
+              "achievements": [
+                "detail:hotpepper-gourmet:J001100102",
+                "hotpepper-gourmet:J001100102:name",
+                "hotpepper-gourmet:J001100102:address"
+              ]
+            },
+            "steps": 14,
+            "metrics": {
+              "elapsedMs": 42911,
+              "tokenAccounting": "provider-reported",
+              "tokens": {
+                "inputTokens": 146397,
+                "outputTokens": 1463,
+                "cachedInputTokens": 103168,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 147860,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "店名・所在地を確認。ランチ・ディナー別平均予算はunknown。",
+              "candidates": [
+                {
+                  "name": "まいか -米香- アトレ上野店",
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "matches": [
+                    {
+                      "criterionId": "name",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "店名欄の記載を確認。"
+                    },
+                    {
+                      "criterionId": "address",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "東京都台東区上野７－１－１ アトレ上野 ２Ｆと記載。"
+                    },
+                    {
+                      "criterionId": "budget",
+                      "status": "unknown",
+                      "evidenceIds": [
+                        "ev-2",
+                        "ev-3"
+                      ],
+                      "explanation": "予算詳細3000円、予算4001～5000円／1501～2000円の記載はあるが、ランチとディナーの区別・平均の明示は未確認。再取得でも新規本文なし。"
+                    }
+                  ],
+                  "score": 67,
+                  "eligible": false
+                }
+              ],
+              "limitations": [
+                "追加詳細は凍結資料に存在せず取得不能。予算の時間帯対応を推測しない。予約・問い合わせなし。",
+                "追加確認しても未確認の項目: 掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "店名\nまいか -米香- アトレ上野店\n住所\n東京都台東区上野７－１－１ アトレ上野 ２Ｆ",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "予算詳細\n3000円",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              },
+              {
+                "id": "ev-3",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "予算\n4001～5000円\n1501～2000円",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "frozenFinal": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-11-14T00:27:48.544Z",
+    "protocol": "same captured pages, criteria, query, model and budgets; baseline first; current independent structural verifier; one sample per case; not a statistical benchmark",
+    "syntheticNavigationPadding": 24000,
+    "cases": [
+      {
+        "sourceTaskId": "1778f028-bfe2-4db0-adcd-c6647d928476",
+        "fixtureSha256": "dd2b02c2f539e7d29d73594b0cbd1367d60f4d98799d2fbe8d4268c80f3d4c9d",
+        "results": {
+          "before": {
+            "taskId": "686c0dc6-32f5-4427-9a12-b7d27e5044a3",
+            "model": "gpt-6.1-sol",
+            "status": "succeeded",
+            "diagnosis": {
+              "complete": true,
+              "verifiedDetails": 1,
+              "supportedRequired": 3,
+              "supportedOptional": 0,
+              "gaps": [],
+              "causes": [],
+              "achievements": [
+                "detail:rakuten-books:18577690",
+                "rakuten-books:18577690:title",
+                "rakuten-books:18577690:publisher",
+                "rakuten-books:18577690:price"
+              ]
+            },
+            "steps": 7,
+            "metrics": {
+              "elapsedMs": 20331,
+              "tokenAccounting": "provider-reported",
+              "tokens": {
+                "inputTokens": 74450,
+                "outputTokens": 599,
+                "cachedInputTokens": 52864,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 75049,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "指定商品詳細で書名『るるぶ 箱根 '27』（るるぶ情報版）、出版社JTBパブリッシング、税込価格1,430円を引用付きで確認し、全3項目をsupportedと判定。",
+              "candidates": [
+                {
+                  "name": "るるぶ 箱根 '27",
+                  "url": "https://books.rakuten.co.jp/rb/18577690/",
+                  "matches": [
+                    {
+                      "criterionId": "title",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "本文に「るるぶ 箱根 '27 （るるぶ情報版）」と記載。"
+                    },
+                    {
+                      "criterionId": "publisher",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-2"
+                      ],
+                      "explanation": "出版社欄に「JTBパブリッシング」と記載。"
+                    },
+                    {
+                      "criterionId": "price",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-3"
+                      ],
+                      "explanation": "対象商品の税込価格は「1,430円（税込）」と記載。"
+                    }
+                  ],
+                  "score": 100,
+                  "eligible": true
+                }
+              ],
+              "limitations": [
+                "公開HTMLの取得時点の記載を確認。送料、在庫、将来の販売価格は確約しない。購入・ログインは行っていない。"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "出版社：\nJTBパブリッシング",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-3",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "1,430円（税込）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              }
+            ]
+          },
+          "after": {
+            "taskId": "8722bd1a-598e-4460-b75f-0b3e98f9aadf",
+            "model": "gpt-6.1-sol",
+            "status": "succeeded",
+            "diagnosis": {
+              "complete": true,
+              "verifiedDetails": 1,
+              "supportedRequired": 3,
+              "supportedOptional": 0,
+              "gaps": [],
+              "causes": [],
+              "achievements": [
+                "detail:rakuten-books:18577690",
+                "rakuten-books:18577690:title",
+                "rakuten-books:18577690:publisher",
+                "rakuten-books:18577690:price"
+              ]
+            },
+            "steps": 7,
+            "metrics": {
+              "elapsedMs": 21585,
+              "tokenAccounting": "provider-reported",
+              "tokens": {
+                "inputTokens": 68094,
+                "outputTokens": 599,
+                "cachedInputTokens": 48640,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 68693,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "指定の商品詳細で書名「るるぶ 箱根 '27」、出版社「JTBパブリッシング」、税込価格1,430円を引用付きで確認。3項目すべてsupported。",
+              "candidates": [
+                {
+                  "name": "るるぶ 箱根 '27",
+                  "url": "https://books.rakuten.co.jp/rb/18577690/",
+                  "matches": [
+                    {
+                      "criterionId": "title",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "書名は「るるぶ 箱根 '27」、シリーズ表記は「るるぶ情報版」と確認できる。"
+                    },
+                    {
+                      "criterionId": "publisher",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-2"
+                      ],
+                      "explanation": "出版社欄に「JTBパブリッシング」と明記されている。"
+                    },
+                    {
+                      "criterionId": "price",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-3"
+                      ],
+                      "explanation": "税込価格は「1,430円（税込）」と記載されている。"
+                    }
+                  ],
+                  "score": 100,
+                  "eligible": true
+                }
+              ],
+              "limitations": [
+                "凍結された公開HTMLの記載を確認した結果であり、送料・在庫・将来の販売価格は確約しない。購入・ログインは行っていない。"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "出版社：\nJTBパブリッシング",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              },
+              {
+                "id": "ev-3",
+                "pageId": "page-1",
+                "url": "https://books.rakuten.co.jp/rb/18577690/",
+                "quote": "1,430円（税込）",
+                "capturedAt": "2026-11-14T00:18:30.653Z"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "sourceTaskId": "2d5f811f-74a1-45e7-a613-24b1eeaff3bf",
+        "fixtureSha256": "b2d6286ba62588507aa2f20a9586b126ac21e6720937a5af95eb8eb1c15747f7",
+        "results": {
+          "before": {
+            "taskId": "8c17122a-0292-41ea-b6e1-b536267b56c2",
+            "model": "gpt-6.1-sol",
+            "status": "partial",
+            "diagnosis": {
+              "complete": false,
+              "verifiedDetails": 1,
+              "supportedRequired": 2,
+              "supportedOptional": 0,
+              "gaps": [
+                {
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "fields": [
+                    "掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+                  ]
+                }
+              ],
+              "causes": [
+                "required_unknown"
+              ],
+              "achievements": [
+                "detail:hotpepper-gourmet:J001100102",
+                "hotpepper-gourmet:J001100102:name",
+                "hotpepper-gourmet:J001100102:address"
+              ]
+            },
+            "steps": 12,
+            "metrics": {
+              "elapsedMs": 39673,
+              "tokenAccounting": "provider-reported",
+              "tokens": {
+                "inputTokens": 120830,
+                "outputTokens": 1243,
+                "cachedInputTokens": 87808,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 122073,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "店名・所在地は確認済み。予算詳細3000円。ランチ・ディナー別平均予算はunknown。",
+              "candidates": [
+                {
+                  "name": "まいか -米香- アトレ上野店",
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "matches": [
+                    {
+                      "criterionId": "name",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "店名欄に明記。"
+                    },
+                    {
+                      "criterionId": "address",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "住所欄に東京都台東区上野７－１－１ アトレ上野 ２Ｆと明記。"
+                    },
+                    {
+                      "criterionId": "budget",
+                      "status": "unknown",
+                      "evidenceIds": [
+                        "ev-2"
+                      ],
+                      "explanation": "予算詳細3000円は掲載されているが、ランチ・ディナー別平均予算は未確認。"
+                    }
+                  ],
+                  "score": 67,
+                  "eligible": false
+                }
+              ],
+              "limitations": [
+                "追加取得先が凍結資料になく、繰り返し追加取得しても補完できなかった。時間帯別予算はunknown。予約・問い合わせなし。",
+                "追加確認しても未確認の項目: 掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "店名\nまいか -米香- アトレ上野店\n住所\n東京都台東区上野７－１－１ アトレ上野 ２Ｆ",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "予算詳細\n3000円",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              }
+            ]
+          },
+          "after": {
+            "taskId": "b8506cf7-26a4-4020-971e-da96c30fc4ff",
+            "model": "gpt-6.1-sol",
+            "status": "partial",
+            "diagnosis": {
+              "complete": false,
+              "verifiedDetails": 1,
+              "supportedRequired": 2,
+              "supportedOptional": 0,
+              "gaps": [
+                {
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "fields": [
+                    "掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+                  ]
+                }
+              ],
+              "causes": [
+                "required_unknown"
+              ],
+              "achievements": [
+                "detail:hotpepper-gourmet:J001100102",
+                "hotpepper-gourmet:J001100102:name",
+                "hotpepper-gourmet:J001100102:address"
+              ]
+            },
+            "steps": 11,
+            "metrics": {
+              "elapsedMs": 29242,
+              "tokenAccounting": "provider-reported",
+              "tokens": {
+                "inputTokens": 99481,
+                "outputTokens": 848,
+                "cachedInputTokens": 65408,
+                "reasoningOutputTokens": 0,
+                "totalTokens": 100329,
+                "cacheWriteInputTokens": 0,
+                "source": "codex-thread-total"
+              },
+              "billing": {
+                "mode": "chatgpt-subscription",
+                "additionalApiUsd": 0,
+                "subscriptionAllocationUsd": null,
+                "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+              }
+            },
+            "answer": {
+              "summary": "対象1店舗の店名と所在地は確認済み。掲載予算の数値は引用できるが、ランチ・ディナー別の平均予算はunknown。",
+              "candidates": [
+                {
+                  "name": "まいか -米香- アトレ上野店",
+                  "url": "https://www.hotpepper.jp/strJ001100102/",
+                  "matches": [
+                    {
+                      "criterionId": "name",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "店名欄に「まいか -米香- アトレ上野店」と記載。"
+                    },
+                    {
+                      "criterionId": "address",
+                      "status": "supported",
+                      "evidenceIds": [
+                        "ev-1"
+                      ],
+                      "explanation": "住所欄に「東京都台東区上野７－１－１ アトレ上野 ２Ｆ」と記載。"
+                    },
+                    {
+                      "criterionId": "budget",
+                      "status": "unknown",
+                      "evidenceIds": [
+                        "ev-2",
+                        "ev-3"
+                      ],
+                      "explanation": "「予算詳細 3000円」、上部に「予算 4001～5000円 1501～2000円」の掲載は確認できるが、取得本文ではランチ・ディナーの対応や平均予算との明示を確認できない。ランチ平均・ディナー平均はそれぞれunknown。"
+                    }
+                  ],
+                  "score": 67,
+                  "eligible": false
+                }
+              ],
+              "limitations": [
+                "凍結資料の公開HTMLに基づく確認。予算のランチ・ディナー区分は本文で確認できず、同一店舗の追加ページも凍結資料になく取得できなかった。予約・問い合わせは行っていない。",
+                "追加確認しても未確認の項目: 掲載平均予算を確認。ランチとディナーを区別し未記載はunknown"
+              ]
+            },
+            "evidence": [
+              {
+                "id": "ev-1",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "店名\nまいか -米香- アトレ上野店\n住所\n東京都台東区上野７－１－１ アトレ上野 ２Ｆ",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              },
+              {
+                "id": "ev-2",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "予算詳細\n3000円",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              },
+              {
+                "id": "ev-3",
+                "pageId": "page-1",
+                "url": "https://www.hotpepper.jp/strJ001100102/",
+                "quote": "予算\n4001～5000円\n1501～2000円",
+                "capturedAt": "2026-11-14T00:19:58.161Z"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validation": {
+    "typecheck": "passed",
+    "build": "passed",
+    "tests": {
+      "serial": {
+        "passed": 196,
+        "failed": 0
+      },
+      "default": {
+        "passed": 196,
+        "failed": 0,
+        "log": ".runtime/quality-study/tests-final-default.log"
+      }
+    },
+    "chatFixture": {
+      "recruit": "passed",
+      "rakuten": "passed"
+    },
+    "liveChat": "not rerun on this revision; CLI live runs above are not live UI acceptance",
+    "release": "not packaged or deployed",
+    "semanticFixtureCheck": {
+      "cases": 8,
+      "labels": 28,
+      "humanReviewed": 0,
+      "freeTextReview": "not_evaluated"
+    }
+  },
+  "limitations": [
+    "No statistical significance or p95 claim from single runs",
+    "Stress test prepends 24000 synthetic navigation characters; it is not a live-web success benchmark",
+    "Structural evidence verification is not general semantic entailment",
+    "Live before/after generated their own criteria; only frozen comparisons and improvement seed fixed the criteria",
+    "Subscription allocation and extra-credit spend are unknown; additionalApiUsd is not total cost",
+    "A concurrent default test run hit an existing child startup READY timing failure; complete serial suite passed"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "scope": "automatic-interaction-and-layout-only; synthetic map transport fixture, no public tile traffic",
+  "humanAppeal": "unrated",
+  "cases": [
+    {
+      "kind": "journey-map",
+      "interactiveMs": 127,
+      "viewports": [
+        {
+          "width": 320,
+          "overflow": false,
+          "visualTop": 231.578125
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "visualTop": 199.578125
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "visualTop": 225.875
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "visualTop": 204.59375
+        }
+      ],
+      "linkedMapSelection": true,
+      "optionalBudget": {
+        "before": 12080,
+        "after": 10820
+      },
+      "googleRoute": true,
+      "loadedMapTiles": 15
+    },
+    {
+      "kind": "life-roadmap",
+      "interactiveMs": 78,
+      "viewports": [
+        {
+          "width": 320,
+          "overflow": false,
+          "visualTop": 199.578125
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "visualTop": 199.578125
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "visualTop": 225.875
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "visualTop": 204.59375
+        }
+      ],
+      "milestones": 9,
+      "dependencyGating": true,
+      "rollbackPropagates": true
+    }
+  ],
+  "passed": true,
+  "backgroundFailures": [
+    {
+      "failure": "http-403-png",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    },
+    {
+      "failure": "http-429-png",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    },
+    {
+      "failure": "cors-network",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    },
+    {
+      "failure": "invalid-png",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    }
+  ],
+  "offline": {
+    "pins": 4,
+    "selectionWorks": true,
+    "limitationsVisible": true
+  },
+  "untrustedMarkupEscaped": true
+}

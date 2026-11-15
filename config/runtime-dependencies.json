@@ -1,4 +1,12 @@
 {
+  "@astryxdesign/core": {
+    "version": "0.7.16",
+    "integrity": "sha512-3FFQGIOiRVczlrBtRH/Pm4TQwl6FVTCkMhGfljVcxjGBY1AJ4yhx6fRFnP7Nw/Wjaic1vne2TbJ7HW00d3vK2Q=="
+  },
+  "@astryxdesign/theme-neutral": {
+    "version": "0.7.16",
+    "integrity": "sha512-4tjVvrL9VM2jpfTceORnYWnR9fiSj93ssAUo786YmODlOHoZIs1b/aCcmClxr0VUdGVha4y33DpCqoutmwF8DQ=="
+  },
   "@earendil-works/pi-coding-agent": {
     "version": "1.5.0",
     "integrity": "sha512-xNDZ5kqowO6Z03FS2gwAkPEGk1ssxVcYKQ6qZId84mFEvwACvvyc2l0vAMOS+c5zvxLRMLBE9r4y44IGYkMJaQ=="
@@ -6,6 +14,10 @@
   "@sinclair/typebox": {
     "version": "0.34.52",
     "integrity": "sha512-XiMQh7qqVlxZzcVD+kkGMNGMzcTrDMLWI7S4x7z1MkCkbDPrekpZXEUK0eZqZFMuHQg2a2DZOcDIh9o5v3Gonw=="
+  },
+  "@stylexjs/stylex": {
+    "version": "0.19.2",
+    "integrity": "sha512-l0fRhOBZ4rFiZ0GntYSlp4lYO5dPT11F3mLb7O4ShK6eE1WOjHtv9GHGQZuzHJbQkjcEaRjPSpBn6itI7yXc3Q=="
   },
   "agent-browser": {
     "version": "0.41.2",
@@ -22,5 +34,17 @@
   "dotenv": {
     "version": "17.4.2",
     "integrity": "sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw=="
+  },
+  "leaflet": {
+    "version": "1.9.4",
+    "integrity": "sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA=="
+  },
+  "react": {
+    "version": "19.3.1",
+    "integrity": "sha512-QNhWdt7nrgVWWQG58QuGsAR3jv3Hbe4mb4vz7w2csnHavciZJgda1CPNaldF6eVxv90ud3jUXpKlHL69gO38yw=="
+  },
+  "react-dom": {
+    "version": "19.3.1",
+    "integrity": "sha512-Y0bARz53lhEC1NMCASs0/j+faB/zqt3R8hpvg1e8+61ZVJ4UL0UdC4cBbXfZMcIuhrfgeILTLe+ZeBCavQPtKQ=="
   }
 }

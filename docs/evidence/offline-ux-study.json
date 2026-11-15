@@ -1,0 +1,1014 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-14T03:07:54.554Z",
+  "research": [
+    {
+      "url": "https://arxiv.org/html/2608.05446v1",
+      "adopted": [
+        "BPE external-state separation",
+        "verified-success-gated efficiency",
+        "offline procedural experience"
+      ],
+      "deferred": [
+        "SFT weight updates",
+        "GRPO training"
+      ],
+      "reason": "CLI-backed models expose no weight training here; independent successful tasks and human semantic labels are insufficient"
+    },
+    {
+      "url": "https://hermosaai.com/research/harness-as-a-service",
+      "adopted": [
+        "explicit ownership of loop, execution, state, and assessment",
+        "documented restart and replay semantics"
+      ],
+      "vendorMigration": false
+    }
+  ],
+  "offline": {
+    "main": {
+      "schemaVersion": 1,
+      "id": "015a9dfc-c864-40e4-807a-2bcdf0061ee9",
+      "createdAt": "2026-11-14T01:28:35.910Z",
+      "scope": "offline-procedural-experience",
+      "modelWeightsUpdated": false,
+      "datasetSha256": "f154fc0d32cb118db5395a26c77bbc92fe162c399ce8363c2aa177de50bf2443",
+      "splitAlgorithm": "sha256-last32-mod5-v1",
+      "trainGroups": [
+        "0a21923db234f6e119f598d103e9d2f972c0696b59ef1a120c96538f6fab92a0",
+        "424e7d3b78b45404c382410c488f0b3043684523252ceb4d580b610131c478b5",
+        "60bc8f9f5d78e89a84d46165c9ffd1c1572e8b13f029de42b845e09129a9d12d",
+        "a3b7f94d0ffb36cb29014f624aee0218384b764f7e359c34ee2a56d2fe3ea7ee"
+      ],
+      "validationGroups": [],
+      "trainExamples": 4,
+      "validationExamples": 0,
+      "rejected": 12,
+      "trainingReadiness": "insufficient-independent-groups",
+      "deployment": "exact-goal-verified-recipe-only",
+      "recipes": []
+    },
+    "repeatedGoal": {
+      "schemaVersion": 1,
+      "id": "d7b7d68a-5609-473e-b4e4-a9a395aa7b34",
+      "createdAt": "2026-11-14T01:28:36.266Z",
+      "scope": "offline-procedural-experience",
+      "modelWeightsUpdated": false,
+      "datasetSha256": "98243f198b808370bbfefb38168ad795d7fcf5fbea16216ae7afc76ef93133b4",
+      "splitAlgorithm": "sha256-last32-mod5-v1",
+      "trainGroups": [
+        "11f66358b00c1a7859cf9bf0d52b886aab9fa347fe063cb6031c61920ef463a1"
+      ],
+      "validationGroups": [],
+      "trainExamples": 2,
+      "validationExamples": 0,
+      "rejected": 0,
+      "trainingReadiness": "insufficient-independent-groups",
+      "deployment": "exact-goal-verified-recipe-only",
+      "recipes": [
+        {
+          "group": "11f66358b00c1a7859cf9bf0d52b886aab9fa347fe063cb6031c61920ef463a1",
+          "taskId": "71773e38-5177-4b72-b666-cc0a96dc381a",
+          "artifactHash": "e3349a2c8e53c92c402ac893ba3e37198cfe0f106a3110cb997de75e1e41beee",
+          "agent": "codex",
+          "model": "gpt-6.1-sol",
+          "strategy": "targeted-links",
+          "urls": [
+            "https://books.rakuten.co.jp/rb/18577690/"
+          ],
+          "reward": 10.679411764705883
+        }
+      ]
+    },
+    "liveRecall": {
+      "loop": {
+        "interactionMode": "auto",
+        "executionTarget": "local",
+        "id": "f2b4c432-1ab5-44a8-8b23-3a5faf55aaf5",
+        "sourceTaskId": "d2b527b3-213c-414b-97e8-15bcd7942a54",
+        "query": "この公開商品詳細から書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとし、finish_taskで保存してください。送料、在庫、将来の販売価格は確約しません。",
+        "urls": [
+          "https://books.rakuten.co.jp/rb/18577690/"
+        ],
+        "criteria": [
+          {
+            "id": "title",
+            "description": "商品詳細に記載された書名",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "publisher",
+            "description": "商品詳細に記載された出版社",
+            "required": true,
+            "weight": 1
+          },
+          {
+            "id": "price",
+            "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+            "required": true,
+            "weight": 1
+          }
+        ],
+        "candidateUrls": [
+          "https://books.rakuten.co.jp/rb/18577690/"
+        ],
+        "minimumCandidates": 1,
+        "additionalUrls": [],
+        "allowReplacements": false,
+        "agent": "codex",
+        "model": "gpt-6.1-sol",
+        "createdAt": "2026-11-14T01:30:18.378Z",
+        "updatedAt": "2026-11-14T01:30:39.336Z",
+        "status": "succeeded",
+        "maxIterations": 1,
+        "timeoutSeconds": 180,
+        "bestTaskId": "6422ed04-599b-47c5-84ad-8c4e6192e3de",
+        "baseline": {
+          "complete": false,
+          "verifiedDetails": 0,
+          "supportedRequired": 0,
+          "supportedOptional": 0,
+          "gaps": [
+            {
+              "url": "https://books.rakuten.co.jp/rb/18577690/",
+              "fields": [
+                "個別詳細の必須項目",
+                "商品詳細に記載された書名",
+                "商品詳細に記載された出版社",
+                "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                "候補数1件以上（現在0件）"
+              ]
+            }
+          ],
+          "causes": [
+            "step_budget_exhausted",
+            "invalid_or_missing_answer",
+            "detail_missing",
+            "required_unknown",
+            "candidate_missing",
+            "candidate_count_missing"
+          ],
+          "achievements": [],
+          "validationError": "回答の要約が必要です"
+        },
+        "best": {
+          "complete": true,
+          "verifiedDetails": 1,
+          "supportedRequired": 3,
+          "supportedOptional": 0,
+          "gaps": [],
+          "causes": [],
+          "achievements": [
+            "detail:rakuten-books:18577690",
+            "rakuten-books:18577690:title",
+            "rakuten-books:18577690:publisher",
+            "rakuten-books:18577690:price"
+          ]
+        },
+        "iterations": [
+          {
+            "number": 1,
+            "taskId": "6422ed04-599b-47c5-84ad-8c4e6192e3de",
+            "plan": {
+              "minimumCandidates": 1,
+              "allowReplacements": false,
+              "loopId": "f2b4c432-1ab5-44a8-8b23-3a5faf55aaf5",
+              "iteration": 1,
+              "criteria": [
+                {
+                  "id": "title",
+                  "description": "商品詳細に記載された書名",
+                  "required": true,
+                  "weight": 1
+                },
+                {
+                  "id": "publisher",
+                  "description": "商品詳細に記載された出版社",
+                  "required": true,
+                  "weight": 1
+                },
+                {
+                  "id": "price",
+                  "description": "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                  "required": true,
+                  "weight": 1
+                }
+              ],
+              "candidateUrls": [
+                "https://books.rakuten.co.jp/rb/18577690/"
+              ],
+              "gaps": [
+                {
+                  "url": "https://books.rakuten.co.jp/rb/18577690/",
+                  "fields": [
+                    "個別詳細の必須項目",
+                    "商品詳細に記載された書名",
+                    "商品詳細に記載された出版社",
+                    "閲覧時の商品詳細に記載された税込価格。送料、在庫、将来価格は確約しない",
+                    "候補数1件以上（現在0件）"
+                  ]
+                }
+              ],
+              "priorityUrls": [],
+              "visitedUrls": [
+                "https://books.rakuten.co.jp/rb/18577690/"
+              ],
+              "workspace": {
+                "belief": {
+                  "verifiedDetails": 0,
+                  "supportedRequired": 0,
+                  "reusableFacts": false
+                },
+                "progress": {
+                  "unresolvedTargets": 1,
+                  "attemptedPages": 1,
+                  "causes": [
+                    "step_budget_exhausted",
+                    "invalid_or_missing_answer",
+                    "detail_missing",
+                    "required_unknown",
+                    "candidate_missing",
+                    "candidate_count_missing"
+                  ]
+                },
+                "experience": {
+                  "proceduralOnly": true,
+                  "offlineDatasetId": "d7b7d68a-5609-473e-b4e4-a9a395aa7b34"
+                }
+              },
+              "strategy": "targeted-links"
+            },
+            "result": {
+              "complete": true,
+              "verifiedDetails": 1,
+              "supportedRequired": 3,
+              "supportedOptional": 0,
+              "gaps": [],
+              "causes": [],
+              "achievements": [
+                "detail:rakuten-books:18577690",
+                "rakuten-books:18577690:title",
+                "rakuten-books:18577690:publisher",
+                "rakuten-books:18577690:price"
+              ]
+            },
+            "accepted": true,
+            "corrections": [],
+            "newPages": 0,
+            "taskStatus": "succeeded",
+            "measurement": {
+              "elapsedMs": 20922,
+              "totalTokens": 62326,
+              "additionalApiUsd": 0,
+              "repeatedPages": 1,
+              "requiredDelta": 3,
+              "detailDelta": 1,
+              "retainedAchievements": true
+            }
+          }
+        ],
+        "promotedStrategies": [
+          "targeted-links"
+        ],
+        "questions": [],
+        "offlineExperience": {
+          "datasetId": "d7b7d68a-5609-473e-b4e4-a9a395aa7b34",
+          "datasetSha256": "98243f198b808370bbfefb38168ad795d7fcf5fbea16216ae7afc76ef93133b4",
+          "taskId": "71773e38-5177-4b72-b666-cc0a96dc381a"
+        },
+        "learnedFrom": "offline:d7b7d68a-5609-473e-b4e4-a9a395aa7b34",
+        "learnedUrls": [
+          "https://books.rakuten.co.jp/rb/18577690/"
+        ],
+        "learnedStrategy": "targeted-links",
+        "stopReason": "元の全候補・必須条件・詳細取得を検証済み"
+      },
+      "taskId": "6422ed04-599b-47c5-84ad-8c4e6192e3de",
+      "status": "succeeded",
+      "metrics": {
+        "elapsedMs": 20920,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 61763,
+          "outputTokens": 563,
+          "cachedInputTokens": 33152,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 62326,
+          "cacheWriteInputTokens": 0,
+          "source": "codex-thread-total"
+        },
+        "billing": {
+          "mode": "chatgpt-subscription",
+          "additionalApiUsd": 0,
+          "subscriptionAllocationUsd": null,
+          "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+        }
+      },
+      "evidence": [
+        {
+          "id": "ev-1",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "るるぶ 箱根 '27 （るるぶ情報版）",
+          "capturedAt": "2026-11-14T01:30:24.240Z"
+        },
+        {
+          "id": "ev-2",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "出版社：\nJTBパブリッシング",
+          "capturedAt": "2026-11-14T01:30:24.240Z"
+        },
+        {
+          "id": "ev-3",
+          "pageId": "page-1",
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "quote": "1,430円（税込）",
+          "capturedAt": "2026-11-14T01:30:24.240Z"
+        }
+      ]
+    }
+  },
+  "ux": {
+    "schemaVersion": 1,
+    "designVersion": "ten-second-v1",
+    "taskId": "eac84c70-5c4a-46b2-bb2a-e08de94196a2",
+    "model": "gpt-6.1-sol",
+    "renderSource": "saved-live-generated-answer",
+    "generatedAt": "2026-11-14T01:32:27.207Z",
+    "humanAssessment": "pending; no human ratings synthesized",
+    "contract": {
+      "schemaVersion": 1,
+      "designVersion": "ten-second-v1",
+      "automatic": {
+        "savedAnswerVisibleMs": 10000,
+        "detailInteractionMs": 1000,
+        "criticalTextContrast": 4.5,
+        "primaryTargetPx": 44,
+        "viewportWidths": [
+          320,
+          390,
+          768,
+          1240
+        ],
+        "viewports": [
+          {
+            "width": 320,
+            "height": 568
+          },
+          {
+            "width": 390,
+            "height": 844
+          },
+          {
+            "width": 768,
+            "height": 1024
+          },
+          {
+            "width": 1240,
+            "height": 960
+          }
+        ],
+        "horizontalOverflowPx": 0,
+        "requiredAboveFold": [
+          "conclusion",
+          "uncertainty",
+          "primary-action"
+        ],
+        "unknownMustRemainVisible": true,
+        "pageErrors": 0
+      },
+      "human": {
+        "exposureMs": 10000,
+        "minimumReviewers": 5,
+        "understoodRate": 0.8,
+        "uncertaintyVisibleRate": 0.8,
+        "nextActionClearRate": 0.8,
+        "medianAppeal": 4,
+        "scale": "1-5",
+        "status": "requires-explicit-human-responses"
+      },
+      "rules": [
+        "10秒は保存回答を表示して理解する時間と、実調査の進捗が分かる時間の基準。実モデルの完了時間を10秒と保証しない",
+        "自動検査合格を人間の魅力評価に置き換えない",
+        "見た目や速度のために引用・未確認・不一致を変更しない",
+        "候補サイトの口コミ評価をruntimeの満足度や信頼度に転用しない"
+      ]
+    },
+    "variants": [
+      {
+        "variant": "before",
+        "visibleMs": 149.17045800000005,
+        "errors": [],
+        "viewports": [
+          {
+            "width": 320,
+            "height": 568,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": false
+            },
+            "primary": {
+              "width": 284,
+              "height": 73.1875
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 4.184993849633919,
+              "primary": 16.293495425950333
+            }
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": false
+            },
+            "primary": {
+              "width": 354,
+              "height": 73.1875
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 4.184993849633919,
+              "primary": 16.293495425950333
+            }
+          },
+          {
+            "width": 768,
+            "height": 1024,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": false
+            },
+            "primary": {
+              "width": 505.9375,
+              "height": 73.1875
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 4.184993849633919,
+              "primary": 16.293495425950333
+            }
+          },
+          {
+            "width": 1240,
+            "height": 960,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": false
+            },
+            "primary": {
+              "width": 949.625,
+              "height": 73.1875
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 4.184993849633919,
+              "primary": 16.293495425950333
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "before-390.png",
+            "sha256": "b7b1e17837c2eabaa90292cf140a3e874c13e39eb82929c33d77e5797987de0f"
+          },
+          {
+            "file": "before-1240.png",
+            "sha256": "472b2c93d0d45488c9edcd138be3c62de31176001d98f5b35858550d3c49d24e"
+          }
+        ]
+      },
+      {
+        "variant": "after",
+        "visibleMs": 146.286208,
+        "errors": [],
+        "viewports": [
+          {
+            "width": 320,
+            "height": 568,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 246,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 316,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          },
+          {
+            "width": 768,
+            "height": 1024,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 205.578125,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          },
+          {
+            "width": 1240,
+            "height": 960,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 205.578125,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "after-390.png",
+            "sha256": "3932e217fe839422bf38636fcb77333bcdefdfbeee699ad5cecbedf7c43515a8"
+          },
+          {
+            "file": "after-1240.png",
+            "sha256": "6f7540dd44436e175311d55b480c937739484d80d9d14137e2af775af032b862"
+          }
+        ],
+        "detailInteractionMs": 22.49145899999985,
+        "focusRestored": true,
+        "citationOpened": true,
+        "humanSurveyHasNoDefaults": true,
+        "reviewExposureMs": 10390.846833
+      }
+    ],
+    "passed": true,
+    "humanResponses": 0,
+    "humanAppealPass": null,
+    "reviewIdentityVerified": false
+  },
+  "generation": {
+    "taskId": "eac84c70-5c4a-46b2-bb2a-e08de94196a2",
+    "query": "2026年11月15日(日)、大人2名と5歳児1名、9:30〜17:00、上野周辺、家族合計16,000円以内。動物と科学が好きで、休憩2回、施設は最大2か所。提供したRecruit Hot Pepperグルメのまいかアトレ上野店と、施設公式の公開ページを実際に取得し、一日を過ごす具体的な回答を日本語で作成してください。plan_taskで役割別の条件を定義し、店舗へ動物・施設へランチなど全候補に同じ条件を要求しない。summaryには時刻付き行程、徒歩区間の見積時間、採用理由、掲載料金と未確認予算枠を分けた家族総額、雨天代替、楽しみポイントの推奨案と2択を含めてください。子供の疲れを優先し、博物館は任意でもよい。動物園・博物館の年齢別料金/営業時間/休館を確認し、特別展と常設料金を混同しない。日曜に平日限定ランチ価格を適用しない。「大人のお子様ランチ」は5歳児向けと断定しない。交通2,500円/家族、おやつ休憩1,500円/家族を未確認予算枠とし、他の未確認料金も明示して予算上限との残額を計算。将来日の営業・空席を確約しない。候補の個別ページを引用し、取得不能の候補を断定せず、取得できた情報だけでも実行可能な暫定案をfinish_taskで保存してください。予約・購入・問い合わせはしません。",
+    "urls": [
+      "https://www.hotpepper.jp/strJ001100102/",
+      "https://www.hotpepper.jp/strJ001100102/lunch/",
+      "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "https://www.kahaku.go.jp/riyou/nyukan-annai/"
+    ],
+    "status": "partial",
+    "model": "gpt-6.1-sol",
+    "createdAt": "2026-11-14T01:20:32.650Z",
+    "updatedAt": "2026-11-14T01:22:04.724Z",
+    "criteria": [
+      {
+        "id": "zoo",
+        "description": "動物園役割：動物、5歳と大人料金、営業時間・休園を確認",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "museum",
+        "description": "任意の科学施設役割：常設の年齢別料金・営業時間・休館確認",
+        "required": false,
+        "weight": 2
+      },
+      {
+        "id": "lunch",
+        "description": "飲食店役割：日曜ランチの掲載料金・営業時間・子連れ適性確認",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "plan",
+        "description": "全体：9:30～17:00、休憩2回、施設最大2、徒歩見積、家族16000円以内。交通2500円おやつ1500円は未確認枠",
+        "required": true,
+        "weight": 3
+      }
+    ],
+    "answer": {
+      "summary": "## 推奨：動物園を主役に、科学博物館は元気なら\n5歳児の疲れを優先し、午前の動物園と座っての昼食を軸にします。動物園は大人2人1,200円・5歳無料、博物館常設は大人2人1,260円・5歳無料ですが、11月15日の臨時変更と店の空席は未確認です。[ev-1][ev-2][ev-5][ev-6][ev-12]\n\n## 行程（2026年11月15日・日曜、提案）\n9:30 上野動物園入園。全園制覇せず、近い展示で好きな動物をじっくり観察（通常9:30～17:00）。[ev-3]\n10:20 休憩①：園内で20分座る。トイレ・水分補給。\n10:40 観察再開。「足の数・歩き方・食べ方」を親子で比べる遊びを推奨。\n11:30 退園、まいかへ徒歩20～25分の見積（出口・信号・幼児の速度で変動）。\n12:00 まいかで昼食。大人は土日祝の天婦羅御膳、子どもはお子様プレートを候補に。子連れ可だが、アレルギーと量は未確認。「大人のお子様ランチ」を幼児向けとは扱いません。土日ランチは時間制です。[ev-9][ev-10][ev-13][ev-14]\n13:00 2択：A＝推奨の省エネ案、駅周辺でゆっくりし博物館は省略。B＝元気なら科学博物館へ徒歩15～20分見積、常設を60～90分だけ。展示の公開状況は現地案内を優先。\n14:45 休憩②：駅周辺でおやつを食べて30分着席。Bは博物館から徒歩15～20分見積を別途確保。\n15:30 体力があれば駅周辺で今日の動物の絵・発見メモ。新しい有料施設は追加しない。\n17:00までに 終了。疲れたら15時台に早帰りし、17時まで埋める必要はありません。\n\n## 予算（家族合計）\n掲載料金：動物園1,200円＋昼食1,880円×2＋860円＝5,820円。Bで常設を追加すると7,080円です。平日限定価格や特別展料金は使っていません。[ev-1][ev-2][ev-9][ev-13][ev-5][ev-12]\n未確認予算枠：交通2,500円＋おやつ休憩1,500円＋追加飲料等1,000円＝5,000円（見積であり掲載料金ではありません）。\nA合計10,820円、上限16,000円まで残額5,180円。B合計12,080円、残額3,920円。土産・追加注文は残額内で調整し、飲酒はしない想定。実際の交通費・当日価格次第で変わります。\n\n## 雨天代替・楽しみの2択\n雨天は動物園を省き、9:30から科学博物館常設を短時間ずつ見る案へ。10:20休憩①、11:30頃に徒歩15～20分見積でまいかへ、12:00昼食、14:00休憩②、以後駅周辺で休み早帰り可。雨中の徒歩は傘・信号待ち分を追加。常設は通常9～17時・月曜休で、特別展は対象外です。[ev-7][ev-8][ev-12]\n楽しみはA『生きた動物の動き比べ』（疲労優先の推奨）、B『動物観察＋科学の発見を一つ持ち帰る』の2択。雨天案の見積総額は10,880円、残額5,120円（常設1,260円＋昼食4,620円＋未確認枠5,000円）。[ev-5][ev-9][ev-13]\n\n## 未確認・次に確認すること\n通常休園日は両施設とも月曜ですが、対象日固有の臨時休館は未確定。博物館は地球館の一部閉鎖告知があり、見たい展示の公開状況・当日の入場条件、まいかの営業・待ち時間・時間制の長さを出発前の公開案内で再確認してください。[ev-4][ev-8][ev-14]",
+      "candidates": [
+        {
+          "name": "上野動物園",
+          "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+          "matches": [
+            {
+              "criterionId": "zoo",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-1",
+                "ev-2",
+                "ev-3",
+                "ev-4"
+              ],
+              "explanation": "一般600円、5歳無料、9:30～17時、通常月曜休。対象日の臨時変更は未確認。動物の観察を担当。"
+            },
+            {
+              "criterionId": "museum",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "科学施設の役割外"
+            },
+            {
+              "criterionId": "lunch",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "ランチ店舗の役割外"
+            },
+            {
+              "criterionId": "plan",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "行程は提案。徒歩と当日営業の確約なし"
+            }
+          ],
+          "score": 27,
+          "eligible": false
+        },
+        {
+          "name": "まいか アトレ上野店",
+          "url": "https://www.hotpepper.jp/strJ001100102/",
+          "matches": [
+            {
+              "criterionId": "lunch",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-9",
+                "ev-10",
+                "ev-11",
+                "ev-13",
+                "ev-14"
+              ],
+              "explanation": "土日祝メニュー天婦羅1880円、お子様860円、子連れ可。11時開店掲載。時間制の長さ・当日空席は未確認。"
+            },
+            {
+              "criterionId": "zoo",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "動物園役割外"
+            },
+            {
+              "criterionId": "museum",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "科学施設役割外"
+            },
+            {
+              "criterionId": "plan",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "未確認予算枠込みでは上限内だが実支出は未確定"
+            }
+          ],
+          "score": 27,
+          "eligible": false
+        },
+        {
+          "name": "国立科学博物館（任意・常設のみ）",
+          "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+          "matches": [
+            {
+              "criterionId": "museum",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-5",
+                "ev-6",
+                "ev-7",
+                "ev-8",
+                "ev-12"
+              ],
+              "explanation": "常設一般630円、18歳未満無料。9～17時、通常月曜休。対象日のカレンダー本文は取得できず。"
+            },
+            {
+              "criterionId": "zoo",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "動物園役割外"
+            },
+            {
+              "criterionId": "lunch",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "飲食店役割外"
+            },
+            {
+              "criterionId": "plan",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "疲労次第で省略する任意枠"
+            }
+          ],
+          "score": 18,
+          "eligible": false
+        }
+      ],
+      "limitations": [
+        "取得は2026年11月14日の公開HTML。予約・購入・問い合わせなし。将来日の営業、空席、混雑、提供メニューは確約しない。",
+        "施設公式の通常休館条件は確認したが11月15日の臨時変更は未確認。博物館カレンダーは見出しのみで、追加取得も不能。動物園カレンダーPDF本文は未取得。",
+        "徒歩は幼児同行を想定した提案上の概算、実測ではない。科学展示の個別内容・公開状況は未検証。役割外の条件はunknownとして非適用扱い。",
+        "交通・おやつ・追加飲料等は見積枠。ランチ時間制の長さ、アレルギー適合、席の確保は未確認。",
+        "追加確認しても未確認の項目: 飲食店役割：日曜ランチの掲載料金・営業時間・子連れ適性確認・全体：9:30～17:00、休憩2回、施設最大2、徒歩見積、家族16000円以内。交通2500円おやつ1500円は未確認枠 / 動物園役割：動物、5歳と大人料金、営業時間・休園を確認・全体：9:30～17:00、休憩2回、施設最大2、徒歩見積、家族16000円以内。交通2500円おやつ1500円は未確認枠 / 動物園役割：動物、5歳と大人料金、営業時間・休園を確認・飲食店役割：日曜ランチの掲載料金・営業時間・子連れ適性確認・全体：9:30～17:00、休憩2回、施設最大2、徒歩見積、家族16000円以内。交通2500円おやつ1500円は未確認枠"
+      ]
+    },
+    "evidence": [
+      {
+        "id": "ev-1",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "一般\n600円",
+        "capturedAt": "2026-11-14T01:20:43.168Z"
+      },
+      {
+        "id": "ev-2",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "小学6年生まで\n無料",
+        "capturedAt": "2026-11-14T01:20:43.168Z"
+      },
+      {
+        "id": "ev-3",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "9時30分～17時00分",
+        "capturedAt": "2026-11-14T01:20:43.168Z"
+      },
+      {
+        "id": "ev-4",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "月曜日（月曜日が国民の祝日や振替休日の場合はその翌日が休園日）",
+        "capturedAt": "2026-11-14T01:20:43.168Z"
+      },
+      {
+        "id": "ev-5",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "一般・大学生 630円",
+        "capturedAt": "2026-11-14T01:20:43.231Z"
+      },
+      {
+        "id": "ev-6",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "65歳以上の方および\n18歳未満の方",
+        "capturedAt": "2026-11-14T01:20:43.231Z"
+      },
+      {
+        "id": "ev-7",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "開館時間 9：00 ～17：00",
+        "capturedAt": "2026-11-14T01:20:43.231Z"
+      },
+      {
+        "id": "ev-8",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "毎週月曜日（日・月曜日が祝日・休日の場合は火曜日）",
+        "capturedAt": "2026-11-14T01:20:43.231Z"
+      },
+      {
+        "id": "ev-9",
+        "pageId": "page-2",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "quote": "天婦羅御膳\n茶碗蒸し、小鉢、香の物、赤出汁、甘味がセットで付きます。\n1,880円（税込）",
+        "capturedAt": "2026-11-14T01:20:43.007Z"
+      },
+      {
+        "id": "ev-10",
+        "pageId": "page-1",
+        "url": "https://www.hotpepper.jp/strJ001100102/",
+        "quote": "お子様連れOK",
+        "capturedAt": "2026-11-14T01:20:42.590Z"
+      },
+      {
+        "id": "ev-11",
+        "pageId": "page-1",
+        "url": "https://www.hotpepper.jp/strJ001100102/",
+        "quote": "月～日、祝日、祝前日: 11:00～22:30 （料理L.O. 21:15 ドリンクL.O. 21:30）",
+        "capturedAt": "2026-11-14T01:20:42.590Z"
+      },
+      {
+        "id": "ev-12",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "次の方々は無料で入館いただけます。ただし、特別展はその都度異なりますのでお問い合わせください。",
+        "capturedAt": "2026-11-14T01:20:43.231Z"
+      },
+      {
+        "id": "ev-13",
+        "pageId": "page-2",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "quote": "お子様プレート\nハンバーグ、海老フライ、ポテト、パスタ、ウインナー、ご飯\n860円（税込）",
+        "capturedAt": "2026-11-14T01:20:43.007Z"
+      },
+      {
+        "id": "ev-14",
+        "pageId": "page-2",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "quote": "土日祝日やお花見シーズン中のランチタイムは時間制となります。",
+        "capturedAt": "2026-11-14T01:20:43.007Z"
+      }
+    ],
+    "metrics": {
+      "elapsedMs": 92080,
+      "tokenAccounting": "provider-reported",
+      "tokens": {
+        "inputTokens": 160409,
+        "outputTokens": 3522,
+        "cachedInputTokens": 117120,
+        "reasoningOutputTokens": 0,
+        "totalTokens": 163931,
+        "cacheWriteInputTokens": 0,
+        "source": "codex-thread-total"
+      },
+      "billing": {
+        "mode": "chatgpt-subscription",
+        "additionalApiUsd": 0,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    },
+    "captures": [
+      {
+        "id": "page-1",
+        "url": "https://www.hotpepper.jp/strJ001100102/",
+        "title": "まいか 米香 アトレ上野店(上野/居酒屋)＜ネット予約可＞ | ホットペッパーグルメ",
+        "capturedAt": "2026-11-14T01:20:42.590Z",
+        "textChars": 6994,
+        "sha256": "405df38aa1638f4a8ecb9ce058119f19a2146e51004e0c8c619b0254784ab935"
+      },
+      {
+        "id": "page-2",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "title": "まいか 米香 アトレ上野店(居酒屋)のランチ | ホットペッパーグルメ",
+        "capturedAt": "2026-11-14T01:20:43.007Z",
+        "textChars": 3517,
+        "sha256": "90d2e0e7e4f0fbb1517bfd5fec0b5c836b09c405ff04561c2119194369739ecf"
+      },
+      {
+        "id": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "title": "開園時間・休園日・入園料 | 上野動物園",
+        "capturedAt": "2026-11-14T01:20:43.168Z",
+        "textChars": 4635,
+        "sha256": "56fa1756850ce658cb4668e317b7b9d1ca91577df687fc82d7c22a047e6ee169"
+      },
+      {
+        "id": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "title": "入館案内（上野本館） | 国立科学博物館 National Museum of Nature and Science,Tokyo",
+        "capturedAt": "2026-11-14T01:20:43.231Z",
+        "textChars": 3151,
+        "sha256": "80c799bc5c108633db0be2754efb940453e61d51be26b32277d248746fcff26d"
+      },
+      {
+        "id": "page-5",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/calendar.html",
+        "title": "開館カレンダー | 国立科学博物館 National Museum of Nature and Science,Tokyo",
+        "capturedAt": "2026-11-14T01:20:47.004Z",
+        "textChars": 95,
+        "sha256": "fa81580ba292165e30cb37646d0eb6fc33c0e2fbab6e82d5210ef5f388a340ef"
+      }
+    ],
+    "earlierRuns": [
+      {
+        "id": "1693b2f9-4f2b-4d18-ab2b-2cbde0837040",
+        "status": "partial",
+        "structuredHeadings": false,
+        "metrics": {
+          "elapsedMs": 144317,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 307664,
+            "outputTokens": 6081,
+            "cachedInputTokens": 242304,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 313745,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        }
+      },
+      {
+        "id": "5210a0be-15a6-4a2b-9351-1aa63620dca7",
+        "status": "timed_out",
+        "error": "Codex実行を中断しました",
+        "metrics": {
+          "elapsedMs": 989152,
+          "tokenAccounting": "last-observed-partial",
+          "tokens": {
+            "inputTokens": 125017,
+            "outputTokens": 2597,
+            "cachedInputTokens": 80256,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 127614,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "note": "Interrupted turn; not evidence of successful generation or speed"
+      }
+    ],
+    "rendering": "Same final Task shown in before and after UI; screenshots do not start model inference"
+  },
+  "validation": {
+    "typecheck": "passed",
+    "build": "passed",
+    "serialTests": {
+      "passed": 200,
+      "failed": 0
+    },
+    "chatSmoke": "passed; includes the first-glance and no-default-human-rating checks",
+    "chatRuntimeFixture": {
+      "recruit": "passed",
+      "rakuten": "passed"
+    },
+    "liveChatAcceptance": "not rerun as release acceptance",
+    "release": "not published or deployed",
+    "testNote": "200/200 in serial. A prior parallel run hit the existing child-process READY timing assertion."
+  },
+  "limitations": [
+    "Single local sample; no p95 or general success-rate claim",
+    "UI machine gates are not human comprehension or appeal scores",
+    "Training exports contain observations and strategy actions, not hidden chain of thought or model weights",
+    "Exact-goal recipes are not generalization to unseen goals",
+    "Offline held-out split is exact-goal stable; semantic paraphrases need further deduplication",
+    "Frontend may separate explicitly role-excluded unknowns for display but never changes the stored match",
+    "Human response identity and independence are not verified",
+    "Quote matching does not prove all semantic implications"
+  ],
+  "implementationHashes": {
+    "src/offline-learning.ts": "d16e98bfd925f715fac85282294571c7b5dd8118f7d79de89aa41cae588b7dd9",
+    "src/improvement.ts": "3a773abba7a3a133b6cfe75cfcd45ffb8005284af11fadf91e13f5462935c1d6",
+    "src/improvement-context.ts": "570e9a60c1d0acb974f6d17ba7bcccff1e04816e625a4da5cf58e83833bf0fb7",
+    "src/ux-feedback.ts": "60c864befd38506387f8c07b11a9f61eb9ddc39490aeb91f72a032aec0e31d38",
+    "src/prompt.ts": "27735a1dd507812b84c41846d3488cf850b43c86251a931f6c6aa147ecb7f72a",
+    "src/run-service.ts": "253244d4ed3b6aafc81dbacfd32279efa49fafbde67a968b8cded1e5be7fbda1",
+    "web/chat.js": "cef953e4eb700fe3a6b86d6a3e3050346f47a6420d01cc4b0ca471ada2f709df",
+    "web/chat.css": "f2372beb4c46f8aa13e73703b4b9a52014808397ca49e8056f20ad3119e0cd49",
+    "web/chat.html": "c245ca128e66be539ebc09bb131b585d8e37d9a13f2b8cc0ea83ea17dac2e892",
+    "web/presentation.js": "a7b3218d489b42881e7c4aa663751bfe48d35a12421a4fc6d21701cde1bc5831",
+    "config/ux-quality.json": "926984436f5d2fbb7982f85ec16e905beb2a3f3f09455605871ccf13fa01a151",
+    "scripts/eval-ux-loop.mjs": "62c7ebaeb1cfadea427ec56201edd4cc00c7ce5979426fcb3a618bd9713e4a10"
+  }
+}

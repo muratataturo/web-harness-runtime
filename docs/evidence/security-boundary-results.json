@@ -1,0 +1,408 @@
+{
+  "dateJapan": "2026-11-13",
+  "scope": "single-user hardened public HTML research; explicit local and OpenShell executors",
+  "tests": {
+    "total": 188,
+    "passed": 188,
+    "failed": 0
+  },
+  "results": [
+    {
+      "family": "recruit",
+      "taskId": "3d5a2c95-7bc9-456a-8366-295bae24de1b",
+      "query": "この店舗の公開詳細から、店舗名、住所、営業時間、掲載されているランチ価格を引用付きで確認してください。予約・問い合わせ・ログインはせず、当日の営業や空席は未確認と明記してfinish_taskに保存してください。",
+      "status": "succeeded",
+      "model": "gpt-6.1-sol",
+      "security": {
+        "profileId": "recruit-public-research",
+        "profileVersion": 1,
+        "mode": "hardened",
+        "policyHash": "ddab7d6e98241e2bbc01d034493182dd7443ea0f000190b1aa6b2b6903607d56"
+      },
+      "execution": {
+        "target": "local",
+        "isolation": "host-process"
+      },
+      "limits": {
+        "maxSteps": 30,
+        "timeoutSeconds": 100,
+        "maxPages": 3
+      },
+      "metrics": {
+        "elapsedMs": 34728,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 82522,
+          "outputTokens": 1202,
+          "cachedInputTokens": 58368,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 83724,
+          "cacheWriteInputTokens": 0,
+          "source": "codex-thread-total"
+        },
+        "billing": {
+          "mode": "chatgpt-subscription",
+          "additionalApiUsd": 0,
+          "subscriptionAllocationUsd": null,
+          "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+        }
+      },
+      "pages": [
+        {
+          "url": "https://www.hotpepper.jp/strJ001100102/",
+          "title": "まいか 米香 アトレ上野店(上野/居酒屋)＜ネット予約可＞ | ホットペッパーグルメ",
+          "capturedAt": "2026-11-12T17:26:04.004Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "bodySha256": "a06a7cc1dbf827dce4fb7d6938ceba0d8a087ad1bf9b7ed59ae9f7e05bbfc45b"
+        },
+        {
+          "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+          "title": "まいか 米香 アトレ上野店(居酒屋)のランチ | ホットペッパーグルメ",
+          "capturedAt": "2026-11-12T17:26:04.360Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "bodySha256": "3ae77fbad0a122076085f31a98acf59a24d125e8ac85932eafeb17a05d4752e6"
+        }
+      ],
+      "evidenceCount": 6,
+      "summary": "指定店舗の店舗名・住所・掲載営業時間・ランチ価格を引用付きで確認しました。対象は指定の1店舗です。当日の営業と空席は未確認です。",
+      "limitations": [
+        "公開HTMLの掲載情報のみを確認。閲覧は2026年11月13日（日本時間）。当日の営業・空席は未確認であり、価格や提供の確約ではありません。",
+        "予約・問い合わせ・ログインは行っていません。",
+        "店舗トップは詳細検証済み。ランチ子ページ単体には住所・アクセスがなく詳細検証上は不足ですが、同一店舗のトップ本文で住所を確認済み。ランチ価格は掲載例で、全メニューの列挙ではありません。"
+      ]
+    },
+    {
+      "family": "rakuten",
+      "taskId": "2188e2f9-f46f-4355-bb74-8f7a94f5ce9c",
+      "query": "この公開ページから書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない条件はunknownとし、finish_taskで保存してください。",
+      "status": "succeeded",
+      "model": "gpt-6.1-sol",
+      "security": {
+        "profileId": "rakuten-public-research",
+        "profileVersion": 1,
+        "mode": "hardened",
+        "policyHash": "228de3052f22247dea60178717b87cdb5ca890df6bfa255d634653b62fc86817"
+      },
+      "execution": {
+        "target": "local",
+        "isolation": "host-process"
+      },
+      "limits": {
+        "maxSteps": 25,
+        "timeoutSeconds": 90,
+        "maxPages": 3
+      },
+      "metrics": {
+        "elapsedMs": 20243,
+        "tokenAccounting": "provider-reported",
+        "tokens": {
+          "inputTokens": 56286,
+          "outputTokens": 561,
+          "cachedInputTokens": 40704,
+          "reasoningOutputTokens": 0,
+          "totalTokens": 56847,
+          "cacheWriteInputTokens": 0,
+          "source": "codex-thread-total"
+        },
+        "billing": {
+          "mode": "chatgpt-subscription",
+          "additionalApiUsd": 0,
+          "subscriptionAllocationUsd": null,
+          "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+        }
+      },
+      "pages": [
+        {
+          "url": "https://books.rakuten.co.jp/rb/18577690/",
+          "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+          "capturedAt": "2026-11-12T17:25:08.534Z",
+          "acquisition": {
+            "kind": "public-html",
+            "status": 200,
+            "charset": "utf-8",
+            "contentType": "text/html;charset=UTF-8"
+          },
+          "bodySha256": "8d785763d0ed9ff89e54e05ee1e72620777950dd870f3a66952cb2eb504b4c4f"
+        }
+      ],
+      "evidenceCount": 3,
+      "summary": "指定の楽天ブックス商品詳細で、書名『るるぶ 箱根 '27』（るるぶ情報版）、出版社JTBパブリッシング、税込価格1,430円を引用付きで確認。3条件とも確認済みでunknownはありません。",
+      "limitations": [
+        "公開HTMLの取得時点の表示を確認。価格は変更される場合があります。購入・ログインは行っていません。"
+      ]
+    }
+  ],
+  "independentImport": [
+    {
+      "family": "rakuten",
+      "status": "passed",
+      "taskStatus": "succeeded",
+      "pages": 1,
+      "evidence": 3,
+      "kind": "local-artifact-with-independent-live-revalidation"
+    },
+    {
+      "family": "recruit",
+      "status": "passed",
+      "taskStatus": "succeeded",
+      "pages": 2,
+      "evidence": 6,
+      "kind": "local-artifact-with-independent-live-revalidation"
+    }
+  ],
+  "policyProver": {
+    "version": "0.1.7",
+    "result": "unsupported",
+    "reason": "boundary policy rule 'research_pages' uses an unsupported REST deny rule",
+    "limitation": "The final nested case-insensitive REST deny rules are unsupported by prover v0.1.7. No formal verification is claimed; live L7 enforcement and application regression tests were verified."
+  },
+  "imageBuild": {
+    "tag": "web-harness-codex:boundary",
+    "status": "succeeded",
+    "imageId": "sha256:f052ec68c5f2927d92797914e98638d9e86b9b62130064e1fe67511bb3c04d68",
+    "sizeBytes": 1078654289,
+    "offlineSecurityStatusSmoke": "passed"
+  },
+  "microvm": {
+    "status": "passed",
+    "dockerRestartApproved": true,
+    "dockerServer": "28.5.1",
+    "initialFailures": [
+      "new-image preparation exceeded available disk space",
+      "Docker API was unresponsive before approved restart"
+    ],
+    "runtimeResults": [
+      {
+        "family": "rakuten",
+        "taskId": "8f4b30e7-24d0-4599-b0ea-b700bef32c0e",
+        "query": "この公開ページから書名、出版社、税込価格を引用付きで確認してください。購入やログインはせず、記載がない項目はunknownとしてfinish_taskに保存してください。送料・在庫・将来価格は確約しません。",
+        "status": "succeeded",
+        "model": "gpt-6.1-sol",
+        "security": {
+          "profileId": "rakuten-public-research",
+          "profileVersion": 1,
+          "mode": "hardened",
+          "policyHash": "228de3052f22247dea60178717b87cdb5ca890df6bfa255d634653b62fc86817",
+          "artifactNonce": "8f4b30e7-24d0-4599-b0ea-b700bef32c0e"
+        },
+        "execution": {
+          "target": "openshell",
+          "isolation": "openshell-sandbox",
+          "gateway": "web-harness-local",
+          "sandboxName": "wh-codex",
+          "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+          "image": "web-harness-codex:local",
+          "allocation": "account-worker",
+          "runtimeRevision": "def0cd91648cfd917590338c",
+          "innerSandbox": "externalSandbox",
+          "elapsedMs": 37431,
+          "cleanupStatus": "stopped"
+        },
+        "limits": {
+          "maxSteps": 30,
+          "timeoutSeconds": 120,
+          "maxPages": 3
+        },
+        "metrics": {
+          "elapsedMs": 23918,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 49008,
+            "outputTokens": 681,
+            "cachedInputTokens": 35200,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 49689,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "pages": [
+          {
+            "url": "https://books.rakuten.co.jp/rb/18577690/",
+            "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+            "capturedAt": "2026-11-12T18:14:10.557Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "bodySha256": "84fb0df8e52820605801a9993f3e521bfe684d3401f459733629c327c7bc0b0d"
+          }
+        ],
+        "evidenceCount": 3,
+        "summary": "指定された楽天ブックスの商品詳細で、書名『るるぶ 箱根 '27 （るるぶ情報版）』、出版社『JTBパブリッシング』、税込価格『1,430円（税込）』を引用付きで確認しました。3項目とも記載があり、unknownはありません。価格は2026年11月12日の閲覧時点の表示です。",
+        "limitations": [
+          "公開HTMLを確認したもので、ブラウザ描画や動的情報は確認していません。",
+          "送料・在庫・将来価格は確約しません。購入・ログインは行っていません。"
+        ]
+      },
+      {
+        "family": "recruit",
+        "taskId": "657ab286-50ec-401e-bbaa-b829fe18d02b",
+        "query": "この店舗の公開詳細から店舗名、住所、営業時間、掲載ランチ価格を引用付きで確認してください。予約・問い合わせ・ログインはせず、当日の営業と空席は未確認と明記してfinish_taskに保存してください。対象は指定した1店舗だけです。",
+        "status": "succeeded",
+        "model": "gpt-6.1-sol",
+        "security": {
+          "profileId": "recruit-public-research",
+          "profileVersion": 1,
+          "mode": "hardened",
+          "policyHash": "4afa2443bc274b3cb79f2bd6f9ad7e71bab01063265b1fb6dda8dbf1fabe3ad9",
+          "artifactNonce": "657ab286-50ec-401e-bbaa-b829fe18d02b"
+        },
+        "execution": {
+          "target": "openshell",
+          "isolation": "openshell-sandbox",
+          "gateway": "web-harness-local",
+          "sandboxName": "wh-codex",
+          "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+          "image": "web-harness-codex:local",
+          "allocation": "account-worker",
+          "runtimeRevision": "def0cd91648cfd917590338c",
+          "innerSandbox": "externalSandbox",
+          "elapsedMs": 47062,
+          "cleanupStatus": "stopped"
+        },
+        "limits": {
+          "maxSteps": 35,
+          "timeoutSeconds": 120,
+          "maxPages": 3
+        },
+        "metrics": {
+          "elapsedMs": 32686,
+          "tokenAccounting": "provider-reported",
+          "tokens": {
+            "inputTokens": 74939,
+            "outputTokens": 1218,
+            "cachedInputTokens": 30080,
+            "reasoningOutputTokens": 0,
+            "totalTokens": 76157,
+            "cacheWriteInputTokens": 0,
+            "source": "codex-thread-total"
+          },
+          "billing": {
+            "mode": "chatgpt-subscription",
+            "additionalApiUsd": 0,
+            "subscriptionAllocationUsd": null,
+            "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+          }
+        },
+        "pages": [
+          {
+            "url": "https://www.hotpepper.jp/strJ001100102/",
+            "title": "まいか 米香 アトレ上野店(上野/居酒屋)＜ネット予約可＞ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-12T18:15:35.550Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "bodySha256": "34a4eac82bbc106b2d6371c08b224e31a0a5fe01e3c7c356194b6f4f5fa62b9f"
+          },
+          {
+            "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+            "title": "まいか 米香 アトレ上野店(居酒屋)のランチ | ホットペッパーグルメ",
+            "capturedAt": "2026-11-12T18:15:36.034Z",
+            "acquisition": {
+              "kind": "public-html",
+              "status": 200,
+              "charset": "utf-8",
+              "contentType": "text/html;charset=UTF-8"
+            },
+            "bodySha256": "f5de706027005b669695874377e78073fc96d02620fa4bc751ab803002ee63af"
+          }
+        ],
+        "evidenceCount": 6,
+        "summary": "指定の1店舗「まいか -米香- アトレ上野店」の店舗名・住所・営業時間・掲載ランチ価格を引用付きで確認しました。比較・別店舗の推奨は行っていません。当日の営業と空席は未確認です。",
+        "limitations": [
+          "2026年11月12日取得の公開HTML掲載情報。ブラウザ描画による確認は行っていません。",
+          "当日の営業と空席は未確認。予約・問い合わせ・ログインは行っていません。掲載価格は当日の提供・価格を確約しません。",
+          "対象は指定の1店舗のみ。店舗トップの詳細検証はverified。ランチ子ページ単体には住所等のaccess項目がありませんが、同一店舗のトップで住所を確認済みです。",
+          "営業時間の特記として12月31日は「11:00～2100（L.O.20:00）」との原文掲載があります（時刻表記は原文どおり）。"
+        ]
+      }
+    ],
+    "readProbe": {
+      "managed": "pi",
+      "proxy": false,
+      "extraCA": true,
+      "https://books.rakuten.co.jp/rb/18577690/": {
+        "status": 200,
+        "title": "楽天ブックス: るるぶ 箱根 '27 - JTBパブリッシング 旅行ガイドブック 編集部 - 9784533172731 : 本",
+        "chars": 3308
+      },
+      "https://www.hotpepper.jp/strJ001100102/": {
+        "status": 200,
+        "title": "まいか 米香 アトレ上野店(上野/居酒屋)＜ネット予約可＞ | ホットペッパーグルメ",
+        "chars": 7000
+      }
+    },
+    "deniedChecks": [
+      {
+        "name": "denied-path",
+        "status": 403
+      },
+      {
+        "name": "denied-host",
+        "error": "fetch failed",
+        "code": "EACCES"
+      },
+      {
+        "name": "denied-metadata",
+        "error": "fetch failed",
+        "code": "EACCES"
+      }
+    ],
+    "localFixtureMethodChecks": [
+      {
+        "method": "GET",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "status": 403,
+        "layer": "l7"
+      }
+    ],
+    "localFixtureReceivedMethods": ["GET"],
+    "externalPostSent": false,
+    "effectivePolicy": {
+      "version": 5,
+      "activeVersion": 5,
+      "hash": "41bab3885c49e7db7a6bd7dd28d01eda6ddb0f7464091a5e2e4bdffce8c059c0",
+      "source": "sandbox"
+    },
+    "workerEffectivePolicy": {
+      "version": 39,
+      "activeVersion": 39,
+      "hash": "6389823f5c779ccd347baf9355d6ed4a9e46907726aba5df54db6e6ae65ae71c"
+    },
+    "audit": [
+      "[1794507004.702] [sandbox] [OCSF ] [ocsf] HTTP:POST [MED] DENIED POST http://host.openshell.internal:60474/fixture [policy:local_method_fixture engine:l7] [reason:L7_REQUEST deny POST host.openshell.internal:60474/fixture reason=POST /fixture not permitted by policy]",
+      "[1794506750.421] [sandbox] [OCSF ] [ocsf] HTTP:GET [MED] DENIED GET https://books.rakuten.co.jp/__web_harness_policy_probe__ [policy:research_pages engine:l7] [reason:L7_REQUEST deny GET books.rakuten.co.jp:443/__web_harness_policy_probe__ reason=GET /__web_harness_policy_probe__ not permitted by policy]",
+      "[1794506750.424] [sandbox] [OCSF ] [ocsf] NET:REFUSE [MED] DENIED example.com [reason:policy_dns_ineligible]",
+      "[1794506750.427] [sandbox] [OCSF ] [ocsf] NET:OPEN [MED] DENIED /usr/local/bin/node(0) -> 169.254.169.254:443 [reason:transparent_tcp_policy_denied]"
+    ],
+    "workerFinalPhase": "Stopped",
+    "probeSandbox": "deleted",
+    "fixtureServer": "stopped",
+    "fallback": false
+  }
+}

@@ -25,7 +25,7 @@ export interface Page {
   images?: { url: string; alt: string }[];
   productOffer?: import("./product-offer.js").ProductOffer;
   acquisition?: {
-    kind: "browser-dom" | "public-html";
+    kind: "browser-dom" | "public-html" | "public-json";
     status?: number;
     charset?: string;
     contentType?: string;
@@ -59,11 +59,31 @@ export interface Candidate {
   eligible: boolean;
 }
 export interface Answer {
+  visualArtifact?: import("./visual-artifact.js").VisualArtifact;
+  actionPlan?: import("./answer-plan.js").ActionPlan;
   summary: string;
   candidates: Candidate[];
   limitations: string[];
 }
 export interface Task {
+  visualRefinement?: {
+    version: 1;
+    sourceTaskId: string;
+    mode: "captured-data-only";
+  };
+  visualReview?: {
+    version: 1;
+    status: "passed" | "needs_visual" | "not_required";
+    issues: string[];
+  };
+  specificity?: import("./answer-plan.js").SpecificityReview;
+  security?: {
+    profileId: import("./runtime-profile.js").ResearchProfile["id"];
+    profileVersion: 1;
+    mode: import("./runtime-profile.js").SecurityMode;
+    policyHash: string;
+    artifactNonce?: string;
+  };
   reviewWarnings?: string[];
   interactionMode?: import("./interaction.js").InteractionMode;
   execution?: {

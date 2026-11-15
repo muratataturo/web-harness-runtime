@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-11-15T04:31:06.439Z",
+  "typecheck": "passed",
+  "build": "passed",
+  "tests": {
+    "passed": 220,
+    "failed": 0,
+    "summary": [
+      "ℹ tests 220",
+      "ℹ pass 220",
+      "ℹ fail 0"
+    ]
+  },
+  "browserQaPassed": true,
+  "automaticScope": "automatic-interaction-and-layout-only; synthetic map transport fixture, no public tile traffic",
+  "liveMapCheck": {
+    "scope": "explicit single-viewport manual live verification; no OSM tile traffic",
+    "checkedAt": "2026-11-15T04:27:26.471Z",
+    "cases": [
+      {
+        "mode": "file",
+        "httpStatuses": [
+          200
+        ],
+        "tileResponses": 8,
+        "decodedTileImages": 8,
+        "osmTileRequests": 0,
+        "attributionVisible": true
+      },
+      {
+        "mode": "http",
+        "httpStatuses": [
+          200
+        ],
+        "tileResponses": 8,
+        "decodedTileImages": 8,
+        "osmTileRequests": 0,
+        "attributionVisible": true
+      }
+    ],
+    "passed": true
+  },
+  "offline": {
+    "pins": 4,
+    "selectionWorks": true,
+    "limitationsVisible": true
+  },
+  "packageAssetsPresent": true,
+  "privateFilesAbsent": true,
+  "releaseAcceptance": "local CI-equivalent checks and preview package only; no new live model/VM run",
+  "humanAppeal": "unrated"
+}

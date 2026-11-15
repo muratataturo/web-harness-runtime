@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "mode": "live",
+  "passed": true,
+  "completedAt": "2026-11-12T18:34:20.588Z",
+  "revision": "55b15e2ac244c8ec41585bb2b3230a2c62d5e2fa0a0f7d3ae168970e6048f8ee",
+  "cases": [
+    {
+      "family": "recruit",
+      "runId": "c8ef3c46-c2a7-42de-9c51-e8fd9fab857b",
+      "taskId": "2a172b3f-51a8-4a45-a4dd-68413ec8fe4a",
+      "runStatus": "succeeded",
+      "taskStatus": "succeeded",
+      "source": "live",
+      "mode": "auto",
+      "security": {
+        "profileId": "recruit-public-research",
+        "profileVersion": 1,
+        "mode": "hardened",
+        "policyHash": "4afa2443bc274b3cb79f2bd6f9ad7e71bab01063265b1fb6dda8dbf1fabe3ad9",
+        "artifactNonce": "2a172b3f-51a8-4a45-a4dd-68413ec8fe4a"
+      },
+      "execution": {
+        "target": "openshell",
+        "isolation": "openshell-sandbox",
+        "gateway": "web-harness-local",
+        "sandboxName": "wh-codex",
+        "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+        "image": "web-harness-codex:local",
+        "allocation": "account-worker",
+        "runtimeRevision": "def0cd91648cfd917590338c",
+        "innerSandbox": "externalSandbox",
+        "elapsedMs": 51836,
+        "cleanupStatus": "stopped"
+      },
+      "evidenceCount": 4,
+      "agent": "codex",
+      "modelTokens": 75232,
+      "pageCount": 2,
+      "summary": "指定1店舗「まいか -米香- アトレ上野店」の店舗名、住所、掲載ランチ価格を引用付きで確認しました。住所は東京都台東区上野７－１－１ アトレ上野 ２Ｆ。予算重視の掲載例は平日「焼き魚御膳」1,300円（税込）、土日祝日「天婦羅御膳」1,880円（税込）。当日の営業と空席は未確認です。予約・問い合わせ・ログインは行っていません。",
+      "checks": {
+        "uiSubmitted": true,
+        "progressVisible": true,
+        "sseReceived": true,
+        "answerVisible": true,
+        "candidateQuoteVisible": true,
+        "sourceBodyVisible": true,
+        "reloadRestored": true,
+        "noPageErrors": true
+      },
+      "screenshots": [
+        "docs/screenshots/chat-runtime-recruit.png",
+        "docs/screenshots/chat-runtime-recruit-quote.png"
+      ]
+    },
+    {
+      "family": "rakuten",
+      "runId": "005eac0b-fa03-43a2-8b76-dbb70cb8b7b2",
+      "taskId": "60abc4b0-bd62-4412-80ca-1d008749abf5",
+      "runStatus": "succeeded",
+      "taskStatus": "succeeded",
+      "source": "live",
+      "mode": "auto",
+      "security": {
+        "profileId": "rakuten-public-research",
+        "profileVersion": 1,
+        "mode": "hardened",
+        "policyHash": "228de3052f22247dea60178717b87cdb5ca890df6bfa255d634653b62fc86817",
+        "artifactNonce": "60abc4b0-bd62-4412-80ca-1d008749abf5"
+      },
+      "execution": {
+        "target": "openshell",
+        "isolation": "openshell-sandbox",
+        "gateway": "web-harness-local",
+        "sandboxName": "wh-codex",
+        "sandboxId": "cc0f618e-0777-43ce-a090-ba25676eb918",
+        "image": "web-harness-codex:local",
+        "allocation": "account-worker",
+        "runtimeRevision": "def0cd91648cfd917590338c",
+        "innerSandbox": "externalSandbox",
+        "elapsedMs": 44388,
+        "cleanupStatus": "stopped"
+      },
+      "evidenceCount": 3,
+      "agent": "codex",
+      "modelTokens": 49744,
+      "pageCount": 1,
+      "summary": "指定商品の書名は『るるぶ 箱根 '27 （るるぶ情報版）』、出版社はJTBパブリッシング、掲載税込価格は1,430円。指定された3項目はすべて公開商品詳細で確認でき、unknownの項目はありません。比較・追加購入の推奨は行いません。",
+      "checks": {
+        "uiSubmitted": true,
+        "progressVisible": true,
+        "sseReceived": true,
+        "answerVisible": true,
+        "candidateQuoteVisible": true,
+        "sourceBodyVisible": true,
+        "reloadRestored": true,
+        "noPageErrors": true
+      },
+      "screenshots": [
+        "docs/screenshots/chat-runtime-rakuten.png",
+        "docs/screenshots/chat-runtime-rakuten-quote.png"
+      ]
+    }
+  ]
+}

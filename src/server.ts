@@ -1,3 +1,4 @@
+import { renderAnswerHtml } from "./answer-html.js";
 import {
   createServer,
   type IncomingMessage,
@@ -16,6 +17,7 @@ import { codexSandboxStatus } from "./codex-sandbox.js";
 import { strataConnection } from "./opencode.js";
 import { VisualPreviewStore } from "./visual-preview.js";
 import { RunService, runtimeCapabilities } from "./run-service.js";
+import { UxFeedbackStore } from "./ux-feedback.js";
 const webRoot = fileURLToPath(new URL("../web/", import.meta.url));
 function send(res: ServerResponse, status: number, body: unknown) {
   res.writeHead(status, {
@@ -103,6 +105,25 @@ export function createWorkbenchServer(
         else if (req.method === "POST")
           send(res, 202, await runs.create(await body(req)));
         else send(res, 405, { error: "GET / POST only" });
+        return;
+      }
+      const answerMatch = path.match(
+        /^\/api\/runs\/([a-zA-Z0-9-]+)\/answer\.html$/,
+      );
+      if (answerMatch && req.method === "GET") {
+        const run = await runs.get(answerMatch[1]!);
+        const task = run.taskId ? await taskStore.get(run.taskId) : run.task;
+        if (!task?.answer) {
+          send(res, 404, { error: "回答はまだありません" });
+          return;
+        }
+        res.writeHead(200, {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-store",
+          "X-Content-Type-Options": "nosniff",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+        });
+        res.end(renderAnswerHtml(task));
         return;
       }
       const visualMatch = path.match(
@@ -313,6 +334,20 @@ export function createWorkbenchServer(
         return;
       }
       const taskMatch = path.match(/^\/api\/tasks\/([a-zA-Z0-9-]+)$/);
+      const uxFeedback = path.match(
+        /^\/api\/tasks\/([a-zA-Z0-9-]+)\/ux-feedback$/,
+      );
+      if (uxFeedback && req.method === "POST") {
+        send(
+          res,
+          200,
+          await new UxFeedbackStore(taskStore).add(
+            uxFeedback[1]!,
+            await body(req),
+          ),
+        );
+        return;
+      }
       if (taskMatch && req.method === "GET") {
         send(res, 200, await taskStore.get(taskMatch[1]!));
         return;
