@@ -1,0 +1,27 @@
+{
+  "scope": "explicit single-viewport manual live verification; no OSM tile traffic",
+  "checkedAt": "2026-11-15T04:27:26.471Z",
+  "cases": [
+    {
+      "mode": "file",
+      "httpStatuses": [
+        200
+      ],
+      "tileResponses": 8,
+      "decodedTileImages": 8,
+      "osmTileRequests": 0,
+      "attributionVisible": true
+    },
+    {
+      "mode": "http",
+      "httpStatuses": [
+        200
+      ],
+      "tileResponses": 8,
+      "decodedTileImages": 8,
+      "osmTileRequests": 0,
+      "attributionVisible": true
+    }
+  ],
+  "passed": true
+}

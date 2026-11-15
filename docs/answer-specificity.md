@@ -40,7 +40,7 @@
 
 ## 実生成で確認したこと
 
-[実回答のHTML版](generated-answer.html)はCSS/JSを内包し、現在は[地図とロードマップの改善](visual-artifact-quality.md)を反映した版。オンライン時は背景地図をOpenStreetMapから取得し、オフライン時もピンと操作を残す。今後の実行でも各Taskの保存先に`answer.html`を自動保存する。保存済みTaskは`node dist/cli.js export-html <id> --out <file>`で、推論やWeb取得をせずに出力できる。
+[実回答のHTML版](generated-answer.html)はCSS/JSを内包し、現在は[地図とロードマップの改善](visual-artifact-quality.md)を反映した版。オンライン時は日本の背景地図を国土地理院から取得し、オフライン時もピンと操作を残す。今後の実行でも各Taskの保存先に`answer.html`を自動保存する。保存済みTaskは`node dist/cli.js export-html <id> --out <file>`で、推論やWeb取得をせずに出力できる。
 
 [回答全文・11手順・予算・引用](specific-generated-answer.md)と[実行記録JSON](evidence/specificity-results.json)を保存した。
 

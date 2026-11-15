@@ -1,10 +1,10 @@
 {
-  "scope": "automatic-interaction-and-layout-only",
+  "scope": "automatic-interaction-and-layout-only; synthetic map transport fixture, no public tile traffic",
   "humanAppeal": "unrated",
   "cases": [
     {
       "kind": "journey-map",
-      "interactiveMs": 108,
+      "interactiveMs": 127,
       "viewports": [
         {
           "width": 320,
@@ -37,7 +37,7 @@
     },
     {
       "kind": "life-roadmap",
-      "interactiveMs": 85,
+      "interactiveMs": 78,
       "viewports": [
         {
           "width": 320,
@@ -66,6 +66,32 @@
     }
   ],
   "passed": true,
+  "backgroundFailures": [
+    {
+      "failure": "http-403-png",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    },
+    {
+      "failure": "http-429-png",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    },
+    {
+      "failure": "cors-network",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    },
+    {
+      "failure": "invalid-png",
+      "errorImagesVisible": false,
+      "pinsAndSelectionWork": true,
+      "retryAfterDenial": false
+    }
+  ],
   "offline": {
     "pins": 4,
     "selectionWorks": true,

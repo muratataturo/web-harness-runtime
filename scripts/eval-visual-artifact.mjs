@@ -4,6 +4,8 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { mapTile } from "../test/fixtures/map-tile.mjs";
+import { newTask } from "../src/runtime.js";
 import { renderAnswerHtml } from "../src/answer-html.js";
 const out = ".runtime/visual-study/qa";
 await mkdir(out, { recursive: true });
@@ -15,7 +17,8 @@ const browser = await chromium.launch({
   ].find(existsSync),
 });
 const report = {
-  scope: "automatic-interaction-and-layout-only",
+  scope:
+    "automatic-interaction-and-layout-only; synthetic map transport fixture, no public tile traffic",
   humanAppeal: "unrated",
   cases: [],
   passed: false,
@@ -34,6 +37,18 @@ try {
     page.on("console", (m) => {
       if (/violates.*Content Security Policy/i.test(m.text()))
         errors.push(m.text());
+    });
+    await page.route("https://cyberjapandata.gsi.go.jp/**", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "image/png",
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body: mapTile,
+      }),
+    );
+    page.on("request", (r) => {
+      if (r.url().includes("tile.openstreetmap.org"))
+        errors.push("Public OSM tile request is forbidden");
     });
     const renderStart = performance.now();
     await page.goto(pathToFileURL(resolve(file)).href);
@@ -204,6 +219,61 @@ try {
     report.cases.push({ kind, interactiveMs, viewports: checks, ...detail });
     await page.close();
   }
+  report.backgroundFailures = [];
+  for (const failure of [
+    "http-403-png",
+    "http-429-png",
+    "cors-network",
+    "invalid-png",
+  ]) {
+    const page = await browser.newPage({
+      viewport: { width: 1240, height: 960 },
+    });
+    let requests = 0;
+    await page.route("https://cyberjapandata.gsi.go.jp/**", (route) => {
+      requests++;
+      if (failure === "cors-network") return route.abort("failed");
+      return route.fulfill({
+        status:
+          failure === "http-403-png"
+            ? 403
+            : failure === "http-429-png"
+              ? 429
+              : 200,
+        contentType: "image/png",
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body:
+          failure === "invalid-png" ? Buffer.from("Access blocked") : mapTile,
+      });
+    });
+    await page.goto(pathToFileURL(resolve("docs/generated-answer.html")).href);
+    await page
+      .locator(".map-fallback-note")
+      .filter({ hasText: "背景地図を表示できません" })
+      .waitFor();
+    assert.equal(await page.locator(".leaflet-tile-loaded").count(), 0);
+    assert.equal(
+      await page.locator(".leaflet-tile-pane img").count(),
+      0,
+      "Provider error PNGs must never be displayed",
+    );
+    await page.locator(".stop-choice").nth(2).click();
+    assert.match(await page.locator(".map-selection h3").innerText(), /まいか/);
+    const before = requests;
+    await page.locator(".leaflet-control-zoom-in").click();
+    await page.waitForTimeout(150);
+    assert.equal(requests, before, "No automatic retry after denial");
+    assert.ok(await page.locator(".map-fallback-note a").getAttribute("href"));
+    if (failure === "http-403-png")
+      await page.screenshot({ path: out + "/blocked-background-fallback.png" });
+    report.backgroundFailures.push({
+      failure,
+      errorImagesVisible: false,
+      pinsAndSelectionWork: true,
+      retryAfterDenial: false,
+    });
+    await page.close();
+  }
   // No tiles / no internet: geometry, controls and roadmap still work.
   const context = await browser.newContext({ offline: true }),
     page = await context.newPage();
@@ -218,9 +288,25 @@ try {
   assert.match(await page.locator(".map-selection h3").innerText(), /まいか/);
   report.offline = { pins: 4, selectionWorks: true, limitationsVisible: true };
   await context.close();
-  const hostile = JSON.parse(
-    await readFile(".runtime/visual-study/roadmap-task.json", "utf8"),
+  const sampleHtml = await readFile("docs/life-roadmap.html", "utf8");
+  const sample = JSON.parse(
+    sampleHtml.match(
+      /<script id="visual-data" type="application\/json">([\s\S]*?)<\/script>/,
+    )[1],
   );
+  const hostile = newTask({
+    query: "人生計画",
+    urls: ["https://www.hotpepper.jp/strJ001100102/"],
+    maxSteps: 10,
+    maxPages: 2,
+    timeoutSeconds: 10,
+  });
+  hostile.answer = {
+    summary: "表示安全性のテスト",
+    candidates: [],
+    limitations: [],
+    visualArtifact: sample.artifact,
+  };
   hostile.answer.visualArtifact.title =
     '</script><img src=x onerror="window.pwned=1">';
   hostile.answer.visualArtifact.milestones[0].action =

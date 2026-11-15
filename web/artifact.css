@@ -755,3 +755,12 @@ body.has-visual .content-grid {
   min-height: 44px;
   line-height: 44px !important;
 }
+
+.map-fallback-note a {
+  display: block;
+  margin-top: 6px;
+  pointer-events: auto;
+  min-height: 32px;
+  line-height: 32px;
+  font-weight: 600;
+}

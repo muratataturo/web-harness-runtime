@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Button } from "@astryxdesign/core/Button";
 import { Badge } from "@astryxdesign/core/Badge";
 import L from "leaflet";
+import { backgroundFor, verifiedTileLayer } from "./map-background.js";
 import "@astryxdesign/core/reset.css";
 import "@astryxdesign/core/astryx.css";
 import "@astryxdesign/theme-neutral/theme.css";
@@ -55,7 +56,7 @@ function Journey() {
     [online, setOnline] = useState(navigator.onLine),
     [tiles, setTiles] = useState(0),
     [tilesPending, setTilesPending] = useState(false),
-    [tileErrors, setTileErrors] = useState(0);
+    [backgroundError, setBackgroundError] = useState(null);
   const container = useRef(),
     mapRef = useRef(),
     layers = useRef(),
@@ -64,6 +65,7 @@ function Journey() {
   const selectedStop = selected.find((s) => s.id === active) ?? selected[0];
   const steps = (s) => data.plan.steps.filter((t) => s.stepIds.includes(t.id));
   const primary = (s) => data.plan.steps.find((t) => t.id === s.primaryStepId);
+  const provider = backgroundFor(a.stops);
   const mapped = selected.filter((s) => s.coordinates),
     unlocated = selected.filter((s) => !s.coordinates);
   useEffect(() => {
@@ -83,18 +85,34 @@ function Journey() {
     map.attributionControl.addAttribution(
       '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>',
     );
-    const tile = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      referrerPolicy: "strict-origin-when-cross-origin",
+    let failed = false;
+    const tile = provider
+      ? verifiedTileLayer(L, provider, (reason) => {
+          failed = true;
+          setBackgroundError(reason);
+          setTiles(0);
+          setTilesPending(false);
+          tile.remove();
+        })
+      : null;
+    tile?.on("loading", () => setTilesPending(true));
+    tile?.on("load", () => {
+      if (!failed) setTilesPending(false);
     });
-    tile.on("loading", () => setTilesPending(true));
-    tile.on("load", () => setTilesPending(false));
-    tile.on("tileload", () => setTiles((n) => n + 1));
-    tile.on("tileerror", () => setTileErrors((n) => n + 1));
-    if (navigator.onLine && mapped.length) tile.addTo(map);
+    tile?.on("tileload", () => {
+      if (!failed) setTiles((n) => n + 1);
+    });
+    if (navigator.onLine && mapped.length && tile) tile.addTo(map);
     const change = () => {
       setOnline(navigator.onLine);
-      if (navigator.onLine && mapped.length && !map.hasLayer(tile))
+      if (!navigator.onLine) setTilesPending(false);
+      if (
+        navigator.onLine &&
+        mapped.length &&
+        tile &&
+        !failed &&
+        !map.hasLayer(tile)
+      )
         tile.addTo(map);
     };
     window.addEventListener("online", change);
@@ -200,12 +218,25 @@ function Journey() {
             data-map-loading={tilesPending}
             aria-label="行程の地図。番号ピンで予定を選択"
           />
-          {(!tiles || tilesPending) && (
+          {(!tiles || tilesPending || backgroundError) && (
             <div className="map-fallback-note" role="status">
-              {!online || tileErrors
-                ? "背景地図を取得できません。"
-                : "背景地図を読み込み中。"}
-              ピンは出典座標、破線は訪問順です。
+              {backgroundError
+                ? `背景地図を表示できません（${backgroundError}）。`
+                : !provider
+                  ? "この地域の背景地図には未対応です。"
+                  : !online
+                    ? "オフラインのため背景地図を取得できません。"
+                    : "背景地図を読み込み中。"}
+              ピンは出典座標、破線は訪問順の概略です。
+              {(!provider || backgroundError || !online) && (
+                <a
+                  href={routeUrl(selected) ?? searchUrl(selectedStop)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Google Mapsで確認 ↗
+                </a>
+              )}
             </div>
           )}
           <div className="map-caption">
@@ -321,7 +352,7 @@ function Journey() {
         </aside>
       </div>
       <p className="visual-footnote">
-        施設の代表位置を表示。入口・通行可能な道・当日の営業は未確認です。背景地図はオンライン時にOpenStreetMapから取得します。
+        施設の代表位置を表示。入口・通行可能な道・当日の営業は未確認です。背景地図は日本の範囲をオンライン時に国土地理院から取得します。取得できない場合は、ピンと訪問順の概略表示を残します。
       </p>
     </div>
   );

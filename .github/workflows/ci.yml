@@ -38,6 +38,7 @@ jobs:
       - run: npm run test:ui
       - run: npm run test:chat
       - run: npm run test:chat:runtime
+      - run: npm run eval:visual
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -46,3 +47,4 @@ jobs:
             .runtime/ui-qa
             .runtime/chat-qa
             .runtime/chat-runtime-fixture
+            .runtime/visual-study/qa
