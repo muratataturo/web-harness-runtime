@@ -1,6 +1,17 @@
+import {
+  validateVisualArtifact,
+  type VisualArtifact,
+} from "./visual-artifact.js";
 import { entityKey } from "./sources.js";
 import { assessPage } from "./page-quality.js";
 import { roomConflicts } from "./improvement-conflicts.js";
+import { normalized, assertEvidenceIntegrity } from "./provenance.js";
+import {
+  validateActionPlan,
+  renderActionPlan,
+  type ActionPlan,
+} from "./answer-plan.js";
+export { normalized } from "./provenance.js";
 import type {
   Answer,
   Candidate,
@@ -10,8 +21,6 @@ import type {
   Page,
   Task,
 } from "./types.js";
-export const normalized = (s: string) =>
-  s.normalize("NFKC").replace(/\s+/g, " ").trim();
 export function recordPlannedEvidence(
   task: Task,
   pageId: string,
@@ -91,7 +100,11 @@ export function validateAnswer(
   summary: string,
   input: Omit<Candidate, "score" | "eligible">[],
   limitations: string[],
+  actionPlan?: ActionPlan,
+  visualArtifact?: VisualArtifact,
 ): Answer {
+  if (visualArtifact) validateVisualArtifact(task, visualArtifact, actionPlan);
+  if (actionPlan) validateActionPlan(task, actionPlan);
   if (!task.criteria.length)
     throw new Error("先に plan_task で条件を定義してください");
   if (!summary.trim()) throw new Error("回答の要約が必要です");
@@ -157,7 +170,7 @@ export function validateAnswer(
           throw new Error("不明な根拠 ID");
         // Evidence must come from this candidate's detail hierarchy (coupons, reviews, styles).
         for (const id of m.evidenceIds) {
-          const evidence = task.evidence.find((e) => e.id === id)!;
+          const evidence = assertEvidenceIntegrity(task, id);
           if (
             !sameEntity(
               detail,
@@ -247,7 +260,15 @@ export function validateAnswer(
     ? "掲載間で駅徒歩の記載が一致しない住居があります。駅徒歩条件は未確認です: " +
       [...conflicts.stationConflicts.keys()].join(", ")
     : undefined;
+  if (actionPlan) {
+    const rendered = renderActionPlan(task, actionPlan);
+    if (!summary.endsWith(rendered)) summary += "\n" + rendered;
+  }
   return {
+    ...(actionPlan ? { actionPlan: structuredClone(actionPlan) } : {}),
+    ...(visualArtifact
+      ? { visualArtifact: structuredClone(visualArtifact) }
+      : {}),
     summary: warning ? "【runtime検証】" + warning + "\n\n" + summary : summary,
     candidates,
     limitations: warning ? [...limitations, warning] : limitations,

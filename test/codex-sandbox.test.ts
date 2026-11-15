@@ -35,10 +35,9 @@ test("Codex worker policy is native-binary scoped and has no OpenRouter credenti
     "/usr/local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-arm64/vendor/aarch64-unknown-linux-musl/bin/codex";
   assert.ok(codexSandboxPolicy([], native).includes(`path: ${native}`));
   assert.throws(() => codexSandboxPolicy([], "/usr/local/bin/node"));
-  assert.doesNotMatch(
-    policy,
-    /OPENROUTER_API_KEY|Authorization|allowed_ips|privileged/,
-  );
+  assert.doesNotMatch(policy, /OPENROUTER_API_KEY|Authorization|privileged/);
+  assert.match(policy, /allowed_ips:/);
+  assert.match(policy, /protocol: rest/);
   assert.throws(() => codexSandboxConfig({ gateway: "--bad" }));
   assert.throws(() => codexSandboxConfig({ gateway: "safe", name: "../auth" }));
 });

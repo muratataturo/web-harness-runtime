@@ -1,4 +1,9 @@
-import { markdown, normalizeMarkdown, presentation } from "./presentation.js";
+import {
+  markdown,
+  normalizeMarkdown,
+  presentation,
+  answerBrief,
+} from "./presentation.js";
 const $ = (s) => document.querySelector(s);
 const esc = (s) =>
   String(s ?? "").replace(
@@ -26,6 +31,36 @@ const state = {
   signature: "",
   selection: null,
 };
+let uxReview = null;
+let uxTimer;
+function startUxReview() {
+  clearTimeout(uxTimer);
+  const taskId = state.run?.task?.id;
+  if (!taskId || state.run.input.source === "replay") {
+    notice("保存された実調査の回答でレビューできます。");
+    return;
+  }
+  const startedAt = performance.now();
+  $(".answer-overview")?.scrollIntoView({ block: "start" });
+  notice("この回答を10秒間見てください。終了後に印象を伺います。");
+  uxReview = { taskId, startedAt };
+  uxTimer = setTimeout(() => {
+    if (!uxReview || state.run?.task?.id !== taskId || document.hidden) {
+      uxReview = null;
+      return;
+    }
+    uxReview.exposureMs = performance.now() - startedAt;
+    $("#ux-review-form").reset();
+    $("#ux-review-result").textContent = "";
+    $("#ux-review-dialog").showModal();
+  }, 10000);
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    clearTimeout(uxTimer);
+    uxReview = null;
+  }
+});
 async function api(path, body) {
   const r = await fetch(path, {
     method: body ? "POST" : "GET",
@@ -161,8 +196,10 @@ function answerOverview(r) {
     candidates = r.task.answer.candidates ?? [],
     sections = p.sections;
   const timeline = p.timeline.slice(0, 6);
+  const brief = answerBrief(r.task);
+  const quick = `<section class="decision-brief" aria-label="ひと目で分かる回答" data-ux="decision-brief"><div class="brief-heading"><span class="brief-label">今回わかったこと</span><span class="brief-date">取得 ${esc(brief.capturedAt ? new Date(brief.capturedAt).toLocaleDateString("ja-JP") : "日時未記録")}</span></div>${brief.budgetText ? `<p class="brief-budget"><span>回答にある予算見積</span><strong>${esc(brief.budgetText)}</strong></p>` : ""}<div class="brief-counts" aria-label="条件の確認状況"><span>確認できた項目 <strong>${brief.supported}<small> / ${brief.total - brief.roleExcluded}</small></strong></span><span>未確認 <strong>${brief.unknown - brief.roleExcluded}</strong></span><span>条件に合わない <strong>${brief.contradicted}</strong></span></div><p class="brief-caution" data-ux="uncertainty"><span aria-hidden="true">${brief.concerns.length ? "○" : "✓"}</span>${esc(brief.concerns[0]?.text ?? brief.limitation ?? "取得時点の掲載情報です。現在の状況は掲載元で確認してください。")}${brief.concerns.length > 1 ? `<span>ほか${brief.concerns.length - 1}項目</span>` : ""}</p><div class="brief-actions"><button class="brief-primary" data-answer-detail="all" data-ux="primary-action">根拠と回答を読む <span aria-hidden="true">↗</span></button><button class="brief-secondary" data-refine>条件を変える</button></div><small class="brief-disclosure">掲載情報の確認です。営業・空席・在庫の保証ではありません。${brief.roleExcluded ? ` 候補の役割に当てはまらない照合${brief.roleExcluded}件は内訳から除いています。原判定は詳細で確認できます。` : ""}</small></section>`;
   const flow = timeline.length
-    ? `<section class="answer-journey"><div class="overview-section-title"><span>01 / YOUR DAY</span><h3>一日の流れを、ひと目で。</h3><small>回答に記載された行程案</small></div><ol class="journey-track">${timeline.map((item, i) => `<li><button data-answer-detail="all"><span class="journey-index">${String(i + 1).padStart(2, "0")}</span><time>${esc(item.time)}</time><p>${esc(item.text)}</p><span class="journey-open">詳細を見る ↗</span></button></li>`).join("")}</ol>${p.timeline.length > 6 ? `<button class="text-link" data-answer-detail="all">この先の行程も読む（全${p.timeline.length}項目） →</button>` : ""}</section>`
+    ? `<section class="answer-journey"><div class="overview-section-title"><span>01 / YOUR DAY</span><h3>一日の流れを、ひと目で。</h3><small>回答に記載された行程案</small></div><ol class="journey-track">${timeline.map((item, i) => `<li><button data-answer-detail="${item.stepIndex !== undefined ? "step-" + item.stepIndex : "all"}"><span class="journey-index">${String(i + 1).padStart(2, "0")}</span><time>${esc(item.time)}</time><p>${esc(item.text)}</p><span class="journey-open">詳細を見る ↗</span></button></li>`).join("")}</ol>${p.timeline.length > 6 ? `<button class="text-link" data-answer-detail="all">この先の行程も読む（全${p.timeline.length}項目） →</button>` : ""}</section>`
     : "";
   const cards = candidates.length
     ? `<section class="answer-candidates"><div class="overview-section-title"><span>${timeline.length ? "02" : "01"} / OPTIONS</span><h3>${timeline.length ? "この日に選ぶ場所。" : "次の一歩につながる選択肢。"}</h3><small>候補ごとの根拠と未確認事項を確認できます</small></div><div class="candidate-grid">${candidates
@@ -180,7 +217,7 @@ function answerOverview(r) {
   const topics = sections
     .filter((s) => s.title !== p.title && s.title !== "提案の概要")
     .slice(0, 4);
-  return `<article class="answer answer-overview"><div class="answer-eyebrow"><span class="answer-spark">✦</span> HARNESS / RESEARCH CANVAS</div><h2>${esc(p.title)}</h2><p class="answer-lead">${esc(p.intro)}</p><div class="answer-meta"><span>${r.input.source === "replay" ? "保存済み実測からの提案" : "取得した根拠からの提案"}</span><span>${r.task.evidence?.length ?? 0}件の引用</span>${r.task.answer.limitations?.length ? `<span>未確認事項あり</span>` : ""}</div>${flow}${cards}${topics.length ? `<div class="answer-topic-grid">${topics.map((section, i) => `<button data-answer-detail="section-${sections.indexOf(section)}"><span>NOTE ${String(i + 1).padStart(2, "0")}</span><strong>${esc(section.title)}</strong><small>${esc(section.lines.find((l) => l.trim()) ?? "")}</small><b>詳しく読む ↗</b></button>`).join("")}</div>` : ""}<button class="read-answer" data-answer-detail="all"><span>提案の詳細を読む<small>行程・予算・根拠をMarkdownで</small></span><span>↗</span></button></article>`;
+  return `<article class="answer answer-overview"><div class="answer-eyebrow"><span class="answer-spark">✦</span> あなたの相談から、次の一歩へ</div><h2 data-ux="conclusion">${esc(p.title)}</h2><p class="answer-lead">${esc(p.intro)}</p><div class="answer-meta"><span>${r.input.source === "replay" ? "保存済み実測からの提案" : "取得した根拠からの提案"}</span><span>${r.task.evidence?.length ?? 0}件の引用</span>${r.task.answer.limitations?.length ? `<span>未確認事項あり</span>` : ""}</div>${r.task.answer.visualArtifact ? `<a class="read-answer" href="/api/runs/${esc(r.id)}/answer.html" target="_blank" rel="noopener noreferrer"><span>${r.task.answer.visualArtifact.kind === "journey-map" ? "地図で行程を見る" : "人生のロードマップを開く"}<small>地点・時間・次の行動を操作して確認</small></span><span>↗</span></a>` : ""}${quick}${flow}${cards}${topics.length ? `<div class="answer-topic-grid">${topics.map((section, i) => `<button data-answer-detail="section-${sections.indexOf(section)}"><span>NOTE ${String(i + 1).padStart(2, "0")}</span><strong>${esc(section.title)}</strong><small>${esc(section.lines.find((l) => l.trim()) ?? "")}</small><b>詳しく読む ↗</b></button>`).join("")}</div>` : ""}<button class="read-answer" data-answer-detail="all"><span>提案の詳細を読む<small>行程・予算・根拠をMarkdownで</small></span><span>↗</span></button><button class="ux-review-start">この画面を10秒でレビュー</button></article>`;
 }
 function showAnswerDetail(key) {
   const r = state.run;
@@ -205,6 +242,18 @@ function showAnswerDetail(key) {
             .join("\n")}`,
       )
       .join("\n\n")}\n\n[掲載元を開く](${c.url})`;
+  } else if (key.startsWith("step-")) {
+    const step = r.task.answer.actionPlan?.steps?.[Number(key.slice(5))];
+    if (!step) return;
+    title = `${step.when} ${step.action}`;
+    content = `## 場所\n\n${step.where}${step.locationStatus === "unconfirmed" ? "（詳細は未確認）" : ""}\n\n## 進め方\n\n${step.how}\n\n## 完了の目安\n\n${step.doneWhen}\n\n${step.durationMinutes ? `所要時間：${step.durationMinutes}分の見積。\n\n` : ""}${step.evidenceIds
+      .map((id) => {
+        const ev = r.task.evidence?.find((e) => e.id === id);
+        return ev
+          ? `> ${ev.quote.replaceAll("\n", "\n> ")}\n\n[掲載元](${ev.url})\n`
+          : "";
+      })
+      .join("\n")}`;
   } else if (key.startsWith("section-")) {
     const section = p.sections[Number(key.slice(8))];
     if (!section) return;
@@ -222,6 +271,15 @@ function showAnswerDetail(key) {
           .map(
             (e) =>
               `- [${r.artifacts?.find((a) => a.url === e.url)?.title ?? new URL(e.url).hostname}](${e.url})`,
+          )
+          .join("\n");
+    if (r.task.evidence?.length)
+      content +=
+        "\n\n## 根拠の引用\n\n" +
+        r.task.evidence
+          .map(
+            (e) =>
+              `### ${e.id}\n\n> ${e.quote.replaceAll("\n", "\n> ")}\n\n[掲載元](${e.url}) · 取得 ${e.capturedAt}\n`,
           )
           .join("\n");
   }
@@ -466,7 +524,8 @@ function render(r) {
     return;
   }
   state.signature = signature;
-  let html = `<div class="message user"><div class="speaker">あなた</div>${esc(r.input.query).replaceAll("\n", "<br>")}</div><div class="message system"><span class="run-tag">${r.input.source === "replay" ? "実測の再生 · 追加推論なし" : "実調査"} / ${esc(r.input.mode)}</span><br>${esc(statusText(r))}</div>`;
+  const queryBody = `<div class="speaker">あなた</div>${esc(r.input.query).replaceAll("\n", "<br>")}`;
+  let html = `${r.task?.answer ? `<details class="query-receipt"><summary>相談した条件を見る</summary><div class="message user">${queryBody}</div></details>` : `<div class="message user">${queryBody}</div>`}<div class="message system"><span class="run-tag">${r.input.source === "replay" ? "実測の再生 · 追加推論なし" : "実調査"} / ${esc(r.input.mode)}</span><br>${esc(statusText(r))}</div>`;
   if (r.reviewWarnings?.length)
     html += `<aside class="review-warning" role="note"><strong>掲載情報の照合結果</strong>${r.reviewWarnings.map((w) => `<p>${esc(w)}</p>`).join("")}</aside>`;
   html += r.decisions
@@ -489,6 +548,14 @@ function render(r) {
   if (r.task?.answer)
     html += `<div class="result-actions"><button id="copy-answer">回答をコピー</button><a href="/api/runs/${esc(r.id)}" target="_blank" rel="noopener">回答・引用・実行記録 JSON ↗</a></div>`;
   $("#conversation").innerHTML = html;
+  $(".ux-review-start")?.addEventListener("click", startUxReview);
+  document.querySelectorAll("[data-refine]").forEach((button) =>
+    button.addEventListener("click", () => {
+      document.body.classList.add("compose-expanded");
+      $("#compose-toggle").setAttribute("aria-expanded", "true");
+      $("#chat-query").focus();
+    }),
+  );
   inspection(r);
   updateLive(r);
   $("#decision-form")?.addEventListener("submit", async (e) => {
@@ -630,6 +697,30 @@ $("#answer-close").onclick = () => $("#answer-dialog").close();
 $("#artifact-jump").onclick = () =>
   $(".artifact-shelf")?.scrollIntoView({ block: "start" });
 $("#usage-close").onclick = () => $("#usage").close();
+$("#ux-review-cancel").onclick = () => $("#ux-review-dialog").close();
+$("#ux-review-form").onsubmit = async (event) => {
+  event.preventDefault();
+  if (!uxReview?.exposureMs) return;
+  const data = new FormData(event.target);
+  event.submitter.disabled = true;
+  try {
+    await api(`/api/tasks/${uxReview.taskId}/ux-feedback`, {
+      exposureMs: uxReview.exposureMs,
+      designVersion: "ten-second-v1",
+      understood: data.get("understood") === "yes",
+      uncertaintyVisible: data.get("uncertaintyVisible") === "yes",
+      nextActionClear: data.get("nextActionClear") === "yes",
+      appeal: Number(data.get("appeal")),
+    });
+    $("#ux-review-dialog").close();
+    notice("10秒レビューを保存しました。");
+    uxReview = null;
+  } catch (error) {
+    $("#ux-review-result").textContent = error.message;
+  } finally {
+    event.submitter.disabled = false;
+  }
+};
 $("#compose-toggle").onclick = () => {
   const expanded = document.body.classList.toggle("compose-expanded");
   $("#compose-toggle").setAttribute("aria-expanded", String(expanded));

@@ -1,0 +1,757 @@
+:root {
+  --artifact-green: #176856;
+  --artifact-ink: #213e36;
+  --font-family-body:
+    -apple-system, BlinkMacSystemFont, "Hiragino Sans", Meiryo, sans-serif;
+  --font-family-heading: var(--font-family-body);
+}
+#visual-artifact {
+  margin: 24px 0 40px;
+  color: var(--artifact-ink);
+  font-family: var(--font-family-body);
+  line-height: 1.6;
+}
+#visual-artifact button,
+#visual-artifact a {
+  font-family: inherit;
+}
+#visual-artifact button:focus-visible,
+#visual-artifact a:focus-visible {
+  outline: 3px solid #176856;
+  outline-offset: 3px;
+}
+#visual-artifact .astryx-button {
+  min-height: 44px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+#visual-artifact .astryx-button[data-variant="primary"] {
+  background: #176856;
+  color: #fff;
+}
+#visual-artifact .astryx-button[data-variant="secondary"] {
+  background: #f0f4ef;
+  color: #204c3f;
+  border: 1px solid #cbd8ce;
+}
+#visual-artifact h2 {
+  font-size: clamp(23px, 2.4vw, 34px);
+  letter-spacing: -0.8px;
+  color: #213e36;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+#visual-artifact h3 {
+  font-size: 20px;
+  color: #213e36;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+#visual-artifact p {
+  margin: 6px 0 12px;
+}
+.overline {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  color: #456d5a;
+}
+.visual-heading {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.visual-heading p:not(.overline) {
+  font-size: 13px;
+  color: #4c665e;
+  max-width: 700px;
+}
+.visual-heading > .astryx-badge {
+  flex-shrink: 0;
+}
+.journey-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 350px;
+  background: white;
+  border: 1px solid #d7e0d8;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 14px 50px #213e3609;
+}
+.journey-map-area {
+  position: relative;
+  min-width: 0;
+  background: #eff3e9;
+}
+.journey-map {
+  height: 430px;
+  width: 100%;
+  z-index: 0;
+  background: #e7eddc;
+}
+.journey-map[data-tiles-ready="false"] {
+  background:
+    radial-gradient(ellipse at 25% 40%, #d5e1c4 0, transparent 48%),
+    linear-gradient(125deg, #e2eddb, #f4f0df);
+}
+.journey-pin {
+  border: 0 !important;
+  background: transparent !important;
+}
+.journey-pin span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: #176856;
+  border: 3px solid white;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 3px 12px #143c3640;
+  color: white;
+  font-weight: 800;
+  font-size: 15px;
+}
+.journey-pin span::first-letter {
+  transform: rotate(45deg);
+}
+.journey-pin.selected span {
+  background: #b44b24;
+  outline: 4px solid #fff9;
+}
+.journey-pin:focus {
+  outline: 3px solid #bf582d;
+  outline-offset: 6px;
+}
+.map-caption {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #405a47;
+  padding: 11px 17px;
+  background: #eff3e9;
+}
+.route-key {
+  width: 24px;
+  border-top: 3px dashed #176856;
+}
+.map-fallback-note {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 65px;
+  z-index: 401;
+  background: #ffffffeb;
+  border: 1px solid #ccd7c9;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  pointer-events: none;
+}
+.map-selection {
+  background: #fff;
+  padding: 20px 26px;
+  border-top: 1px solid #d7e0d8;
+  min-height: 180px;
+}
+.map-selection p {
+  font-size: 13px;
+}
+.map-selection a {
+  font-size: 12px;
+}
+.visual-refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  font-size: 11px;
+  margin-top: 10px;
+}
+.journey-planner {
+  padding: 22px;
+  background: #fbfcf8;
+  border-left: 1px solid #d7e0d8;
+  min-width: 0;
+}
+.planner-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  align-items: center;
+  margin-bottom: 13px;
+}
+.plan-toggle small {
+  display: block;
+  font-size: 10px;
+  color: #5d6c61;
+  margin: 8px 0 14px;
+}
+.stop-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stop-list li {
+  padding: 0;
+}
+.stop-choice {
+  width: 100%;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #e4e9e1;
+  background: transparent;
+  display: grid;
+  grid-template-columns: 28px 1fr 16px;
+  gap: 8px;
+  align-items: center;
+  text-align: left;
+  padding: 12px 8px;
+  cursor: pointer;
+  color: #344c41;
+  border-radius: 9px;
+  min-height: 78px;
+}
+.stop-choice:hover {
+  background: #eef4eb;
+}
+.stop-choice.is-active {
+  background: #e7eee0;
+  border-color: #c4d2bc;
+}
+.stop-index {
+  font-size: 14px;
+  font-weight: 700;
+  color: #176856;
+  border: 1px solid #b7c9b3;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  line-height: 24px;
+}
+.stop-choice strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 3px 0;
+  overflow-wrap: anywhere;
+}
+.stop-choice small,
+.stop-time {
+  font-size: 10px;
+  display: block;
+  color: #5b6b5f;
+}
+.journey-total {
+  padding: 15px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  align-items: center;
+}
+.journey-total > span {
+  font-size: 11px;
+}
+.journey-total strong {
+  font-size: 27px;
+  letter-spacing: -1px;
+}
+.journey-total small {
+  grid-column: 1/-1;
+  font-size: 10px;
+  color: #5b6b5f;
+}
+.visual-footnote {
+  font-size: 11px !important;
+  color: #5b6b5f;
+  padding: 12px 0;
+}
+.visual-warning {
+  padding: 12px;
+  background: #fff4df;
+  font-size: 12px;
+}
+.leaflet-container {
+  font-family: inherit !important;
+}
+.leaflet-control-attribution {
+  font-size: 9px !important;
+}
+.leaflet-control-zoom a {
+  min-width: 36px;
+  min-height: 36px;
+  line-height: 36px !important;
+}
+.roadmap-summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 35px;
+  border-radius: 20px;
+  background: #e9eee4;
+  border: 1px solid #cdd8c7;
+  padding: 28px 36px;
+  margin-bottom: 24px;
+}
+.roadmap-summary p {
+  font-size: 13px;
+  max-width: 700px;
+}
+.progress-ring {
+  width: 128px;
+  height: 128px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(#176856 var(--progress), #ccd8c3 0);
+  padding: 9px;
+  flex-shrink: 0;
+}
+.progress-ring > span {
+  background: #f5f7ef;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+.progress-ring strong {
+  font-size: 27px;
+}
+.progress-ring small {
+  font-size: 14px;
+  color: #587060;
+}
+.roadmap-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 11px;
+  margin: 12px 0;
+}
+.roadmap-scroll {
+  overflow-x: auto;
+  border: 1px solid #d7e0d8;
+  border-radius: 14px;
+  background: #fff;
+}
+.roadmap-board {
+  display: grid;
+  grid-template-columns: 140px repeat(var(--columns), minmax(220px, 1fr));
+  min-width: 850px;
+}
+.roadmap-corner,
+.horizon {
+  padding: 19px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  border-bottom: 1px solid #d7e0d8;
+  background: #f4f5ed;
+}
+.horizon {
+  border-left: 1px solid #e0e5da;
+}
+.lane-label {
+  padding: 22px 18px;
+  background: #f6f8f2;
+  border-bottom: 1px solid #d7e0d8;
+}
+.lane-label span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  display: block;
+  color: #698263;
+}
+.lane-label strong {
+  font-size: 15px;
+  display: block;
+  margin-top: 6px;
+}
+.roadmap-cell {
+  padding: 14px;
+  border-left: 1px solid #e2e6dc;
+  border-bottom: 1px solid #d7e0d8;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: linear-gradient(
+    transparent 50%,
+    #e8ede3 50%,
+    #e8ede3 calc(50% + 1px),
+    transparent calc(50% + 1px)
+  );
+}
+.milestone {
+  min-height: 138px;
+  width: 100%;
+  text-align: left;
+  padding: 17px;
+  border: 1px solid #d1ddcb;
+  border-radius: 12px;
+  background: #f7faf2;
+  color: #243d31;
+  cursor: pointer;
+  box-shadow: 0 2px 5px #182b2005;
+}
+.milestone:hover {
+  border-color: #44846c;
+}
+.milestone.is-active {
+  border: 2px solid #176856;
+  padding: 16px;
+  background: #e9f1e2;
+}
+.milestone.is-done {
+  border-color: #176856;
+  background: #f0f6eb;
+}
+.milestone strong {
+  font-size: 14px;
+  display: block;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+.milestone-state {
+  font-size: 10px;
+  color: #446451;
+}
+.milestone-outcome {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #50684f;
+}
+.milestone small {
+  display: block;
+  font-size: 10px;
+  color: #66795e;
+  margin-top: 10px;
+}
+.lane-1 .milestone {
+  background: #fdf6ec;
+  border-color: #e4d3b6;
+}
+.lane-1 .milestone.is-active {
+  border-color: #98632c;
+}
+.lane-2 .milestone {
+  background: #f3f0f9;
+  border-color: #d5cce7;
+}
+.lane-2 .milestone.is-active {
+  border-color: #7152a0;
+}
+.milestone-detail {
+  border: 1px solid #d2ddcc;
+  padding: 26px;
+  margin-top: 20px;
+  border-radius: 14px;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 225px;
+  gap: 30px;
+}
+.milestone-detail p {
+  font-size: 13px;
+}
+.milestone-detail > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: start;
+}
+.milestone-detail > div:last-child > small {
+  font-size: 11px;
+  color: #5b6b5f;
+}
+.milestone-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 12px 18px;
+  background: #f4f7ee;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+.milestone-facts b {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 4px;
+  color: #486746;
+}
+body.has-visual {
+  background: #f8f9f3;
+  color: #263f34;
+}
+body.has-visual main {
+  padding-top: 26px;
+  max-width: 1420px;
+}
+body.has-visual .masthead,
+body.has-visual footer {
+  max-width: 1420px;
+}
+body.has-visual .hero-grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0;
+}
+body.has-visual .hero h1 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+body.has-visual .hero > .eyebrow,
+body.has-visual .hero .lead,
+body.has-visual .hero .budget-hero {
+  display: none;
+}
+body.has-visual .snapshot {
+  margin: 7px 0;
+  font-size: 10px;
+}
+body.has-visual .hero-tags {
+  font-size: 10px;
+}
+body.has-visual .hero-tags > span {
+  padding: 2px 7px;
+}
+body.has-visual .section-nav {
+  margin-top: 15px;
+  padding: 3px 0;
+}
+body.has-visual .content-grid {
+  grid-template-columns: minmax(0, 1fr) 250px;
+}
+body.has-visual .hero {
+  position: relative;
+}
+.artifact-fallback {
+  padding: 25px;
+  border: 1px solid #cedac7;
+  background: #eaf0e2;
+  border-radius: 15px;
+}
+.artifact-fallback li {
+  padding: 10px;
+}
+@media (min-width: 1100px) {
+  body.has-visual .hero-grid {
+    display: block;
+    padding-right: 350px;
+  }
+  body.has-visual .hero .snapshot {
+    position: absolute;
+    right: 0;
+    top: 25px;
+    max-width: 330px;
+  }
+}
+@media (max-width: 1000px) {
+  .journey-layout {
+    grid-template-columns: minmax(0, 1fr) 310px;
+  }
+  .journey-planner {
+    padding: 16px;
+  }
+  .visual-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .milestone-detail {
+    grid-template-columns: 1fr;
+  }
+  .roadmap-summary {
+    padding: 24px;
+  }
+  .milestone-detail > div:last-child {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  body.has-visual .content-grid {
+    grid-template-columns: 1fr;
+  }
+  body.has-visual .side-note {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .journey-layout {
+    grid-template-columns: 1fr;
+  }
+  .journey-map {
+    height: 320px;
+  }
+  .journey-planner {
+    border-left: 0;
+    border-top: 1px solid #d7e0d8;
+  }
+  .map-selection {
+    padding: 18px;
+  }
+  .visual-heading {
+    margin-bottom: 16px;
+  }
+  .roadmap-summary {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 22px;
+  }
+  .progress-ring {
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    right: 18px;
+    top: 22px;
+  }
+  .progress-ring > span {
+    width: 72px;
+    height: 72px;
+    font-size: 8px;
+  }
+  .progress-ring strong {
+    font-size: 20px;
+  }
+  .roadmap-summary {
+    position: relative;
+    padding-right: 125px;
+    min-height: 150px;
+  }
+  .roadmap-summary h3 {
+    font-size: 17px !important;
+  }
+  .roadmap-summary p {
+    display: none;
+  }
+  .roadmap-summary .astryx-button {
+    font-size: 11px !important;
+  }
+  .milestone-facts {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .roadmap-scroll {
+    margin-right: -4px;
+  }
+  .roadmap-board {
+    grid-template-columns: 100px repeat(var(--columns), 220px);
+    min-width: 760px;
+  }
+  .lane-label {
+    padding: 16px 12px;
+  }
+  .lane-label strong {
+    font-size: 13px;
+  }
+  .milestone-detail {
+    padding: 19px;
+  }
+  .journey-total strong {
+    font-size: 26px;
+  }
+  body.has-visual main {
+    padding: 20px 18px;
+  }
+  body.has-visual .hero h1 {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  #visual-artifact {
+    margin-top: 20px;
+  }
+  .visual-footnote {
+    font-size: 10px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #visual-artifact * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+@media print {
+  .journey-map {
+    height: 350px;
+  }
+  .leaflet-control-zoom,
+  .plan-toggle {
+    display: none;
+  }
+  .roadmap-scroll {
+    overflow: visible;
+  }
+  .roadmap-board {
+    min-width: 0;
+    grid-template-columns: 80px repeat(var(--columns), 1fr);
+  }
+  .milestone {
+    break-inside: avoid;
+    padding: 8px;
+  }
+  .journey-layout {
+    display: block;
+  }
+  .journey-planner {
+    border-left: 0;
+  }
+  .map-selection {
+    break-inside: avoid;
+  }
+}
+
+body.has-visual .main-column {
+  min-width: 0;
+}
+body.has-visual .content-grid {
+  grid-template-columns: minmax(0, 1fr) 250px;
+}
+@media (max-width: 1000px) {
+  body.has-visual .content-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  body.has-visual .section-heading {
+    flex-wrap: wrap;
+  }
+}
+.journey-pin b {
+  display: block;
+  transform: rotate(45deg);
+  font: inherit;
+}
+/* Astryx reset uses logical image sizing. Leaflet's absolute tile parents have
+   no intrinsic width, so restore the configured 256px tile dimensions. */
+#visual-artifact .leaflet-tile {
+  inline-size: 256px;
+  block-size: 256px;
+  max-inline-size: none !important;
+  max-block-size: none !important;
+}
+
+#visual-artifact .journey-map {
+  overflow: hidden;
+}
+
+#visual-artifact .prerequisite-link {
+  background: #f1f6eb;
+  color: #185b45;
+  border: 1px solid #c5d5bc;
+  padding: 8px 12px;
+  margin: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 44px;
+  font-size: 12px;
+}
+#visual-artifact .leaflet-control-zoom a {
+  min-width: 44px;
+  min-height: 44px;
+  line-height: 44px !important;
+}

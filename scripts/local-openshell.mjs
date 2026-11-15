@@ -1,8 +1,16 @@
 /** Workspace-local OpenShell MicroVM bootstrap. Never imports subscription auth. */
-import { mkdir, readFile, writeFile, chmod, lstat } from "node:fs/promises";
+import {
+  mkdir,
+  readFile,
+  writeFile,
+  chmod,
+  lstat,
+  statfs,
+} from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { createHash } from "node:crypto";
-import { spawn } from "node:child_process";
+import { spawn, execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { config } from "dotenv";
 const version = "v0.1.7";
 const root = resolve(".runtime/openshell-local"),
@@ -47,6 +55,26 @@ const run = (name, args, extra = {}) =>
     });
   });
 const cli = (...args) => run(join(bin, "openshell"), args);
+async function preflight() {
+  const disk = await statfs(root);
+  const freeBytes = disk.bavail * disk.bsize;
+  try {
+    const result = await promisify(execFile)(
+      "docker",
+      ["version", "--format", "{{.Server.Version}}"],
+      { env, timeout: 5000, maxBuffer: 8192 },
+    );
+    return {
+      dockerServer: result.stdout.trim(),
+      freeBytes,
+      imagePreparationHas12GiBHeadroom: freeBytes >= 12 * 1024 ** 3,
+    };
+  } catch {
+    throw new Error(
+      "Docker daemonが5秒以内に応答しません。Docker Desktopの稼働とホスト空き容量を確認してください。VMやmodelの起動は開始していません。",
+    );
+  }
+}
 async function download(name) {
   const response = await fetch(
     `https://github.com/NVIDIA/OpenShell/releases/download/${version}/${name}`,
@@ -63,7 +91,9 @@ try {
       "このbootstrapはApple Silicon macOS用です。Linux/remoteは既存gatewayを指定してください。",
     );
   await mkdir(root, { recursive: true, mode: 0o700 });
-  if (action === "setup") {
+  if (action === "preflight") {
+    console.log(JSON.stringify(await preflight(), null, 2));
+  } else if (action === "setup") {
     await mkdir(bin, { recursive: true, mode: 0o700 });
     const checks = new Map();
     for (const file of [
@@ -207,6 +237,7 @@ try {
       { OPENSHELL_BIN: join(bin, "openshell") },
     );
   } else if (action === "run-codex") {
+    await preflight();
     await run(process.execPath, ["dist/cli.js", ...process.argv.slice(3)], {
       RUNTIME_EXECUTOR: "openshell",
       RUNTIME_AGENT: "codex",
@@ -218,6 +249,7 @@ try {
   } else if (action === "cli") {
     await cli(...process.argv.slice(3));
   } else if (action === "run") {
+    await preflight();
     await run(process.execPath, ["dist/cli.js", ...process.argv.slice(3)], {
       RUNTIME_EXECUTOR: "openshell",
       RUNTIME_AGENT: "pi-openrouter",
@@ -227,7 +259,7 @@ try {
     });
   } else
     throw new Error(
-      "setup / start / register / init-provider / codex-setup / codex-login / run-codex / cli / run から指定してください",
+      "setup / start / register / preflight / init-provider / codex-setup / codex-login / run-codex / cli / run から指定してください",
     );
 } catch (error) {
   if (!Number.isInteger(error.exitCode)) console.error(error.message);

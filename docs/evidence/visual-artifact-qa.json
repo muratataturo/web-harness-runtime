@@ -1,0 +1,75 @@
+{
+  "scope": "automatic-interaction-and-layout-only",
+  "humanAppeal": "unrated",
+  "cases": [
+    {
+      "kind": "journey-map",
+      "interactiveMs": 108,
+      "viewports": [
+        {
+          "width": 320,
+          "overflow": false,
+          "visualTop": 231.578125
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "visualTop": 199.578125
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "visualTop": 225.875
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "visualTop": 204.59375
+        }
+      ],
+      "linkedMapSelection": true,
+      "optionalBudget": {
+        "before": 12080,
+        "after": 10820
+      },
+      "googleRoute": true,
+      "loadedMapTiles": 15
+    },
+    {
+      "kind": "life-roadmap",
+      "interactiveMs": 85,
+      "viewports": [
+        {
+          "width": 320,
+          "overflow": false,
+          "visualTop": 199.578125
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "visualTop": 199.578125
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "visualTop": 225.875
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "visualTop": 204.59375
+        }
+      ],
+      "milestones": 9,
+      "dependencyGating": true,
+      "rollbackPropagates": true
+    }
+  ],
+  "passed": true,
+  "offline": {
+    "pins": 4,
+    "selectionWorks": true,
+    "limitationsVisible": true
+  },
+  "untrustedMarkupEscaped": true
+}

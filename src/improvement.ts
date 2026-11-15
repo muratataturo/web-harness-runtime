@@ -1,3 +1,7 @@
+import {
+  assessVisualArtifact,
+  visualArtifactSchema,
+} from "./visual-artifact.js";
 import { roomConflicts } from "./improvement-conflicts.js";
 import { randomUUID } from "node:crypto";
 import {
@@ -29,6 +33,7 @@ import {
 import { actionKey, deepeningActions } from "./research.js";
 import type { Task, Criterion, Answer } from "./types.js";
 import type { ImprovementContext } from "./improvement-context.js";
+import { assessSpecificity } from "./answer-plan.js";
 
 export interface Diagnosis {
   complete: boolean;
@@ -41,6 +46,11 @@ export interface Diagnosis {
   achievements: string[];
 }
 export interface ImprovementLoop {
+  offlineExperience?: {
+    datasetId: string;
+    datasetSha256: string;
+    taskId: string;
+  };
   interactionMode?: InteractionMode;
   executionTarget?: "local" | "openshell";
   parentLoopId?: string;
@@ -103,6 +113,15 @@ export interface ImprovementLoop {
     corrections?: string[];
     newPages: number;
     taskStatus: Task["status"];
+    measurement?: {
+      elapsedMs: number;
+      totalTokens: number | null;
+      additionalApiUsd: number | null;
+      repeatedPages: number;
+      requiredDelta: number;
+      detailDelta: number;
+      retainedAchievements: boolean;
+    };
   }[];
   promotedStrategies: ImprovementContext["strategy"][];
   questions: {
@@ -198,6 +217,8 @@ export function diagnose(
       task.answer?.summary ?? "",
       task.answer?.candidates ?? [],
       task.answer?.limitations ?? [],
+      task.answer?.actionPlan,
+      task.answer?.visualArtifact,
     );
   } catch (e) {
     d.validationError = e instanceof Error ? e.message : String(e);
@@ -293,6 +314,26 @@ export function diagnose(
   )
     d.causes.push("invalid_extra_candidate");
   const grouped = new Map<string, Set<string>>();
+  if (answer) {
+    const visual = assessVisualArtifact(task, answer);
+    if (visual.status === "needs_visual") {
+      d.causes.push("insufficient_visual_artifact");
+      d.gaps.push({
+        url: candidateUrls[0] ?? task.urls[0]!,
+        fields: visual.issues,
+      });
+    } else if (visual.status === "passed")
+      d.achievements.push("answer:interactive-visual-artifact");
+    const specificity = assessSpecificity(task, answer);
+    if (specificity.status === "needs_detail") {
+      d.causes.push("insufficient_specificity");
+      d.gaps.push({
+        url: candidateUrls[0] ?? task.urls[0]!,
+        fields: specificity.issues,
+      });
+    } else if (specificity.status === "passed")
+      d.achievements.push("answer:concrete-action-plan");
+  }
   for (const gap of d.gaps) {
     const fields = grouped.get(gap.url) ?? new Set<string>();
     gap.fields.forEach((f) => fields.add(f));
@@ -328,6 +369,7 @@ function improves(
     before.achievements.every((k) => after.achievements.includes(k)) &&
     b.every((n, i) => n >= a[i]!) &&
     (b.some((n, i) => n > a[i]!) ||
+      after.achievements.length > before.achievements.length ||
       (after.complete && !before.complete) ||
       !!before.validationError)
   );
@@ -346,6 +388,27 @@ export function improvementPlan(
       ...(t.research?.attempts ?? []).map((a) => actionKey(a.mode, a.url)),
     ]),
   );
+  // Access restrictions remain restrictions across retries; rendering is not recovery.
+  const blockedEntities = new Set(
+    tasks.flatMap((t) =>
+      t.pages
+        .filter((p) =>
+          ["access_denied", "login_required", "retired"].includes(
+            assessPage(p).kind,
+          ),
+        )
+        .map((p) => entityKey(p.url))
+        .filter(Boolean),
+    ),
+  );
+  const blockedUrls = new Set(
+    tasks.flatMap((t) =>
+      t.pages
+        .filter((p) => assessPage(p).shouldStop)
+        .map((p) => actionKey("link", p.url)),
+    ),
+  );
+  const hardened = tasks.some((t) => t.security?.mode === "hardened");
   const hosts = allowedHosts(routeSources(loop.query, loop.urls));
   const actions = loop.best.gaps.flatMap((g) =>
     tasks.flatMap((t) =>
@@ -408,7 +471,10 @@ export function improvementPlan(
     .filter((u) => {
       try {
         checkNavigation(u, hosts);
-        return true;
+        return (
+          !blockedEntities.has(entityKey(u)) &&
+          !blockedUrls.has(actionKey("link", u))
+        );
       } catch {
         return false;
       }
@@ -424,14 +490,34 @@ export function improvementPlan(
     gaps: structuredClone(loop.best.gaps),
     priorityUrls,
     visitedUrls: [...new Set(tasks.flatMap((t) => t.pages.map((p) => p.url)))],
+    workspace: {
+      belief: {
+        verifiedDetails: loop.best.verifiedDetails,
+        supportedRequired: loop.best.supportedRequired,
+        reusableFacts: false,
+      },
+      progress: {
+        unresolvedTargets: loop.best.gaps.length,
+        attemptedPages: tasks.reduce((n, t) => n + t.pages.length, 0),
+        causes: [...loop.best.causes],
+      },
+      experience: {
+        proceduralOnly: true,
+        offlineDatasetId: loop.offlineExperience?.datasetId,
+      },
+    },
     strategy:
       iteration === 1 && loop.learnedStrategy
-        ? loop.learnedStrategy
+        ? hardened && loop.learnedStrategy === "render-and-recheck"
+          ? "broader-links"
+          : loop.learnedStrategy
         : iteration === 1
           ? "targeted-links"
           : iteration === 2
             ? "broader-links"
-            : "render-and-recheck",
+            : hardened
+              ? "broader-links"
+              : "render-and-recheck",
   };
 }
 export interface ImproveOptions {
@@ -572,7 +658,23 @@ export async function improveTask(
   try {
     // Reuse only a previously verified recipe for the identical goal/contract.
     // Pages and quotes are always fetched again; no old answer becomes fresh evidence.
+    const { recallOfflineExperience } = await import("./offline-learning.js");
+    const offline = await recallOfflineExperience(loop, store);
+    if (offline) {
+      loop.offlineExperience = {
+        datasetId: offline.datasetId,
+        datasetSha256: offline.datasetSha256,
+        taskId: offline.taskId,
+      };
+      loop.learnedFrom = `offline:${offline.datasetId}`;
+      loop.learnedUrls = offline.urls;
+      loop.learnedStrategy = offline.strategy;
+      options.onProgress?.(
+        `offlineの検証済み手順を再利用: ${offline.taskId}。本文・引用は再取得します`,
+      );
+    }
     for (const previous of (await loops.list()).slice(0, 20)) {
+      if (offline) break;
       controller.signal.throwIfAborted();
       if (
         previous.status !== "succeeded" ||
@@ -640,8 +742,15 @@ export async function improveTask(
         break;
       }
       if (
-        loop.best.causes.includes("source_unavailable") &&
-        !loop.best.causes.includes("required_unknown")
+        !loop.allowReplacements &&
+        loop.candidateUrls.every((url) => {
+          const pages = tasks
+            .flatMap((t) => t.pages)
+            .filter((p) => entityKey(p.url) === entityKey(url));
+          return (
+            pages.length > 0 && pages.every((p) => assessPage(p).shouldStop)
+          );
+        })
       ) {
         loop.status = "blocked";
         loop.stopReason = "公開詳細にアクセスできません。制限は回避しません";
@@ -651,6 +760,7 @@ export async function improveTask(
       options.onProgress?.(
         `improvement ${loop.id} [${i}/${maxIterations}] ${plan.strategy}: ${loop.best.gaps.length}対象が未達・未調査リンク${plan.priorityUrls.length}件`,
       );
+      const iterationStarted = Date.now();
       const task = await execute(
         {
           interactionMode: mode,
@@ -726,6 +836,17 @@ export async function improveTask(
         corrections,
         newPages,
         taskStatus: task.status,
+        measurement: {
+          elapsedMs: Date.now() - iterationStarted,
+          totalTokens: task.metrics?.tokens?.totalTokens ?? null,
+          additionalApiUsd: task.metrics?.billing.additionalApiUsd ?? null,
+          repeatedPages: task.pages.length - newPages,
+          requiredDelta: result.supportedRequired - loop.best.supportedRequired,
+          detailDelta: result.verifiedDetails - loop.best.verifiedDetails,
+          retainedAchievements: loop.best.achievements.every((a) =>
+            result.achievements.includes(a),
+          ),
+        },
       });
       if (accepted) {
         loop.best = result;

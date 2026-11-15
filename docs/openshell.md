@@ -1,5 +1,7 @@
 # Self-host VM 上の OpenShell task executor
 
+**2026-11-13の変更：** 既定の`hardened`モードではresearch endpointを`protocol: rest`／`enforcement: enforce`にし、固定pathのGET／HEADとpublic IP範囲だけを許可します。Chromium描画は提供せず、公開HTMLの失敗をそのまま返します。以下の`tls: skip`／browserの説明は従来の`development`モードの記録です。最新の実装と未検証範囲は[境界強化の結果](security-boundary-results.md)を参照してください。Codexのサブスク用native endpointのTLS透過は別ルールとして残ります。
+
 [Auto/Approvalの仕様](runtime-modes.md)、[Codex MicroVMと既存Strataの手順・実測](codex-strata.md)。OpenShellはpi用の都度発行executorと、Codex用の認証を保持する専用workerに対応します。`sandbox plan` はpi用です。Codexは `npm run sandbox:local -- codex-setup` とVM内の初回ログインを経て `npm run sandbox:local -- run-codex run ...` で実行します。ホストのCodex資格情報をイメージやVMへコピーしません。Claude Code / OpenCodeのOpenShell実行は未対応で、ホストへ暗黙に切り替えません。
 
 本 PR には、1 調査タスクを 1 OpenShell sandbox に割り当てる実行アダプターと image/provider/policy の準備を含めています。Web Mock の sandbox 表示はデモであり、実際に VM を発行した証拠ではありません。実際の割り当てはホスト CLI から明示的に実行する経路です。

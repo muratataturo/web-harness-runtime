@@ -9,6 +9,7 @@ import { readPublicHtml, prefersPublicHtml } from "./html-reader.js";
 import { assessPage } from "./page-quality.js";
 import { checkNavigation } from "./sources.js";
 import type { Page } from "./types.js";
+import { checkResearchNavigation, securityMode } from "./runtime-profile.js";
 const exec = promisify(execFile);
 export const browserBin = fileURLToPath(
   new URL("../node_modules/.bin/agent-browser", import.meta.url),
@@ -48,6 +49,10 @@ export class Browser {
     await writeFile(this.config, "{}", { mode: 0o600 });
   }
   async command(args: string[], cleanup = false): Promise<any> {
+    if (securityMode() === "hardened")
+      throw new Error(
+        "強化モードではbrowser描画を提供しません。公開HTMLを使用してください",
+      );
     const env: NodeJS.ProcessEnv = {};
     for (const key of [
       "PATH",
@@ -113,8 +118,26 @@ export class Browser {
     return result.data;
   }
   async open(value: string, options: { render?: boolean } = {}): Promise<Page> {
+    if (securityMode() === "hardened" && options.render)
+      throw new Error(
+        "強化モードではbrowser描画は未対応です。公開HTMLの未確認を保持してください",
+      );
     const url = await publicTarget(value, this.hosts);
     this.htmlPage = undefined;
+    if (securityMode() === "hardened") {
+      if (options.render)
+        throw new Error(
+          "強化モードではbrowser描画は未対応です。公開HTMLの未確認を保持してください",
+        );
+      const extracted = await readPublicHtml(
+        checkResearchNavigation(url, this.hosts),
+        this.hosts,
+        this.signal,
+      );
+      const page: Page = { ...extracted, id: `page-${++this.count}` };
+      this.htmlPage = page;
+      return page;
+    }
     if (prefersPublicHtml(url) && !options.render) {
       try {
         const extracted = await readPublicHtml(url, this.hosts, this.signal);

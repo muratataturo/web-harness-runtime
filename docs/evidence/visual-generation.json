@@ -1,0 +1,29 @@
+{
+  "sourceTaskId": "3a101398-a541-4d6b-aa51-0faccbde6361",
+  "renderSource": "saved-live-answer plus captured geographic evidence; roadmap is an explicitly synthetic interaction example",
+  "before": {
+    "version": 1,
+    "status": "needs_visual",
+    "issues": [
+      "journey-mapの視覚成果物がありません。文章の整形だけでなく地図またはロードマップを作成してください"
+    ]
+  },
+  "after": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "roadmap": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "diagnosisBefore": [
+    "required_unknown",
+    "insufficient_visual_artifact"
+  ],
+  "diagnosisAfter": [
+    "required_unknown"
+  ],
+  "generatedAt": "2026-11-15T00:28:47.088Z"
+}

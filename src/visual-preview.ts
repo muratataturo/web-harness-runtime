@@ -6,8 +6,15 @@ import { readPublicHtml } from "./html-reader.js";
 import { publicTarget } from "./net-policy.js";
 import { assessPage } from "./page-quality.js";
 import type { PageArtifact } from "./artifacts.js";
+import { publicFetch } from "./public-fetch.js";
+import {
+  assetHosts,
+  securityMode,
+  checkResearchNavigation,
+} from "./runtime-profile.js";
 type Input = PageArtifact & { images?: { url: string; alt: string }[] };
 export interface VisualPreview {
+  policy?: "public-assets-v1";
   url: string;
   capturedAt: string;
   images: { file: string; alt: string; sourceUrl: string; type: string }[];
@@ -25,12 +32,15 @@ const maxBytes = 4 * 1024 * 1024;
 export async function fetchPreviewImage(
   value: string,
   signal: AbortSignal,
-  fetcher = fetch,
+  fetcher = publicFetch,
   resolver?: Parameters<typeof publicTarget>[2],
+  hosts = [new URL(value).hostname],
 ) {
   let url = value;
   for (let i = 0; i < 4; i++) {
-    url = await publicTarget(url, [new URL(url).hostname], resolver);
+    if (securityMode() === "hardened")
+      url = checkResearchNavigation(url, hosts, true);
+    url = await publicTarget(url, hosts, resolver);
     const response = await fetcher(url, {
       redirect: "manual",
       signal,
@@ -142,13 +152,37 @@ export class VisualPreviewStore {
       const dir = this.directory(a.url);
       await mkdir(dir, { recursive: true, mode: 0o700 });
       const cached = await this.cached(a);
-      if (cached && (!capture || cached.screen)) return cached;
-      const result: VisualPreview = cached ?? {
+      if (
+        cached &&
+        securityMode() === "hardened" &&
+        cached.policy === "public-assets-v1" &&
+        !cached.screen &&
+        cached.images.every((i) =>
+          assetHosts(new URL(a.url).hostname).includes(
+            new URL(i.sourceUrl).hostname,
+          ),
+        )
+      ) {
+        if (capture)
+          cached.screenError =
+            "強化モードではWeb画面の描画は未対応です。公開画像と保存本文を確認してください。";
+        return cached;
+      }
+      if (
+        cached &&
+        (!capture || cached.screen) &&
+        securityMode() !== "hardened"
+      )
+        return cached;
+      const result: VisualPreview = (securityMode() === "hardened"
+        ? undefined
+        : cached) ?? {
         url: a.url,
         capturedAt: new Date().toISOString(),
+        policy: "public-assets-v1",
         images: [],
       };
-      if (!cached) {
+      if (!cached || securityMode() === "hardened") {
         try {
           const page = await readPublicHtml(
             a.url,
@@ -164,6 +198,9 @@ export class VisualPreviewStore {
               const asset = await fetchPreviewImage(
                 image.url,
                 AbortSignal.timeout(8000),
+                publicFetch,
+                undefined,
+                assetHosts(new URL(a.url).hostname),
               );
               const file = `image-${result.images.length}`;
               await writeFile(join(dir, file), asset.bytes, { mode: 0o600 });
@@ -186,64 +223,58 @@ export class VisualPreviewStore {
         }
       }
       if (capture) {
-        const work = async () => {
-          const signal = AbortSignal.timeout(45000);
-          const host = new URL(a.url).hostname;
-          const assets = result.images.map(
-            (i) => new URL(i.sourceUrl).hostname,
-          );
-          const cdns = host.endsWith("hotpepper.jp")
-            ? ["imgfp.hotp.jp", "img.recruit.co.jp"]
-            : host.endsWith("rakuten.co.jp")
-              ? [
-                  "thumbnail.image.rakuten.co.jp",
-                  "image.books.rakuten.co.jp",
-                  "books.rakuten.co.jp",
-                  "r.r10s.jp",
-                ]
-              : host.endsWith("jalan.net")
-                ? ["www.jalan.net", "cdn.jalan.jp"]
-                : [];
-          const hosts = [...new Set([host, ...assets, ...cdns])];
-          const verified = [];
-          for (const h of hosts) {
-            try {
-              await publicTarget(`https://${h}/`, [h]);
-              verified.push(h);
-            } catch {
-              /* unavailable asset host */
+        if (securityMode() === "hardened") {
+          result.screenError =
+            "強化モードではWeb画面の描画は未対応です。公開画像と保存本文を確認してください。";
+        } else {
+          const work = async () => {
+            const signal = AbortSignal.timeout(45000);
+            const host = new URL(a.url).hostname;
+            const assets = result.images.map(
+              (i) => new URL(i.sourceUrl).hostname,
+            );
+            const cdns = assetHosts(host);
+            const hosts = [...new Set([host, ...assets, ...cdns])];
+            const verified = [];
+            for (const h of hosts) {
+              try {
+                await publicTarget(`https://${h}/`, [h]);
+                verified.push(h);
+              } catch {
+                /* unavailable asset host */
+              }
             }
-          }
-          const browser = new Browser(
-            "visual-" + randomUUID(),
-            dir,
-            verified,
-            signal,
-          );
-          try {
-            await browser.init();
-            await browser.command(["set", "viewport", "1280", "900"]);
-            const page = await browser.open(a.url, { render: true });
-            if (assessPage(page).shouldStop) throw Error("取得不可の画面");
-            await browser.command(["screenshot", join(dir, "screen.png")]);
-            result.screen = {
-              file: "screen.png",
-              capturedAt: new Date().toISOString(),
-              width: 1280,
-              height: 900,
-              url: page.url,
-            };
-            delete result.screenError;
-          } catch {
-            result.screenError =
-              "Web画面を取得できませんでした。ページ画像・保存本文または元ページで確認してください。";
-          } finally {
-            await browser.command(["close"], true).catch(() => {});
-          }
-        };
-        const queued = this.screenQueue.catch(() => {}).then(work);
-        this.screenQueue = queued;
-        await queued;
+            const browser = new Browser(
+              "visual-" + randomUUID(),
+              dir,
+              verified,
+              signal,
+            );
+            try {
+              await browser.init();
+              await browser.command(["set", "viewport", "1280", "900"]);
+              const page = await browser.open(a.url, { render: true });
+              if (assessPage(page).shouldStop) throw Error("取得不可の画面");
+              await browser.command(["screenshot", join(dir, "screen.png")]);
+              result.screen = {
+                file: "screen.png",
+                capturedAt: new Date().toISOString(),
+                width: 1280,
+                height: 900,
+                url: page.url,
+              };
+              delete result.screenError;
+            } catch {
+              result.screenError =
+                "Web画面を取得できませんでした。ページ画像・保存本文または元ページで確認してください。";
+            } finally {
+              await browser.command(["close"], true).catch(() => {});
+            }
+          };
+          const queued = this.screenQueue.catch(() => {}).then(work);
+          this.screenQueue = queued;
+          await queued;
+        }
       }
       const tmp = join(dir, randomUUID() + ".tmp");
       await writeFile(tmp, JSON.stringify(result), { mode: 0o600 });
@@ -259,7 +290,20 @@ export class VisualPreviewStore {
     }
   }
   async file(a: Input, file: string) {
+    if (!/^(?:image-[0-2]|screen\.png)$/.test(file))
+      throw Error("不正な表示画像名です");
     const meta = await this.cached(a);
+    if (
+      securityMode() === "hardened" &&
+      (meta?.policy !== "public-assets-v1" ||
+        file === "screen.png" ||
+        !meta.images.every((i) =>
+          assetHosts(new URL(a.url).hostname).includes(
+            new URL(i.sourceUrl).hostname,
+          ),
+        ))
+    )
+      throw Error("この表示画像は現在の強化policyで検証されていません");
     const image = meta?.images.find((i) => i.file === file);
     if (!image && !(file === "screen.png" && meta?.screen))
       throw Error("表示画像がありません");

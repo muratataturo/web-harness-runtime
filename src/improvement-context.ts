@@ -27,6 +27,24 @@ const contextSchema = Type.Object(
     }),
     priorityUrls: strings,
     visitedUrls: strings,
+    workspace: Type.Optional(
+      Type.Object({
+        belief: Type.Object({
+          verifiedDetails: Type.Integer({ minimum: 0 }),
+          supportedRequired: Type.Integer({ minimum: 0 }),
+          reusableFacts: Type.Literal(false),
+        }),
+        progress: Type.Object({
+          unresolvedTargets: Type.Integer({ minimum: 0 }),
+          attemptedPages: Type.Integer({ minimum: 0 }),
+          causes: strings,
+        }),
+        experience: Type.Object({
+          proceduralOnly: Type.Literal(true),
+          offlineDatasetId: Type.Optional(Type.String({ maxLength: 100 })),
+        }),
+      }),
+    ),
     strategy: Type.Union([
       Type.Literal("targeted-links"),
       Type.Literal("broader-links"),
@@ -55,10 +73,24 @@ export interface ImprovementContext {
   gaps: { url: string; fields: string[] }[];
   priorityUrls: string[];
   visitedUrls: string[];
+  workspace?: {
+    belief: {
+      verifiedDetails: number;
+      supportedRequired: number;
+      reusableFacts: false;
+    };
+    progress: {
+      unresolvedTargets: number;
+      attemptedPages: number;
+      causes: string[];
+    };
+    experience: { proceduralOnly: true; offlineDatasetId?: string };
+  };
   strategy: "targeted-links" | "broader-links" | "render-and-recheck";
 }
 export const IMPROVEMENT_PROMPT = `
 自己改善ループの実行です。improvement.criteriaは元の評価契約であり変更できません。plan_taskは同じ条件を返すか省略してください。
+workspaceはBelief/Progress/Experienceを整理したホストの状態です。前回の確認数は再取得の計画にだけ使い、今回の事実・引用として使用しないでください。経験は調査手順だけで、unknownを解消する証拠ではありません。
 ユーザーのqueryを保持し、candidateUrlsの全対象を再評価してください。unknownを根拠なくsupportedに変えてはいけません。
 ただしallowReplacements=trueは利用者が代替候補の探索を許可した場合です。この場合は同じ許可ソース内で、同じ必須条件を満たす別候補を探索できます。元候補の必須条件が解消できなければ、必ず取得済みリンクの一覧・検索導線から代替を探してください。minimumCandidates以上を新しく詳細取得・引用検証してください。元候補を繰り返し再提示するだけでは代替探索は完了していません。allowReplacements=falseまたは省略の場合、元候補の省略・差し替えは禁止です。
 primedPagesはホストが今回新しく取得した未調査ページです。まずここから不足項目を確認してください。visitedUrlsの既読子ページを繰り返さず、priorityUrlsと今回新しく発見したリンクを優先してください。候補本体の再取得は許可します。

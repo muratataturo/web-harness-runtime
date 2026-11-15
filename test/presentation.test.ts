@@ -7,6 +7,31 @@ import {
 } from "../web/presentation.js";
 import { extractPublicHtml } from "../src/html-reader.js";
 import { fetchPreviewImage } from "../src/visual-preview.js";
+test("structured execution steps show how and completion checks instead of duplicating the vague timeline", () => {
+  const p = presentation({
+    task: {
+      answer: {
+        summary: "## 提案\n9:30 ゆっくり楽しむ",
+        actionPlan: {
+          steps: [
+            {
+              when: "9:30",
+              where: "動物園正門",
+              action: "案内を確認",
+              how: "公開中の展示から近い3種類を選ぶ",
+              doneWhen: "3種類の違いをメモする",
+              locationStatus: "unconfirmed",
+            },
+          ],
+        },
+      },
+    },
+  });
+  assert.equal(p.timeline.length, 1);
+  assert.match(p.timeline[0]!.text, /近い3種類/);
+  assert.match(p.timeline[0]!.text, /完了の目安/);
+  assert.match(p.timeline[0]!.text, /未確認/);
+});
 test("Markdown note renders headings, lists, tables and citations but never source HTML or unsafe URLs", () => {
   const html = markdown(
     "## 行程\n\n**休憩**を大切に\n\n- 子どもと動物園\n- 昼食\n\n| 項目 | 料金 |\n| --- | --- |\n| 昼食 | 未確認 |\n\n> 営業時間は未確認\n\n[出典](https://example.com/page)\n\n<script>alert(1)</script> [危険](javascript:alert) ![画像](https://example.com/photo.jpg)\n\n```html\n<img onerror=alert(1)>\n```",
@@ -96,7 +121,7 @@ test("image proxy checks every redirect, bounds bytes, and rejects HTML or SVG d
       },
       resolver,
     ),
-    /公開 IP/,
+    /許可対象外のドメイン/,
   );
   assert.equal(calls, 1);
   await assert.rejects(

@@ -20,6 +20,32 @@ const urls = [
 const criteria = [
   { id: "capacity", description: "容量40L", required: true, weight: 5 },
 ];
+test("answer validation rejects persisted evidence tampering at every entry point", () => {
+  for (const mutate of [
+    (t: ReturnType<typeof fixture>) => {
+      t.evidence[0]!.quote = "存在しない容量40Lの証拠";
+    },
+    (t: ReturnType<typeof fixture>) => {
+      t.evidence[0]!.url = urls[1]!;
+    },
+    (t: ReturnType<typeof fixture>) => {
+      t.evidence[0]!.capturedAt = "2000-01-01";
+    },
+    (t: ReturnType<typeof fixture>) => {
+      t.pages.push(structuredClone(t.pages[0]!));
+    },
+    (t: ReturnType<typeof fixture>) => {
+      t.pages[0]!.acquisition = { kind: "public-html", status: 403 };
+    },
+  ]) {
+    const task = fixture([true, true]);
+    mutate(task);
+    assert.throws(() =>
+      validateAnswer(task, task.answer!.summary, task.answer!.candidates, []),
+    );
+    assert.equal(diagnose(task, task.criteria, urls).complete, false);
+  }
+});
 function fixture(supported = [false, false], options?: RunOptions) {
   const task = newTask(
     options ?? {
@@ -119,11 +145,55 @@ test("loop applies a new plan, accepts verified improvements and stops on full c
       true,
     );
     assert.equal(loop.promotedStrategies.length, 2);
+    assert.equal(loop.iterations[0]!.measurement!.requiredDelta, 1);
+    assert.equal(loop.iterations[1]!.measurement!.retainedAchievements, true);
+    assert.equal(loop.iterations[0]!.measurement!.totalTokens, null);
     assert.equal(
       (await new ImprovementStore(f.store).get(loop.id)).bestTaskId,
       loop.bestTaskId,
     );
     assert.equal((await f.store.get(f.seed.id)).status, "partial");
+  } finally {
+    await f.cleanup();
+  }
+});
+test("hardened recovery never schedules or learns browser rendering", async () => {
+  const f = await setup();
+  try {
+    const loop = await improveTask(f.seed.id, { diagnoseOnly: true }, f.store);
+    loop.learnedStrategy = "render-and-recheck";
+    assert.equal(improvementPlan(loop, [f.seed], 1).strategy, "broader-links");
+    assert.equal(improvementPlan(loop, [f.seed], 3).strategy, "broader-links");
+    const missingChild = structuredClone(f.seed);
+    missingChild.pages.push({
+      ...structuredClone(missingChild.pages[0]!),
+      id: "gone-child",
+      url: urls[0] + "?gone",
+      acquisition: { kind: "public-html", status: 404 },
+    });
+    assert.ok(
+      improvementPlan(loop, [missingChild], 1).priorityUrls.includes(
+        urls[0] + "?view=detail",
+      ),
+    );
+    const denied = structuredClone(f.seed);
+    denied.pages.forEach((p) => {
+      p.acquisition = { kind: "public-html", status: 403 };
+    });
+    assert.deepEqual(improvementPlan(loop, [denied], 1).priorityUrls, []);
+    await f.store.save(denied);
+    let calls = 0;
+    const stopped = await improveTask(
+      denied.id,
+      { interactionMode: "auto" },
+      f.store,
+      async () => {
+        calls++;
+        throw new Error("must not run");
+      },
+    );
+    assert.equal(stopped.status, "blocked");
+    assert.equal(calls, 0);
   } finally {
     await f.cleanup();
   }

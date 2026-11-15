@@ -1,0 +1,898 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-14T06:49:15.388Z",
+  "contract": {
+    "version": 1,
+    "mode": "itinerary",
+    "minimumSteps": 4,
+    "timeRange": [
+      "9:30",
+      "17:00"
+    ],
+    "budgetRequired": true,
+    "ceilingYen": 16000,
+    "branchesRequired": 2,
+    "policy": "行動・場所・進め方・完了目安・切替条件を具体化する。移動は独立手順にし、10分を超える未説明の空白を残さない。予算のscenarioに対象案を明記する。時刻と徒歩時間は提案/見積、掲載価格と見積は区別。未確認の施設・商品・展示・空席を捏造しない。事実確認だけの質問に余分な行程を要求しない"
+  },
+  "before": {
+    "taskId": "eac84c70-5c4a-46b2-bb2a-e08de94196a2",
+    "status": "partial",
+    "review": {
+      "version": 1,
+      "mode": "itinerary",
+      "status": "needs_detail",
+      "issues": [
+        "行動手順actionPlanがありません。説明だけでなく、いつ・どこで・何を・どう進め・何ができれば終わりかを構造化してください"
+      ]
+    }
+  },
+  "initialLiveRevision": {
+    "taskId": "7c7d6c76-7328-4285-a037-da79672297e1",
+    "recordedReview": {
+      "version": 1,
+      "mode": "itinerary",
+      "status": "passed",
+      "issues": [],
+      "attempts": [
+        {
+          "number": 1,
+          "issues": [
+            "s2: 未確認の場所が使えない場合の切替条件がありません",
+            "s5: 未確認の場所が使えない場合の切替条件がありません"
+          ]
+        },
+        {
+          "number": 2,
+          "issues": []
+        }
+      ]
+    },
+    "reviewUnderFinalRules": {
+      "version": 1,
+      "mode": "itinerary",
+      "status": "needs_detail",
+      "issues": [
+        "s3: 前の手順後に10分を超える未説明の空白があります。観察・移動・待機など実際に行う手順を別にしてください",
+        "s3: 説明に手順の時間枠外の行動があります。退園・徒歩・帰路を独立した手順にしてください",
+        "s4: 前の手順後に10分を超える未説明の空白があります。観察・移動・待機など実際に行う手順を別にしてください",
+        "予算がどの案に対するものかscenarioに明示してください。任意の追加案の費用を主案と混同しないでください"
+      ]
+    }
+  },
+  "outerImprovement": {
+    "id": "8aef2e4f-34b4-489c-893d-554441f21b1f",
+    "status": "completed_partial",
+    "bestTaskId": "7c7d6c76-7328-4285-a037-da79672297e1",
+    "iterations": [
+      {
+        "taskId": "8e025f43-9918-420c-b958-80d8871714e0",
+        "status": "cancelled",
+        "accepted": false,
+        "result": {
+          "complete": false,
+          "verifiedDetails": 0,
+          "supportedRequired": 0,
+          "supportedOptional": 0,
+          "gaps": [
+            {
+              "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+              "fields": [
+                "個別詳細の必須項目",
+                "動物園役割：動物、年齢別料金・営業時間・休園",
+                "店舗役割：上野で日曜の昼食、料金・営業時間",
+                "共通：9:30〜17:00、2成人と5歳、休憩2回、施設最大2、16000円以内の暫定計画",
+                "候補数3件以上（現在0件）"
+              ]
+            },
+            {
+              "url": "https://www.hotpepper.jp/strJ001100102/",
+              "fields": [
+                "個別詳細の必須項目",
+                "動物園役割：動物、年齢別料金・営業時間・休園",
+                "店舗役割：上野で日曜の昼食、料金・営業時間",
+                "共通：9:30〜17:00、2成人と5歳、休憩2回、施設最大2、16000円以内の暫定計画"
+              ]
+            },
+            {
+              "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+              "fields": [
+                "個別詳細の必須項目",
+                "動物園役割：動物、年齢別料金・営業時間・休園",
+                "店舗役割：上野で日曜の昼食、料金・営業時間",
+                "共通：9:30〜17:00、2成人と5歳、休憩2回、施設最大2、16000円以内の暫定計画"
+              ]
+            }
+          ],
+          "causes": [
+            "invalid_or_missing_answer",
+            "detail_missing",
+            "required_unknown",
+            "candidate_missing",
+            "candidate_count_missing"
+          ],
+          "achievements": [],
+          "validationError": "回答の要約が必要です"
+        }
+      }
+    ],
+    "note": "An outer run was interrupted/cancelled without adopting a weaker result; its failure is retained. Final generation below is a separate real run."
+  },
+  "after": {
+    "taskId": "3a101398-a541-4d6b-aa51-0faccbde6361",
+    "status": "partial",
+    "model": "gpt-6.1-sol",
+    "query": "2026年11月15日(日)、大人2名と5歳児1名、9:30〜17:00、上野周辺、家族合計16,000円以内。動物と科学が好きで、休憩2回、施設は最大2か所。提供したRecruit Hot Pepperグルメのまいかアトレ上野店と、施設公式の公開ページを実際に取得し、一日を過ごす具体的な回答を日本語で作成してください。plan_taskで役割別の条件を定義し、店舗へ動物・施設へランチなど全候補に同じ条件を要求しない。summaryには時刻付き行程、徒歩区間の見積時間、採用理由、掲載料金と未確認予算枠を分けた家族総額、雨天代替、楽しみポイントの推奨案と2択を含めてください。子供の疲れを優先し、博物館は任意でもよい。動物園・博物館の年齢別料金/営業時間/休館を確認し、特別展と常設料金を混同しない。日曜に平日限定ランチ価格を適用しない。「大人のお子様ランチ」は5歳児向けと断定しない。交通2,500円/家族、おやつ休憩1,500円/家族を未確認予算枠とし、他の未確認料金も明示して予算上限との残額を計算。将来日の営業・空席を確約しない。候補の個別ページを引用し、取得不能の候補を断定せず、取得できた情報だけでも実行可能な暫定案をfinish_taskで保存してください。予約・購入・問い合わせはしません。",
+    "review": {
+      "version": 1,
+      "mode": "itinerary",
+      "status": "passed",
+      "issues": [],
+      "attempts": [
+        {
+          "number": 1,
+          "issues": []
+        }
+      ]
+    },
+    "rechecked": {
+      "version": 1,
+      "mode": "itinerary",
+      "status": "passed",
+      "issues": []
+    },
+    "answer": {
+      "actionPlan": {
+        "steps": [
+          {
+            "id": "s0",
+            "when": "9:30",
+            "durationMinutes": 20,
+            "where": "上野駅→動物園",
+            "action": "徒歩移動",
+            "how": "子供の歩調で正門へ",
+            "doneWhen": "到着",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s1",
+            "when": "9:50",
+            "durationMinutes": 90,
+            "where": "動物園",
+            "action": "動物比較",
+            "how": "公開中の近い2種類を案内で選び足を比較",
+            "doneWhen": "違いを一つ言う",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s2",
+            "when": "11:20",
+            "durationMinutes": 25,
+            "where": "園内休憩場所未確認",
+            "action": "休憩1",
+            "how": "水分・トイレ。席なしなら退園",
+            "doneWhen": "歩けるか確認",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s3",
+            "when": "11:45",
+            "durationMinutes": 25,
+            "where": "動物園→まいか",
+            "action": "徒歩移動",
+            "how": "中央改札側へ",
+            "doneWhen": "店舗着",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s4",
+            "when": "12:10",
+            "durationMinutes": 70,
+            "where": "まいか",
+            "action": "昼食",
+            "how": "日曜御膳2と子供プレート1。価格・アレルギーを現地確認",
+            "doneWhen": "会計",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s5",
+            "when": "13:20",
+            "durationMinutes": 20,
+            "where": "まいか→博物館",
+            "action": "徒歩移動",
+            "how": "疲れたら省略",
+            "doneWhen": "到着",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s6",
+            "when": "13:40",
+            "durationMinutes": 100,
+            "where": "博物館常設",
+            "action": "標本観察",
+            "how": "公開中の動物標本2点を案内で選ぶ。特別展は除外",
+            "doneWhen": "生体との違いを話す",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s7",
+            "when": "15:20",
+            "durationMinutes": 30,
+            "where": "指定休憩場所未確認",
+            "action": "休憩2",
+            "how": "飲食可能表示を確認、不可なら駅へ",
+            "doneWhen": "疲労確認",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s8",
+            "when": "15:50",
+            "durationMinutes": 40,
+            "where": "常設",
+            "action": "振り返り",
+            "how": "気に入った1点だけ再確認",
+            "doneWhen": "感想一つ",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s9",
+            "when": "16:30",
+            "durationMinutes": 20,
+            "where": "博物館→上野駅",
+            "action": "徒歩移動",
+            "how": "混雑なら早め退館",
+            "doneWhen": "駅着",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          },
+          {
+            "id": "s10",
+            "when": "16:50",
+            "durationMinutes": 10,
+            "where": "上野駅",
+            "action": "帰路準備",
+            "how": "トイレ・持物確認",
+            "doneWhen": "17時終了",
+            "locationStatus": "unconfirmed",
+            "evidenceIds": [
+              "ev-3",
+              "ev-7",
+              "ev-11"
+            ],
+            "costItemIds": []
+          }
+        ],
+        "budget": {
+          "scenario": "家族3名・動物園と常設の両方を含む主案",
+          "totalYen": 12080,
+          "items": [
+            {
+              "id": "b0",
+              "unitYen": 600,
+              "quantity": 2,
+              "label": "動物園",
+              "basis": "published",
+              "evidenceIds": [
+                "ev-1"
+              ]
+            },
+            {
+              "id": "b1",
+              "unitYen": 630,
+              "quantity": 2,
+              "label": "常設",
+              "basis": "published",
+              "evidenceIds": [
+                "ev-5"
+              ]
+            },
+            {
+              "id": "b2",
+              "unitYen": 1880,
+              "quantity": 2,
+              "label": "日曜御膳",
+              "basis": "published",
+              "evidenceIds": [
+                "ev-9"
+              ]
+            },
+            {
+              "id": "b3",
+              "unitYen": 860,
+              "quantity": 1,
+              "label": "子供プレート",
+              "basis": "published",
+              "evidenceIds": [
+                "ev-10"
+              ]
+            },
+            {
+              "id": "b4",
+              "unitYen": 2500,
+              "quantity": 1,
+              "label": "交通家族枠",
+              "basis": "estimate",
+              "evidenceIds": []
+            },
+            {
+              "id": "b5",
+              "unitYen": 1500,
+              "quantity": 1,
+              "label": "おやつ家族枠",
+              "basis": "estimate",
+              "evidenceIds": []
+            },
+            {
+              "id": "b6",
+              "unitYen": 1000,
+              "quantity": 1,
+              "label": "追加飲食未確認枠",
+              "basis": "estimate",
+              "evidenceIds": []
+            }
+          ]
+        },
+        "branches": [
+          {
+            "trigger": "雨",
+            "action": "動物園省略",
+            "how": "9:50常設へ、11:20休憩後昼食、午後疲れれば終了。1200円減",
+            "evidenceIds": [
+              "ev-5"
+            ]
+          },
+          {
+            "trigger": "疲労・利用不可",
+            "action": "博物館省略・早帰り",
+            "how": "昼食後駅で休憩2を取って帰路。1260円減。店が満席なら駅で表示価格を見て家族4620円以内の食事を選ぶ（店未確認）",
+            "evidenceIds": [
+              "ev-11"
+            ]
+          }
+        ]
+      },
+      "summary": "## 推奨：動物園を主役に、科学博物館は任意\n9:30上野駅→徒歩20分→9:50動物園、11:20休憩①、11:45徒歩25分→12:10まいかで昼食、13:20徒歩20分→13:40科学博物館常設、15:20休憩②、16:30徒歩20分→17:00駅で終了。時刻・徒歩は提案見積です。[ev-3][ev-7][ev-11][ev-12]\n掲載額は動物園1200円・5歳無料、常設1260円・5歳無料、日曜天婦羅御膳1880円×2＋子供プレート860円＝4620円、計7080円。[ev-1][ev-2][ev-5][ev-6][ev-9][ev-10] 未確認枠は家族交通2500円、おやつ1500円、追加飲食1000円で総額12080円、残3920円。\n2択は①推奨：動物と標本の違い探し②疲れたら博物館を省き早帰り。雨天は動物園を省き常設中心へ。両施設は通常月曜休ですが対象日の臨時変更・空席は未確認です。[ev-4][ev-8]\n\n## 具体的な実行手順（時刻・行動は提案）\n9:30 上野駅→動物園 — 徒歩移動（20分の見積）。子供の歩調で正門へ 完了の目安：到着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n9:50 動物園 — 動物比較（90分の見積）。公開中の近い2種類を案内で選び足を比較 完了の目安：違いを一つ言う。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n11:20 園内休憩場所未確認 — 休憩1（25分の見積）。水分・トイレ。席なしなら退園 完了の目安：歩けるか確認。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n11:45 動物園→まいか — 徒歩移動（25分の見積）。中央改札側へ 完了の目安：店舗着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n12:10 まいか — 昼食（70分の見積）。日曜御膳2と子供プレート1。価格・アレルギーを現地確認 完了の目安：会計。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n13:20 まいか→博物館 — 徒歩移動（20分の見積）。疲れたら省略 完了の目安：到着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n13:40 博物館常設 — 標本観察（100分の見積）。公開中の動物標本2点を案内で選ぶ。特別展は除外 完了の目安：生体との違いを話す。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n15:20 指定休憩場所未確認 — 休憩2（30分の見積）。飲食可能表示を確認、不可なら駅へ 完了の目安：疲労確認。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n15:50 常設 — 振り返り（40分の見積）。気に入った1点だけ再確認 完了の目安：感想一つ。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n16:30 博物館→上野駅 — 徒歩移動（20分の見積）。混雑なら早め退館 完了の目安：駅着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n16:50 上野駅 — 帰路準備（10分の見積）。トイレ・持物確認 完了の目安：17時終了。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n\n## 予算（家族3名・動物園と常設の両方を含む主案・掲載料金と未確認の見積）\n| 内訳 | 人数・数量 | 単価 | 小計 | 区分 |\n| --- | ---: | ---: | ---: | --- |\n| 動物園 | 2 | 600円 | 1,200円 | 掲載額[ev-1] |\n| 常設 | 2 | 630円 | 1,260円 | 掲載額[ev-5] |\n| 日曜御膳 | 2 | 1,880円 | 3,760円 | 掲載額[ev-9] |\n| 子供プレート | 1 | 860円 | 860円 | 掲載額[ev-10] |\n| 交通家族枠 | 1 | 2,500円 | 2,500円 | 未確認の見積 |\n| おやつ家族枠 | 1 | 1,500円 | 1,500円 | 未確認の見積 |\n| 追加飲食未確認枠 | 1 | 1,000円 | 1,000円 | 未確認の見積 |\n合計12,080円。指定上限16,000円との差額3,920円。見積を含み、実際の支払額を保証しません。\n\n## 状況が変わった時の行動\n- 雨 → 動物園省略。9:50常設へ、11:20休憩後昼食、午後疲れれば終了。1200円減[ev-5]\n- 疲労・利用不可 → 博物館省略・早帰り。昼食後駅で休憩2を取って帰路。1260円減。店が満席なら駅で表示価格を見て家族4620円以内の食事を選ぶ（店未確認）[ev-11]",
+      "candidates": [
+        {
+          "name": "上野動物園",
+          "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+          "matches": [
+            {
+              "criterionId": "zoo",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-1",
+                "ev-2",
+                "ev-3",
+                "ev-4"
+              ],
+              "explanation": "役割別料金・通常営業時間を確認。対象日確約ではない"
+            },
+            {
+              "criterionId": "museum",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            },
+            {
+              "criterionId": "lunch",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            },
+            {
+              "criterionId": "plan",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            }
+          ],
+          "score": 27,
+          "eligible": false
+        },
+        {
+          "name": "まいか",
+          "url": "https://www.hotpepper.jp/strJ001100102/",
+          "matches": [
+            {
+              "criterionId": "zoo",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            },
+            {
+              "criterionId": "museum",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            },
+            {
+              "criterionId": "lunch",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-9",
+                "ev-10",
+                "ev-11",
+                "ev-12"
+              ],
+              "explanation": "役割別料金・通常営業時間を確認。対象日確約ではない"
+            },
+            {
+              "criterionId": "plan",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            }
+          ],
+          "score": 27,
+          "eligible": false
+        },
+        {
+          "name": "国立科学博物館",
+          "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+          "matches": [
+            {
+              "criterionId": "zoo",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            },
+            {
+              "criterionId": "museum",
+              "status": "supported",
+              "evidenceIds": [
+                "ev-5",
+                "ev-6",
+                "ev-7",
+                "ev-8"
+              ],
+              "explanation": "役割別料金・通常営業時間を確認。対象日確約ではない"
+            },
+            {
+              "criterionId": "lunch",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            },
+            {
+              "criterionId": "plan",
+              "status": "unknown",
+              "evidenceIds": [],
+              "explanation": "他役割は適用外。行程適合は暫定見積"
+            }
+          ],
+          "score": 18,
+          "eligible": false
+        }
+      ],
+      "limitations": [
+        "対象日カレンダー詳細取得不能。通常休館規則のみ確認。",
+        "公開HTMLのみ。具体展示公開・休憩席・空席は未確認。特別展は対象外。",
+        "大人のお子様ランチを幼児用とは扱わず、日曜欄の子供プレートを採用。",
+        "追加確認しても未確認の項目: 飲食店役割：日曜の昼食・価格・子連れ適性。施設には要求しない・各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み / 動物園役割：年齢別料金・営業時間・休園と動物体験・各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み / 動物園役割：年齢別料金・営業時間・休園と動物体験・飲食店役割：日曜の昼食・価格・子連れ適性。施設には要求しない・各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み"
+      ]
+    },
+    "criteria": [
+      {
+        "id": "zoo",
+        "description": "動物園役割：年齢別料金・営業時間・休園と動物体験",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "museum",
+        "description": "任意の科学施設役割：常設の年齢別料金・営業時間・休館",
+        "required": false,
+        "weight": 2
+      },
+      {
+        "id": "lunch",
+        "description": "飲食店役割：日曜の昼食・価格・子連れ適性。施設には要求しない",
+        "required": true,
+        "weight": 3
+      },
+      {
+        "id": "plan",
+        "description": "各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み",
+        "required": true,
+        "weight": 3
+      }
+    ],
+    "evidence": [
+      {
+        "id": "ev-1",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "一般\n600円",
+        "capturedAt": "2026-11-14T06:41:44.802Z"
+      },
+      {
+        "id": "ev-2",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "小学6年生まで\n無料",
+        "capturedAt": "2026-11-14T06:41:44.802Z"
+      },
+      {
+        "id": "ev-3",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "9時30分～17時00分",
+        "capturedAt": "2026-11-14T06:41:44.802Z"
+      },
+      {
+        "id": "ev-4",
+        "pageId": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "quote": "月曜日（月曜日が国民の祝日や振替休日の場合はその翌日が休園日）",
+        "capturedAt": "2026-11-14T06:41:44.802Z"
+      },
+      {
+        "id": "ev-5",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "一般・大学生 630円",
+        "capturedAt": "2026-11-14T06:41:44.880Z"
+      },
+      {
+        "id": "ev-6",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "18歳未満の方",
+        "capturedAt": "2026-11-14T06:41:44.880Z"
+      },
+      {
+        "id": "ev-7",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "開館時間 9：00 ～17：00",
+        "capturedAt": "2026-11-14T06:41:44.880Z"
+      },
+      {
+        "id": "ev-8",
+        "pageId": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "quote": "毎週月曜日（日・月曜日が祝日・休日の場合は火曜日）",
+        "capturedAt": "2026-11-14T06:41:44.880Z"
+      },
+      {
+        "id": "ev-9",
+        "pageId": "page-6",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "quote": "天婦羅御膳\n茶碗蒸し、小鉢、香の物、赤出汁、甘味がセットで付きます。\n1,880円（税込）",
+        "capturedAt": "2026-11-14T06:41:52.023Z"
+      },
+      {
+        "id": "ev-10",
+        "pageId": "page-6",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "quote": "お子様プレート\nハンバーグ、海老フライ、ポテト、パスタ、ウインナー、ご飯\n860円（税込）",
+        "capturedAt": "2026-11-14T06:41:52.023Z"
+      },
+      {
+        "id": "ev-11",
+        "pageId": "page-1",
+        "url": "https://www.hotpepper.jp/strJ001100102/",
+        "quote": "上野駅中央改札を出てすぐ。アトレEAST（レトロ館）２Ｆ",
+        "capturedAt": "2026-11-14T06:41:43.687Z"
+      },
+      {
+        "id": "ev-12",
+        "pageId": "page-1",
+        "url": "https://www.hotpepper.jp/strJ001100102/",
+        "quote": "月～日、祝日、祝前日: 11:00～22:30 （料理L.O. 21:15 ドリンクL.O. 21:30）",
+        "capturedAt": "2026-11-14T06:41:43.687Z"
+      }
+    ],
+    "metrics": {
+      "elapsedMs": 125281,
+      "tokenAccounting": "provider-reported",
+      "tokens": {
+        "inputTokens": 206447,
+        "outputTokens": 4795,
+        "cachedInputTokens": 171904,
+        "reasoningOutputTokens": 40,
+        "totalTokens": 211242,
+        "cacheWriteInputTokens": 0,
+        "source": "codex-thread-total"
+      },
+      "billing": {
+        "mode": "chatgpt-subscription",
+        "additionalApiUsd": 0,
+        "subscriptionAllocationUsd": null,
+        "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+      }
+    },
+    "captures": [
+      {
+        "id": "page-1",
+        "url": "https://www.hotpepper.jp/strJ001100102/",
+        "title": "まいか 米香 アトレ上野店(上野/居酒屋)＜ネット予約可＞ | ホットペッパーグルメ",
+        "capturedAt": "2026-11-14T06:41:43.687Z",
+        "chars": 6994,
+        "sha256": "405df38aa1638f4a8ecb9ce058119f19a2146e51004e0c8c619b0254784ab935"
+      },
+      {
+        "id": "page-2",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "title": "まいか 米香 アトレ上野店(居酒屋)のランチ | ホットペッパーグルメ",
+        "capturedAt": "2026-11-14T06:41:44.126Z",
+        "chars": 3517,
+        "sha256": "90d2e0e7e4f0fbb1517bfd5fec0b5c836b09c405ff04561c2119194369739ecf"
+      },
+      {
+        "id": "page-3",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "title": "開園時間・休園日・入園料 | 上野動物園",
+        "capturedAt": "2026-11-14T06:41:44.802Z",
+        "chars": 4635,
+        "sha256": "56fa1756850ce658cb4668e317b7b9d1ca91577df687fc82d7c22a047e6ee169"
+      },
+      {
+        "id": "page-4",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "title": "入館案内（上野本館） | 国立科学博物館 National Museum of Nature and Science,Tokyo",
+        "capturedAt": "2026-11-14T06:41:44.880Z",
+        "chars": 3151,
+        "sha256": "80c799bc5c108633db0be2754efb940453e61d51be26b32277d248746fcff26d"
+      },
+      {
+        "id": "page-5",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/calendar.html",
+        "title": "開館カレンダー | 国立科学博物館 National Museum of Nature and Science,Tokyo",
+        "capturedAt": "2026-11-14T06:41:48.628Z",
+        "chars": 95,
+        "sha256": "fa81580ba292165e30cb37646d0eb6fc33c0e2fbab6e82d5210ef5f388a340ef"
+      },
+      {
+        "id": "page-6",
+        "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+        "title": "まいか 米香 アトレ上野店(居酒屋)のランチ | ホットペッパーグルメ",
+        "capturedAt": "2026-11-14T06:41:52.023Z",
+        "chars": 3517,
+        "sha256": "90d2e0e7e4f0fbb1517bfd5fec0b5c836b09c405ff04561c2119194369739ecf"
+      }
+    ]
+  },
+  "ui": {
+    "schemaVersion": 1,
+    "designVersion": "ten-second-v1",
+    "taskId": "3a101398-a541-4d6b-aa51-0faccbde6361",
+    "model": "gpt-6.1-sol",
+    "renderSource": "saved-live-generated-answer",
+    "generatedAt": "2026-11-14T06:46:04.510Z",
+    "humanAssessment": "pending; no human ratings synthesized",
+    "contract": {
+      "schemaVersion": 1,
+      "designVersion": "ten-second-v1",
+      "automatic": {
+        "savedAnswerVisibleMs": 10000,
+        "detailInteractionMs": 1000,
+        "criticalTextContrast": 4.5,
+        "primaryTargetPx": 44,
+        "viewportWidths": [
+          320,
+          390,
+          768,
+          1240
+        ],
+        "viewports": [
+          {
+            "width": 320,
+            "height": 568
+          },
+          {
+            "width": 390,
+            "height": 844
+          },
+          {
+            "width": 768,
+            "height": 1024
+          },
+          {
+            "width": 1240,
+            "height": 960
+          }
+        ],
+        "horizontalOverflowPx": 0,
+        "requiredAboveFold": [
+          "conclusion",
+          "uncertainty",
+          "primary-action"
+        ],
+        "unknownMustRemainVisible": true,
+        "pageErrors": 0
+      },
+      "human": {
+        "exposureMs": 10000,
+        "minimumReviewers": 5,
+        "understoodRate": 0.8,
+        "uncertaintyVisibleRate": 0.8,
+        "nextActionClearRate": 0.8,
+        "medianAppeal": 4,
+        "scale": "1-5",
+        "status": "requires-explicit-human-responses"
+      },
+      "rules": [
+        "10秒は保存回答を表示して理解する時間と、実調査の進捗が分かる時間の基準。実モデルの完了時間を10秒と保証しない",
+        "自動検査合格を人間の魅力評価に置き換えない",
+        "見た目や速度のために引用・未確認・不一致を変更しない",
+        "候補サイトの口コミ評価をruntimeの満足度や信頼度に転用しない"
+      ]
+    },
+    "variants": [
+      {
+        "variant": "after",
+        "visibleMs": 216.32270800000015,
+        "errors": [],
+        "viewports": [
+          {
+            "width": 320,
+            "height": 568,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 246,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          },
+          {
+            "width": 390,
+            "height": 844,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 316,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          },
+          {
+            "width": 768,
+            "height": 1024,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 205.578125,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          },
+          {
+            "width": 1240,
+            "height": 960,
+            "overflow": 0,
+            "aboveFold": {
+              "conclusion": true,
+              "uncertainty": true,
+              "primary-action": true
+            },
+            "primary": {
+              "width": 205.578125,
+              "height": 48
+            },
+            "contrast": {
+              "conclusion": 17.9278402530276,
+              "uncertainty": 8.13199035594197,
+              "primary": 7.357639148159307
+            }
+          }
+        ],
+        "screenshots": [
+          {
+            "file": "after-390.png",
+            "sha256": "cb0853025edba4d34f21eea6b86dbd8910c681aa21248a9d999db3b938b21634"
+          },
+          {
+            "file": "after-1240.png",
+            "sha256": "339ad31bb43b11816fab26cc45a6712a5e749fcfc4ac38c20827e9c1d5aa998c"
+          }
+        ],
+        "detailInteractionMs": 26.255916999999954,
+        "focusRestored": true,
+        "citationOpened": true,
+        "concreteStepDetailOpened": true,
+        "humanSurveyHasNoDefaults": true,
+        "reviewExposureMs": 10411.766667
+      }
+    ],
+    "passed": true
+  },
+  "tests": {
+    "passed": 207,
+    "failed": 0,
+    "mode": "serial",
+    "log": ".runtime/specificity-study/tests-final.log",
+    "chat": "passed",
+    "ux": true
+  },
+  "limitations": [
+    "Specificity is a structural, arithmetic and reference contract, not a semantic-entailment proof or guarantee of real-world availability",
+    "Current time consistency checks assume a same-day itinerary; multi-day plans need explicit day-aware scheduling",
+    "Place details and future availability remain unconfirmed when not sourced",
+    "Unknown factual conditions stay unknown even when the execution plan passes"
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "generatedAt": "2026-11-15T00:28:47.096Z",
+  "model": "gpt-6.1-sol",
+  "sourceTaskId": "3a101398-a541-4d6b-aa51-0faccbde6361",
+  "finalTaskId": "4b3f8a0a-ff3e-4c29-860c-357813e8857b",
+  "loopId": "71cd6c84-0aa7-4dc4-8a5e-20283074afc1",
+  "loopStatus": "completed_partial",
+  "accepted": true,
+  "mode": "captured-data-only model synthesis; not weight training",
+  "sourcePreparation": "12 original research quotes retained; four geographic captures added before the offline model loop",
+  "factsPreserved": true,
+  "originalSummaryPreserved": true,
+  "budgetPreserved": true,
+  "evidencePreserved": true,
+  "firstResearchAttempt": {
+    "loopStatus": "completed_partial",
+    "accepted": false,
+    "reason": "合格する構造化回答を確定できず不採用。元の最良回答を保持"
+  },
+  "densityImprovement": {
+    "firstDescriptionCharacters": 306,
+    "finalDescriptionCharacters": 83,
+    "firstMaxPlaceLabel": 72,
+    "finalMaxPlaceLabel": 16
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "artifact": {
+    "kind": "journey-map",
+    "title": "上野の家族一日プラン：動物園と任意の科学博物館",
+    "description": "9:30〜17:00、動物園を主役に休憩2回。科学博物館は疲労時に省略。徒歩時間は見積、家族予算12,080円（未確認枠含む）、残額3,920円。営業・空席は未確約。",
+    "stops": [
+      {
+        "id": "departure",
+        "label": "東京・上野駅",
+        "optional": false,
+        "primaryStepId": "s0",
+        "stepIds": [
+          "s0"
+        ],
+        "evidenceIds": [
+          "ev-geo-station"
+        ],
+        "coordinates": {
+          "evidenceId": "ev-geo-station",
+          "lat": 35.7140413,
+          "lon": 139.7771164
+        }
+      },
+      {
+        "id": "zoo",
+        "label": "東京・上野 恩賜上野動物園",
+        "optional": false,
+        "primaryStepId": "s1",
+        "stepIds": [
+          "s0",
+          "s1",
+          "s2",
+          "s3"
+        ],
+        "evidenceIds": [
+          "ev-1",
+          "ev-2",
+          "ev-3",
+          "ev-4",
+          "ev-geo-zoo"
+        ],
+        "coordinates": {
+          "evidenceId": "ev-geo-zoo",
+          "lat": 35.7153426,
+          "lon": 139.768896
+        }
+      },
+      {
+        "id": "lunch",
+        "label": "東京・上野 まいか アトレ上野店",
+        "optional": false,
+        "primaryStepId": "s4",
+        "stepIds": [
+          "s3",
+          "s4",
+          "s5"
+        ],
+        "evidenceIds": [
+          "ev-9",
+          "ev-10",
+          "ev-11",
+          "ev-12",
+          "ev-geo-lunch"
+        ],
+        "coordinates": {
+          "evidenceId": "ev-geo-lunch",
+          "lat": 35.713800988772995,
+          "lon": 139.77720009817438
+        }
+      },
+      {
+        "id": "museum",
+        "label": "東京・上野 国立科学博物館",
+        "optional": true,
+        "primaryStepId": "s6",
+        "stepIds": [
+          "s5",
+          "s6",
+          "s7",
+          "s8",
+          "s9"
+        ],
+        "evidenceIds": [
+          "ev-5",
+          "ev-6",
+          "ev-7",
+          "ev-8",
+          "ev-geo-museum"
+        ],
+        "coordinates": {
+          "evidenceId": "ev-geo-museum",
+          "lat": 35.7158995,
+          "lon": 139.7766878
+        }
+      },
+      {
+        "id": "return",
+        "label": "東京・上野駅",
+        "optional": false,
+        "primaryStepId": "s10",
+        "stepIds": [
+          "s9",
+          "s10"
+        ],
+        "evidenceIds": [
+          "ev-geo-station"
+        ],
+        "coordinates": {
+          "evidenceId": "ev-geo-station",
+          "lat": 35.7140413,
+          "lon": 139.7771164
+        }
+      }
+    ]
+  },
+  "humanAppeal": "not measured; user's earlier negative feedback motivated revision"
+}

@@ -1,5 +1,3 @@
-import { readdir, readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { runTask, type RunOptions } from "./runtime.js";
 import { agentEngine } from "./codex.js";
 import { Store } from "./store.js";
@@ -10,6 +8,8 @@ import {
 } from "./sandbox.js";
 import type { Task } from "./types.js";
 import { runCodexSandbox, configuredCodexSandbox } from "./codex-sandbox.js";
+import { recoverSandboxTask } from "./sandbox-artifacts.js";
+import { createResearchProfile } from "./runtime-profile.js";
 export type RuntimeExecutor = (
   options: RunOptions,
   store?: Store,
@@ -19,18 +19,6 @@ export function runtimeTarget(): "local" | "openshell" {
   if (value !== "local" && value !== "openshell")
     throw new Error("RUNTIME_EXECUTOR は local または openshell です");
   return value;
-}
-async function taskFiles(root: string, depth = 0): Promise<string[]> {
-  if (depth > 5) return [];
-  const entries = await readdir(root, { withFileTypes: true });
-  const paths: string[] = [];
-  for (const item of entries) {
-    if (item.isSymbolicLink()) continue;
-    if (item.isDirectory())
-      paths.push(...(await taskFiles(join(root, item.name), depth + 1)));
-    else if (item.name === "task.json") paths.push(join(root, item.name));
-  }
-  return paths;
 }
 export function createOpenShellExecutor(
   config: Pick<OpenShellTaskOptions, "gateway" | "image" | "provider">,
@@ -82,42 +70,11 @@ export function createOpenShellExecutor(
       throw new Error(
         `OpenShell成果物の回収を確認できません。${plan.directory}`,
       );
-    const files = await taskFiles(result.artifactsDirectory).catch(() => []);
-    const tasks: Task[] = [];
-    for (const file of files) {
-      const task = JSON.parse(await readFile(file, "utf8")) as Task;
-      if (
-        task.query !== options.query ||
-        !/^[a-zA-Z0-9-]+$/.test(task.id) ||
-        !Array.isArray(task.urls) ||
-        task.urls.join("\n") !== options.urls.join("\n")
-      )
-        continue;
-      if (
-        ![
-          "succeeded",
-          "partial",
-          "blocked",
-          "failed",
-          "cancelled",
-          "timed_out",
-        ].includes(task.status)
-      )
-        continue;
-      if (
-        !Array.isArray(task.pages) ||
-        !Array.isArray(task.evidence) ||
-        !Array.isArray(task.criteria) ||
-        !Array.isArray(task.sources)
-      )
-        continue;
-      tasks.push(task);
-    }
-    if (tasks.length !== 1)
-      throw new Error(
-        `OpenShell: ${result.status}; タスク成果物を一意に回収できません。${plan.directory} を確認してください`,
-      );
-    const task = tasks[0]!;
+    const task = await recoverSandboxTask(result.artifactsDirectory, {
+      ...options,
+      agent: "pi-openrouter",
+      artifactNonce: plan.artifactNonce,
+    });
     task.parentId = options.parentId;
     task.goalId = options.goalId;
     if (result.status === "failed" && task.status === "succeeded") {
@@ -147,6 +104,13 @@ export function createOpenShellExecutor(
   };
 }
 export function configuredRuntime(): RuntimeExecutor {
+  if (
+    process.env.RUNTIME_DEPLOYMENT &&
+    process.env.RUNTIME_DEPLOYMENT !== "single-user"
+  )
+    throw new Error(
+      "このruntimeはsingle-user専用です。共有サービスの認証・tenant分離は未対応です",
+    );
   if (runtimeTarget() === "local") return runTask;
   const gateway = process.env.OPENSHELL_GATEWAY;
   if (!gateway)
@@ -156,12 +120,14 @@ export function configuredRuntime(): RuntimeExecutor {
     image: process.env.OPENSHELL_IMAGE,
     provider: process.env.OPENSHELL_PROVIDER,
   });
-  return (options, store) =>
-    agentEngine(options.agent) === "codex"
+  return (options, store) => {
+    createResearchProfile(options.urls);
+    return agentEngine(options.agent) === "codex"
       ? runCodexSandbox(
           { ...options, agent: "codex" },
           store,
           configuredCodexSandbox(),
         )
       : pi(options, store);
+  };
 }

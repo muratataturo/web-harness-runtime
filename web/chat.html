@@ -181,6 +181,78 @@ node /absolute/path/dist/cli.js mcp
       <div id="answer-detail"></div>
     </dialog>
     <div id="notice" role="status" aria-live="polite"></div>
+    <dialog
+      id="ux-review-dialog"
+      class="ux-review-dialog"
+      aria-labelledby="ux-review-title"
+    >
+      <form id="ux-review-form">
+        <h2 id="ux-review-title">最初の10秒、どうでしたか？</h2>
+        <p>
+          いま見た印象で選んでください。評価はこのPCに保存し、回答の正しさとは分けて扱います。
+        </p>
+        <fieldset>
+          <legend>何がわかった回答か、理解できた</legend>
+          <label
+            ><input
+              type="radio"
+              name="understood"
+              value="yes"
+              required
+            />はい</label
+          ><label
+            ><input type="radio" name="understood" value="no" />いいえ</label
+          >
+        </fieldset>
+        <fieldset>
+          <legend>未確認の情報や制約を見つけられた</legend>
+          <label
+            ><input
+              type="radio"
+              name="uncertaintyVisible"
+              value="yes"
+              required
+            />はい</label
+          ><label
+            ><input
+              type="radio"
+              name="uncertaintyVisible"
+              value="no"
+            />いいえ</label
+          >
+        </fieldset>
+        <fieldset>
+          <legend>次に押す場所がわかった</legend>
+          <label
+            ><input
+              type="radio"
+              name="nextActionClear"
+              value="yes"
+              required
+            />はい</label
+          ><label
+            ><input
+              type="radio"
+              name="nextActionClear"
+              value="no"
+            />いいえ</label
+          >
+        </fieldset>
+        <fieldset>
+          <legend>
+            見た目や使い心地に魅力を感じた（1:感じない〜5:感じる）
+          </legend>
+          <label><input type="radio" name="appeal" value="1" required />1</label
+          ><label><input type="radio" name="appeal" value="2" />2</label
+          ><label><input type="radio" name="appeal" value="3" />3</label
+          ><label><input type="radio" name="appeal" value="4" />4</label
+          ><label><input type="radio" name="appeal" value="5" />5</label>
+        </fieldset>
+        <button type="submit">評価を保存</button
+        ><button id="ux-review-cancel" type="button">閉じる</button>
+        <p id="ux-review-result" role="status"></p>
+      </form>
+    </dialog>
     <script type="module" src="/chat.js"></script>
   </body>
 </html>

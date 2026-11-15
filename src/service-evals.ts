@@ -1,3 +1,7 @@
+import {
+  assessVisualArtifact,
+  visualArtifactSchema,
+} from "./visual-artifact.js";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { type RunOptions } from "./runtime.js";
@@ -5,6 +9,8 @@ import { configuredRuntime } from "./executors.js";
 import { entityKey } from "./sources.js";
 import { verifyDetail, type DetailVerification } from "./detail-contracts.js";
 import { assessPage } from "./page-quality.js";
+import { validateAnswer } from "./evidence.js";
+import { assessSpecificity } from "./answer-plan.js";
 import { Store } from "./store.js";
 import type { Task } from "./types.js";
 export interface ServiceEvalCase {
@@ -59,7 +65,24 @@ export function evaluateServiceTask(
   const access = task.pages.map(assessPage);
   const individualDetails =
     candidates.length > 0 && candidates.every((c) => !!entityKey(c.url));
+  let integrity = false;
+  let verifiedEligible = 0;
+  try {
+    const validated = validateAnswer(
+      task,
+      task.answer?.summary ?? "",
+      candidates,
+      task.answer?.limitations ?? [],
+      task.answer?.actionPlan,
+      task.answer?.visualArtifact,
+    );
+    verifiedEligible = validated.candidates.filter((c) => c.eligible).length;
+    integrity = true;
+  } catch {
+    /* Failed provenance never earns a validated result. */
+  }
   const pageGrounded =
+    integrity &&
     candidates.length > 0 &&
     candidates.every((c) => task.pages.some((p) => p.url === c.url)) &&
     matches
@@ -86,7 +109,9 @@ export function evaluateServiceTask(
   else if (candidates.length && individualDetails && pageGrounded) {
     outcome =
       candidates.length >= test.minCandidates &&
-      candidates.every((c) => c.eligible) &&
+      verifiedEligible === candidates.length &&
+      assessSpecificity(task, task.answer!).status !== "needs_detail" &&
+      assessVisualArtifact(task, task.answer!).status !== "needs_visual" &&
       missing.length === 0
         ? "validated"
         : "partial";
@@ -98,7 +123,7 @@ export function evaluateServiceTask(
     taskStatus: task.status,
     outcome,
     candidates: candidates.length,
-    eligible: candidates.filter((c) => c.eligible).length,
+    eligible: verifiedEligible,
     supported: matches.filter((m) => m.status === "supported").length,
     unknown: matches.filter((m) => m.status === "unknown").length,
     contradicted: matches.filter((m) => m.status === "contradicted").length,

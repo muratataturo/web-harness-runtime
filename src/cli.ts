@@ -1,9 +1,12 @@
 #!/usr/bin/env node
+import { visualRefinementRunner } from "./visual-refinement.js";
 import { config } from "dotenv";
 import { Command, InvalidArgumentError, Option } from "commander";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readFile } from "node:fs/promises";
+import { readFile, mkdir, writeFile } from "node:fs/promises";
+import { resolve, dirname, join } from "node:path";
+import { renderAnswerHtml } from "./answer-html.js";
 import {
   improveTask,
   ImprovementStore,
@@ -19,6 +22,8 @@ import {
 } from "./semantic-benchmark.js";
 import { taskReviewSignals } from "./reviews.js";
 import { FeedbackStore } from "./feedback.js";
+import { buildOfflineExperience } from "./offline-learning.js";
+import { UxFeedbackStore } from "./ux-feedback.js";
 import { Store } from "./store.js";
 import { assessPage } from "./page-quality.js";
 import { configuredRuntime, runtimeTarget } from "./executors.js";
@@ -54,8 +59,10 @@ import {
   writeOpenShellPlan,
   executeOpenShellPlan,
   doctorOpenShell,
+  openShellPolicy,
 } from "./sandbox.js";
 import { renderAnswer } from "./evidence.js";
+import { createResearchProfile, securityMode } from "./runtime-profile.js";
 config({ quiet: true });
 process.umask(0o077);
 const program = new Command()
@@ -73,6 +80,7 @@ const integer = (value: string) => {
 const withRunOptions = (command: Command) =>
   command
     .addOption(new Option("--openshell-outer-sandbox").hideHelp())
+    .addOption(new Option("--artifact-nonce <nonce>").hideHelp())
     .option(
       "--improvement-context <base64url>",
       "sandboxへの検証契約転送",
@@ -139,6 +147,7 @@ async function execute(
   process.once("SIGTERM", cancel);
   try {
     const task = await configuredRuntime()({
+      artifactNonce: opts.artifactNonce,
       outerSandbox: opts.openshellOuterSandbox ? "openshell" : undefined,
       interactionMode: interactionMode(opts.mode),
       improvement: opts.improvementContext,
@@ -235,6 +244,45 @@ program
   .action((query, opts) =>
     console.log(JSON.stringify(routeSources(query, opts.url), null, 2)),
   );
+const security = program
+  .command("security")
+  .description("公開調査の固定権限と強化モードを確認");
+security.command("status").action(() => {
+  const mode = securityMode();
+  configuredRuntime();
+  console.log(
+    JSON.stringify(
+      {
+        mode,
+        deployment: "single-user",
+        executor: runtimeTarget(),
+        profile: process.env.RUNTIME_PROFILE ?? "auto",
+        retrieval:
+          mode === "hardened" ? "public-html-only" : "public-html-and-browser",
+        sharedServiceSupported: false,
+      },
+      null,
+      2,
+    ),
+  );
+});
+security
+  .command("plan")
+  .requiredOption("--url <urls...>", "公開URL")
+  .action((opts) => {
+    const profile = createResearchProfile(opts.url);
+    console.log(
+      JSON.stringify(
+        {
+          profile,
+          policyYaml: openShellPolicy([...profile.hosts]),
+          validation: "plan-only",
+        },
+        null,
+        2,
+      ),
+    );
+  });
 program
   .command("models")
   .description("選択エンジンで利用可能なモデル一覧")
@@ -519,6 +567,21 @@ program
     const task = await new Store().get(id);
     console.log(opts.json ? JSON.stringify(task, null, 2) : renderAnswer(task));
   });
+program
+  .command("export-html")
+  .description(
+    "保存済みの実回答を単独で開けるHTML/CSSへ出力。推論・Web取得なし",
+  )
+  .argument("<id>")
+  .option("--out <file>", "HTMLの出力先")
+  .action(async (id, opts) => {
+    const store = new Store(),
+      task = await store.get(id);
+    const out = resolve(opts.out ?? join(store.dir(id), "answer.html"));
+    await mkdir(dirname(out), { recursive: true });
+    await writeFile(out, renderAnswerHtml(task), { mode: 0o600 });
+    console.log(out);
+  });
 withRunOptions(
   program
     .command("retry")
@@ -552,6 +615,10 @@ program
   )
   .option("--mode <mode>", "auto / approval", interactionMode, "approval")
   .description("保存タスクの未達を診断・計画・再実行・検証し最良結果を保存")
+  .option(
+    "--offline-visual",
+    "保存根拠だけから視覚成果物を実モデルで改善。新しいWeb取得なし",
+  )
   .argument("<task-id>")
   .option("--allow-replacements", "同じ条件・同数以上の代替候補の探索を許可")
   .option("--url <urls...>", "確認に使う同一対象の追加公開URL（最大8件）")
@@ -571,18 +638,23 @@ program
     process.once("SIGINT", cancel);
     process.once("SIGTERM", cancel);
     try {
-      const loop = await improveTask(id, {
-        diagnoseOnly: opts.diagnoseOnly,
-        interactionMode: interactionMode(opts.mode),
-        allowReplacements: opts.allowReplacements,
-        additionalUrls: opts.url,
-        maxIterations: opts.iterations,
-        timeoutSeconds: opts.timeout,
-        agent: opts.agent ? agentEngine(opts.agent) : undefined,
-        model: opts.model,
-        signal: controller.signal,
-        onProgress: (m) => process.stderr.write(m + "\n"),
-      });
+      const loop = await improveTask(
+        id,
+        {
+          diagnoseOnly: opts.diagnoseOnly,
+          interactionMode: interactionMode(opts.mode),
+          allowReplacements: opts.allowReplacements,
+          additionalUrls: opts.url,
+          maxIterations: opts.iterations,
+          timeoutSeconds: opts.timeout,
+          agent: opts.agent ? agentEngine(opts.agent) : undefined,
+          model: opts.model,
+          signal: controller.signal,
+          onProgress: (m) => process.stderr.write(m + "\n"),
+        },
+        new Store(),
+        opts.offlineVisual ? visualRefinementRunner() : undefined,
+      );
       const task = await new Store().get(loop.bestTaskId);
       console.log(
         opts.json
@@ -656,6 +728,26 @@ improvements
 const benchmark = program
   .command("benchmark")
   .description("正解ラベル付き凍結資料による限定的な意味判定ベンチマーク");
+const learning = program
+  .command("learning")
+  .description(
+    "実行履歴のoffline経験集約と学習用データの分離。モデル重みは更新しない",
+  );
+program
+  .command("ux-reviews")
+  .description(
+    "実際に投稿された10秒レビューを集計。自動テストを人間評価に混ぜない",
+  )
+  .action(async () =>
+    console.log(JSON.stringify(await new UxFeedbackStore().summary(), null, 2)),
+  );
+learning
+  .command("build")
+  .description("本文・引用を再検証しtrain/validationを課題単位で分離して保存")
+  .action(async () => {
+    const result = await buildOfflineExperience();
+    console.log(JSON.stringify(result, null, 2));
+  });
 benchmark.command("list").action(async () => {
   for (const c of await loadSemanticCases())
     console.log(

@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-15T00:29:29.946Z",
+  "typecheck": "passed",
+  "build": "passed",
+  "tests": {
+    "passed": 217,
+    "failed": 0,
+    "summary": [
+      "ℹ tests 217",
+      "ℹ pass 217",
+      "ℹ fail 0"
+    ]
+  },
+  "browserQaPassed": true,
+  "automaticScope": "automatic-interaction-and-layout-only",
+  "artifactInteractiveMs": [
+    {
+      "kind": "journey-map",
+      "ms": 108
+    },
+    {
+      "kind": "life-roadmap",
+      "ms": 85
+    }
+  ],
+  "offline": {
+    "pins": 4,
+    "selectionWorks": true,
+    "limitationsVisible": true
+  },
+  "packageAssetsPresent": true,
+  "privateFilesAbsent": true,
+  "releaseAcceptance": "not rerun; local preview package verification only",
+  "humanAppeal": "unrated"
+}
