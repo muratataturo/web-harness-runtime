@@ -1,6 +1,6 @@
 import { test, mock } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtemp, rm, readFile } from "node:fs/promises";
+import { mkdtemp, rm, readFile, mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { newTask, runTask } from "../src/runtime.js";
@@ -438,6 +438,44 @@ test("local answer endpoint serves the saved interactive artifact and preserves 
     const html = await response.text();
     assert.match(html, /life-roadmap/);
     assert.match(html, /script-src 'sha256-/);
+    const file = "a".repeat(64) + ".png";
+    task.answerPhotos = {
+      demo: {
+        file,
+        pageId: "p",
+        imageIndex: 0,
+        sourceUrl: url,
+        type: "image/png",
+        capturedAt: task.createdAt,
+      },
+    };
+    await mkdir(join(store.dir(task.id), "answer-assets"), { recursive: true });
+    await writeFile(
+      join(store.dir(task.id), "answer-assets", file),
+      "fixture-photo",
+    );
+    await store.save(task);
+    const photo = await fetch(base + "/api/runs/demo/answer-assets/" + file);
+    assert.equal(photo.status, 200);
+    assert.equal(photo.headers.get("content-type"), "image/png");
+    assert.equal(await photo.text(), "fixture-photo");
+    assert.equal(
+      (
+        await fetch(
+          base + "/api/runs/demo/answer-assets/" + "b".repeat(64) + ".png",
+        )
+      ).status,
+      404,
+    );
+    assert.equal(
+      (
+        await fetch(base + "/api/runs/demo/answer-assets/" + file, {
+          headers: { Origin: "https://evil.example" },
+        })
+      ).status,
+      403,
+    );
+
     assert.equal(
       (
         await fetch(base + "/api/runs/demo/answer.html", {

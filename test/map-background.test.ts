@@ -1,13 +1,16 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { backgroundFor, fetchTilePng } from "../web/map-background.js";
+import { mapVector } from "./fixtures/map-vector.mjs";
+import { decodeMapTile, paintMapTile } from "../web/vector-map.js";
+import { fetchVectorTile } from "../web/map-background.js";
 import { mapTile } from "./fixtures/map-tile.mjs";
 const tile = "https://cyberjapandata.gsi.go.jp/xyz/pale/16/58212/25798.png";
 test("Japan background uses GSI; missing or out-of-coverage coordinates stay schematic", () => {
   const provider = backgroundFor([
     { coordinates: { lat: 35.715, lon: 139.77 } },
   ]);
-  assert.equal(provider?.id, "gsi-pale");
+  assert.equal(provider?.id, "gsi-vector-clean");
   assert.ok(!provider?.url.includes("openstreetmap"));
   assert.match(provider!.attribution, /地理院タイル/);
   assert.equal(backgroundFor([]), null);
@@ -66,4 +69,57 @@ test("only bounded PNG data reaches the image, using normal CORS caching without
     }),
     /CORS/,
   );
+});
+
+test("vector background excludes clutter layers and rejects denied or malformed payloads", async () => {
+  const layers = await fetchVectorTile(
+    "https://cyberjapandata.gsi.go.jp/test.pbf",
+    {
+      fetcher: async () =>
+        new Response(mapVector, {
+          headers: { "Content-Type": "application/octet-stream" },
+        }),
+    },
+  );
+  assert.deepEqual(
+    layers.map((l) => l.name),
+    ["building", "waterarea", "road"],
+  );
+  assert.ok(!layers.some((l) => l.name === "label"));
+  for (const response of [
+    new Response(mapTile, {
+      status: 403,
+      headers: { "Content-Type": "image/png" },
+    }),
+    new Response(mapTile, { headers: { "Content-Type": "image/png" } }),
+    new Response("Access blocked", {
+      headers: { "Content-Type": "application/octet-stream" },
+    }),
+  ])
+    await assert.rejects(
+      fetchVectorTile("https://cyberjapandata.gsi.go.jp/test.pbf", {
+        fetcher: async () => response,
+      }),
+      /HTTP 403|invalid-vector/,
+    );
+  const operations = [];
+  const context = new Proxy(
+    {},
+    {
+      get:
+        (_t, key) =>
+        (...args) =>
+          operations.push([key, ...args]),
+      set: (t, key, value) => {
+        t[key] = value;
+        return true;
+      },
+    },
+  );
+  const canvas = { getContext: () => context };
+  paintMapTile(canvas, layers, 2);
+  assert.equal(canvas.width, 512);
+  assert.ok(operations.some((op) => op[0] === "fill"));
+  assert.ok(!operations.some((op) => op[0] === "fillText"));
+  assert.throws(() => decodeMapTile(new Uint8Array([0])), /./);
 });

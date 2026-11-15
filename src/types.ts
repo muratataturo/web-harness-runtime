@@ -22,6 +22,7 @@ export interface Source {
   guidance: string;
 }
 export interface Page {
+  mapEmbeds?: string[];
   images?: { url: string; alt: string }[];
   productOffer?: import("./product-offer.js").ProductOffer;
   acquisition?: {
@@ -66,6 +67,25 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  photoInspections?: {
+    pageId: string;
+    imageIndex: number;
+    file: string;
+    sourceUrl: string;
+    type: string;
+    shownAt: string;
+  }[];
+  answerPhotos?: Record<
+    string,
+    {
+      file: string;
+      pageId: string;
+      imageIndex: number;
+      sourceUrl: string;
+      type: string;
+      capturedAt: string;
+    }
+  >;
   visualRefinement?: {
     version: 1;
     sourceTaskId: string;

@@ -1,3 +1,4 @@
+import { decodeMapTile, paintMapTile } from "./vector-map.js";
 /** Background geography is a trusted presentation choice, never model-supplied URLs.
  * GSI supports CORS (including file:// Origin:null) and requires visible attribution.
  * Outside its Japan coverage the sourced points remain on a schematic canvas.
@@ -12,10 +13,11 @@ export function backgroundFor(stops) {
   )
     return null;
   return {
-    id: "gsi-pale",
+    id: "gsi-vector-clean",
     name: "地理院タイル",
-    url: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
+    url: "https://cyberjapandata.gsi.go.jp/xyz/experimental_bvmap/{z}/{x}/{y}.pbf",
     minZoom: 5,
+    maxNativeZoom: 16,
     maxZoom: 18,
     attribution:
       '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">地理院タイル</a>',
@@ -83,6 +85,57 @@ export async function fetchTilePng(url, { signal, fetcher = fetch } = {}) {
     throw new TileError("invalid-png");
   return new Blob([bytes], { type: "image/png" });
 }
+/** CORS/status/size limits are checked before decoding, including error PNGs. */
+export async function fetchVectorTile(url, { signal, fetcher = fetch } = {}) {
+  const response = await fetcher(url, {
+    mode: "cors",
+    credentials: "omit",
+    cache: "default",
+    redirect: "error",
+    signal,
+  });
+  if (response.type === "opaque" || response.status !== 200) {
+    await response.body?.cancel();
+    throw new TileError(`HTTP ${response.status || "unavailable"}`);
+  }
+  const type = response.headers.get("content-type") ?? "";
+  if (
+    !/^(?:application\/(?:octet-stream|x-protobuf|vnd.mapbox-vector-tile)|binary\/octet-stream)(?:;|$)/i.test(
+      type,
+    ) ||
+    Number(response.headers.get("content-length")) > 2 * 1024 * 1024
+  ) {
+    await response.body?.cancel();
+    throw new TileError("invalid-vector");
+  }
+  const reader = response.body?.getReader();
+  if (!reader) throw new TileError("empty-vector");
+  const chunks = [];
+  let size = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > 2 * 1024 * 1024) throw new TileError("vector-too-large");
+      chunks.push(value);
+    }
+  } finally {
+    await reader.cancel();
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.length;
+  }
+  try {
+    return decodeMapTile(bytes);
+  } catch {
+    throw new TileError("invalid-vector");
+  }
+}
+
 /** One failure stops the whole background. No provider rotation, proxy, spoofed
  * headers, or automatic retries. Pins and visit order are separate Leaflet layers. */
 export function verifiedTileLayer(L, provider, onFailure) {
@@ -99,8 +152,8 @@ export function verifiedTileLayer(L, provider, onFailure) {
   };
   const Layer = L.TileLayer.extend({
     createTile(coords, done) {
-      const tile = document.createElement("img");
-      tile.alt = "";
+      const tile = document.createElement("canvas");
+      tile.setAttribute("aria-hidden", "true");
       tile.setAttribute("role", "presentation");
       const state = {
         controller: new AbortController(),
@@ -125,17 +178,23 @@ export function verifiedTileLayer(L, provider, onFailure) {
           error instanceof TileError ? error.reason : "network-or-timeout",
         );
       };
-      fetchTilePng(this.getTileUrl(coords), { signal: state.controller.signal })
-        .then((blob) => {
+      fetchVectorTile(this.getTileUrl(coords), {
+        signal: state.controller.signal,
+      })
+        .then((layers) => {
           if (state.disposed || stopped) return;
-          state.url = URL.createObjectURL(blob);
-          tile.onload = () => {
-            if (state.disposed || stopped) return;
+          try {
+            paintMapTile(
+              tile,
+              layers,
+              Math.min(window.devicePixelRatio || 1, 2),
+            );
+            tile.dataset.vectorReady = "true";
             dispose(state);
             done(null, tile);
-          };
-          tile.onerror = () => fail(new TileError("image-decode"));
-          tile.src = state.url;
+          } catch {
+            fail(new TileError("vector-render"));
+          }
         })
         .catch(fail);
       return tile;
@@ -144,6 +203,7 @@ export function verifiedTileLayer(L, provider, onFailure) {
   const layer = new Layer(provider.url, {
     minZoom: provider.minZoom,
     maxZoom: provider.maxZoom,
+    maxNativeZoom: provider.maxNativeZoom,
     attribution: provider.attribution,
     updateWhenIdle: true,
     keepBuffer: 0,

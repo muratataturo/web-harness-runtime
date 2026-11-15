@@ -9,6 +9,15 @@ createInterface({ input: process.stdin }).on("line", (line) => {
   const m = JSON.parse(line);
   if (m.id === undefined) return;
   if (!m.method) {
+    if (
+      mode === "image" &&
+      !m.result?.contentItems?.some(
+        (c) =>
+          c.type === "inputImage" &&
+          c.imageUrl === "data:image/png;base64,AQID",
+      )
+    )
+      process.exit(11);
     if (mode === "forbidden") {
       if (!m.error) process.exit(4);
       send({

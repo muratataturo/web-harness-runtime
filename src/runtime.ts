@@ -1,3 +1,4 @@
+import { prepareAnswerMedia, inspectAnswerPhoto } from "./answer-media.js";
 import { locatePlace } from "./geocoding.js";
 import {
   visualArtifactSchema,
@@ -179,7 +180,7 @@ export async function runTask(
   const task = newTask(options);
   const instructions =
     SYSTEM_PROMPT +
-    `\n視覚成果物契約: ${JSON.stringify(visualContract(task.query))}。kindがnoneなら視覚成果物は不要。それ以外はfinish_task.visualArtifactを作る。journey-mapはstopsと実際のstepIds、主な活動のprimaryStepId、出典本文に数値のあるcoordinates/evidenceId。life-roadmapはlanesとmilestones（horizon/action/doneWhen/decision/dependsOn/basis/evidenceIds）。座標なしの場所を捏造しない。許可ソースにnominatim.openstreetmap.orgがある場合はlocate_placeで公開地点名と地域を検索できる。` +
+    `\n視覚成果物契約: ${JSON.stringify(visualContract(task.query))}。kindがnoneなら視覚成果物は不要。それ以外はfinish_task.visualArtifactを作る。journey-mapはstopsと実際のstepIds、主な活動のprimaryStepId、取得済みGoogle共有地図のpreviewPageId、写真付き体験experience（headline/why/highlights/photoPageId/photoIndex/photoCaption/photoDescription（実画像の内容））、出典本文に数値のあるcoordinates/evidenceId。life-roadmapはlanesとmilestones（horizon/action/doneWhen/decision/dependsOn/basis/evidenceIds）。座標なしの場所を捏造しない。許可ソースにnominatim.openstreetmap.orgがある場合はlocate_placeで公開地点名と地域を検索できる。` +
     (!options.benchmark && specificityContract(task.query).mode !== "facts"
       ? `\n具体性の実行契約: ${JSON.stringify(specificityContract(task.query))}\nfinish_taskのactionPlanに、行動単位のwhen/where/action/how/doneWhenと根拠IDを渡してください。行程はdurationMinutesも必要です。『周辺でゆっくり』『好きなものを見る』で止めず、開始地点・見る/選ぶ対象・操作・完了目安と切替行動まで書いてください。場所の詳細を確認できなければunconfirmedとし、使えない時の行動をbranchesに書いてください。予算は主案1つの人数×単価をbudgetに、掲載額はpublished、未確認枠はestimateにします。推測を出典情報にしないでください。summaryは短い結論と重要な注意点を中心にし、構造化手順・予算・分岐はホストが本文へ表示します。不足はaccepted=falseで返るので、必要に応じてread_page/deepen_details/open_pageで確認し修正してください。`
       : "") +
@@ -470,6 +471,27 @@ export async function runTask(
   let visualRepairs = 0;
   let geoLookups = 0;
   const tools: ToolDefinition[] = [
+    defineTool({
+      name: "inspect_photo",
+      label: "Inspect captured photo",
+      description:
+        "保存ページの写真候補を実画像として確認する。URLやaltだけで採用せず、施設・展示・料理の内容を見て選ぶ。",
+      parameters: Type.Object({
+        pageId: Type.String(),
+        imageIndex: Type.Integer({ minimum: 0, maximum: 7 }),
+      }),
+      execute: async (_id, p) => {
+        await step("inspect_photo", p);
+        const result = await inspectAnswerPhoto(
+          task,
+          dir,
+          p.pageId,
+          p.imageIndex,
+        );
+        await store.save(task);
+        return result;
+      },
+    }),
     defineTool({
       name: "locate_place",
       label: "Locate public place",
@@ -1172,6 +1194,8 @@ export async function runTask(
     await writeFile(join(dir, "answer.md"), renderAnswer(task) + "\n", {
       mode: 0o600,
     });
+    await prepareAnswerMedia(task, dir);
+    await store.save(task);
     await writeFile(join(dir, "answer.html"), renderAnswerHtml(task), {
       mode: 0o600,
     });

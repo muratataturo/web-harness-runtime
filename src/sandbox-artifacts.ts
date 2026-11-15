@@ -2,6 +2,7 @@ import {
   assessVisualArtifact,
   visualArtifactSchema,
 } from "./visual-artifact.js";
+import { sharedMapEmbed } from "./map-embed.js";
 import { constants } from "node:fs";
 import { readdir, open, lstat, realpath } from "node:fs/promises";
 import { join, relative, isAbsolute } from "node:path";
@@ -107,6 +108,9 @@ const schema = Type.Object({
       capturedAt: text(80),
       truncated: Type.Boolean(),
       links: list(Type.Object({ text: text(2000), url }), 220),
+      mapEmbeds: Type.Optional(
+        Type.Array(Type.String({ maxLength: 5000 }), { maxItems: 3 }),
+      ),
       images: Type.Optional(list(Type.Object({ url, alt: text(2000) }), 8)),
       acquisition: Type.Optional(
         Type.Object({
@@ -142,6 +146,28 @@ const schema = Type.Object({
       capturedAt: text(80),
     }),
     1000,
+  ),
+  photoInspections: Type.Optional(
+    list(
+      Type.Object({
+        pageId: id,
+        imageIndex: Type.Integer({ minimum: 0, maximum: 7 }),
+        file: Type.String({
+          pattern: "^[a-f0-9]{64}\\.(jpg|png|webp|gif|avif)$",
+          maxLength: 70,
+        }),
+        sourceUrl: url,
+        type: Type.Union([
+          Type.Literal("image/jpeg"),
+          Type.Literal("image/png"),
+          Type.Literal("image/webp"),
+          Type.Literal("image/gif"),
+          Type.Literal("image/avif"),
+        ]),
+        shownAt: text(80),
+      }),
+      8,
+    ),
   ),
   answer: Type.Optional(
     Type.Object({
@@ -249,12 +275,14 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
         }
       }),
       images: p.images,
+      mapEmbeds: p.mapEmbeds?.filter((u) => sharedMapEmbed(u) !== null),
       acquisition: p.acquisition,
       productOffer: p.productOffer,
       capturedAt: p.capturedAt,
       truncated: p.truncated,
     })),
     evidence: raw.evidence.map((e) => ({ ...e })),
+    photoInspections: raw.photoInspections?.map((p) => ({ ...p })),
     model: raw.model,
     metrics: raw.metrics ? structuredClone(raw.metrics) : undefined,
     error: raw.error,
@@ -313,6 +341,13 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     verifiedDetailUrls,
     checkedPages: task.pages.length,
   };
+  for (const photo of task.photoInspections ?? []) {
+    if (
+      task.pages.find((p) => p.id === photo.pageId)?.images?.[photo.imageIndex]
+        ?.url !== photo.sourceUrl
+    )
+      throw Error("sandboxの写真確認と保存ページの参照が一致しません");
+  }
   if (raw.answer)
     task.answer = validateAnswer(
       task,

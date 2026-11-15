@@ -1,3 +1,4 @@
+import { sharedMapEmbed } from "./map-embed.js";
 import { productOffer, offerText } from "./product-offer.js";
 import * as cheerio from "cheerio";
 import { checkNavigation } from "./sources.js";
@@ -124,10 +125,21 @@ export function extractPublicHtml(
       }
     });
   const title = $("title").first().text().replace(/\s+/g, " ").trim();
+  const mapEmbeds = $("iframe[src]")
+    .toArray()
+    .map((el) => {
+      try {
+        return sharedMapEmbed(new URL($(el).attr("src")!, url).href);
+      } catch {
+        return null;
+      }
+    })
+    .filter((u): u is string => !!u)
+    .slice(0, 3);
   const images: { url: string; alt: string }[] = [];
   const imageUrls = new Set<string>();
   const addImage = (value: string | undefined, alt: string) => {
-    if (!value || images.length >= 8) return;
+    if (!value || images.length >= 8 || /\.svg(?:[?#]|$)/i.test(value)) return;
     try {
       const u = new URL(value, url);
       if (
@@ -258,6 +270,7 @@ export function extractPublicHtml(
   return {
     url,
     title,
+    mapEmbeds,
     productOffer: offer,
     images,
     text: text.slice(0, 32000),

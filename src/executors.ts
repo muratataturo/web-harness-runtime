@@ -1,3 +1,4 @@
+import { prepareAnswerMedia } from "./answer-media.js";
 import { runTask, type RunOptions } from "./runtime.js";
 import { agentEngine } from "./codex.js";
 import { Store } from "./store.js";
@@ -94,6 +95,7 @@ export function createOpenShellExecutor(
       elapsedMs: Math.round(performance.now() - started),
       cleanupStatus: result.cleanupStatus,
     };
+    await prepareAnswerMedia(task, store.dir(task.id));
     await store.save(task);
     await store.event(task.id, "sandbox_import", {
       sandbox: plan.sandboxName,

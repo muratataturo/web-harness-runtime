@@ -1,0 +1,110 @@
+{
+  "taskId": "63666bf7-64ca-465a-9264-f75b0ca1d61e",
+  "model": "gpt-6.1-sol",
+  "accepted": true,
+  "imagesShown": [
+    {
+      "pageId": "page-3",
+      "imageIndex": 0,
+      "file": "69f03a04df9bf3c22f4015a1eb06322260d32ebff5e82fd09157dfcc71de0094.jpg",
+      "sourceUrl": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-15T08:46:37.040Z"
+    },
+    {
+      "pageId": "page-1",
+      "imageIndex": 1,
+      "file": "9fbc0a4a4e85a2529e22e1d5180487ed5f2cc549ba8ee9cf29c08229754cdf81.jpg",
+      "sourceUrl": "https://imgfp.hotp.jp/IMGH/22/19/P049622219/P049622219_368.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-15T08:46:37.134Z"
+    },
+    {
+      "pageId": "page-4",
+      "imageIndex": 1,
+      "file": "3045c210ec67991f4510d227168845f9df42291466aa9fafd34e84a667d3e173.jpg",
+      "sourceUrl": "https://www.kahaku.go.jp/albums/925/abm00000087.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-15T08:46:37.269Z"
+    },
+    {
+      "pageId": "page-museum-gallery",
+      "imageIndex": 7,
+      "file": "d867c75855f1cdd7d49d1d4b6833b8ec0c14ad7f81e2b706ee3602362bf8f0c3.webp",
+      "sourceUrl": "https://www.kahaku.go.jp/albums/1001/abm00000258.webp",
+      "type": "image/webp",
+      "shownAt": "2026-11-15T08:46:50.345Z"
+    }
+  ],
+  "photosSaved": {
+    "zoo": {
+      "file": "69f03a04df9bf3c22f4015a1eb06322260d32ebff5e82fd09157dfcc71de0094.jpg",
+      "pageId": "page-3",
+      "imageIndex": 0,
+      "sourceUrl": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-15T08:47:17.827Z"
+    },
+    "lunch": {
+      "file": "9fbc0a4a4e85a2529e22e1d5180487ed5f2cc549ba8ee9cf29c08229754cdf81.jpg",
+      "pageId": "page-1",
+      "imageIndex": 1,
+      "sourceUrl": "https://imgfp.hotp.jp/IMGH/22/19/P049622219/P049622219_368.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-15T08:47:17.827Z"
+    },
+    "museum": {
+      "file": "d867c75855f1cdd7d49d1d4b6833b8ec0c14ad7f81e2b706ee3602362bf8f0c3.webp",
+      "pageId": "page-museum-gallery",
+      "imageIndex": 7,
+      "sourceUrl": "https://www.kahaku.go.jp/albums/1001/abm00000258.webp",
+      "type": "image/webp",
+      "capturedAt": "2026-11-15T08:47:17.828Z"
+    }
+  },
+  "experiences": [
+    {
+      "stop": "zoo",
+      "headline": "近い2種類の動物で足の違い探し",
+      "highlights": [
+        "9:50から公開中の近い2種類を案内で選ぶ",
+        "違いを一つ言ってみる",
+        "11:20に水分・トイレ休憩、歩けるか確認"
+      ],
+      "why": "動物好きの子供を主役に、観察対象を絞って疲れを抑える提案です。",
+      "photoPageId": "page-3",
+      "photoIndex": 0,
+      "photoDescription": "上野動物園の大きな看板がある正門と金属の門扉、入口を歩く人々。",
+      "photoCaption": "掲載ページの正門参考写真です。当日の展示・提供内容を保証しません。"
+    },
+    {
+      "stop": "lunch",
+      "headline": "昼食を取り、午後へ進むか家族で判断",
+      "highlights": [
+        "12:10から70分の昼食",
+        "御膳2人分と子供プレート1人分を予定",
+        "価格・アレルギーは現地確認"
+      ],
+      "why": "食事時間を確保し、午後の博物館は子供の疲れを見て判断できます。",
+      "photoPageId": "page-1",
+      "photoIndex": 1,
+      "photoDescription": "釜に入った料理と、刺身を盛った白い皿、サラダ、小鉢、汁椀が並ぶ和食。",
+      "photoCaption": "掲載ページの料理参考写真です。予定メニューとは限らず、当日の提供内容を保証しません。"
+    },
+    {
+      "stop": "museum",
+      "headline": "生きた動物と標本の違いを発見",
+      "highlights": [
+        "13:40から常設の公開中の動物標本2点を案内で選ぶ",
+        "15:20に飲食可能表示を確認して休憩",
+        "15:50に気に入った1点を再確認。疲れたら博物館を省略"
+      ],
+      "why": "動物園での体験と科学への興味をつなぐ任意の提案です。特別展は含みません。",
+      "photoPageId": "page-museum-gallery",
+      "photoIndex": 7,
+      "photoDescription": "ガラスケースに展示された茶色いクマの標本と、手前の生物史の解説パネル。",
+      "photoCaption": "掲載ページの展示参考写真です。当日の展示・提供内容を保証しません。"
+    }
+  ],
+  "humanAppeal": "unrated"
+}

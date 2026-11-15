@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { copyAnswerMedia } from "./answer-media.js";
 import { visualRefinementRunner } from "./visual-refinement.js";
 import { config } from "dotenv";
 import { Command, InvalidArgumentError, Option } from "commander";
@@ -570,7 +571,7 @@ program
 program
   .command("export-html")
   .description(
-    "保存済みの実回答を単独で開けるHTML/CSSへ出力。推論・Web取得なし",
+    "保存済みの実回答をHTML/CSSと画像アセットへ出力。推論・Web取得なし",
   )
   .argument("<id>")
   .option("--out <file>", "HTMLの出力先")
@@ -579,6 +580,7 @@ program
       task = await store.get(id);
     const out = resolve(opts.out ?? join(store.dir(id), "answer.html"));
     await mkdir(dirname(out), { recursive: true });
+    await copyAnswerMedia(task, store.dir(task.id), out);
     await writeFile(out, renderAnswerHtml(task), { mode: 0o600 });
     console.log(out);
   });
@@ -617,7 +619,7 @@ program
   .description("保存タスクの未達を診断・計画・再実行・検証し最良結果を保存")
   .option(
     "--offline-visual",
-    "保存根拠だけから視覚成果物を実モデルで改善。新しいWeb取得なし",
+    "保存根拠から視覚成果物を改善。写真は保存済みの参照元から取得",
   )
   .argument("<task-id>")
   .option("--allow-replacements", "同じ条件・同数以上の代替候補の探索を許可")

@@ -4,7 +4,7 @@
   "cases": [
     {
       "kind": "journey-map",
-      "interactiveMs": 127,
+      "interactiveMs": 118,
       "viewports": [
         {
           "width": 320,
@@ -33,11 +33,11 @@
         "after": 10820
       },
       "googleRoute": true,
-      "loadedMapTiles": 15
+      "loadedMapTiles": 6
     },
     {
       "kind": "life-roadmap",
-      "interactiveMs": 78,
+      "interactiveMs": 83,
       "viewports": [
         {
           "width": 320,
@@ -66,6 +66,9 @@
     }
   ],
   "passed": true,
+  "experiencePhotosDecoded": 3,
+  "googleFrameErrorFallback": true,
+  "googlePreviewPreferred": true,
   "backgroundFailures": [
     {
       "failure": "http-403-png",
