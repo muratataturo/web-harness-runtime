@@ -764,3 +764,384 @@ body.has-visual .content-grid {
   line-height: 32px;
   font-weight: 600;
 }
+
+/* A quiet, label-free vector atlas; itinerary annotations carry the hierarchy. */
+.journey-map {
+  background: #f4f3ed;
+  height: 470px;
+}
+.journey-pin span {
+  width: 30px;
+  height: 30px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: none;
+  background: #487364;
+  box-shadow: 0 3px 10px #234d3626;
+  font-size: 12px;
+  font-weight: 700;
+}
+.journey-pin b {
+  transform: none;
+}
+.journey-pin.selected span {
+  background: #c77348;
+  outline: 5px solid #c7734820;
+}
+.journey-place-label.leaflet-tooltip {
+  background: #fffefbf5;
+  border: 1px solid #e3e8df;
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: #2c4b3f;
+  box-shadow: 0 3px 13px #234d3609;
+  white-space: normal;
+  min-width: 92px;
+  max-width: 165px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+.journey-place-label small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  color: #6b7c71;
+}
+.journey-place-label strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+.journey-place-label.is-selected {
+  border-color: #d9bfa5;
+  background: #fffdf5;
+}
+.journey-place-label:before {
+  display: none;
+}
+.map-view-tag {
+  position: absolute;
+  z-index: 400;
+  top: 16px;
+  left: 17px;
+  pointer-events: none;
+  padding: 11px 15px;
+  background: #fffefbf0;
+  border: 1px solid #e1e6dc;
+  border-radius: 11px;
+  box-shadow: 0 3px 16px #223e3007;
+}
+.map-view-tag span {
+  display: block;
+  color: #3c5c4c;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.map-view-tag small {
+  display: block;
+  color: #6d7d70;
+  font-size: 10px;
+  margin-top: 2px;
+}
+.map-fallback-note {
+  z-index: 405;
+}
+.map-caption {
+  background: #f5f5ed;
+  color: #6a7a6d;
+  font-size: 10px;
+}
+.route-key {
+  border-top-color: #527c70;
+  border-top-width: 2px;
+}
+#visual-artifact .leaflet-control-zoom {
+  border: 1px solid #e3e7df;
+  box-shadow: 0 3px 12px #234d3610;
+  border-radius: 12px;
+  overflow: hidden;
+}
+#visual-artifact .leaflet-control-zoom a {
+  color: #456452;
+  background: #fffefbf5;
+  border-color: #e8ece2;
+  font-size: 22px;
+}
+@media (max-width: 700px) {
+  .journey-map {
+    height: 370px;
+  }
+  .journey-place-label:not(.is-selected) {
+    display: none;
+  }
+  .journey-place-label.leaflet-tooltip {
+    max-width: 125px;
+    padding: 6px 9px;
+  }
+  .map-view-tag {
+    top: 12px;
+    left: 12px;
+    padding: 8px 11px;
+  }
+  .map-view-tag small {
+    display: none;
+  }
+}
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 26px;
+}
+.experience-card {
+  min-width: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e1e7df;
+  border-radius: 17px;
+  box-shadow: 0 8px 30px #243f3205;
+}
+.experience-card figure {
+  margin: 0;
+  position: relative;
+  background: #edf0e7;
+}
+.experience-card figure img {
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.experience-card figure:hover img {
+  transform: scale(1.035);
+}
+.experience-order {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  background: #fffefbef;
+  color: #345443;
+  width: 33px;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 11px;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 9px #163b2520;
+}
+.experience-card figcaption {
+  font-size: 9px;
+  line-height: 1.6;
+  padding: 9px 13px;
+  background: #f7f8f2;
+  color: #6c796c;
+}
+.experience-card figcaption a {
+  color: inherit;
+}
+.experience-copy {
+  padding: 21px;
+}
+.experience-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 10px;
+  color: #657963;
+}
+.experience-meta time {
+  font-size: 19px;
+  font-weight: 650;
+  color: #294d3b;
+  letter-spacing: -0.5px;
+}
+.experience-copy h3 {
+  font-size: 21px;
+  line-height: 1.6;
+  letter-spacing: -0.5px;
+  margin: 14px 0 !important;
+  color: #254934;
+}
+.experience-why {
+  font-size: 13px;
+  line-height: 1.95;
+  color: #536853;
+}
+.experience-copy ol {
+  padding-left: 20px;
+  margin: 17px 0;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #405a45;
+}
+.experience-copy li {
+  padding-left: 3px;
+  margin: 8px 0;
+}
+.experience-bottom {
+  padding-top: 15px;
+  border-top: 1px solid #e9ede3;
+}
+.experience-bottom > a {
+  font-size: 12px;
+  font-weight: 600;
+}
+.full-itinerary {
+  margin-top: 28px;
+  background: #f4f6ee;
+  border: 1px solid #dce4d5;
+  border-radius: 12px;
+  padding: 17px 20px;
+}
+.full-itinerary > summary {
+  font-size: 13px;
+  color: #3d6048;
+}
+body.has-visual:has(.experience-grid) .content-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+body.has-visual:has(.experience-grid) .side-note {
+  display: none;
+}
+.photo-missing {
+  height: 205px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  color: #687966;
+}
+@media (max-width: 950px) {
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+  .experience-card {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+  }
+  .experience-card figure img {
+    height: 100%;
+    min-height: 300px;
+  }
+  .experience-card figure {
+    height: 100%;
+  }
+  .experience-card figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fffefbef;
+  }
+  .experience-copy {
+    padding: 22px;
+  }
+}
+@media (max-width: 600px) {
+  .experience-card {
+    display: block;
+  }
+  .experience-card figure img {
+    height: 225px;
+    min-height: 0;
+  }
+  .experience-card figure {
+    height: auto;
+  }
+  .experience-card figcaption {
+    position: static;
+  }
+  .experience-copy {
+    padding: 21px;
+  }
+  .experience-copy h3 {
+    font-size: 22px;
+  }
+  .experience-grid {
+    gap: 24px;
+  }
+}
+.map-modebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e4e8e0;
+}
+.map-modebar > div {
+  display: flex;
+  gap: 6px;
+}
+.map-modebar > small {
+  font-size: 10px;
+  color: #6a7b6b;
+}
+.map-modebar .astryx-button {
+  font-size: 11px !important;
+  min-height: 36px !important;
+}
+.map-stage {
+  position: relative;
+}
+.google-map-preview {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  background: #f3f5f0;
+}
+.google-map-preview iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  min-height: 200px;
+}
+.google-map-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #f5f7f3ef;
+  font-size: 13px;
+  color: #516a58;
+  pointer-events: none;
+}
+.map-switch-fallback {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: #386a84;
+  text-decoration: underline;
+  font-size: 10px;
+  cursor: pointer;
+  min-height: 36px;
+}
+.map-view-tag {
+  background: #fffffff0;
+}
+.journey-pin.selected span {
+  background: #b3603b;
+  outline-color: #b3603b20;
+}
+@media (max-width: 700px) {
+  .map-modebar {
+    align-items: start;
+    flex-direction: column;
+    gap: 5px;
+    padding: 11px 12px;
+  }
+  .map-modebar > small {
+    font-size: 9px;
+  }
+  .map-caption {
+    flex-wrap: wrap;
+  }
+  .map-switch-fallback {
+    margin-left: 0;
+  }
+}

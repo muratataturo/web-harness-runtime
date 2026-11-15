@@ -1,3 +1,4 @@
+import { sharedMapEmbed } from "./map-embed.js";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
@@ -26,8 +27,10 @@ export const EXTRACT = `JSON.stringify((()=>{
  const detail=/\\/(?:sln\\/?H[0-9a-z]+|strJ[0-9]+|yad[0-9]+|usedcar\\/detail\\/|chintai\\/(?:bc|jnc)_[0-9]+|viewjob)/i;
  const rank=l=>/\\/chintai\\/bc_[0-9]+/i.test(l.url)?3:/\\/chintai\\/jnc_[0-9]+/i.test(l.url)?1:detail.test(l.url)?2:0;
  unique.sort((a,b)=>rank(b)-rank(a));
+ const images=Array.from(document.querySelectorAll('img[src]')).filter(img=>!img.src.split('?')[0].endsWith('.svg')).slice(0,8).map(img=>({url:img.currentSrc||img.src,alt:(img.alt||'').slice(0,2000)}));
+ const mapEmbeds=Array.from(document.querySelectorAll('iframe[src]')).map(f=>f.src).slice(0,30);
  const text=title+'\\n'+body;
- return {url:location.href,title,text:text.slice(0,32000),truncated:text.length>32000,links:unique.slice(0,220)};
+ return {url:location.href,title,text:text.slice(0,32000),truncated:text.length>32000,links:unique.slice(0,220),images,mapEmbeds};
 })())`;
 
 class BrowserCommandError extends Error {}
@@ -181,6 +184,9 @@ export class Browser {
         ? data.result
         : JSON.stringify(data.result),
     );
+    page.mapEmbeds = (page.mapEmbeds ?? [])
+      .filter((u: string) => sharedMapEmbed(u) !== null)
+      .slice(0, 3);
     page.url = checkNavigation(page.url, this.hosts);
     page.links = page.links.filter((l: { url: string }) => {
       try {

@@ -252,3 +252,27 @@ test("Codex usage keeps cumulative native totals without counting duplicate upda
     await f.client.close();
   }
 });
+
+test("Codex tool bridge forwards actual images as inputImage rather than dropping visual evidence", async () => {
+  const f = fixture("image");
+  const photo = defineTool({
+    name: "lookup",
+    label: "Photo",
+    description: "Photo",
+    parameters: Type.Object({ url: Type.String() }),
+    execute: async () => ({
+      content: [
+        { type: "text" as const, text: "captured source photo" },
+        { type: "image" as const, mimeType: "image/png", data: "AQID" },
+      ],
+      details: {},
+    }),
+  });
+  try {
+    await f.client.initialize();
+    await f.client.start([photo], "Inspect the source photo");
+    await f.client.prompt("look");
+  } finally {
+    await f.client.close();
+  }
+});

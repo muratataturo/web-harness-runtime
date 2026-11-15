@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Button } from "@astryxdesign/core/Button";
 import { Badge } from "@astryxdesign/core/Badge";
 import L from "leaflet";
+import { visitCurve } from "./journey-geometry.js";
 import { backgroundFor, verifiedTileLayer } from "./map-background.js";
 import "@astryxdesign/core/reset.css";
 import "@astryxdesign/core/astryx.css";
@@ -52,7 +53,14 @@ function citations(ids) {
 function Journey() {
   const a = data.artifact,
     [optional, setOptional] = useState(true),
-    [active, setActive] = useState(a.stops[0].id),
+    [active, setActive] = useState(
+      a.stops.find((s) => data.previews?.[s.id])?.id ?? a.stops[0].id,
+    ),
+    [mapMode, setMapMode] = useState(
+      Object.keys(data.previews ?? {}).length ? "google" : "route",
+    ),
+    [googleLoaded, setGoogleLoaded] = useState(false),
+    [googleUnavailable, setGoogleUnavailable] = useState(false),
     [online, setOnline] = useState(navigator.onLine),
     [tiles, setTiles] = useState(0),
     [tilesPending, setTilesPending] = useState(false),
@@ -60,11 +68,21 @@ function Journey() {
   const container = useRef(),
     mapRef = useRef(),
     layers = useRef(),
+    backgroundLayer = useRef(),
+    backgroundStopped = useRef(false),
     visibleCoordinates = useRef([]),
+    boundsKey = useRef(""),
     selected = a.stops.filter((s) => optional || !s.optional);
   const selectedStop = selected.find((s) => s.id === active) ?? selected[0];
   const steps = (s) => data.plan.steps.filter((t) => s.stepIds.includes(t.id));
   const primary = (s) => data.plan.steps.find((t) => t.id === s.primaryStepId);
+  const preview = data.previews?.[selectedStop.id];
+  const chooseStop = (id) => {
+    setActive(id);
+    setGoogleLoaded(false);
+    setGoogleUnavailable(false);
+    setMapMode(data.previews?.[id] && navigator.onLine ? "google" : "route");
+  };
   const provider = backgroundFor(a.stops);
   const mapped = selected.filter((s) => s.coordinates),
     unlocated = selected.filter((s) => !s.coordinates);
@@ -89,6 +107,7 @@ function Journey() {
     const tile = provider
       ? verifiedTileLayer(L, provider, (reason) => {
           failed = true;
+          backgroundStopped.current = true;
           setBackgroundError(reason);
           setTiles(0);
           setTilesPending(false);
@@ -102,7 +121,9 @@ function Journey() {
     tile?.on("tileload", () => {
       if (!failed) setTiles((n) => n + 1);
     });
-    if (navigator.onLine && mapped.length && tile) tile.addTo(map);
+    backgroundLayer.current = tile;
+    if (navigator.onLine && mapped.length && tile && mapMode === "route")
+      tile.addTo(map);
     const change = () => {
       setOnline(navigator.onLine);
       if (!navigator.onLine) setTilesPending(false);
@@ -111,7 +132,8 @@ function Journey() {
         mapped.length &&
         tile &&
         !failed &&
-        !map.hasLayer(tile)
+        !map.hasLayer(tile) &&
+        mapMode === "route"
       )
         tile.addTo(map);
     };
@@ -136,50 +158,156 @@ function Journey() {
     };
   }, []);
   useEffect(() => {
+    const tile = backgroundLayer.current,
+      map = mapRef.current;
+    if (
+      mapMode === "route" &&
+      tile &&
+      map &&
+      online &&
+      !backgroundStopped.current &&
+      !map.hasLayer(tile)
+    )
+      tile.addTo(map);
+  }, [mapMode, online]);
+  useEffect(() => {
+    if (mapMode !== "google" || !preview || !online) {
+      if (mapMode === "google") setMapMode("route");
+      return;
+    }
+    if (googleLoaded) return;
+    const timer = setTimeout(() => {
+      setGoogleUnavailable(true);
+      setMapMode("route");
+    }, 8000);
+    return () => clearTimeout(timer);
+  }, [mapMode, preview?.url, googleLoaded]);
+  useEffect(() => {
+    const click = (e) => {
+      const link = e.target.closest("a[data-map-stop]");
+      if (link && a.stops.some((s) => s.id === link.dataset.mapStop))
+        chooseStop(link.dataset.mapStop);
+    };
+    document.addEventListener("click", click);
+    return () => document.removeEventListener("click", click);
+  }, []);
+  useEffect(() => {
     const group = layers.current,
       map = mapRef.current;
     if (!map || !group) return;
-    group.clearLayers();
     const coords = mapped.map((s) => [s.coordinates.lat, s.coordinates.lon]);
     visibleCoordinates.current = coords;
-    if (coords.length > 1) {
-      L.polyline(coords, {
-        color: "#176856",
-        weight: 4,
-        dashArray: "7 9",
-        opacity: 0.85,
-      }).addTo(group);
-      map.fitBounds(coords, { padding: [45, 45], maxZoom: 17, animate: false });
+    const key = JSON.stringify(coords);
+    if (key !== boundsKey.current) {
+      boundsKey.current = key;
+      if (coords.length > 1)
+        map.fitBounds(coords, {
+          padding: [55, 55],
+          maxZoom: 17,
+          animate: false,
+        });
+      if (coords.length === 1) map.setView(coords[0], 16);
+      if (!coords.length) map.setView([0, 0], 1);
     }
-    if (coords.length === 1) map.setView(coords[0], 16);
-    if (!coords.length) map.setView([0, 0], 1);
-    const groups = new Map();
-    mapped.forEach((s, i) => {
-      const key = s.coordinates.lat + "," + s.coordinates.lon;
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key).push({ stop: s, number: selected.indexOf(s) + 1 });
-    });
-    groups.forEach((entries) => {
-      const { stop: s } = entries[0],
-        isActive = entries.some((e) => e.stop.id === selectedStop.id);
-      const marker = L.marker([s.coordinates.lat, s.coordinates.lon], {
-        icon: L.divIcon({
-          className: "journey-pin" + (isActive ? " selected" : ""),
-          html:
-            "<span><b>" +
-            entries.map((e) => e.number).join("/") +
-            "</b></span>",
-          iconSize: [36, 36],
-          iconAnchor: [18, 36],
-        }),
-        title: s.label,
-        keyboard: true,
-        alt: s.label,
-        zIndexOffset: isActive ? 1000 : 0,
-      }).addTo(group);
-      marker.on("click", () => setActive(s.id));
-      marker.getElement()?.setAttribute("aria-label", s.label + "を選択");
-    });
+    const draw = () => {
+      group.clearLayers();
+      for (let i = 1; i < coords.length; i++) {
+        const curve = visitCurve(map, coords[i - 1], coords[i], i);
+        L.polyline(curve, {
+          color: "#fffefa",
+          weight: 7,
+          opacity: 0.95,
+          interactive: false,
+        }).addTo(group);
+        L.polyline(curve, {
+          color: "#527c70",
+          weight: 2.5,
+          dashArray: "4 8",
+          opacity: 0.85,
+          interactive: false,
+        }).addTo(group);
+      }
+      const groups = new Map();
+      mapped.forEach((s) => {
+        const k = s.coordinates.lat + "," + s.coordinates.lon;
+        if (!groups.has(k)) groups.set(k, []);
+        groups.get(k).push({ stop: s, number: selected.indexOf(s) + 1 });
+      });
+      const entriesList = [...groups.values()];
+      entriesList.forEach((entries, gi) => {
+        const s = entries[0].stop,
+          source = [s.coordinates.lat, s.coordinates.lon],
+          point = map.project(source),
+          isActive = entries.some((e) => e.stop.id === selectedStop.id);
+        const near = entriesList.findIndex(
+          (other, oi) =>
+            oi !== gi &&
+            map
+              .project([
+                other[0].stop.coordinates.lat,
+                other[0].stop.coordinates.lon,
+              ])
+              .distanceTo(point) < 48,
+        );
+        const offset = near < 0 ? 0 : gi < near ? -24 : 24;
+        const dock = map.unproject([point.x, point.y + offset]);
+        if (offset)
+          L.polyline([source, dock], {
+            color: "#91aaa0",
+            weight: 1.2,
+            interactive: false,
+          }).addTo(group);
+        L.circleMarker(source, {
+          radius: 3,
+          stroke: false,
+          fillColor: "#527c70",
+          fillOpacity: 1,
+          interactive: false,
+        }).addTo(group);
+        const marker = L.marker(dock, {
+          icon: L.divIcon({
+            className: "journey-pin" + (isActive ? " selected" : ""),
+            html:
+              "<span><b>" +
+              entries.map((e) => e.number).join("·") +
+              "</b></span>",
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+          }),
+          title: s.label,
+          keyboard: true,
+          alt: s.label,
+          zIndexOffset: isActive ? 1000 : 0,
+        }).addTo(group);
+        marker.on("click", () => chooseStop(s.id));
+        marker.getElement()?.setAttribute("aria-label", s.label + "を選択");
+        const label = document.createElement("div"),
+          name = document.createElement("strong"),
+          time = document.createElement("small");
+        name.textContent = s.label.includes("・")
+          ? s.label.split("・").slice(1).join("・")
+          : s.label;
+        time.textContent = entries
+          .map((e) => primary(e.stop)?.when)
+          .filter(Boolean)
+          .join(" / ");
+        label.append(time, name);
+        const direction =
+          map.latLngToContainerPoint(dock).x > map.getSize().x * 0.55
+            ? "left"
+            : "right";
+        marker.bindTooltip(label, {
+          permanent: true,
+          direction,
+          offset: [direction === "left" ? -19 : 19, 0],
+          className: "journey-place-label" + (isActive ? " is-selected" : ""),
+          opacity: 1,
+        });
+      });
+    };
+    draw();
+    map.on("zoomend", draw);
+    return () => map.off("zoomend", draw);
   }, [optional, active]);
   const cost = data.plan.budget;
   const excluded = optional
@@ -211,37 +339,118 @@ function Journey() {
       </div>
       <div className="journey-layout">
         <div className="journey-map-area">
-          <div
-            ref={container}
-            className="journey-map"
-            data-tiles-ready={tiles > 0}
-            data-map-loading={tilesPending}
-            aria-label="行程の地図。番号ピンで予定を選択"
-          />
-          {(!tiles || tilesPending || backgroundError) && (
-            <div className="map-fallback-note" role="status">
-              {backgroundError
-                ? `背景地図を表示できません（${backgroundError}）。`
-                : !provider
-                  ? "この地域の背景地図には未対応です。"
-                  : !online
-                    ? "オフラインのため背景地図を取得できません。"
-                    : "背景地図を読み込み中。"}
-              ピンは出典座標、破線は訪問順の概略です。
-              {(!provider || backgroundError || !online) && (
+          <div className="map-modebar">
+            <div>
+              <Button
+                label="Google Maps"
+                variant={mapMode === "google" ? "primary" : "secondary"}
+                isDisabled={!preview || !online}
+                onClick={() => {
+                  setGoogleLoaded(false);
+                  setGoogleUnavailable(false);
+                  setMapMode("google");
+                }}
+              />
+              <Button
+                label="行程マップ"
+                variant={mapMode === "route" ? "primary" : "secondary"}
+                onClick={() => setMapMode("route")}
+              />
+            </div>
+            <small>
+              {mapMode === "google"
+                ? "選択地点のGoogle Mapsプレビュー"
+                : "地物に基づく参考地図・訪問順の概略"}
+            </small>
+          </div>
+          <div className="map-stage">
+            <div
+              ref={container}
+              className="journey-map"
+              data-tiles-ready={tiles > 0}
+              data-map-loading={tilesPending}
+              aria-label="行程の地図。番号ピンで予定を選択"
+            />
+            {mapMode === "route" &&
+              (!tiles || tilesPending || backgroundError) && (
+                <div className="map-fallback-note" role="status">
+                  {backgroundError
+                    ? `背景地図を表示できません（${backgroundError}）。`
+                    : !provider
+                      ? "この地域の背景地図には未対応です。"
+                      : !online
+                        ? "オフラインのため背景地図を取得できません。"
+                        : "背景地図を読み込み中。"}
+                  ピンは出典座標、破線は訪問順の概略です。
+                  {(!provider || backgroundError || !online) && (
+                    <a
+                      href={routeUrl(selected) ?? searchUrl(selectedStop)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Google Mapsで確認 ↗
+                    </a>
+                  )}
+                </div>
+              )}
+            {mapMode === "google" && preview && (
+              <div className="google-map-preview">
+                <iframe
+                  key={preview.url}
+                  title={`${selectedStop.label}のGoogle Mapsプレビュー`}
+                  src={preview.url}
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  onLoad={() => setGoogleLoaded(true)}
+                  ref={(node) => {
+                    if (node)
+                      node.onerror = () => {
+                        setGoogleUnavailable(true);
+                        setMapMode("route");
+                      };
+                  }}
+                />
+                {!googleLoaded && (
+                  <div className="google-map-loading">
+                    Google Mapsを読み込み中…
+                  </div>
+                )}
+              </div>
+            )}
+            {mapMode === "route" && (
+              <div className="map-view-tag">
+                <span>旅の見取り図</span>
+                <small>場所を選んで詳細へ</small>
+              </div>
+            )}
+          </div>
+          <div className="map-caption">
+            <span className="route-key" />
+            {mapMode === "google" ? (
+              <>
                 <a
-                  href={routeUrl(selected) ?? searchUrl(selectedStop)}
+                  href={preview?.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Google Mapsで確認 ↗
+                  施設公式ページの共有地図
                 </a>
-              )}
-            </div>
-          )}
-          <div className="map-caption">
-            <span className="route-key" />
-            破線＝配置できた地点の訪問順。道路・徒歩ルートではありません。
+                <button
+                  className="map-switch-fallback"
+                  onClick={() => setMapMode("route")}
+                >
+                  表示されない場合は行程マップへ
+                </button>
+              </>
+            ) : (
+              <>
+                {googleUnavailable
+                  ? "Google Mapsを表示できないため、参考地図に切り替えました。"
+                  : ""}
+                点線は立寄り順のイメージです。歩行経路はGoogle
+                Mapsで確認できます。
+              </>
+            )}
           </div>
           <div className="map-selection" aria-live="polite">
             <span className="overline">SELECTED STOP</span>
@@ -300,7 +509,7 @@ function Journey() {
                     (selectedStop.id === s.id ? "is-active" : "")
                   }
                   aria-pressed={selectedStop.id === s.id}
-                  onClick={() => setActive(s.id)}
+                  onClick={() => chooseStop(s.id)}
                 >
                   <span className="stop-index">{i + 1}</span>
                   <span>

@@ -1,3 +1,4 @@
+import { prepareAnswerMedia } from "./answer-media.js";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile, rm } from "node:fs/promises";
 import { resolve, join } from "node:path";
@@ -547,6 +548,7 @@ export async function runCodexSandbox(
           task.status = "partial";
           task.error = "VM実行終了を正常確認できませんでした。回答を保持します";
         }
+        await prepareAnswerMedia(task, store.dir(task.id));
         await store.save(task);
         await store.event(task.id, "sandbox_import", {
           sandbox: config.name,

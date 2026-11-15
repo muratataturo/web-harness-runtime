@@ -46,6 +46,7 @@ export async function fetchPreviewImage(
       signal,
       headers: {
         Accept: "image/avif,image/webp,image/png,image/jpeg,image/gif",
+        "User-Agent": "web-harness-runtime/0.3 (public-source image preview)",
       },
     });
     if ([301, 302, 303, 307, 308].includes(response.status)) {

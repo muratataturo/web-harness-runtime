@@ -289,7 +289,14 @@ export class CodexAgent {
         contentItems: [
           {
             type: "inputText",
-            text: "未対応ツールまたは不正な引数です。提示されたJSON Schemaに従ってください。",
+            text:
+              "未対応ツールまたは不正な引数です。提示されたJSON Schemaに従ってください。" +
+              (tool
+                ? [...Value.Errors(tool.parameters as any, params.arguments)]
+                    .slice(0, 8)
+                    .map((e) => `${e.path}: ${e.message}`)
+                    .join(" / ")
+                : ""),
           },
         ],
       };
@@ -304,9 +311,18 @@ export class CodexAgent {
       );
       return {
         success: !(result as any).isError,
-        contentItems: result.content
-          .filter((c) => c.type === "text")
-          .map((c) => ({ type: "inputText", text: (c as any).text })),
+        contentItems: result.content.flatMap((c): any[] =>
+          c.type === "text"
+            ? [{ type: "inputText", text: c.text }]
+            : c.type === "image"
+              ? [
+                  {
+                    type: "inputImage",
+                    imageUrl: `data:${c.mimeType};base64,${c.data}`,
+                  },
+                ]
+              : [],
+        ),
       };
     } catch (e) {
       throw e;

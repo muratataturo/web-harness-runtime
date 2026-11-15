@@ -236,6 +236,28 @@ test("host import rejects replay, fabricated quotes, invalid schema and cross-ho
   forged.security!.policyHash = "forged";
   assert.throws(() => validateSandboxTask(forged, options), /profile/);
 });
+test("sandbox imports captured map previews and bounded photo receipts without accepting foreign references", () => {
+  const t = fixture(),
+    page = t.pages[0]!;
+  const embed = "https://www.google.com/maps/embed?pb=!1m18!2d139.77";
+  page.mapEmbeds = [embed, "https://evil.example/embed"];
+  page.images = [{ url: page.url + "photo.jpg", alt: "参照写真" }];
+  t.photoInspections = [
+    {
+      pageId: page.id,
+      imageIndex: 0,
+      file: "a".repeat(64) + ".jpg",
+      sourceUrl: page.images[0]!.url,
+      type: "image/jpeg",
+      shownAt: t.createdAt,
+    },
+  ];
+  const imported = validateSandboxTask(t, options);
+  assert.deepEqual(imported.pages[0]!.mapEmbeds, [embed]);
+  assert.deepEqual(imported.photoInspections, t.photoInspections);
+  t.photoInspections[0]!.sourceUrl = "https://evil.example/photo.jpg";
+  assert.throws(() => validateSandboxTask(t, options), /写真確認/);
+});
 test("bounded artifact import refuses symlinks and oversized task files", async () => {
   const root = await mkdtemp(join(tmpdir(), "boundary-import-"));
   try {

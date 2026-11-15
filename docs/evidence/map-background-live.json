@@ -1,24 +1,28 @@
 {
-  "scope": "explicit single-viewport manual live verification; no OSM tile traffic",
-  "checkedAt": "2026-11-15T04:27:26.471Z",
+  "scope": "live Google map pixels, local experience photos and vector fallback; no OSM tile traffic",
+  "checkedAt": "2026-11-15T08:59:47.504Z",
   "cases": [
     {
       "mode": "file",
+      "googleMapRendered": true,
+      "photosDecoded": 3,
       "httpStatuses": [
         200
       ],
-      "tileResponses": 8,
-      "decodedTileImages": 8,
+      "tileResponses": 12,
+      "renderedVectorTiles": 12,
       "osmTileRequests": 0,
       "attributionVisible": true
     },
     {
       "mode": "http",
+      "googleMapRendered": true,
+      "photosDecoded": 3,
       "httpStatuses": [
         200
       ],
-      "tileResponses": 8,
-      "decodedTileImages": 8,
+      "tileResponses": 12,
+      "renderedVectorTiles": 12,
       "osmTileRequests": 0,
       "attributionVisible": true
     }

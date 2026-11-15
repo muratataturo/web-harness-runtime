@@ -5,6 +5,7 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { mapTile } from "../test/fixtures/map-tile.mjs";
+import { mapVector } from "../test/fixtures/map-vector.mjs";
 import { newTask } from "../src/runtime.js";
 import { renderAnswerHtml } from "../src/answer-html.js";
 const out = ".runtime/visual-study/qa";
@@ -16,6 +17,7 @@ const browser = await chromium.launch({
     "/usr/bin/chromium",
   ].find(existsSync),
 });
+browser.on("context", (context) => context.setDefaultTimeout(15000));
 const report = {
   scope:
     "automatic-interaction-and-layout-only; synthetic map transport fixture, no public tile traffic",
@@ -33,6 +35,8 @@ try {
         reducedMotion: "reduce",
       }),
       errors = [];
+    page.setDefaultTimeout(15000);
+    console.log(`Opening ${kind}`);
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => {
       if (/violates.*Content Security Policy/i.test(m.text()))
@@ -41,17 +45,25 @@ try {
     await page.route("https://cyberjapandata.gsi.go.jp/**", (route) =>
       route.fulfill({
         status: 200,
-        contentType: "image/png",
+        contentType: "application/octet-stream",
         headers: { "Access-Control-Allow-Origin": "*" },
-        body: mapTile,
+        body: mapVector,
       }),
     );
     page.on("request", (r) => {
       if (r.url().includes("tile.openstreetmap.org"))
         errors.push("Public OSM tile request is forbidden");
     });
+    await page.route("https://www.google.com/maps/embed?**", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "text/html",
+        body: "<!doctype html><p>Google Maps embed fixture</p>",
+      }),
+    );
     const renderStart = performance.now();
     await page.goto(pathToFileURL(resolve(file)).href);
+    console.log(`Opened ${kind}`);
     await page.locator(`[data-artifact-kind="${kind}"]`).waitFor();
     const interactiveMs = Math.round(performance.now() - renderStart);
     assert.ok(
@@ -59,6 +71,37 @@ try {
       "Saved artifact must become interactive within ten seconds",
     );
     if (kind === "journey-map") {
+      const preview = page.locator(".google-map-preview iframe");
+      assert.equal(await page.locator(".experience-card").count(), 3);
+      for (const image of await page.locator(".experience-card img").all()) {
+        await image.scrollIntoViewIfNeeded();
+        await image.evaluate((img) =>
+          Promise.race([
+            img.decode(),
+            new Promise((_, reject) =>
+              setTimeout(() => reject(Error("Photo decode timeout")), 5000),
+            ),
+          ]),
+        );
+        console.log("Photo decoded");
+      }
+      report.experiencePhotosDecoded = 3;
+      if (await preview.count()) {
+        await preview.waitFor();
+        await preview.dispatchEvent("error");
+        await page
+          .locator(".google-map-preview")
+          .waitFor({ state: "detached" });
+        report.googleFrameErrorFallback = true;
+        await page
+          .getByRole("button", { name: "Google Maps", exact: true })
+          .click();
+        await page.locator(".google-map-preview iframe").waitFor();
+        report.googlePreviewPreferred = true;
+        await page
+          .getByRole("button", { name: "行程マップ", exact: true })
+          .click();
+      }
       await page
         .locator(".leaflet-tile-loaded")
         .first()
@@ -72,6 +115,7 @@ try {
     });
     const checks = [];
     for (const width of [320, 390, 768, 1440]) {
+      console.log(`Checking ${kind} at ${width}px`);
       await page.setViewportSize({ width, height: width < 600 ? 844 : 1050 });
       await page.evaluate(() => window.scrollTo(0, 0));
       if (kind === "journey-map")
@@ -116,6 +160,9 @@ try {
         .locator(".map-selection h3")
         .filter({ hasText: "動物園" })
         .waitFor();
+      await page
+        .getByRole("button", { name: "行程マップ", exact: true })
+        .click();
       await page.locator(".journey-pin").filter({ hasText: "4" }).click();
       assert.match(
         await page.locator(".map-selection h3").innerText(),
@@ -246,14 +293,22 @@ try {
           failure === "invalid-png" ? Buffer.from("Access blocked") : mapTile,
       });
     });
+    await page.route("https://www.google.com/maps/embed?**", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "text/html",
+        body: "<p>fixture</p>",
+      }),
+    );
     await page.goto(pathToFileURL(resolve("docs/generated-answer.html")).href);
+    await page.getByRole("button", { name: "行程マップ", exact: true }).click();
     await page
       .locator(".map-fallback-note")
       .filter({ hasText: "背景地図を表示できません" })
       .waitFor();
     assert.equal(await page.locator(".leaflet-tile-loaded").count(), 0);
     assert.equal(
-      await page.locator(".leaflet-tile-pane img").count(),
+      await page.locator(".leaflet-tile-pane canvas").count(),
       0,
       "Provider error PNGs must never be displayed",
     );

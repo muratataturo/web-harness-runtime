@@ -1,0 +1,977 @@
+{
+  "id": "63666bf7-64ca-465a-9264-f75b0ca1d61e",
+  "query": "2026年11月15日(日)、大人2名と5歳児1名、9:30〜17:00、上野周辺、家族合計16,000円以内。動物と科学が好きで、休憩2回、施設は最大2か所。提供したRecruit Hot Pepperグルメのまいかアトレ上野店と、施設公式の公開ページを実際に取得し、一日を過ごす具体的な回答を日本語で作成してください。plan_taskで役割別の条件を定義し、店舗へ動物・施設へランチなど全候補に同じ条件を要求しない。summaryには時刻付き行程、徒歩区間の見積時間、採用理由、掲載料金と未確認予算枠を分けた家族総額、雨天代替、楽しみポイントの推奨案と2択を含めてください。子供の疲れを優先し、博物館は任意でもよい。動物園・博物館の年齢別料金/営業時間/休館を確認し、特別展と常設料金を混同しない。日曜に平日限定ランチ価格を適用しない。「大人のお子様ランチ」は5歳児向けと断定しない。交通2,500円/家族、おやつ休憩1,500円/家族を未確認予算枠とし、他の未確認料金も明示して予算上限との残額を計算。将来日の営業・空席を確約しない。候補の個別ページを引用し、取得不能の候補を断定せず、取得できた情報だけでも実行可能な暫定案をfinish_taskで保存してください。予約・購入・問い合わせはしません。",
+  "status": "partial",
+  "createdAt": "2026-11-15T08:46:27.421Z",
+  "updatedAt": "2026-11-15T08:47:17.829Z",
+  "model": "gpt-6.1-sol",
+  "agent": "codex",
+  "urls": [
+    "https://www.hotpepper.jp/strJ001100102/",
+    "https://www.hotpepper.jp/strJ001100102/lunch/",
+    "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+    "https://www.kahaku.go.jp/riyou/nyukan-annai/"
+  ],
+  "sources": [
+    {
+      "id": "source-1",
+      "kind": "hotpepper-gourmet",
+      "url": "https://www.hotpepper.jp/strJ001100102/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "料理、エリア、駅、予算、営業時間を /strJ.../ の店舗詳細で確認する。一覧・特集ページは発見に使い、そのものを店舗候補にしない。ランチとディナーの価格を混同しない。トップから地域リンク、または取得済みのランチ一覧へ進む。検索URLは https://www.hotpepper.jp/CSP/psh010/doBasic?FWT= + encodeURIComponent(短い検索語) を使用できる。空席は日付人数が未指定なら未確認とする。"
+    },
+    {
+      "id": "source-2",
+      "kind": "hotpepper-gourmet",
+      "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "料理、エリア、駅、予算、営業時間を /strJ.../ の店舗詳細で確認する。一覧・特集ページは発見に使い、そのものを店舗候補にしない。ランチとディナーの価格を混同しない。トップから地域リンク、または取得済みのランチ一覧へ進む。検索URLは https://www.hotpepper.jp/CSP/psh010/doBasic?FWT= + encodeURIComponent(短い検索語) を使用できる。空席は日付人数が未指定なら未確認とする。"
+    },
+    {
+      "id": "source-3",
+      "kind": "official-visit",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-4",
+      "kind": "official-visit",
+      "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "zoo",
+      "description": "動物園役割：年齢別料金・営業時間・休園と動物体験",
+      "required": true,
+      "weight": 3
+    },
+    {
+      "id": "museum",
+      "description": "任意の科学施設役割：常設の年齢別料金・営業時間・休館",
+      "required": false,
+      "weight": 2
+    },
+    {
+      "id": "lunch",
+      "description": "飲食店役割：日曜の昼食・価格・子連れ適性。施設には要求しない",
+      "required": true,
+      "weight": 3
+    },
+    {
+      "id": "plan",
+      "description": "各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み",
+      "required": true,
+      "weight": 3
+    }
+  ],
+  "limits": {
+    "maxSteps": 90,
+    "timeoutSeconds": 600,
+    "maxPages": 16
+  },
+  "steps": 12,
+  "answer": {
+    "actionPlan": {
+      "steps": [
+        {
+          "id": "s0",
+          "when": "9:30",
+          "durationMinutes": 20,
+          "where": "上野駅→動物園",
+          "action": "徒歩移動",
+          "how": "子供の歩調で正門へ",
+          "doneWhen": "到着",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        },
+        {
+          "id": "s1",
+          "when": "9:50",
+          "durationMinutes": 90,
+          "where": "動物園",
+          "action": "動物比較",
+          "how": "公開中の近い2種類を案内で選び足を比較",
+          "doneWhen": "違いを一つ言う",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": ["b0"]
+        },
+        {
+          "id": "s2",
+          "when": "11:20",
+          "durationMinutes": 25,
+          "where": "園内休憩場所未確認",
+          "action": "休憩1",
+          "how": "水分・トイレ。席なしなら退園",
+          "doneWhen": "歩けるか確認",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        },
+        {
+          "id": "s3",
+          "when": "11:45",
+          "durationMinutes": 25,
+          "where": "動物園→まいか",
+          "action": "徒歩移動",
+          "how": "中央改札側へ",
+          "doneWhen": "店舗着",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        },
+        {
+          "id": "s4",
+          "when": "12:10",
+          "durationMinutes": 70,
+          "where": "まいか",
+          "action": "昼食",
+          "how": "日曜御膳2と子供プレート1。価格・アレルギーを現地確認",
+          "doneWhen": "会計",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": ["b2", "b3"]
+        },
+        {
+          "id": "s5",
+          "when": "13:20",
+          "durationMinutes": 20,
+          "where": "まいか→博物館",
+          "action": "徒歩移動",
+          "how": "疲れたら省略",
+          "doneWhen": "到着",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        },
+        {
+          "id": "s6",
+          "when": "13:40",
+          "durationMinutes": 100,
+          "where": "博物館常設",
+          "action": "標本観察",
+          "how": "公開中の動物標本2点を案内で選ぶ。特別展は除外",
+          "doneWhen": "生体との違いを話す",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": ["b1"]
+        },
+        {
+          "id": "s7",
+          "when": "15:20",
+          "durationMinutes": 30,
+          "where": "指定休憩場所未確認",
+          "action": "休憩2",
+          "how": "飲食可能表示を確認、不可なら駅へ",
+          "doneWhen": "疲労確認",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        },
+        {
+          "id": "s8",
+          "when": "15:50",
+          "durationMinutes": 40,
+          "where": "常設",
+          "action": "振り返り",
+          "how": "気に入った1点だけ再確認",
+          "doneWhen": "感想一つ",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        },
+        {
+          "id": "s9",
+          "when": "16:30",
+          "durationMinutes": 20,
+          "where": "博物館→上野駅",
+          "action": "徒歩移動",
+          "how": "混雑なら早め退館",
+          "doneWhen": "駅着",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        },
+        {
+          "id": "s10",
+          "when": "16:50",
+          "durationMinutes": 10,
+          "where": "上野駅",
+          "action": "帰路準備",
+          "how": "トイレ・持物確認",
+          "doneWhen": "17時終了",
+          "locationStatus": "unconfirmed",
+          "evidenceIds": ["ev-3", "ev-7", "ev-11"],
+          "costItemIds": []
+        }
+      ],
+      "budget": {
+        "scenario": "家族3名・動物園と常設の両方を含む主案",
+        "totalYen": 12080,
+        "items": [
+          {
+            "id": "b0",
+            "unitYen": 600,
+            "quantity": 2,
+            "label": "動物園",
+            "basis": "published",
+            "evidenceIds": ["ev-1"]
+          },
+          {
+            "id": "b1",
+            "unitYen": 630,
+            "quantity": 2,
+            "label": "常設",
+            "basis": "published",
+            "evidenceIds": ["ev-5"]
+          },
+          {
+            "id": "b2",
+            "unitYen": 1880,
+            "quantity": 2,
+            "label": "日曜御膳",
+            "basis": "published",
+            "evidenceIds": ["ev-9"]
+          },
+          {
+            "id": "b3",
+            "unitYen": 860,
+            "quantity": 1,
+            "label": "子供プレート",
+            "basis": "published",
+            "evidenceIds": ["ev-10"]
+          },
+          {
+            "id": "b4",
+            "unitYen": 2500,
+            "quantity": 1,
+            "label": "交通家族枠",
+            "basis": "estimate",
+            "evidenceIds": []
+          },
+          {
+            "id": "b5",
+            "unitYen": 1500,
+            "quantity": 1,
+            "label": "おやつ家族枠",
+            "basis": "estimate",
+            "evidenceIds": []
+          },
+          {
+            "id": "b6",
+            "unitYen": 1000,
+            "quantity": 1,
+            "label": "追加飲食未確認枠",
+            "basis": "estimate",
+            "evidenceIds": []
+          }
+        ]
+      },
+      "branches": [
+        {
+          "trigger": "雨",
+          "action": "動物園省略",
+          "how": "9:50常設へ、11:20休憩後昼食、午後疲れれば終了。1200円減",
+          "evidenceIds": ["ev-5"]
+        },
+        {
+          "trigger": "疲労・利用不可",
+          "action": "博物館省略・早帰り",
+          "how": "昼食後駅で休憩2を取って帰路。1260円減。店が満席なら駅で表示価格を見て家族4620円以内の食事を選ぶ（店未確認）",
+          "evidenceIds": ["ev-11"]
+        }
+      ]
+    },
+    "visualArtifact": {
+      "kind": "journey-map",
+      "title": "上野の家族一日プラン：動物園と任意の科学博物館",
+      "description": "9:30〜17:00、休憩2回。掲載料金7,080円＋未確認予算枠5,000円＝12,080円、残3,920円。徒歩は見積。疲れたら博物館省略、雨天は常設中心。営業・空席は未確約。",
+      "stops": [
+        {
+          "id": "departure",
+          "label": "東京・上野駅",
+          "optional": false,
+          "primaryStepId": "s0",
+          "stepIds": ["s0"],
+          "evidenceIds": ["ev-geo-station"],
+          "coordinates": {
+            "evidenceId": "ev-geo-station",
+            "lat": 35.7140413,
+            "lon": 139.7771164
+          }
+        },
+        {
+          "id": "zoo",
+          "label": "東京・上野 恩賜上野動物園",
+          "optional": false,
+          "primaryStepId": "s1",
+          "stepIds": ["s0", "s1", "s2", "s3"],
+          "evidenceIds": ["ev-1", "ev-2", "ev-3", "ev-4", "ev-geo-zoo"],
+          "coordinates": {
+            "evidenceId": "ev-geo-zoo",
+            "lat": 35.7153426,
+            "lon": 139.768896
+          },
+          "previewPageId": "page-map-zoo",
+          "experience": {
+            "headline": "近い2種類の動物で足の違い探し",
+            "highlights": [
+              "9:50から公開中の近い2種類を案内で選ぶ",
+              "違いを一つ言ってみる",
+              "11:20に水分・トイレ休憩、歩けるか確認"
+            ],
+            "why": "動物好きの子供を主役に、観察対象を絞って疲れを抑える提案です。",
+            "photoPageId": "page-3",
+            "photoIndex": 0,
+            "photoDescription": "上野動物園の大きな看板がある正門と金属の門扉、入口を歩く人々。",
+            "photoCaption": "掲載ページの正門参考写真です。当日の展示・提供内容を保証しません。"
+          }
+        },
+        {
+          "id": "lunch",
+          "label": "東京・上野 まいか アトレ上野店",
+          "optional": false,
+          "primaryStepId": "s4",
+          "stepIds": ["s3", "s4", "s5"],
+          "evidenceIds": ["ev-9", "ev-10", "ev-11", "ev-12", "ev-geo-lunch"],
+          "coordinates": {
+            "evidenceId": "ev-geo-lunch",
+            "lat": 35.713800988772995,
+            "lon": 139.77720009817438
+          },
+          "experience": {
+            "headline": "昼食を取り、午後へ進むか家族で判断",
+            "highlights": [
+              "12:10から70分の昼食",
+              "御膳2人分と子供プレート1人分を予定",
+              "価格・アレルギーは現地確認"
+            ],
+            "why": "食事時間を確保し、午後の博物館は子供の疲れを見て判断できます。",
+            "photoPageId": "page-1",
+            "photoIndex": 1,
+            "photoDescription": "釜に入った料理と、刺身を盛った白い皿、サラダ、小鉢、汁椀が並ぶ和食。",
+            "photoCaption": "掲載ページの料理参考写真です。予定メニューとは限らず、当日の提供内容を保証しません。"
+          }
+        },
+        {
+          "id": "museum",
+          "label": "東京・上野 国立科学博物館",
+          "optional": true,
+          "primaryStepId": "s6",
+          "stepIds": ["s5", "s6", "s7", "s8", "s9"],
+          "evidenceIds": [
+            "ev-5",
+            "ev-6",
+            "ev-7",
+            "ev-8",
+            "ev-17",
+            "ev-geo-museum"
+          ],
+          "coordinates": {
+            "evidenceId": "ev-geo-museum",
+            "lat": 35.7158995,
+            "lon": 139.7766878
+          },
+          "experience": {
+            "headline": "生きた動物と標本の違いを発見",
+            "highlights": [
+              "13:40から常設の公開中の動物標本2点を案内で選ぶ",
+              "15:20に飲食可能表示を確認して休憩",
+              "15:50に気に入った1点を再確認。疲れたら博物館を省略"
+            ],
+            "why": "動物園での体験と科学への興味をつなぐ任意の提案です。特別展は含みません。",
+            "photoPageId": "page-museum-gallery",
+            "photoIndex": 7,
+            "photoDescription": "ガラスケースに展示された茶色いクマの標本と、手前の生物史の解説パネル。",
+            "photoCaption": "掲載ページの展示参考写真です。当日の展示・提供内容を保証しません。"
+          }
+        },
+        {
+          "id": "return",
+          "label": "東京・上野駅",
+          "optional": false,
+          "primaryStepId": "s10",
+          "stepIds": ["s9", "s10"],
+          "evidenceIds": ["ev-geo-station"],
+          "coordinates": {
+            "evidenceId": "ev-geo-station",
+            "lat": 35.7140413,
+            "lon": 139.7771164
+          }
+        }
+      ]
+    },
+    "summary": "## 推奨：動物園を主役に、科学博物館は任意\n9:30上野駅→徒歩20分→9:50動物園、11:20休憩①、11:45徒歩25分→12:10まいかで昼食、13:20徒歩20分→13:40科学博物館常設、15:20休憩②、16:30徒歩20分→17:00駅で終了。時刻・徒歩は提案見積です。[ev-3][ev-7][ev-11][ev-12]\n掲載額は動物園1200円・5歳無料、常設1260円・5歳無料、日曜天婦羅御膳1880円×2＋子供プレート860円＝4620円、計7080円。[ev-1][ev-2][ev-5][ev-6][ev-9][ev-10] 未確認枠は家族交通2500円、おやつ1500円、追加飲食1000円で総額12080円、残3920円。\n2択は①推奨：動物と標本の違い探し②疲れたら博物館を省き早帰り。雨天は動物園を省き常設中心へ。両施設は通常月曜休ですが対象日の臨時変更・空席は未確認です。[ev-4][ev-8]\n\n## 具体的な実行手順（時刻・行動は提案）\n9:30 上野駅→動物園 — 徒歩移動（20分の見積）。子供の歩調で正門へ 完了の目安：到着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n9:50 動物園 — 動物比較（90分の見積）。公開中の近い2種類を案内で選び足を比較 完了の目安：違いを一つ言う。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n11:20 園内休憩場所未確認 — 休憩1（25分の見積）。水分・トイレ。席なしなら退園 完了の目安：歩けるか確認。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n11:45 動物園→まいか — 徒歩移動（25分の見積）。中央改札側へ 完了の目安：店舗着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n12:10 まいか — 昼食（70分の見積）。日曜御膳2と子供プレート1。価格・アレルギーを現地確認 完了の目安：会計。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n13:20 まいか→博物館 — 徒歩移動（20分の見積）。疲れたら省略 完了の目安：到着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n13:40 博物館常設 — 標本観察（100分の見積）。公開中の動物標本2点を案内で選ぶ。特別展は除外 完了の目安：生体との違いを話す。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n15:20 指定休憩場所未確認 — 休憩2（30分の見積）。飲食可能表示を確認、不可なら駅へ 完了の目安：疲労確認。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n15:50 常設 — 振り返り（40分の見積）。気に入った1点だけ再確認 完了の目安：感想一つ。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n16:30 博物館→上野駅 — 徒歩移動（20分の見積）。混雑なら早め退館 完了の目安：駅着。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n16:50 上野駅 — 帰路準備（10分の見積）。トイレ・持物確認 完了の目安：17時終了。場所の詳細は未確認。[ev-3][ev-7][ev-11]\n\n## 予算（家族3名・動物園と常設の両方を含む主案・掲載料金と未確認の見積）\n| 内訳 | 人数・数量 | 単価 | 小計 | 区分 |\n| --- | ---: | ---: | ---: | --- |\n| 動物園 | 2 | 600円 | 1,200円 | 掲載額[ev-1] |\n| 常設 | 2 | 630円 | 1,260円 | 掲載額[ev-5] |\n| 日曜御膳 | 2 | 1,880円 | 3,760円 | 掲載額[ev-9] |\n| 子供プレート | 1 | 860円 | 860円 | 掲載額[ev-10] |\n| 交通家族枠 | 1 | 2,500円 | 2,500円 | 未確認の見積 |\n| おやつ家族枠 | 1 | 1,500円 | 1,500円 | 未確認の見積 |\n| 追加飲食未確認枠 | 1 | 1,000円 | 1,000円 | 未確認の見積 |\n合計12,080円。指定上限16,000円との差額3,920円。見積を含み、実際の支払額を保証しません。\n\n## 状況が変わった時の行動\n- 雨 → 動物園省略。9:50常設へ、11:20休憩後昼食、午後疲れれば終了。1200円減[ev-5]\n- 疲労・利用不可 → 博物館省略・早帰り。昼食後駅で休憩2を取って帰路。1260円減。店が満席なら駅で表示価格を見て家族4620円以内の食事を選ぶ（店未確認）[ev-11]",
+    "candidates": [
+      {
+        "name": "上野動物園",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "matches": [
+          {
+            "criterionId": "zoo",
+            "status": "supported",
+            "evidenceIds": ["ev-1", "ev-2", "ev-3", "ev-4"],
+            "explanation": "役割別料金・通常営業時間を確認。対象日確約ではない"
+          },
+          {
+            "criterionId": "museum",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          },
+          {
+            "criterionId": "lunch",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          },
+          {
+            "criterionId": "plan",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          }
+        ],
+        "score": 27,
+        "eligible": false
+      },
+      {
+        "name": "まいか",
+        "url": "https://www.hotpepper.jp/strJ001100102/",
+        "matches": [
+          {
+            "criterionId": "zoo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          },
+          {
+            "criterionId": "museum",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          },
+          {
+            "criterionId": "lunch",
+            "status": "supported",
+            "evidenceIds": ["ev-9", "ev-10", "ev-11", "ev-12"],
+            "explanation": "役割別料金・通常営業時間を確認。対象日確約ではない"
+          },
+          {
+            "criterionId": "plan",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          }
+        ],
+        "score": 27,
+        "eligible": false
+      },
+      {
+        "name": "国立科学博物館",
+        "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+        "matches": [
+          {
+            "criterionId": "zoo",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          },
+          {
+            "criterionId": "museum",
+            "status": "supported",
+            "evidenceIds": ["ev-5", "ev-6", "ev-7", "ev-8"],
+            "explanation": "役割別料金・通常営業時間を確認。対象日確約ではない"
+          },
+          {
+            "criterionId": "lunch",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          },
+          {
+            "criterionId": "plan",
+            "status": "unknown",
+            "evidenceIds": [],
+            "explanation": "他役割は適用外。行程適合は暫定見積"
+          }
+        ],
+        "score": 18,
+        "eligible": false
+      }
+    ],
+    "limitations": [
+      "対象日カレンダー詳細取得不能。通常休館規則のみ確認。",
+      "公開HTMLのみ。具体展示公開・休憩席・空席は未確認。特別展は対象外。",
+      "大人のお子様ランチを幼児用とは扱わず、日曜欄の子供プレートを採用。",
+      "追加確認しても未確認の項目: 飲食店役割：日曜の昼食・価格・子連れ適性。施設には要求しない・各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み / 動物園役割：年齢別料金・営業時間・休園と動物体験・各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み / 動物園役割：年齢別料金・営業時間・休園と動物体験・飲食店役割：日曜の昼食・価格・子連れ適性。施設には要求しない・各候補の役割に応じ家族3名、休憩2回、施設最大2か所、16000円以内の行程への組込み"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "pageId": "page-3",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "quote": "一般\n600円",
+      "capturedAt": "2026-11-14T06:41:44.802Z"
+    },
+    {
+      "id": "ev-2",
+      "pageId": "page-3",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "quote": "小学6年生まで\n無料",
+      "capturedAt": "2026-11-14T06:41:44.802Z"
+    },
+    {
+      "id": "ev-3",
+      "pageId": "page-3",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "quote": "9時30分～17時00分",
+      "capturedAt": "2026-11-14T06:41:44.802Z"
+    },
+    {
+      "id": "ev-4",
+      "pageId": "page-3",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "quote": "月曜日（月曜日が国民の祝日や振替休日の場合はその翌日が休園日）",
+      "capturedAt": "2026-11-14T06:41:44.802Z"
+    },
+    {
+      "id": "ev-5",
+      "pageId": "page-4",
+      "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+      "quote": "一般・大学生 630円",
+      "capturedAt": "2026-11-14T06:41:44.880Z"
+    },
+    {
+      "id": "ev-6",
+      "pageId": "page-4",
+      "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+      "quote": "18歳未満の方",
+      "capturedAt": "2026-11-14T06:41:44.880Z"
+    },
+    {
+      "id": "ev-7",
+      "pageId": "page-4",
+      "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+      "quote": "開館時間 9：00 ～17：00",
+      "capturedAt": "2026-11-14T06:41:44.880Z"
+    },
+    {
+      "id": "ev-8",
+      "pageId": "page-4",
+      "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+      "quote": "毎週月曜日（日・月曜日が祝日・休日の場合は火曜日）",
+      "capturedAt": "2026-11-14T06:41:44.880Z"
+    },
+    {
+      "id": "ev-9",
+      "pageId": "page-6",
+      "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+      "quote": "天婦羅御膳\n茶碗蒸し、小鉢、香の物、赤出汁、甘味がセットで付きます。\n1,880円（税込）",
+      "capturedAt": "2026-11-14T06:41:52.023Z"
+    },
+    {
+      "id": "ev-10",
+      "pageId": "page-6",
+      "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+      "quote": "お子様プレート\nハンバーグ、海老フライ、ポテト、パスタ、ウインナー、ご飯\n860円（税込）",
+      "capturedAt": "2026-11-14T06:41:52.023Z"
+    },
+    {
+      "id": "ev-11",
+      "pageId": "page-1",
+      "url": "https://www.hotpepper.jp/strJ001100102/",
+      "quote": "上野駅中央改札を出てすぐ。アトレEAST（レトロ館）２Ｆ",
+      "capturedAt": "2026-11-14T06:41:43.687Z"
+    },
+    {
+      "id": "ev-12",
+      "pageId": "page-1",
+      "url": "https://www.hotpepper.jp/strJ001100102/",
+      "quote": "月～日、祝日、祝前日: 11:00～22:30 （料理L.O. 21:15 ドリンクL.O. 21:30）",
+      "capturedAt": "2026-11-14T06:41:43.687Z"
+    },
+    {
+      "id": "ev-geo-station",
+      "pageId": "geo-station",
+      "url": "https://www.openstreetmap.org/way/85395094",
+      "quote": "{\"name\":\"上野駅\",\"lat\":\"35.7140413\",\"lon\":\"139.7771164\",\"osm_type\":\"way\",\"osm_id\":85395094,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\"}",
+      "capturedAt": "2026-11-15T00:09:23.503Z"
+    },
+    {
+      "id": "ev-geo-zoo",
+      "pageId": "geo-zoo",
+      "url": "https://www.openstreetmap.org/way/1065775336",
+      "quote": "{\"name\":\"恩賜上野動物園\",\"lat\":\"35.7153426\",\"lon\":\"139.7688960\",\"osm_type\":\"way\",\"osm_id\":1065775336,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\"}",
+      "capturedAt": "2026-11-15T00:09:23.503Z"
+    },
+    {
+      "id": "ev-geo-museum",
+      "pageId": "geo-museum",
+      "url": "https://www.openstreetmap.org/way/203960902",
+      "quote": "{\"name\":\"国立科学博物館\",\"lat\":\"35.7158995\",\"lon\":\"139.7766878\",\"osm_type\":\"way\",\"osm_id\":203960902,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\"}",
+      "capturedAt": "2026-11-15T00:09:23.503Z"
+    },
+    {
+      "id": "ev-geo-lunch",
+      "pageId": "geo-lunch",
+      "url": "https://www.hotpepper.jp/strJ001100102/",
+      "quote": "\"geo\": {\n\t\t\"@type\": \"GeoCoordinates\",\n\t\t\"latitude\": \"35.713800988772995\",\n\t\t\"longitude\": \"139.77720009817438\"\n\t}",
+      "capturedAt": "2026-11-15T00:09:23.504Z"
+    },
+    {
+      "id": "ev-17",
+      "pageId": "page-museum-gallery",
+      "url": "https://www.kahaku.go.jp/tenji/index.html",
+      "quote": "展示 TOP | 国立科学博物館 National Museum of Nature and Science,Tokyo\n\n国立科学博物館\n展示\n展示 TOP\n展示 TOP\nお知らせ\n特別展・企画展\n常設展\nその他の展示\n巡回展\nお知らせ\nお知らせ一覧（リンクを新しいタブで開きます）\n特別展・企画展",
+      "capturedAt": "2026-11-15T08:40:34.491Z"
+    }
+  ],
+  "photoInspections": [
+    {
+      "pageId": "page-3",
+      "imageIndex": 0,
+      "file": "69f03a04df9bf3c22f4015a1eb06322260d32ebff5e82fd09157dfcc71de0094.jpg",
+      "sourceUrl": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-15T08:46:37.040Z"
+    },
+    {
+      "pageId": "page-1",
+      "imageIndex": 1,
+      "file": "9fbc0a4a4e85a2529e22e1d5180487ed5f2cc549ba8ee9cf29c08229754cdf81.jpg",
+      "sourceUrl": "https://imgfp.hotp.jp/IMGH/22/19/P049622219/P049622219_368.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-15T08:46:37.134Z"
+    },
+    {
+      "pageId": "page-4",
+      "imageIndex": 1,
+      "file": "3045c210ec67991f4510d227168845f9df42291466aa9fafd34e84a667d3e173.jpg",
+      "sourceUrl": "https://www.kahaku.go.jp/albums/925/abm00000087.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-15T08:46:37.269Z"
+    },
+    {
+      "pageId": "page-museum-gallery",
+      "imageIndex": 7,
+      "file": "d867c75855f1cdd7d49d1d4b6833b8ec0c14ad7f81e2b706ee3602362bf8f0c3.webp",
+      "sourceUrl": "https://www.kahaku.go.jp/albums/1001/abm00000258.webp",
+      "type": "image/webp",
+      "shownAt": "2026-11-15T08:46:50.345Z"
+    }
+  ],
+  "answerPhotos": {
+    "zoo": {
+      "file": "69f03a04df9bf3c22f4015a1eb06322260d32ebff5e82fd09157dfcc71de0094.jpg",
+      "pageId": "page-3",
+      "imageIndex": 0,
+      "sourceUrl": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-15T08:47:17.827Z"
+    },
+    "lunch": {
+      "file": "9fbc0a4a4e85a2529e22e1d5180487ed5f2cc549ba8ee9cf29c08229754cdf81.jpg",
+      "pageId": "page-1",
+      "imageIndex": 1,
+      "sourceUrl": "https://imgfp.hotp.jp/IMGH/22/19/P049622219/P049622219_368.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-15T08:47:17.827Z"
+    },
+    "museum": {
+      "file": "d867c75855f1cdd7d49d1d4b6833b8ec0c14ad7f81e2b706ee3602362bf8f0c3.webp",
+      "pageId": "page-museum-gallery",
+      "imageIndex": 7,
+      "sourceUrl": "https://www.kahaku.go.jp/albums/1001/abm00000258.webp",
+      "type": "image/webp",
+      "capturedAt": "2026-11-15T08:47:17.828Z"
+    }
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "passed",
+    "issues": [],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": []
+      }
+    ]
+  },
+  "reviewWarnings": [
+    "東京・上野 恩賜上野動物園: 掲載写真を取得できませんでした。写真のない状態を視覚品質の成功には数えません。"
+  ],
+  "pages": [
+    {
+      "url": "https://www.hotpepper.jp/strJ001100102/",
+      "title": "まいか 米香 アトレ上野店(上野/居酒屋)＜ネット予約可＞ | ホットペッパーグルメ",
+      "images": [
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/65/65/P020156565/P020156565_480.jpg",
+          "alt": "まいか 米香 アトレ上野店(上野/居酒屋)＜ネット予約可＞ | ホットペッパーグルメ"
+        },
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/22/19/P049622219/P049622219_368.jpg",
+          "alt": "まいか 米香 アトレ上野店のおすすめ料理1"
+        },
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/22/28/P049622228/P049622228_168.jpg",
+          "alt": "まいか 米香 アトレ上野店のおすすめ料理2"
+        },
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/22/31/P049622231/P049622231_168.jpg",
+          "alt": "まいか 米香 アトレ上野店のおすすめ料理3"
+        },
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/93/91/P029829391/P029829391_120.jpg",
+          "alt": "料理メニュー写真 茶豆"
+        },
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/94/68/P029829468/P029829468_120.jpg",
+          "alt": "料理メニュー写真 馬刺し"
+        },
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/15/69/P031251569/P031251569_120.jpg",
+          "alt": "料理メニュー写真 無農薬野菜のグリーンサラダ"
+        },
+        {
+          "url": "https://imgfp.hotp.jp/IMGH/43/49/P029404349/P029404349_198.jpg",
+          "alt": "全国ご当地食材を使用したまいかオリジナル和創作料理"
+        }
+      ],
+      "text": "上野駅中央改札を出てすぐ。アトレEAST（レトロ館）２Ｆ\n月～日、祝日、祝前日: 11:00～22:30 （料理L.O. 21:15 ドリンクL.O. 21:30）",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-14T06:41:43.687Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-1"
+    },
+    {
+      "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+      "title": "まいか 米香 アトレ上野店(居酒屋)のランチ | ホットペッパーグルメ",
+      "images": [],
+      "text": "",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-14T06:41:44.126Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-2"
+    },
+    {
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "title": "開園時間・休園日・入園料 | 上野動物園",
+      "images": [
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+          "alt": "開園時間・休園日・入園料 | 上野動物園"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/nenpass_ueno.jpg",
+          "alt": "年間パスポート"
+        }
+      ],
+      "text": "一般\n600円\n小学6年生まで\n無料\n9時30分～17時00分\n月曜日（月曜日が国民の祝日や振替休日の場合はその翌日が休園日）",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-14T06:41:44.802Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-3"
+    },
+    {
+      "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/",
+      "title": "入館案内（上野本館） | 国立科学博物館 National Museum of Nature and Science,Tokyo",
+      "images": [
+        {
+          "url": "https://www.kahaku.go.jp/ogp.png",
+          "alt": "入館案内（上野本館） | 国立科学博物館 National Museum of Nature and Science,Tokyo"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/925/abm00000087.jpg",
+          "alt": "入館案内（上野本館） | 国立科学博物館 National Museum of Nature and Science,Tokyo"
+        }
+      ],
+      "text": "一般・大学生 630円\n18歳未満の方\n開館時間 9：00 ～17：00\n毎週月曜日（日・月曜日が祝日・休日の場合は火曜日）",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-14T06:41:44.880Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-4"
+    },
+    {
+      "url": "https://www.kahaku.go.jp/riyou/nyukan-annai/calendar.html",
+      "title": "開館カレンダー | 国立科学博物館 National Museum of Nature and Science,Tokyo",
+      "images": [
+        {
+          "url": "https://www.kahaku.go.jp/ogp.png",
+          "alt": "開館カレンダー | 国立科学博物館 National Museum of Nature and Science,Tokyo"
+        }
+      ],
+      "text": "",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-14T06:41:48.628Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-5"
+    },
+    {
+      "url": "https://www.hotpepper.jp/strJ001100102/lunch/",
+      "title": "まいか 米香 アトレ上野店(居酒屋)のランチ | ホットペッパーグルメ",
+      "images": [],
+      "text": "天婦羅御膳\n茶碗蒸し、小鉢、香の物、赤出汁、甘味がセットで付きます。\n1,880円（税込）\nお子様プレート\nハンバーグ、海老フライ、ポテト、パスタ、ウインナー、ご飯\n860円（税込）",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-14T06:41:52.023Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-6"
+    },
+    {
+      "id": "geo-station",
+      "url": "https://www.openstreetmap.org/way/85395094",
+      "title": "station 地理データの取得記録",
+      "text": "{\"name\":\"上野駅\",\"lat\":\"35.7140413\",\"lon\":\"139.7771164\",\"osm_type\":\"way\",\"osm_id\":85395094,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\"}",
+      "links": [],
+      "capturedAt": "2026-11-15T00:09:23.503Z",
+      "truncated": true
+    },
+    {
+      "id": "geo-zoo",
+      "url": "https://www.openstreetmap.org/way/1065775336",
+      "title": "zoo 地理データの取得記録",
+      "text": "{\"name\":\"恩賜上野動物園\",\"lat\":\"35.7153426\",\"lon\":\"139.7688960\",\"osm_type\":\"way\",\"osm_id\":1065775336,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\"}",
+      "links": [],
+      "capturedAt": "2026-11-15T00:09:23.503Z",
+      "truncated": true
+    },
+    {
+      "id": "geo-museum",
+      "url": "https://www.openstreetmap.org/way/203960902",
+      "title": "museum 地理データの取得記録",
+      "text": "{\"name\":\"国立科学博物館\",\"lat\":\"35.7158995\",\"lon\":\"139.7766878\",\"osm_type\":\"way\",\"osm_id\":203960902,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\"}",
+      "links": [],
+      "capturedAt": "2026-11-15T00:09:23.503Z",
+      "truncated": true
+    },
+    {
+      "id": "geo-lunch",
+      "url": "https://www.hotpepper.jp/strJ001100102/",
+      "title": "lunch 地理データの取得記録",
+      "text": "\"geo\": {\n\t\t\"@type\": \"GeoCoordinates\",\n\t\t\"latitude\": \"35.713800988772995\",\n\t\t\"longitude\": \"139.77720009817438\"\n\t}",
+      "links": [],
+      "capturedAt": "2026-11-15T00:09:23.504Z",
+      "truncated": true
+    },
+    {
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/access/",
+      "title": "交通アクセス | 上野動物園",
+      "mapEmbeds": [
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.393930948477!2d139.7723777412035!3d35.71652921760806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c28f7766d7f%3A0x76b8b5efa1988ef4!2z5LiK6YeO5YuV54mp5ZyS!5e0!3m2!1sja!2sjp!4v1763379986468!5m2!1sja!2sjp"
+      ],
+      "images": [
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/plan_your_visit/access/access_map_ueno.png",
+          "alt": "交通アクセス | 上野動物園"
+        }
+      ],
+      "text": "",
+      "links": [],
+      "truncated": true,
+      "id": "page-map-zoo",
+      "capturedAt": "2026-11-15T07:52:37.230Z"
+    },
+    {
+      "url": "https://www.kahaku.go.jp/tenji/index.html",
+      "title": "展示 TOP | 国立科学博物館 National Museum of Nature and Science,Tokyo",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.kahaku.go.jp/ogp.png",
+          "alt": "展示 TOP | 国立科学博物館 National Museum of Nature and Science,Tokyo"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/1001/abm00000279.webp",
+          "alt": "小惑星探査機はやぶさ 再突入カプセル"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/1001/abm00000277.webp",
+          "alt": "習志野隕石"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/1001/abm00000269.webp",
+          "alt": "すばる望遠鏡　主焦点カメラ"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/1001/abm00000247.webp",
+          "alt": "日本の海洋研究"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/1001/abm00000254.webp",
+          "alt": "Ⅰ. 日本列島の素顔"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/1001/abm00000260.webp",
+          "alt": "Ⅱ. 日本列島の生い立ち"
+        },
+        {
+          "url": "https://www.kahaku.go.jp/albums/1001/abm00000258.webp",
+          "alt": "Ⅲ. 生き物たちの日本列島"
+        }
+      ],
+      "text": "展示 TOP | 国立科学博物館 National Museum of Nature and Science,Tokyo\n\n国立科学博物館\n展示\n展示 TOP\n展示 TOP\nお知らせ\n特別展・企画展\n常設展\nその他の展示\n巡回展\nお知らせ\nお知らせ一覧（リンクを新しいタブで開きます）\n特別展・企画展",
+      "links": [],
+      "truncated": true,
+      "id": "page-museum-gallery",
+      "capturedAt": "2026-11-15T08:40:34.491Z"
+    }
+  ],
+  "evaluation": {
+    "mode": "frozen-replay",
+    "caseId": "saved-visual-answer",
+    "fixtureSha256": "1076314332d23ed803a0bea3ddec1a4af4c9bd486331d3cd9213078dca2dc817"
+  }
+}

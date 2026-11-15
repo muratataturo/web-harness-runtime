@@ -6,6 +6,7 @@ import {
 } from "node:http";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { GoalEngine, scenarioDefaults } from "./goals.js";
 import { Store } from "./store.js";
 import { claudeAuthentication } from "./claude.js";
@@ -107,6 +108,30 @@ export function createWorkbenchServer(
         else send(res, 405, { error: "GET / POST only" });
         return;
       }
+      const photoMatch = path.match(
+        /^\/api\/runs\/([a-zA-Z0-9-]+)\/answer-assets\/([a-f0-9]{64}\.(?:jpg|png|webp|gif|avif))$/,
+      );
+      if (photoMatch && req.method === "GET") {
+        const run = await runs.get(photoMatch[1]!);
+        const task = run.taskId ? await taskStore.get(run.taskId) : run.task;
+        const photo = Object.values(task?.answerPhotos ?? {}).find(
+          (p) => p.file === photoMatch[2],
+        );
+        if (!task || !photo) {
+          send(res, 404, { error: "保存写真がありません" });
+          return;
+        }
+        const bytes = await readFile(
+          join(taskStore.dir(task.id), "answer-assets", photo.file),
+        );
+        res.writeHead(200, {
+          "Content-Type": photo.type,
+          "X-Content-Type-Options": "nosniff",
+          "Cache-Control": "private,max-age=86400",
+        });
+        res.end(bytes);
+        return;
+      }
       const answerMatch = path.match(
         /^\/api\/runs\/([a-zA-Z0-9-]+)\/answer\.html$/,
       );
@@ -123,7 +148,11 @@ export function createWorkbenchServer(
           "X-Content-Type-Options": "nosniff",
           "Referrer-Policy": "strict-origin-when-cross-origin",
         });
-        res.end(renderAnswerHtml(task));
+        res.end(
+          renderAnswerHtml(task, {
+            photoBase: `/api/runs/${answerMatch[1]}/answer-assets`,
+          }),
+        );
         return;
       }
       const visualMatch = path.match(

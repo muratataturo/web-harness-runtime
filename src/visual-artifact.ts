@@ -1,3 +1,5 @@
+import { entityKey } from "./sources.js";
+import { sharedMapEmbed } from "./map-embed.js";
 import { specificityContract } from "./answer-plan.js";
 import { Type, type Static } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
@@ -21,6 +23,27 @@ export const visualArtifactSchema = Type.Union([
             primaryStepId: id,
             evidenceIds: ids,
             optional: Type.Boolean(),
+            previewPageId: Type.Optional(id),
+            experience: Type.Optional(
+              Type.Object(
+                {
+                  headline: Type.String({ minLength: 1, maxLength: 64 }),
+                  why: Type.String({ minLength: 1, maxLength: 200 }),
+                  highlights: Type.Array(
+                    Type.String({ minLength: 1, maxLength: 180 }),
+                    { minItems: 2, maxItems: 4 },
+                  ),
+                  photoPageId: id,
+                  photoIndex: Type.Integer({ minimum: 0, maximum: 7 }),
+                  photoCaption: Type.String({ minLength: 1, maxLength: 180 }),
+                  photoDescription: Type.String({
+                    minLength: 1,
+                    maxLength: 160,
+                  }),
+                },
+                { additionalProperties: false },
+              ),
+            ),
             coordinates: Type.Optional(
               Type.Object(
                 {
@@ -117,6 +140,53 @@ export function validateVisualArtifact(
         throw Error(
           `${s.id}: 地点名には場所だけを書き、時刻や行動説明はstepIdsに紐づく手順に分けてください`,
         );
+      if (s.previewPageId) {
+        const previewPage = task.pages.find((p) => p.id === s.previewPageId);
+        if (
+          previewPage &&
+          !s.evidenceIds.some((id) => {
+            const ev = task.evidence.find((e) => e.id === id);
+            if (!ev) return false;
+            const a = entityKey(ev.url),
+              b = entityKey(previewPage.url);
+            return a &&
+              b &&
+              !a.startsWith("generic:") &&
+              !b.startsWith("generic:")
+              ? a === b
+              : new URL(ev.url).hostname === new URL(previewPage.url).hostname;
+          })
+        )
+          throw Error(`${s.id}: Google共有地図と訪問先の出典対応がありません`);
+      }
+      if (
+        s.previewPageId &&
+        !task.pages
+          .find((p) => p.id === s.previewPageId)
+          ?.mapEmbeds?.some(sharedMapEmbed)
+      )
+        throw Error(`${s.id}: 取得済みのGoogle Maps共有埋め込みが必要です`);
+      if (s.experience) {
+        const e = s.experience,
+          page = task.pages.find((p) => p.id === e.photoPageId);
+        if (
+          !task.photoInspections?.some(
+            (p) => p.pageId === e.photoPageId && p.imageIndex === e.photoIndex,
+          )
+        )
+          throw Error(
+            `${s.id}: inspect_photoで実画像を確認してから選んでください`,
+          );
+        if (!page?.images?.[e.photoIndex])
+          throw Error(`${s.id}: 保存ページ内の写真参照が必要です`);
+        if (
+          !s.evidenceIds.some(
+            (id) =>
+              task.evidence.find((ev) => ev.id === id)?.pageId === page.id,
+          )
+        )
+          throw Error(`${s.id}: 写真と地点の出典対応がありません`);
+      }
       s.evidenceIds.forEach((id) => assertEvidenceIntegrity(task, id));
       if (s.coordinates) {
         const quote = assertEvidenceIntegrity(
@@ -191,6 +261,38 @@ export function assessVisualArtifact(task: Task, answer: Answer) {
       issues.push(
         "地図に配置できる出典付き座標が2地点未満です。未配置のまま部分回答に残すか追加調査してください",
       );
+    if (answer.visualArtifact.kind === "journey-map") {
+      const experiences = answer.visualArtifact.stops.filter(
+        (s) => s.experience,
+      );
+      if (task.answerPhotos !== undefined) {
+        const missing = experiences.filter((s) => !task.answerPhotos?.[s.id]);
+        if (missing.length)
+          issues.push(
+            "写真の取得・保存が完了していない体験があります: " +
+              missing.map((s) => s.label).join("、"),
+          );
+      }
+      const mainStops = answer.visualArtifact.stops.filter((s) => {
+        const primary = answer.actionPlan?.steps.find(
+          (p) => p.id === s.primaryStepId,
+        );
+        return (
+          primary &&
+          !/徒歩|移動|帰路|帰宅|乗車|解散|待機|休憩/.test(primary.action)
+        );
+      });
+      const absent = mainStops.filter((s) => !s.experience);
+      if (absent.length)
+        issues.push(
+          "主要な訪問先すべてに写真と体験内容が必要です: " +
+            absent.map((s) => s.label).join("、"),
+        );
+      if (experiences.length < 2)
+        issues.push(
+          "YOUR DAYの写真付き体験が2件未満です。掲載写真と、何を体験するか・選ぶ理由・楽しむ手順を構造化してください",
+        );
+    }
     if (
       answer.visualArtifact.kind === "life-roadmap" &&
       !answer.visualArtifact.milestones.some((m) => m.dependsOn.length)

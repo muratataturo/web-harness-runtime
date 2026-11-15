@@ -9,28 +9,41 @@ test("fixed extraction script includes title and prioritizes deduplicated candid
   const doc = {
     title: "店舗A",
     body: { innerText: "渋谷駅から徒歩3分" },
-    querySelectorAll: () => [
-      {
-        innerText: "京都一覧",
-        href: "https://www.hotpepper.jp/SA22/",
-        getClientRects: () => [{}],
-      },
-      {
-        innerText: "店舗A",
-        href: "https://www.hotpepper.jp/strJ000000001/",
-        getClientRects: () => [{}],
-      },
-      {
-        innerText: "店舗A詳細",
-        href: "https://www.hotpepper.jp/strJ000000001/",
-        getClientRects: () => [{}],
-      },
-    ],
+    querySelectorAll: (selector: string) =>
+      selector === "img[src]"
+        ? [
+            {
+              src: "https://www.hotpepper.jp/photo.jpg",
+              currentSrc: "",
+              alt: "料理",
+            },
+          ]
+        : selector === "iframe[src]"
+          ? [{ src: "https://www.google.com/maps/embed?pb=!1m18" }]
+          : [
+              {
+                innerText: "京都一覧",
+                href: "https://www.hotpepper.jp/SA22/",
+                getClientRects: () => [{}],
+              },
+              {
+                innerText: "店舗A",
+                href: "https://www.hotpepper.jp/strJ000000001/",
+                getClientRects: () => [{}],
+              },
+              {
+                innerText: "店舗A詳細",
+                href: "https://www.hotpepper.jp/strJ000000001/",
+                getClientRects: () => [{}],
+              },
+            ],
   };
   const extract = new Function("document", "location", `return ${EXTRACT}`);
   const result = JSON.parse(
     extract(doc, { href: "https://www.hotpepper.jp/SA22/" }),
   );
+  assert.equal(result.images[0].alt, "料理");
+  assert.equal(result.mapEmbeds.length, 1);
   assert.equal(result.links.length, 2);
   assert.match(result.links[0].url, /strJ/);
   assert.match(result.text, /店舗A\n渋谷/);
