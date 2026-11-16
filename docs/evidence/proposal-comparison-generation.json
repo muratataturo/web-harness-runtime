@@ -1,0 +1,200 @@
+{
+  "scope": "actual model generation with shared adoption; no simulated human results",
+  "records": [
+    {
+      "case": "travel",
+      "taskId": "bfe00831-5b99-4b78-afd5-3c1b12ed996e",
+      "model": "gpt-6.1-sol",
+      "loopId": "2a6f1fc8-2280-4af9-9cb0-e771df6385d9",
+      "accepted": true,
+      "review": {
+        "version": 1,
+        "status": "passed",
+        "issues": []
+      },
+      "sourceTaskId": "comparison-seed-8ec23b0b-dcfe-4472-a962-663bcd6fafda",
+      "originalPlanPreserved": true,
+      "existingVisualPreserved": true,
+      "audit": {
+        "version": 1,
+        "method": "structured-actions-and-character-bigram-heuristic",
+        "semanticAppeal": "unrated",
+        "pairwise": [
+          {
+            "a": "discovery-compare",
+            "b": "relax-focus",
+            "similarity": 0.184
+          },
+          {
+            "a": "discovery-compare",
+            "b": "photo-capture",
+            "similarity": 0.224
+          },
+          {
+            "a": "relax-focus",
+            "b": "photo-capture",
+            "similarity": 0.179
+          }
+        ],
+        "ranking": {
+          "recommendedId": "relax-focus",
+          "reason": "希望にある「休憩・子供・疲れ」との対応から、この案を先に表示しています。",
+          "assessment": "明示された優先条件・希望語との対応と構造検査による初期表示。人間の魅力度評価や実測の効果ではありません。",
+          "options": [
+            {
+              "id": "relax-focus",
+              "theme": "relax",
+              "matches": [
+                "休憩",
+                "子供",
+                "疲れ"
+              ],
+              "evidenceLinked": true,
+              "explicitlyPrioritized": true
+            },
+            {
+              "id": "discovery-compare",
+              "theme": "discovery",
+              "matches": [
+                "動物",
+                "科学",
+                "発見",
+                "比較"
+              ],
+              "evidenceLinked": true,
+              "explicitlyPrioritized": false
+            },
+            {
+              "id": "photo-capture",
+              "theme": "photo",
+              "matches": [
+                "記録",
+                "撮影"
+              ],
+              "evidenceLinked": true,
+              "explicitlyPrioritized": false
+            }
+          ]
+        }
+      },
+      "uxLearningContext": {
+        "scope": "self-reported-human-ux-review",
+        "sourceTaskId": "comparison-seed-8ec23b0b-dcfe-4472-a962-663bcd6fafda",
+        "artifactRevision": "708490ed056f798f62dbaf6494622742cb17530ff3e16a1478ddbd325569de30",
+        "responses": 0,
+        "uniqueBrowserReviewers": 0,
+        "independentHumansVerified": false,
+        "humanAppealStatus": "unrated",
+        "issues": {
+          "too_dense": 0,
+          "unclear_difference": 0,
+          "not_for_me": 0,
+          "unrealistic": 0,
+          "hard_to_read": 0
+        },
+        "guidance": [],
+        "variants": [],
+        "note": "同じ版・ブラウザ識別子・案の最新回答だけを使用。本人性・独立した人間の人数は未検証。新しい生成物の評価点として転用しない。"
+      },
+      "humanResponsesCollected": 0,
+      "humanAppeal": "unrated"
+    },
+    {
+      "case": "life",
+      "taskId": "47ce830f-a51c-44d7-a3da-2836f473b8ed",
+      "model": "gpt-6.1-sol",
+      "loopId": "acea9fd4-4340-4221-b822-8783278a670a",
+      "accepted": true,
+      "review": {
+        "version": 1,
+        "status": "passed",
+        "issues": []
+      },
+      "sourceTaskId": "comparison-seed-6f2dbbec-9a4d-4e3e-b90f-58513eb834ff",
+      "originalPlanPreserved": true,
+      "existingVisualPreserved": false,
+      "audit": {
+        "version": 1,
+        "method": "structured-actions-and-character-bigram-heuristic",
+        "semanticAppeal": "unrated",
+        "pairwise": [
+          {
+            "a": "discovery",
+            "b": "relax",
+            "similarity": 0.115
+          },
+          {
+            "a": "discovery",
+            "b": "photo",
+            "similarity": 0.06
+          },
+          {
+            "a": "relax",
+            "b": "photo",
+            "similarity": 0
+          }
+        ],
+        "ranking": {
+          "recommendedId": "photo",
+          "reason": "希望にある「写真・記録・撮影」との対応から、この案を先に表示しています。",
+          "assessment": "明示された優先条件・希望語との対応と構造検査による初期表示。人間の魅力度評価や実測の効果ではありません。",
+          "options": [
+            {
+              "id": "photo",
+              "theme": "photo",
+              "matches": [
+                "写真",
+                "記録",
+                "撮影"
+              ],
+              "evidenceLinked": false,
+              "explicitlyPrioritized": false
+            },
+            {
+              "id": "discovery",
+              "theme": "discovery",
+              "matches": [
+                "発見",
+                "比較"
+              ],
+              "evidenceLinked": true,
+              "explicitlyPrioritized": false
+            },
+            {
+              "id": "relax",
+              "theme": "relax",
+              "matches": [
+                "保留"
+              ],
+              "evidenceLinked": false,
+              "explicitlyPrioritized": false
+            }
+          ]
+        }
+      },
+      "uxLearningContext": {
+        "scope": "self-reported-human-ux-review",
+        "sourceTaskId": "comparison-seed-6f2dbbec-9a4d-4e3e-b90f-58513eb834ff",
+        "artifactRevision": "774df203497b9bf7e03fd4493b3058fc27ab421c5ebf23dc006db42a74f29ad9",
+        "responses": 0,
+        "uniqueBrowserReviewers": 0,
+        "independentHumansVerified": false,
+        "humanAppealStatus": "unrated",
+        "issues": {
+          "too_dense": 0,
+          "unclear_difference": 0,
+          "not_for_me": 0,
+          "unrealistic": 0,
+          "hard_to_read": 0
+        },
+        "guidance": [],
+        "variants": [],
+        "note": "同じ版・ブラウザ識別子・案の最新回答だけを使用。本人性・独立した人間の人数は未検証。新しい生成物の評価点として転用しない。"
+      },
+      "humanResponsesCollected": 0,
+      "humanAppeal": "unrated",
+      "milestoneSchedulePreserved": true,
+      "originalSummaryPreserved": true
+    }
+  ]
+}

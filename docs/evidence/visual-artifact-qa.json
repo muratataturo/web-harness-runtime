@@ -4,7 +4,7 @@
   "cases": [
     {
       "kind": "journey-map",
-      "interactiveMs": 118,
+      "interactiveMs": 140,
       "viewports": [
         {
           "width": 320,
@@ -37,7 +37,7 @@
     },
     {
       "kind": "life-roadmap",
-      "interactiveMs": 81,
+      "interactiveMs": 87,
       "viewports": [
         {
           "width": 320,

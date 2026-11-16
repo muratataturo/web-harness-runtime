@@ -1,4 +1,5 @@
-import { randomUUID } from "node:crypto";
+import { proposalRevision } from "./proposals.js";
+import { randomUUID, createHash } from "node:crypto";
 import { mkdir, readFile, writeFile, rename, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { Store } from "./store.js";
@@ -8,7 +9,17 @@ export interface UxReviewInput {
   uncertaintyVisible: boolean;
   nextActionClear: boolean;
   appeal: number;
-  designVersion: "ten-second-v1";
+  designVersion: "ten-second-v1" | "ten-second-v2";
+  reviewerId?: string;
+  artifactRevision?: string;
+  proposalId?: string;
+  issues?: (
+    | "too_dense"
+    | "unclear_difference"
+    | "not_for_me"
+    | "unrealistic"
+    | "hard_to_read"
+  )[];
 }
 interface UxReviewRecord extends UxReviewInput {
   id?: string;
@@ -33,7 +44,7 @@ export class UxFeedbackStore {
       !Number.isInteger(input.appeal) ||
       input.appeal < 1 ||
       input.appeal > 5 ||
-      input.designVersion !== "ten-second-v1"
+      !["ten-second-v1", "ten-second-v2"].includes(input.designVersion)
     )
       throw new Error(
         "10秒レビューの回答が不正です。表示を見てから全項目を選んでください",
@@ -41,8 +52,47 @@ export class UxFeedbackStore {
     const task = await this.store.get(taskId);
     if (!task.answer || task.evaluation)
       throw new Error("保存された実調査の回答が必要です");
+    if (input.designVersion === "ten-second-v2") {
+      if (
+        input.exposureMs < 10000 ||
+        !/^[a-zA-Z0-9-]{8,80}$/.test(input.reviewerId ?? "") ||
+        input.artifactRevision !== proposalRevision(task) ||
+        !task.answer.visualArtifact?.proposalSet?.options.some(
+          (o) => o.id === input.proposalId,
+        )
+      )
+        throw Error("評価対象の版・案・10秒の表示時間を確認してください");
+      if (
+        input.issues &&
+        (!Array.isArray(input.issues) ||
+          input.issues.length > 5 ||
+          new Set(input.issues).size !== input.issues.length ||
+          input.issues.some(
+            (x) =>
+              ![
+                "too_dense",
+                "unclear_difference",
+                "not_for_me",
+                "unrealistic",
+                "hard_to_read",
+              ].includes(x),
+          ))
+      )
+        throw Error("UX改善点の指定が不正です");
+    }
     const record: UxReviewRecord = {
-      id: randomUUID(),
+      id:
+        input.designVersion === "ten-second-v2"
+          ? createHash("sha256")
+              .update(
+                [
+                  input.reviewerId,
+                  input.artifactRevision,
+                  input.proposalId,
+                ].join(":"),
+              )
+              .digest("hex")
+          : randomUUID(),
       scope: "self-reported-human-ux-review",
       taskId,
       createdAt: new Date().toISOString(),
@@ -52,6 +102,14 @@ export class UxFeedbackStore {
       nextActionClear: input.nextActionClear,
       appeal: input.appeal,
       designVersion: input.designVersion,
+      ...(input.designVersion === "ten-second-v2"
+        ? {
+            reviewerId: input.reviewerId,
+            artifactRevision: input.artifactRevision,
+            proposalId: input.proposalId,
+            issues: input.issues ?? [],
+          }
+        : {}),
       passed:
         input.understood &&
         input.uncertaintyVisible &&
@@ -72,7 +130,7 @@ export class UxFeedbackStore {
       result.scope !== "self-reported-human-ux-review" ||
       (file !== result.taskId + ".json" &&
         file !== result.taskId + "-" + result.id + ".json") ||
-      result.designVersion !== "ten-second-v1" ||
+      !["ten-second-v1", "ten-second-v2"].includes(result.designVersion) ||
       !Number.isFinite(result.exposureMs) ||
       result.exposureMs < 9000 ||
       result.exposureMs > 30000 ||
@@ -86,6 +144,25 @@ export class UxFeedbackStore {
       result.appeal > 5
     )
       throw new Error("保存されたUX評価が不正です");
+    if (
+      result.designVersion === "ten-second-v2" &&
+      (result.exposureMs < 10000 ||
+        !/^[a-zA-Z0-9-]{8,80}$/.test(result.reviewerId ?? "") ||
+        !/^[a-f0-9]{64}$/.test(result.artifactRevision ?? "") ||
+        typeof result.proposalId !== "string" ||
+        !Array.isArray(result.issues) ||
+        result.issues.some(
+          (x: string) =>
+            ![
+              "too_dense",
+              "unclear_difference",
+              "not_for_me",
+              "unrealistic",
+              "hard_to_read",
+            ].includes(x),
+        ))
+    )
+      throw Error("保存された比較UX評価が不正です");
     return result as UxReviewRecord;
   }
   private async records() {
@@ -119,6 +196,81 @@ export class UxFeedbackStore {
         code: "ENOENT",
       });
     return record;
+  }
+  async learningContext(taskId: string) {
+    const task = await this.store.get(taskId),
+      revision = proposalRevision(task);
+    const all = (await this.records())
+      .filter(
+        (r) =>
+          r.taskId === taskId &&
+          r.designVersion === "ten-second-v2" &&
+          r.artifactRevision === revision,
+      )
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const seen = new Set<string>(),
+      reviews = all.filter((r) => {
+        const key = r.reviewerId + ":" + r.proposalId;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    const median = (values: number[]) => {
+      const a = values.sort((a, b) => a - b);
+      return a.length
+        ? (a[Math.floor((a.length - 1) / 2)]! + a[Math.floor(a.length / 2)]!) /
+            2
+        : null;
+    };
+    const issues = Object.fromEntries(
+      [
+        "too_dense",
+        "unclear_difference",
+        "not_for_me",
+        "unrealistic",
+        "hard_to_read",
+      ].map((k) => [
+        k,
+        reviews.filter((r) => r.issues?.includes(k as any)).length,
+      ]),
+    );
+    const guidance = [
+      ...(issues.too_dense
+        ? ["比較表の情報量を減らし、行動と違いを先に示す"]
+        : []),
+      ...(issues.unclear_difference
+        ? ["案ごとの操作と残る成果を明確に変える"]
+        : []),
+      ...(issues.not_for_me
+        ? ["入力条件に合う理由と不向きな条件を具体化する"]
+        : []),
+      ...(issues.unrealistic ? ["元の時間枠・費用・移動条件を再点検する"] : []),
+      ...(issues.hard_to_read
+        ? ["文字階層・コントラスト・モバイル表示を再検査する"]
+        : []),
+    ];
+    return {
+      scope: "self-reported-human-ux-review" as const,
+      sourceTaskId: taskId,
+      artifactRevision: revision,
+      responses: reviews.length,
+      uniqueBrowserReviewers: new Set(reviews.map((r) => r.reviewerId)).size,
+      independentHumansVerified: false,
+      humanAppealStatus: reviews.length ? "self-reported-only" : "unrated",
+      issues,
+      guidance,
+      variants: (task.answer?.visualArtifact?.proposalSet?.options ?? []).map(
+        (o) => ({
+          proposalId: o.id,
+          theme: o.theme,
+          responses: reviews.filter((r) => r.proposalId === o.id).length,
+          medianAppeal: median(
+            reviews.filter((r) => r.proposalId === o.id).map((r) => r.appeal),
+          ),
+        }),
+      ),
+      note: "同じ版・ブラウザ識別子・案の最新回答だけを使用。本人性・独立した人間の人数は未検証。新しい生成物の評価点として転用しない。",
+    };
   }
   async summary() {
     const reviews = await this.records();

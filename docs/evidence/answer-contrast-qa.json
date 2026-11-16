@@ -140,6 +140,62 @@
       "width": 1280,
       "inspected": 458,
       "failures": []
+    },
+    {
+      "file": "docs/comparison-travel.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 631,
+      "failures": []
+    },
+    {
+      "file": "docs/comparison-travel.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 662,
+      "failures": []
+    },
+    {
+      "file": "docs/comparison-travel.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 631,
+      "failures": []
+    },
+    {
+      "file": "docs/comparison-travel.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 662,
+      "failures": []
+    },
+    {
+      "file": "docs/comparison-life.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 161,
+      "failures": []
+    },
+    {
+      "file": "docs/comparison-life.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 186,
+      "failures": []
+    },
+    {
+      "file": "docs/comparison-life.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 161,
+      "failures": []
+    },
+    {
+      "file": "docs/comparison-life.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 186,
+      "failures": []
     }
   ],
   "passed": true

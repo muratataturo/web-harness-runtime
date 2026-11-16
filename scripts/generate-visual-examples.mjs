@@ -8,6 +8,8 @@ for (const [name, output] of [
   ["asakusa", "asakusa-day"],
   ["life-actual", "life-roadmap-actual"],
   ["social", "asakusa-social-day"],
+  ["comparison-travel", "comparison-travel"],
+  ["comparison-life", "comparison-life"],
 ]) {
   const task = JSON.parse(
     await readFile(`examples/visual-${name}-answer.json`, "utf8"),

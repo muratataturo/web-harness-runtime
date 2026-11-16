@@ -2,6 +2,8 @@
 
 [背景地図の403画像対策](docs/map-background-fix.md) — ファイル直開き対応、HTTP状態検査、失敗時の概略表示を実装。
 
+[3案比較と10秒レビューの改善ループ](docs/proposal-comparison-runtime.md) — [旅行の実生成](docs/comparison-travel.html#proposal-comparison) / [人生計画の実生成](docs/comparison-life.html#proposal-comparison)。
+
 [SNS・季節情報とユニークな提案](docs/social-discovery-runtime.md) — [実生成した追加提案](docs/asakusa-social-day.html#discoveries)。保存回答の白文字化を修正し、明暗両モードのコントラストをCIで検査します。
 
 [3つの実生成ケースを見る](docs/visual-cases.html) — 上野11場面、浅草・押上10場面、人生計画9節目。[移動・休憩を含む品質契約](docs/journey-moments-quality.md)。

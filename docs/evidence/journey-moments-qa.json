@@ -4,7 +4,7 @@
     {
       "name": "ueno",
       "file": "docs/generated-answer.html",
-      "readyMs": 121,
+      "readyMs": 120,
       "widths": [
         320,
         390,
@@ -44,7 +44,7 @@
     {
       "name": "life",
       "file": "docs/life-roadmap-actual.html",
-      "readyMs": 87,
+      "readyMs": 85,
       "widths": [
         320,
         390,

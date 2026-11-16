@@ -1,4 +1,9 @@
 import {
+  proposalSetSchema,
+  proposalRequested,
+  validateProposalSet,
+} from "./proposals.js";
+import {
   discoverySchema,
   discoveryRequested,
   validateDiscoveries,
@@ -18,6 +23,7 @@ export const visualArtifactSchema = Type.Union([
     {
       kind: Type.Literal("journey-map"),
       discoveries: Type.Optional(discoverySchema),
+      proposalSet: Type.Optional(proposalSetSchema),
       title: Type.String({ minLength: 1, maxLength: 64 }),
       description: Type.String({ minLength: 1, maxLength: 180 }),
       moments: Type.Optional(
@@ -93,6 +99,7 @@ export const visualArtifactSchema = Type.Union([
     {
       kind: Type.Literal("life-roadmap"),
       discoveries: Type.Optional(discoverySchema),
+      proposalSet: Type.Optional(proposalSetSchema),
       title: Type.String({ minLength: 1, maxLength: 64 }),
       description: Type.String({ minLength: 1, maxLength: 180 }),
       lanes: Type.Array(
@@ -151,6 +158,8 @@ export function validateVisualArtifact(
 ) {
   if (!Value.Check(visualArtifactSchema, artifact))
     throw Error("visualArtifactの形式が不正です");
+  if (artifact.proposalSet)
+    validateProposalSet(task, artifact.proposalSet, artifact, plan);
   if (artifact.discoveries)
     validateDiscoveries(
       task,
@@ -298,6 +307,10 @@ export function assessVisualArtifact(task: Task, answer: Answer) {
     } catch (e) {
       issues.push(String((e as Error).message));
     }
+    if (proposalRequested(task.query) && !answer.visualArtifact.proposalSet)
+      issues.push(
+        "proposalSetに発見・ゆったり・写真の3案が必要です。行動・残る成果・定番との違い・不向きな点を具体化し、元の時間枠と地点を参照してください",
+      );
     if (discoveryRequested(task.query)) {
       if (!answer.visualArtifact.discoveries?.length)
         issues.push(

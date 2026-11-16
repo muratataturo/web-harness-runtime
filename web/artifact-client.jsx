@@ -1,3 +1,4 @@
+import { ProposalChooser, TenSecondReview } from "./proposal-client.jsx";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Button } from "@astryxdesign/core/Button";
@@ -789,3 +790,20 @@ createRoot(document.getElementById("visual-artifact")).render(
     {data.artifact.kind === "journey-map" ? <Journey /> : <Roadmap />}
   </ArtifactBoundary>,
 );
+
+if (data.artifact.proposalSet) {
+  const comparison = document.getElementById("proposal-comparison"),
+    review = document.getElementById("ux-review");
+  if (comparison)
+    createRoot(comparison).render(
+      <ArtifactBoundary>
+        <ProposalChooser data={data} />
+      </ArtifactBoundary>,
+    );
+  if (review)
+    createRoot(review).render(
+      <ArtifactBoundary>
+        <TenSecondReview data={data} />
+      </ArtifactBoundary>,
+    );
+}

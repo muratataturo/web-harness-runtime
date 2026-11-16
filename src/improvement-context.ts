@@ -27,6 +27,20 @@ const contextSchema = Type.Object(
     }),
     priorityUrls: strings,
     visitedUrls: strings,
+    uxGuidance: Type.Optional(
+      Type.Object(
+        {
+          sourceTaskId: Type.String({ maxLength: 100 }),
+          artifactRevision: Type.String({ pattern: "^[a-f0-9]{64}$" }),
+          responses: Type.Integer({ minimum: 0 }),
+          guidance: Type.Array(Type.String({ maxLength: 300 }), {
+            maxItems: 8,
+          }),
+          independentHumansVerified: Type.Literal(false),
+        },
+        { additionalProperties: false },
+      ),
+    ),
     workspace: Type.Optional(
       Type.Object({
         belief: Type.Object({
@@ -73,6 +87,13 @@ export interface ImprovementContext {
   gaps: { url: string; fields: string[] }[];
   priorityUrls: string[];
   visitedUrls: string[];
+  uxGuidance?: {
+    sourceTaskId: string;
+    artifactRevision: string;
+    responses: number;
+    guidance: string[];
+    independentHumansVerified: false;
+  };
   workspace?: {
     belief: {
       verifiedDetails: number;
@@ -90,6 +111,7 @@ export interface ImprovementContext {
 }
 export const IMPROVEMENT_PROMPT = `
 自己改善ループの実行です。improvement.criteriaは元の評価契約であり変更できません。plan_taskは同じ条件を返すか省略してください。
+uxGuidanceは過去の版の自己申告UXレビューを集計した改善指針です。新しい回答の魅力度の点数や、独立した人の評価の証明ではありません。行動と成果の違い・読みやすさ・希望への適合の改善へ使ってください。
 workspaceはBelief/Progress/Experienceを整理したホストの状態です。前回の確認数は再取得の計画にだけ使い、今回の事実・引用として使用しないでください。経験は調査手順だけで、unknownを解消する証拠ではありません。
 ユーザーのqueryを保持し、candidateUrlsの全対象を再評価してください。unknownを根拠なくsupportedに変えてはいけません。
 ただしallowReplacements=trueは利用者が代替候補の探索を許可した場合です。この場合は同じ許可ソース内で、同じ必須条件を満たす別候補を探索できます。元候補の必須条件が解消できなければ、必ず取得済みリンクの一覧・検索導線から代替を探してください。minimumCandidates以上を新しく詳細取得・引用検証してください。元候補を繰り返し再提示するだけでは代替探索は完了していません。allowReplacements=falseまたは省略の場合、元候補の省略・差し替えは禁止です。

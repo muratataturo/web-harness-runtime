@@ -1,0 +1,19 @@
+{
+  "scope": "live local Task HTML and registered assets; no automatic review submission",
+  "cases": [
+    {
+      "case": "travel",
+      "variants": 3,
+      "photos": 3,
+      "reviewResponses": 0
+    },
+    {
+      "case": "life",
+      "variants": 3,
+      "photos": 0,
+      "reviewResponses": 0
+    }
+  ],
+  "humanResponsesCollected": 0,
+  "passed": true
+}

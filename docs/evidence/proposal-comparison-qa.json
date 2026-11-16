@@ -1,0 +1,39 @@
+{
+  "scope": "actual saved model variants and automated interaction checks; ratings are test fixtures only",
+  "humanResponsesCollected": 0,
+  "humanAppeal": "unrated",
+  "cases": [
+    {
+      "name": "travel",
+      "variants": 3,
+      "widths": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "choicePersists": true,
+      "mobileOneVisibleVariant": true
+    },
+    {
+      "name": "life",
+      "variants": 3,
+      "widths": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "choicePersists": true,
+      "mobileOneVisibleVariant": true
+    }
+  ],
+  "passed": true,
+  "reviewWorkflow": {
+    "visibleExposureGate": true,
+    "hiddenTimeExcluded": true,
+    "explicitRatingsRequired": true,
+    "localExportIsNotSubmitted": true,
+    "fixtureIdentityOnly": true
+  }
+}
