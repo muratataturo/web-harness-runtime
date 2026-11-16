@@ -235,10 +235,10 @@ export class UxFeedbackStore {
       ]),
     );
     const guidance = [
-      ...(issues.too_dense
+      ...(issues.too_dense || reviews.some((r) => r.appeal < 4)
         ? ["比較表の情報量を減らし、行動と違いを先に示す"]
         : []),
-      ...(issues.unclear_difference
+      ...(issues.unclear_difference || reviews.some((r) => !r.understood)
         ? ["案ごとの操作と残る成果を明確に変える"]
         : []),
       ...(issues.not_for_me
@@ -247,6 +247,12 @@ export class UxFeedbackStore {
       ...(issues.unrealistic ? ["元の時間枠・費用・移動条件を再点検する"] : []),
       ...(issues.hard_to_read
         ? ["文字階層・コントラスト・モバイル表示を再検査する"]
+        : []),
+      ...(reviews.some((r) => !r.uncertaintyVisible)
+        ? ["重要な未確認事項を選択理由の近くに示す"]
+        : []),
+      ...(reviews.some((r) => !r.nextActionClear)
+        ? ["次にする操作と小さな完了条件を先に示す"]
         : []),
     ];
     return {

@@ -151,6 +151,18 @@ test("versioned human feedback deduplicates browser/variant responses and produc
       context.variants.find((v) => v.proposalId === "relax")!.medianAppeal,
       4,
     );
+    await ux.add(t.id, {
+      ...input,
+      appeal: 2,
+      understood: false,
+      uncertaintyVisible: false,
+      nextActionClear: false,
+      issues: [],
+    });
+    const mandatory = await ux.learningContext(t.id);
+    assert.ok(mandatory.guidance.some((s) => s.includes("成果")));
+    assert.ok(mandatory.guidance.some((s) => s.includes("未確認事項")));
+    assert.ok(mandatory.guidance.some((s) => s.includes("完了条件")));
     t.answer!.visualArtifact!.proposalSet!.options[0]!.activity +=
       " 最後に感想を話す。";
     await store.save(t);
