@@ -477,10 +477,11 @@ export class CodexAgent {
       authentication: "chatgpt",
     });
   }
-  async prompt(text: string) {
+  async prompt(text: string, effort: "low" | "medium" = "low") {
     await this.options.onStep("model_turn", {
       engine: "codex",
       model: this.model,
+      effort,
     });
     const completion = new Promise<void>((resolve, reject) => {
       this.turn = { resolve, reject };
@@ -498,7 +499,7 @@ export class CodexAgent {
             },
           }
         : {}),
-      effort: "low",
+      effort,
       serviceTierForTurn: "default",
     });
     await completion;

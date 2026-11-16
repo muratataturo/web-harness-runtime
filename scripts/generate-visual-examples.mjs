@@ -1,6 +1,7 @@
 // Portable replay of saved outputs, including the explicitly reviewed final edit. No inference or source requests.
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
+import { exportPortableAnswer } from "./portable-answer.mjs";
 import { renderAnswerHtml } from "../dist/answer-html.js";
 for (const [name, output] of [
   ["travel", "generated-answer"],
@@ -11,6 +12,7 @@ for (const [name, output] of [
   ["comparison-travel", "comparison-travel"],
   ["comparison-life", "comparison-life"],
   ["cafe", "cafe-day"],
+  ["autonomous-cafe", "autonomous-cafe-day"],
 ]) {
   const task = JSON.parse(
     await readFile(`examples/visual-${name}-answer.json`, "utf8"),
@@ -25,8 +27,10 @@ for (const [name, output] of [
     )
       throw Error("Photo integrity failed");
   }
-  await writeFile(`docs/${output}.html`, renderAnswerHtml(task));
+  if (name === "autonomous-cafe")
+    await exportPortableAnswer(task, `docs/${output}.html`);
+  else await writeFile(`docs/${output}.html`, renderAnswerHtml(task));
 }
 console.log(
-  "Replayed six model outputs, one source-grounded final edit, and one synthetic roadmap example",
+  "Replayed seven model outputs, one source-grounded final edit, and one synthetic roadmap example",
 );

@@ -1,0 +1,40 @@
+{
+  "scope": "unedited live model output; offline display replay; live success is recorded separately",
+  "taskId": "18f6646a-03e1-47c8-b4e4-6db7ffb2a362",
+  "humanResponses": 0,
+  "cases": [
+    {
+      "width": 320,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/autonomous-itinerary/qa/cafe-320.png"
+    },
+    {
+      "width": 390,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/autonomous-itinerary/qa/cafe-390.png"
+    },
+    {
+      "width": 768,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/autonomous-itinerary/qa/cafe-768.png"
+    },
+    {
+      "width": 1280,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/autonomous-itinerary/qa/cafe-1280.png"
+    }
+  ],
+  "passed": true
+}

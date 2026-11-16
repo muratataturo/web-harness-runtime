@@ -302,3 +302,24 @@ test("bounded artifact import refuses symlinks and oversized task files", async 
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("sandbox preserves bounded PDF inspection provenance and rejects a mismatched document or page", () => {
+  const t = fixture();
+  t.pages[0]!.acquisition = { kind: "public-pdf", status: 200 };
+  t.pages[0]!.pdf = { sha256: "a".repeat(64), pages: 2 };
+  t.pdfInspections = [
+    {
+      pageId: t.pages[0]!.id,
+      pageNumber: 2,
+      sha256: "a".repeat(64),
+      shownAt: t.createdAt,
+    },
+  ];
+  const imported = validateSandboxTask(t, options);
+  assert.deepEqual(imported.pdfInspections, t.pdfInspections);
+  t.pdfInspections[0]!.pageNumber = 3;
+  assert.throws(() => validateSandboxTask(t, options), /PDF確認/);
+  t.pdfInspections[0]!.pageNumber = 2;
+  t.pdfInspections[0]!.sha256 = "b".repeat(64);
+  assert.throws(() => validateSandboxTask(t, options), /PDF確認/);
+});

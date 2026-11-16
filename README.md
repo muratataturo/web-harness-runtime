@@ -4,6 +4,8 @@
 
 [3案比較と10秒レビューの改善ループ](docs/proposal-comparison-runtime.md) — [旅行の実生成](docs/comparison-travel.html#proposal-comparison) / [人生計画の実生成](docs/comparison-life.html#proposal-comparison)。
 
+[無人生成のE2Eと改善内容](docs/autonomous-finalization.md) — [回答を編集せず生成した正式版](docs/autonomous-cafe-day.html#itinerary)。
+
 [カフェを組み込む旅行runtime](docs/cafe-itinerary-runtime.md) — [資料照合して仕上げた正式版](docs/cafe-day.html#itinerary)。
 
 [SNS・季節情報とユニークな提案](docs/social-discovery-runtime.md) — [実生成した追加提案](docs/asakusa-social-day.html#discoveries)。保存回答の白文字化を修正し、明暗両モードのコントラストをCIで検査します。

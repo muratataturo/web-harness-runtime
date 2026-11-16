@@ -23,6 +23,7 @@ export interface Source {
   guidance: string;
 }
 export interface Page {
+  pdf?: { sha256: string; pages: number };
   mapEmbeds?: string[];
   images?: { url: string; alt: string }[];
   productOffer?: import("./product-offer.js").ProductOffer;
@@ -68,6 +69,12 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  pdfInspections?: {
+    pageId: string;
+    pageNumber: number;
+    sha256: string;
+    shownAt: string;
+  }[];
   authorship?: {
     mode: "source-grounded-final-edit";
     editor: "Codex";

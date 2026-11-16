@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { sharedMapEmbed } from "./map-embed.js";
 import { extractPdf } from "./pdf-reader.js";
 import { productOffer, offerText } from "./product-offer.js";
@@ -286,7 +287,11 @@ export async function readPublicHtml(
   value: string,
   hosts: string[],
   signal: AbortSignal,
-  deps: { fetcher?: typeof fetch; resolveHost?: HostResolver } = {},
+  deps: {
+    fetcher?: typeof fetch;
+    resolveHost?: HostResolver;
+    savePdf?: (bytes: Buffer, sha256: string) => Promise<void>;
+  } = {},
 ): Promise<Omit<Page, "id">> {
   const fetcher = deps.fetcher ?? publicFetch;
   const navigation =
@@ -402,6 +407,8 @@ export async function readPublicHtml(
     const bytes = Buffer.concat(chunks);
     if (isPdf) {
       const extracted = await extractPdf(bytes, deadline);
+      const sha256 = createHash("sha256").update(bytes).digest("hex");
+      await deps.savePdf?.(bytes, sha256);
       const title = decodeURIComponent(
         new URL(url).pathname.split("/").at(-1) ?? "公式PDF",
       );
@@ -410,6 +417,7 @@ export async function readPublicHtml(
         url,
         title,
         text: text.slice(0, 32000),
+        pdf: { sha256, pages: extracted.pages },
         truncated: text.length > 32000,
         links: [],
         capturedAt: new Date().toISOString(),

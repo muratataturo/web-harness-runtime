@@ -30,6 +30,7 @@ try {
     "docs/comparison-travel.html",
     "docs/comparison-life.html",
     "docs/cafe-day.html",
+    "docs/autonomous-cafe-day.html",
   ])
     for (const scheme of ["light", "dark"])
       for (const width of [390, 1280]) {

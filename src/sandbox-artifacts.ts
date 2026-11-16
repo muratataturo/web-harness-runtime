@@ -125,6 +125,12 @@ const schema = Type.Object({
         Type.Array(Type.String({ maxLength: 5000 }), { maxItems: 3 }),
       ),
       images: Type.Optional(list(Type.Object({ url, alt: text(2000) }), 8)),
+      pdf: Type.Optional(
+        Type.Object({
+          sha256: Type.String({ pattern: "^[a-f0-9]{64}$" }),
+          pages: Type.Integer({ minimum: 1, maximum: 20 }),
+        }),
+      ),
       acquisition: Type.Optional(
         Type.Object({
           kind: Type.Union([
@@ -163,6 +169,17 @@ const schema = Type.Object({
   ),
   socialSignals: Type.Optional(list(socialSignalSchema, 6)),
   socialResearch: Type.Optional(list(socialAttemptSchema, 6)),
+  pdfInspections: Type.Optional(
+    list(
+      Type.Object({
+        pageId: id,
+        pageNumber: Type.Integer({ minimum: 1, maximum: 20 }),
+        sha256: Type.String({ pattern: "^[a-f0-9]{64}$" }),
+        shownAt: text(80),
+      }),
+      8,
+    ),
+  ),
   photoInspections: Type.Optional(
     list(
       Type.Object({
@@ -291,6 +308,7 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
         }
       }),
       images: p.images,
+      pdf: p.pdf ? { ...p.pdf } : undefined,
       mapEmbeds: p.mapEmbeds?.filter((u) => sharedMapEmbed(u) !== null),
       acquisition: p.acquisition,
       productOffer: p.productOffer,
@@ -301,6 +319,7 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     socialSignals: raw.socialSignals?.map((s) => structuredClone(s)),
     socialResearch: raw.socialResearch?.map((s) => ({ ...s })),
     photoInspections: raw.photoInspections?.map((p) => ({ ...p })),
+    pdfInspections: raw.pdfInspections?.map((p) => ({ ...p })),
     model: raw.model,
     metrics: raw.metrics ? structuredClone(raw.metrics) : undefined,
     error: raw.error,
@@ -362,6 +381,17 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     checkedPages: task.pages.length,
   };
   for (const s of task.socialSignals ?? []) verifySocialSignal(task, s);
+  for (const receipt of task.pdfInspections ?? []) {
+    const page = task.pages.find((p) => p.id === receipt.pageId);
+    if (
+      !page?.pdf ||
+      page.acquisition?.kind !== "public-pdf" ||
+      page.pdf.sha256 !== receipt.sha256 ||
+      receipt.pageNumber > page.pdf.pages ||
+      !Number.isFinite(Date.parse(receipt.shownAt))
+    )
+      throw Error("sandboxのPDF確認と保存ページの参照が一致しません");
+  }
   for (const photo of task.photoInspections ?? []) {
     if (
       task.pages.find((p) => p.id === photo.pageId)?.images?.[photo.imageIndex]

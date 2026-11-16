@@ -38,7 +38,8 @@
     "release:check": "node scripts/release-preflight.mjs",
     "docs:screenshots": "node --import tsx scripts/capture-docs.mjs",
     "eval:visual": "npm run build && node --import tsx scripts/eval-visual-artifact.mjs && node scripts/eval-journey-moments.mjs && node scripts/eval-answer-contrast.mjs && node scripts/eval-proposal-comparison.mjs && node scripts/eval-cafe-itinerary.mjs",
-    "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs"
+    "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs",
+    "test:itinerary:live": "npm run build && node scripts/itinerary-live-e2e.mjs --live"
   },
   "engines": {
     "node": ">=22.13.0"
@@ -48,6 +49,7 @@
     "@astryxdesign/theme-neutral": "0.7.16",
     "@earendil-works/pi-coding-agent": "1.5.0",
     "@mapbox/vector-tile": "3.0.0",
+    "@napi-rs/canvas": "0.1.100",
     "@sinclair/typebox": "0.34.52",
     "@stylexjs/stylex": "0.19.2",
     "agent-browser": "0.41.2",

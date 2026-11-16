@@ -39,6 +39,7 @@ jobs:
       - run: npm run test:chat
       - run: npm run test:chat:runtime
       - run: npm run eval:visual
+      - run: node scripts/eval-autonomous-itinerary.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -51,3 +52,4 @@ jobs:
             .runtime/social-discovery/contrast
             .runtime/proposal-comparison/qa
             .runtime/cafe-itinerary/qa
+            .runtime/autonomous-itinerary/qa
