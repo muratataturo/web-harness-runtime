@@ -1,0 +1,130 @@
+{
+  "scope": "real Codex subscription inference and public source acquisition; no synthetic human ratings",
+  "generatedAt": "2026-11-16T09:33:44.848Z",
+  "finalTaskId": "209a4e20-76eb-44b7-a538-266c4681264a",
+  "attempts": [
+    {
+      "taskId": "e51c1b82-5f8e-4bd8-9b87-4d147e4dd0b4",
+      "status": "partial",
+      "model": "gpt-6.1-sol",
+      "pages": 7,
+      "photos": 0,
+      "steps": 2,
+      "candidateComparisons": 0,
+      "visualStatus": "needs_visual",
+      "cafeIssuesUnderCurrentRuntime": [
+        "s2: カフェの店舗名・住所・営業時間を同一店舗の引用で確認してください。他店の情報や施設一覧を混ぜないでください",
+        "s2: カフェの飲み物・甘味の費用を主案budgetと手順のcostItemIdsに含めてください。未確認の単価はestimateと明示してください",
+        "カフェが満席・休業のとき、待ち時間の上限と次に行う具体的な行動をbranchesに示してください"
+      ],
+      "schemaRejections": 5,
+      "elapsedMs": 192639
+    },
+    {
+      "taskId": "44770945-ab8a-49ca-803b-4a35fa31f94e",
+      "status": "partial",
+      "model": "gpt-6.1-sol",
+      "pages": 11,
+      "photos": 2,
+      "steps": 6,
+      "candidateComparisons": 2,
+      "visualStatus": "passed",
+      "cafeIssuesUnderCurrentRuntime": [
+        "s4: カフェの店舗名・住所・営業時間を同一店舗の引用で確認してください。他店の情報や施設一覧を混ぜないでください"
+      ],
+      "schemaRejections": 8,
+      "elapsedMs": 241776
+    },
+    {
+      "taskId": "209a4e20-76eb-44b7-a538-266c4681264a",
+      "status": "blocked",
+      "model": "gpt-6.1-sol",
+      "pages": 10,
+      "photos": 2,
+      "steps": 8,
+      "candidateComparisons": 0,
+      "visualStatus": "passed",
+      "cafeIssuesUnderCurrentRuntime": [],
+      "schemaRejections": 2,
+      "elapsedMs": 312362
+    }
+  ],
+  "commonImprovementLoop": {
+    "id": "01677d1e-1f48-46d5-ae42-0d8e0c16b63c",
+    "sourceTaskId": "e51c1b82-5f8e-4bd8-9b87-4d147e4dd0b4",
+    "adoptedTaskId": "44770945-ab8a-49ca-803b-4a35fa31f94e",
+    "status": "completed_partial"
+  },
+  "finalGenerationAfterRuntimeRepairs": "209a4e20-76eb-44b7-a538-266c4681264a",
+  "currentAssessment": {
+    "cafeIssues": [],
+    "specificity": {
+      "version": 1,
+      "mode": "itinerary",
+      "status": "needs_detail",
+      "issues": [
+        "s2.where: 抽象的です。実際に行う操作・場所・判断可能な目安を書いてください"
+      ]
+    },
+    "visual": {
+      "version": 1,
+      "status": "passed",
+      "issues": []
+    }
+  },
+  "budget": {
+    "scenario": "主案・大人2人、甘味1皿共有・飲物と軽食各1品、交通費別",
+    "totalYen": 8900,
+    "items": [
+      {
+        "id": "entry",
+        "label": "入園",
+        "quantity": 2,
+        "unitYen": 600,
+        "totalYen": 1200,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-1"
+        ]
+      },
+      {
+        "id": "sweet",
+        "label": "パンケーキ共有希望",
+        "quantity": 1,
+        "unitYen": 2700,
+        "totalYen": 2700,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-6"
+        ]
+      },
+      {
+        "id": "drink",
+        "label": "ハーブティー見積枠",
+        "quantity": 2,
+        "unitYen": 1000,
+        "totalYen": 2000,
+        "basis": "estimate",
+        "evidenceIds": []
+      },
+      {
+        "id": "food",
+        "label": "軽食見積枠",
+        "quantity": 2,
+        "unitYen": 1500,
+        "totalYen": 3000,
+        "basis": "estimate",
+        "evidenceIds": []
+      }
+    ]
+  },
+  "limitations": [
+    "候補比較は空配列。調査済みの2施設を組み合わせた主案を保存する。",
+    "公開HTMLの情報。対象日の臨時変更・展示・空席はunknown、前日に公式告知再確認。",
+    "限定甘味の提供終了日と共有可否はunknown。飲物・軽食は未取得単価の見積枠で平均予算を転用していない。",
+    "現地集合解散、交通費別。徒歩時間は見積。地図は代表点で入口経路未確認。Google共有地図未取得。写真は当日公開・提供保証ではない。"
+  ],
+  "unresolved": "The final model saved a composed itinerary but omitted candidate comparisons. Original task status remains blocked. Photos, itinerary, cited cafe facts and budget are independently checked; this is not a fully verified successful research run.",
+  "humanAppeal": "unrated",
+  "humanResponses": 0
+}

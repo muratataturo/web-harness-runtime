@@ -1,5 +1,17 @@
 import { isIP } from "node:net";
 import type { Source } from "./types.js";
+export const cafeTerms =
+  /カフェ|喫茶|珈琲|コーヒー|ティータイム|\bcaf[eé]|\bcoffee\b/i;
+export function cafeRequested(query: string): boolean {
+  if (
+    /(?:カフェ|喫茶|コーヒー).{0,6}(?:不要|なし|除外|寄らな|寄らず|含めな|含めず|抜き)|(?:no|without|avoid)\s+(?:caf[eé]s?|coffee)/i.test(
+      query,
+    )
+  )
+    return false;
+  return cafeTerms.test(query);
+}
+
 export interface Adapter {
   id: string;
   hosts: string[];
@@ -42,6 +54,13 @@ export const adapters: Adapter[] = [
       "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。",
   },
   {
+    id: "official-cafe",
+    hosts: ["shop.create-restaurants.co.jp"],
+    keywords: /カフェ|喫茶|珈琲|コーヒー|旅行|遊び|日帰り|caf[eé]|coffee/i,
+    guidance:
+      "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。",
+  },
+  {
     id: "official-dining",
     hosts: ["www.maruka.net", "maruka.net"],
     keywords: /食|ランチ|蕎麦|浅草/,
@@ -58,7 +77,8 @@ export const adapters: Adapter[] = [
   {
     id: "hotpepper-gourmet",
     hosts: ["www.hotpepper.jp", "hotpepper.jp"],
-    keywords: /グルメ|飲食|居酒屋|レストラン|ランチ|ディナー|食事|restaurant/i,
+    keywords:
+      /グルメ|飲食|居酒屋|レストラン|ランチ|ディナー|食事|カフェ|喫茶|珈琲|コーヒー|caf[eé]|coffee|restaurant/i,
     guidance:
       "料理、エリア、駅、予算、営業時間を /strJ.../ の店舗詳細で確認する。一覧・特集ページは発見に使い、そのものを店舗候補にしない。ランチとディナーの価格を混同しない。トップから地域リンク、または取得済みのランチ一覧へ進む。検索URLは https://www.hotpepper.jp/CSP/psh010/doBasic?FWT= + encodeURIComponent(短い検索語) を使用できる。空席は日付人数が未指定なら未確認とする。",
   },
@@ -111,7 +131,8 @@ export const adapters: Adapter[] = [
   {
     id: "rakuten-gourmet",
     hosts: ["r.gnavi.co.jp"],
-    keywords: /グルメ|食|料理|ランチ|ディナー|和食|restaurant/i,
+    keywords:
+      /グルメ|食|料理|ランチ|ディナー|和食|カフェ|喫茶|珈琲|コーヒー|caf[eé]|coffee|restaurant/i,
     guidance:
       "楽天ぐるなび。店舗ID付きの詳細ページで住所、営業時間、予算を確認。PR順位を品質評価にしない。",
   },
@@ -179,9 +200,26 @@ export function publicSocialRequested(query: string): boolean {
   return /SNS|トレンド|流行|バズ|social|trending/i.test(query);
 }
 export function routeSources(query: string, urls: string[]): Source[] {
+  const dining =
+    cafeRequested(query) &&
+    !urls.some((value) => {
+      const host = new URL(value).hostname;
+      return adapters.some(
+        (a) =>
+          ["hotpepper-gourmet", "rakuten-gourmet", "official-cafe"].includes(
+            a.id,
+          ) && a.hosts.includes(host),
+      );
+    })
+      ? [
+          process.env.RUNTIME_PROFILE === "rakuten"
+            ? "https://r.gnavi.co.jp/"
+            : "https://www.hotpepper.jp/",
+        ]
+      : [];
   const selected = publicSocialRequested(query)
-    ? [...urls, "https://bsky.app/", "https://x.com/"]
-    : urls;
+    ? [...urls, ...dining, "https://bsky.app/", "https://x.com/"]
+    : [...urls, ...dining];
   return [...new Set(selected)]
     .map((value, i) => {
       const url = publicUrl(value);
@@ -227,6 +265,8 @@ export function entityKey(value: string): string | undefined {
   const adapter = adapters.find((a) => a.hosts.includes(url.hostname));
   if (!adapter) return `generic:${url.href}`;
   let id: string | undefined;
+  if (adapter.id === "official-cafe")
+    id = url.pathname.match(/^\/(\d{4,})(?:\/|$)/)?.[1];
   if (adapter.id === "official-visit") {
     if (url.hostname === "www.tokyo-zoo.net")
       id = url.pathname.match(

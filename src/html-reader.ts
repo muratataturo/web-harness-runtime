@@ -16,6 +16,7 @@ export const prefersPublicHtml = (value: string) =>
     "sumida-aquarium.com",
     "www.sumida-aquarium.com",
     "www.maruka.net",
+    "shop.create-restaurants.co.jp",
     "maruka.net",
     "www.jalan.net",
     "www.r-agent.com",

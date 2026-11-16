@@ -2,6 +2,7 @@ import { Type, type Static } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import { assertEvidenceIntegrity } from "./provenance.js";
 import type { Task, Answer } from "./types.js";
+import { cafePlanIssues } from "./cafe.js";
 const text = Type.String({ maxLength: 600 });
 const ids = Type.Array(Type.String({ maxLength: 100 }), { maxItems: 20 });
 export const actionPlanSchema = Type.Object(
@@ -174,7 +175,11 @@ export function assessSpecificity(
 ): Omit<SpecificityReview, "attempts"> {
   const c = specificityContract(task.query),
     issues: string[] = [];
-  if (task.evaluation || c.mode === "facts" || !answer.candidates.length)
+  if (
+    task.evaluation ||
+    c.mode === "facts" ||
+    (!answer.candidates.length && !answer.actionPlan)
+  )
     return { version: 1, mode: c.mode, status: "not_required", issues };
   const p = answer.actionPlan;
   if (!p)
@@ -187,6 +192,7 @@ export function assessSpecificity(
       ],
     };
   validateActionPlan(task, p);
+  if (c.mode === "itinerary") issues.push(...cafePlanIssues(task, answer));
   if (p.steps.length < c.minimumSteps)
     issues.push(`具体的な手順を${c.minimumSteps}件以上にしてください`);
   for (const [i, s] of p.steps.entries()) {

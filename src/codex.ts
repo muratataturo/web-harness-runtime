@@ -8,6 +8,44 @@ export function toolSchemaIssues(
   schema: import("@sinclair/typebox").TSchema,
   args: any,
 ) {
+  // Field-local contracts make repairs actionable: "Expected union value" alone
+  // does not tell the model which enum values or nested property names to use.
+  const expected = (s: any, depth = 2): any => {
+    if (s.const !== undefined) return { const: s.const };
+    if (s.anyOf)
+      return {
+        choices: s.anyOf
+          .map((b: any) => b.const ?? b.properties?.kind?.const ?? b.type)
+          .filter(Boolean),
+      };
+    if (s.type === "object")
+      return {
+        type: s.type,
+        required: s.required,
+        ...(depth > 0
+          ? {
+              properties: Object.fromEntries(
+                Object.entries(s.properties ?? {})
+                  .slice(0, 20)
+                  .map(([k, v]) => [k, expected(v, depth - 1)]),
+              ),
+            }
+          : {}),
+      };
+    if (s.type === "array")
+      return {
+        type: s.type,
+        minItems: s.minItems,
+        ...(depth > 0 ? { items: expected(s.items, depth - 1) } : {}),
+      };
+    return {
+      type: s.type,
+      minLength: s.minLength,
+      maxLength: s.maxLength,
+      minimum: s.minimum,
+      maximum: s.maximum,
+    };
+  };
   const properties = { ...schema.properties };
   for (const [key, property] of Object.entries(properties) as [string, any][]) {
     const selected = property.anyOf?.find(
@@ -18,9 +56,18 @@ export function toolSchemaIssues(
     if (selected) properties[key] = selected;
   }
   const diagnostic = schema.properties ? { ...schema, properties } : schema;
+  const seen = new Set<string>();
   return [...Value.Errors(diagnostic, args)]
+    .filter((e) => {
+      if (seen.has(e.path)) return false;
+      seen.add(e.path);
+      return true;
+    })
     .slice(0, 8)
-    .map((e) => `${e.path}: ${e.message}`);
+    .map(
+      (e) =>
+        `${e.path}: ${e.message}; expected ${JSON.stringify(expected(e.schema))}`,
+    );
 }
 export type AgentEngine =
   "codex" | "pi-openrouter" | "claude-code" | "opencode";
