@@ -255,6 +255,18 @@ test("discovery HTML labels unavailable popularity, escapes suggestions and expo
 });
 
 test("social capture honors the page budget before issuing a provider request", async () => {
+  const frozen = input();
+  frozen.evaluation = {
+    mode: "frozen-replay",
+    caseId: "social",
+    fixtureSha256: "fixture",
+  };
+  await assert.rejects(
+    captureSocial(frozen, postUrl, new AbortController().signal, async () => {
+      throw Error("must not fetch");
+    }),
+    /凍結評価/,
+  );
   const t = input();
   t.limits.maxPages = 1;
   t.pages.push({

@@ -43,6 +43,8 @@ export async function captureSocial(
   signal: AbortSignal,
   fetcher: typeof fetch = publicFetch,
 ) {
+  if (task.evaluation?.mode === "frozen-replay")
+    throw Error("凍結評価ではSNSの新規取得はできません");
   const hosts = allowedHosts(task.sources),
     target = checkResearchNavigation(url, hosts),
     u = new URL(target);
