@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-11-16T06:43:15.277Z",
+  "attempt": {
+    "url": "https://bsky.app/profile/navi.1yen.jp/post/3mve7wgvni22h",
+    "checkedAt": "2026-11-16T06:43:14.951Z",
+    "status": "captured",
+    "reason": "公開APIで投稿と取得時点の反応数を確認"
+  },
+  "signal": {
+    "id": "social-1",
+    "pageId": "social-page-1",
+    "url": "https://bsky.app/profile/navi.1yen.jp/post/3mve7wgvni22h",
+    "provider": "bluesky",
+    "publishedAt": "2026-09-12T23:22:17.497Z",
+    "observedAt": "2026-11-16T06:43:14.951Z",
+    "metrics": {
+      "likes": 23,
+      "reposts": 11,
+      "replies": 0
+    }
+  },
+  "excludedReason": "古い投稿を現在の話題として扱えません",
+  "usedInTravelSuggestion": false
+}

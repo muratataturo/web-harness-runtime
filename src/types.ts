@@ -67,6 +67,8 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  socialSignals?: import("./social.js").SocialSignal[];
+  socialResearch?: import("./social.js").SocialAttempt[];
   photoInspections?: {
     pageId: string;
     imageIndex: number;

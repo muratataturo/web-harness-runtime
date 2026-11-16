@@ -1,0 +1,51 @@
+{
+  "taskId": "5884739f-3f89-4a1e-8757-4029df3bdb70",
+  "loopId": "c25b5a66-68b9-4626-85a4-05b56db130e6",
+  "model": "gpt-6.1-sol",
+  "accepted": true,
+  "status": "partial",
+  "review": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "originalPlanPreserved": true,
+  "socialResearch": [
+    {
+      "url": "https://x.com/Sumida_Aquarium",
+      "checkedAt": "2026-11-16T06:38:58.206Z",
+      "status": "unavailable",
+      "reason": "公開HTMLの取得状態: 200。公開投稿の日時と反応数を検証できませんでした"
+    }
+  ],
+  "discoveries": [
+    {
+      "anchorId": "aquarium",
+      "basis": "official-event",
+      "headline": "期間内なら「思い込み」をほどく展示へ",
+      "idea": "13:20からの6階鑑賞の一部で、開催・公開を現地確認後、参加型パネルを見て2人の予想を比べる。追加時間や有料体験は加えない。",
+      "whyNow": "保存済み公式案内の開催期間は2026年10月1日〜11月16日。日付未指定のため期間内限定の候補で、SNS反応・人気は未確認。",
+      "fit": "既存の水族館鑑賞枠内、入場料以外無料の企画。2回の休憩と予算を維持。",
+      "fallback": "期間外・非公開なら自然水景で水草と水中の動きを見比べる通常鑑賞にする。",
+      "evidenceIds": [
+        "ev-10",
+        "ev-11"
+      ],
+      "validFrom": "2026-10-01",
+      "validTo": "2026-11-16"
+    },
+    {
+      "anchorId": "aquarium",
+      "basis": "original-idea",
+      "headline": "同じ水槽、違う発見を持ち寄る",
+      "idea": "15:00からの大水槽鑑賞で、2人がそれぞれ気づいた動きを一つ選び、角度を変えた後に違いを話す。",
+      "whyNow": "SNS投稿の日時と反応数を検証できず、トレンドではなく独自の観察方法として提案。",
+      "fit": "既存の鑑賞時間内で追加費用なし。休憩2回は変更しない。",
+      "fallback": "疲れたら回遊を省略し、休憩中に前半の発見を一つずつ話す。",
+      "evidenceIds": [
+        "ev-7"
+      ]
+    }
+  ],
+  "humanAppeal": "unrated"
+}

@@ -48,3 +48,4 @@ jobs:
             .runtime/chat-qa
             .runtime/chat-runtime-fixture
             .runtime/visual-study/qa
+            .runtime/social-discovery/contrast

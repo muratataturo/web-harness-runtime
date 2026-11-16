@@ -1,4 +1,9 @@
-import { entityKey } from "./sources.js";
+import {
+  discoverySchema,
+  discoveryRequested,
+  validateDiscoveries,
+} from "./discovery.js";
+import { entityKey, publicSocialRequested } from "./sources.js";
 import { sharedMapEmbed } from "./map-embed.js";
 import { specificityContract } from "./answer-plan.js";
 import { Type, type Static } from "@sinclair/typebox";
@@ -12,6 +17,7 @@ export const visualArtifactSchema = Type.Union([
   Type.Object(
     {
       kind: Type.Literal("journey-map"),
+      discoveries: Type.Optional(discoverySchema),
       title: Type.String({ minLength: 1, maxLength: 64 }),
       description: Type.String({ minLength: 1, maxLength: 180 }),
       moments: Type.Optional(
@@ -86,6 +92,7 @@ export const visualArtifactSchema = Type.Union([
   Type.Object(
     {
       kind: Type.Literal("life-roadmap"),
+      discoveries: Type.Optional(discoverySchema),
       title: Type.String({ minLength: 1, maxLength: 64 }),
       description: Type.String({ minLength: 1, maxLength: 180 }),
       lanes: Type.Array(
@@ -144,6 +151,14 @@ export function validateVisualArtifact(
 ) {
   if (!Value.Check(visualArtifactSchema, artifact))
     throw Error("visualArtifactの形式が不正です");
+  if (artifact.discoveries)
+    validateDiscoveries(
+      task,
+      artifact.discoveries,
+      artifact.kind === "journey-map"
+        ? artifact.stops.map((s) => s.id)
+        : artifact.milestones.map((m) => m.id),
+    );
   const unique = (values: string[]) => {
     if (new Set(values).size !== values.length)
       throw Error("視覚成果物のIDが重複しています");
@@ -282,6 +297,16 @@ export function assessVisualArtifact(task: Task, answer: Answer) {
       validateVisualArtifact(task, answer.visualArtifact, answer.actionPlan);
     } catch (e) {
       issues.push(String((e as Error).message));
+    }
+    if (discoveryRequested(task.query)) {
+      if (!answer.visualArtifact.discoveries?.length)
+        issues.push(
+          "SNS・トレンドを検討したdiscoveriesが必要です。取得できた反応・公式の期間限定情報・独自案を区別し、既存行程内の具体案と代替を示してください",
+        );
+      if (publicSocialRequested(task.query) && !task.socialResearch?.length)
+        issues.push(
+          "read_socialでSNSの取得可否を確認してください。取得できなければ未確認を明示して公式情報と独自案を使えます",
+        );
     }
     if (
       contract.kind !== "none" &&

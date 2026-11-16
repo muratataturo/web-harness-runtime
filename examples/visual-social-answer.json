@@ -1,0 +1,1096 @@
+{
+  "id": "5884739f-3f89-4a1e-8757-4029df3bdb70",
+  "query": "大人2人、浅草・押上の一日旅行を日本語で提案してください。11:00〜17:00、2人の予算16,000円以内。雷門満留賀の昼食とすみだ水族館を主な体験にし、徒歩・鉄道の移動は見積と明記して独立手順にする。休憩を2回入れる。日付未指定なので特定日の営業・空席・料金は保証しない。まず2施設の公開ページを読み、料金、通常営業時間、料理や展示の根拠を引用する。条件は施設ごとの役割に合わせて定義する。食事の掲載価格が取れなければ見積を使い、交通、休憩、追加飲食も未確認の予算枠として総額と残額を計算する。徒歩と鉄道の経路・所要時間は未確認の見積。各主要体験に実際に掲載されている写真をinspect_photoで見て、料理・展示・施設の写真を選ぶ。バナーやロゴは除外し、必要なら同じ施設の実在リンク先を開く。YOUR DAYの見出しと楽しみ方を具体的にし、移動・休憩も含む全手順のmomentsを生成する。水族館に指定日時に特定の生き物が見られると断定しない。地図には出典のある座標を配置し、公式掲載の共有Google MapsがあればpreviewPageIdを使う。座標取得が難しい地点は未配置のまま保持してよい。雨と疲労それぞれの切替行動を提示する。予約・購入・問い合わせはしない。根拠が不足する場合も推測を確認済みにせず、取得できた内容で暫定回答をfinish_taskに保存する。 SNSでの人気や今のトレンドも検討し、定番に加えるユニークな楽しみ方をdiscoveriesで1〜2案提案してください。日付未指定なので期間限定企画は開催期間中だけの条件付きで、期間外の代替を必ず示す。既存の施設、時刻、2回の休憩、予算を維持する。SNS反応が取得不能なら人気は未確認と明示し、公式の季節企画と独自の観察方法を区別する。",
+  "status": "partial",
+  "createdAt": "2026-11-16T06:38:59.895Z",
+  "updatedAt": "2026-11-16T06:39:57.682Z",
+  "model": "gpt-6.1-sol",
+  "agent": "codex",
+  "urls": [
+    "https://www.maruka.net/",
+    "https://sumida-aquarium.com/about/price/",
+    "https://sumida-aquarium.com/about/access/",
+    "https://sumida-aquarium.com/",
+    "https://nominatim.openstreetmap.org/",
+    "https://www.sumida-aquarium.com/news/4q4iptlvr3/"
+  ],
+  "sources": [
+    {
+      "id": "source-1",
+      "kind": "official-dining",
+      "url": "https://www.maruka.net/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の所在地、営業時間、メニューの税込価格を確認。当日の空席・営業の確約はしない。"
+    },
+    {
+      "id": "source-2",
+      "kind": "official-visit",
+      "url": "https://sumida-aquarium.com/about/price/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-3",
+      "kind": "official-visit",
+      "url": "https://sumida-aquarium.com/about/access/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-4",
+      "kind": "official-visit",
+      "url": "https://sumida-aquarium.com/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-6",
+      "kind": "official-visit",
+      "url": "https://www.sumida-aquarium.com/news/4q4iptlvr3/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-7",
+      "kind": "public-social",
+      "url": "https://bsky.app/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公開投稿をread_socialで確認する。取得時点の反応数と投稿日時を引用。単一投稿を世間全体の人気や急増とは扱わない。拒否・ログイン要求は回避せず未確認を残す。公式告知と独自提案を区別する。"
+    },
+    {
+      "id": "source-8",
+      "kind": "public-social",
+      "url": "https://x.com/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公開投稿をread_socialで確認する。取得時点の反応数と投稿日時を引用。単一投稿を世間全体の人気や急増とは扱わない。拒否・ログイン要求は回避せず未確認を残す。公式告知と独自提案を区別する。"
+    },
+    {
+      "id": "source-5",
+      "kind": "generic",
+      "url": "https://nominatim.openstreetmap.org/",
+      "score": 0,
+      "reason": "汎用サイト。内容を読んで適合性を確認",
+      "guidance": "ページを読んで対象分野と検索方法を確認し、候補の詳細ページで条件を検証する。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "lunch",
+      "description": "雷門満留賀の昼食、料理・料金・通常営業時間",
+      "required": true,
+      "weight": 5
+    },
+    {
+      "id": "aquarium",
+      "description": "すみだ水族館の大人料金・通常営業時間・展示",
+      "required": true,
+      "weight": 5
+    },
+    {
+      "id": "plan",
+      "description": "大人2人11〜17時、移動見積独立・休憩2回",
+      "required": true,
+      "weight": 4
+    },
+    {
+      "id": "budget",
+      "description": "2人16000円以内、未確認枠を含める",
+      "required": true,
+      "weight": 4
+    }
+  ],
+  "limits": {
+    "maxSteps": 90,
+    "timeoutSeconds": 540,
+    "maxPages": 14
+  },
+  "steps": 3,
+  "answer": {
+    "actionPlan": {
+      "steps": [
+        {
+          "id": "s0",
+          "when": "11:00",
+          "durationMinutes": 60,
+          "where": "雷門満留賀",
+          "action": "天ざる各1人前を注文し食感を比べる",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": ["ev-1", "ev-2"]
+        },
+        {
+          "id": "s1",
+          "when": "12:00",
+          "durationMinutes": 15,
+          "where": "浅草駅へ",
+          "action": "徒歩見積15分、浅草線入口を現地確認",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s2",
+          "when": "12:15",
+          "durationMinutes": 20,
+          "where": "浅草→押上",
+          "action": "鉄道見積20分、待機込み、方面・運賃現地確認",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s3",
+          "when": "12:35",
+          "durationMinutes": 15,
+          "where": "水族館入口へ",
+          "action": "徒歩見積15分、5階へ",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s4",
+          "when": "12:50",
+          "durationMinutes": 30,
+          "where": "水族館入口",
+          "action": "料金・営業・入場可否確認と待機",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s5",
+          "when": "13:20",
+          "durationMinutes": 70,
+          "where": "6階",
+          "action": "公開中の自然水景・クラゲ水槽で動きの違いを話す",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s6",
+          "when": "14:30",
+          "durationMinutes": 30,
+          "where": "大水槽付近",
+          "action": "休憩1、空いた椅子で水分補給し感想を話す",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s7",
+          "when": "15:00",
+          "durationMinutes": 60,
+          "where": "5階",
+          "action": "公開中の大水槽を別角度で見て江戸リウムへ",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s8",
+          "when": "16:00",
+          "durationMinutes": 40,
+          "where": "カフェ付近",
+          "action": "休憩2、価格確認後各800円以内で飲み物を選ぶ",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "次の開始時刻までに終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        },
+        {
+          "id": "s9",
+          "when": "16:40",
+          "durationMinutes": 20,
+          "where": "押上駅へ",
+          "action": "徒歩見積20分、17時終了",
+          "how": "時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮",
+          "doneWhen": "17時駅で終了",
+          "locationStatus": "unconfirmed",
+          "costItemIds": [],
+          "evidenceIds": []
+        }
+      ],
+      "branches": [
+        {
+          "trigger": "雨",
+          "action": "屋外寄り道をせず鉄道で押上へ",
+          "how": "徒歩は足元優先、遅れは後半鑑賞を短縮",
+          "evidenceIds": []
+        },
+        {
+          "trigger": "疲労",
+          "action": "後半回遊を省略し休憩2を前倒し",
+          "how": "改善しなければ押上駅へ移動し早めに終了",
+          "evidenceIds": []
+        },
+        {
+          "trigger": "休業・入場不可・満席",
+          "action": "日程変更または終了判断",
+          "how": "満留賀定休日なら別日に変更。水族館入場不可なら終了。休憩満席なら職員案内で休憩場所を確認し追加注文しない",
+          "evidenceIds": []
+        }
+      ],
+      "budget": {
+        "scenario": "大人2人、天ざる各1・通常入館・休憩2回、浅草駅開始〜押上駅終了。自宅往復除外。残額2100円",
+        "items": [
+          {
+            "id": "b0",
+            "label": "天ざる2人×1750円",
+            "totalYen": 3500,
+            "basis": "published",
+            "evidenceIds": ["ev-1"],
+            "quantity": 2,
+            "unitYen": 1750
+          },
+          {
+            "id": "b1",
+            "label": "大人入館2人×2700円",
+            "totalYen": 5400,
+            "basis": "published",
+            "evidenceIds": ["ev-3"],
+            "quantity": 2,
+            "unitYen": 2700
+          },
+          {
+            "id": "b2",
+            "label": "未確認交通枠2人×500円",
+            "totalYen": 1000,
+            "basis": "estimate",
+            "evidenceIds": [],
+            "quantity": 2,
+            "unitYen": 500
+          },
+          {
+            "id": "b3",
+            "label": "未確認休憩2人×2回×800円",
+            "totalYen": 3200,
+            "basis": "estimate",
+            "evidenceIds": [],
+            "quantity": 4,
+            "unitYen": 800
+          },
+          {
+            "id": "b4",
+            "label": "未確認追加飲食2人×400円",
+            "totalYen": 800,
+            "basis": "estimate",
+            "evidenceIds": [],
+            "quantity": 2,
+            "unitYen": 400
+          }
+        ],
+        "totalYen": 13900
+      }
+    },
+    "visualArtifact": {
+      "kind": "journey-map",
+      "title": "YOUR DAY｜天ざるの香りから、水景の世界へ",
+      "description": "11:00〜17:00、大人2人13,900円・残額2,100円の暫定案。交通・休憩・追加飲食は未確認予算枠。営業・空席・当日料金・展示公開は未保証。SNS人気は未確認。雨は寄り道せず、疲労時は後半回遊を省略。",
+      "stops": [
+        {
+          "id": "maruka",
+          "label": "浅草 雷門満留賀",
+          "optional": false,
+          "primaryStepId": "s0",
+          "stepIds": ["s0"],
+          "evidenceIds": ["ev-1", "ev-2", "ev-9"],
+          "previewPageId": "page-maruka-photos",
+          "experience": {
+            "headline": "天ざるの香りと食感を比べる",
+            "why": "掲載価格と車えびの天ぷらの説明を確認できる昼食を主役に。",
+            "highlights": [
+              "11:00〜12:00、天ざる各1人前",
+              "蕎麦の香りと天ぷらの食感を話す"
+            ],
+            "photoPageId": "page-maruka-photos",
+            "photoIndex": 7,
+            "photoDescription": "海苔を載せた蕎麦の器、えびと野菜の天ぷら、つゆと薬味。",
+            "photoCaption": "公式掲載ページの参考写真。当日の提供内容を保証しません。"
+          }
+        },
+        {
+          "id": "asakusa",
+          "label": "浅草 浅草駅",
+          "optional": false,
+          "primaryStepId": "s2",
+          "stepIds": ["s1", "s2"],
+          "evidenceIds": ["ev-6"],
+          "coordinates": {
+            "lat": 35.7093327,
+            "lon": 139.7968825,
+            "evidenceId": "ev-6"
+          }
+        },
+        {
+          "id": "aquarium",
+          "label": "押上 すみだ水族館",
+          "optional": false,
+          "primaryStepId": "s5",
+          "stepIds": ["s3", "s4", "s5", "s6", "s7", "s8"],
+          "evidenceIds": ["ev-3", "ev-4", "ev-5", "ev-7"],
+          "coordinates": {
+            "lat": 35.7101011,
+            "lon": 139.8093338,
+            "evidenceId": "ev-5"
+          },
+          "previewPageId": "page-3",
+          "experience": {
+            "headline": "水草の景色と水中の動きを見比べる",
+            "why": "自然水景とクラゲ、大水槽を休憩を挟んで楽しむ構成。",
+            "highlights": [
+              "13:20から6階の公開中の展示へ",
+              "15:00から大水槽を別角度で見て江戸リウムへ",
+              "特定日時の生き物の公開は未保証"
+            ],
+            "photoPageId": "page-4",
+            "photoIndex": 2,
+            "photoDescription": "長方形の水槽に密生する緑の水草、流木、泳ぐ小魚。",
+            "photoCaption": "公式掲載ページの参考写真。当日の展示・提供内容を保証しません。"
+          }
+        },
+        {
+          "id": "return",
+          "label": "押上 押上駅",
+          "optional": false,
+          "primaryStepId": "s9",
+          "stepIds": ["s9"],
+          "evidenceIds": []
+        }
+      ],
+      "moments": [
+        {
+          "stepId": "s0",
+          "kind": "meal",
+          "title": "香りを楽しむ天ざる",
+          "invitation": "11:00〜12:00。天ざる各1人前で蕎麦の香りと天ぷらの食感を比べましょう。営業・空席・当日価格は未保証。"
+        },
+        {
+          "stepId": "s1",
+          "kind": "move",
+          "title": "入口を確かめながら",
+          "invitation": "12:00から徒歩15分の未確認見積。浅草線入口を現地で確かめ、昼食の感想を話しながら足元優先で進みましょう。"
+        },
+        {
+          "stepId": "s2",
+          "kind": "move",
+          "title": "押上への小さな移動",
+          "invitation": "12:15から待機込み鉄道20分の未確認見積。方面と運賃を現地確認し、見たい展示を2人で相談しましょう。"
+        },
+        {
+          "stepId": "s3",
+          "kind": "move",
+          "title": "5階入口を目指して",
+          "invitation": "12:35から徒歩15分の未確認見積。5階への案内を確認。雨は寄り道せず、疲労時は歩調を落とし遅れは後半鑑賞で調整。"
+        },
+        {
+          "stepId": "s4",
+          "kind": "arrival",
+          "title": "入場前の確認タイム",
+          "invitation": "12:50〜13:20。営業・料金・入場可否を確認して待機。入場不可なら終了判断をし、無理に進めないで。"
+        },
+        {
+          "stepId": "s5",
+          "kind": "experience",
+          "title": "緑と漂いを見つめる",
+          "invitation": "13:20〜14:30。6階の公開中の自然水景・クラゲ水槽へ。水草や水中の動きで気になった違いを一つずつ話しましょう。"
+        },
+        {
+          "stepId": "s6",
+          "kind": "rest",
+          "title": "水景の余韻でひと息",
+          "invitation": "14:30〜15:00。大水槽付近の空いた椅子を確認し、水分補給と感想交換。満席なら職員に休憩場所を確認し、追加注文はしない方針で。"
+        },
+        {
+          "stepId": "s7",
+          "kind": "experience",
+          "title": "角度を変えて発見",
+          "invitation": "15:00〜16:00。5階の公開中の大水槽を別角度で見て江戸リウムへ。気づきを話し、疲労時は後半回遊を省略して休憩2を前倒し。"
+        },
+        {
+          "stepId": "s8",
+          "kind": "rest",
+          "title": "今日の一番を語る",
+          "invitation": "16:00〜16:40。カフェ付近で価格確認後、各800円以内で飲み物を選ぶ案。好きだった体験を話し、疲労が改善しなければ早めに終了。"
+        },
+        {
+          "stepId": "s9",
+          "kind": "return",
+          "title": "余韻とともに押上へ",
+          "invitation": "16:40から徒歩20分の未確認見積、17:00押上駅で終了。案内を確かめ、体調に合わせた歩調で今日の発見を振り返りましょう。"
+        }
+      ],
+      "discoveries": [
+        {
+          "anchorId": "aquarium",
+          "basis": "official-event",
+          "headline": "期間内なら「思い込み」をほどく展示へ",
+          "idea": "13:20からの6階鑑賞の一部で、開催・公開を現地確認後、参加型パネルを見て2人の予想を比べる。追加時間や有料体験は加えない。",
+          "whyNow": "保存済み公式案内の開催期間は2026年10月1日〜11月16日。日付未指定のため期間内限定の候補で、SNS反応・人気は未確認。",
+          "fit": "既存の水族館鑑賞枠内、入場料以外無料の企画。2回の休憩と予算を維持。",
+          "fallback": "期間外・非公開なら自然水景で水草と水中の動きを見比べる通常鑑賞にする。",
+          "evidenceIds": ["ev-10", "ev-11"],
+          "validFrom": "2026-10-01",
+          "validTo": "2026-11-16"
+        },
+        {
+          "anchorId": "aquarium",
+          "basis": "original-idea",
+          "headline": "同じ水槽、違う発見を持ち寄る",
+          "idea": "15:00からの大水槽鑑賞で、2人がそれぞれ気づいた動きを一つ選び、角度を変えた後に違いを話す。",
+          "whyNow": "SNS投稿の日時と反応数を検証できず、トレンドではなく独自の観察方法として提案。",
+          "fit": "既存の鑑賞時間内で追加費用なし。休憩2回は変更しない。",
+          "fallback": "疲れたら回遊を省略し、休憩中に前半の発見を一つずつ話す。",
+          "evidenceIds": ["ev-7"]
+        }
+      ]
+    },
+    "summary": "## 推奨：満留賀から水族館へ、2人13,900円の暫定案\n天ざる各1,750円、大人入館各2,700円を軸に、未確認予算枠込みで残額2,100円です。[ev-1][ev-3] 満留賀は11〜19時（LO18:30）、火曜・第1第3水曜休み。水族館の通常営業時間は未取得で、特定日の営業・空席・料金・生き物の公開は保証しません。[ev-2]\n\n## 具体的な実行手順（時刻・行動は提案）\n11:00 雷門満留賀 — 天ざる各1人前を注文し食感を比べる（60分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。[ev-1][ev-2]\n12:00 浅草駅へ — 徒歩見積15分、浅草線入口を現地確認（15分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n12:15 浅草→押上 — 鉄道見積20分、待機込み、方面・運賃現地確認（20分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n12:35 水族館入口へ — 徒歩見積15分、5階へ（15分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n12:50 水族館入口 — 料金・営業・入場可否確認と待機（30分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n13:20 6階 — 公開中の自然水景・クラゲ水槽で動きの違いを話す（70分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n14:30 大水槽付近 — 休憩1、空いた椅子で水分補給し感想を話す（30分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n15:00 5階 — 公開中の大水槽を別角度で見て江戸リウムへ（60分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n16:00 カフェ付近 — 休憩2、価格確認後各800円以内で飲み物を選ぶ（40分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：次の開始時刻までに終了。場所の詳細は未確認。\n16:40 押上駅へ — 徒歩見積20分、17時終了（20分の見積）。時刻は提案、経路・時間は未確認見積。遅れは後半鑑賞から短縮 完了の目安：17時駅で終了。場所の詳細は未確認。\n\n## 予算（大人2人、天ざる各1・通常入館・休憩2回、浅草駅開始〜押上駅終了。自宅往復除外。残額2100円・掲載料金と未確認の見積）\n| 内訳 | 人数・数量 | 単価 | 小計 | 区分 |\n| --- | ---: | ---: | ---: | --- |\n| 天ざる2人×1750円 | 2 | 1,750円 | 3,500円 | 掲載額[ev-1] |\n| 大人入館2人×2700円 | 2 | 2,700円 | 5,400円 | 掲載額[ev-3] |\n| 未確認交通枠2人×500円 | 2 | 500円 | 1,000円 | 未確認の見積 |\n| 未確認休憩2人×2回×800円 | 4 | 800円 | 3,200円 | 未確認の見積 |\n| 未確認追加飲食2人×400円 | 2 | 400円 | 800円 | 未確認の見積 |\n合計13,900円。指定上限16,000円との差額2,100円。見積を含み、実際の支払額を保証しません。\n\n## 状況が変わった時の行動\n- 雨 → 屋外寄り道をせず鉄道で押上へ。徒歩は足元優先、遅れは後半鑑賞を短縮\n- 疲労 → 後半回遊を省略し休憩2を前倒し。改善しなければ押上駅へ移動し早めに終了\n- 休業・入場不可・満席 → 日程変更または終了判断。満留賀定休日なら別日に変更。水族館入場不可なら終了。休憩満席なら職員案内で休憩場所を確認し追加注文しない",
+    "candidates": [
+      {
+        "name": "雷門満留賀",
+        "url": "https://www.maruka.net/",
+        "matches": [
+          {
+            "criterionId": "lunch",
+            "status": "supported",
+            "explanation": "料理・1750円・通常営業時間確認",
+            "evidenceIds": ["ev-1", "ev-2"]
+          },
+          {
+            "criterionId": "aquarium",
+            "status": "unknown",
+            "explanation": "役割対象外または未確認枠を含む提案",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "plan",
+            "status": "unknown",
+            "explanation": "役割対象外または未確認枠を含む提案",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "budget",
+            "status": "unknown",
+            "explanation": "役割対象外または未確認枠を含む提案",
+            "evidenceIds": []
+          }
+        ],
+        "score": 28,
+        "eligible": false
+      },
+      {
+        "name": "すみだ水族館",
+        "url": "https://sumida-aquarium.com/about/price/",
+        "matches": [
+          {
+            "criterionId": "lunch",
+            "status": "unknown",
+            "explanation": "通常営業時間未取得、または役割対象外・提案。大人2700円と展示案内は取得済み",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "aquarium",
+            "status": "unknown",
+            "explanation": "通常営業時間未取得、または役割対象外・提案。大人2700円と展示案内は取得済み",
+            "evidenceIds": ["ev-3"]
+          },
+          {
+            "criterionId": "plan",
+            "status": "unknown",
+            "explanation": "通常営業時間未取得、または役割対象外・提案。大人2700円と展示案内は取得済み",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "budget",
+            "status": "unknown",
+            "explanation": "通常営業時間未取得、または役割対象外・提案。大人2700円と展示案内は取得済み",
+            "evidenceIds": []
+          }
+        ],
+        "score": 0,
+        "eligible": false
+      }
+    ],
+    "limitations": [
+      "検査・修正の完了を確認できませんでした。引用検証済みの草案を保持しており、条件充足・具体性・視覚品質の合格を意味しません。",
+      "公開HTMLのみ。水族館アクセス本文は不完全で通常営業時間未取得。",
+      "写真ツール実行済みだが実画像表示を確認できず写真選定未完。視覚成果物も未完。",
+      "座標検索は両施設候補なし。架空のピンは作らない。全移動経路・時間は未確認見積、休憩席・追加飲食価格も未確認。",
+      "視覚成果物の保存形式検証を通過できないため、未完成のまま暫定保存を依頼。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "pageId": "page-1",
+      "url": "https://www.maruka.net/",
+      "quote": "天ざる 1,750円\n薄口の胡麻油で車えびをからっと揚げた天ぷらです。",
+      "capturedAt": "2026-11-16T05:50:00.265Z"
+    },
+    {
+      "id": "ev-2",
+      "pageId": "page-1",
+      "url": "https://www.maruka.net/",
+      "quote": "11:00～19:00（L.O.18:30）\n定休日\n火曜日、第1・第3水曜日",
+      "capturedAt": "2026-11-16T05:50:00.265Z"
+    },
+    {
+      "id": "ev-3",
+      "pageId": "page-2",
+      "url": "https://sumida-aquarium.com/about/price/",
+      "quote": "大人\n2,700円\n6,000円",
+      "capturedAt": "2026-11-16T05:50:00.772Z"
+    },
+    {
+      "id": "ev-4",
+      "pageId": "page-4",
+      "url": "https://sumida-aquarium.com/about/floor/",
+      "quote": "大小さまざまな水槽ですみだ水族館生まれのクラゲをご覧いただけます。",
+      "capturedAt": "2026-11-16T05:50:07.553Z"
+    },
+    {
+      "id": "ev-5",
+      "pageId": "geo-extra-1",
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8&format=jsonv2&limit=3",
+      "quote": "[{\"place_id\":265551264,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":1998331328,\"lat\":\"35.7101011\",\"lon\":\"139.8093338\",\"category\":\"tourism\",\"type\":\"aquarium\",\"place_rank\":30,\"importance\":0.3799838315762615,\"addresstype\":\"tourism\",\"name\":\"すみだ水族館\",\"display_name\":\"すみだ水族館, 2, 押上一丁目, 押上, 墨田区, 東京都, 131-0045, 日本\",\"boundingbox\":[\"35.7100511\",\"35.7101511\",\"139.8092838\",\"139.8093838\"]}]",
+      "capturedAt": "2026-11-16T05:55:18.541Z"
+    },
+    {
+      "id": "ev-6",
+      "pageId": "geo-station",
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%85%E8%8D%89%E9%A7%85+%E5%8F%B0%E6%9D%B1%E5%8C%BA&format=jsonv2&limit=3",
+      "quote": "[{\"place_id\":266081020,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":9896894907,\"lat\":\"35.7093327\",\"lon\":\"139.7968825\",\"category\":\"railway\",\"type\":\"subway_entrance\",\"place_rank\":30,\"importance\":8.593499656667457e-05,\"addresstype\":\"railway\",\"name\":\"浅草駅\",\"display_name\":\"浅草駅, Interchanging footway, 雷門二丁目, 雷門, 台東区, 東京都, 111-0034, 日本\",\"boundingbox\":[\"35.7092827\",\"35.7093827\",\"139.7968325\",\"139.7969325\"]},{\"place_id\":266230656,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":2008977412,\"lat\":\"35.7113505\",\"lon\":\"139.7983284\",\"category\":\"highway\",\"type\":\"bus_stop\",\"place_rank\":30,\"importance\":8.593499656667457e-05,\"addresstype\":\"highway\",\"name\":\"浅草駅\",\"display_name\":\"浅草駅, 江戸通り, 花川戸一丁目, 花川戸, 台東区, 東京都, 111-0033, 日本\",\"boundingbox\":[\"35.7113005\",\"35.7114005\",\"139.7982784\",\"139.7983784\"]}]",
+      "capturedAt": "2026-11-16T05:56:10.560Z"
+    },
+    {
+      "id": "ev-7",
+      "pageId": "page-4",
+      "url": "https://sumida-aquarium.com/about/floor/",
+      "quote": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】\n\nイベント・体験\nカフェ・ショップ\nよくあるご質問\nFLOOR MAP\nすみだ水族館フロアマップ\n6F\n5F\nトップページ\nすみだ水族館について\nフロア案内\nフロア案内\n6F\n5F\n5F\nエントランス\n5F\nすみだ水族館は東京スカイツリータウン®の5階にエントランスがございます。\n入場後は、階段を上ってまずは6階へと移動します。\n6F\n自然水景\n6F\n最初にお出迎えするのは自然の生態系を表現した水槽『自然水景』。\n水草といきものが循環する、大自然の美しさをご覧ください。\n詳しく見る\nクラゲ\n6F\n大小さまざまな水槽ですみだ水族館生まれのクラゲをご覧いただけます。\n美しく幻想的なクラゲたちの姿から、非日常の世界に没入してみてください。\n詳しく見る\n小笠原（6F）\n6F\n世界自然遺産である小笠原諸島の海をテーマにした大水槽。\n椅子に座ってゆったりと小笠原の海をお楽しみください。\n詳しく見る\nサンゴ礁\n6F\nサンゴ礁の海で暮らすいきものたちを360度全方向から観賞いただけます。\nすみだ水族館の人気者、チンアナゴの水槽もこちらです。\n詳しく見る\n5F\n万華鏡トンネル\n5F\n6階と5階をつなぐ『万華鏡トンネル』も見どころで",
+      "capturedAt": "2026-11-16T05:50:07.553Z"
+    },
+    {
+      "id": "ev-8",
+      "pageId": "page-6",
+      "url": "https://sumida-aquarium.com/",
+      "quote": "東京スカイツリータウン®にある「すみだ水族館」【公式】\n\nイベント・体験\nカフェ・ショップ\nよくあるご質問\n営業時間・アクセス\nご利用料金\nイベント・体験\nPICK UP!\n注目情報\n開催中の企画展や注目情報をチェック！\n1,111匹がニョキニョキ大集合! 「チンアナゴクリスマスツリー」が今年も登場\n高さ約2ｍ！すみだ水族館の冬の風物詩「チンアナゴクリスマスツリー」が今年も期間限定で登場します\nクラゲ水槽「ビッグシャーレ」を特別ライティング\n秋の夜空に浮かぶ満月と、色づく秋の風景をイメージし、黄色やオレンジ色、赤色など暖かみのある色彩で水面を彩ります。\nオレンジのしましまは、チンアナゴじゃない!?「※チンアナゴではありま展」を開催\n13年目の「チンアナゴの日」はみんなの誤解を解きます！\n新たに公開したアオウミガメの赤ちゃん2頭の名前を「星」と「空」に決定\n小笠原諸島で2026年7月13日（月）に生まれたアオウミガメの赤ちゃん2頭の名前を「星」と「空」に決定し、公開を開始しました。\n国内水族館初導入!米国IMMOTION社の人気VRアトラクションがやってくる!\n～9月1日（火）より圧倒的没入感の海洋コンテンツをスタート～\nがんばれ、ペンギンのルーキーたち! 4羽に会える特別な2日間「す",
+      "capturedAt": "2026-11-16T05:50:17.784Z"
+    },
+    {
+      "id": "ev-9",
+      "pageId": "page-maruka-photos",
+      "url": "https://www.maruka.net/",
+      "quote": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】\n\nトップ\n蕎麦のこだわり\nお品書き\n店舗情報\n最新情報\n閉じる×\n浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業\nトップ\n蕎麦のこだわり\nお品書き\n店舗情報\n最新情報\nトップ\n蕎麦のこだわり\nお品書き\n店舗情報\n最新情報\n浅草駅前のそば処「雷門 満留賀(まるか)」。\n明治28年創業以来、観音様のおひざ元で、蕎麦一筋でやって参りました。当店の蕎麦は上品でありながらしっかり香る、北海道音威子府の厳選した蕎麦粉を使用。 毎朝の仕事に一切の妥協をせず、一つ一つを丁寧に打っております。\n決め手の出汁は保存料・添加物・化学調味料を一切使用せず、本鰹からしっかりとった上品な味わいです。 蕎麦本来の香りと味わいをお楽しみ頂けるように、余分なものは加えずにシンプルに仕上げています。\nお席は1階が40席、2階が30席で計70席と広々とした空間です。テーブル席だけでなく、小上がり席もございますので、お子様連れでもゆっくりとお食事をお楽しみいただけます。ランチや夜ご飯に、浅草寺などの観光のお食事にご利用ください。通し営業なので遅めのランチにもおすすめです。2階は30名様までの団体貸切も可能です。\n※現在2階席の利用を"
+    },
+    {
+      "id": "ev-10",
+      "pageId": "page-seasonal-event",
+      "url": "https://www.sumida-aquarium.com/news/4q4iptlvr3/",
+      "quote": "【開催期間】2026年10月1日（木）～11月16日（月）\n【開催場所】すみだ水族館館内各所\n【料金】無料※ 水族館入場料別。\n1. 「※チンアナゴではありま展",
+      "capturedAt": "2026-11-16T06:38:58.205Z"
+    },
+    {
+      "id": "ev-11",
+      "pageId": "page-seasonal-event",
+      "url": "https://www.sumida-aquarium.com/news/4q4iptlvr3/",
+      "quote": "6階特設スペースに大型の参加型パネルが登場します。",
+      "capturedAt": "2026-11-16T06:38:58.205Z"
+    }
+  ],
+  "photoInspections": [
+    {
+      "pageId": "page-maruka-photos",
+      "imageIndex": 7,
+      "file": "872095018980670554c20a39b0150190381ae9c3ecb70ccae4d3d5ff2c46cf3e.png",
+      "sourceUrl": "https://www.maruka.net/shared/img/index/sec2-img2.png",
+      "type": "image/png",
+      "shownAt": "2026-11-16T06:39:11.027Z"
+    },
+    {
+      "pageId": "page-4",
+      "imageIndex": 2,
+      "file": "e9a524f4b77ef9044f8ea26344f4234163e40ae07c93c83c1929c9f30b353375.png",
+      "sourceUrl": "https://sumida-aquarium.com/assets/images/img-floor-main02_CZti36ZP_11bE4i.png",
+      "type": "image/png",
+      "shownAt": "2026-11-16T06:39:13.654Z"
+    }
+  ],
+  "answerPhotos": {
+    "maruka": {
+      "file": "872095018980670554c20a39b0150190381ae9c3ecb70ccae4d3d5ff2c46cf3e.png",
+      "pageId": "page-maruka-photos",
+      "imageIndex": 7,
+      "sourceUrl": "https://www.maruka.net/shared/img/index/sec2-img2.png",
+      "type": "image/png",
+      "capturedAt": "2026-11-16T06:39:57.681Z"
+    },
+    "aquarium": {
+      "file": "e9a524f4b77ef9044f8ea26344f4234163e40ae07c93c83c1929c9f30b353375.png",
+      "pageId": "page-4",
+      "imageIndex": 2,
+      "sourceUrl": "https://sumida-aquarium.com/assets/images/img-floor-main02_CZti36ZP_11bE4i.png",
+      "type": "image/png",
+      "capturedAt": "2026-11-16T06:39:57.682Z"
+    }
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "passed",
+    "issues": [],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": [
+          "行動手順actionPlanがありません。説明だけでなく、いつ・どこで・何を・どう進め・何ができれば終わりかを構造化してください"
+        ]
+      },
+      {
+        "number": 2,
+        "issues": []
+      },
+      {
+        "number": 3,
+        "issues": []
+      }
+    ]
+  },
+  "socialResearch": [
+    {
+      "url": "https://x.com/Sumida_Aquarium",
+      "checkedAt": "2026-11-16T06:38:58.206Z",
+      "status": "unavailable",
+      "reason": "公開HTMLの取得状態: 200。公開投稿の日時と反応数を検証できませんでした"
+    }
+  ],
+  "socialSignals": [],
+  "pages": [
+    {
+      "url": "https://www.maruka.net/",
+      "title": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】",
+      "mapEmbeds": [
+        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d963.143909360889!2d139.7970056003995!3d35.711040439475696!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x156b55249f2ff659!2z6Zu36ZaA5rqA55WZ6LOA!5e0!3m2!1sja!2sjp!4v1598434993591!5m2!1sja!2sjp"
+      ],
+      "images": [
+        {
+          "url": "https://www.maruka.net/shared/img/shared/ogp.png",
+          "alt": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】"
+        }
+      ],
+      "text": "天ざる 1,750円\n薄口の胡麻油で車えびをからっと揚げた天ぷらです。\n11:00～19:00（L.O.18:30）\n定休日\n火曜日、第1・第3水曜日",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:50:00.265Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-1"
+    },
+    {
+      "url": "https://sumida-aquarium.com/about/price/",
+      "title": "ご利用料金・年間パスポート | 東京スカイツリータウン®にある「すみだ水族館」【公式】",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.sumida-aquarium.com/ogp/ogp-common.png",
+          "alt": "ご利用料金・年間パスポート | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-passport-hero_9DOs-0nu_Z1ICi3g.png",
+          "alt": "年パスで、いつもの日常をほっこりレベルアップ 年パスではじめよう「すみだ水族館のある暮らし」"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-passport-card_BjqeHbY7_Z14iWbz.png",
+          "alt": "年間パスポートの画像"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-benefit-kids_D73jCCTk_JxdEH.png",
+          "alt": "すみだ水族館アクアパスポート"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-benefit-companion_CT9QtYef_XnOIH.png",
+          "alt": "ご利用料金・年間パスポート | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-benefit-shop_BSt2NF9C_Z1bV7J0.png",
+          "alt": "ご利用料金・年間パスポート | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-benefit-cafe_ClkH0Oj1_1wo8sS.png",
+          "alt": "ご利用料金・年間パスポート | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-benefit-tokyosoramachi_D7tZK_84_ZANDgA.png",
+          "alt": "東京ソラマチ、東京ミズマチの対象店舗にておトクなサービスが受けられる！東京スカイツリー、すみだ水族館、コニカミノルタプラネタリウム天空へ遊びに来たらチケット見せて得しよう！"
+        }
+      ],
+      "text": "大人\n2,700円\n6,000円",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:50:00.772Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-2"
+    },
+    {
+      "url": "https://sumida-aquarium.com/about/access/",
+      "title": "営業時間・アクセス | 東京スカイツリータウン®にある「すみだ水族館」【公式】",
+      "mapEmbeds": [
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.6621733370107!2d139.8095855!3d35.7099301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ed6ddcaa63b%3A0x52f9e68583464160!2z44GZ44G_44Gg5rC05peP6aSo!5e0!3m2!1sja!2sjp!4v1764568477514!5m2!1sja!2sjp"
+      ],
+      "images": [
+        {
+          "url": "https://www.sumida-aquarium.com/ogp/ogp-common.png",
+          "alt": "営業時間・アクセス | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-map_Ccn8UCwO_ZWTvMs.png",
+          "alt": "営業時間・アクセス | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        }
+      ],
+      "text": "",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:50:07.350Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-3"
+    },
+    {
+      "url": "https://sumida-aquarium.com/about/floor/",
+      "title": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.sumida-aquarium.com/ogp/ogp-common.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-floor-main01_DgfzbyX__2vpes2.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-floor-main02_CZti36ZP_11bE4i.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-floor-main03_DIerpML2_1W2EHs.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-floor-main04_BXjDZvgY_Z15mGcK.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-floor-main05_DojobmeT_28kd9x.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-floor-main06_U0hxsRcT_Zi5oPB.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-floor-main15_B9Mkz0Hw_1rLloo.png",
+          "alt": "フロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        }
+      ],
+      "text": "大小さまざまな水槽ですみだ水族館生まれのクラゲをご覧いただけます。\nフロア案内 | 東京スカイツリータウン®にある「すみだ水族館」【公式】\n\nイベント・体験\nカフェ・ショップ\nよくあるご質問\nFLOOR MAP\nすみだ水族館フロアマップ\n6F\n5F\nトップページ\nすみだ水族館について\nフロア案内\nフロア案内\n6F\n5F\n5F\nエントランス\n5F\nすみだ水族館は東京スカイツリータウン®の5階にエントランスがございます。\n入場後は、階段を上ってまずは6階へと移動します。\n6F\n自然水景\n6F\n最初にお出迎えするのは自然の生態系を表現した水槽『自然水景』。\n水草といきものが循環する、大自然の美しさをご覧ください。\n詳しく見る\nクラゲ\n6F\n大小さまざまな水槽ですみだ水族館生まれのクラゲをご覧いただけます。\n美しく幻想的なクラゲたちの姿から、非日常の世界に没入してみてください。\n詳しく見る\n小笠原（6F）\n6F\n世界自然遺産である小笠原諸島の海をテーマにした大水槽。\n椅子に座ってゆったりと小笠原の海をお楽しみください。\n詳しく見る\nサンゴ礁\n6F\nサンゴ礁の海で暮らすいきものたちを360度全方向から観賞いただけます。\nすみだ水族館の人気者、チンアナゴの水槽もこちらです。\n詳しく見る\n5F\n万華鏡トンネル\n5F\n6階と5階をつなぐ『万華鏡トンネル』も見どころで",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:50:07.553Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-4"
+    },
+    {
+      "url": "https://www.maruka.net/",
+      "title": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】",
+      "mapEmbeds": [
+        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d963.143909360889!2d139.7970056003995!3d35.711040439475696!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x156b55249f2ff659!2z6Zu36ZaA5rqA55WZ6LOA!5e0!3m2!1sja!2sjp!4v1598434993591!5m2!1sja!2sjp"
+      ],
+      "images": [
+        {
+          "url": "https://www.maruka.net/shared/img/shared/ogp.png",
+          "alt": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】"
+        }
+      ],
+      "text": "",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:50:12.301Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-5"
+    },
+    {
+      "url": "https://sumida-aquarium.com/",
+      "title": "東京スカイツリータウン®にある「すみだ水族館」【公式】",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.sumida-aquarium.com/ogp/ogp-common.png",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-visual-01_CjwcycSN_1UOy3y.png",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://sumida-aquarium.com/assets/images/img-visual-02_BjGuYjcR_Zqvwe8.png",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/7d9ca43bf25544b0be49de7ea59d72c6/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E3%80%91%E2%91%A0%E3%83%81%E3%83%B3%E3%82%A2%E3%83%8A%E3%82%B4%E3%83%84%E3%83%AA%E3%83%BC%EF%BC%88%E3%83%A1%E3%82%A4%E3%83%B3%EF%BC%89.jpeg",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/f5d3a3e216e04afd8cbaa003ac04157d/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E3%80%91%E2%91%A0%E3%82%AF%E3%83%A9%E3%82%B2%E6%B0%B4%E6%A7%BD%E3%80%8C%E3%83%93%E3%83%83%E3%82%B0%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%AC%E3%80%8D%E3%81%AE%E7%89%B9%E5%88%A5%E3%83%A9%E3%82%A4%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%EF%BC%88%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%EF%BC%89.JPG",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/989bc3b5d29442d78ebbb4ee09b3c713/2.%E3%83%94%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%83%90%E3%83%8A%E3%83%BC_260908.jpg",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/0ccf4b13eb404cb0b4766d3920c89fa2/%E6%98%9F%E3%81%A8%E7%A9%BA.JPG",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/116d6cf0dc7e4ab4be461a6d75d87de9/AUDIENCE%20REACTIONS%20-%201.jpg",
+          "alt": "東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        }
+      ],
+      "text": "東京スカイツリータウン®にある「すみだ水族館」【公式】\n\nイベント・体験\nカフェ・ショップ\nよくあるご質問\n営業時間・アクセス\nご利用料金\nイベント・体験\nPICK UP!\n注目情報\n開催中の企画展や注目情報をチェック！\n1,111匹がニョキニョキ大集合! 「チンアナゴクリスマスツリー」が今年も登場\n高さ約2ｍ！すみだ水族館の冬の風物詩「チンアナゴクリスマスツリー」が今年も期間限定で登場します\nクラゲ水槽「ビッグシャーレ」を特別ライティング\n秋の夜空に浮かぶ満月と、色づく秋の風景をイメージし、黄色やオレンジ色、赤色など暖かみのある色彩で水面を彩ります。\nオレンジのしましまは、チンアナゴじゃない!?「※チンアナゴではありま展」を開催\n13年目の「チンアナゴの日」はみんなの誤解を解きます！\n新たに公開したアオウミガメの赤ちゃん2頭の名前を「星」と「空」に決定\n小笠原諸島で2026年7月13日（月）に生まれたアオウミガメの赤ちゃん2頭の名前を「星」と「空」に決定し、公開を開始しました。\n国内水族館初導入!米国IMMOTION社の人気VRアトラクションがやってくる!\n～9月1日（火）より圧倒的没入感の海洋コンテンツをスタート～\nがんばれ、ペンギンのルーキーたち! 4羽に会える特別な2日間「す",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:50:17.784Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-6"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E9%9B%B7%E9%96%80%E6%BA%80%E7%95%99%E8%B3%80+%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%B5%85%E8%8D%891-1-5&format=jsonv2&limit=3",
+      "title": "雷門満留賀 東京都台東区浅草1-1-5 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "",
+      "links": [],
+      "capturedAt": "2026-11-16T05:50:18.405Z",
+      "truncated": true,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-1"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8+%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A2%A8%E7%94%B0%E5%8C%BA%E6%8A%BC%E4%B8%8A1-1-2&format=jsonv2&limit=3",
+      "title": "すみだ水族館 東京都墨田区押上1-1-2 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "",
+      "links": [],
+      "capturedAt": "2026-11-16T05:50:19.341Z",
+      "truncated": true,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-2"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E9%9B%B7%E9%96%80%E6%BA%80%E7%95%99%E8%B3%80&format=jsonv2&limit=3",
+      "title": "雷門満留賀 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "",
+      "links": [],
+      "capturedAt": "2026-11-16T05:55:17.252Z",
+      "truncated": true,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-extra-0"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8&format=jsonv2&limit=3",
+      "title": "すみだ水族館 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "[{\"place_id\":265551264,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":1998331328,\"lat\":\"35.7101011\",\"lon\":\"139.8093338\",\"category\":\"tourism\",\"type\":\"aquarium\",\"place_rank\":30,\"importance\":0.3799838315762615,\"addresstype\":\"tourism\",\"name\":\"すみだ水族館\",\"display_name\":\"すみだ水族館, 2, 押上一丁目, 押上, 墨田区, 東京都, 131-0045, 日本\",\"boundingbox\":[\"35.7100511\",\"35.7101511\",\"139.8092838\",\"139.8093838\"]}]",
+      "links": [],
+      "capturedAt": "2026-11-16T05:55:18.541Z",
+      "truncated": true,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-extra-1"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%85%E8%8D%89%E9%A7%85+%E5%8F%B0%E6%9D%B1%E5%8C%BA&format=jsonv2&limit=3",
+      "title": "浅草駅 台東区 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "[{\"place_id\":266081020,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":9896894907,\"lat\":\"35.7093327\",\"lon\":\"139.7968825\",\"category\":\"railway\",\"type\":\"subway_entrance\",\"place_rank\":30,\"importance\":8.593499656667457e-05,\"addresstype\":\"railway\",\"name\":\"浅草駅\",\"display_name\":\"浅草駅, Interchanging footway, 雷門二丁目, 雷門, 台東区, 東京都, 111-0034, 日本\",\"boundingbox\":[\"35.7092827\",\"35.7093827\",\"139.7968325\",\"139.7969325\"]},{\"place_id\":266230656,\"licence\":\"Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":2008977412,\"lat\":\"35.7113505\",\"lon\":\"139.7983284\",\"category\":\"highway\",\"type\":\"bus_stop\",\"place_rank\":30,\"importance\":8.593499656667457e-05,\"addresstype\":\"highway\",\"name\":\"浅草駅\",\"display_name\":\"浅草駅, 江戸通り, 花川戸一丁目, 花川戸, 台東区, 東京都, 111-0033, 日本\",\"boundingbox\":[\"35.7113005\",\"35.7114005\",\"139.7982784\",\"139.7983784\"]}]",
+      "links": [],
+      "capturedAt": "2026-11-16T05:56:10.560Z",
+      "truncated": true,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-station"
+    },
+    {
+      "url": "https://www.maruka.net/",
+      "title": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】",
+      "mapEmbeds": [
+        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d963.143909360889!2d139.7970056003995!3d35.711040439475696!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x156b55249f2ff659!2z6Zu36ZaA5rqA55WZ6LOA!5e0!3m2!1sja!2sjp!4v1598434993591!5m2!1sja!2sjp"
+      ],
+      "images": [
+        {
+          "url": "https://www.maruka.net/shared/img/shared/ogp.png",
+          "alt": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】"
+        },
+        {
+          "url": "https://www.maruka.net/shared/img/index/sec1-img.png",
+          "alt": "鴨南蛮"
+        },
+        {
+          "url": "https://www.maruka.net/shared/img/index/sec1-ttl2.png",
+          "alt": "季節感じるお"
+        },
+        {
+          "url": "https://www.maruka.net/shared/img/index/sec1-img2.png",
+          "alt": "おろしそば"
+        },
+        {
+          "url": "https://www.maruka.net/shared/img/index/sec1-ttl3.png",
+          "alt": "季節のおすすめ蕎麦"
+        },
+        {
+          "url": "https://www.maruka.net/shared/img/index/sec2-mark2.png",
+          "alt": "おすすめ"
+        },
+        {
+          "url": "https://www.maruka.net/shared/img/index/sec2-img1.png",
+          "alt": "かも南蛮"
+        },
+        {
+          "url": "https://www.maruka.net/shared/img/index/sec2-img2.png",
+          "alt": "天ざる"
+        }
+      ],
+      "text": "浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業【公式】\n\nトップ\n蕎麦のこだわり\nお品書き\n店舗情報\n最新情報\n閉じる×\n浅草の蕎麦処「雷門 満留賀（まるか）」ランチや夜ご飯に｜通し営業\nトップ\n蕎麦のこだわり\nお品書き\n店舗情報\n最新情報\nトップ\n蕎麦のこだわり\nお品書き\n店舗情報\n最新情報\n浅草駅前のそば処「雷門 満留賀(まるか)」。\n明治28年創業以来、観音様のおひざ元で、蕎麦一筋でやって参りました。当店の蕎麦は上品でありながらしっかり香る、北海道音威子府の厳選した蕎麦粉を使用。 毎朝の仕事に一切の妥協をせず、一つ一つを丁寧に打っております。\n決め手の出汁は保存料・添加物・化学調味料を一切使用せず、本鰹からしっかりとった上品な味わいです。 蕎麦本来の香りと味わいをお楽しみ頂けるように、余分なものは加えずにシンプルに仕上げています。\nお席は1階が40席、2階が30席で計70席と広々とした空間です。テーブル席だけでなく、小上がり席もございますので、お子様連れでもゆっくりとお食事をお楽しみいただけます。ランチや夜ご飯に、浅草寺などの観光のお食事にご利用ください。通し営業なので遅めのランチにもおすすめです。2階は30名様までの団体貸切も可能です。\n※現在2階席の利用を",
+      "links": [],
+      "truncated": true,
+      "id": "page-maruka-photos"
+    },
+    {
+      "url": "https://www.sumida-aquarium.com/news/4q4iptlvr3/",
+      "title": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.sumida-aquarium.com/ogp/ogp-common.png",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/971b5d01eed84078926f51d27bde01f0/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E2%91%A0%E3%80%91%E3%82%AD%E3%83%BC%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB.jpg",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/d1bed747b7554e2191fd23f6f4488de8/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E2%91%A1%E3%80%91%E5%A4%A7%E5%9E%8B%E3%83%91%E3%83%8D%E3%83%AB.jpg?w=500&h=320",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/d3b5d1dc7ebb4d4a88531093ff0a2c11/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E2%91%A2%E3%80%91%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%97%E3%83%A9%E3%83%AA%E3%83%BC.png?w=500&h=357",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/2965481a554c45c4a7ab1cf266319360/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E2%91%A3%E3%80%91%E3%83%81%E3%83%B3%E3%82%A2%E3%83%8A%E3%82%B43%E7%A8%AE.jpg?w=500&h=281",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/1a20f229ed2a45ccbe33e2f482905174/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E2%91%A4%E3%80%91%EF%BE%81%EF%BE%9D%EF%BD%B1%EF%BE%85%EF%BD%BA%EF%BE%9E%EF%BE%8A%EF%BE%9D.JPG?w=500&h=298",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/3d4b024581f14601a6b065b2c31f19ad/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E2%91%A5%E3%80%91%E9%85%8D%E5%B8%83%E7%94%A8%E3%83%81%E3%83%B3%E3%82%A2%E3%83%8A%E3%82%B4%E3%81%8A%E9%9D%A2.png?w=500&h=333",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        },
+        {
+          "url": "https://images.microcms-assets.io/assets/218fe239b5e04e63b5e1c6e743e86224/4bdc0d8bce3c4c02a0e9d7889f214f5b/%E3%80%90%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8%E2%91%A6%E3%80%91%EF%BC%B7%EF%BC%B3%E3%83%81%E3%83%B3%E3%82%A2%E3%83%8A%E3%82%B4%E3%81%8A%E9%9D%A2.jpeg?w=500&h=161",
+          "alt": "「※チンアナゴではありま展」を開催 ～みんなの誤解をとく、13年目のチンアナゴの日～ | ニュース | 東京スカイツリータウン®にある「すみだ水族館」【公式】"
+        }
+      ],
+      "text": "【開催期間】2026年10月1日（木）～11月16日（月）\n【開催場所】すみだ水族館館内各所\n【料金】無料※ 水族館入場料別。\n1. 「※チンアナゴではありま展\n6階特設スペースに大型の参加型パネルが登場します。",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T06:38:58.205Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-seasonal-event"
+    }
+  ],
+  "evaluation": {
+    "mode": "frozen-replay",
+    "caseId": "social-discovery",
+    "fixtureSha256": "f3841b140cb5dcdfb003d66db8d37791bcb2031fe3646a10cda8033366527d80"
+  }
+}

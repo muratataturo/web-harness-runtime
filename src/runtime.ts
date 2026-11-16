@@ -1,3 +1,4 @@
+import { captureSocial } from "./social.js";
 import { prepareAnswerMedia, inspectAnswerPhoto } from "./answer-media.js";
 import { locatePlace } from "./geocoding.js";
 import {
@@ -95,7 +96,7 @@ export function newTask(options: RunOptions): Task {
   )
     throw new Error("クエリと1件以上のURLが必要です");
   const sources = routeSources(options.query, options.urls);
-  const profile = createResearchProfile(options.urls);
+  const profile = createResearchProfile(options.urls, undefined, options.query);
   if (options.artifactNonce && !/^[a-f0-9-]{36}$/.test(options.artifactNonce))
     throw new Error("不正なartifact nonce");
   if (profile.mode === "hardened" && options.headed)
@@ -180,6 +181,7 @@ export async function runTask(
   const task = newTask(options);
   const instructions =
     SYSTEM_PROMPT +
+    "\nSNSやトレンドを求められた場合はread_socialで公開投稿の取得可否を確認し、visualArtifact.discoveriesに最大3案のユニークな体験を作る。anchorIdは既存のstopまたはmilestoneのID。headline/idea/whyNow/fit/fallback/evidenceIds/basisを指定。basisはsocial-snapshot（取得済みsignalIdと引用が必要）、official-event（公式の開催期間validFrom/validToと引用が必要）、original-idea（独自の過ごし方の提案）。反応数はホストが表示し、単一投稿から急増やSNS全体の人気を断定しない。取得不能なら人気は未確認のまま公式情報と独自案を組み合わせる。新しい場所・時間・費用を勝手に足さず、既存の条件内でどう楽しむかと期間外の代替まで示す。期間限定の体験を通常展示と混同しない。" +
     `\n視覚成果物契約: ${JSON.stringify(visualContract(task.query))}。kindがnoneなら視覚成果物は不要。それ以外はfinish_task.visualArtifactを作る。journey-mapは全手順に対応するmoments（stepId/kind:arrival|move|experience|meal|rest|return/title/invitation）を作り、移動・休憩にも会話や疲労に合わせる具体的な過ごし方を提案する。未確認の景観・設備を捏造しない。stopsと実際のstepIds、主な活動のprimaryStepId、取得済みGoogle共有地図のpreviewPageId、写真付き体験experience（headline/why/highlights/photoPageId/photoIndex/photoCaption/photoDescription（実画像の内容））、出典本文に数値のあるcoordinates/evidenceId。life-roadmapはlanesとmilestones（horizon/action/doneWhen/decision/dependsOn/basis/evidenceIds）。座標なしの場所を捏造しない。許可ソースにnominatim.openstreetmap.orgがある場合はlocate_placeで公開地点名と地域を検索できる。` +
     (!options.benchmark && specificityContract(task.query).mode !== "facts"
       ? `\n具体性の実行契約: ${JSON.stringify(specificityContract(task.query))}\nfinish_taskのactionPlanに、行動単位のwhen/where/action/how/doneWhenと根拠IDを渡してください。行程はdurationMinutesも必要です。『周辺でゆっくり』『好きなものを見る』で止めず、開始地点・見る/選ぶ対象・操作・完了目安と切替行動まで書いてください。場所の詳細を確認できなければunconfirmedとし、使えない時の行動をbranchesに書いてください。予算は主案1つの人数×単価をbudgetに、掲載額はpublished、未確認枠はestimateにします。推測を出典情報にしないでください。summaryは短い結論と重要な注意点を中心にし、構造化手順・予算・分岐はホストが本文へ表示します。不足はaccepted=falseで返るので、必要に応じてread_page/deepen_details/open_pageで確認し修正してください。`
@@ -471,6 +473,18 @@ export async function runTask(
   let visualRepairs = 0;
   let geoLookups = 0;
   const tools: ToolDefinition[] = [
+    defineTool({
+      name: "read_social",
+      label: "Read public social evidence",
+      description:
+        "許可済みSNSの公開投稿を確認する。Blueskyの個別投稿は日時・反応数を公開APIで取得。他SNSは取得不能を明示し、拒否を回避しない。単一投稿で流行を断定しない。",
+      parameters: Type.Object({ url: Type.String({ maxLength: 2048 }) }),
+      execute: wrap("read_social", async (p) => {
+        const result = await captureSocial(task, p.url, controller.signal);
+        await store.save(task);
+        return result;
+      }),
+    }),
     defineTool({
       name: "inspect_photo",
       label: "Inspect captured photo",

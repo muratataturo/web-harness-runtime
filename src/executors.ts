@@ -123,7 +123,7 @@ export function configuredRuntime(): RuntimeExecutor {
     provider: process.env.OPENSHELL_PROVIDER,
   });
   return (options, store) => {
-    createResearchProfile(options.urls);
+    createResearchProfile(options.urls, undefined, options.query);
     return agentEngine(options.agent) === "codex"
       ? runCodexSandbox(
           { ...options, agent: "codex" },

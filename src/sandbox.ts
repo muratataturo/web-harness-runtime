@@ -167,7 +167,7 @@ export function planOpenShellTask(
   if (!options.urls.length || options.urls.length > 20)
     throw new Error("Specify 1–20 source URLs");
   const sources = routeSources(options.query, options.urls);
-  const profile = createResearchProfile(options.urls);
+  const profile = createResearchProfile(options.urls, undefined, options.query);
   const artifactNonce = randomUUID();
   interactionMode(options.interactionMode);
   if (
