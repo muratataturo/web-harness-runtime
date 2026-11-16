@@ -147,6 +147,8 @@ export async function captureSocial(
     if (
       !post ||
       typeof post.record?.text !== "string" ||
+      typeof publishedAt !== "string" ||
+      publishedAt.length > 80 ||
       !Number.isFinite(Date.parse(publishedAt)) ||
       Date.parse(publishedAt) > Date.now() + 300000
     )

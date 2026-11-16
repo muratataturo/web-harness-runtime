@@ -117,6 +117,7 @@ try {
   report.passed = true;
 } finally {
   await browser.close();
+  await writeFile(`${out}/report.json`, JSON.stringify(report, null, 2) + "\n");
   await writeFile(
     "docs/evidence/answer-contrast-qa.json",
     JSON.stringify(report, null, 2) + "\n",

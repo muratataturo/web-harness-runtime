@@ -157,6 +157,21 @@ test("missing reaction metrics stay null and old observations cannot become curr
       ),
     /数値/,
   );
+  const badDate = await captureSocial(
+    input(),
+    postUrl,
+    new AbortController().signal,
+    async () =>
+      response({
+        posts: [
+          {
+            uri: "at://did:plc:abc/app.bsky.feed.post/3abc123",
+            record: { text: "投稿", createdAt: 1234 },
+          },
+        ],
+      }),
+  );
+  assert.equal(badDate.attempt.status, "unavailable");
   const older = await captured();
   older.createdAt = new Date(
     Date.parse(older.createdAt) + 31 * 86400000,
