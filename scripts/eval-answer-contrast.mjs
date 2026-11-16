@@ -27,6 +27,8 @@ try {
     "docs/life-roadmap.html",
     "docs/life-roadmap-actual.html",
     "docs/asakusa-social-day.html",
+    "docs/comparison-travel.html",
+    "docs/comparison-life.html",
   ])
     for (const scheme of ["light", "dark"])
       for (const width of [390, 1280]) {

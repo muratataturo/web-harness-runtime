@@ -45,6 +45,11 @@ export function createWorkbenchServer(
 ) {
   const streams = new Set<ServerResponse>();
   const visuals = new VisualPreviewStore(taskStore.root);
+  const answerTask = async (scope: string, id: string) => {
+    if (scope === "tasks") return taskStore.get(id);
+    const run = await runs.get(id);
+    return run.taskId ? taskStore.get(run.taskId) : run.task;
+  };
   const server = createServer(async (req, res) => {
     try {
       const host = req.headers.host ?? "";
@@ -109,13 +114,12 @@ export function createWorkbenchServer(
         return;
       }
       const photoMatch = path.match(
-        /^\/api\/runs\/([a-zA-Z0-9-]+)\/answer-assets\/([a-f0-9]{64}\.(?:jpg|png|webp|gif|avif))$/,
+        /^\/api\/(runs|tasks)\/([a-zA-Z0-9-]+)\/answer-assets\/([a-f0-9]{64}\.(?:jpg|png|webp|gif|avif))$/,
       );
       if (photoMatch && req.method === "GET") {
-        const run = await runs.get(photoMatch[1]!);
-        const task = run.taskId ? await taskStore.get(run.taskId) : run.task;
+        const task = await answerTask(photoMatch[1]!, photoMatch[2]!);
         const photo = Object.values(task?.answerPhotos ?? {}).find(
-          (p) => p.file === photoMatch[2],
+          (p) => p.file === photoMatch[3],
         );
         if (!task || !photo) {
           send(res, 404, { error: "保存写真がありません" });
@@ -133,11 +137,10 @@ export function createWorkbenchServer(
         return;
       }
       const answerMatch = path.match(
-        /^\/api\/runs\/([a-zA-Z0-9-]+)\/answer\.html$/,
+        /^\/api\/(runs|tasks)\/([a-zA-Z0-9-]+)\/answer\.html$/,
       );
       if (answerMatch && req.method === "GET") {
-        const run = await runs.get(answerMatch[1]!);
-        const task = run.taskId ? await taskStore.get(run.taskId) : run.task;
+        const task = await answerTask(answerMatch[1]!, answerMatch[2]!);
         if (!task?.answer) {
           send(res, 404, { error: "回答はまだありません" });
           return;
@@ -150,7 +153,8 @@ export function createWorkbenchServer(
         });
         res.end(
           renderAnswerHtml(task, {
-            photoBase: `/api/runs/${answerMatch[1]}/answer-assets`,
+            photoBase: `/api/${answerMatch[1]}/${answerMatch[2]}/answer-assets`,
+            uxFeedbackEndpoint: `/api/tasks/${task.id}/ux-feedback`,
           }),
         );
         return;
@@ -366,6 +370,14 @@ export function createWorkbenchServer(
       const uxFeedback = path.match(
         /^\/api\/tasks\/([a-zA-Z0-9-]+)\/ux-feedback$/,
       );
+      if (uxFeedback && req.method === "GET") {
+        send(
+          res,
+          200,
+          await new UxFeedbackStore(taskStore).learningContext(uxFeedback[1]!),
+        );
+        return;
+      }
       if (uxFeedback && req.method === "POST") {
         send(
           res,

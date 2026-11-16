@@ -1,0 +1,351 @@
+{
+  "id": "47ce830f-a51c-44d7-a3da-2836f473b8ed",
+  "query": "人生計画のサンプル相談。35歳の会社員が、仕事の働き方を見直し、武蔵小杉周辺の住まいを検討し、週末の移動を楽しめる暮らしを考えています。0〜30日・1〜3か月・3〜6か月のロードマップと、次にする具体的な行動を日本語で作成してください。本人の年収・貯蓄・家族人数・手取り・職歴は未指定で推測しません。希望の整理、確認、試す、判断する順に、仕事・住居・移動をつなぐ9節目程度を作る。公開ページは住居条件を確認する参考として使用し、特定の契約や転職、車の購入を推奨せず、未確認の項目は保留する。求人・収入・採用見通しを作らない。写真や地図は不要。life-roadmapの各節目に具体行動、完了条件、見直す条件、依存関係を入れる。将来の計画はproposalとし、取得した公開ページの掲載条件だけをsource-backedとして扱う。構造化actionPlanにも次にできる手順と条件が違った時の分岐を保存する。予算上限は入力されていないので勝手に作らない。公開情報が足りなくても実行可能な暫定提案をfinish_taskに保存する。応募・内見予約・契約・問い合わせはしません。 元の行程・費用・根拠・未確認事項を保持し、発見重視・ゆったり・記録重視の3案を比較して選びたい。proposalSet.optionsで行動と残る成果の違う3案を具体的に作ってください。撮影が未確認なら撮影可の保証をせず、紙のメモなどの代替も示す。追加費用・新しい移動を足さず、既存の地点または節目に結び付ける。",
+  "status": "partial",
+  "createdAt": "2026-11-16T07:36:56.647Z",
+  "updatedAt": "2026-11-16T07:38:47.325Z",
+  "model": "gpt-6.1-sol",
+  "agent": "codex",
+  "urls": [
+    "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/"
+  ],
+  "sources": [
+    {
+      "id": "source-1",
+      "kind": "suumo",
+      "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "家賃と管理費、初期費用、駅徒歩、間取り、築年、募集条件を /chintai/bc_.../ など個別物件詳細で確認する。一覧を1部屋の候補にしない。月額上限は家賃と管理費・共益費の合算で判定し、別の駅への徒歩分数を対象駅の徒歩と取り違えない。検索URLの内部エリアIDは推測せず地域・駅の実在リンクを使う。空室や入居可否は確約しない。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "reference",
+      "description": "武蔵小杉周辺の個別住居掲載条件を参考確認。契約推奨ではない",
+      "required": false,
+      "weight": 1
+    },
+    {
+      "id": "roadmap",
+      "description": "仕事・住居・移動を結ぶ3期間9節目の暫定提案。本人属性は推測しない",
+      "required": true,
+      "weight": 1
+    }
+  ],
+  "limits": {
+    "maxSteps": 55,
+    "timeoutSeconds": 360,
+    "maxPages": 5
+  },
+  "steps": 3,
+  "answer": {
+    "visualArtifact": {
+      "kind": "life-roadmap",
+      "title": "仕事・住まい・週末をつなぐ6か月の暫定ロードマップ",
+      "description": "希望整理→確認→試行→判断の9節目はすべて提案。掲載額・徒歩のみ確認済み参考。家計・勤務条件は未指定で適否を保留。予算上限・追加費用・移動は作らず、応募・予約・契約・問い合わせや車購入の推奨はしません。",
+      "lanes": [
+        {
+          "id": "work",
+          "label": "仕事・働き方"
+        },
+        {
+          "id": "home",
+          "label": "住居・武蔵小杉周辺"
+        },
+        {
+          "id": "mobility",
+          "label": "週末・移動"
+        }
+      ],
+      "milestones": [
+        {
+          "id": "w1",
+          "laneId": "work",
+          "horizon": "0〜30日",
+          "title": "働き方の希望",
+          "action": "続けたい働き方・変えたい点と通勤・勤務時間の希望を順位付きで書く。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "条件が不明なら判断を保留して確認へ戻る。希望や疲労が変われば再整理し、試行は短縮・延期する。",
+          "dependsOn": [],
+          "basis": "proposal",
+          "evidenceIds": []
+        },
+        {
+          "id": "h1",
+          "laneId": "home",
+          "horizon": "0〜30日",
+          "title": "住居の希望",
+          "action": "間取り・通勤条件を整理し、家族人数・手取り・貯蓄・支出を確認待ちにする。予算上限は作らない。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "条件が不明なら判断を保留して確認へ戻る。希望や疲労が変われば再整理し、試行は短縮・延期する。",
+          "dependsOn": [],
+          "basis": "proposal",
+          "evidenceIds": []
+        },
+        {
+          "id": "m1",
+          "laneId": "mobility",
+          "horizon": "0〜30日",
+          "title": "週末の希望",
+          "action": "週末に楽しみたいこと、時間、疲労の許容範囲を仕事・住居の希望と照合する。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "条件が不明なら判断を保留して確認へ戻る。希望や疲労が変われば再整理し、試行は短縮・延期する。",
+          "dependsOn": [
+            "w1",
+            "h1"
+          ],
+          "basis": "proposal",
+          "evidenceIds": []
+        },
+        {
+          "id": "w2",
+          "laneId": "work",
+          "horizon": "1〜3か月",
+          "title": "勤務条件の確認・試行",
+          "action": "本人が確認できる勤務制度と現行条件を整理し、現状の時間配分を小さく試す。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "条件が不明なら判断を保留して確認へ戻る。希望や疲労が変われば再整理し、試行は短縮・延期する。",
+          "dependsOn": [
+            "w1"
+          ],
+          "basis": "proposal",
+          "evidenceIds": []
+        },
+        {
+          "id": "h2",
+          "laneId": "home",
+          "horizon": "1〜3か月",
+          "title": "掲載条件との照合",
+          "action": "クレールの掲載賃料12.5万円、管理費共益費5500円と希望を比較。武蔵小杉駅JR横須賀線徒歩8分・東急東横線徒歩10分、向河原駅JR南武線徒歩4分は参考限定。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "空室・入居可否・初期費用総額・本人の家計が不明なら適否はunknownで保留。条件が違えばh1に戻る。",
+          "dependsOn": [
+            "h1",
+            "w2"
+          ],
+          "basis": "proposal",
+          "evidenceIds": [
+            "ev-1",
+            "ev-2"
+          ]
+        },
+        {
+          "id": "m2",
+          "laneId": "mobility",
+          "horizon": "1〜3か月",
+          "title": "週末の試行・記録",
+          "action": "元の希望内で実行可能な過ごし方を試し、時間・支出・疲労・楽しさと翌日の負担を記録。費用不明なら縮小。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "条件が不明なら判断を保留して確認へ戻る。希望や疲労が変われば再整理し、試行は短縮・延期する。",
+          "dependsOn": [
+            "m1",
+            "w2",
+            "h2"
+          ],
+          "basis": "proposal",
+          "evidenceIds": []
+        },
+        {
+          "id": "w3",
+          "laneId": "work",
+          "horizon": "3〜6か月",
+          "title": "働き方の判断材料",
+          "action": "勤務条件と試行から現状維持・時間配分調整・追加確認を比較する。収入・採用見通しは作らない。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "条件が不明なら判断を保留して確認へ戻る。希望や疲労が変われば再整理し、試行は短縮・延期する。",
+          "dependsOn": [
+            "w2",
+            "m2"
+          ],
+          "basis": "proposal",
+          "evidenceIds": []
+        },
+        {
+          "id": "h3",
+          "laneId": "home",
+          "horizon": "3〜6か月",
+          "title": "住居の判断材料",
+          "action": "本人が確認した家計と住居・勤務条件から現住居継続・検討継続・条件再整理を比較する。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "空室・入居可否・初期費用総額・本人の家計が不明なら適否はunknownで保留。条件が違えばh1に戻る。",
+          "dependsOn": [
+            "h2",
+            "w3"
+          ],
+          "basis": "proposal",
+          "evidenceIds": []
+        },
+        {
+          "id": "m3",
+          "laneId": "mobility",
+          "horizon": "3〜6か月",
+          "title": "暮らしの再整理",
+          "action": "仕事・住居・週末の記録を重ね、継続・調整・保留と次に確認する一項目を選ぶ。",
+          "doneWhen": "結果と未確認事項、次の具体的な確認項目がメモに残る。",
+          "decision": "条件が不明なら判断を保留して確認へ戻る。希望や疲労が変われば再整理し、試行は短縮・延期する。",
+          "dependsOn": [
+            "m2",
+            "w3",
+            "h3"
+          ],
+          "basis": "proposal",
+          "evidenceIds": []
+        }
+      ],
+      "proposalSet": {
+        "options": [
+          {
+            "id": "discovery",
+            "theme": "discovery",
+            "mechanism": "compare",
+            "anchorId": "h2",
+            "title": "発見重視：希望との差",
+            "activity": "既存の掲載条件を希望に合う・異なる・未確認に分類し、次に確認する一項目を選ぶ。",
+            "deliverable": "希望との差が分かる比較表",
+            "benefit": "判断前に条件の違いを発見できる",
+            "difference": "既存条件の比較を中心にする",
+            "tradeoff": "体感や休息の確認は別の節目で行う",
+            "minutes": 10,
+            "evidenceIds": [
+              "ev-1",
+              "ev-2"
+            ]
+          },
+          {
+            "id": "relax",
+            "theme": "relax",
+            "mechanism": "focus",
+            "anchorId": "m1",
+            "title": "ゆったり：休息を優先",
+            "activity": "既存の希望から休息と両立したい条件を一つ選び、疲れた場合の短縮・延期条件を書く。",
+            "deliverable": "優先条件と短縮・延期条件のカード",
+            "benefit": "負担を増やさず試行条件を決められる",
+            "difference": "比較数を増やさず一条件に集中する",
+            "tradeoff": "他の希望の検討は一旦保留にする",
+            "minutes": 5,
+            "evidenceIds": []
+          },
+          {
+            "id": "photo",
+            "theme": "photo",
+            "mechanism": "capture",
+            "anchorId": "m2",
+            "title": "記録重視：体感を残す",
+            "activity": "元の試行の時間・支出・疲労・楽しさを紙に記録する。撮影可否は未確認で写真を前提にせず、追加外出もしない。",
+            "deliverable": "試行前後を振り返る紙の記録",
+            "benefit": "後の判断に実際の体感を利用できる",
+            "difference": "条件比較ではなく実際の体験を残す",
+            "tradeoff": "記録の手間があるため負担なら一項目に減らす",
+            "minutes": 5,
+            "evidenceIds": []
+          }
+        ]
+      }
+    },
+    "summary": "## 推奨：希望整理→確認→試行→判断で進める\n以下は将来予測ではなく暫定提案です。本人の家計・勤務条件が未指定のため、住み替えや働き方変更の適否はunknownとして保留します。\n\n### 0〜30日\n1. 仕事：7日間の勤務と疲労を記録し、残したいこと・減らしたいことを各3つ書く。完了は優先事項3つの決定。競合したら順位を修正。依存なし。\n2. 住居：本人が家計・同居条件・現住居費を確認する。完了は確認値と不明欄を分けた表。数字が不明なら支払判断は保留。依存：1。\n3. 移動：行きたい方面2つと帰宅希望時刻を書く。完了は休息を含む休日案2つ。休日確保が難しければ近距離案へ。依存：1。\n\n### 1〜3か月\n4. 仕事：就業規則の勤務時間・在宅制度を確認。完了は利用条件と不明点一覧。対象外なら現状内の時間配分を検討。依存：1。\n5. 住居：家賃と管理費、路線別徒歩、初期費用を現住居と比較。完了は不明項目付き比較表。家計・勤務未確定なら選定保留。依存：2・4。\n6. 移動：運賃と運行確認後に週末案を1回試す。往路・活動・休憩・復路を別々に計画し、時間・実費・翌日の疲労を記録して完了。費用不明・悪天候・疲労時は自宅で経路比較へ。依存：3・5。\n\n### 3〜6か月\n7. 仕事：実施可能と確認した時間配分を2週間試す。継続・修正・中止を理由付きで選んで完了。負担増なら元に戻す。依存：4・6。\n8. 住居：現状維持と住み替え検討を費用・通勤・休日で比較。保留を含む結論を書いて完了。初期費用総額不明なら判断保留。依存：5・7。\n9. 移動：仕事・住居の判断に合わせ休日案を更新。続けること・やめること各1つと再確認日を決めて完了。条件変更時は2へ戻る。依存：6・8。\n\n次は自宅で30分、勤務記録の用紙を作り、その次の30分で家計の確認項目を列挙してください。不明な数値は空欄のままにします。\n\n公開情報の参考例は家賃125,000円＋管理費5,500円＝月額130,500円、武蔵小杉駅徒歩は横須賀線8分・東横線10分です。本人への適合や契約を推奨するものではありません。[ev-1][ev-2]",
+    "candidates": [],
+    "limitations": [
+      "検査・修正の完了を確認できませんでした。引用検証済みの草案を保持しており、条件充足・具体性・視覚品質の合格を意味しません。",
+      "9節目はすべてproposal。公開ページの掲載額・徒歩だけをsource-backedとして扱う。",
+      "年収・貯蓄・家族人数・手取り・職歴・勤務先は未指定でunknown。求人・収入・採用見通しは作成しない。",
+      "住居参考詳細1件を確認したが、候補比較・特定物件の推奨は行わない。空室・入居可否・初期費用総額はunknown。",
+      "予算上限は設定しない。外出費・転居費は未算定。応募・内見予約・契約・問い合わせは行っていない。",
+      "life-roadmapとactionPlanの専用構造は先行呼出しで形式エラーとなったため、節目・依存関係・次の手順・分岐をsummaryに保存する。"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "ev-1",
+      "pageId": "page-2",
+      "url": "https://suumo.jp/chintai/jnc_000111170176/",
+      "quote": "12.5万円\n管理費・共益費: 5500円",
+      "capturedAt": "2026-11-16T05:53:00.929Z"
+    },
+    {
+      "id": "ev-2",
+      "pageId": "page-2",
+      "url": "https://suumo.jp/chintai/jnc_000111170176/",
+      "quote": "ＪＲ横須賀線/武蔵小杉駅 歩8分\nＪＲ南武線/向河原駅 歩4分\n東急東横線/武蔵小杉駅 歩10分",
+      "capturedAt": "2026-11-16T05:53:00.929Z"
+    }
+  ],
+  "photoInspections": [],
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "specificity": {
+    "version": 1,
+    "mode": "next-actions",
+    "status": "not_required",
+    "issues": [],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": []
+      }
+    ]
+  },
+  "uxLearningContext": {
+    "scope": "self-reported-human-ux-review",
+    "sourceTaskId": "comparison-seed-6f2dbbec-9a4d-4e3e-b90f-58513eb834ff",
+    "artifactRevision": "774df203497b9bf7e03fd4493b3058fc27ab421c5ebf23dc006db42a74f29ad9",
+    "responses": 0,
+    "uniqueBrowserReviewers": 0,
+    "independentHumansVerified": false,
+    "humanAppealStatus": "unrated",
+    "issues": {
+      "too_dense": 0,
+      "unclear_difference": 0,
+      "not_for_me": 0,
+      "unrealistic": 0,
+      "hard_to_read": 0
+    },
+    "guidance": [],
+    "variants": [],
+    "note": "同じ版・ブラウザ識別子・案の最新回答だけを使用。本人性・独立した人間の人数は未検証。新しい生成物の評価点として転用しない。"
+  },
+  "pages": [
+    {
+      "url": "https://suumo.jp/chintai/kanagawa/ek_38720/nj_204/",
+      "title": "【SUUMO】1LDKで探す武蔵小杉駅の賃貸(賃貸マンション・アパート)住宅のお部屋探し物件情報（神奈川県）",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:52:58.155Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-1"
+    },
+    {
+      "url": "https://suumo.jp/chintai/jnc_000111170176/",
+      "title": "【SUUMO】クレール（上丸子山王町）／神奈川県川崎市中原区上丸子山王町２／武蔵小杉駅の賃貸・部屋探し情報（000111170176） | 賃貸マンション・賃貸アパート",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "12.5万円\n管理費・共益費: 5500円\nＪＲ横須賀線/武蔵小杉駅 歩8分\nＪＲ南武線/向河原駅 歩4分\n東急東横線/武蔵小杉駅 歩10分",
+      "links": [],
+      "truncated": true,
+      "capturedAt": "2026-11-16T05:53:00.929Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-2"
+    }
+  ],
+  "evaluation": {
+    "mode": "frozen-replay",
+    "caseId": "proposal-comparison-life",
+    "fixtureSha256": "c04cae4b4c7442d1405ffc03a46f17365c0dbe9ae02d7a3260a2f59ecd916527"
+  }
+}

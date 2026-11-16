@@ -1,3 +1,4 @@
+import { UxFeedbackStore } from "./ux-feedback.js";
 import { captureSocial } from "./social.js";
 import { prepareAnswerMedia, inspectAnswerPhoto } from "./answer-media.js";
 import { locatePlace } from "./geocoding.js";
@@ -179,8 +180,22 @@ export async function runTask(
     );
   const started = performance.now();
   const task = newTask(options);
+  if (options.parentId) {
+    try {
+      task.uxLearningContext = await new UxFeedbackStore(store).learningContext(
+        options.parentId,
+      );
+    } catch (error: any) {
+      if (error.code !== "ENOENT") throw error;
+    }
+  }
   const instructions =
     SYSTEM_PROMPT +
+    "\n複数案の比較ではvisualArtifact.proposalSet.optionsに3案を作る。各案はid/theme(discovery|relax|photo)/anchorId/title/activity/deliverable/benefit/difference/tradeoff/mechanism(compare|focus|capture)/minutes/evidenceIds。themeとmechanismは3件それぞれ別にする。旅程はstepIdで元の地点の活動枠に結び付け、minutesを枠内にする。見出しの言い換えだけにせず、具体的な行動と残る成果を変える。追加費用・移動を勝手に足さない。人の魅力度を採点したと主張しない。" +
+    (task.uxLearningContext
+      ? "\n過去の自己申告UXレビュー集計。新しい回答の評価点ではない。改善指針として使う: " +
+        JSON.stringify(task.uxLearningContext)
+      : "") +
     "\nSNSやトレンドを求められた場合はread_socialで公開投稿の取得可否を確認し、visualArtifact.discoveriesに最大3案のユニークな体験を作る。anchorIdは既存のstopまたはmilestoneのID。headline/idea/whyNow/fit/fallback/evidenceIds/basisを指定。basisはsocial-snapshot（取得済みsignalIdと引用が必要）、official-event（公式の開催期間validFrom/validToと引用が必要）、original-idea（独自の過ごし方の提案）。反応数はホストが表示し、単一投稿から急増やSNS全体の人気を断定しない。取得不能なら人気は未確認のまま公式情報と独自案を組み合わせる。新しい場所・時間・費用を勝手に足さず、既存の条件内でどう楽しむかと期間外の代替まで示す。期間限定の体験を通常展示と混同しない。" +
     `\n視覚成果物契約: ${JSON.stringify(visualContract(task.query))}。kindがnoneなら視覚成果物は不要。それ以外はfinish_task.visualArtifactを作る。journey-mapは全手順に対応するmoments（stepId/kind:arrival|move|experience|meal|rest|return/title/invitation）を作り、移動・休憩にも会話や疲労に合わせる具体的な過ごし方を提案する。未確認の景観・設備を捏造しない。stopsと実際のstepIds、主な活動のprimaryStepId、取得済みGoogle共有地図のpreviewPageId、写真付き体験experience（headline/why/highlights/photoPageId/photoIndex/photoCaption/photoDescription（実画像の内容））、出典本文に数値のあるcoordinates/evidenceId。life-roadmapはlanesとmilestones（horizon/action/doneWhen/decision/dependsOn/basis/evidenceIds）。座標なしの場所を捏造しない。許可ソースにnominatim.openstreetmap.orgがある場合はlocate_placeで公開地点名と地域を検索できる。` +
     (!options.benchmark && specificityContract(task.query).mode !== "facts"

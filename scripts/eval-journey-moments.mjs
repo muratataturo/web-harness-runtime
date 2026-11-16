@@ -170,7 +170,10 @@ try {
       widths,
       checks,
       steps: data.plan?.steps.length,
-      moments: data.artifact.moments?.length,
+      moments:
+        data.artifact.kind === "journey-map"
+          ? await page.locator(".journey-moment").count()
+          : undefined,
     });
     await page.close();
   }

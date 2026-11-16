@@ -67,6 +67,9 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  uxLearningContext?: Awaited<
+    ReturnType<import("./ux-feedback.js").UxFeedbackStore["learningContext"]>
+  >;
   socialSignals?: import("./social.js").SocialSignal[];
   socialResearch?: import("./social.js").SocialAttempt[];
   photoInspections?: {

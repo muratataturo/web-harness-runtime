@@ -1,3 +1,4 @@
+import { proposalRevision, rankProposals } from "./proposals.js";
 import { renderDiscoveries } from "./discovery-html.js";
 import { renderJourneyStory } from "./journey-story.js";
 import { sharedMapEmbed } from "./map-embed.js";
@@ -11,7 +12,7 @@ import type { Task } from "./types.js";
 /** Saved answer plus a purpose-specific interactive artifact; never starts model inference. */
 export function renderAnswerHtml(
   task: Task,
-  options: { photoBase?: string } = {},
+  options: { photoBase?: string; uxFeedbackEndpoint?: string } = {},
 ): string {
   const answer = task.answer,
     plan = answer?.actionPlan,
@@ -32,8 +33,37 @@ export function renderAnswerHtml(
       )
     : "";
   const scriptHash = createHash("sha256").update(client).digest("base64");
+  // Photo stories and full-step invitations are already rendered in HTML. Send only fields the interactive client uses.
+  const clientArtifact =
+    artifact?.kind === "journey-map"
+      ? {
+          kind: artifact.kind,
+          title: artifact.title,
+          description: artifact.description,
+          proposalSet: artifact.proposalSet,
+          stops: artifact.stops.map((s) => ({
+            id: s.id,
+            label: s.label,
+            stepIds: s.stepIds,
+            primaryStepId: s.primaryStepId,
+            evidenceIds: s.evidenceIds,
+            optional: s.optional,
+            coordinates: s.coordinates,
+          })),
+        }
+      : artifact;
   const visualData = JSON.stringify({
-    artifact,
+    artifact: clientArtifact,
+    proposalRanking: artifact?.proposalSet
+      ? rankProposals(task, artifact.proposalSet)
+      : undefined,
+    review: artifact?.proposalSet
+      ? {
+          taskId: task.id,
+          revision: proposalRevision(task),
+          endpoint: options.uxFeedbackEndpoint,
+        }
+      : undefined,
     previews:
       artifact?.kind === "journey-map"
         ? Object.fromEntries(
@@ -145,16 +175,16 @@ export function renderAnswerHtml(
         `<details class="source" id="source-${i}"><summary><span class="source-id">${esc(e.id)}</span>${esc(task.pages.find((p) => p.id === e.pageId)?.title ?? new URL(e.url).hostname)}</summary><blockquote>${esc(e.quote).replaceAll("\n", "<br>")}</blockquote><div class="source-footer">${external(e.url, "掲載元を開く")}<span>取得 ${esc(e.capturedAt)}</span></div></details>`,
     )
     .join("");
-  return `<!doctype html><html lang="ja" data-astryx-theme="neutral" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-${scriptHash}'; style-src 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://cyberjapandata.gsi.go.jp; frame-src https://www.google.com; base-uri 'none'; form-action 'none'"><meta name="referrer" content="strict-origin-when-cross-origin"><title>${esc(title)}｜生成回答</title><style>${artifactCss}\n${styles}</style></head><body class="${artifact ? "has-visual" : ""}">
+  return `<!doctype html><html lang="ja" data-astryx-theme="neutral" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-${scriptHash}'; style-src 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://cyberjapandata.gsi.go.jp; frame-src https://www.google.com; base-uri 'none'; form-action 'none'"><meta name="referrer" content="strict-origin-when-cross-origin"><title>${esc(title)}｜生成回答</title><style>${artifactCss}\n${styles}</style></head><body class="${artifact ? "has-visual" : ""}">
   <header class="masthead"><a class="wordmark" href="#top"><span class="brand-mark">h</span>harness<span class="wordmark-small">RESEARCH NOTE</span></a><span class="saved-label">${isExample ? "架空条件の操作例" : "保存された実生成回答"}</span></header>
   <main id="top"><section class="hero"><div class="eyebrow">YOUR NEXT GOOD CHOICE <span>／ 調査からの提案</span></div><div class="hero-grid"><div><div class="hero-tags">${date ? `<span>${esc(date)}</span>` : ""}${contract.timeRange ? `<span>${esc(contract.timeRange.join("–"))}・提案</span>` : ""}<span class="partial">${task.status === "succeeded" ? "取得時点の掲載情報を確認" : "未確認を含む暫定案"}</span></div><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p><p class="snapshot">${isExample ? "作成" : "取得"}：${esc(new Date(captured).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }))} JST · ${task.evidence.length}件の引用</p></div>${budget ? `<aside class="budget-hero"><span class="eyebrow">家族の予算見積</span><div class="amount"><small>¥</small>${money(budget.totalYen)}</div><p>${esc(budget.scenario ?? "対象案は未確認")}</p>${contract.ceilingYen !== undefined ? `<div class="remaining">上限 ${money(contract.ceilingYen)}円まで <strong>${money(contract.ceilingYen - budget.totalYen)}円</strong></div>` : ""}<small>未確認の見積${money(estimated)}円を含みます。</small><a class="budget-link" href="#budget">内訳と出典を見る ↓</a></aside>` : ""}</div>
   ${visual}<nav class="section-nav" aria-label="回答の目次">${inspiration ? '<a href="#discoveries">ひとつ違う楽しみ方</a>' : ""}${steps ? '<a href="#itinerary">行程と進め方</a>' : ""}${budget ? '<a href="#budget">予算</a>' : ""}<a href="#conditions">未確認・変更時の行動</a><a href="#full-answer">回答全文</a><a href="#sources">引用・出典</a></nav></section>
-  <div class="content-grid"><div class="main-column">${inspiration}${steps ? `<section id="itinerary" class="section"><div class="section-heading"><div><span class="eyebrow">01 / YOUR DAY</span><h2>${story ? "この日を、こんなふうに楽しむ。" : "いつ、どこで、どう過ごすか。"}</h2></div><span class="section-count">${plan!.steps.length}の手順</span></div><p class="section-note">時刻・所要時間・観察や休憩の方法は提案です。未確認の場所や当日の利用を保証しません。</p>${story ? `<div class="experience-grid">${story}</div>${journeyStory}` : `<div class="timeline">${steps}</div>`}</section>` : ""}
-  ${budget ? `<section id="budget" class="section"><span class="eyebrow">02 / BUDGET</span><h2>掲載料金と、未確認の見積を分ける。</h2><p class="section-note">${esc(budget.scenario ?? "")}</p><div class="table-wrap"><table><thead><tr><th>内訳</th><th>数量 × 単価</th><th>小計</th><th>区分</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><th colspan="2">合計</th><td colspan="2">${money(budget.totalYen)}円</td></tr></tfoot></table></div><p class="budget-note">掲載額 ${money(published)}円 ＋ 未確認の見積 ${money(estimated)}円。実際の支払額を保証するものではありません。</p></section>` : ""}
+  <div class="content-grid"><div class="main-column">${artifact?.proposalSet ? '<div id="proposal-comparison"></div>' : ""}${inspiration}${steps ? `<section id="itinerary" class="section"><div class="section-heading"><div><span class="eyebrow">01 / YOUR DAY</span><h2>${story ? "この日を、こんなふうに楽しむ。" : "いつ、どこで、どう過ごすか。"}</h2></div><span class="section-count">${plan!.steps.length}の手順</span></div><p class="section-note">時刻・所要時間・観察や休憩の方法は提案です。未確認の場所や当日の利用を保証しません。</p>${story ? `<div class="experience-grid">${story}</div>${journeyStory}` : `<div class="timeline">${steps}</div>`}</section>` : ""}
+${budget ? `<section id="budget" class="section"><span class="eyebrow">02 / BUDGET</span><h2>掲載料金と、未確認の見積を分ける。</h2><p class="section-note">${esc(budget.scenario ?? "")}</p><div class="table-wrap"><table><thead><tr><th>内訳</th><th>数量 × 単価</th><th>小計</th><th>区分</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><th colspan="2">合計</th><td colspan="2">${money(budget.totalYen)}円</td></tr></tfoot></table></div><p class="budget-note">掲載額 ${money(published)}円 ＋ 未確認の見積 ${money(estimated)}円。実際の支払額を保証するものではありません。</p></section>` : ""}
   <section id="conditions" class="section"><span class="eyebrow">03 / PLAN B & UNCERTAINTY</span><h2>無理をしないための、切り替え方。</h2><div class="branches">${plan?.branches.map((b) => `<article class="branch"><span class="trigger">${esc(b.trigger)}なら</span><h3>${esc(b.action)}</h3><p>${esc(b.how)}</p><div class="refs">${refs(b.evidenceIds)}</div></article>`).join("") ?? ""}</div><div class="limitations"><h3>確認できていないこと</h3><ul>${answer?.limitations.map((l) => `<li>${esc(l)}</li>`).join("") ?? `<li>${esc(task.error ?? "回答未取得")}</li>`}</ul></div></section>
   <section id="full-answer" class="section"><span class="eyebrow">04 / ORIGINAL ANSWER</span><h2>生成した回答の全文。</h2><p class="section-note">保存された本文を表示しています。構造化手順・予算・分岐の表示部分はruntimeが追記したものです。</p><details class="full-answer"><summary>回答全文を開く</summary><div class="markdown-body">${full}</div></details></section>
   <section id="sources" class="section"><span class="eyebrow">05 / SOURCES</span><h2>判断のもとになった引用。</h2><p class="section-note">項目を開くと、取得した本文の引用と掲載元を確認できます。</p>${sources || "<p>引用は保存されていません。</p>"}</section></div>
-  <aside class="side-note"><span class="eyebrow">この案の使い方</span><h3>予定を埋めるより、<br>無理なく選ぶ。</h3><p>各手順の「進め方」と「完了の目安」を確認し、状況が変わったら代替行動へ。</p><div class="side-warning"><strong>出発前に確認</strong><p>${esc(answer?.limitations[0] ?? "最新の営業・料金・利用条件を掲載元で確認してください。")}</p></div><a href="#conditions">未確認事項を読む ↗</a><a href="#sources">掲載元と引用を確認 ↗</a><details class="record"><summary>この回答の記録</summary><p>モデル：${esc(task.model ?? "記録なし")}</p><p>結果：${esc(task.status)}</p><p>Task：${esc(task.id)}</p><p>このHTMLを開いても、モデル推論やWeb取得は行いません。</p></details></aside></div></main>
+  <aside class="side-note"><span class="eyebrow">この案の使い方</span><h3>予定を埋めるより、<br>無理なく選ぶ。</h3><p>各手順の「進め方」と「完了の目安」を確認し、状況が変わったら代替行動へ。</p><div class="side-warning"><strong>出発前に確認</strong><p>${esc(answer?.limitations[0] ?? "最新の営業・料金・利用条件を掲載元で確認してください。")}</p></div><a href="#conditions">未確認事項を読む ↗</a><a href="#sources">掲載元と引用を確認 ↗</a><details class="record"><summary>この回答の記録</summary><p>モデル：${esc(task.model ?? "記録なし")}</p><p>結果：${esc(task.status)}</p><p>Task：${esc(task.id)}</p><p>このHTMLを開いても、モデル推論やWeb取得は行いません。</p></details></aside></div>${artifact?.proposalSet ? '<div id="ux-review"></div>' : ""}</main>
   <footer>WEB HARNESS RUNTIME <span>${isExample ? "架空条件の操作例" : "実生成の保存記録"} · 予約・購入を行う画面ではありません</span><a href="#top">先頭へ ↑</a></footer>${artifact ? `<script id="visual-data" type="application/json">${visualData}</script><script>${client}</script>` : ""}</body></html>`;
 }
 

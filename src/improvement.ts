@@ -1,3 +1,4 @@
+import { UxFeedbackStore } from "./ux-feedback.js";
 import {
   assessVisualArtifact,
   visualArtifactSchema,
@@ -757,6 +758,17 @@ export async function improveTask(
         break;
       }
       const plan = improvementPlan(loop, tasks, i);
+      const ux = await new UxFeedbackStore(store).learningContext(
+        loop.bestTaskId,
+      );
+      if (ux.responses)
+        plan.uxGuidance = {
+          sourceTaskId: ux.sourceTaskId,
+          artifactRevision: ux.artifactRevision,
+          responses: ux.responses,
+          guidance: ux.guidance,
+          independentHumansVerified: false,
+        };
       options.onProgress?.(
         `improvement ${loop.id} [${i}/${maxIterations}] ${plan.strategy}: ${loop.best.gaps.length}対象が未達・未調査リンク${plan.priorityUrls.length}件`,
       );

@@ -735,7 +735,7 @@ const learning = program
   .description(
     "実行履歴のoffline経験集約と学習用データの分離。モデル重みは更新しない",
   );
-program
+const uxReviews = program
   .command("ux-reviews")
   .description(
     "実際に投稿された10秒レビューを集計。自動テストを人間評価に混ぜない",
@@ -743,6 +743,25 @@ program
   .action(async () =>
     console.log(JSON.stringify(await new UxFeedbackStore().summary(), null, 2)),
   );
+uxReviews
+  .command("import <file>")
+  .description("本人が書き出した比較案の10秒レビューJSONを保存する")
+  .action(async (file) => {
+    const input = JSON.parse(await readFile(file, "utf8"));
+    if (
+      input.protocol !== "web-harness-ux-review-v2" ||
+      typeof input.taskId !== "string"
+    )
+      throw Error("UXレビューの書き出しJSONが必要です");
+    const record = await new UxFeedbackStore().add(input.taskId, input);
+    console.log(
+      JSON.stringify(
+        { saved: true, id: record.id, taskId: record.taskId },
+        null,
+        2,
+      ),
+    );
+  });
 learning
   .command("build")
   .description("本文・引用を再検証しtrain/validationを課題単位で分離して保存")
