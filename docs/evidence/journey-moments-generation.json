@@ -1,0 +1,275 @@
+{
+  "mode": "live model generation and shared improvement adoption; public snapshots are replay only",
+  "records": [
+    {
+      "case": "ueno",
+      "taskId": "10a7bee2-1aa1-464c-aa64-740e7595b6f2",
+      "sourceTaskId": "63666bf7-64ca-465a-9264-f75b0ca1d61e",
+      "loopId": "371027af-2b01-4c63-aa00-675de635f77e",
+      "accepted": true,
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "visualReview": {
+        "version": 1,
+        "status": "passed",
+        "issues": []
+      },
+      "planSteps": 11,
+      "moments": [
+        {
+          "stepId": "s0",
+          "kind": "move",
+          "title": "正門へ、期待を話そう",
+          "invitation": "9:30から徒歩20分見積。子供の歩調で正門へ。見たい動物を話し、歩きづらさがないか確かめましょう。"
+        },
+        {
+          "stepId": "s1",
+          "kind": "experience",
+          "title": "足の違いを発見",
+          "invitation": "9:50から90分。案内で公開中の近い2種類を選び、足の違いを一つ言ってみましょう。"
+        },
+        {
+          "stepId": "s2",
+          "kind": "rest",
+          "title": "午後の元気をためる",
+          "invitation": "11:20から25分。水分・トイレを優先し、歩けるか子供に確認。休憩場所・席は未確認のため、席がなければ退園する案です。"
+        },
+        {
+          "stepId": "s3",
+          "kind": "move",
+          "title": "お昼へ気持ちを切り替え",
+          "invitation": "11:45から徒歩25分見積。中央改札側へ向かい、見つけた動物の違いを話しましょう。子供の歩調を優先します。"
+        },
+        {
+          "stepId": "s4",
+          "kind": "meal",
+          "title": "食べて午後を相談",
+          "invitation": "12:10から70分。日曜御膳2と子供プレート1を予定。価格・アレルギーを現地確認し、食後の疲れを見て博物館へ進むか相談しましょう。"
+        },
+        {
+          "stepId": "s5",
+          "kind": "move",
+          "title": "科学へつなぐ道",
+          "invitation": "13:20から徒歩20分見積。動物の体で気になったことを話しながら博物館へ。疲れていたら博物館は省略しましょう。"
+        },
+        {
+          "stepId": "s6",
+          "kind": "experience",
+          "title": "標本と生体を比べよう",
+          "invitation": "13:40から100分。案内で公開中の動物標本2点を選び、動物園の生体との違いを話しましょう。特別展は除外します。"
+        },
+        {
+          "stepId": "s7",
+          "kind": "rest",
+          "title": "帰りの元気を確かめる",
+          "invitation": "15:20から30分。飲食可能表示を確かめて休憩。場所・席は未確認です。飲食不可なら駅へ向かい、子供の疲れを確認しましょう。"
+        },
+        {
+          "stepId": "s8",
+          "kind": "experience",
+          "title": "お気に入りをもう一度",
+          "invitation": "15:50から40分。気に入った1点だけ再確認し、今日の感想を一つ話しましょう。"
+        },
+        {
+          "stepId": "s9",
+          "kind": "move",
+          "title": "発見を持って駅へ",
+          "invitation": "16:30から徒歩20分見積。今日一番面白かったことを話しながら駅へ。混雑なら早めに退館し、子供の歩調で進みましょう。"
+        },
+        {
+          "stepId": "s10",
+          "kind": "return",
+          "title": "忘れ物なく帰ろう",
+          "invitation": "16:50から10分。トイレと持物を確認し、子供の疲れを確かめて帰路の準備。17:00終了です。"
+        }
+      ],
+      "photoInspections": [
+        {
+          "pageId": "page-3",
+          "imageIndex": 0,
+          "file": "69f03a04df9bf3c22f4015a1eb06322260d32ebff5e82fd09157dfcc71de0094.jpg",
+          "sourceUrl": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+          "type": "image/jpeg",
+          "shownAt": "2026-11-16T05:48:48.607Z"
+        },
+        {
+          "pageId": "page-1",
+          "imageIndex": 1,
+          "file": "9fbc0a4a4e85a2529e22e1d5180487ed5f2cc549ba8ee9cf29c08229754cdf81.jpg",
+          "sourceUrl": "https://imgfp.hotp.jp/IMGH/22/19/P049622219/P049622219_368.jpg",
+          "type": "image/jpeg",
+          "shownAt": "2026-11-16T05:48:48.703Z"
+        },
+        {
+          "pageId": "page-museum-gallery",
+          "imageIndex": 7,
+          "file": "d867c75855f1cdd7d49d1d4b6833b8ec0c14ad7f81e2b706ee3602362bf8f0c3.webp",
+          "sourceUrl": "https://www.kahaku.go.jp/albums/1001/abm00000258.webp",
+          "type": "image/webp",
+          "shownAt": "2026-11-16T05:48:48.780Z"
+        }
+      ],
+      "photos": {
+        "zoo": {
+          "file": "69f03a04df9bf3c22f4015a1eb06322260d32ebff5e82fd09157dfcc71de0094.jpg",
+          "pageId": "page-3",
+          "imageIndex": 0,
+          "sourceUrl": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+          "type": "image/jpeg",
+          "capturedAt": "2026-11-16T05:49:37.700Z"
+        },
+        "lunch": {
+          "file": "9fbc0a4a4e85a2529e22e1d5180487ed5f2cc549ba8ee9cf29c08229754cdf81.jpg",
+          "pageId": "page-1",
+          "imageIndex": 1,
+          "sourceUrl": "https://imgfp.hotp.jp/IMGH/22/19/P049622219/P049622219_368.jpg",
+          "type": "image/jpeg",
+          "capturedAt": "2026-11-16T05:49:37.700Z"
+        },
+        "museum": {
+          "file": "d867c75855f1cdd7d49d1d4b6833b8ec0c14ad7f81e2b706ee3602362bf8f0c3.webp",
+          "pageId": "page-museum-gallery",
+          "imageIndex": 7,
+          "sourceUrl": "https://www.kahaku.go.jp/albums/1001/abm00000258.webp",
+          "type": "image/webp",
+          "capturedAt": "2026-11-16T05:49:37.701Z"
+        }
+      },
+      "originalPlanPreserved": true,
+      "humanAppeal": "unrated"
+    },
+    {
+      "case": "asakusa",
+      "taskId": "c0a27a1f-b80a-450d-9999-8bb1773a92ea",
+      "sourceTaskId": "couple-prepared-1794808516558",
+      "loopId": "0473b819-edb5-4513-ae66-946ae6e3c3e6",
+      "accepted": true,
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "visualReview": {
+        "version": 1,
+        "status": "passed",
+        "issues": []
+      },
+      "planSteps": 10,
+      "moments": [
+        {
+          "stepId": "s0",
+          "kind": "meal",
+          "title": "香りを楽しむ天ざる",
+          "invitation": "11:00〜12:00。天ざる各1人前で蕎麦の香りと天ぷらの食感を比べましょう。営業・空席・当日価格は未保証。"
+        },
+        {
+          "stepId": "s1",
+          "kind": "move",
+          "title": "入口を確かめながら",
+          "invitation": "12:00から徒歩15分の未確認見積。浅草線入口を現地で確かめ、昼食の感想を話しながら足元優先で進みましょう。"
+        },
+        {
+          "stepId": "s2",
+          "kind": "move",
+          "title": "押上への小さな移動",
+          "invitation": "12:15から待機込み鉄道20分の未確認見積。方面と運賃を現地確認し、次に見たい展示を2人で相談しましょう。"
+        },
+        {
+          "stepId": "s3",
+          "kind": "move",
+          "title": "5階入口を目指して",
+          "invitation": "12:35から徒歩15分の未確認見積。水族館5階への案内を確認。雨は寄り道せず、疲れていれば歩調を落とし遅れは後半観賞で調整。"
+        },
+        {
+          "stepId": "s4",
+          "kind": "arrival",
+          "title": "入場前の確認タイム",
+          "invitation": "12:50〜13:20。営業・料金・入場可否を確認して待機。入場不可なら終了判断をし、無理に予定を進めないで。"
+        },
+        {
+          "stepId": "s5",
+          "kind": "experience",
+          "title": "緑と漂いを見つめる",
+          "invitation": "13:20〜14:30。6階の公開中の自然水景・クラゲ水槽へ。水草や水中の動きで気になった違いを一つずつ話しましょう。"
+        },
+        {
+          "stepId": "s6",
+          "kind": "rest",
+          "title": "水景の余韻でひと息",
+          "invitation": "14:30〜15:00。大水槽付近の空いた椅子を確認し、水分補給と感想交換。満席なら職員に休憩場所を確認し、追加注文はしない方針で。"
+        },
+        {
+          "stepId": "s7",
+          "kind": "experience",
+          "title": "角度を変えて発見",
+          "invitation": "15:00〜16:00。5階の公開中の大水槽を別角度で見て江戸リウムへ。気づきの違いを話し、疲労時は後半回遊を省略して休憩2を前倒し。"
+        },
+        {
+          "stepId": "s8",
+          "kind": "rest",
+          "title": "今日の一番を語る",
+          "invitation": "16:00〜16:40。カフェ付近で価格を確認後、各800円以内で飲み物を選ぶ案。好きだった体験を話し、疲労が改善しなければ早めに終了しましょう。"
+        },
+        {
+          "stepId": "s9",
+          "kind": "return",
+          "title": "余韻とともに押上へ",
+          "invitation": "16:40から徒歩20分の未確認見積、17:00押上駅で終了。駅への案内を確かめ、体調に合わせた歩調で今日の発見を振り返りましょう。"
+        }
+      ],
+      "photoInspections": [
+        {
+          "pageId": "page-maruka-photos",
+          "imageIndex": 7,
+          "file": "872095018980670554c20a39b0150190381ae9c3ecb70ccae4d3d5ff2c46cf3e.png",
+          "sourceUrl": "https://www.maruka.net/shared/img/index/sec2-img2.png",
+          "type": "image/png",
+          "shownAt": "2026-11-16T05:59:05.084Z"
+        },
+        {
+          "pageId": "page-4",
+          "imageIndex": 2,
+          "file": "e9a524f4b77ef9044f8ea26344f4234163e40ae07c93c83c1929c9f30b353375.png",
+          "sourceUrl": "https://sumida-aquarium.com/assets/images/img-floor-main02_CZti36ZP_11bE4i.png",
+          "type": "image/png",
+          "shownAt": "2026-11-16T05:59:05.591Z"
+        }
+      ],
+      "photos": {
+        "maruka": {
+          "file": "872095018980670554c20a39b0150190381ae9c3ecb70ccae4d3d5ff2c46cf3e.png",
+          "pageId": "page-maruka-photos",
+          "imageIndex": 7,
+          "sourceUrl": "https://www.maruka.net/shared/img/index/sec2-img2.png",
+          "type": "image/png",
+          "capturedAt": "2026-11-16T05:59:58.821Z"
+        },
+        "aquarium": {
+          "file": "e9a524f4b77ef9044f8ea26344f4234163e40ae07c93c83c1929c9f30b353375.png",
+          "pageId": "page-4",
+          "imageIndex": 2,
+          "sourceUrl": "https://sumida-aquarium.com/assets/images/img-floor-main02_CZti36ZP_11bE4i.png",
+          "type": "image/png",
+          "capturedAt": "2026-11-16T05:59:58.823Z"
+        }
+      },
+      "originalPlanPreserved": true,
+      "humanAppeal": "unrated"
+    },
+    {
+      "case": "life",
+      "taskId": "89e12166-83fa-4ed0-ab48-2d60553d5809",
+      "sourceTaskId": "f01d0e51-efc6-4a8a-98c6-09bdc931c033",
+      "loopId": "127b8622-c145-4c1e-80e2-6178315155ab",
+      "accepted": true,
+      "model": "gpt-6.1-sol",
+      "status": "partial",
+      "visualReview": {
+        "version": 1,
+        "status": "passed",
+        "issues": []
+      },
+      "milestones": 9,
+      "photoInspections": [],
+      "originalPlanPreserved": true,
+      "humanAppeal": "unrated"
+    }
+  ]
+}

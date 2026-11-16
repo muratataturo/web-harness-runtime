@@ -5,6 +5,7 @@ import { Type } from "@sinclair/typebox";
 import { defineTool } from "@earendil-works/pi-coding-agent";
 import {
   CodexAgent,
+  toolSchemaIssues,
   agentEngine,
   codexEnvironment,
   codexArgs,
@@ -275,4 +276,31 @@ test("Codex tool bridge forwards actual images as inputImage rather than droppin
   } finally {
     await f.client.close();
   }
+});
+
+test("tool schema repairs identify the actual field inside the chosen visual artifact branch", () => {
+  const schema = Type.Object({
+    visualArtifact: Type.Union([
+      Type.Object({
+        kind: Type.Literal("journey-map"),
+        moments: Type.Array(
+          Type.Object({ stepId: Type.String(), invitation: Type.String() }),
+        ),
+      }),
+      Type.Object({
+        kind: Type.Literal("life-roadmap"),
+        lanes: Type.Array(Type.String()),
+      }),
+    ]),
+  });
+  const issues = toolSchemaIssues(schema, {
+    visualArtifact: { kind: "journey-map", moments: [{ stepId: "s1" }] },
+  });
+  assert.ok(
+    issues.some((s) => s.includes("/visualArtifact/moments/0/invitation")),
+  );
+  assert.equal(
+    issues.some((s) => s.includes("lanes")),
+    false,
+  );
 });

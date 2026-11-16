@@ -3,6 +3,25 @@ import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
 import { createInterface } from "node:readline";
 import { Value } from "@sinclair/typebox/value";
 import type { ToolDefinition } from "@earendil-works/pi-coding-agent";
+/** Give the model field-level errors for the selected discriminated union branch. */
+export function toolSchemaIssues(
+  schema: import("@sinclair/typebox").TSchema,
+  args: any,
+) {
+  const properties = { ...schema.properties };
+  for (const [key, property] of Object.entries(properties) as [string, any][]) {
+    const selected = property.anyOf?.find(
+      (branch: any) =>
+        typeof args?.[key]?.kind === "string" &&
+        branch.properties?.kind?.const === args[key].kind,
+    );
+    if (selected) properties[key] = selected;
+  }
+  const diagnostic = schema.properties ? { ...schema, properties } : schema;
+  return [...Value.Errors(diagnostic, args)]
+    .slice(0, 8)
+    .map((e) => `${e.path}: ${e.message}`);
+}
 export type AgentEngine =
   "codex" | "pi-openrouter" | "claude-code" | "opencode";
 export function agentEngine(
@@ -283,7 +302,13 @@ export class CodexAgent {
         params.arguments,
       )
     ) {
-      await this.options.onStep("invalid_tool_call", { tool: params.tool });
+      const issues = tool
+        ? toolSchemaIssues(tool.parameters as any, params.arguments)
+        : [];
+      await this.options.onStep("invalid_tool_call", {
+        tool: params.tool,
+        issues,
+      });
       return {
         success: false,
         contentItems: [
@@ -291,12 +316,7 @@ export class CodexAgent {
             type: "inputText",
             text:
               "未対応ツールまたは不正な引数です。提示されたJSON Schemaに従ってください。" +
-              (tool
-                ? [...Value.Errors(tool.parameters as any, params.arguments)]
-                    .slice(0, 8)
-                    .map((e) => `${e.path}: ${e.message}`)
-                    .join(" / ")
-                : ""),
+              (tool ? issues.join(" / ") : ""),
           },
         ],
       };

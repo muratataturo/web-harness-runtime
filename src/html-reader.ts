@@ -147,7 +147,7 @@ export function extractPublicHtml(
         u.username ||
         u.password ||
         imageUrls.has(u.pathname) ||
-        /(?:logo|icon|badge|banner|tracking|pixel|spacer|noimage|no_image|\/SYS\/|\/common\/|_98\.)/i.test(
+        /(?:logo|icon|badge|banner|tracking|pixel|spacer|noimage|no_image|(?:^|[-_/])(?:ttl|deco|navbar|tel)(?:[-_.]|$)|\/SYS\/|\/common\/|_98\.)/i.test(
           u.pathname,
         )
       )
@@ -162,7 +162,7 @@ export function extractPublicHtml(
     addImage($(el).attr("content"), title),
   );
   $(
-    "main img,article img,#main img,#mainContents img,#mainContent img,.mainContents img",
+    "main img,article img,#main img,#mainContents img,#mainContent img,.mainContents img,body img",
   ).each((_i, el) => {
     const img = $(el),
       w = Number(img.attr("width")),
@@ -170,7 +170,8 @@ export function extractPublicHtml(
     if (
       (w > 0 && w < 160) ||
       (h > 0 && h < 90) ||
-      img.closest("nav,header,footer,[hidden]").length
+      img.closest("nav,header,footer,#header,#footer,.header,.footer,[hidden]")
+        .length
     )
       return;
     addImage(img.attr("data-src") || img.attr("src"), img.attr("alt") || title);

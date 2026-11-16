@@ -30,3 +30,5 @@
 [ブラウザ検証](evidence/visual-artifact-qa.json)は外部通信を模擬して、4画面幅、エラー時の切替、選択連動、予算切替、オフライン、ロードマップ依存関係を検査する。10秒以内の操作可能性は検査するが、人間の「魅力的」という評価は未採点。
 
 再現用の `examples/visual-travel-answer.json` は実出力の凍結スナップショットで、本文資料は引用箇所のみ残す。`node scripts/generate-visual-examples.mjs` は推論も通信もしない表示再生。人生ロードマップは架空条件の操作例。これらを新しいモデルの能力評価や学習済みの成果とは扱わない。
+
+全手順の場面表示と別ケースへの実適用は[移動・休憩の品質契約](journey-moments-quality.md)と[実生成ケース一覧](visual-cases.html)を参照。

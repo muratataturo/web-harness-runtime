@@ -2,6 +2,8 @@
 
 [背景地図の403画像対策](docs/map-background-fix.md) — ファイル直開き対応、HTTP状態検査、失敗時の概略表示を実装。
 
+[3つの実生成ケースを見る](docs/visual-cases.html) — 上野11場面、浅草・押上10場面、人生計画9節目。[移動・休憩を含む品質契約](docs/journey-moments-quality.md)。
+
 [地図・人生ロードマップと視覚改善ループ](docs/visual-artifact-quality.md) — [実モデルで生成した行程地図](docs/generated-answer.html) / [人生ロードマップの操作例](docs/life-roadmap.html)。Astryxを実コンポーネントとして組み込み、文章だけの回答を視覚品質ゲートで差し戻します。
 [回答の具体性を検査・自律修正する仕組み](docs/answer-specificity.md) — 進め方・完了目安・切替条件・予算対象を検査し、実生成の11手順と記録を掲載。
 

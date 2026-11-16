@@ -62,6 +62,12 @@ function travel() {
       kind: "journey-map",
       title: "旅の体験",
       description: "保存された根拠からの提案",
+      moments: steps.map((s) => ({
+        stepId: s.id,
+        kind: "experience" as const,
+        title: "違いを見つけよう",
+        invitation: "展示を一つ選び、気づいた特徴を一緒に話す提案です。",
+      })),
       stops: steps.map((s, i) => ({
         id: "stop" + i,
         label: s.where,
@@ -156,4 +162,54 @@ test("a photo must actually be shown before selection; missing main activities c
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
+});
+
+test("journey moments cover the fixed plan exactly, preserve its facts and escape generated invitations", () => {
+  const t = travel(),
+    a = t.answer!.visualArtifact!;
+  if (a.kind !== "journey-map") throw Error("fixture");
+  t.photoInspections = a.stops.map((s) => ({
+    pageId: s.experience!.photoPageId,
+    imageIndex: 0,
+    file: "a".repeat(64) + ".png",
+    sourceUrl: t.pages.find((p) => p.id === s.experience!.photoPageId)!
+      .images![0]!.url,
+    type: "image/png",
+    shownAt: t.createdAt,
+  }));
+  validateVisualArtifact(t, a);
+  a.moments![0]!.invitation = '<img src=x onerror="window.pwned=1">';
+  const html = renderAnswerHtml(t);
+  assert.match(html, /&lt;img src=x/);
+  assert.match(html, /journey-story/);
+  assert.equal(
+    (html.match(/class="journey-moment kind-/g) ?? []).length,
+    t.answer!.actionPlan!.steps.length,
+  );
+  assert.match(html, /展示を比較して特徴を話す/);
+  const all = structuredClone(a.moments!);
+  a.moments = all.slice(1);
+  assert.throws(() => validateVisualArtifact(t, a), /全手順/);
+  a.moments = [all[0]!, all[0]!];
+  assert.throws(() => validateVisualArtifact(t, a), /重複/);
+  a.moments = [{ ...all[0]!, stepId: "foreign-step" }, all[1]!];
+  assert.throws(() => validateVisualArtifact(t, a), /全手順/);
+  delete a.moments;
+  assert.ok(
+    assessVisualArtifact(t, t.answer!).issues.some((i) =>
+      i.includes("moments"),
+    ),
+  );
+});
+
+test("legacy venue layouts expose real food photos outside main and skip decorative headers", () => {
+  const page = extractPublicHtml(
+    '<title>お店</title><body><div id="header"><img src="/header-photo.jpg"></div><div id="contents"><img src="/sec1-ttl.png"><img src="/sec1-deco.png"><img src="/tel.png"><img src="/sec2-img2.png" alt="天ざる"><img src="/sec3-img1.png" alt="内観"></div></body>',
+    "https://www.maruka.net/",
+    ["www.maruka.net"],
+  );
+  assert.deepEqual(
+    page.images?.map((p) => p.alt),
+    ["天ざる", "内観"],
+  );
 });
