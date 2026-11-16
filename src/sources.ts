@@ -8,6 +8,19 @@ export interface Adapter {
 }
 export const adapters: Adapter[] = [
   {
+    id: "public-social",
+    hosts: [
+      "bsky.app",
+      "public.api.bsky.app",
+      "x.com",
+      "www.instagram.com",
+      "www.youtube.com",
+    ],
+    keywords: /SNS|トレンド|流行|バズ|social|trending/i,
+    guidance:
+      "公開投稿をread_socialで確認する。取得時点の反応数と投稿日時を引用。単一投稿を世間全体の人気や急増とは扱わない。拒否・ログイン要求は回避せず未確認を残す。公式告知と独自提案を区別する。",
+  },
+  {
     id: "recruit-agent",
     hosts: ["www.r-agent.com", "r-agent.com"],
     keywords: /求人|仕事|転職|年収|リモート|job/i,
@@ -156,8 +169,20 @@ export function publicUrl(value: string): URL {
     throw new Error("ローカル・内部 URL は利用できません");
   return url;
 }
+export function publicSocialRequested(query: string): boolean {
+  if (
+    /(?:SNS|ソーシャル|social media).{0,8}(?:不要|使わ|参照しな|除外|含めな)|(?:no|without|avoid)\s+(?:social|SNS)/i.test(
+      query,
+    )
+  )
+    return false;
+  return /SNS|トレンド|流行|バズ|social|trending/i.test(query);
+}
 export function routeSources(query: string, urls: string[]): Source[] {
-  return [...new Set(urls)]
+  const selected = publicSocialRequested(query)
+    ? [...urls, "https://bsky.app/", "https://x.com/"]
+    : urls;
+  return [...new Set(selected)]
     .map((value, i) => {
       const url = publicUrl(value);
       const adapter = adapters.find((a) => a.hosts.includes(url.hostname));

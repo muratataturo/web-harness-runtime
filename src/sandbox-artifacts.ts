@@ -1,4 +1,9 @@
 import {
+  socialSignalSchema,
+  socialAttemptSchema,
+  verifySocialSignal,
+} from "./social.js";
+import {
   assessVisualArtifact,
   visualArtifactSchema,
 } from "./visual-artifact.js";
@@ -147,6 +152,8 @@ const schema = Type.Object({
     }),
     1000,
   ),
+  socialSignals: Type.Optional(list(socialSignalSchema, 6)),
+  socialResearch: Type.Optional(list(socialAttemptSchema, 6)),
   photoInspections: Type.Optional(
     list(
       Type.Object({
@@ -212,7 +219,7 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
   if (!Value.Check(schema, value))
     throw new Error("sandbox成果物のschemaが不正です");
   const raw = value as Task;
-  const profile = createResearchProfile(options.urls);
+  const profile = createResearchProfile(options.urls, undefined, options.query);
   if (
     raw.id !== options.artifactNonce ||
     raw.query !== options.query ||
@@ -282,6 +289,8 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
       truncated: p.truncated,
     })),
     evidence: raw.evidence.map((e) => ({ ...e })),
+    socialSignals: raw.socialSignals?.map((s) => structuredClone(s)),
+    socialResearch: raw.socialResearch?.map((s) => ({ ...s })),
     photoInspections: raw.photoInspections?.map((p) => ({ ...p })),
     model: raw.model,
     metrics: raw.metrics ? structuredClone(raw.metrics) : undefined,
@@ -341,6 +350,7 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     verifiedDetailUrls,
     checkedPages: task.pages.length,
   };
+  for (const s of task.socialSignals ?? []) verifySocialSignal(task, s);
   for (const photo of task.photoInspections ?? []) {
     if (
       task.pages.find((p) => p.id === photo.pageId)?.images?.[photo.imageIndex]
@@ -449,7 +459,11 @@ export async function recoverSandboxTask(
   // A compromised guest could fabricate both text and quotes. For hardened
   // answers independently reacquire cited/candidate pages without its credentials.
   if (task.security?.mode === "hardened" && task.answer) {
-    const profile = createResearchProfile(options.urls);
+    const profile = createResearchProfile(
+      options.urls,
+      undefined,
+      options.query,
+    );
     const needed = new Set([
       ...task.evidence.map((e) => e.url),
       ...task.answer.candidates.map((c) => c.url),

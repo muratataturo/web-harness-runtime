@@ -4,7 +4,7 @@
     {
       "name": "ueno",
       "file": "docs/generated-answer.html",
-      "readyMs": 123,
+      "readyMs": 121,
       "widths": [
         320,
         390,
@@ -24,7 +24,7 @@
     {
       "name": "asakusa",
       "file": "docs/asakusa-day.html",
-      "readyMs": 107,
+      "readyMs": 109,
       "widths": [
         320,
         390,

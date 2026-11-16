@@ -272,7 +272,7 @@ export class RunService {
     )
       throw Error("質問と1〜12件の公開URLが必要です");
     routeSources(input.query, input.urls);
-    createResearchProfile(input.urls);
+    createResearchProfile(input.urls, undefined, input.query);
     if (input.source && !["live", "replay"].includes(input.source))
       throw Error("不正な実行データ設定");
     const source = input.source ?? "live";

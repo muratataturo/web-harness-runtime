@@ -188,9 +188,10 @@ export interface ResearchProfile {
 export function createResearchProfile(
   urls: string[],
   mode = securityMode(),
+  query = "research",
 ): ResearchProfile {
   if (!urls.length || urls.length > 20) throw new Error("公開URLは1〜20件です");
-  const sources = routeSources("research", urls);
+  const sources = routeSources(query, urls);
   const services = [...new Set(sources.map((s) => s.kind))].sort();
   const requested = process.env.RUNTIME_PROFILE ?? "auto";
   if (!["auto", "recruit", "rakuten", "public"].includes(requested))

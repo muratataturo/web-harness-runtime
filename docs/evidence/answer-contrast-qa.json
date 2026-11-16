@@ -1,0 +1,146 @@
+{
+  "scope": "computed text contrast on owned HTML; transparent solid ancestors composited; map iframes and disabled controls excluded",
+  "cases": [
+    {
+      "file": "docs/generated-answer.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 595,
+      "failures": []
+    },
+    {
+      "file": "docs/generated-answer.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 603,
+      "failures": []
+    },
+    {
+      "file": "docs/generated-answer.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 595,
+      "failures": []
+    },
+    {
+      "file": "docs/generated-answer.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 603,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-day.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 409,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-day.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 415,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-day.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 409,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-day.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 415,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 95,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 109,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 95,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 109,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap-actual.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 125,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap-actual.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 139,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap-actual.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 125,
+      "failures": []
+    },
+    {
+      "file": "docs/life-roadmap-actual.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 139,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-social-day.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 452,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-social-day.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 458,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-social-day.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 452,
+      "failures": []
+    },
+    {
+      "file": "docs/asakusa-social-day.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 458,
+      "failures": []
+    }
+  ],
+  "passed": true
+}
