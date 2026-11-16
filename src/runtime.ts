@@ -1,5 +1,6 @@
 import { UxFeedbackStore } from "./ux-feedback.js";
 import { CAFE_GUIDANCE } from "./cafe.js";
+import { criterionSchema, uncoveredCriteria } from "./criteria.js";
 import { captureSocial } from "./social.js";
 import { prepareAnswerMedia, inspectAnswerPhoto } from "./answer-media.js";
 import { locatePlace } from "./geocoding.js";
@@ -7,6 +8,8 @@ import {
   visualArtifactSchema,
   visualContract,
   assessVisualArtifact,
+  validateVisualArtifact,
+  type VisualArtifact,
 } from "./visual-artifact.js";
 import { pageArtifact } from "./artifacts.js";
 import { renderAnswerHtml } from "./answer-html.js";
@@ -14,6 +17,8 @@ import {
   actionPlanSchema,
   assessSpecificity,
   specificityContract,
+  validateActionPlan,
+  type ActionPlan,
 } from "./answer-plan.js";
 import { readPageContext, focusTerms, pageView } from "./page-context.js";
 import { researchProgress, progressPrefix } from "./progress.js";
@@ -192,6 +197,7 @@ export async function runTask(
   }
   const instructions =
     SYSTEM_PROMPT +
+    "\n旅行はstage_planでactionPlan、stage_visualでvisualArtifactを先に提出してからfinish_taskで候補比較と結論を確定できる。finish_taskで省略してもstageした行程・写真は保持される。plan_taskの各条件には、役割が異なる施設へ条件を誤適用しないためappliesToに対象の個別URL配列を指定できる。対象外の条件はunknown・根拠なし・explanationは対象外とし、適用条件の確認率だけを集計する。必須条件を持つ対象候補そのものは省略できない。正式版を求められた旅程ではverification.dateとchecksをactionPlanに作る。checksのkindはopening/prices/seating/comparison/restを全て含め、detail/evidenceIds/stepIds、statusはpublished。ただしseatingだけarrival-checkとし、公式の予約・利用方法と満席時の判断を示す。空席あり・予約完了を作文しない。価格はPDFもopen_pageで読み、具体的な商品と税込掲載単価だけで主案を作る。休憩は公式に確認できる施設名と位置を示す。" +
     "\n" +
     CAFE_GUIDANCE +
     "\n複数案の比較ではvisualArtifact.proposalSet.optionsに3案を作る。各案はid/theme(discovery|relax|photo)/anchorId/title/activity/deliverable/benefit/difference/tradeoff/mechanism(compare|focus|capture)/minutes/evidenceIds。themeとmechanismは3件それぞれ別にする。旅程はstepIdで元の地点の活動枠に結び付け、minutesを枠内にする。見出しの言い換えだけにせず、具体的な行動と残る成果を変える。追加費用・移動を勝手に足さない。人の魅力度を採点したと主張しない。" +
@@ -490,6 +496,8 @@ export async function runTask(
   let specificityRepairs = 0;
   let visualRepairs = 0;
   let geoLookups = 0;
+  let stagedPlan: ActionPlan | undefined;
+  let stagedVisual: VisualArtifact | undefined;
   const tools: ToolDefinition[] = [
     defineTool({
       name: "read_social",
@@ -582,15 +590,7 @@ export async function runTask(
       description:
         "調査前に評価条件を定義する。駅近などの曖昧条件は説明に暫定基準を書く。",
       parameters: Type.Object({
-        criteria: Type.Array(
-          Type.Object({
-            id: Type.String(),
-            description: Type.String(),
-            weight: Type.Number({ minimum: 1, maximum: 10 }),
-            required: Type.Boolean(),
-          }),
-          { minItems: 1, maxItems: 12 },
-        ),
+        criteria: Type.Array(criterionSchema, { minItems: 1, maxItems: 12 }),
       }),
       execute: wrap("plan_task", (p) => {
         if (options.improvement || options.benchmark) {
@@ -672,6 +672,39 @@ export async function runTask(
       ),
     }),
     defineTool({
+      name: "stage_plan",
+      label: "Stage itinerary",
+      description:
+        "行程を先に保存する。最終回答・成功判定ではない。finish_taskで省略したactionPlanはこの検証済み草案を再利用する。変更するとstage_visualの草案は取り消す。",
+      parameters: Type.Object({ actionPlan: actionPlanSchema }),
+      execute: wrap("stage_plan", (p) => {
+        validateActionPlan(task, p.actionPlan);
+        stagedPlan = structuredClone(p.actionPlan);
+        stagedVisual = undefined;
+        return {
+          staged: true,
+          steps: p.actionPlan.steps.length,
+          next: "写真をinspect_photoで確認しstage_visualで視覚成果物を保存してから、finish_taskへ要約・全候補の比較・制約を提出してください",
+        };
+      }),
+    }),
+    defineTool({
+      name: "stage_visual",
+      label: "Stage visual",
+      description:
+        "stage_planの行程へ結び付けた視覚成果物を保存する。最終回答ではない。finish_taskで省略したvisualArtifactはこの草案を再利用し、全根拠を再検証する。",
+      parameters: Type.Object({ visualArtifact: visualArtifactSchema }),
+      execute: wrap("stage_visual", (p) => {
+        if (!stagedPlan) throw Error("先にstage_planで行程を保存してください");
+        validateVisualArtifact(task, p.visualArtifact, stagedPlan);
+        stagedVisual = structuredClone(p.visualArtifact);
+        return {
+          staged: true,
+          next: "finish_taskに要約・candidates・limitationsを提出してください。actionPlanとvisualArtifactは省略しても保持されます。候補比較を省略してはいけません",
+        };
+      }),
+    }),
+    defineTool({
       name: "finish_task",
       label: "Finish",
       description:
@@ -702,13 +735,25 @@ export async function runTask(
         visualArtifact: Type.Optional(visualArtifactSchema),
       }),
       execute: wrap("finish_task", async (p) => {
+        const statedReason = [p.summary, ...p.limitations].join(" ");
+        if (
+          /ユーザー.{0,20}指示.{0,40}候補なし|候補なし.{0,20}ユーザー.{0,20}指示/.test(
+            statedReason,
+          ) &&
+          !/(?:候補なし|空配列).{0,8}(?:で保存|で返|にして)|中止|中断|ここまでにして/.test(
+            task.query,
+          )
+        )
+          throw Error(
+            "ユーザーは候補なしでの保存や中止を指示していません。未完了なら実際の調査不足として記録し、ユーザーからの指示を創作しないでください",
+          );
         const answer = validateAnswer(
           task,
           p.summary,
           p.candidates,
           p.limitations,
-          p.actionPlan,
-          p.visualArtifact,
+          p.actionPlan ?? stagedPlan,
+          p.visualArtifact ?? stagedVisual,
         );
         lastValidatedDraft = structuredClone(answer);
         task.visualReview = assessVisualArtifact(task, answer);
@@ -1136,7 +1181,8 @@ export async function runTask(
     task.status =
       task.answer.candidates.length === 0
         ? "blocked"
-        : task.specificity?.status !== "needs_detail" &&
+        : !uncoveredCriteria(task.criteria, task.answer.candidates).length &&
+            task.specificity?.status !== "needs_detail" &&
             task.visualReview?.status !== "needs_visual" &&
             task.answer.candidates.every((c) => c.eligible) &&
             task.answer.candidates.every((c) =>

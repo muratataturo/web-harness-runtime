@@ -18,6 +18,13 @@ const contextSchema = Type.Object(
         description: Type.String(),
         weight: Type.Number({ minimum: 1, maximum: 10 }),
         required: Type.Boolean(),
+        appliesTo: Type.Optional(
+          Type.Array(Type.String({ minLength: 1, maxLength: 2048 }), {
+            minItems: 1,
+            maxItems: 10,
+            uniqueItems: true,
+          }),
+        ),
       }),
       { minItems: 1, maxItems: 12 },
     ),

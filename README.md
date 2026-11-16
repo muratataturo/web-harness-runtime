@@ -4,7 +4,7 @@
 
 [3案比較と10秒レビューの改善ループ](docs/proposal-comparison-runtime.md) — [旅行の実生成](docs/comparison-travel.html#proposal-comparison) / [人生計画の実生成](docs/comparison-life.html#proposal-comparison)。
 
-[カフェを組み込む旅行runtime](docs/cafe-itinerary-runtime.md) — [写真付きの実生成回答](docs/cafe-day.html#itinerary)。
+[カフェを組み込む旅行runtime](docs/cafe-itinerary-runtime.md) — [資料照合して仕上げた正式版](docs/cafe-day.html#itinerary)。
 
 [SNS・季節情報とユニークな提案](docs/social-discovery-runtime.md) — [実生成した追加提案](docs/asakusa-social-day.html#discoveries)。保存回答の白文字化を修正し、明暗両モードのコントラストをCIで検査します。
 
@@ -79,7 +79,7 @@ Chat・CLIの`runs`・MCPは同じ相談を操作し、単発の`run`はexecutor
 
 ## 1. キーなしでChatを体験する
 
-必要なものはNode.js 22以降とnpmです。リポジトリのディレクトリで実行します。
+必要なものはNode.js 22.13以降とnpmです。リポジトリのディレクトリで実行します。
 
 ```sh
 npm ci

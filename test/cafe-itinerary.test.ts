@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { cafeRequested, cafePlanIssues } from "../src/cafe.js";
+import { cafeRequested, cafePlanIssues, isCafeStay } from "../src/cafe.js";
 import { routeSources, allowedHosts, entityKey } from "../src/sources.js";
 import { createResearchProfile } from "../src/runtime-profile.js";
 import { newTask } from "../src/runtime.js";
@@ -231,4 +231,22 @@ test("an itinerary cannot bypass cafe checks by omitting candidate comparisons",
   const review = assessSpecificity(task, answer);
   assert.equal(review.status, "needs_detail");
   assert.match(review.issues.join(" "), /費用/);
+});
+
+test("walking to a cafe and reception do not become paid cafe stays", () => {
+  assert.equal(
+    isCafeStay({ where: "正門からカフェ", action: "案内でカフェへ歩く" }),
+    false,
+  );
+  assert.equal(
+    isCafeStay({
+      where: "EVERYONEs CAFE",
+      action: "当日受付とメニューを確認する",
+    }),
+    false,
+  );
+  assert.equal(
+    isCafeStay({ where: "EVERYONEs CAFE", action: "昼食と会計を済ませる" }),
+    true,
+  );
 });

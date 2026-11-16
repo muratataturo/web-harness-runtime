@@ -12,6 +12,7 @@ export interface Criterion {
   description: string;
   weight: number;
   required: boolean;
+  appliesTo?: string[];
 }
 export interface Source {
   id: string;
@@ -26,7 +27,7 @@ export interface Page {
   images?: { url: string; alt: string }[];
   productOffer?: import("./product-offer.js").ProductOffer;
   acquisition?: {
-    kind: "browser-dom" | "public-html" | "public-json";
+    kind: "browser-dom" | "public-html" | "public-json" | "public-pdf";
     status?: number;
     charset?: string;
     contentType?: string;
@@ -67,6 +68,13 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  authorship?: {
+    mode: "source-grounded-final-edit";
+    editor: "Codex";
+    sourceTaskId: string;
+    sourceCollectionModel?: string;
+    note: string;
+  };
   uxLearningContext?: Awaited<
     ReturnType<import("./ux-feedback.js").UxFeedbackStore["learningContext"]>
   >;

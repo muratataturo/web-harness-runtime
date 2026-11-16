@@ -9,7 +9,7 @@ import {
   validateDiscoveries,
 } from "./discovery.js";
 import { entityKey, publicSocialRequested } from "./sources.js";
-import { cafeTerms } from "./cafe.js";
+import { isCafeStay } from "./cafe.js";
 import { sharedMapEmbed } from "./map-embed.js";
 import { specificityContract } from "./answer-plan.js";
 import { Type, type Static } from "@sinclair/typebox";
@@ -357,10 +357,7 @@ export function assessVisualArtifact(task: Task, answer: Answer) {
         return (
           primary &&
           (!/徒歩|移動|帰路|帰宅|乗車|解散|待機|休憩/.test(primary.action) ||
-            (cafeTerms.test(primary.where + " " + primary.action) &&
-              !/徒歩|移動|帰路|帰宅|乗車|解散|待機|待ち|入店待/.test(
-                primary.action,
-              )))
+            isCafeStay(primary))
         );
       });
       const absent = mainStops.filter((s) => !s.experience);

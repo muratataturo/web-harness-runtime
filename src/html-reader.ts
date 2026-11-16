@@ -1,4 +1,5 @@
 import { sharedMapEmbed } from "./map-embed.js";
+import { extractPdf } from "./pdf-reader.js";
 import { productOffer, offerText } from "./product-offer.js";
 import * as cheerio from "cheerio";
 import { checkNavigation } from "./sources.js";
@@ -290,7 +291,12 @@ export async function readPublicHtml(
   const fetcher = deps.fetcher ?? publicFetch;
   const navigation =
     securityMode() === "hardened" ? checkResearchNavigation : checkNavigation;
-  const deadline = AbortSignal.any([signal, AbortSignal.timeout(15000)]);
+  const deadline = AbortSignal.any([
+    signal,
+    AbortSignal.timeout(
+      /\.pdf$/i.test(new URL(value).pathname) ? 180000 : 15000,
+    ),
+  ]);
   let url = navigation(value, hosts);
   for (let redirects = 0; redirects <= 5; redirects++) {
     deadline.throwIfAborted();
@@ -300,7 +306,7 @@ export async function readPublicHtml(
       redirect: "manual",
       signal: deadline,
       headers: {
-        Accept: "text/html,application/xhtml+xml",
+        Accept: "text/html,application/xhtml+xml,application/pdf",
         "User-Agent": "web-harness-runtime/0.2 (public page research)",
       },
     });
@@ -356,11 +362,16 @@ export async function readPublicHtml(
         },
       };
     }
-    if (!/^(text\/html|application\/xhtml\+xml)\b/i.test(contentType)) {
+    const isPdf = /^application\/pdf\b/i.test(contentType);
+    if (
+      !isPdf &&
+      !/^(text\/html|application\/xhtml\+xml)\b/i.test(contentType)
+    ) {
       await response.body?.cancel();
       throw new HtmlReadError("HTML以外のレスポンスです", "unsupported");
     }
-    if (Number(response.headers.get("content-length")) > MAX_BYTES) {
+    const maxBytes = isPdf ? 16 * 1024 * 1024 : MAX_BYTES;
+    if (Number(response.headers.get("content-length")) > maxBytes) {
       await response.body?.cancel();
       throw new HtmlReadError(
         "HTMLが取得サイズ上限を超えています",
@@ -377,7 +388,7 @@ export async function readPublicHtml(
         const { done, value: chunk } = await reader.read();
         if (done) break;
         size += chunk.byteLength;
-        if (size > MAX_BYTES)
+        if (size > maxBytes)
           throw new HtmlReadError(
             "HTMLが取得サイズ上限を超えています",
             "too_large",
@@ -389,6 +400,26 @@ export async function readPublicHtml(
       throw error;
     }
     const bytes = Buffer.concat(chunks);
+    if (isPdf) {
+      const extracted = await extractPdf(bytes, deadline);
+      const title = decodeURIComponent(
+        new URL(url).pathname.split("/").at(-1) ?? "公式PDF",
+      );
+      const text = title + "\n" + extracted.text;
+      return {
+        url,
+        title,
+        text: text.slice(0, 32000),
+        truncated: text.length > 32000,
+        links: [],
+        capturedAt: new Date().toISOString(),
+        acquisition: {
+          kind: "public-pdf",
+          status: response.status,
+          contentType,
+        },
+      };
+    }
     const { html, charset } = decodeHtml(bytes, contentType);
     const page = extractPublicHtml(html, url, hosts);
     return {

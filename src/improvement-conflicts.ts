@@ -1,5 +1,6 @@
 import type { Page, Task } from "./types.js";
 import { entityKey } from "./sources.js";
+import { criterionApplies } from "./criteria.js";
 const clean = (s: string) =>
   s.normalize("NFKC").replace(/\s+/g, "").toLowerCase();
 /** Conservative SUUMO cross-listing check; uncertain duplicate rooms are not counted twice. */
@@ -33,7 +34,9 @@ export function roomConflicts(task: Task) {
     if (new Set(candidates.map((c) => entityKey(c.url))).size > 1)
       candidates.forEach((c) => duplicateUrls.add(c.url));
     for (const c of candidates) {
-      for (const criterion of task.criteria.filter((c) => c.required)) {
+      for (const criterion of task.criteria.filter(
+        (criterion) => criterion.required && criterionApplies(criterion, c.url),
+      )) {
         const station =
           criterion.description.match(/[一-龯ぁ-んァ-ヶー]{2,12}駅/)?.[0];
         if (!station) continue;

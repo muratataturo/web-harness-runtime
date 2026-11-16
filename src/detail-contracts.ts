@@ -35,6 +35,10 @@ const hotel = [
   },
 ];
 export const detailContracts: Record<string, DetailField[]> = {
+  "official-coffee": [
+    access,
+    { id: "hours", pattern: /営業時間[\s\S]{0,80}\d{1,2}[:：]/ },
+  ],
   "official-cafe": [
     access,
     {

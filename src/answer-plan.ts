@@ -3,10 +3,41 @@ import { Value } from "@sinclair/typebox/value";
 import { assertEvidenceIntegrity } from "./provenance.js";
 import type { Task, Answer } from "./types.js";
 import { cafePlanIssues } from "./cafe.js";
+import { uncoveredCriteria } from "./criteria.js";
 const text = Type.String({ maxLength: 600 });
 const ids = Type.Array(Type.String({ maxLength: 100 }), { maxItems: 20 });
 export const actionPlanSchema = Type.Object(
   {
+    verification: Type.Optional(
+      Type.Object(
+        {
+          date: Type.String({ pattern: "^\\d{4}-\\d{2}-\\d{2}$" }),
+          checks: Type.Array(
+            Type.Object(
+              {
+                kind: Type.Union([
+                  Type.Literal("opening"),
+                  Type.Literal("prices"),
+                  Type.Literal("seating"),
+                  Type.Literal("comparison"),
+                  Type.Literal("rest"),
+                ]),
+                status: Type.Union([
+                  Type.Literal("published"),
+                  Type.Literal("arrival-check"),
+                ]),
+                detail: Type.String({ minLength: 12, maxLength: 500 }),
+                evidenceIds: ids,
+                stepIds: ids,
+              },
+              { additionalProperties: false },
+            ),
+            { minItems: 5, maxItems: 10 },
+          ),
+        },
+        { additionalProperties: false },
+      ),
+    ),
     steps: Type.Array(
       Type.Object({
         id: Type.String({ maxLength: 100 }),
@@ -135,6 +166,29 @@ export function validateActionPlan(task: Task, plan: ActionPlan) {
   }
   for (const branch of plan.branches)
     for (const id of branch.evidenceIds) assertEvidenceIntegrity(task, id);
+  if (plan.verification) {
+    const v = plan.verification;
+    if (new Date(v.date).toISOString().slice(0, 10) !== v.date)
+      throw Error("対象日が不正です");
+    for (const c of v.checks) {
+      if (
+        !c.evidenceIds.length ||
+        !c.stepIds.length ||
+        c.stepIds.some((id) => !plan.steps.some((s) => s.id === id))
+      )
+        throw Error("正式版の確認項目は引用と実際の手順へ結び付けてください");
+      c.evidenceIds.forEach((id) => assertEvidenceIntegrity(task, id));
+      if ((c.kind === "seating") !== (c.status === "arrival-check"))
+        throw Error(
+          "座席は到着時判断、それ以外の正式版の情報は公開根拠で確認してください。空席確約・予約完了にはできません",
+        );
+      if (
+        c.kind === "seating" &&
+        /空席あり|空席確約|座席確保|予約済|予約完了/.test(c.detail)
+      )
+        throw Error("公開情報から未来の空席・予約完了を断定できません");
+    }
+  }
   if (plan.budget) {
     for (const item of plan.budget.items) {
       if (item.basis === "published" && !item.evidenceIds.length)
@@ -150,6 +204,24 @@ export function validateActionPlan(task: Task, plan: ActionPlan) {
           ...quotes.matchAll(/([\d,]+(?:\.\d+)?)\s*(万)?\s*円/g),
           ...quotes.matchAll(/¥\s*([\d,]+(?:\.\d+)?)(万)?/g),
         ].map((m) => Number(m[1]!.replaceAll(",", "")) * (m[2] ? 10000 : 1));
+        // Japanese menu PDFs commonly omit 円 beside each displayed price.
+        // Accept stand-alone numeric price lines only in a captured PDF; the
+        // item and tax interpretation still need to be described and cited.
+        for (const id of item.evidenceIds) {
+          const ev = assertEvidenceIntegrity(task, id);
+          if (
+            task.pages.find((p) => p.id === ev.pageId)?.acquisition?.kind ===
+            "public-pdf"
+          ) {
+            for (const line of ev.quote.normalize("NFKC").split("\n"))
+              if (/^\s*[+＋]?\s*\d[\d,\s/]*$/.test(line))
+                amounts.push(
+                  ...[...line.matchAll(/[\d,]+/g)].map((m) =>
+                    Number(m[0].replaceAll(",", "")),
+                  ),
+                );
+          }
+        }
         if (
           !amounts.includes(item.unitYen) &&
           !(item.unitYen === 0 && /無料|無償/.test(quotes))
@@ -192,6 +264,33 @@ export function assessSpecificity(
       ],
     };
   validateActionPlan(task, p);
+  issues.push(
+    ...uncoveredCriteria(task.criteria, answer.candidates).map(
+      (c) => `必須条件の対象候補が不足しています: ${c.description}`,
+    ),
+  );
+  if (c.mode === "itinerary" && /正式|確定版|暫定.{0,8}解消/.test(task.query)) {
+    const v = p.verification;
+    for (const kind of ["opening", "prices", "seating", "comparison", "rest"])
+      if (!v?.checks.some((c) => c.kind === kind))
+        issues.push(
+          `正式版にはverification.checksの${kind}（営業時間・掲載価格・席の利用方法・候補比較・具体的な休憩所）が必要です`,
+        );
+    const date = task.query.match(/(20\d{2})年(\d{1,2})月(\d{1,2})日/);
+    if (
+      date &&
+      v &&
+      v.date !==
+        `${date[1]}-${date[2]!.padStart(2, "0")}-${date[3]!.padStart(2, "0")}`
+    )
+      issues.push("確認項目の対象日が相談日程と一致しません");
+    if (p.budget?.items.some((i) => i.basis !== "published"))
+      issues.push(
+        "正式版の主案は選ぶ商品と掲載単価を確認し、未確認の見積枠を残さないでください。移動時間などの提案とは区別してください",
+      );
+    if (!answer.candidates.length)
+      issues.push("正式版の候補比較を省略できません");
+  }
   if (c.mode === "itinerary") issues.push(...cafePlanIssues(task, answer));
   if (p.steps.length < c.minimumSteps)
     issues.push(`具体的な手順を${c.minimumSteps}件以上にしてください`);
