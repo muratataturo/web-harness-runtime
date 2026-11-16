@@ -304,3 +304,42 @@ test("tool schema repairs identify the actual field inside the chosen visual art
     false,
   );
 });
+
+test("tool repairs expose allowed enum values and the fields of array entries", () => {
+  const schema = Type.Object({
+    locationStatus: Type.Union([
+      Type.Literal("evidence-linked"),
+      Type.Literal("unconfirmed"),
+    ]),
+    matches: Type.Array(
+      Type.Object({
+        criterionId: Type.String(),
+        explanation: Type.String(),
+        evidenceIds: Type.Array(Type.String()),
+      }),
+    ),
+  });
+  const issues = toolSchemaIssues(schema, {
+    locationStatus: "unknown",
+    matches: { criterionId: "cafe" },
+  });
+  assert.ok(
+    issues.some(
+      (s) =>
+        s.includes("/locationStatus") &&
+        s.includes('"evidence-linked"') &&
+        s.includes('"unconfirmed"'),
+    ),
+  );
+  assert.ok(
+    issues.some(
+      (s) =>
+        s.includes("/matches") &&
+        s.includes('"explanation"') &&
+        s.includes('"evidenceIds"'),
+    ),
+  );
+  assert.ok(issues.every((s) => s.length < 2000));
+  const missing = toolSchemaIssues(schema, {});
+  assert.equal(missing.filter((s) => s.startsWith("/matches:")).length, 1);
+});

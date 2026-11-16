@@ -1,0 +1,40 @@
+{
+  "scope": "saved real cafe itinerary; offline replay; automated checks only",
+  "taskId": "209a4e20-76eb-44b7-a538-266c4681264a",
+  "humanResponses": 0,
+  "cases": [
+    {
+      "width": 320,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/cafe-itinerary/qa/cafe-320.png"
+    },
+    {
+      "width": 390,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/cafe-itinerary/qa/cafe-390.png"
+    },
+    {
+      "width": 768,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/cafe-itinerary/qa/cafe-768.png"
+    },
+    {
+      "width": 1280,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/cafe-itinerary/qa/cafe-1280.png"
+    }
+  ],
+  "passed": true
+}

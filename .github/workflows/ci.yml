@@ -50,3 +50,4 @@ jobs:
             .runtime/visual-study/qa
             .runtime/social-discovery/contrast
             .runtime/proposal-comparison/qa
+            .runtime/cafe-itinerary/qa

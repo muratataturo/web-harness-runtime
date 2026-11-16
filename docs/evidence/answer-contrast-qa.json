@@ -196,6 +196,34 @@
       "width": 1280,
       "inspected": 186,
       "failures": []
+    },
+    {
+      "file": "docs/cafe-day.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 388,
+      "failures": []
+    },
+    {
+      "file": "docs/cafe-day.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 393,
+      "failures": []
+    },
+    {
+      "file": "docs/cafe-day.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 388,
+      "failures": []
+    },
+    {
+      "file": "docs/cafe-day.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 393,
+      "failures": []
     }
   ],
   "passed": true

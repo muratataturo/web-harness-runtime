@@ -1,4 +1,5 @@
 import { UxFeedbackStore } from "./ux-feedback.js";
+import { CAFE_GUIDANCE } from "./cafe.js";
 import { captureSocial } from "./social.js";
 import { prepareAnswerMedia, inspectAnswerPhoto } from "./answer-media.js";
 import { locatePlace } from "./geocoding.js";
@@ -191,6 +192,8 @@ export async function runTask(
   }
   const instructions =
     SYSTEM_PROMPT +
+    "\n" +
+    CAFE_GUIDANCE +
     "\n複数案の比較ではvisualArtifact.proposalSet.optionsに3案を作る。各案はid/theme(discovery|relax|photo)/anchorId/title/activity/deliverable/benefit/difference/tradeoff/mechanism(compare|focus|capture)/minutes/evidenceIds。themeとmechanismは3件それぞれ別にする。旅程はstepIdで元の地点の活動枠に結び付け、minutesを枠内にする。見出しの言い換えだけにせず、具体的な行動と残る成果を変える。追加費用・移動を勝手に足さない。人の魅力度を採点したと主張しない。" +
     (task.uxLearningContext
       ? "\n過去の自己申告UXレビュー集計。新しい回答の評価点ではない。改善指針として使う: " +

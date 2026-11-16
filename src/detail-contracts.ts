@@ -35,6 +35,14 @@ const hotel = [
   },
 ];
 export const detailContracts: Record<string, DetailField[]> = {
+  "official-cafe": [
+    access,
+    {
+      id: "menu",
+      pattern: /メニュー|MENU|ドリンク|珈琲|コーヒー|ハーブティー/i,
+    },
+    { id: "hours", pattern: /営業時間[\s\S]{0,80}\d{1,2}[:：]/ },
+  ],
   "official-visit": [
     {
       id: "opening-conditions",

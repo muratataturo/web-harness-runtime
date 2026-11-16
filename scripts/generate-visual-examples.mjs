@@ -10,6 +10,7 @@ for (const [name, output] of [
   ["social", "asakusa-social-day"],
   ["comparison-travel", "comparison-travel"],
   ["comparison-life", "comparison-life"],
+  ["cafe", "cafe-day"],
 ]) {
   const task = JSON.parse(
     await readFile(`examples/visual-${name}-answer.json`, "utf8"),
@@ -27,5 +28,5 @@ for (const [name, output] of [
   await writeFile(`docs/${output}.html`, renderAnswerHtml(task));
 }
 console.log(
-  "Replayed three real model outputs and the explicitly synthetic roadmap example",
+  "Replayed seven real model outputs and the explicitly synthetic roadmap example",
 );
