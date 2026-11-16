@@ -1,4 +1,5 @@
 import { UxFeedbackStore } from "./ux-feedback.js";
+import { criterionApplies, uncoveredCriteria } from "./criteria.js";
 import {
   assessVisualArtifact,
   visualArtifactSchema,
@@ -257,7 +258,7 @@ export function diagnose(
       d.verifiedDetails++;
       d.achievements.push("detail:" + key);
     }
-    for (const c of criteria) {
+    for (const c of criteria.filter((c) => criterionApplies(c, url))) {
       const match = candidate?.matches.find((m) => m.criterionId === c.id);
       if (
         conflicts.stationConflicts.get(candidate?.url ?? url)?.includes(c.id)
@@ -297,6 +298,13 @@ export function diagnose(
       fields: [
         `候補数${minimumCandidates}件以上（現在${answer?.candidates.length ?? 0}件）`,
       ],
+    });
+  }
+  for (const c of uncoveredCriteria(criteria, answer?.candidates ?? [])) {
+    d.causes.push("required_scope_missing");
+    d.gaps.push({
+      url: c.appliesTo![0]!,
+      fields: [`必須条件の対象候補を省略できません: ${c.description}`],
     });
   }
   // Extra candidates cannot conceal a newly introduced failure either.

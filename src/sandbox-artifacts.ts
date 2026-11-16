@@ -3,6 +3,7 @@ import {
   socialAttemptSchema,
   verifySocialSignal,
 } from "./social.js";
+import { uncoveredCriteria } from "./criteria.js";
 import {
   assessVisualArtifact,
   visualArtifactSchema,
@@ -101,6 +102,13 @@ const schema = Type.Object({
       description: text(4000),
       weight: Type.Number({ minimum: 1, maximum: 10 }),
       required: Type.Boolean(),
+      appliesTo: Type.Optional(
+        Type.Array(Type.String({ minLength: 1, maxLength: 2048 }), {
+          minItems: 1,
+          maxItems: 10,
+          uniqueItems: true,
+        }),
+      ),
     }),
     12,
   ),
@@ -122,6 +130,7 @@ const schema = Type.Object({
           kind: Type.Union([
             Type.Literal("public-html"),
             Type.Literal("public-json"),
+            Type.Literal("public-pdf"),
             Type.Literal("browser-dom"),
           ]),
           status: Type.Optional(Type.Integer({ minimum: 100, maximum: 599 })),
@@ -315,7 +324,9 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
   for (const page of task.pages) {
     if (
       profile.mode === "hardened" &&
-      !["public-html", "public-json"].includes(page.acquisition?.kind ?? "")
+      !["public-html", "public-json", "public-pdf"].includes(
+        page.acquisition?.kind ?? "",
+      )
     )
       throw new Error("強化モード以外の取得成果物です");
     if (
@@ -377,7 +388,8 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     task.status =
       task.answer.candidates.length === 0
         ? "blocked"
-        : task.specificity?.status !== "needs_detail" &&
+        : !uncoveredCriteria(task.criteria, task.answer.candidates).length &&
+            task.specificity?.status !== "needs_detail" &&
             task.visualReview?.status !== "needs_visual" &&
             task.answer.candidates.every(
               (c) => c.eligible && verifiedDetailUrls.includes(c.url),

@@ -12,6 +12,7 @@ export const snapshotAssets = [
   "web/chat.html",
   "web/chat.js",
   "web/presentation.js",
+  "web/pdf-reader-worker.js",
   "web/artifact-client.bundle.js",
   "web/artifact-client.bundle.css",
   "web/chat.css",

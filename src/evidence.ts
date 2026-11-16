@@ -2,7 +2,8 @@ import {
   validateVisualArtifact,
   type VisualArtifact,
 } from "./visual-artifact.js";
-import { entityKey } from "./sources.js";
+import { entityKey, publicUrl } from "./sources.js";
+import { criterionApplies, uncoveredCriteria } from "./criteria.js";
 import { assessPage } from "./page-quality.js";
 import { roomConflicts } from "./improvement-conflicts.js";
 import { normalized, assertEvidenceIntegrity } from "./provenance.js";
@@ -93,6 +94,18 @@ export function setCriteria(task: Task, criteria: Criterion[]) {
     )
   )
     throw new Error("評価条件の説明と 1〜10 の重みが必要です");
+  for (const c of criteria)
+    if (c.appliesTo) {
+      if (
+        !c.appliesTo.length ||
+        c.appliesTo.length > 10 ||
+        new Set(c.appliesTo).size !== c.appliesTo.length ||
+        c.appliesTo.some((u) => !entityKey(publicUrl(u).href))
+      )
+        throw Error(
+          "条件のappliesToは重複のない個別対象の公開URLを1〜10件指定してください",
+        );
+    }
   task.criteria = criteria;
 }
 export function validateAnswer(
@@ -158,6 +171,15 @@ export function validateAnswer(
       )
         throw new Error("候補ごとにすべての評価条件を一度ずつ評価してください");
       for (const m of candidate.matches) {
+        const applies = task.criteria.find((c) => c.id === m.criterionId);
+        if (
+          applies &&
+          !criterionApplies(applies, candidate.url) &&
+          (m.status !== "unknown" || m.evidenceIds.length)
+        )
+          throw Error(
+            "対象外の条件はunknown・根拠なしとし、explanationに対象外と記載してください。別の役割の情報を流用できません",
+          );
         if (!task.criteria.some((c) => c.id === m.criterionId))
           throw new Error("不明な評価条件");
         if (!m.explanation.trim())
@@ -230,10 +252,13 @@ export function validateAnswer(
               match.explanation;
           }
         }
-      const weight = task.criteria.reduce((sum, c) => sum + c.weight, 0);
+      const applicable = task.criteria.filter((c) =>
+        criterionApplies(c, candidate.url),
+      );
+      const weight = applicable.reduce((sum, c) => sum + c.weight, 0);
       const score = Math.round(
         (100 *
-          task.criteria.reduce(
+          applicable.reduce(
             (sum, c) =>
               sum +
               (candidate.matches.find((m) => m.criterionId === c.id)?.status ===
@@ -242,15 +267,17 @@ export function validateAnswer(
                 : 0),
             0,
           )) /
-          weight,
+          (weight || 1),
       );
-      const eligible = task.criteria
-        .filter((c) => c.required)
-        .every(
-          (c) =>
-            candidate.matches.find((m) => m.criterionId === c.id)?.status ===
-            "supported",
-        );
+      const eligible =
+        applicable.length > 0 &&
+        applicable
+          .filter((c) => c.required)
+          .every(
+            (c) =>
+              candidate.matches.find((m) => m.criterionId === c.id)?.status ===
+              "supported",
+          );
       return { ...candidate, score, eligible };
     })
     .sort(
@@ -271,7 +298,13 @@ export function validateAnswer(
       : {}),
     summary: warning ? "【runtime検証】" + warning + "\n\n" + summary : summary,
     candidates,
-    limitations: warning ? [...limitations, warning] : limitations,
+    limitations: [
+      ...limitations,
+      ...(warning ? [warning] : []),
+      ...uncoveredCriteria(task.criteria, candidates).map(
+        (c) => `必須条件の対象候補が不足しています: ${c.description}`,
+      ),
+    ],
   };
 }
 function sameEntity(a: Page, b: Page) {
@@ -301,8 +334,12 @@ export function renderAnswer(task: Task): string {
       const label = task.criteria.find(
         (c) => c.id === m.criterionId,
       )?.description;
+      const applies = criterionApplies(
+        task.criteria.find((c) => c.id === m.criterionId)!,
+        c.url,
+      );
       lines.push(
-        `   ${m.status === "supported" ? "○" : m.status === "contradicted" ? "×" : "?"} ${label}: ${m.explanation}`,
+        `   ${!applies ? "— 対象外" : m.status === "supported" ? "○" : m.status === "contradicted" ? "×" : "?"} ${label}: ${m.explanation}`,
       );
       for (const id of m.evidenceIds) {
         const e = task.evidence.find((e) => e.id === id)!;

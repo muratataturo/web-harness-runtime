@@ -1,4 +1,4 @@
-// Portable replay of actual saved model output. No inference or source requests.
+// Portable replay of saved outputs, including the explicitly reviewed final edit. No inference or source requests.
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { renderAnswerHtml } from "../dist/answer-html.js";
@@ -28,5 +28,5 @@ for (const [name, output] of [
   await writeFile(`docs/${output}.html`, renderAnswerHtml(task));
 }
 console.log(
-  "Replayed seven real model outputs and the explicitly synthetic roadmap example",
+  "Replayed six model outputs, one source-grounded final edit, and one synthetic roadmap example",
 );

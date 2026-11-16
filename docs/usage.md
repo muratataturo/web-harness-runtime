@@ -213,7 +213,7 @@ npm run sandbox:local -- run-codex chat --port 4311
 
 ### 自分のLinux VMにChat/API/CLIを置く場合
 
-Linux VMへのSSHとNode 22以上を前提に、VM内でリポジトリを展開してdaemonを実行できます。以下は提供手順で、今回remote VMへの配置は実行していません。
+Linux VMへのSSHとNode 22.13以上を前提に、VM内でリポジトリを展開してdaemonを実行できます。以下は提供手順で、今回remote VMへの配置は実行していません。
 
 ```sh
 # VM内。リポジトリをcloneしてそのディレクトリへ移動後

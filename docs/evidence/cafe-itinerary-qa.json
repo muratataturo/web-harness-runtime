@@ -1,6 +1,6 @@
 {
-  "scope": "saved real cafe itinerary; offline replay; automated checks only",
-  "taskId": "209a4e20-76eb-44b7-a538-266c4681264a",
+  "scope": "source-grounded final edit; offline replay; automated checks only; not unattended model success",
+  "taskId": "ebe8ccc5-d0b8-4afc-a850-4b8048bd9e00",
   "humanResponses": 0,
   "cases": [
     {

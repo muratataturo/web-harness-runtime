@@ -61,6 +61,13 @@ export const adapters: Adapter[] = [
       "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。",
   },
   {
+    id: "official-coffee",
+    hosts: ["store.starbucks.co.jp"],
+    keywords: /カフェ|喫茶|珈琲|コーヒー|旅行|caf[eé]|coffee/i,
+    guidance:
+      "店舗公式の営業時間・住所・特定立地価格・サイズ制限を確認する。/detail-数字/が個別店。価格適用店の違いを無視して全国標準価格を代用しない。座席や商品在庫は確約しない。",
+  },
+  {
     id: "official-dining",
     hosts: ["www.maruka.net", "maruka.net"],
     keywords: /食|ランチ|蕎麦|浅草/,
@@ -206,9 +213,12 @@ export function routeSources(query: string, urls: string[]): Source[] {
       const host = new URL(value).hostname;
       return adapters.some(
         (a) =>
-          ["hotpepper-gourmet", "rakuten-gourmet", "official-cafe"].includes(
-            a.id,
-          ) && a.hosts.includes(host),
+          [
+            "hotpepper-gourmet",
+            "rakuten-gourmet",
+            "official-cafe",
+            "official-coffee",
+          ].includes(a.id) && a.hosts.includes(host),
       );
     })
       ? [
@@ -267,11 +277,18 @@ export function entityKey(value: string): string | undefined {
   let id: string | undefined;
   if (adapter.id === "official-cafe")
     id = url.pathname.match(/^\/(\d{4,})(?:\/|$)/)?.[1];
+  if (adapter.id === "official-coffee")
+    id = url.pathname.match(/^\/detail-(\d+)\/?$/)?.[1];
   if (adapter.id === "official-visit") {
     if (url.hostname === "www.tokyo-zoo.net")
-      id = url.pathname.match(
-        /^\/(ueno|kasai)\/visitor-info\/(?:tickets|access)\//,
-      )?.[1];
+      id =
+        /^\/(?:ueno\/|file\/ueno\/|file\/calendar_\d{4}_ueno\.pdf$|topics\/news\/ueno\/)/.test(
+          url.pathname,
+        )
+          ? "ueno"
+          : url.pathname.match(
+              /^\/(ueno|kasai)\/visitor-info\/(?:tickets|access)\//,
+            )?.[1];
     if (
       url.hostname === "www.kahaku.go.jp" &&
       /^\/riyou\/(?:nyukan-annai|access)/.test(url.pathname)

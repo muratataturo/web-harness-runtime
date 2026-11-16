@@ -41,7 +41,7 @@
     "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.13.0"
   },
   "dependencies": {
     "@astryxdesign/core": "0.7.16",
@@ -56,8 +56,10 @@
     "dotenv": "17.4.2",
     "leaflet": "1.9.4",
     "pbf": "5.1.2",
+    "pdfjs-dist": "6.5.438",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "unpdf": "1.6.2"
   },
   "devDependencies": {
     "@astryxdesign/cli": "^0.7.16",

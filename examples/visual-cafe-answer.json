@@ -1,27 +1,49 @@
 {
-  "id": "209a4e20-76eb-44b7-a538-266c4681264a",
-  "query": "2026年11月21日（土）に友人と大人2人で上野を10:00〜15:00で一日遊びする旅行プラン。上野動物園の散策と、公園内のカフェでコーヒーまたはハーブティー・甘いものを楽しむ時間を組み込みたい。EVERYONEs CAFEも調べ、カフェは1店を主案に。家族合計の代わりに2人合計で予算10000円以内。観光だけで詰め込まず、何を味わうか、移動・滞在・注文の予算・満席時の待ち時間上限と代替まで具体的に。動物園とカフェそれぞれの写真と地図付きで、YOUR DAYから楽しみが伝わる回答にしてください。公式の平均予算を商品価格に使わず、単価未取得は見積枠として明示。追加のSNS調査は不要。",
-  "status": "blocked",
-  "createdAt": "2026-11-16T09:28:32.487Z",
-  "updatedAt": "2026-11-16T09:33:44.848Z",
+  "id": "ebe8ccc5-d0b8-4afc-a850-4b8048bd9e00",
+  "parentId": "dc915f8d-f8c5-4817-837a-92317d582ee3",
+  "query": "2026年11月21日（土）、大人2人で上野を10:00〜15:00に遊ぶカフェ旅行を正式な実行プランにする。現地の入園・飲食は予算10000円以内、交通費は対象外。上野動物園とEVERYONEs CAFEを主案にし、1人1皿の定番パンケーキと1杯のハーブティーで軽い昼食とお茶を楽しむ。営業予定、主案の掲載商品価格、候補比較、具体的な休憩所を確認する。代替店は当日判断の切替先として営業時間・所在地・利用制約を比較し、主案とは別の注文上限を設ける。未来の席確保ではなく公式の予約・当日利用方式と満席時の手順を明確にする。",
+  "status": "succeeded",
+  "createdAt": "2026-11-16T11:02:09.575Z",
+  "updatedAt": "2026-11-16T11:25:11.750Z",
   "model": "gpt-6.1-sol",
   "agent": "codex",
   "urls": [
-    "https://www.tokyo-zoo.net/zoo/ueno/",
+    "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+    "https://www.tokyo-zoo.net/ueno/shops/foodshop/index.html",
+    "https://www.tokyo-zoo.net/file/calendar_2026_ueno.pdf",
     "https://shop.create-restaurants.co.jp/0941/",
+    "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/08/GRAND_%E4%BC%91%E6%97%A5_260924.pdf",
+    "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/04/%E3%83%89%E3%83%AA%E3%83%B3%E3%82%AF%EF%BC%9A%E3%83%8F%E3%82%A4%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3.pdf",
+    "https://store.starbucks.co.jp/detail-1087/",
     "https://nominatim.openstreetmap.org/"
   ],
   "sources": [
     {
       "id": "source-1",
       "kind": "official-visit",
-      "url": "https://www.tokyo-zoo.net/zoo/ueno/",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
       "score": 10,
       "reason": "クエリの分野と URL の分野が一致",
       "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
     },
     {
       "id": "source-2",
+      "kind": "official-visit",
+      "url": "https://www.tokyo-zoo.net/ueno/shops/foodshop/index.html",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-3",
+      "kind": "official-visit",
+      "url": "https://www.tokyo-zoo.net/file/calendar_2026_ueno.pdf",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-4",
       "kind": "official-cafe",
       "url": "https://shop.create-restaurants.co.jp/0941/",
       "score": 10,
@@ -29,7 +51,31 @@
       "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
     },
     {
-      "id": "source-3",
+      "id": "source-5",
+      "kind": "official-cafe",
+      "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/08/GRAND_%E4%BC%91%E6%97%A5_260924.pdf",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-6",
+      "kind": "official-cafe",
+      "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/04/%E3%83%89%E3%83%AA%E3%83%B3%E3%82%AF%EF%BC%9A%E3%83%8F%E3%82%A4%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3.pdf",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-7",
+      "kind": "official-coffee",
+      "url": "https://store.starbucks.co.jp/detail-1087/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の営業時間・住所・特定立地価格・サイズ制限を確認する。/detail-数字/が個別店。価格適用店の違いを無視して全国標準価格を代用しない。座席や商品在庫は確約しない。"
+    },
+    {
+      "id": "source-8",
       "kind": "generic",
       "url": "https://nominatim.openstreetmap.org/",
       "score": 0,
@@ -39,73 +85,72 @@
   ],
   "criteria": [
     {
-      "id": "date",
-      "description": "2026年11月21日10〜15時の利用条件",
+      "id": "public-info",
+      "description": "対象日の通常営業予定と所在地・利用制約を公式で確認",
       "required": true,
-      "weight": 5
+      "weight": 3,
+      "appliesTo": [
+        "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "https://shop.create-restaurants.co.jp/0941/",
+        "https://store.starbucks.co.jp/detail-1087/"
+      ]
     },
     {
-      "id": "zoo",
-      "description": "上野動物園の散策",
+      "id": "admission",
+      "description": "主案の大人入園料を確認",
       "required": true,
-      "weight": 5
+      "weight": 2,
+      "appliesTo": [
+        "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/"
+      ]
     },
     {
-      "id": "cafe",
-      "description": "公園内EVERYONEs CAFEで飲物と甘味",
+      "id": "order-price",
+      "description": "主案の具体的な注文品・枚数・掲載単価を確認",
       "required": true,
-      "weight": 5
+      "weight": 3,
+      "appliesTo": [
+        "https://shop.create-restaurants.co.jp/0941/"
+      ]
     },
     {
-      "id": "budget",
-      "description": "大人2人合計10000円以内、未取得単価は見積",
+      "id": "rest",
+      "description": "東園の屋内無料休憩所の名称・場所・営業時間を確認",
       "required": true,
-      "weight": 5
+      "weight": 2,
+      "appliesTo": [
+        "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/"
+      ]
+    },
+    {
+      "id": "seating-policy",
+      "description": "主案カフェの予約・当日利用方式を確認",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://shop.create-restaurants.co.jp/0941/"
+      ]
     }
   ],
   "pages": [
     {
-      "url": "https://www.tokyo-zoo.net/ueno/index.html",
-      "title": "上野動物園",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "title": "開園時間・休園日・入園料 | 上野動物園",
       "mapEmbeds": [],
       "images": [
         {
-          "url": "https://www.tokyo-zoo.net/image/MV_ueno_pc.jpg",
-          "alt": "ニシローランドゴリラの屋外運動場。数頭の群れ"
+          "url": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
+          "alt": "開園時間・休園日・入園料 | 上野動物園"
         },
         {
-          "url": "https://www.tokyo-zoo.net/image/ueno/news/japanese-serow-topics-ueno.jpg",
-          "alt": "屋外にいるニホンカモシカ1頭。額から2本、後方に向けて曲がった形の短いツノが2本見える。全身は黒褐色のような色をしている。"
-        },
-        {
-          "url": "https://www.tokyo-zoo.net/ueno/shoebill/main-visual.jpg",
-          "alt": "ハシビロコウの頭部を真横から撮影。嘴が大きい。後頭部に逆だったような羽毛が見える。"
-        },
-        {
-          "url": "https://www.tokyo-zoo.net/image/ueno/school_program/quiz-talk-list-image.jpg",
-          "alt": "解説プログラムクイズラリー"
-        },
-        {
-          "url": "https://www.tokyo-zoo.net/image/map_ueno.jpg",
-          "alt": "上野動物園"
-        },
-        {
-          "url": "https://www.tokyo-zoo.net/image/ueno/blog/13918_01.jpg",
-          "alt": "上野動物園"
-        },
-        {
-          "url": "https://www.tokyo-zoo.net/image/ueno/blog/13859_01.JPG",
-          "alt": "上野動物園"
-        },
-        {
-          "url": "https://www.tokyo-zoo.net/image/ueno/blog/13853_01.jpg",
-          "alt": "上野動物園"
+          "url": "https://www.tokyo-zoo.net/image/nenpass_ueno.jpg",
+          "alt": "年間パスポート"
         }
       ],
-      "text": "上野動物園\n\n〒110-8711 台東区上野公園9-83 上野動物園",
+      "text": "開園時間・休園日・入園料 | 上野動物園\n\n開園時間\n9時30分～17時00分\n※\n入園および入園券\n\n一般\n600円\n",
       "links": [],
       "truncated": false,
-      "capturedAt": "2026-11-16T09:28:42.666Z",
+      "capturedAt": "2026-11-16T10:38:07.022Z",
       "acquisition": {
         "kind": "public-html",
         "status": 200,
@@ -113,6 +158,70 @@
         "contentType": "text/html;charset=UTF-8"
       },
       "id": "page-1"
+    },
+    {
+      "url": "https://www.tokyo-zoo.net/ueno/shops/foodshop/index.html",
+      "title": "フードショップ",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shop/foodshop/photo_restaurant_05.JPG",
+          "alt": "フードショップ"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shop/foodshop/ueno_birdsong_kawausoman.jpg",
+          "alt": "カワウソまん"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shop/foodshop/saruman-saruyama.jpg",
+          "alt": "さるまん"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shop/foodshop/noukoucheesburger-cafechameleon.jpg",
+          "alt": "濃厚チーズバーガー"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shop/foodshop/beefcurry-nishisyoku.jpg",
+          "alt": "動物園オリジナルビーフカレー"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shops/foodshop/map_restaurant.png",
+          "alt": "フードショップマップ"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shop/foodshop/photo_restaurant_03.JPG",
+          "alt": "バードソング"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/shop/foodshop/bird26.11_.jpg",
+          "alt": "バードソングのメニュー"
+        }
+      ],
+      "text": "フードショップ\n\nさるやまキッチン（屋内）\n東園サル山前にある無料休憩所併設の2階建ての飲食店です。\n弁当や丼など、和をイメージしたメニューを販売しています。\n座席からは、サル山のニホンザルがご覧いただけます。\n場所\n東園 サル山前\n営業時間\n10:00～16:30\n※\n食事メニューのラストオーダーは16:00、16:00以降はドリンクのみの販売と",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-16T10:38:07.165Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-2"
+    },
+    {
+      "url": "https://www.tokyo-zoo.net/file/calendar_2026_ueno.pdf",
+      "title": "calendar_2026_ueno.pdf",
+      "text": "calendar_2026_ueno.pdf\n\n恩賜上野動物園 開園日カレンダー\n開園スケジュール・入園方法は変更になる場合があります。ご来園前に必ずホームページで最新情報をご確認ください。\n2026 年 4 月～ 2027 年 3 月\n日 月 火 水 木 金 土   日 月",
+      "truncated": false,
+      "links": [],
+      "capturedAt": "2026-11-16T10:38:07.470Z",
+      "acquisition": {
+        "kind": "public-pdf",
+        "status": 200,
+        "contentType": "application/pdf"
+      },
+      "id": "page-3"
     },
     {
       "url": "https://shop.create-restaurants.co.jp/0941/",
@@ -152,17 +261,117 @@
           "alt": "EVERYONEs CAFE 上野恩賜公園 | 公式 | 上野恩賜公園内で東京都産の食材を堪能 旬の食材を取り入れたメニューが一日中楽しめるカフェ"
         }
       ],
-      "text": "EVERYONEs CAFE 上野恩賜公園 | 公式 | 上野恩賜公園内で東京都産の食材を堪能 旬の食材を取り入れたメニューが一日中楽しめるカフェ\n\nEVERYONEs CAFE 上野恩賜公園\n住所\n東京都台東区\n上野公園8-4号\n\n土：\n09:00 〜 21:00（L.O. 20:00）\n\nlatitude=35.7156757 longitude=139.7747529\n\n香り高いハーブティー",
+      "text": "EVERYONEs CAFE 上野恩賜公園 | 公式 | 上野恩賜公園内で東京都産の食材を堪能 旬の食材を取り入れたメニューが一日中楽しめるカフェ\n\nEVERYONEs CAFE 上野恩賜公園\n住所\n東京都台東区\n上野公園8-4号\nアクセス\nJR上野駅(公園口) 徒歩3分\n電話番号\n03-5815-8251\n営業時間\n月：\n10\n\n土：\n09:00 〜 21:00（L.O. 20:00）\n日：\n09:0\n\n当店はご予約・貸切は承っておりません\n【その\n\n構造化データ GeoCoordinates latitude=35.7156757 longitude=139.7747529（施設の代表位置。入口・経路は未確認）\nHOME\nABOUT\nNEWS\nMENU",
       "links": [],
       "truncated": false,
-      "capturedAt": "2026-11-16T09:28:42.815Z",
+      "capturedAt": "2026-11-16T10:38:18.881Z",
       "acquisition": {
         "kind": "public-html",
         "status": 200,
         "charset": "utf-8",
         "contentType": "text/html; charset=UTF-8"
       },
-      "id": "page-2"
+      "id": "page-4"
+    },
+    {
+      "url": "https://store.starbucks.co.jp/detail-1087/",
+      "title": "スターバックス コーヒー 上野恩賜公園店｜スターバックス コーヒー ジャパン",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://d3vgbguy0yofad.cloudfront.net/images/og/store-search.jpg",
+          "alt": "スターバックス コーヒー 上野恩賜公園店｜スターバックス コーヒー ジャパン"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/smart_cards.png",
+          "alt": "交通系電子マネー取り扱い"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/pay_pay.png",
+          "alt": "PayPay"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/d_pay.png",
+          "alt": "D払い"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/r_pay.png",
+          "alt": "楽天ペイ"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/au_pay.png",
+          "alt": "auPay"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/alipay.png",
+          "alt": "Alipay"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/wechatpay.png",
+          "alt": "WeChat Pay"
+        }
+      ],
+      "text": "スターバックス コーヒー 上野恩賜公園店｜スターバックス コーヒー ジャパン\n\n110-0007 東京都 台東区 上野公園8-22\n電話番号\n03-5834-1630\n営業時間\n08:00～21:00\n定休日\n不定休\nアクセス\n無線LAN\nSTARBUCKS\ndocomo\nWi2\n\n当店舗はすべてのドリンクについて、トールサイズのみの提供となります。\n※\n特定立地価格 B適用店舗です。\n※\n台風、その他災害等により、予告なく臨時休業や営業時間を変更をさせて頂くことがあり",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-16T10:42:19.170Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-5"
+    },
+    {
+      "url": "https://www.tokyo-zoo.net/ueno/index.html",
+      "title": "上野動物園",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.tokyo-zoo.net/image/MV_ueno_pc.jpg",
+          "alt": "ニシローランドゴリラの屋外運動場。数頭の群れ"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/news/japanese-serow-topics-ueno.jpg",
+          "alt": "屋外にいるニホンカモシカ1頭。額から2本、後方に向けて曲がった形の短いツノが2本見える。全身は黒褐色のような色をしている。"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/ueno/shoebill/main-visual.jpg",
+          "alt": "ハシビロコウの頭部を真横から撮影。嘴が大きい。後頭部に逆だったような羽毛が見える。"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/school_program/quiz-talk-list-image.jpg",
+          "alt": "解説プログラムクイズラリー"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/map_ueno.jpg",
+          "alt": "上野動物園"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/blog/13918_01.jpg",
+          "alt": "上野動物園"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/blog/13859_01.JPG",
+          "alt": "上野動物園"
+        },
+        {
+          "url": "https://www.tokyo-zoo.net/image/ueno/blog/13853_01.jpg",
+          "alt": "上野動物園"
+        }
+      ],
+      "text": "上野動物園\n\n上野動物園\n\n日本語English简体中文繁體中文한국어DeutschFrançaisEspañolBahasa Ind",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-16T10:42:23.813Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "id": "page-6"
     },
     {
       "url": "https://shop.create-restaurants.co.jp/0941/news/2747/",
@@ -174,17 +383,17 @@
           "alt": "【期間限定】9月19日（土）秋の贅沢 ～抹茶と和栗のモンブランパンケーキ登場～ | EVERYONEs CAFE 上野恩賜公園"
         }
       ],
-      "text": "【期間限定】9月19日（土）秋の贅沢 ～抹茶と和栗のモンブランパンケーキ登場～ | EVERYONEs CAFE 上野恩賜公園\n\n「抹茶と和栗のモンブランパンケーキ」2,700円（税込）",
+      "text": "【期間限定】9月19日（土）秋の贅沢 ～抹茶と和栗のモンブランパンケーキ登場～ | EVERYONEs CAFE 上野恩賜公園",
       "links": [],
       "truncated": false,
-      "capturedAt": "2026-11-16T09:28:49.594Z",
+      "capturedAt": "2026-11-16T10:42:32.049Z",
       "acquisition": {
         "kind": "public-html",
         "status": 200,
         "charset": "utf-8",
         "contentType": "text/html; charset=UTF-8"
       },
-      "id": "page-3"
+      "id": "page-7"
     },
     {
       "url": "https://shop.create-restaurants.co.jp/0941/news/1010/",
@@ -199,76 +408,42 @@
       "text": "【メディア情報】『上野が、すき。』にてご紹介いただきました | EVERYONEs CAFE 上野恩賜公園",
       "links": [],
       "truncated": false,
-      "capturedAt": "2026-11-16T09:28:49.719Z",
+      "capturedAt": "2026-11-16T10:42:34.421Z",
       "acquisition": {
         "kind": "public-html",
         "status": 200,
         "charset": "utf-8",
         "contentType": "text/html; charset=UTF-8"
       },
-      "id": "page-4"
+      "id": "page-8"
     },
     {
-      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/index.html",
-      "title": "開園時間・休園日・入園料 | 上野動物園",
-      "mapEmbeds": [],
-      "images": [
-        {
-          "url": "https://www.tokyo-zoo.net/image/ueno_seimon-2.jpg",
-          "alt": "開園時間・休園日・入園料 | 上野動物園"
-        },
-        {
-          "url": "https://www.tokyo-zoo.net/image/nenpass_ueno.jpg",
-          "alt": "年間パスポート"
-        }
-      ],
-      "text": "開園時間・休園日・入園料 | 上野動物園\n\n一般\n600円\n\n9時30分～17時00分\n\n開園時間・休園日・入園料 | 上野動物園",
-      "links": [],
+      "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/08/GRAND_%E4%BC%91%E6%97%A5_260924.pdf",
+      "title": "GRAND_休日_260924.pdf",
+      "text": "GRAND_休日_260924.pdf\n\n3枚\n2枚\n2枚 東京産たまごを使ったパン ケーキ / キャ ラ メ ルナッ ツ\nCaramel Nuts Pancake ( 3 pieces or 2 pieces)\nCaramel\nNuts\n抹茶と和栗のモンブラン パン ケーキ\nMatcha & Japanese Chestnut Mont Blanc Pancake (2 pieces)\n2,600\n1,900 2,100   /",
       "truncated": false,
-      "capturedAt": "2026-11-16T09:28:49.854Z",
+      "links": [],
+      "capturedAt": "2026-11-16T10:44:12.488Z",
       "acquisition": {
-        "kind": "public-html",
+        "kind": "public-pdf",
         "status": 200,
-        "charset": "utf-8",
-        "contentType": "text/html;charset=UTF-8"
+        "contentType": "application/pdf"
       },
-      "id": "page-5"
+      "id": "page-9"
     },
     {
-      "url": "https://www.tokyo-zoo.net/ueno/news/5472/index.html",
-      "title": "【最新情報】展示休止やイベント中止などのお知らせ | 上野動物園",
-      "mapEmbeds": [],
-      "images": [
-        {
-          "url": "https://www.tokyo-zoo.net/image/ueno/news/japanese-serow-topics-ueno.jpg",
-          "alt": "【最新情報】展示休止やイベント中止などのお知らせ | 上野動物園"
-        }
-      ],
-      "text": "【最新情報】展示休止やイベント中止などのお知らせ | 上野動物園\n\n16:45 ゾウ",
-      "links": [],
+      "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/04/%E3%83%89%E3%83%AA%E3%83%B3%E3%82%AF%EF%BC%9A%E3%83%8F%E3%82%A4%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3.pdf",
+      "title": "ドリンク：ハイシーズン.pdf",
+      "text": "ドリンク：ハイシーズン.pdf\n\nフレッシュハーブティー （ ホ ッ ト ）\nフレッシュハーブレモネード\n\n1,030\n1,080\n1,080\n930\n930\nF",
       "truncated": false,
-      "capturedAt": "2026-11-16T09:28:49.994Z",
-      "acquisition": {
-        "kind": "public-html",
-        "status": 200,
-        "charset": "utf-8",
-        "contentType": "text/html;charset=UTF-8"
-      },
-      "id": "page-6"
-    },
-    {
-      "url": "https://nominatim.openstreetmap.org/search?q=%E4%B8%8A%E9%87%8E%E5%8B%95%E7%89%A9%E5%9C%92+%E5%8F%B0%E6%9D%B1%E5%8C%BA%E4%B8%8A%E9%87%8E%E5%85%AC%E5%9C%929-83&format=jsonv2&limit=3",
-      "title": "上野動物園 台東区上野公園9-83 — OpenStreetMap地理検索（施設代表点・入口未確認）",
-      "text": "上野動物園 台東区上野公園9-83 — OpenStreetMap地理検索（施設代表点・入口未確認）",
       "links": [],
-      "capturedAt": "2026-11-16T09:21:17.789Z",
-      "truncated": false,
+      "capturedAt": "2026-11-16T10:45:19.273Z",
       "acquisition": {
-        "kind": "public-json",
+        "kind": "public-pdf",
         "status": 200,
-        "contentType": "application/json"
+        "contentType": "application/pdf"
       },
-      "id": "geo-1"
+      "id": "page-10"
     },
     {
       "url": "https://nominatim.openstreetmap.org/search?q=%E4%B8%8A%E9%87%8E%E5%8B%95%E7%89%A9%E5%9C%92+%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E4%B8%8A%E9%87%8E%E5%85%AC%E5%9C%929-83&format=jsonv2&limit=3",
@@ -282,501 +457,766 @@
         "status": 200,
         "contentType": "application/json"
       },
-      "id": "geo-2"
-    },
-    {
-      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/access/index.html",
-      "title": "交通アクセス | 上野動物園",
-      "mapEmbeds": [
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.393930948477!2d139.7723777412035!3d35.71652921760806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c28f7766d7f%3A0x76b8b5efa1988ef4!2z5LiK6YeO5YuV54mp5ZyS!5e0!3m2!1sja!2sjp!4v1763379986468!5m2!1sja!2sjp"
-      ],
-      "images": [
-        {
-          "url": "https://www.tokyo-zoo.net/image/ueno/plan_your_visit/access/access_map_ueno.png",
-          "alt": "交通アクセス | 上野動物園"
-        }
-      ],
-      "text": "交通アクセス | 上野動物園",
-      "links": [],
-      "truncated": false,
-      "capturedAt": "2026-11-16T09:31:49.399Z",
-      "acquisition": {
-        "kind": "public-html",
-        "status": 200,
-        "charset": "utf-8",
-        "contentType": "text/html;charset=UTF-8"
-      },
-      "id": "page-7"
-    },
-    {
-      "url": "https://shop.create-restaurants.co.jp/0941/news/992/",
-      "title": "【メディア情報】MOOK本「東京のときめく公園めぐり」にてご紹介いただきました | EVERYONEs CAFE 上野恩賜公園",
-      "mapEmbeds": [],
-      "images": [
-        {
-          "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2024/11/09.jpg",
-          "alt": "【メディア情報】MOOK本「東京のときめく公園めぐり」にてご紹介いただきました | EVERYONEs CAFE 上野恩賜公園"
-        }
-      ],
-      "text": "【メディア情報】MOOK本「東京のときめく公園めぐり」にてご紹介いただきました | EVERYONEs CAFE 上野恩賜公園",
-      "links": [],
-      "truncated": false,
-      "capturedAt": "2026-11-16T09:31:51.669Z",
-      "acquisition": {
-        "kind": "public-html",
-        "status": 200,
-        "charset": "utf-8",
-        "contentType": "text/html; charset=UTF-8"
-      },
-      "id": "page-8"
+      "id": "geo-zoo"
     }
   ],
   "evidence": [
     {
       "id": "ev-1",
-      "pageId": "page-5",
-      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/index.html",
-      "quote": "一般\n600円",
-      "capturedAt": "2026-11-16T09:28:49.854Z"
+      "pageId": "page-1",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "quote": "開園時間\n9時30分～17時00分\n※\n入園および入園券",
+      "capturedAt": "2026-11-16T10:38:07.022Z"
     },
     {
       "id": "ev-2",
-      "pageId": "page-5",
-      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/index.html",
-      "quote": "9時30分～17時00分",
-      "capturedAt": "2026-11-16T09:28:49.854Z"
+      "pageId": "page-1",
+      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+      "quote": "一般\n600円\n",
+      "capturedAt": "2026-11-16T10:38:07.022Z"
     },
     {
       "id": "ev-3",
-      "pageId": "page-2",
-      "url": "https://shop.create-restaurants.co.jp/0941/",
-      "quote": "EVERYONEs CAFE 上野恩賜公園\n住所\n東京都台東区\n上野公園8-4号",
-      "capturedAt": "2026-11-16T09:28:42.815Z"
+      "pageId": "page-3",
+      "url": "https://www.tokyo-zoo.net/file/calendar_2026_ueno.pdf",
+      "quote": "恩賜上野動物園 開園日カレンダー\n開園スケジュール・入園方法は変更になる場合があります。ご来園前に必ずホームページで最新情報をご確認ください。\n2026 年 4 月～ 2027 年 3 月\n日 月 火 水 木 金 土   日 月",
+      "capturedAt": "2026-11-16T10:38:07.470Z"
     },
     {
       "id": "ev-4",
       "pageId": "page-2",
-      "url": "https://shop.create-restaurants.co.jp/0941/",
-      "quote": "土：\n09:00 〜 21:00（L.O. 20:00）",
-      "capturedAt": "2026-11-16T09:28:42.815Z"
+      "url": "https://www.tokyo-zoo.net/ueno/shops/foodshop/index.html",
+      "quote": "さるやまキッチン（屋内）\n東園サル山前にある無料休憩所併設の2階建ての飲食店です。\n弁当や丼など、和をイメージしたメニューを販売しています。\n座席からは、サル山のニホンザルがご覧いただけます。\n場所\n東園 サル山前\n営業時間\n10:00～16:30\n※\n食事メニューのラストオーダーは16:00、16:00以降はドリンクのみの販売と",
+      "capturedAt": "2026-11-16T10:38:07.165Z"
     },
     {
       "id": "ev-5",
-      "pageId": "page-2",
+      "pageId": "page-4",
       "url": "https://shop.create-restaurants.co.jp/0941/",
-      "quote": "latitude=35.7156757 longitude=139.7747529",
-      "capturedAt": "2026-11-16T09:28:42.815Z"
+      "quote": "EVERYONEs CAFE 上野恩賜公園\n住所\n東京都台東区\n上野公園8-4号\nアクセス\nJR上野駅(公園口) 徒歩3分\n電話番号\n03-5815-8251\n営業時間\n月：\n10",
+      "capturedAt": "2026-11-16T10:38:18.881Z"
     },
     {
       "id": "ev-6",
-      "pageId": "page-3",
-      "url": "https://shop.create-restaurants.co.jp/0941/news/2747/",
-      "quote": "「抹茶と和栗のモンブランパンケーキ」2,700円（税込）",
-      "capturedAt": "2026-11-16T09:28:49.594Z"
+      "pageId": "page-4",
+      "url": "https://shop.create-restaurants.co.jp/0941/",
+      "quote": "土：\n09:00 〜 21:00（L.O. 20:00）\n日：\n09:0",
+      "capturedAt": "2026-11-16T10:38:18.881Z"
     },
     {
       "id": "ev-7",
-      "pageId": "page-6",
-      "url": "https://www.tokyo-zoo.net/ueno/news/5472/index.html",
-      "quote": "16:45 ゾウ",
-      "capturedAt": "2026-11-16T09:28:49.994Z"
+      "pageId": "page-4",
+      "url": "https://shop.create-restaurants.co.jp/0941/",
+      "quote": "当店はご予約・貸切は承っておりません\n【その",
+      "capturedAt": "2026-11-16T10:38:18.881Z"
     },
     {
       "id": "ev-8",
-      "pageId": "page-1",
-      "url": "https://www.tokyo-zoo.net/ueno/index.html",
-      "quote": "〒110-8711 台東区上野公園9-83 上野動物園",
-      "capturedAt": "2026-11-16T09:28:42.666Z"
+      "pageId": "page-9",
+      "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/08/GRAND_%E4%BC%91%E6%97%A5_260924.pdf",
+      "quote": "3枚\n2枚\n2枚 東京産たまごを使ったパン ケーキ / キャ ラ メ ルナッ ツ\nCaramel Nuts Pancake ( 3 pieces or 2 pieces)\nCaramel\nNuts\n抹茶と和栗のモンブラン パン ケーキ\nMatcha & Japanese Chestnut Mont Blanc Pancake (2 pieces)\n2,600\n1,900 2,100   /",
+      "capturedAt": "2026-11-16T10:44:12.488Z"
     },
     {
       "id": "ev-9",
-      "pageId": "geo-2",
+      "pageId": "page-10",
+      "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/04/%E3%83%89%E3%83%AA%E3%83%B3%E3%82%AF%EF%BC%9A%E3%83%8F%E3%82%A4%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3.pdf",
+      "quote": "フレッシュハーブティー （ ホ ッ ト ）\nフレッシュハーブレモネード",
+      "capturedAt": "2026-11-16T10:45:19.273Z"
+    },
+    {
+      "id": "ev-10",
+      "pageId": "page-10",
+      "url": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/04/%E3%83%89%E3%83%AA%E3%83%B3%E3%82%AF%EF%BC%9A%E3%83%8F%E3%82%A4%E3%82%B7%E3%83%BC%E3%82%BA%E3%83%B3.pdf",
+      "quote": "1,030\n1,080\n1,080\n930\n930\nF",
+      "capturedAt": "2026-11-16T10:45:19.273Z"
+    },
+    {
+      "id": "ev-11",
+      "pageId": "page-5",
+      "url": "https://store.starbucks.co.jp/detail-1087/",
+      "quote": "110-0007 東京都 台東区 上野公園8-22\n電話番号\n03-5834-1630\n営業時間\n08:00～21:00\n定休日\n不定休\nアクセス\n無線LAN\nSTARBUCKS\ndocomo\nWi2",
+      "capturedAt": "2026-11-16T10:42:19.170Z"
+    },
+    {
+      "id": "ev-12",
+      "pageId": "page-5",
+      "url": "https://store.starbucks.co.jp/detail-1087/",
+      "quote": "当店舗はすべてのドリンクについて、トールサイズのみの提供となります。\n※\n特定立地価格 B適用店舗です。\n※\n台風、その他災害等により、予告なく臨時休業や営業時間を変更をさせて頂くことがあり",
+      "capturedAt": "2026-11-16T10:42:19.170Z"
+    },
+    {
+      "id": "ev-13",
+      "pageId": "page-6",
+      "url": "https://www.tokyo-zoo.net/ueno/index.html",
+      "quote": "上野動物園\n\n日本語English简体中文繁體中文한국어DeutschFrançaisEspañolBahasa Ind",
+      "capturedAt": "2026-11-16T10:42:23.813Z"
+    },
+    {
+      "id": "ev-14",
+      "pageId": "geo-zoo",
       "url": "https://nominatim.openstreetmap.org/search?q=%E4%B8%8A%E9%87%8E%E5%8B%95%E7%89%A9%E5%9C%92+%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E4%B8%8A%E9%87%8E%E5%85%AC%E5%9C%929-83&format=jsonv2&limit=3",
       "quote": "\"lat\":\"35.7153426\",\"lon\":\"139.7688960\"",
       "capturedAt": "2026-11-16T09:29:06.623Z"
     },
     {
-      "id": "ev-10",
-      "pageId": "page-2",
+      "id": "ev-15",
+      "pageId": "page-4",
       "url": "https://shop.create-restaurants.co.jp/0941/",
-      "quote": "香り高いハーブティー",
-      "capturedAt": "2026-11-16T09:28:42.815Z"
-    },
-    {
-      "id": "ev-11",
-      "pageId": "page-5",
-      "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/index.html",
-      "quote": "開園時間・休園日・入園料 | 上野動物園",
-      "capturedAt": "2026-11-16T09:28:49.854Z"
+      "quote": "構造化データ GeoCoordinates latitude=35.7156757 longitude=139.7747529（施設の代表位置。入口・経路は未確認）\nHOME\nABOUT\nNEWS\nMENU",
+      "capturedAt": "2026-11-16T10:38:18.881Z"
     }
   ],
   "answer": {
     "actionPlan": {
       "steps": [
         {
-          "id": "s0",
+          "id": "arrive",
           "when": "10:00",
           "durationMinutes": 20,
-          "where": "上野動物園正門",
-          "action": "入園し公開中の展示を2つ選ぶ",
-          "how": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り",
-          "doneWhen": "次の開始時刻までに完了",
+          "where": "上野動物園・正門",
+          "action": "入園し、公開中の展示を二つ選ぶ",
+          "how": "一般の入園券を1人1枚購入する。園内案内と当日の展示告知を見て、東園で見る二つの対象を友人と決める。",
+          "doneWhen": "入園し、最初に向かう展示が二つ決まる。",
           "locationStatus": "evidence-linked",
           "evidenceIds": [
-            "ev-8",
+            "ev-1",
             "ev-2"
           ],
           "costItemIds": [
-            "entry"
+            "admission"
           ]
         },
         {
-          "id": "s1",
+          "id": "animals",
           "when": "10:20",
-          "durationMinutes": 100,
-          "where": "東園",
-          "action": "ゾウを軸に公開展示を徒歩で巡り、しぐさの発見を各自一つ共有",
-          "how": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り",
-          "doneWhen": "次の開始時刻までに完了",
+          "durationMinutes": 95,
+          "where": "上野動物園・東園の公開展示",
+          "action": "動物のしぐさを見つけて話す",
+          "how": "公開中の展示を二つ巡る。各自が気付いた動きや形を一つ選び、相手へ説明する。混雑する展示は10分を目安に次へ進む。",
+          "doneWhen": "二人が一つずつ発見を話し、11:55に休憩所へ向かう。",
           "locationStatus": "evidence-linked",
           "evidenceIds": [
-            "ev-8",
-            "ev-2"
+            "ev-1",
+            "ev-13"
           ],
           "costItemIds": []
         },
         {
-          "id": "s2",
+          "id": "to-rest",
+          "when": "11:55",
+          "durationMinutes": 5,
+          "where": "上野動物園・東園からサル山前",
+          "action": "さるやまキッチンへ移動する",
+          "how": "園内表示でサル山前の建物を確認して向かう。5分は見積で、通行止めがあれば園の案内表示を優先する。",
+          "doneWhen": "さるやまキッチンの無料休憩所に着く。",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-4"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "rest",
           "when": "12:00",
           "durationMinutes": 20,
-          "where": "園内",
-          "action": "利用可能な休憩場所で足を休め写真を1枚共有",
-          "how": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り",
-          "doneWhen": "次の開始時刻までに完了",
+          "where": "上野動物園・東園サル山前、さるやまキッチン無料休憩所",
+          "action": "屋内で足を休め、今日の一枚を選ぶ",
+          "how": "無料休憩所を利用して20分休む。写真を一枚ずつ選んで見せ合い、疲れに合わせて午後の歩き方を相談する。追加購入を休憩の前提にしない。",
+          "doneWhen": "12:20まで休み、次の移動に無理がないか二人で確認する。",
           "locationStatus": "evidence-linked",
           "evidenceIds": [
-            "ev-8",
-            "ev-2"
-          ],
-          "costItemIds": []
-        },
-        {
-          "id": "s3",
-          "when": "12:20",
-          "durationMinutes": 25,
-          "where": "東園から正門",
-          "action": "通行可能な園路で退出",
-          "how": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り",
-          "doneWhen": "次の開始時刻までに完了",
-          "locationStatus": "evidence-linked",
-          "evidenceIds": [
-            "ev-8",
-            "ev-2"
-          ],
-          "costItemIds": []
-        },
-        {
-          "id": "s4",
-          "when": "12:45",
-          "durationMinutes": 15,
-          "where": "正門からEVERYONEs CAFE",
-          "action": "公園内案内と住所を確認して徒歩移動",
-          "how": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り",
-          "doneWhen": "次の開始時刻までに完了",
-          "locationStatus": "evidence-linked",
-          "evidenceIds": [
-            "ev-3",
             "ev-4"
           ],
           "costItemIds": []
         },
         {
-          "id": "s5",
+          "id": "exit",
+          "when": "12:20",
+          "durationMinutes": 20,
+          "where": "さるやまキッチンから上野動物園正門",
+          "action": "案内に従って正門から退園する",
+          "how": "出口表示を確認して正門へ向かう。20分は見積。途中の展示を追加せず、午後のカフェのために歩くペースを落とす。",
+          "doneWhen": "正門の外へ出る。",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-4",
+            "ev-1"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "to-cafe",
+          "when": "12:40",
+          "durationMinutes": 15,
+          "where": "上野動物園正門からEVERYONEs CAFE 上野恩賜公園",
+          "action": "公園の案内でカフェへ歩く",
+          "how": "公式住所の上野公園8-4号を確認し、公園内の表示で店舗へ向かう。15分は経路未計測の見積で、道路に沿う実経路は地図リンクで確認する。",
+          "doneWhen": "店舗の入口に着く。",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-5"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "reception",
+          "when": "12:55",
+          "durationMinutes": 5,
+          "where": "EVERYONEs CAFE 上野恩賜公園・店頭",
+          "action": "当日受付とメニューを確認する",
+          "how": "予約受付はないため、店頭で2人利用と待ち時間を確認する。キャラメルナッツ2枚とホットのハーブティーの掲載品・表示価格が当日も同じか確かめる。",
+          "doneWhen": "待ち時間と注文品の表示価格が分かる。",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-10"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "queue",
           "when": "13:00",
           "durationMinutes": 20,
-          "where": "EVERYONEs CAFE",
-          "action": "店頭で待ち時間確認、最大20分待機",
-          "how": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り",
-          "doneWhen": "次の開始時刻までに完了",
+          "where": "EVERYONEs CAFE 上野恩賜公園・案内された待機場所",
+          "action": "入店待ちは20分で区切る",
+          "how": "13:20を入店判断の締切にする。寒さや雨で無理がある場合は待たず切り替える。早く入店できれば、その分は食事・会話へ回す。",
+          "doneWhen": "13:20までに入店か切り替えかを二人で決める。",
           "locationStatus": "evidence-linked",
           "evidenceIds": [
-            "ev-3",
-            "ev-4"
+            "ev-7",
+            "ev-6"
           ],
           "costItemIds": []
         },
         {
-          "id": "s6",
+          "id": "tea",
           "when": "13:20",
           "durationMinutes": 80,
-          "where": "EVERYONEs CAFE",
-          "action": "ハーブティー各1杯と甘味1皿共有、軽食を予算内で注文",
-          "how": "限定パンケーキの提供・共有可否を確認。飲物各1000円・軽食各1500円は見積枠。注文前に合計確認、香りと甘味の感想を話す",
-          "doneWhen": "次の開始時刻までに完了",
+          "where": "EVERYONEs CAFE 上野恩賜公園",
+          "action": "パンケーキとハーブティーで、ゆっくり昼食",
+          "how": "1人ずつキャラメルナッツパンケーキ2枚と単品フレッシュハーブティー（ホット）を注文する。香りを確かめ、午前に選んだ写真を見せ合って80分過ごす。追加トッピング・追加注文をしない主案。",
+          "doneWhen": "14:40までに食事・会話・会計を終える。",
           "locationStatus": "evidence-linked",
           "evidenceIds": [
-            "ev-3",
-            "ev-4"
+            "ev-5",
+            "ev-6",
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-10"
           ],
           "costItemIds": [
-            "sweet",
-            "drink",
-            "food"
+            "pancake",
+            "tea"
           ]
         },
         {
-          "id": "s7",
+          "id": "return",
           "when": "14:40",
           "durationMinutes": 20,
-          "where": "カフェから上野駅公園口方面",
-          "action": "徒歩で戻り15時解散",
-          "how": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り",
-          "doneWhen": "15時に解散",
+          "where": "EVERYONEs CAFEからJR上野駅公園口方面",
+          "action": "駅へ戻り、15時に解散する",
+          "how": "JR上野駅の公園口方面へ案内を確認して戻る。20分は見積。歩きながら次に行ってみたい場所を一つずつ話す。",
+          "doneWhen": "15:00までに駅方面へ戻り、二人で解散を確認する。",
           "locationStatus": "evidence-linked",
           "evidenceIds": [
-            "ev-3",
-            "ev-4"
+            "ev-5"
           ],
           "costItemIds": []
         }
       ],
       "budget": {
-        "scenario": "主案・大人2人、甘味1皿共有・飲物と軽食各1品、交通費別",
-        "totalYen": 8900,
+        "scenario": "主案・大人2人の現地入園と各1皿1杯。交通費・追加注文を除く。公式メニューの掲載額で計算。",
         "items": [
           {
-            "id": "entry",
-            "label": "入園",
+            "id": "admission",
+            "label": "上野動物園・一般入園",
             "quantity": 2,
             "unitYen": 600,
-            "totalYen": 1200,
             "basis": "published",
             "evidenceIds": [
-              "ev-1"
+              "ev-2"
             ]
           },
           {
-            "id": "sweet",
-            "label": "パンケーキ共有希望",
-            "quantity": 1,
-            "unitYen": 2700,
-            "totalYen": 2700,
+            "id": "pancake",
+            "label": "キャラメルナッツパンケーキ・2枚",
+            "quantity": 2,
+            "unitYen": 1900,
             "basis": "published",
             "evidenceIds": [
-              "ev-6"
+              "ev-8"
             ]
           },
           {
-            "id": "drink",
-            "label": "ハーブティー見積枠",
+            "id": "tea",
+            "label": "フレッシュハーブティー（ホット）・単品",
             "quantity": 2,
-            "unitYen": 1000,
-            "totalYen": 2000,
-            "basis": "estimate",
-            "evidenceIds": []
-          },
-          {
-            "id": "food",
-            "label": "軽食見積枠",
-            "quantity": 2,
-            "unitYen": 1500,
-            "totalYen": 3000,
-            "basis": "estimate",
-            "evidenceIds": []
+            "unitYen": 1030,
+            "basis": "published",
+            "evidenceIds": [
+              "ev-9",
+              "ev-10"
+            ]
           }
-        ]
+        ],
+        "totalYen": 7060
       },
       "branches": [
         {
-          "trigger": "満席20分超・雨や寒さで待機困難",
-          "action": "13:20までに退列",
-          "how": "駅方面へ戻る。別店は未検証、店頭で営業・席・価格を確認できる場合のみ利用。カフェ希望未達の可能性を残す",
+          "trigger": "13:20時点でも入店できない、または雨・寒さで待つのが難しい",
+          "action": "スターバックス上野恩賜公園店へ切り替える",
+          "how": "上野公園8-22の店舗へ向かう。徒歩5分は見積。Tallのみ・特定立地Bの店頭価格と席を確認し、2人3,000円を注文上限にする。入れない・上限内で選べない場合は無理に注文せず駅方面へ戻る。主案のパンケーキは注文しない。",
           "evidenceIds": [
-            "ev-3"
+            "ev-11",
+            "ev-12",
+            "ev-7"
           ]
         },
         {
-          "trigger": "甘味終了・共有不可・予算超過",
-          "action": "注文前に組替え",
-          "how": "甘味2700円以内、飲物各1000円以内を優先し軽食を減らす。甘味がなければ飲物のみ。現地合計10000円を超える注文はしない",
+          "trigger": "無料休憩所が混雑・閉鎖で利用できない",
+          "action": "観察を短縮し、早めに退園してカフェへ向かう",
+          "how": "立って20分我慢する予定にはしない。二人の疲れを確認して追加の展示をやめ、案内表示に従い正門へ向かう。カフェも座れない場合は帰路を優先する。",
           "evidenceIds": [
+            "ev-4"
+          ]
+        },
+        {
+          "trigger": "注文品が売り切れ、または掲載額から変更されている",
+          "action": "店頭で品目と総額を確認してから選び直す",
+          "how": "会計前ではなく注文前に2人合計を確認する。飲食は2人6,000円を上限とし、追加トッピングは付けない。希望の一皿一杯を上限内で選べない場合は無理に注文せず切り替える。",
+          "evidenceIds": [
+            "ev-8",
+            "ev-10"
+          ]
+        },
+        {
+          "trigger": "出発前に休業・臨時変更の公式告知が出ている",
+          "action": "出発を見送り、営業日を選び直す",
+          "how": "当日の営業告知を優先し、確認した予定表を根拠に休業日に入園・入店できるとは扱わない。予約済み・席確保済みではないため、変更時に無理に主案を実行しない。",
+          "evidenceIds": [
+            "ev-1",
+            "ev-3",
             "ev-6"
           ]
         }
-      ]
+      ],
+      "verification": {
+        "date": "2026-11-21",
+        "checks": [
+          {
+            "kind": "opening",
+            "status": "published",
+            "detail": "上野動物園は通常9:30〜17:00、カフェは土曜9:00〜21:00。対象日と主案の訪問時刻を照合し、両施設の営業予定内に行程を収めました。臨時変更時は公式告知を優先します。",
+            "evidenceIds": [
+              "ev-1",
+              "ev-3",
+              "ev-6"
+            ],
+            "stepIds": [
+              "arrive",
+              "tea"
+            ]
+          },
+          {
+            "kind": "prices",
+            "status": "published",
+            "detail": "1人に定番キャラメルナッツパンケーキ2枚1,900円と、単品ハーブティー1,030円。入園600円×2人を含めて掲載額の合計7,060円。セット割引・取り分け・追加注文を前提にしません。",
+            "evidenceIds": [
+              "ev-2",
+              "ev-8",
+              "ev-9",
+              "ev-10"
+            ],
+            "stepIds": [
+              "arrive",
+              "tea"
+            ]
+          },
+          {
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "公式で予約受付なしを確認しました。利用時は店頭で席と待ち時間を確認し、入店判断は13:20まで。20分を超えたら比較済みの切替先へ向かいます。",
+            "evidenceIds": [
+              "ev-7",
+              "ev-11"
+            ],
+            "stepIds": [
+              "reception",
+              "queue",
+              "tea"
+            ]
+          },
+          {
+            "kind": "comparison",
+            "status": "published",
+            "detail": "主案はパンケーキとハーブティーを楽しめるEVERYONEs CAFE。切替先は8:00〜21:00のスターバックス上野恩賜公園店。切替先はTallのみ・特定立地Bという条件を確認し、主案と同じ価格を当てはめません。",
+            "evidenceIds": [
+              "ev-8",
+              "ev-9",
+              "ev-6",
+              "ev-11",
+              "ev-12"
+            ],
+            "stepIds": [
+              "reception",
+              "queue"
+            ]
+          },
+          {
+            "kind": "rest",
+            "status": "published",
+            "detail": "12:00から20分、東園・サル山前のさるやまキッチン無料休憩所を使います。屋内・無料休憩所併設・営業10:00〜16:30を公式情報で確認しました。",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "stepIds": [
+              "to-rest",
+              "rest"
+            ]
+          }
+        ]
+      }
     },
     "visualArtifact": {
       "kind": "journey-map",
-      "title": "YOUR DAY｜しぐさから、お茶の香りへ",
-      "description": "2人の発見を持ち寄る5時間。ピンは施設代表点。",
+      "title": "動物園のあと、香るお茶と甘いひと息。",
+      "description": "公式資料を照合した大人2人の実行プラン。点線は訪問順で、実経路と移動時間は提案・見積です。",
+      "moments": [
+        {
+          "stepId": "arrive",
+          "kind": "arrival",
+          "title": "今日の楽しみを、二つ選ぶ",
+          "invitation": "園内図を開き、二人が気になる公開展示を一つずつ選ぼう。"
+        },
+        {
+          "stepId": "animals",
+          "kind": "experience",
+          "title": "しぐさの発見を持ち寄って",
+          "invitation": "どちらがたくさん見たかより、何に気付いたかを一つずつ話そう。"
+        },
+        {
+          "stepId": "to-rest",
+          "kind": "move",
+          "title": "サル山前へ、ひと息の準備",
+          "invitation": "写真を一枚選ぶつもりで、休憩所へ向かおう。"
+        },
+        {
+          "stepId": "rest",
+          "kind": "rest",
+          "title": "屋内で、今日の一枚を",
+          "invitation": "20分は次の行き先を増やさず、足を休めて写真を見せ合う時間に。"
+        },
+        {
+          "stepId": "exit",
+          "kind": "move",
+          "title": "午後のために、歩くペースを落とす",
+          "invitation": "気になった展示は次の楽しみに残し、正門へ向かおう。"
+        },
+        {
+          "stepId": "to-cafe",
+          "kind": "move",
+          "title": "香るお茶へ、公園を歩く",
+          "invitation": "午前の発見を一言ずつ振り返りながら、住所と案内表示で場所を確かめよう。"
+        },
+        {
+          "stepId": "reception",
+          "kind": "arrival",
+          "title": "待ち時間も、注文も先に確認",
+          "invitation": "二人の好きな香りと、ちょうどよい量を注文前に確かめよう。"
+        },
+        {
+          "stepId": "queue",
+          "kind": "arrival",
+          "title": "待つのはここまで、と決めておく",
+          "invitation": "20分という区切りを共有すると、待ち続ける不安を減らせる。"
+        },
+        {
+          "stepId": "tea",
+          "kind": "meal",
+          "title": "香りと甘さで、午前を振り返る",
+          "invitation": "まずは湯気の香りを。定番パンケーキは一人一皿、今日の一枚と一緒にゆっくり楽しもう。"
+        },
+        {
+          "stepId": "return",
+          "kind": "return",
+          "title": "次の楽しみを話しながら駅へ",
+          "invitation": "楽しかった瞬間と、次に行きたい場所を一つずつ話して帰ろう。"
+        }
+      ],
       "stops": [
         {
-          "id": "z",
+          "id": "zoo",
           "label": "上野動物園",
           "stepIds": [
-            "s0",
-            "s1",
-            "s2",
-            "s3"
+            "arrive",
+            "animals",
+            "to-rest",
+            "rest",
+            "exit"
           ],
-          "primaryStepId": "s1",
+          "primaryStepId": "animals",
           "evidenceIds": [
-            "ev-8"
+            "ev-1",
+            "ev-2",
+            "ev-4",
+            "ev-13",
+            "ev-14"
           ],
           "optional": false,
           "coordinates": {
             "lat": 35.7153426,
             "lon": 139.768896,
-            "evidenceId": "ev-9"
+            "evidenceId": "ev-14"
           },
           "experience": {
-            "headline": "動きを待つ楽しみ",
-            "why": "観察と休憩を確保する",
+            "headline": "動物のしぐさを、二人の発見に。",
+            "why": "午前は東園の公開展示から二つ選び、急がず観察。12時には屋内の無料休憩所で足を休めます。",
             "highlights": [
-              "当日公開の展示を2つ選ぶ",
-              "発見を一つ共有"
+              "各自が気付いた動きや形を一つ選んで話す",
+              "さるやまキッチンで20分休み、今日の一枚を見せ合う"
             ],
-            "photoPageId": "page-1",
+            "photoPageId": "page-6",
             "photoIndex": 0,
-            "photoCaption": "公式写真、当日公開保証なし",
-            "photoDescription": "屋外運動場のゴリラの群れ"
+            "photoCaption": "上野動物園公式の掲載写真。当日の展示・公開を保証するものではありません。",
+            "photoDescription": "木々のある屋外運動場で過ごすゴリラの群れ"
           }
         },
         {
-          "id": "c",
-          "label": "EVERYONEs CAFE",
+          "id": "cafe",
+          "label": "EVERYONEs CAFE 上野恩賜公園",
           "stepIds": [
-            "s4",
-            "s5",
-            "s6",
-            "s7"
+            "to-cafe",
+            "reception",
+            "queue",
+            "tea",
+            "return"
           ],
-          "primaryStepId": "s6",
+          "primaryStepId": "tea",
           "evidenceIds": [
-            "ev-3",
-            "ev-4",
-            "ev-10"
+            "ev-5",
+            "ev-6",
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-10",
+            "ev-15"
           ],
           "optional": false,
           "coordinates": {
             "lat": 35.7156757,
             "lon": 139.7747529,
-            "evidenceId": "ev-5"
+            "evidenceId": "ev-15"
           },
           "experience": {
-            "headline": "香りと甘味で振り返る",
-            "why": "80分のティータイムを主役に",
+            "headline": "ハーブの香りに、今日の一枚を添えて。",
+            "why": "午後は80分のティータイム。定番パンケーキを一人一皿、単品のホットハーブティーと楽しむ主案です。",
             "highlights": [
-              "ハーブティーを味わう",
-              "限定甘味は提供確認後に注文"
+              "湯気の香りを確かめてから、ゆっくりひと口",
+              "写真を一枚ずつ見せ合い、午前の発見を話す",
+              "待ち時間は20分で区切り、無理なら比較済みの店へ"
             ],
-            "photoPageId": "page-2",
-            "photoIndex": 0,
-            "photoCaption": "公式限定パンケーキ写真",
-            "photoDescription": "抹茶モンブランを重ねたパンケーキ"
+            "photoPageId": "page-4",
+            "photoIndex": 4,
+            "photoCaption": "公式のハーブティー参考写真。手前のホットティーを主案にし、奥のソーダは注文に含めていません。",
+            "photoDescription": "ハーブティーのカップとガラスポット、奥にハーブ入りソーダが並ぶ公式写真"
           }
-        }
-      ],
-      "moments": [
-        {
-          "stepId": "s0",
-          "kind": "arrival",
-          "title": "入園し公開中の展示を2つ選ぶ",
-          "invitation": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り"
-        },
-        {
-          "stepId": "s1",
-          "kind": "experience",
-          "title": "ゾウを軸に公開展示を徒歩で巡り、しぐさの発見を各自一つ共有",
-          "invitation": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り"
-        },
-        {
-          "stepId": "s2",
-          "kind": "rest",
-          "title": "利用可能な休憩場所で足を休め写真を1枚共有",
-          "invitation": "写真を見せ合い疲れ具合を確認"
-        },
-        {
-          "stepId": "s3",
-          "kind": "move",
-          "title": "通行可能な園路で退出",
-          "invitation": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り"
-        },
-        {
-          "stepId": "s4",
-          "kind": "move",
-          "title": "公園内案内と住所を確認して徒歩移動",
-          "invitation": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り"
-        },
-        {
-          "stepId": "s5",
-          "kind": "rest",
-          "title": "店頭で待ち時間確認、最大20分待機",
-          "invitation": "時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り"
-        },
-        {
-          "stepId": "s6",
-          "kind": "meal",
-          "title": "ハーブティー各1杯と甘味1皿共有、軽食を予算内で注文",
-          "invitation": "限定パンケーキの提供・共有可否を確認。飲物各1000円・軽食各1500円は見積枠。注文前に合計確認、香りと甘味の感想を話す"
-        },
-        {
-          "stepId": "s7",
-          "kind": "return",
-          "title": "徒歩で戻り15時解散",
-          "invitation": "今日一番の発見を共有しながら駅へ"
         }
       ]
     },
-    "summary": "## 推奨：動物園の後はEVERYONEs CAFE\n一般入園2人1200円と、掲載甘味・飲食見積を合わせ8900円。午後はハーブティーの香りと甘味を主役にします。[ev-1][ev-6][ev-10]\n対象日の臨時変更、限定甘味の提供と共有可否、飲物・軽食単価、空席は未確認です。\n\n## 具体的な実行手順（時刻・行動は提案）\n10:00 上野動物園正門 — 入園し公開中の展示を2つ選ぶ（20分の見積）。時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り 完了の目安：次の開始時刻までに完了。[ev-8][ev-2]\n10:20 東園 — ゾウを軸に公開展示を徒歩で巡り、しぐさの発見を各自一つ共有（100分の見積）。時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り 完了の目安：次の開始時刻までに完了。[ev-8][ev-2]\n12:00 園内 — 利用可能な休憩場所で足を休め写真を1枚共有（20分の見積）。時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り 完了の目安：次の開始時刻までに完了。[ev-8][ev-2]\n12:20 東園から正門 — 通行可能な園路で退出（25分の見積）。時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り 完了の目安：次の開始時刻までに完了。[ev-8][ev-2]\n12:45 正門からEVERYONEs CAFE — 公園内案内と住所を確認して徒歩移動（15分の見積）。時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り 完了の目安：次の開始時刻までに完了。[ev-3][ev-4]\n13:00 EVERYONEs CAFE — 店頭で待ち時間確認、最大20分待機（20分の見積）。時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り 完了の目安：次の開始時刻までに完了。[ev-3][ev-4]\n13:20 EVERYONEs CAFE — ハーブティー各1杯と甘味1皿共有、軽食を予算内で注文（80分の見積）。限定パンケーキの提供・共有可否を確認。飲物各1000円・軽食各1500円は見積枠。注文前に合計確認、香りと甘味の感想を話す 完了の目安：次の開始時刻までに完了。[ev-3][ev-4]\n14:40 カフェから上野駅公園口方面 — 徒歩で戻り15時解散（20分の見積）。時刻・徒歩時間は提案見積。掲示優先、疲れたら観察対象を減らす。待機は20分で打切り 完了の目安：15時に解散。[ev-3][ev-4]\n\n## 予算（主案・大人2人、甘味1皿共有・飲物と軽食各1品、交通費別・掲載料金と未確認の見積）\n| 内訳 | 人数・数量 | 単価 | 小計 | 区分 |\n| --- | ---: | ---: | ---: | --- |\n| 入園 | 2 | 600円 | 1,200円 | 掲載額[ev-1] |\n| パンケーキ共有希望 | 1 | 2,700円 | 2,700円 | 掲載額[ev-6] |\n| ハーブティー見積枠 | 2 | 1,000円 | 2,000円 | 未確認の見積 |\n| 軽食見積枠 | 2 | 1,500円 | 3,000円 | 未確認の見積 |\n合計8,900円。指定上限10,000円との差額1,100円。見積を含み、実際の支払額を保証しません。\n\n## 状況が変わった時の行動\n- 満席20分超・雨や寒さで待機困難 → 13:20までに退列。駅方面へ戻る。別店は未検証、店頭で営業・席・価格を確認できる場合のみ利用。カフェ希望未達の可能性を残す[ev-3]\n- 甘味終了・共有不可・予算超過 → 注文前に組替え。甘味2700円以内、飲物各1000円以内を優先し軽食を減らす。甘味がなければ飲物のみ。現地合計10000円を超える注文はしない[ev-6]",
-    "candidates": [],
+    "summary": "## 推奨：動物と香るお茶を楽しむ、上野の一日\n午前は動物園、12時は屋内で20分休憩。午後は一人一皿の定番パンケーキとホットハーブティーを、80分かけて楽しみます。[ev-4][ev-8][ev-9]\n主案は掲載額で2人7,060円。予約不可の当日受付という利用方式と、20分を超えて待たない切替手順まで確認しました。[ev-2][ev-7]\n\n## 具体的な実行手順（時刻・行動は提案）\n10:00 上野動物園・正門 — 入園し、公開中の展示を二つ選ぶ（20分の見積）。一般の入園券を1人1枚購入する。園内案内と当日の展示告知を見て、東園で見る二つの対象を友人と決める。 完了の目安：入園し、最初に向かう展示が二つ決まる。。[ev-1][ev-2]\n10:20 上野動物園・東園の公開展示 — 動物のしぐさを見つけて話す（95分の見積）。公開中の展示を二つ巡る。各自が気付いた動きや形を一つ選び、相手へ説明する。混雑する展示は10分を目安に次へ進む。 完了の目安：二人が一つずつ発見を話し、11:55に休憩所へ向かう。。[ev-1][ev-13]\n11:55 上野動物園・東園からサル山前 — さるやまキッチンへ移動する（5分の見積）。園内表示でサル山前の建物を確認して向かう。5分は見積で、通行止めがあれば園の案内表示を優先する。 完了の目安：さるやまキッチンの無料休憩所に着く。。[ev-4]\n12:00 上野動物園・東園サル山前、さるやまキッチン無料休憩所 — 屋内で足を休め、今日の一枚を選ぶ（20分の見積）。無料休憩所を利用して20分休む。写真を一枚ずつ選んで見せ合い、疲れに合わせて午後の歩き方を相談する。追加購入を休憩の前提にしない。 完了の目安：12:20まで休み、次の移動に無理がないか二人で確認する。。[ev-4]\n12:20 さるやまキッチンから上野動物園正門 — 案内に従って正門から退園する（20分の見積）。出口表示を確認して正門へ向かう。20分は見積。途中の展示を追加せず、午後のカフェのために歩くペースを落とす。 完了の目安：正門の外へ出る。。[ev-4][ev-1]\n12:40 上野動物園正門からEVERYONEs CAFE 上野恩賜公園 — 公園の案内でカフェへ歩く（15分の見積）。公式住所の上野公園8-4号を確認し、公園内の表示で店舗へ向かう。15分は経路未計測の見積で、道路に沿う実経路は地図リンクで確認する。 完了の目安：店舗の入口に着く。。[ev-5]\n12:55 EVERYONEs CAFE 上野恩賜公園・店頭 — 当日受付とメニューを確認する（5分の見積）。予約受付はないため、店頭で2人利用と待ち時間を確認する。キャラメルナッツ2枚とホットのハーブティーの掲載品・表示価格が当日も同じか確かめる。 完了の目安：待ち時間と注文品の表示価格が分かる。。[ev-7][ev-8][ev-9][ev-10]\n13:00 EVERYONEs CAFE 上野恩賜公園・案内された待機場所 — 入店待ちは20分で区切る（20分の見積）。13:20を入店判断の締切にする。寒さや雨で無理がある場合は待たず切り替える。早く入店できれば、その分は食事・会話へ回す。 完了の目安：13:20までに入店か切り替えかを二人で決める。。[ev-7][ev-6]\n13:20 EVERYONEs CAFE 上野恩賜公園 — パンケーキとハーブティーで、ゆっくり昼食（80分の見積）。1人ずつキャラメルナッツパンケーキ2枚と単品フレッシュハーブティー（ホット）を注文する。香りを確かめ、午前に選んだ写真を見せ合って80分過ごす。追加トッピング・追加注文をしない主案。 完了の目安：14:40までに食事・会話・会計を終える。。[ev-5][ev-6][ev-7][ev-8][ev-9][ev-10]\n14:40 EVERYONEs CAFEからJR上野駅公園口方面 — 駅へ戻り、15時に解散する（20分の見積）。JR上野駅の公園口方面へ案内を確認して戻る。20分は見積。歩きながら次に行ってみたい場所を一つずつ話す。 完了の目安：15:00までに駅方面へ戻り、二人で解散を確認する。。[ev-5]\n\n## 予算（主案・大人2人の現地入園と各1皿1杯。交通費・追加注文を除く。公式メニューの掲載額で計算。・掲載料金と未確認の見積）\n| 内訳 | 人数・数量 | 単価 | 小計 | 区分 |\n| --- | ---: | ---: | ---: | --- |\n| 上野動物園・一般入園 | 2 | 600円 | 1,200円 | 掲載額[ev-2] |\n| キャラメルナッツパンケーキ・2枚 | 2 | 1,900円 | 3,800円 | 掲載額[ev-8] |\n| フレッシュハーブティー（ホット）・単品 | 2 | 1,030円 | 2,060円 | 掲載額[ev-9][ev-10] |\n合計7,060円。指定上限10,000円との差額2,940円。見積を含み、実際の支払額を保証しません。\n\n## 状況が変わった時の行動\n- 13:20時点でも入店できない、または雨・寒さで待つのが難しい → スターバックス上野恩賜公園店へ切り替える。上野公園8-22の店舗へ向かう。徒歩5分は見積。Tallのみ・特定立地Bの店頭価格と席を確認し、2人3,000円を注文上限にする。入れない・上限内で選べない場合は無理に注文せず駅方面へ戻る。主案のパンケーキは注文しない。[ev-11][ev-12][ev-7]\n- 無料休憩所が混雑・閉鎖で利用できない → 観察を短縮し、早めに退園してカフェへ向かう。立って20分我慢する予定にはしない。二人の疲れを確認して追加の展示をやめ、案内表示に従い正門へ向かう。カフェも座れない場合は帰路を優先する。[ev-4]\n- 注文品が売り切れ、または掲載額から変更されている → 店頭で品目と総額を確認してから選び直す。会計前ではなく注文前に2人合計を確認する。飲食は2人6,000円を上限とし、追加トッピングは付けない。希望の一皿一杯を上限内で選べない場合は無理に注文せず切り替える。[ev-8][ev-10]\n- 出発前に休業・臨時変更の公式告知が出ている → 出発を見送り、営業日を選び直す。当日の営業告知を優先し、確認した予定表を根拠に休業日に入園・入店できるとは扱わない。予約済み・席確保済みではないため、変更時に無理に主案を実行しない。[ev-1][ev-3][ev-6]",
+    "candidates": [
+      {
+        "name": "上野動物園｜主案の午前",
+        "url": "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
+        "matches": [
+          {
+            "criterionId": "public-info",
+            "status": "supported",
+            "explanation": "通常9:30〜17:00、月曜休園。対象日は土曜で通常営業予定に沿う。公式カレンダーは臨時変更時の再確認も案内。",
+            "evidenceIds": [
+              "ev-1",
+              "ev-3"
+            ]
+          },
+          {
+            "criterionId": "admission",
+            "status": "supported",
+            "explanation": "大人一般600円、2人で1,200円。",
+            "evidenceIds": [
+              "ev-2"
+            ]
+          },
+          {
+            "criterionId": "order-price",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "rest",
+            "status": "supported",
+            "explanation": "東園・サル山前のさるやまキッチンに無料休憩所を併設。営業10:00〜16:30、12:00から20分休む主案。",
+            "evidenceIds": [
+              "ev-4"
+            ]
+          },
+          {
+            "criterionId": "seating-policy",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          }
+        ],
+        "score": 100,
+        "eligible": true
+      },
+      {
+        "name": "EVERYONEs CAFE｜主案の昼下がり",
+        "url": "https://shop.create-restaurants.co.jp/0941/",
+        "matches": [
+          {
+            "criterionId": "public-info",
+            "status": "supported",
+            "explanation": "上野公園8-4号。土曜9:00〜21:00、L.O.20:00。主案の13:20〜14:40は営業時間内。",
+            "evidenceIds": [
+              "ev-5",
+              "ev-6"
+            ]
+          },
+          {
+            "criterionId": "admission",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "order-price",
+            "status": "supported",
+            "explanation": "休日メニューのキャラメルナッツパンケーキ2枚1,900円、単品フレッシュハーブティー（ホット）1,030円を各1人分。共有やセット割引に依存しない。",
+            "evidenceIds": [
+              "ev-8",
+              "ev-9",
+              "ev-10"
+            ]
+          },
+          {
+            "criterionId": "rest",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "seating-policy",
+            "status": "supported",
+            "explanation": "公式に予約・貸切を受け付けないと記載。当日受付で利用し、席は到着時に判断する。",
+            "evidenceIds": [
+              "ev-7"
+            ]
+          }
+        ],
+        "score": 100,
+        "eligible": true
+      },
+      {
+        "name": "スターバックス上野恩賜公園店｜満席時の切替先",
+        "url": "https://store.starbucks.co.jp/detail-1087/",
+        "matches": [
+          {
+            "criterionId": "public-info",
+            "status": "supported",
+            "explanation": "上野公園8-22、8:00〜21:00、不定休。Tallのみ・特定立地価格B。主案の注文セットは転用せず、切替時に店頭価格と席を確認して2人3,000円以内で注文する。",
+            "evidenceIds": [
+              "ev-11",
+              "ev-12"
+            ]
+          },
+          {
+            "criterionId": "admission",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "order-price",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "rest",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "seating-policy",
+            "status": "unknown",
+            "explanation": "別の役割を持つ候補のため対象外。",
+            "evidenceIds": []
+          }
+        ],
+        "score": 100,
+        "eligible": true
+      }
+    ],
     "limitations": [
-      "候補比較は空配列。調査済みの2施設を組み合わせた主案を保存する。",
-      "公開HTMLの情報。対象日の臨時変更・展示・空席はunknown、前日に公式告知再確認。",
-      "限定甘味の提供終了日と共有可否はunknown。飲物・軽食は未取得単価の見積枠で平均予算を転用していない。",
-      "現地集合解散、交通費別。徒歩時間は見積。地図は代表点で入口経路未確認。Google共有地図未取得。写真は当日公開・提供保証ではない。"
+      "対象日は公式の営業予定に基づきます。臨時変更・当日の提供・席の利用は当日の案内が優先です。予約や未来の空席の確約を行ったものではありません。",
+      "主案の7,060円は公式掲載額に基づく現地入園・各1皿1杯の計画額です。交通費・追加注文は含めず、注文前に店頭の総額を確認します。",
+      "切替先の特定立地B価格は主案へ転用していません。切替時は2人3,000円を注文上限にして、席と価格を確認してから利用します。",
+      "地図の座標は施設の代表点。点線は訪問順で、道路に沿う経路・入口位置・移動時間の確定を意味しません。"
     ]
   },
   "answerPhotos": {
-    "z": {
+    "zoo": {
       "file": "a51d38172bb3279875d263b552574b5d134de0d8e366b0a590de863451404509.jpg",
-      "pageId": "page-1",
+      "pageId": "page-6",
       "imageIndex": 0,
       "sourceUrl": "https://www.tokyo-zoo.net/image/MV_ueno_pc.jpg",
       "type": "image/jpeg",
-      "capturedAt": "2026-11-16T09:33:44.847Z"
+      "capturedAt": "2026-11-16T11:02:10.466Z"
     },
-    "c": {
-      "file": "5a5c6219bcc1c68b5af28a4cfe8fca45bef6843ef52df731ffe70152aa26b7fe.jpg",
-      "pageId": "page-2",
-      "imageIndex": 0,
-      "sourceUrl": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/09/2_%EF%BE%8A%EF%BE%9F%EF%BE%9D%EF%BD%B9%EF%BD%B0%EF%BD%B7_%E6%8A%B9%E8%8C%B6%EF%BE%93%EF%BE%9D%EF%BE%8C%EF%BE%9E%EF%BE%97%EF%BE%9D2608-e1789723568716.jpg",
+    "cafe": {
+      "file": "32fdf2fbfb557d144f6200682bdfc2106a9bb277ca81dcdbf1acc2406ebb865a.jpg",
+      "pageId": "page-4",
+      "imageIndex": 4,
+      "sourceUrl": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2022/11/photo%E7%94%A8%E2%91%A8-e1669605786559.jpg",
       "type": "image/jpeg",
-      "capturedAt": "2026-11-16T09:33:44.848Z"
+      "capturedAt": "2026-11-16T11:02:10.466Z"
     }
   },
   "photoInspections": [
     {
-      "pageId": "page-1",
+      "pageId": "page-6",
       "imageIndex": 0,
       "file": "a51d38172bb3279875d263b552574b5d134de0d8e366b0a590de863451404509.jpg",
       "sourceUrl": "https://www.tokyo-zoo.net/image/MV_ueno_pc.jpg",
       "type": "image/jpeg",
-      "shownAt": "2026-11-16T09:28:50.135Z"
+      "shownAt": "2026-11-16T11:02:10.048Z"
     },
     {
-      "pageId": "page-2",
-      "imageIndex": 0,
-      "file": "5a5c6219bcc1c68b5af28a4cfe8fca45bef6843ef52df731ffe70152aa26b7fe.jpg",
-      "sourceUrl": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2026/09/2_%EF%BE%8A%EF%BE%9F%EF%BE%9D%EF%BD%B9%EF%BD%B0%EF%BD%B7_%E6%8A%B9%E8%8C%B6%EF%BE%93%EF%BE%9D%EF%BE%8C%EF%BE%9E%EF%BE%97%EF%BE%9D2608-e1789723568716.jpg",
+      "pageId": "page-4",
+      "imageIndex": 4,
+      "file": "32fdf2fbfb557d144f6200682bdfc2106a9bb277ca81dcdbf1acc2406ebb865a.jpg",
+      "sourceUrl": "https://shop.create-restaurants.co.jp/0941/wp-content/uploads/sites/70/2022/11/photo%E7%94%A8%E2%91%A8-e1669605786559.jpg",
       "type": "image/jpeg",
-      "shownAt": "2026-11-16T09:28:50.239Z"
+      "shownAt": "2026-11-16T11:02:10.454Z"
     }
   ],
+  "authorship": {
+    "mode": "source-grounded-final-edit",
+    "editor": "Codex",
+    "sourceTaskId": "dc915f8d-f8c5-4817-837a-92317d582ee3",
+    "sourceCollectionModel": "gpt-6.1-sol",
+    "note": "自動生成は完了しなかった。実取得した公式資料を照合し、本編集セッションで行程・候補比較を完成してホスト品質ゲートで再検査した。未実施の無人生成成功や重み学習を意味しない。"
+  },
   "evaluation": {
     "mode": "frozen-replay",
-    "caseId": "cafe-real-output",
-    "fixtureSha256": "a20007cf6ee6e853a81f2ae9b270316808783134203c9dbbb68d7a386e369bef"
+    "caseId": "cafe-source-grounded-final-edit",
+    "fixtureSha256": "335781540df2a56a20c0f4224d214f792c8cc05d0d4f9726663dc59f4d1f927c"
   },
-  "snapshotNote": "Actual model output; source pages reduced to title and captured quotations for portable display replay. No inference or new research during replay."
+  "snapshotNote": "公式資料を実取得したruntimeタスクから、Codexが資料照合・最終編集した回答。無人モデル生成の成功例ではない。原文は引用のみ残した表示再生用スナップショット。"
 }
