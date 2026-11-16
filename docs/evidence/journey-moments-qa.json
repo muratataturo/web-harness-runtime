@@ -1,0 +1,61 @@
+{
+  "scope": "saved real model outputs, deterministic transport; human appeal unrated",
+  "cases": [
+    {
+      "name": "ueno",
+      "file": "docs/generated-answer.html",
+      "readyMs": 123,
+      "widths": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "checks": [
+        "all fixed steps preserved",
+        "rest and move invitations",
+        "reviewed photos decoded",
+        "practical details",
+        "map selection link"
+      ],
+      "steps": 11,
+      "moments": 11
+    },
+    {
+      "name": "asakusa",
+      "file": "docs/asakusa-day.html",
+      "readyMs": 107,
+      "widths": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "checks": [
+        "all fixed steps preserved",
+        "rest and move invitations",
+        "reviewed photos decoded",
+        "practical details",
+        "map selection link"
+      ],
+      "steps": 10,
+      "moments": 10
+    },
+    {
+      "name": "life",
+      "file": "docs/life-roadmap-actual.html",
+      "readyMs": 87,
+      "widths": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "checks": [
+        "actual generated life roadmap",
+        "milestone selection"
+      ]
+    }
+  ],
+  "passed": true
+}

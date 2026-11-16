@@ -5,6 +5,8 @@ import { renderAnswerHtml } from "../dist/answer-html.js";
 for (const [name, output] of [
   ["travel", "generated-answer"],
   ["roadmap", "life-roadmap"],
+  ["asakusa", "asakusa-day"],
+  ["life-actual", "life-roadmap-actual"],
 ]) {
   const task = JSON.parse(
     await readFile(`examples/visual-${name}-answer.json`, "utf8"),
@@ -21,4 +23,6 @@ for (const [name, output] of [
   }
   await writeFile(`docs/${output}.html`, renderAnswerHtml(task));
 }
-console.log("Replayed reviewed travel answer and synthetic roadmap example");
+console.log(
+  "Replayed three real model outputs and the explicitly synthetic roadmap example",
+);

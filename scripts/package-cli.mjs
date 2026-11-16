@@ -44,6 +44,7 @@ for (const required of [
   "dist/answer-plan.js",
   "dist/provenance.js",
   "dist/answer-html.js",
+  "dist/journey-story.js",
   "dist/answer-media.js",
   "dist/map-embed.js",
   "dist/visual-artifact.js",

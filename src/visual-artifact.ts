@@ -14,6 +14,27 @@ export const visualArtifactSchema = Type.Union([
       kind: Type.Literal("journey-map"),
       title: Type.String({ minLength: 1, maxLength: 64 }),
       description: Type.String({ minLength: 1, maxLength: 180 }),
+      moments: Type.Optional(
+        Type.Array(
+          Type.Object(
+            {
+              stepId: id,
+              kind: Type.Union([
+                Type.Literal("arrival"),
+                Type.Literal("move"),
+                Type.Literal("experience"),
+                Type.Literal("meal"),
+                Type.Literal("rest"),
+                Type.Literal("return"),
+              ]),
+              title: Type.String({ minLength: 1, maxLength: 48 }),
+              invitation: Type.String({ minLength: 1, maxLength: 180 }),
+            },
+            { additionalProperties: false },
+          ),
+          { minItems: 1, maxItems: 16 },
+        ),
+      ),
       stops: Type.Array(
         Type.Object(
           {
@@ -129,6 +150,19 @@ export function validateVisualArtifact(
   };
   if (artifact.kind === "journey-map") {
     unique(artifact.stops.map((s) => s.id));
+    if (artifact.moments) {
+      unique(artifact.moments.map((m) => m.stepId));
+      if (
+        !plan ||
+        artifact.moments.length !== plan.steps.length ||
+        plan.steps.some(
+          (s) => !artifact.moments!.some((m) => m.stepId === s.id),
+        )
+      )
+        throw Error(
+          "行程の場面は移動・休憩を含む全手順に一対一で対応させてください",
+        );
+    }
     for (const s of artifact.stops) {
       if (
         !s.stepIds.length ||
@@ -262,6 +296,10 @@ export function assessVisualArtifact(task: Task, answer: Answer) {
         "地図に配置できる出典付き座標が2地点未満です。未配置のまま部分回答に残すか追加調査してください",
       );
     if (answer.visualArtifact.kind === "journey-map") {
+      if (!answer.visualArtifact.moments)
+        issues.push(
+          "移動・休憩を含む全手順のmoments（stepId/kind/title/invitation）が必要です。移動や休憩にも具体的な楽しみ方・過ごし方を提案してください",
+        );
       const experiences = answer.visualArtifact.stops.filter(
         (s) => s.experience,
       );

@@ -9,3 +9,12 @@
 | d867c758 | https://www.kahaku.go.jp/tenji/index.html | 生物史展示のクマ標本 |
 
 実際の画像URL・保存ハッシュ・モデル確認記録は `../evidence/travel-story-generation.json` を参照。
+
+追加ケース（浅草・押上）:
+
+| ファイルの先頭 | 掲載元 | 写真 |
+| --- | --- | --- |
+| 87209501 | https://www.maruka.net/ | 天ざるの掲載写真 |
+| e9a524f4 | https://sumida-aquarium.com/about/floor/ | 水草と魚の水槽の掲載写真 |
+
+追加ケースの画像URL・確認記録は `../evidence/journey-moments-generation.json` に保存しています。
