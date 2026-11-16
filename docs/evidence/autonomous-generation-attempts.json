@@ -1,0 +1,36 @@
+{
+  "scope": "different runtime revisions; debugging attempts, not a success-rate sample",
+  "answerUnedited": true,
+  "answerSha256": "6dab35bce029eab88cd1a0f49568d41437b5ed9e9840feb77ec2fd3f8af72dfa",
+  "attempts": [
+    {
+      "startedAt": "2026-11-16T23:15:54.972Z",
+      "taskId": "f3519196-82cc-4f40-b9b0-310fc1ef77e2",
+      "status": "partial",
+      "passed": false,
+      "answerEdited": false,
+      "steps": 51,
+      "elapsedMs": 273353,
+      "failure": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'partial'\n- 'succeeded'\n"
+    },
+    {
+      "startedAt": "2026-11-16T23:20:52.810Z",
+      "taskId": "6635b2fc-846c-4869-b605-e92522fb0dc8",
+      "status": "partial",
+      "passed": false,
+      "answerEdited": false,
+      "steps": 78,
+      "elapsedMs": 438316,
+      "failure": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'partial'\n- 'succeeded'\n"
+    },
+    {
+      "startedAt": "2026-11-16T23:28:26.537Z",
+      "taskId": "18f6646a-03e1-47c8-b4e4-6db7ffb2a362",
+      "status": "succeeded",
+      "passed": true,
+      "answerEdited": false,
+      "steps": 74,
+      "elapsedMs": 385332
+    }
+  ]
+}

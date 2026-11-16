@@ -47,6 +47,7 @@ for (const required of [
   "dist/proposals.js",
   "dist/criteria.js",
   "dist/pdf-reader.js",
+  "dist/finalization.js",
   "dist/itinerary-verification-html.js",
   "web/pdf-reader-worker.js",
   "dist/discovery-html.js",

@@ -1,4 +1,6 @@
+import { inspectPdfPage } from "./pdf-reader.js";
 import { UxFeedbackStore } from "./ux-feedback.js";
+import { finalizationState, continuationPrompt } from "./finalization.js";
 import { CAFE_GUIDANCE } from "./cafe.js";
 import { criterionSchema, uncoveredCriteria } from "./criteria.js";
 import { captureSocial } from "./social.js";
@@ -197,8 +199,8 @@ export async function runTask(
   }
   const instructions =
     SYSTEM_PROMPT +
-    "\n旅行はstage_planでactionPlan、stage_visualでvisualArtifactを先に提出してからfinish_taskで候補比較と結論を確定できる。finish_taskで省略してもstageした行程・写真は保持される。plan_taskの各条件には、役割が異なる施設へ条件を誤適用しないためappliesToに対象の個別URL配列を指定できる。対象外の条件はunknown・根拠なし・explanationは対象外とし、適用条件の確認率だけを集計する。必須条件を持つ対象候補そのものは省略できない。正式版を求められた旅程ではverification.dateとchecksをactionPlanに作る。checksのkindはopening/prices/seating/comparison/restを全て含め、detail/evidenceIds/stepIds、statusはpublished。ただしseatingだけarrival-checkとし、公式の予約・利用方法と満席時の判断を示す。空席あり・予約完了を作文しない。価格はPDFもopen_pageで読み、具体的な商品と税込掲載単価だけで主案を作る。休憩は公式に確認できる施設名と位置を示す。" +
-    "\n" +
+    "\n旅行はstage_planでactionPlan、stage_visualでvisualArtifactを先に提出してからfinish_taskで候補比較と結論を確定できる。finish_taskで省略してもstageした行程・写真は保持される。plan_taskの各条件には、役割が異なる施設へ条件を誤適用しないためappliesToに対象の個別URL配列を指定できる。対象外の条件はunknown・根拠なし・explanationは対象外とし、適用条件の確認率だけを集計する。必須条件を持つ対象候補そのものは省略できない。正式版を求められた旅程ではverification.dateとchecksをactionPlanに作る。checksのkindはopening/prices/seating/comparison/restを全て含め、detail/evidenceIds/stepIds、statusはpublished。ただしseatingだけarrival-checkとし、公式の予約・利用方法と満席時の判断を示す。空席あり・予約完了を作文しない。価格はPDFもopen_pageで読み、具体的な商品と資料の掲載単価だけで主案を作る。休憩は公式に確認できる施設名と位置を示す。" +
+    "\n作業は取得→引用保存→行程→視覚→比較の順で小さく確定する。各主要ページを読んだ直後にrecord_evidenceを呼び、全ページ取得後まで引用保存を延期しない。read_task_stateで保存状態・直近エラー・次工程を確認できる。同じentityKeyの施設案内と休憩所ページは1候補にまとめる。主案の購入価格と、代替店の店頭確認付き支出上限は別の条件で扱う。代替店に主案の商品価格条件を課さない。税区分の明記がなければ掲載額と税区分未記載を示し、税込と補わない。PDF本文の後半はread_pageのterms/offsetで読む。カレンダーの色・価格の配置はinspect_pdf_pageで実画像を確認する。色を見ずに休園日と断定しない。季節品の価格対応が不明なら明確な定番を選び、取得済みの事実を全てunknownへ戻して放棄しない。\n" +
     CAFE_GUIDANCE +
     "\n複数案の比較ではvisualArtifact.proposalSet.optionsに3案を作る。各案はid/theme(discovery|relax|photo)/anchorId/title/activity/deliverable/benefit/difference/tradeoff/mechanism(compare|focus|capture)/minutes/evidenceIds。themeとmechanismは3件それぞれ別にする。旅程はstepIdで元の地点の活動枠に結び付け、minutesを枠内にする。見出しの言い換えだけにせず、具体的な行動と残る成果を変える。追加費用・移動を勝手に足さない。人の魅力度を採点したと主張しない。" +
     (task.uxLearningContext
@@ -241,6 +243,7 @@ export async function runTask(
   let claude: ClaudeAgent | undefined;
   let opencode: OpenCodeAgent | undefined;
   let cleanupWarning: string | undefined;
+  let lastToolError: string | undefined;
   const progress = (m: string) => options.onProgress?.(m);
   const redact = (s: string) =>
     process.env.OPENROUTER_API_KEY
@@ -286,7 +289,11 @@ export async function runTask(
     details: {},
   });
   const wrap =
-    (name: string, fn: (p: any) => Promise<unknown> | unknown) =>
+    (
+      name: string,
+      fn: (p: any) => Promise<unknown> | unknown,
+      nativeContent = false,
+    ) =>
     async (_id: string, p: any) => {
       controller.signal.throwIfAborted();
       if (task.answer)
@@ -309,6 +316,7 @@ export async function runTask(
             (result as any)?.quality?.shouldStop ? "error" : "done",
             p,
           );
+        if (nativeContent) return result as ReturnType<typeof output>;
         return output({
           result,
           remainingSteps: task.limits.maxSteps - task.steps,
@@ -321,6 +329,7 @@ export async function runTask(
       } catch (e) {
         controller.signal.throwIfAborted();
         const error = redact(e instanceof Error ? e.message : String(e));
+        lastToolError = `${name}: ${error}`;
         await store.event(task.id, "tool_error", { tool: name, error });
         activity(name, "error", p);
         return { ...output({ error }), isError: true };
@@ -498,7 +507,26 @@ export async function runTask(
   let geoLookups = 0;
   let stagedPlan: ActionPlan | undefined;
   let stagedVisual: VisualArtifact | undefined;
+  const requireScopes =
+    !options.benchmark &&
+    !options.improvement &&
+    specificityContract(task.query).mode === "itinerary" &&
+    new Set(
+      task.urls
+        .map(entityKey)
+        .filter((key) => key && !key.startsWith("generic:")),
+    ).size > 1;
   const tools: ToolDefinition[] = [
+    defineTool({
+      name: "read_task_state",
+      label: "Read finalization checkpoint",
+      description:
+        "保存済み引用・対象の同一性・行程と視覚草案・不足工程・直近エラーを確認する。回答や根拠を補完せず作業状態だけを返す。",
+      parameters: Type.Object({}),
+      execute: wrap("read_task_state", () =>
+        finalizationState(task, stagedPlan, stagedVisual, lastToolError),
+      ),
+    }),
     defineTool({
       name: "read_social",
       label: "Read public social evidence",
@@ -520,17 +548,27 @@ export async function runTask(
         pageId: Type.String(),
         imageIndex: Type.Integer({ minimum: 0, maximum: 7 }),
       }),
-      execute: async (_id, p) => {
-        await step("inspect_photo", p);
-        const result = await inspectAnswerPhoto(
-          task,
-          dir,
-          p.pageId,
-          p.imageIndex,
-        );
-        await store.save(task);
-        return result;
-      },
+      execute: wrap(
+        "inspect_photo",
+        (p) => inspectAnswerPhoto(task, dir, p.pageId, p.imageIndex),
+        true,
+      ),
+    }),
+    defineTool({
+      name: "inspect_pdf_page",
+      label: "Inspect captured PDF page",
+      description:
+        "open_pageで取得済みのPDFの1ページを実画像で確認する。カレンダーの色分けやメニューの価格配置に使う。再通信なし、各生成最大8回。見た内容は本文引用と区別し、未来の営業や席を保証しない。",
+      parameters: Type.Object({
+        pageId: Type.String(),
+        pageNumber: Type.Integer({ minimum: 1, maximum: 20 }),
+      }),
+      execute: wrap(
+        "inspect_pdf_page",
+        (p) =>
+          inspectPdfPage(task, dir, p.pageId, p.pageNumber, controller.signal),
+        true,
+      ),
     }),
     defineTool({
       name: "locate_place",
@@ -588,9 +626,12 @@ export async function runTask(
       name: "plan_task",
       label: "Plan",
       description:
-        "調査前に評価条件を定義する。駅近などの曖昧条件は説明に暫定基準を書く。",
+        "調査前に施設本文で照合する評価条件を定義する。複数施設の旅程は全条件のappliesToに対象URLを指定。時間枠・人数・合計予算・写真・全体行程はactionPlanとvisualArtifactのホスト検査で扱い、各施設が証明できない全体行程を候補の必須条件にしない。根拠収集後は変更不可。駅近などの曖昧条件は説明に暫定基準を書く。",
       parameters: Type.Object({
-        criteria: Type.Array(criterionSchema, { minItems: 1, maxItems: 12 }),
+        criteria: Type.Array(
+          requireScopes ? Type.Required(criterionSchema) : criterionSchema,
+          { minItems: 1, maxItems: 12 },
+        ),
       }),
       execute: wrap("plan_task", (p) => {
         if (options.improvement || options.benchmark) {
@@ -606,6 +647,10 @@ export async function runTask(
           return task.criteria;
         }
         const criteria = pinRequiredCriteria(task.query, p.criteria);
+        if (requireScopes && criteria.some((c) => !c.appliesTo?.length))
+          throw Error(
+            "複数施設の旅程は全条件にappliesToの対象URLが必要です。主案の価格条件を代替店へ課さず、全体行程の条件はactionPlanで検査してください。まだ評価条件は保存していません",
+          );
         if (JSON.stringify(task.criteria) === JSON.stringify(criteria))
           return task.criteria;
         setCriteria(task, criteria);
@@ -684,6 +729,12 @@ export async function runTask(
         return {
           staged: true,
           steps: p.actionPlan.steps.length,
+          specificity: assessSpecificity(task, {
+            summary: "",
+            candidates: [],
+            limitations: [],
+            actionPlan: stagedPlan,
+          }),
           next: "写真をinspect_photoで確認しstage_visualで視覚成果物を保存してから、finish_taskへ要約・全候補の比較・制約を提出してください",
         };
       }),
@@ -700,6 +751,13 @@ export async function runTask(
         stagedVisual = structuredClone(p.visualArtifact);
         return {
           staged: true,
+          visualReview: assessVisualArtifact(task, {
+            summary: "",
+            candidates: [],
+            limitations: [],
+            actionPlan: stagedPlan,
+            visualArtifact: stagedVisual,
+          }),
           next: "finish_taskに要約・candidates・limitationsを提出してください。actionPlanとvisualArtifactは省略しても保持されます。候補比較を省略してはいけません",
         };
       }),
@@ -915,6 +973,47 @@ export async function runTask(
     const inspect = tools.findIndex((t) => t.name === "inspect_page");
     if (inspect >= 0) tools.splice(inspect, 1);
   }
+  // Retry unfinished turns with the actual checkpoint, bounded by all original limits.
+  // Two consecutive turns without durable progress stop the loop (not a success).
+  const continueFinalization = async (
+    prompt: (text: string) => Promise<void>,
+  ) => {
+    let stalled = 0;
+    const signature = () =>
+      JSON.stringify([
+        task.criteria,
+        task.pages.map((p) => p.id),
+        task.evidence,
+        stagedPlan,
+        stagedVisual,
+      ]);
+    for (
+      let attempt = 1;
+      attempt <= 3 && !task.answer && !exhausted;
+      attempt++
+    ) {
+      controller.signal.throwIfAborted();
+      if (task.limits.maxSteps - task.steps < 2) break;
+      const before = signature();
+      const checkpoint = finalizationState(
+        task,
+        stagedPlan,
+        stagedVisual,
+        lastToolError,
+      );
+      await store.event(task.id, "finalization_continuation", {
+        attempt,
+        pending: checkpoint.pending,
+        lastError: checkpoint.lastError,
+      });
+      progress(
+        `最終化の再開 ${attempt}/3: ${checkpoint.pending[0] ?? "保存を確認"}`,
+      );
+      await prompt(continuationPrompt(checkpoint));
+      stalled = signature() === before ? stalled + 1 : 0;
+      if (stalled >= 2) break;
+    }
+  };
   const resources: ResourceLoader = {
     getExtensions: () => ({
       extensions: [],
@@ -971,13 +1070,16 @@ export async function runTask(
           sources: task.sources,
           limits: task.limits,
           instruction:
-            "条件を検証してfinish_taskで日本語回答を保存してください。",
+            "条件を検証してfinish_taskで日本語回答を保存してください。まず各取得ページで引用を保存し、stage_planとstage_visualで検査・修正した後に比較結果を確定してください。",
         }),
+        specificityContract(task.query).mode === "facts" ? "low" : "medium",
       );
-      if (!task.answer && !exhausted)
-        await codex.prompt(
-          "回答が保存されていません。調査済みの根拠でfinish_taskを呼んでください。未確認はunknown、候補なしも許可されます。",
-        );
+      await continueFinalization((text) =>
+        codex!.prompt(
+          text,
+          specificityContract(task.query).mode === "facts" ? "low" : "medium",
+        ),
+      );
       controller.signal.throwIfAborted();
       if (!task.answer)
         throw new Error("Codexが構造化回答を確定しませんでした");
@@ -1006,13 +1108,7 @@ export async function runTask(
           limits: task.limits,
         }),
       );
-      if (!task.answer && !exhausted)
-        await claude.prompt(
-          JSON.stringify({
-            instruction: "調査済みの根拠でfinish_taskを呼んでください。",
-            task,
-          }),
-        );
+      await continueFinalization((text) => claude!.prompt(text));
       controller.signal.throwIfAborted();
       if (!task.answer)
         throw new Error("Claude Codeが構造化回答を確定しませんでした");
@@ -1038,14 +1134,7 @@ export async function runTask(
           limits: task.limits,
         }),
       );
-      if (!task.answer && !exhausted)
-        await opencode.prompt(
-          JSON.stringify({
-            instruction:
-              "取得した引用でfinish_taskを呼び、未確認はunknownにしてください",
-            task,
-          }),
-        );
+      await continueFinalization((text) => opencode!.prompt(text));
       controller.signal.throwIfAborted();
       if (!task.answer)
         throw new Error("OpenCodeが構造化回答を確定しませんでした");
@@ -1160,10 +1249,7 @@ export async function runTask(
         .filter(Boolean)
         .at(-1);
       if (!task.answer && firstError) throw new Error(firstError);
-      if (!task.answer && !exhausted)
-        await session.prompt(
-          "まだ構造化回答が保存されていません。調査済みの根拠を使って finish_task を呼んでください。未確認はunknown、候補なしも許可されます。",
-        );
+      await continueFinalization((text) => session!.prompt(text));
       controller.signal.throwIfAborted();
       if (!task.answer) {
         const errorMessage = session.messages

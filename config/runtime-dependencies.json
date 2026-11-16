@@ -62,5 +62,9 @@
   "unpdf": {
     "version": "1.6.2",
     "integrity": "sha512-zQ80ySoPuPHOsvIoRp/nJyQt8TOUoTh1+WBCGcBvlddQNgKDLRwm0AY3x8Q35I7+kIiRSgqMx+Ma2pl9McIp7A=="
+  },
+  "@napi-rs/canvas": {
+    "version": "0.1.100",
+    "integrity": "sha512-xglYA6q3XO5P3BNJYxVZ1IV7DLVjp1Py6nwag88YntrS+3vKHyYcMqXVS4ZztJmwz2uGvz1FWhI/4LgbR5uQDA=="
   }
 }

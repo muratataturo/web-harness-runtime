@@ -509,7 +509,9 @@ test("model exit after a visual rejection preserves the validated partial draft 
           (await tools.find((t) => t.name === name).execute(name, args))
             .content[0].text,
         ).result;
-      if (!calls++) {
+      // The model exits without submitting another answer on continuation turns.
+      if (calls++) return;
+      {
         await call("plan_task", { criteria: seed.criteria });
         await call("open_page", { url });
         await call("record_evidence", {

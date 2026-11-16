@@ -3,7 +3,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { publicTarget } from "./net-policy.js";
 export { privateAddress } from "./net-policy.js";
 import { readPublicHtml, prefersPublicHtml } from "./html-reader.js";
@@ -47,6 +47,12 @@ export class Browser {
     private headed = false,
   ) {
     this.config = join(dir, "browser-config.json");
+  }
+  private async savePdf(bytes: Buffer, hash: string) {
+    await mkdir(join(this.dir, "pdf-assets"), { recursive: true, mode: 0o700 });
+    await writeFile(join(this.dir, "pdf-assets", hash + ".pdf"), bytes, {
+      mode: 0o600,
+    });
   }
   async init() {
     await writeFile(this.config, "{}", { mode: 0o600 });
@@ -136,6 +142,7 @@ export class Browser {
         checkResearchNavigation(url, this.hosts),
         this.hosts,
         this.signal,
+        { savePdf: (bytes, hash) => this.savePdf(bytes, hash) },
       );
       const page: Page = { ...extracted, id: `page-${++this.count}` };
       this.htmlPage = page;
@@ -143,7 +150,9 @@ export class Browser {
     }
     if (prefersPublicHtml(url) && !options.render) {
       try {
-        const extracted = await readPublicHtml(url, this.hosts, this.signal);
+        const extracted = await readPublicHtml(url, this.hosts, this.signal, {
+          savePdf: (bytes, hash) => this.savePdf(bytes, hash),
+        });
         const quality = assessPage(extracted);
         if (quality.shouldStop || extracted.text.length >= 150) {
           const page: Page = { ...extracted, id: `page-${++this.count}` };
