@@ -20,17 +20,32 @@ import { createWorkbenchServer } from "../dist/server.js";
 import { GoalEngine, GoalRepository } from "../dist/goals.js";
 import { acceptanceRevision } from "./chat-acceptance.mjs";
 import { diagnose } from "../dist/improvement.js";
+import { itineraryCases } from "./itinerary-cases.mjs";
 const args = process.argv.slice(2);
-if (args.length !== 1 || args[0] !== "--live")
-  throw Error(
-    "Use --live: this command invokes the logged-in model and public sources",
-  );
-const root = resolve(".runtime/autonomous-itinerary");
+if (
+  args[0] !== "--live" ||
+  ![1, 3].includes(args.length) ||
+  (args.length === 3 && args[1] !== "--case")
+)
+  throw Error("Use --live [--case ueno|hamamatsu|nagoya]");
+const selected = itineraryCases[args[2] ?? "ueno"];
+if (!selected) throw Error("Unknown itinerary case");
+const output = `docs/${selected.output}.html`;
+const root = resolve(
+  selected.id === "ueno"
+    ? ".runtime/autonomous-itinerary"
+    : `.runtime/regional-itinerary/${selected.id}`,
+);
 const attempt = join(root, new Date().toISOString().replace(/[:.]/g, "-"));
 await mkdir(attempt, { recursive: true, mode: 0o700 });
 const revision = await acceptanceRevision();
 const receipt = {
   runtimeRevision: revision,
+  caseId: selected.id,
+  label: selected.label,
+  inputSha256: createHash("sha256")
+    .update(JSON.stringify({ query: selected.query, urls: selected.urls }))
+    .digest("hex"),
   version: 1,
   mode: "live-unattended",
   startedAt: new Date().toISOString(),
@@ -48,16 +63,8 @@ const task = await runTask(
     agent: "codex",
     model: process.env.ITINERARY_MODEL ?? "gpt-6.1-sol",
     interactionMode: "auto",
-    query:
-      "2026年11月21日（土）に大人2人で上野を10:00〜15:00、一日遊ぶカフェ旅行を正式な実行プランにしてください。現地の入園・飲食は2人合計10000円以内で交通費は除きます。主案は上野動物園とEVERYONEs CAFE。カフェでは80分ほど過ごし、各自1皿の甘味と1杯の飲物を注文して軽い昼食にします。共有や未確認のセット割に依存せず、定番の掲載商品価格から予算を作ってください。営業時間、対象日の開園予定、主案の価格、カフェの利用方式、候補比較、休憩所の名称・所在地・時間を公式資料で確認し、写真付きの体験と地図をHTMLで見られる回答にしてください。休憩20分、徒歩移動、入店待ちも独立した手順にし、時間の重複と10分を超える空白を作らないでください。満席で20分待っても入れない場合はスターバックス上野恩賜公園店へ切り替える手順を含めてください。代替店の商品単価が未掲載なら店頭で確認して2人3000円以内で注文する条件付き代替案にし、主案の掲載価格とは分けて比較してください。未来の空席や予約完了は断定せず、公式の利用方式を確認した上で席だけを当日判断とします。税区分が書かれていない資料は掲載額と税区分未記載を明示してください。写真は実画像を確認し、注文品の写真がなければ同じ店舗の外観や店内を使えます。SNS調査は不要です。",
-    urls: [
-      "https://www.tokyo-zoo.net/ueno/visitor-info/tickets/",
-      "https://www.tokyo-zoo.net/ueno/shops/foodshop/index.html",
-      "https://www.tokyo-zoo.net/file/calendar_2026_ueno.pdf",
-      "https://shop.create-restaurants.co.jp/0941/",
-      "https://store.starbucks.co.jp/detail-1087/",
-      "https://nominatim.openstreetmap.org/",
-    ],
+    query: selected.query,
+    urls: selected.urls,
     maxSteps: 200,
     maxPages: 24,
     timeoutSeconds: 1200,
@@ -217,21 +224,16 @@ try {
   }));
   snapshot.evaluation = {
     mode: "frozen-replay",
-    caseId: "autonomous-cafe-e2e-display",
+    caseId: `${selected.id}-e2e-display`,
     fixtureSha256: createHash("sha256")
       .update(JSON.stringify(snapshot.pages))
       .digest("hex"),
   };
-  snapshot.snapshotNote =
-    "無人の実モデル出力を変更せず保存。原文は引用のみ残した表示再生用スナップショット。ライブ生成の検証はautonomous-itinerary-e2e.jsonを参照。";
-  await copyAnswerMedia(
-    task,
-    store.dir(task.id),
-    "docs/autonomous-cafe-day.html",
-  );
-  await exportPortableAnswer(snapshot, "docs/autonomous-cafe-day.html");
+  snapshot.snapshotNote = `無人の実モデル出力を変更せず保存。原文は引用のみ残した表示再生用スナップショット。ライブ生成の検証は${selected.receipt}.jsonを参照。`;
+  await copyAnswerMedia(task, store.dir(task.id), output);
+  await exportPortableAnswer(snapshot, output);
   await writeFile(
-    "examples/visual-autonomous-cafe-answer.json",
+    `examples/${selected.snapshot}.json`,
     JSON.stringify(snapshot, null, 2) + "\n",
   );
 } catch (error) {
@@ -266,7 +268,7 @@ if (receipt.passed) {
   const publicReceipt = structuredClone(receipt);
   delete publicReceipt.store;
   await writeFile(
-    "docs/evidence/autonomous-itinerary-e2e.json",
+    `docs/evidence/${selected.receipt}.json`,
     JSON.stringify(publicReceipt, null, 2) + "\n",
   );
 }

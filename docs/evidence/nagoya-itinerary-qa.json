@@ -1,0 +1,46 @@
+{
+  "scope": "unedited live model output; offline display replay; live success is recorded separately",
+  "taskId": "1605ad51-85d2-4531-8976-20dac6f1e634",
+  "humanResponses": 0,
+  "factualComplete": false,
+  "originalTaskStatus": "partial",
+  "cases": [
+    {
+      "width": 320,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 2,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/nagoya/qa/cafe-320.png"
+    },
+    {
+      "width": 390,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 2,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/nagoya/qa/cafe-390.png"
+    },
+    {
+      "width": 768,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 2,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/nagoya/qa/cafe-768.png"
+    },
+    {
+      "width": 1280,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 2,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/nagoya/qa/cafe-1280.png"
+    }
+  ],
+  "passed": true
+}

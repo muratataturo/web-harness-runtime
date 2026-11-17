@@ -31,6 +31,9 @@ try {
     "docs/comparison-life.html",
     "docs/cafe-day.html",
     "docs/autonomous-cafe-day.html",
+    "docs/hamamatsu-day.html",
+    "docs/nagoya-day.html",
+    "docs/regional-cases.html",
   ])
     for (const scheme of ["light", "dark"])
       for (const width of [390, 1280]) {
@@ -41,7 +44,8 @@ try {
         });
         await page.route(/^https?:/, (r) => r.abort());
         await page.goto(pathToFileURL(resolve(file)).href);
-        await page.locator("[data-artifact-kind]").waitFor();
+        if (file !== "docs/regional-cases.html")
+          await page.locator("[data-artifact-kind]").waitFor();
         await page
           .locator("details")
           .evaluateAll((items) => items.forEach((e) => (e.open = true)));

@@ -252,6 +252,90 @@
       "width": 1280,
       "inspected": 826,
       "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-day.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 737,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-day.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 766,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-day.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 737,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-day.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 766,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-day.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 743,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-day.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 771,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-day.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 743,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-day.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 771,
+      "failures": []
+    },
+    {
+      "file": "docs/regional-cases.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 52,
+      "failures": []
+    },
+    {
+      "file": "docs/regional-cases.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 52,
+      "failures": []
+    },
+    {
+      "file": "docs/regional-cases.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 52,
+      "failures": []
+    },
+    {
+      "file": "docs/regional-cases.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 52,
+      "failures": []
     }
   ],
   "passed": true

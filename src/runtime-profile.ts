@@ -209,6 +209,7 @@ export function createResearchProfile(
       "official-dining",
       "official-cafe",
       "official-coffee",
+      "official-public-space",
     ].includes(s);
   const rakuten = (s: string) => s.startsWith("rakuten-");
   if (

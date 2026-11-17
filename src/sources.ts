@@ -1,3 +1,9 @@
+import {
+  regionalVisitHosts,
+  regionalCafeHosts,
+  regionalSpaceHosts,
+  regionalVenue,
+} from "./regional-venues.js";
 import { isIP } from "node:net";
 import type { Source } from "./types.js";
 export const cafeTerms =
@@ -42,6 +48,7 @@ export const adapters: Adapter[] = [
   {
     id: "official-visit",
     hosts: [
+      ...regionalVisitHosts,
       "www.tokyo-zoo.net",
       "www.kahaku.go.jp",
       "www.tokyo-park.or.jp",
@@ -55,10 +62,17 @@ export const adapters: Adapter[] = [
   },
   {
     id: "official-cafe",
-    hosts: ["shop.create-restaurants.co.jp"],
+    hosts: ["shop.create-restaurants.co.jp", ...regionalCafeHosts],
     keywords: /カフェ|喫茶|珈琲|コーヒー|旅行|遊び|日帰り|caf[eé]|coffee/i,
     guidance:
-      "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。",
+      "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。",
+  },
+  {
+    id: "official-public-space",
+    hosts: regionalSpaceHosts,
+    keywords: /休憩|公園|広場|庭園|旅行|遊び/,
+    guidance:
+      "公式の利用条件・所在地・利用時間を確認する。無料の屋外広場と有料ホール・展望施設を混同せず、席・ベンチの利用可否は当日判断。登録済みの屋外広場の案内だけを個別対象とする。",
   },
   {
     id: "official-coffee",
@@ -272,6 +286,8 @@ export function checkNavigation(value: string, hosts: string[]): string {
 /** Stable entity identity for known providers; list pages intentionally return undefined. */
 export function entityKey(value: string): string | undefined {
   const url = new URL(value);
+  const regional = regionalVenue(url.href);
+  if (regional) return regional;
   const adapter = adapters.find((a) => a.hosts.includes(url.hostname));
   if (!adapter) return `generic:${url.href}`;
   let id: string | undefined;

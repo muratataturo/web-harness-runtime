@@ -13,6 +13,8 @@ for (const [name, output] of [
   ["comparison-life", "comparison-life"],
   ["cafe", "cafe-day"],
   ["autonomous-cafe", "autonomous-cafe-day"],
+  ["hamamatsu", "hamamatsu-day"],
+  ["nagoya", "nagoya-day"],
 ]) {
   const task = JSON.parse(
     await readFile(`examples/visual-${name}-answer.json`, "utf8"),
@@ -27,10 +29,10 @@ for (const [name, output] of [
     )
       throw Error("Photo integrity failed");
   }
-  if (name === "autonomous-cafe")
+  if (["autonomous-cafe", "hamamatsu", "nagoya"].includes(name))
     await exportPortableAnswer(task, `docs/${output}.html`);
   else await writeFile(`docs/${output}.html`, renderAnswerHtml(task));
 }
 console.log(
-  "Replayed seven model outputs, one source-grounded final edit, and one synthetic roadmap example",
+  "Replayed nine model outputs, one source-grounded final edit, and one synthetic roadmap example",
 );
