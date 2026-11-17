@@ -1,3 +1,8 @@
+import {
+  regionalVisitHosts,
+  regionalCafeHosts,
+  regionalSpaceHosts,
+} from "./regional-venues.js";
 import { createHash } from "node:crypto";
 import { sharedMapEmbed } from "./map-embed.js";
 import { extractPdf } from "./pdf-reader.js";
@@ -11,6 +16,9 @@ import { checkResearchNavigation, securityMode } from "./runtime-profile.js";
 const MAX_BYTES = 4 * 1024 * 1024;
 export const prefersPublicHtml = (value: string) =>
   [
+    ...regionalVisitHosts,
+    ...regionalCafeHosts,
+    ...regionalSpaceHosts,
     "www.tokyo-zoo.net",
     "www.kahaku.go.jp",
     "www.tokyo-park.or.jp",

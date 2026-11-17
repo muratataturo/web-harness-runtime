@@ -40,6 +40,8 @@ jobs:
       - run: npm run test:chat:runtime
       - run: npm run eval:visual
       - run: node scripts/eval-autonomous-itinerary.mjs
+      - run: node scripts/eval-autonomous-itinerary.mjs --case hamamatsu
+      - run: node scripts/eval-autonomous-itinerary.mjs --case nagoya
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -53,3 +55,6 @@ jobs:
             .runtime/proposal-comparison/qa
             .runtime/cafe-itinerary/qa
             .runtime/autonomous-itinerary/qa
+            .runtime/regional-itinerary/hamamatsu/qa
+            .runtime/regional-itinerary/nagoya/qa
+            .runtime/regional-itinerary/gallery-qa

@@ -1,0 +1,46 @@
+{
+  "scope": "unedited live model output; offline display replay; live success is recorded separately",
+  "taskId": "6cbd1027-861c-442f-bee3-5335c15b623e",
+  "humanResponses": 0,
+  "factualComplete": false,
+  "originalTaskStatus": "partial",
+  "cases": [
+    {
+      "width": 320,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 3,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/hamamatsu/qa/cafe-320.png"
+    },
+    {
+      "width": 390,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 3,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/hamamatsu/qa/cafe-390.png"
+    },
+    {
+      "width": 768,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 3,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/hamamatsu/qa/cafe-768.png"
+    },
+    {
+      "width": 1280,
+      "scheme": "dark",
+      "cafePhotoDecoded": true,
+      "photosDecoded": 3,
+      "allStepsVisible": true,
+      "noHorizontalOverflow": true,
+      "screenshot": ".runtime/regional-itinerary/hamamatsu/qa/cafe-1280.png"
+    }
+  ],
+  "passed": true
+}

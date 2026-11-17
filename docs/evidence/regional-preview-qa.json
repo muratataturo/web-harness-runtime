@@ -1,0 +1,129 @@
+{
+  "scope": "live HTTP display of saved unedited partial answers plus gallery; not a successful factual-completion test",
+  "checkedAt": "2026-11-17T17:31:59.457Z",
+  "answers": [
+    {
+      "caseId": "hamamatsu",
+      "taskId": "6cbd1027-861c-442f-bee3-5335c15b623e",
+      "status": "partial",
+      "width": 320,
+      "httpStatus": 200,
+      "photosDecoded": 3,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    },
+    {
+      "caseId": "hamamatsu",
+      "taskId": "6cbd1027-861c-442f-bee3-5335c15b623e",
+      "status": "partial",
+      "width": 390,
+      "httpStatus": 200,
+      "photosDecoded": 3,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    },
+    {
+      "caseId": "hamamatsu",
+      "taskId": "6cbd1027-861c-442f-bee3-5335c15b623e",
+      "status": "partial",
+      "width": 768,
+      "httpStatus": 200,
+      "photosDecoded": 3,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    },
+    {
+      "caseId": "hamamatsu",
+      "taskId": "6cbd1027-861c-442f-bee3-5335c15b623e",
+      "status": "partial",
+      "width": 1280,
+      "httpStatus": 200,
+      "photosDecoded": 3,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    },
+    {
+      "caseId": "nagoya",
+      "taskId": "1605ad51-85d2-4531-8976-20dac6f1e634",
+      "status": "partial",
+      "width": 320,
+      "httpStatus": 200,
+      "photosDecoded": 2,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    },
+    {
+      "caseId": "nagoya",
+      "taskId": "1605ad51-85d2-4531-8976-20dac6f1e634",
+      "status": "partial",
+      "width": 390,
+      "httpStatus": 200,
+      "photosDecoded": 2,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    },
+    {
+      "caseId": "nagoya",
+      "taskId": "1605ad51-85d2-4531-8976-20dac6f1e634",
+      "status": "partial",
+      "width": 768,
+      "httpStatus": 200,
+      "photosDecoded": 2,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    },
+    {
+      "caseId": "nagoya",
+      "taskId": "1605ad51-85d2-4531-8976-20dac6f1e634",
+      "status": "partial",
+      "width": 1280,
+      "httpStatus": 200,
+      "photosDecoded": 2,
+      "photoToMapSelection": true,
+      "noPageErrors": true,
+      "noHorizontalOverflow": true,
+      "formalBadgeAbsent": true
+    }
+  ],
+  "gallery": [
+    {
+      "width": 320,
+      "photosDecoded": 2,
+      "noHorizontalOverflow": true,
+      "answerLinks": 2
+    },
+    {
+      "width": 390,
+      "photosDecoded": 2,
+      "noHorizontalOverflow": true,
+      "answerLinks": 2
+    },
+    {
+      "width": 768,
+      "photosDecoded": 2,
+      "noHorizontalOverflow": true,
+      "answerLinks": 2
+    },
+    {
+      "width": 1280,
+      "photosDecoded": 2,
+      "noHorizontalOverflow": true,
+      "answerLinks": 2
+    }
+  ],
+  "displayPassed": true
+}

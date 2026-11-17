@@ -1,0 +1,1750 @@
+{
+  "security": {
+    "profileId": "public-research",
+    "profileVersion": 1,
+    "mode": "hardened",
+    "policyHash": "e0b9c69682876bcced42f2b32f8ed495d9b013aca0fbd7630dd0333a140a5cdf"
+  },
+  "interactionMode": "auto",
+  "execution": {
+    "target": "local",
+    "isolation": "host-process"
+  },
+  "id": "1605ad51-85d2-4531-8976-20dac6f1e634",
+  "agent": "codex",
+  "query": "2026年11月21日（土）に大人2人で愛知県名古屋市を10:00〜15:00、一日遊ぶカフェ旅行を正式な実行プランにしてください。地下鉄伏見駅から始めて同じエリアで終え、徒歩中心です。現地の入館・飲食は2人合計10000円以内で交通費は除きます。主案はFUJIなごや科学館（名古屋市科学館）の展示室のみ。プラネタリウムや有料特別展は主案に含めないとFUJIなごや科学館カフェレストラン。カフェでは昼食と飲物と甘味を楽しむ80分程度を確保し、各自1皿の食事・飲物1杯・甘味1品を選んでください。セットで飲物が含まれるなら重複加算せず、公式に条件が明記された掲載額を使います。営業時間、対象日の開館予定、主案の商品価格と税・サービス料、利用方式、候補比較、休憩所の具体的な場所と利用時間を公式で確認してください。休憩20分、徒歩移動、入店待ちも独立した手順にして、時刻重複と10分を超える空白を残さない。満席20分で未入店ならスターバックス名古屋伏見ATビル店へ切り替える具体手順を示し、代替店の単価が未掲載なら店頭で2人3000円以内を確認して注文する条件付き代替とし、主案の掲載価格と分けます。季節品・営業時間の古い記事・別店舗・テイクアウト価格を混同しない。現在公開されている公式情報に基づいて調査する。写真は実画像を確認し、同じ施設の外観・店内も使えます。地図と写真付き体験、移動・休憩の過ごし方をHTMLで見られる構造化回答にしてください。未来の空席・当日提供・予約完了を断定せず、席は当日判断。予約・購入・問い合わせは実行しません。SNS調査は不要です。",
+  "urls": [
+    "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+    "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/facilities.html",
+    "https://www.ncsm.city.nagoya.jp/",
+    "https://www.nomura-medias.co.jp/shop_list/1083/",
+    "https://www.nomura-medias.co.jp/works/228/",
+    "https://www.nomura-medias.co.jp/news/774/",
+    "https://store.starbucks.co.jp/detail-533/",
+    "https://nominatim.openstreetmap.org/"
+  ],
+  "status": "partial",
+  "createdAt": "2026-11-17T00:47:44.075Z",
+  "updatedAt": "2026-11-17T00:53:55.514Z",
+  "sources": [
+    {
+      "id": "source-4",
+      "kind": "official-cafe",
+      "url": "https://www.nomura-medias.co.jp/shop_list/1083/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-5",
+      "kind": "official-cafe",
+      "url": "https://www.nomura-medias.co.jp/works/228/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-6",
+      "kind": "official-cafe",
+      "url": "https://www.nomura-medias.co.jp/news/774/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-7",
+      "kind": "official-coffee",
+      "url": "https://store.starbucks.co.jp/detail-533/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の営業時間・住所・特定立地価格・サイズ制限を確認する。/detail-数字/が個別店。価格適用店の違いを無視して全国標準価格を代用しない。座席や商品在庫は確約しない。"
+    },
+    {
+      "id": "source-1",
+      "kind": "official-visit",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+      "score": 1,
+      "reason": "別分野の候補。必要な場合だけ参照",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-2",
+      "kind": "official-visit",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/facilities.html",
+      "score": 1,
+      "reason": "別分野の候補。必要な場合だけ参照",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-3",
+      "kind": "official-visit",
+      "url": "https://www.ncsm.city.nagoya.jp/",
+      "score": 1,
+      "reason": "別分野の候補。必要な場合だけ参照",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-8",
+      "kind": "generic",
+      "url": "https://nominatim.openstreetmap.org/",
+      "score": 0,
+      "reason": "汎用サイト。内容を読んで適合性を確認",
+      "guidance": "ページを読んで対象分野と検索方法を確認し、候補の詳細ページで条件を検証する。"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "museum",
+      "description": "展示室のみの大人料金・利用時間・伏見駅からのアクセス",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html"
+      ]
+    },
+    {
+      "id": "date",
+      "description": "2026年11月21日の開館予定を公式カレンダーで確認",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html"
+      ]
+    },
+    {
+      "id": "rest",
+      "description": "休憩所の具体的位置と利用時間",
+      "required": true,
+      "weight": 4,
+      "appliesTo": [
+        "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html"
+      ]
+    },
+    {
+      "id": "cafe",
+      "description": "対象店の住所・現行営業時間・利用方式",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.nomura-medias.co.jp/shop_list/1083/"
+      ]
+    },
+    {
+      "id": "menu",
+      "description": "各自食事1皿・飲物1杯・甘味1品の掲載単価、セット条件、税・サービス料",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.nomura-medias.co.jp/shop_list/1083/"
+      ]
+    },
+    {
+      "id": "alt",
+      "description": "名古屋伏見ATビル店の住所・営業時間・価格条件を確認し条件付き代替とする",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://store.starbucks.co.jp/detail-533/"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://www.nomura-medias.co.jp/shop_list/1083/",
+      "title": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.nomura-medias.co.jp/og-image.png",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe1.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe2.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe3.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe4.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe5.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe6.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        }
+      ],
+      "text": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス\n\n愛知県名古屋市中区栄2-17-1\nＦＵＪＩなごや科学館 1階\n\n営業時間\n9:30～17:00\n※ラストオーダー ［フード］16:30 ［ドリンク］16:45\n\nＦＵＪＩなごや科学館 カフェレストラン",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:47:58.973Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-1"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/works/228/",
+      "title": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.nomura-medias.co.jp/og-image.png",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/228-mv.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/228-sub-1.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/228-sub-2.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/228-sub-3.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/228-sub-4.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/228-sub-5.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/228-sub-6.jpg",
+          "alt": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス"
+        }
+      ],
+      "text": "ＦＵＪＩなごや科学館 カフェレストラン ｜ノムラメディアス\n\n※カフェレストランは科学館の観覧券がなくてもご利用いただけます。\n※営業日は、科学館の開館日に準じます。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:48:06.342Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-2"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | 開館時間・観覧料",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | 開館時間・観覧料\n\n展示室とプラネタリウム\n展示室のみ\n一般\n1,000円\n500円\n\n開館\n午前9時30分\n閉館\n午後5時00分 (※入館は午後4時30分までとなります。)\n\n観覧当日、エントランスホールの窓口において、現金・クレジットカード・電子マネー・コード決済でお支払いください。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:48:13.418Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-3"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/news/774/",
+      "title": "「名古屋市科学館 ミュージアムショップ」「名古屋市科学館 カフェレストラン」がオープン！ ｜ノムラメディアス",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.nomura-medias.co.jp/og-image.png",
+          "alt": "「名古屋市科学館 ミュージアムショップ」「名古屋市科学館 カフェレストラン」がオープン！ ｜ノムラメディアス"
+        },
+        {
+          "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E7%A7%91%E5%AD%A6%E9%A4%A8-%E3%83%9F%E3%83%A5%E3%83%BC%E3%82%B8%E3%82%A2%E3%83%A0%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97.jpg",
+          "alt": "「名古屋市科学館 ミュージアムショップ」「名古屋市科学館 カフェレストラン」がオープン！ ｜ノムラメディアス"
+        }
+      ],
+      "text": "「名古屋市科学館 ミュージアムショップ」「名古屋市科学館 カフェレストラン」がオープン！ ｜ノムラメディアス\n\n名古屋市科学館カフェレストラン_MENU（2026年3月現在）.pdf",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:48:21.407Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-4"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "title": "774.pdf",
+      "text": "774.pdf\n\n溶岩流チーズハンバーグ\nLava-Flow Cheese Hamburg Steak\n¥990\n\n価格は全て税込みです。\n\nコーヒー （HOT／ICE）\nカフェオレ （HOT／ICE）\n抹茶オレ （HOT／ICE）\nCoffee (Hot or Ice)\nCafe au lait (Hot or Ice)\nMaccha au lait (Hot or Ice)\n¥420\n\n惑星ストロベリー\nドーナツ\nPlanet Strawberry\nDonuts   ¥400",
+      "pdf": {
+        "sha256": "2b038c6e51f3854bec3f3b3e7f5131094230cad39d15b9fa289eb656d7718342",
+        "pages": 1
+      },
+      "truncated": false,
+      "links": [],
+      "capturedAt": "2026-11-17T00:48:28.530Z",
+      "acquisition": {
+        "kind": "public-pdf",
+        "status": 200,
+        "contentType": "application/pdf"
+      },
+      "id": "page-5"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/facilities.html",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | 館内施設について",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floorb2_fuji.gif",
+          "alt": "B2F"
+        },
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floor01.gif",
+          "alt": "1F"
+        },
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floor02.gif",
+          "alt": "2F"
+        },
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floor03.gif",
+          "alt": "3F"
+        },
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floor04.gif",
+          "alt": "4F"
+        },
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floor05.gif",
+          "alt": "5F"
+        },
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floor06.gif",
+          "alt": "6F"
+        },
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/floor_images/floor07.gif",
+          "alt": "7F"
+        }
+      ],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | 館内施設について\n\n館内から直接行くことはできません。\n理工館1階エントランスホールからいったん外に出てお越しください。\n再入館される場合は、観覧券を提示して科学館へお入りください。\n\n休憩室\n生命館１階 １７０席\n理工館３階 ８４席\n理工館７階 ９６席",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:48:29.097Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-6"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/calender.html",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | 開館日カレンダー",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | 開館日カレンダー\n\n20\n金曜日\n休館日\n21\n土曜日\n-\n-\n22\n日曜日",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:49:07.313Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-7"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/",
+      "title": "ＦＵＪＩなごや科学館",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ＦＵＪＩなごや科学館\n\n11月11日（水）以降通常開館について",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:49:14.152Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-8"
+    },
+    {
+      "url": "https://store.starbucks.co.jp/detail-533/",
+      "title": "スターバックス コーヒー 名古屋 伏見 ＡＴビル店｜スターバックス コーヒー ジャパン",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://d3vgbguy0yofad.cloudfront.net/images/og/store-search.jpg",
+          "alt": "スターバックス コーヒー 名古屋 伏見 ＡＴビル店｜スターバックス コーヒー ジャパン"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/smart_cards.png",
+          "alt": "交通系電子マネー取り扱い"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/pay_pay.png",
+          "alt": "PayPay"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/d_pay.png",
+          "alt": "D払い"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/r_pay.png",
+          "alt": "楽天ペイ"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/au_pay.png",
+          "alt": "auPay"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/alipay.png",
+          "alt": "Alipay"
+        },
+        {
+          "url": "https://store.starbucks.co.jp/asset/202611130555-0720ab/images/mobile_payment/wechatpay.png",
+          "alt": "WeChat Pay"
+        }
+      ],
+      "text": "スターバックス コーヒー 名古屋 伏見 ＡＴビル店｜スターバックス コーヒー ジャパン\n\n名古屋 伏見 ＡＴビル店\n460-8633 愛知県 名古屋市中区 錦1-18-22 名古屋ATビル\n\n土：07:30～22:00\n\n特定立地価格 B適用店舗です。\n\nGeoCoordinates latitude=35.1682540786 longitude=136.894540195",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:49:23.364Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-9"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/information/2026/11101111.html",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | お知らせ| <span style=\"color: #ff0000;\"><b>11月11日（水）以降通常開館について</b></span>",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | お知らせ| <span style=\"color: #ff0000;\"><b>11月11日（水）以降通常開館について</b></span>\n\n11月11日（水）以降は通常通り開館いたします。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:49:32.617Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-10"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/event_calendarR8_20261101.pdf",
+      "title": "event_calendarR8_20261101.pdf",
+      "text": "event_calendarR8_20261101.pdf\n\n11月21日   土曜日   ものづくり",
+      "pdf": {
+        "sha256": "2801feddb63f90b8c86664435c47229653fda01c54fe81082979edd321eda23f",
+        "pages": 4
+      },
+      "truncated": false,
+      "links": [],
+      "capturedAt": "2026-11-17T00:49:34.750Z",
+      "acquisition": {
+        "kind": "public-pdf",
+        "status": 200,
+        "contentType": "application/pdf"
+      },
+      "id": "page-11"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/faq/",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | よくある質問",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | よくある質問\n\n休憩室の予約はとれますか？",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:49:43.259Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-12"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/faq/post_20.html",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | よくある質問 | 休憩室の予約はとれますか？",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 利用案内 | よくある質問 | 休憩室の予約はとれますか？\n\n予約を受け付けることはできません。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:49:54.095Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-13"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/access.html",
+      "title": "交通アクセス｜ＦＵＪＩなごや科学館",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "交通アクセス｜ＦＵＪＩなごや科学館\n\n地下鉄東山線・鶴舞線 「伏見」駅下車、4・5番出口 から南へ徒歩5分",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:49:54.556Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-14"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "title": "774.pdf",
+      "text": "774.pdf\n\n価格は全て税込みです。",
+      "pdf": {
+        "sha256": "2b038c6e51f3854bec3f3b3e7f5131094230cad39d15b9fa289eb656d7718342",
+        "pages": 1
+      },
+      "truncated": false,
+      "links": [],
+      "capturedAt": "2026-11-17T00:50:12.336Z",
+      "acquisition": {
+        "kind": "public-pdf",
+        "status": 200,
+        "contentType": "application/pdf"
+      },
+      "id": "page-15"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 展示ガイド | 展示フロアマップ",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/images/floor_top_fuji.jpg",
+          "alt": "展示フロアマップ"
+        }
+      ],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 展示ガイド | 展示フロアマップ\n\n5階 宇宙のすがた\n4階 サイエンスステージ\n\n4階 科学原理とのふれあい",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:50:13.452Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-16"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/life_1f.html",
+      "title": "ＦＵＪＩなごや科学館 | 科学館を利用する | 展示ガイド | 生命館1F：休憩室",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/images/life_1f.jpg",
+          "alt": "生命館 １階 休憩所"
+        }
+      ],
+      "text": "ＦＵＪＩなごや科学館 | 科学館を利用する | 展示ガイド | 生命館1F：休憩室\n\n席数は170席です。飲みものの自動販売機も設置されています。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-17T00:50:25.017Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-17"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E7%A7%91%E5%AD%A6%E9%A4%A8+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%8C%BA%E6%A0%842-17-1&format=jsonv2&limit=3",
+      "title": "名古屋市科学館 名古屋市中区栄2-17-1 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "名古屋市科学館 名古屋市中区栄2-17-1 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "links": [],
+      "capturedAt": "2026-11-17T00:50:26.122Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-1"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E7%A7%91%E5%AD%A6%E9%A4%A8+%E5%90%8D%E5%8F%A4%E5%B1%8B&format=jsonv2&limit=3",
+      "title": "名古屋市科学館 名古屋 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "名古屋市科学館 名古屋 — OpenStreetMap地理検索（施設代表点・入口未確認）\n\n\"lat\":\"35.1648931\",\"lon\":\"136.8997007\"",
+      "links": [],
+      "capturedAt": "2026-11-17T00:50:37.174Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-2"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/dl/ncsm_map01_fuji.pdf",
+      "title": "ncsm_map01_fuji.pdf",
+      "text": "ncsm_map01_fuji.pdf",
+      "pdf": {
+        "sha256": "a5a4e11bd6f32a864f143f3c3bb5bcb046063dbf7cb59ab19d7424d226e26a9d",
+        "pages": 1
+      },
+      "truncated": false,
+      "links": [],
+      "capturedAt": "2026-11-17T00:50:46.852Z",
+      "acquisition": {
+        "kind": "public-pdf",
+        "status": 200,
+        "contentType": "application/pdf"
+      },
+      "id": "page-18"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-1",
+      "pageId": "page-1",
+      "url": "https://www.nomura-medias.co.jp/shop_list/1083/",
+      "quote": "愛知県名古屋市中区栄2-17-1\nＦＵＪＩなごや科学館 1階",
+      "capturedAt": "2026-11-17T00:47:58.973Z"
+    },
+    {
+      "id": "ev-2",
+      "pageId": "page-1",
+      "url": "https://www.nomura-medias.co.jp/shop_list/1083/",
+      "quote": "営業時間\n9:30～17:00\n※ラストオーダー ［フード］16:30 ［ドリンク］16:45",
+      "capturedAt": "2026-11-17T00:47:58.973Z"
+    },
+    {
+      "id": "ev-3",
+      "pageId": "page-1",
+      "url": "https://www.nomura-medias.co.jp/shop_list/1083/",
+      "quote": "ＦＵＪＩなごや科学館 カフェレストラン",
+      "capturedAt": "2026-11-17T00:47:58.973Z"
+    },
+    {
+      "id": "ev-4",
+      "pageId": "page-2",
+      "url": "https://www.nomura-medias.co.jp/works/228/",
+      "quote": "※カフェレストランは科学館の観覧券がなくてもご利用いただけます。\n※営業日は、科学館の開館日に準じます。",
+      "capturedAt": "2026-11-17T00:48:06.342Z"
+    },
+    {
+      "id": "ev-5",
+      "pageId": "page-3",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+      "quote": "展示室とプラネタリウム\n展示室のみ\n一般\n1,000円\n500円",
+      "capturedAt": "2026-11-17T00:48:13.418Z"
+    },
+    {
+      "id": "ev-6",
+      "pageId": "page-3",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+      "quote": "開館\n午前9時30分\n閉館\n午後5時00分 (※入館は午後4時30分までとなります。)",
+      "capturedAt": "2026-11-17T00:48:13.418Z"
+    },
+    {
+      "id": "ev-7",
+      "pageId": "page-3",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+      "quote": "観覧当日、エントランスホールの窓口において、現金・クレジットカード・電子マネー・コード決済でお支払いください。",
+      "capturedAt": "2026-11-17T00:48:13.418Z"
+    },
+    {
+      "id": "ev-8",
+      "pageId": "page-4",
+      "url": "https://www.nomura-medias.co.jp/news/774/",
+      "quote": "名古屋市科学館カフェレストラン_MENU（2026年3月現在）.pdf",
+      "capturedAt": "2026-11-17T00:48:21.407Z"
+    },
+    {
+      "id": "ev-9",
+      "pageId": "page-5",
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "quote": "溶岩流チーズハンバーグ\nLava-Flow Cheese Hamburg Steak\n¥990",
+      "capturedAt": "2026-11-17T00:48:28.530Z"
+    },
+    {
+      "id": "ev-10",
+      "pageId": "page-5",
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "quote": "価格は全て税込みです。",
+      "capturedAt": "2026-11-17T00:48:28.530Z"
+    },
+    {
+      "id": "ev-11",
+      "pageId": "page-6",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/facilities.html",
+      "quote": "館内から直接行くことはできません。\n理工館1階エントランスホールからいったん外に出てお越しください。\n再入館される場合は、観覧券を提示して科学館へお入りください。",
+      "capturedAt": "2026-11-17T00:48:29.097Z"
+    },
+    {
+      "id": "ev-12",
+      "pageId": "page-6",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/facilities.html",
+      "quote": "休憩室\n生命館１階 １７０席\n理工館３階 ８４席\n理工館７階 ９６席",
+      "capturedAt": "2026-11-17T00:48:29.097Z"
+    },
+    {
+      "id": "ev-13",
+      "pageId": "page-5",
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "quote": "コーヒー （HOT／ICE）\nカフェオレ （HOT／ICE）\n抹茶オレ （HOT／ICE）\nCoffee (Hot or Ice)\nCafe au lait (Hot or Ice)\nMaccha au lait (Hot or Ice)\n¥420",
+      "capturedAt": "2026-11-17T00:48:28.530Z"
+    },
+    {
+      "id": "ev-14",
+      "pageId": "page-5",
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "quote": "惑星ストロベリー\nドーナツ\nPlanet Strawberry\nDonuts   ¥400",
+      "capturedAt": "2026-11-17T00:48:28.530Z"
+    },
+    {
+      "id": "ev-15",
+      "pageId": "page-7",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/calender.html",
+      "quote": "20\n金曜日\n休館日\n21\n土曜日\n-\n-\n22\n日曜日",
+      "capturedAt": "2026-11-17T00:49:07.313Z"
+    },
+    {
+      "id": "ev-16",
+      "pageId": "page-8",
+      "url": "https://www.ncsm.city.nagoya.jp/",
+      "quote": "11月11日（水）以降通常開館について",
+      "capturedAt": "2026-11-17T00:49:14.152Z"
+    },
+    {
+      "id": "ev-17",
+      "pageId": "page-9",
+      "url": "https://store.starbucks.co.jp/detail-533/",
+      "quote": "名古屋 伏見 ＡＴビル店\n460-8633 愛知県 名古屋市中区 錦1-18-22 名古屋ATビル",
+      "capturedAt": "2026-11-17T00:49:23.364Z"
+    },
+    {
+      "id": "ev-18",
+      "pageId": "page-9",
+      "url": "https://store.starbucks.co.jp/detail-533/",
+      "quote": "土：07:30～22:00",
+      "capturedAt": "2026-11-17T00:49:23.364Z"
+    },
+    {
+      "id": "ev-19",
+      "pageId": "page-9",
+      "url": "https://store.starbucks.co.jp/detail-533/",
+      "quote": "特定立地価格 B適用店舗です。",
+      "capturedAt": "2026-11-17T00:49:23.364Z"
+    },
+    {
+      "id": "ev-20",
+      "pageId": "page-9",
+      "url": "https://store.starbucks.co.jp/detail-533/",
+      "quote": "GeoCoordinates latitude=35.1682540786 longitude=136.894540195",
+      "capturedAt": "2026-11-17T00:49:23.364Z"
+    },
+    {
+      "id": "ev-21",
+      "pageId": "page-10",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/information/2026/11101111.html",
+      "quote": "11月11日（水）以降は通常通り開館いたします。",
+      "capturedAt": "2026-11-17T00:49:32.617Z"
+    },
+    {
+      "id": "ev-22",
+      "pageId": "page-11",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/event_calendarR8_20261101.pdf",
+      "quote": "11月21日   土曜日   ものづくり",
+      "capturedAt": "2026-11-17T00:49:34.750Z"
+    },
+    {
+      "id": "ev-23",
+      "pageId": "page-12",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/faq/",
+      "quote": "休憩室の予約はとれますか？",
+      "capturedAt": "2026-11-17T00:49:43.259Z"
+    },
+    {
+      "id": "ev-24",
+      "pageId": "page-13",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/faq/post_20.html",
+      "quote": "予約を受け付けることはできません。",
+      "capturedAt": "2026-11-17T00:49:54.095Z"
+    },
+    {
+      "id": "ev-25",
+      "pageId": "page-14",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/access.html",
+      "quote": "地下鉄東山線・鶴舞線 「伏見」駅下車、4・5番出口 から南へ徒歩5分",
+      "capturedAt": "2026-11-17T00:49:54.556Z"
+    },
+    {
+      "id": "ev-26",
+      "pageId": "page-16",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/",
+      "quote": "5階 宇宙のすがた\n4階 サイエンスステージ",
+      "capturedAt": "2026-11-17T00:50:13.452Z"
+    },
+    {
+      "id": "ev-27",
+      "pageId": "page-16",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/",
+      "quote": "4階 科学原理とのふれあい",
+      "capturedAt": "2026-11-17T00:50:13.452Z"
+    },
+    {
+      "id": "ev-28",
+      "pageId": "page-17",
+      "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/life_1f.html",
+      "quote": "席数は170席です。飲みものの自動販売機も設置されています。",
+      "capturedAt": "2026-11-17T00:50:25.017Z"
+    },
+    {
+      "id": "ev-29",
+      "pageId": "geo-2",
+      "url": "https://nominatim.openstreetmap.org/search?q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E7%A7%91%E5%AD%A6%E9%A4%A8+%E5%90%8D%E5%8F%A4%E5%B1%8B&format=jsonv2&limit=3",
+      "quote": "\"lat\":\"35.1648931\",\"lon\":\"136.8997007\"",
+      "capturedAt": "2026-11-17T00:50:37.174Z"
+    },
+    {
+      "id": "ev-30",
+      "pageId": "page-15",
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "quote": "価格は全て税込みです。",
+      "capturedAt": "2026-11-17T00:50:12.336Z"
+    }
+  ],
+  "steps": 77,
+  "limits": {
+    "maxSteps": 200,
+    "timeoutSeconds": 1200,
+    "maxPages": 24
+  },
+  "research": {
+    "rounds": 0,
+    "maxRounds": 1,
+    "pagesOpened": 2,
+    "maxPages": 2,
+    "attempts": [
+      {
+        "pageId": "page-4",
+        "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+        "mode": "link",
+        "fields": [
+          "メニューPDF",
+          "利用方式",
+          "税込・サービス料"
+        ],
+        "result": "insufficient_detail"
+      },
+      {
+        "pageId": "page-6",
+        "url": "https://www.ncsm.city.nagoya.jp/",
+        "mode": "link",
+        "fields": [
+          "休憩室の利用時間",
+          "カフェ注文方式とサービス料"
+        ],
+        "result": "insufficient_detail"
+      }
+    ]
+  },
+  "model": "gpt-6.1-sol",
+  "retrieval": {
+    "status": "verified",
+    "verifiedDetailUrls": [
+      "https://www.nomura-medias.co.jp/shop_list/1083/",
+      "https://www.nomura-medias.co.jp/works/228/",
+      "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+      "https://store.starbucks.co.jp/detail-533/"
+    ],
+    "checkedPages": 20
+  },
+  "pdfInspections": [
+    {
+      "pageId": "page-5",
+      "pageNumber": 1,
+      "sha256": "2b038c6e51f3854bec3f3b3e7f5131094230cad39d15b9fa289eb656d7718342",
+      "shownAt": "2026-11-17T00:48:38.549Z"
+    },
+    {
+      "pageId": "page-5",
+      "pageNumber": 1,
+      "sha256": "2b038c6e51f3854bec3f3b3e7f5131094230cad39d15b9fa289eb656d7718342",
+      "shownAt": "2026-11-17T00:48:45.050Z"
+    },
+    {
+      "pageId": "page-11",
+      "pageNumber": 1,
+      "sha256": "2801feddb63f90b8c86664435c47229653fda01c54fe81082979edd321eda23f",
+      "shownAt": "2026-11-17T00:49:42.935Z"
+    }
+  ],
+  "photoInspections": [
+    {
+      "pageId": "page-1",
+      "imageIndex": 1,
+      "file": "9460ec3209b3d4a550821fac19e055c189394518a556593faf1409772c68c1f4.webp",
+      "sourceUrl": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe1.jpg",
+      "type": "image/webp",
+      "shownAt": "2026-11-17T00:50:14.337Z"
+    },
+    {
+      "pageId": "page-17",
+      "imageIndex": 0,
+      "file": "3a2fbc0b2302f283417e420c3fa915958665eee146e3df552f0560d3e63c11d5.jpg",
+      "sourceUrl": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/images/life_1f.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-17T00:50:37.794Z"
+    },
+    {
+      "pageId": "page-1",
+      "imageIndex": 2,
+      "file": "f4e50ecc318021afba972284cc25ade13c1e65170b19c43784d144d632ae103f.webp",
+      "sourceUrl": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe2.jpg",
+      "type": "image/webp",
+      "shownAt": "2026-11-17T00:50:45.459Z"
+    }
+  ],
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "passed",
+    "issues": [],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": []
+      },
+      {
+        "number": 2,
+        "issues": []
+      }
+    ]
+  },
+  "answer": {
+    "actionPlan": {
+      "steps": [
+        {
+          "id": "s1",
+          "when": "10:00",
+          "durationMinutes": 5,
+          "where": "伏見駅4・5番出口→FUJIなごや科学館",
+          "action": "徒歩で南へ向かう",
+          "how": "出口で合流し科学館へ。徒歩5分は公式目安、信号で遅れれば午前展示を短縮。",
+          "doneWhen": "入口に到着",
+          "evidenceIds": [
+            "ev-25"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s2",
+          "when": "10:05",
+          "durationMinutes": 15,
+          "where": "FUJIなごや科学館 エントランスホール",
+          "action": "当日券購入・入館待機",
+          "how": "大人2人の展示室のみを窓口で購入。プラネタリウム・有料特別展は買わない。列が長ければ展示時間を短縮。",
+          "doneWhen": "観覧券を2枚確保して入館",
+          "evidenceIds": [
+            "ev-5",
+            "ev-7",
+            "ev-1"
+          ],
+          "costItemIds": [
+            "admission"
+          ],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s3",
+          "when": "10:20",
+          "durationMinutes": 65,
+          "where": "FUJIなごや科学館 理工館4階",
+          "action": "科学原理とのふれあいを比較観覧",
+          "how": "最初の5分で公開中の展示から2件を選び、予想→操作可能なら操作→説明を読む順に各25分。残り10分で意外だった点を1つずつメモ。実演の整理券は前提にしない。",
+          "doneWhen": "2件の違いを各自1文で説明",
+          "evidenceIds": [
+            "ev-27",
+            "ev-1"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s4",
+          "when": "11:25",
+          "durationMinutes": 5,
+          "where": "理工館4階→1階→科学館カフェレストラン",
+          "action": "館内移動・いったん館外へ",
+          "how": "観覧券を保管しエントランスから外へ出てカフェ入口へ。館内直通ではない。",
+          "doneWhen": "カフェ入口到着",
+          "evidenceIds": [
+            "ev-11",
+            "ev-1"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s5",
+          "when": "11:30",
+          "durationMinutes": 20,
+          "where": "FUJIなごや科学館カフェレストラン入口",
+          "action": "入店待ち・席の当日判断",
+          "how": "店頭案内に従って2人席と注文方法を確認。入店済みなら着席して選ぶ時間に充当。11:50で未入店なら待機を打ち切りスターバックスへ。",
+          "doneWhen": "11:50までに入店または切替決定",
+          "evidenceIds": [
+            "ev-1",
+            "ev-2",
+            "ev-3",
+            "ev-4"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s6",
+          "when": "11:50",
+          "durationMinutes": 80,
+          "where": "FUJIなごや科学館カフェレストラン",
+          "action": "昼食・コーヒー・ドーナツ",
+          "how": "各自、溶岩流チーズハンバーグ990円、ホットコーヒー単品420円、惑星ストロベリードーナツ400円を注文案とする。1人1810円、2人3620円税込掲載額。食事40分、甘味とコーヒー25分、展示の感想を話して会計15分。セット適用条件とサービス料は未確認なので会計前に確認し、飲物込みなら単品を重複注文しない。予算超過・欠品は分岐へ。",
+          "doneWhen": "各自食事1皿・飲物1杯・甘味1品を終えて13:10退店",
+          "evidenceIds": [
+            "ev-1",
+            "ev-2",
+            "ev-3",
+            "ev-4",
+            "ev-9",
+            "ev-10",
+            "ev-13",
+            "ev-14"
+          ],
+          "costItemIds": [
+            "meal",
+            "coffee",
+            "sweet"
+          ],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s7",
+          "when": "13:10",
+          "durationMinutes": 10,
+          "where": "カフェ→科学館入口→天文館5階",
+          "action": "徒歩・再入館・フロア移動",
+          "how": "外から入口へ戻り観覧券を提示、5階の宇宙のすがたへ。エレベーター等の案内に従い急がない。",
+          "doneWhen": "展示階へ到着",
+          "evidenceIds": [
+            "ev-11",
+            "ev-26",
+            "ev-1"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s8",
+          "when": "13:20",
+          "durationMinutes": 65,
+          "where": "FUJIなごや科学館 天文館5階 宇宙のすがた",
+          "action": "宇宙展示を二人で読み比べる",
+          "how": "公開中の展示から疑問を1つずつ決め、25分ずつ説明と図を確認し相手に説明。最後15分で午前の科学原理とつながった点を記録。プラネタリウムには入らない。",
+          "doneWhen": "各自疑問1つと答え1つをメモ",
+          "evidenceIds": [
+            "ev-26",
+            "ev-1"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s9",
+          "when": "14:25",
+          "durationMinutes": 5,
+          "where": "天文館5階→生命館1階休憩室",
+          "action": "館内移動",
+          "how": "案内板で生命館1階へ。空席を当日確認し荷物で席取りしない。",
+          "doneWhen": "休憩室に到着",
+          "evidenceIds": [
+            "ev-12",
+            "ev-1"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s10",
+          "when": "14:30",
+          "durationMinutes": 20,
+          "where": "FUJIなごや科学館 生命館1階休憩室（170席）",
+          "action": "独立した20分休憩",
+          "how": "空席があれば着席。前半10分は足を休め会話を控え、後半10分で一番の発見を交換する。休憩室固有の利用可能時間は未確認のため入室時に掲示を確認。満席なら別休憩室の分岐に従う。",
+          "doneWhen": "20分休憩完了",
+          "evidenceIds": [
+            "ev-12",
+            "ev-28",
+            "ev-6",
+            "ev-24",
+            "ev-1"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        },
+        {
+          "id": "s11",
+          "when": "14:50",
+          "durationMinutes": 10,
+          "where": "生命館1階→科学館出口→伏見駅4・5番出口周辺",
+          "action": "退館・徒歩で伏見エリアへ戻る",
+          "how": "退館と徒歩に10分確保。帰りは公式徒歩5分経路を逆にたどり、足の疲れを確認しながら歩く。15:00に同じ駅エリアで終了。",
+          "doneWhen": "15:00伏見駅周辺で解散",
+          "evidenceIds": [
+            "ev-25",
+            "ev-1"
+          ],
+          "costItemIds": [],
+          "locationStatus": "evidence-linked"
+        }
+      ],
+      "branches": [
+        {
+          "trigger": "11:50まで20分待って未入店",
+          "action": "スターバックス名古屋伏見ATビル店へ切替",
+          "how": "11:50〜12:05は徒歩移動（15分見積、経路・入口は当日確認）、錦1-18-22へ。12:05〜12:15は席と店頭税込合計を確認。特定立地価格Bのため全国価格は代用しない。各自食事・飲物・甘味を2人3000円以内で揃えられる場合だけ注文、12:15〜13:35の80分滞在。13:35〜13:50徒歩で科学館へ戻り、13:50〜14:25宇宙展示35分に短縮、以降は主案と同じ。入館1000円＋代替飲食上限3000円＝4000円以内、主案3620円とは加算しない。席・品数・総額が成立しなければ注文せずカフェ旅行は未達として伏見駅へ戻り終了。",
+          "evidenceIds": [
+            "ev-17",
+            "ev-18",
+            "ev-19",
+            "ev-11"
+          ]
+        },
+        {
+          "trigger": "主案の欠品・税サービス料確認後の支払合計が10000円超、または臨時休業",
+          "action": "購入前に中止・条件付き代替へ",
+          "how": "同一店の掲載済み定番で各自3品が揃うか確認し、勝手に季節品や持帰り価格を代用しない。成立しなければ上記スターバックス分岐へ。両店不成立なら未達を認め飲食注文せず伏見駅へ。雨天は屋外写真を省略し歩行を優先、通行困難なら外出を中止する。",
+          "evidenceIds": [
+            "ev-2",
+            "ev-19",
+            "ev-14"
+          ]
+        },
+        {
+          "trigger": "生命館1階休憩室が満席・利用不可",
+          "action": "理工館3階休憩室へ",
+          "how": "14:30〜14:35移動、14:35〜14:55の20分休憩、14:55〜15:00出口から伏見駅へ徒歩5分目安。移動が延びたら宇宙展示を前倒し短縮して休憩20分を維持。両方使えなければ無理せず退館し終了時刻を前倒す。",
+          "evidenceIds": [
+            "ev-12",
+            "ev-25"
+          ]
+        }
+      ],
+      "budget": {
+        "scenario": "主案：大人2人、展示室のみ＋科学館カフェ各自ハンバーグ・単品コーヒー・ドーナツ。交通費除外。サービス料は未確認、追加なら注文前に総額上限確認。",
+        "totalYen": 4620,
+        "items": [
+          {
+            "id": "admission",
+            "label": "展示室のみ・一般",
+            "quantity": 2,
+            "unitYen": 500,
+            "basis": "published",
+            "evidenceIds": [
+              "ev-5"
+            ]
+          },
+          {
+            "id": "meal",
+            "label": "溶岩流チーズハンバーグ",
+            "quantity": 2,
+            "unitYen": 990,
+            "basis": "published",
+            "evidenceIds": [
+              "ev-9",
+              "ev-10"
+            ]
+          },
+          {
+            "id": "coffee",
+            "label": "ホットコーヒー単品（セット条件未確認）",
+            "quantity": 2,
+            "unitYen": 420,
+            "basis": "published",
+            "evidenceIds": [
+              "ev-13",
+              "ev-10"
+            ]
+          },
+          {
+            "id": "sweet",
+            "label": "惑星ストロベリードーナツ",
+            "quantity": 2,
+            "unitYen": 400,
+            "basis": "published",
+            "evidenceIds": [
+              "ev-14",
+              "ev-10"
+            ]
+          }
+        ]
+      },
+      "verification": {
+        "date": "2026-11-21",
+        "checks": [
+          {
+            "kind": "opening",
+            "status": "published",
+            "detail": "11/17閲覧：11/21はカレンダーで休館表示なし、PDF実画像も確認。11/11以降通常開館告知。科学館9:30〜17:00、カフェ9:30〜17:00（フードLO16:30、飲物16:45）。未来の臨時変更は確約しない。",
+            "evidenceIds": [
+              "ev-15",
+              "ev-21",
+              "ev-22",
+              "ev-6",
+              "ev-2"
+            ],
+            "stepIds": [
+              "s2",
+              "s6"
+            ]
+          },
+          {
+            "kind": "prices",
+            "status": "published",
+            "detail": "一般展示室のみ500円。メニューPDFの実配置を確認：ハンバーグ990円・コーヒー420円・ドーナツ400円、飲食税込。ドリンクセット+300円の対象条件・サービス料は未確認なので単品価格で計上。",
+            "evidenceIds": [
+              "ev-5",
+              "ev-9",
+              "ev-10",
+              "ev-13",
+              "ev-14"
+            ],
+            "stepIds": [
+              "s2",
+              "s6"
+            ]
+          },
+          {
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "観覧券不要、館外から利用し再入館は観覧券提示。2人利用の席予約・注文会計方式は未確認、当日店頭案内に従う。11:50で未入店ならATビル店へ、そこでも席と2人3000円以内を確認できた場合のみ注文。予約実行なし。",
+            "evidenceIds": [
+              "ev-4",
+              "ev-11",
+              "ev-17",
+              "ev-19"
+            ],
+            "stepIds": [
+              "s5",
+              "s6"
+            ]
+          },
+          {
+            "kind": "comparison",
+            "status": "published",
+            "detail": "主案は科学館と同一敷地でオリジナル料理・掲載価格を確認できるため優先。ATビル店は土7:30〜22:00だが特定立地B単価未掲載なので条件付き代替。",
+            "evidenceIds": [
+              "ev-1",
+              "ev-9",
+              "ev-14",
+              "ev-17",
+              "ev-18",
+              "ev-19"
+            ],
+            "stepIds": [
+              "s6"
+            ]
+          },
+          {
+            "kind": "rest",
+            "status": "published",
+            "detail": "生命館1階170席、理工館3階84席・7階96席。休憩室固有の利用時間は未確認、館の開館時間内に20分を置き、当日掲示で確認。予約不可。",
+            "evidenceIds": [
+              "ev-12",
+              "ev-28",
+              "ev-6",
+              "ev-24"
+            ],
+            "stepIds": [
+              "s9",
+              "s10"
+            ]
+          }
+        ]
+      }
+    },
+    "visualArtifact": {
+      "kind": "journey-map",
+      "title": "11/21 伏見発着・科学とカフェの5時間",
+      "description": "時刻・館内移動は提案。地図は施設代表点で入口や徒歩経路を保証しない。カフェは科学館代表点を共有、伏見駅は座標未取得で未配置。Google共有地図は未取得、公式周辺地図PDFを補助参照。主案4620円掲載額、席は当日判断。",
+      "stops": [
+        {
+          "id": "fushimi",
+          "stepIds": [
+            "s1",
+            "s11"
+          ],
+          "primaryStepId": "s1",
+          "label": "伏見駅4・5番出口周辺（開始・終了）",
+          "optional": false,
+          "evidenceIds": [
+            "ev-25"
+          ]
+        },
+        {
+          "id": "museum",
+          "stepIds": [
+            "s2",
+            "s3",
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ],
+          "primaryStepId": "s3",
+          "coordinates": {
+            "lat": 35.1648931,
+            "lon": 136.8997007,
+            "evidenceId": "ev-29"
+          },
+          "evidenceIds": [
+            "ev-5",
+            "ev-26",
+            "ev-27",
+            "ev-29",
+            "ev-1",
+            "ev-3"
+          ],
+          "experience": {
+            "headline": "科学原理から宇宙へ、二人で答え合わせ",
+            "why": "展示室だけでテーマを選び、カフェの会話につなげる",
+            "highlights": [
+              "午前は理工館4階の展示を2件比較",
+              "午後は天文館5階で疑問を一つ解く"
+            ],
+            "photoPageId": "page-1",
+            "photoIndex": 2,
+            "photoCaption": "科学館1階カフェ側の外観（公式写真）",
+            "photoDescription": "ガラス張りの外壁、CAFEの看板、ショップ入口と上方の球体の一部が見える。展示室内写真ではない。"
+          },
+          "label": "FUJIなごや科学館",
+          "optional": false
+        },
+        {
+          "id": "cafe",
+          "stepIds": [
+            "s4",
+            "s5",
+            "s6"
+          ],
+          "primaryStepId": "s6",
+          "coordinates": {
+            "lat": 35.1648931,
+            "lon": 136.8997007,
+            "evidenceId": "ev-29"
+          },
+          "evidenceIds": [
+            "ev-1",
+            "ev-2",
+            "ev-3",
+            "ev-9",
+            "ev-13",
+            "ev-14"
+          ],
+          "experience": {
+            "headline": "科学モチーフの昼食と甘味を80分",
+            "why": "移動を抑え、食事・コーヒー・ドーナツの3品と展示の感想を味わう",
+            "highlights": [
+              "各自ハンバーグ990円",
+              "各自コーヒー420円＋ドーナツ400円",
+              "単品掲載価格の案、当日提供と追加料金は店頭確認"
+            ],
+            "photoPageId": "page-1",
+            "photoIndex": 1,
+            "photoCaption": "科学館カフェレストランの店内（公式写真）",
+            "photoDescription": "木目のテーブルと緑系の椅子、オレンジ色のソファ席、科学モチーフの壁画、右手に注文カウンターがある。撮影時の空席は未来の席保証ではない。"
+          },
+          "label": "FUJIなごや科学館カフェレストラン",
+          "optional": false
+        }
+      ],
+      "moments": [
+        {
+          "stepId": "s1",
+          "kind": "move",
+          "title": "徒歩で南へ向かう",
+          "invitation": "歩幅を合わせ、今日一つ知りたいことを話す"
+        },
+        {
+          "stepId": "s2",
+          "kind": "arrival",
+          "title": "当日券購入・入館待機",
+          "invitation": "展示室のみを確認して購入。観覧券は最後まで保管"
+        },
+        {
+          "stepId": "s3",
+          "kind": "experience",
+          "title": "科学原理とのふれあいを比較観覧",
+          "invitation": "予想と説明の違いを1件ずつ見つける"
+        },
+        {
+          "stepId": "s4",
+          "kind": "move",
+          "title": "館内移動・いったん館外へ",
+          "invitation": "外へ出る必要があるので観覧券を先に用意"
+        },
+        {
+          "stepId": "s5",
+          "kind": "rest",
+          "title": "入店待ち・席の当日判断",
+          "invitation": "疲れた側に合わせ、20分を超えて待たない"
+        },
+        {
+          "stepId": "s6",
+          "kind": "meal",
+          "title": "昼食・コーヒー・ドーナツ",
+          "invitation": "前半は食事、後半はコーヒーと甘味。展示の驚きを交換"
+        },
+        {
+          "stepId": "s7",
+          "kind": "move",
+          "title": "徒歩・再入館・フロア移動",
+          "invitation": "食後は急がず、再入館と階移動を独立して行う"
+        },
+        {
+          "stepId": "s8",
+          "kind": "experience",
+          "title": "宇宙展示を二人で読み比べる",
+          "invitation": "相手の疑問に自分の言葉で答える"
+        },
+        {
+          "stepId": "s9",
+          "kind": "move",
+          "title": "館内移動",
+          "invitation": "足の疲れを確認して休憩室へ"
+        },
+        {
+          "stepId": "s10",
+          "kind": "rest",
+          "title": "独立した20分休憩",
+          "invitation": "前半10分は静かに休み、後半は発見一つだけ話す"
+        },
+        {
+          "stepId": "s11",
+          "kind": "return",
+          "title": "退館・徒歩で伏見エリアへ戻る",
+          "invitation": "忘れ物と体調を確認し、同じ伏見エリアで終える"
+        }
+      ],
+      "proposalSet": {
+        "options": [
+          {
+            "id": "discover",
+            "theme": "discovery",
+            "anchorId": "museum",
+            "stepId": "s3",
+            "title": "予想と結果の比較",
+            "activity": "公開中の二つの展示で、操作する前の予想と説明を読んだ後の答えを比較する",
+            "deliverable": "予想と結果の違いを二行のメモに残す",
+            "benefit": "科学原理を会話にできる",
+            "difference": "二つの展示を横断して違いを比較する",
+            "tradeoff": "広く回る展示数は減る",
+            "mechanism": "compare",
+            "minutes": 50,
+            "evidenceIds": [
+              "ev-27"
+            ]
+          },
+          {
+            "id": "relax",
+            "theme": "relax",
+            "anchorId": "cafe",
+            "stepId": "s6",
+            "title": "一口と一杯に集中",
+            "activity": "食後25分はコーヒーとドーナツを交互に味わい、一番好きな点を一つ話す",
+            "deliverable": "二人それぞれ一言の味の感想",
+            "benefit": "歩き疲れを増やさず会話できる",
+            "difference": "食感と香りに焦点",
+            "tradeoff": "撮影や展示メモは後回し",
+            "mechanism": "focus",
+            "minutes": 25,
+            "evidenceIds": [
+              "ev-13",
+              "ev-14"
+            ]
+          },
+          {
+            "id": "photo",
+            "theme": "photo",
+            "anchorId": "cafe",
+            "stepId": "s6",
+            "title": "科学モチーフを一枚に",
+            "activity": "周囲が写らないよう自分の料理と甘味を一枚撮り、科学を連想した形を一言添える。撮影不可ならスケッチ",
+            "deliverable": "写真1枚またはスケッチ＋短文",
+            "benefit": "旅行の記録が残る",
+            "difference": "料理の見た目を写真と短文で記録する",
+            "tradeoff": "飲食時間内の5分を使う",
+            "mechanism": "capture",
+            "minutes": 5,
+            "evidenceIds": [
+              "ev-9",
+              "ev-14"
+            ]
+          }
+        ]
+      }
+    },
+    "summary": "## 推奨：展示室＋科学館カフェ80分、掲載額4620円\n11月21日は開館予定で、展示室500円×2人と各自ハンバーグ・単品コーヒー・ドーナツを組み合わせます。[ev-5][ev-15][ev-21][ev-9][ev-13][ev-14]\nサービス料・セット適用条件・注文方式・休憩室固有の利用時間は未確認。席は当日判断、20分未入店なら代替店で2人3000円以内を店頭確認して注文します。[ev-19]\n\n## 具体的な実行手順（時刻・行動は提案）\n10:00 伏見駅4・5番出口→FUJIなごや科学館 — 徒歩で南へ向かう（5分の見積）。出口で合流し科学館へ。徒歩5分は公式目安、信号で遅れれば午前展示を短縮。 完了の目安：入口に到着。[ev-25]\n10:05 FUJIなごや科学館 エントランスホール — 当日券購入・入館待機（15分の見積）。大人2人の展示室のみを窓口で購入。プラネタリウム・有料特別展は買わない。列が長ければ展示時間を短縮。 完了の目安：観覧券を2枚確保して入館。[ev-5][ev-7][ev-1]\n10:20 FUJIなごや科学館 理工館4階 — 科学原理とのふれあいを比較観覧（65分の見積）。最初の5分で公開中の展示から2件を選び、予想→操作可能なら操作→説明を読む順に各25分。残り10分で意外だった点を1つずつメモ。実演の整理券は前提にしない。 完了の目安：2件の違いを各自1文で説明。[ev-27][ev-1]\n11:25 理工館4階→1階→科学館カフェレストラン — 館内移動・いったん館外へ（5分の見積）。観覧券を保管しエントランスから外へ出てカフェ入口へ。館内直通ではない。 完了の目安：カフェ入口到着。[ev-11][ev-1]\n11:30 FUJIなごや科学館カフェレストラン入口 — 入店待ち・席の当日判断（20分の見積）。店頭案内に従って2人席と注文方法を確認。入店済みなら着席して選ぶ時間に充当。11:50で未入店なら待機を打ち切りスターバックスへ。 完了の目安：11:50までに入店または切替決定。[ev-1][ev-2][ev-3][ev-4]\n11:50 FUJIなごや科学館カフェレストラン — 昼食・コーヒー・ドーナツ（80分の見積）。各自、溶岩流チーズハンバーグ990円、ホットコーヒー単品420円、惑星ストロベリードーナツ400円を注文案とする。1人1810円、2人3620円税込掲載額。食事40分、甘味とコーヒー25分、展示の感想を話して会計15分。セット適用条件とサービス料は未確認なので会計前に確認し、飲物込みなら単品を重複注文しない。予算超過・欠品は分岐へ。 完了の目安：各自食事1皿・飲物1杯・甘味1品を終えて13:10退店。[ev-1][ev-2][ev-3][ev-4][ev-9][ev-10][ev-13][ev-14]\n13:10 カフェ→科学館入口→天文館5階 — 徒歩・再入館・フロア移動（10分の見積）。外から入口へ戻り観覧券を提示、5階の宇宙のすがたへ。エレベーター等の案内に従い急がない。 完了の目安：展示階へ到着。[ev-11][ev-26][ev-1]\n13:20 FUJIなごや科学館 天文館5階 宇宙のすがた — 宇宙展示を二人で読み比べる（65分の見積）。公開中の展示から疑問を1つずつ決め、25分ずつ説明と図を確認し相手に説明。最後15分で午前の科学原理とつながった点を記録。プラネタリウムには入らない。 完了の目安：各自疑問1つと答え1つをメモ。[ev-26][ev-1]\n14:25 天文館5階→生命館1階休憩室 — 館内移動（5分の見積）。案内板で生命館1階へ。空席を当日確認し荷物で席取りしない。 完了の目安：休憩室に到着。[ev-12][ev-1]\n14:30 FUJIなごや科学館 生命館1階休憩室（170席） — 独立した20分休憩（20分の見積）。空席があれば着席。前半10分は足を休め会話を控え、後半10分で一番の発見を交換する。休憩室固有の利用可能時間は未確認のため入室時に掲示を確認。満席なら別休憩室の分岐に従う。 完了の目安：20分休憩完了。[ev-12][ev-28][ev-6][ev-24][ev-1]\n14:50 生命館1階→科学館出口→伏見駅4・5番出口周辺 — 退館・徒歩で伏見エリアへ戻る（10分の見積）。退館と徒歩に10分確保。帰りは公式徒歩5分経路を逆にたどり、足の疲れを確認しながら歩く。15:00に同じ駅エリアで終了。 完了の目安：15:00伏見駅周辺で解散。[ev-25][ev-1]\n\n## 予算（主案：大人2人、展示室のみ＋科学館カフェ各自ハンバーグ・単品コーヒー・ドーナツ。交通費除外。サービス料は未確認、追加なら注文前に総額上限確認。・掲載料金と未確認の見積）\n| 内訳 | 人数・数量 | 単価 | 小計 | 区分 |\n| --- | ---: | ---: | ---: | --- |\n| 展示室のみ・一般 | 2 | 500円 | 1,000円 | 掲載額[ev-5] |\n| 溶岩流チーズハンバーグ | 2 | 990円 | 1,980円 | 掲載額[ev-9][ev-10] |\n| ホットコーヒー単品（セット条件未確認） | 2 | 420円 | 840円 | 掲載額[ev-13][ev-10] |\n| 惑星ストロベリードーナツ | 2 | 400円 | 800円 | 掲載額[ev-14][ev-10] |\n合計4,620円。指定上限10,000円との差額5,380円。見積を含み、実際の支払額を保証しません。\n\n## 状況が変わった時の行動\n- 11:50まで20分待って未入店 → スターバックス名古屋伏見ATビル店へ切替。11:50〜12:05は徒歩移動（15分見積、経路・入口は当日確認）、錦1-18-22へ。12:05〜12:15は席と店頭税込合計を確認。特定立地価格Bのため全国価格は代用しない。各自食事・飲物・甘味を2人3000円以内で揃えられる場合だけ注文、12:15〜13:35の80分滞在。13:35〜13:50徒歩で科学館へ戻り、13:50〜14:25宇宙展示35分に短縮、以降は主案と同じ。入館1000円＋代替飲食上限3000円＝4000円以内、主案3620円とは加算しない。席・品数・総額が成立しなければ注文せずカフェ旅行は未達として伏見駅へ戻り終了。[ev-17][ev-18][ev-19][ev-11]\n- 主案の欠品・税サービス料確認後の支払合計が10000円超、または臨時休業 → 購入前に中止・条件付き代替へ。同一店の掲載済み定番で各自3品が揃うか確認し、勝手に季節品や持帰り価格を代用しない。成立しなければ上記スターバックス分岐へ。両店不成立なら未達を認め飲食注文せず伏見駅へ。雨天は屋外写真を省略し歩行を優先、通行困難なら外出を中止する。[ev-2][ev-19][ev-14]\n- 生命館1階休憩室が満席・利用不可 → 理工館3階休憩室へ。14:30〜14:35移動、14:35〜14:55の20分休憩、14:55〜15:00出口から伏見駅へ徒歩5分目安。移動が延びたら宇宙展示を前倒し短縮して休憩20分を維持。両方使えなければ無理せず退館し終了時刻を前倒す。[ev-12][ev-25]",
+    "candidates": [
+      {
+        "name": "スターバックス名古屋伏見ATビル店（条件付き代替）",
+        "url": "https://store.starbucks.co.jp/detail-533/",
+        "matches": [
+          {
+            "criterionId": "museum",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "date",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "rest",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "cafe",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "menu",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "alt",
+            "status": "supported",
+            "explanation": "錦1-18-22名古屋ATビル、土7:30〜22:00、特定立地B。単価未掲載につき店頭で2人3000円以内かつ各自3品を確認する条件付き代替。",
+            "evidenceIds": [
+              "ev-17",
+              "ev-18",
+              "ev-19"
+            ]
+          }
+        ],
+        "score": 100,
+        "eligible": true
+      },
+      {
+        "name": "FUJIなごや科学館（展示室のみ）",
+        "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "matches": [
+          {
+            "criterionId": "museum",
+            "status": "supported",
+            "explanation": "展示室のみ一般500円、9:30〜17:00（入館16:30まで）、伏見駅4・5番出口から南へ徒歩5分。",
+            "evidenceIds": [
+              "ev-5",
+              "ev-6",
+              "ev-25"
+            ]
+          },
+          {
+            "criterionId": "date",
+            "status": "supported",
+            "explanation": "公式11月予定とPDF実画像で21日が休館表示でないことを確認。11日以降通常開館告知あり。臨時変更は当日再確認。",
+            "evidenceIds": [
+              "ev-15",
+              "ev-21",
+              "ev-22"
+            ]
+          },
+          {
+            "criterionId": "rest",
+            "status": "unknown",
+            "explanation": "生命館1階170席、理工館3階84席・7階96席は確認。休憩室固有の利用時間が取得できず、館開館時間から保証しない。",
+            "evidenceIds": [
+              "ev-12",
+              "ev-28"
+            ]
+          },
+          {
+            "criterionId": "cafe",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "menu",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "alt",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          }
+        ],
+        "score": 71,
+        "eligible": false
+      },
+      {
+        "name": "FUJIなごや科学館カフェレストラン（主案）",
+        "url": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "matches": [
+          {
+            "criterionId": "museum",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "date",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "rest",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          },
+          {
+            "criterionId": "cafe",
+            "status": "unknown",
+            "explanation": "店名・栄2-17-1科学館1階・9:30〜17:00、科学館開館日に準じる。観覧券不要、館内直通不可。注文・配膳方式と席予約の扱いは未確認。",
+            "evidenceIds": [
+              "ev-1",
+              "ev-2",
+              "ev-3",
+              "ev-4"
+            ]
+          },
+          {
+            "criterionId": "menu",
+            "status": "unknown",
+            "explanation": "公開中の2026年3月メニュー：ハンバーグ990円、単品コーヒー420円、惑星ストロベリードーナツ400円、全て税込。2人3620円。ドリンクセット+300円表記はあるが適用条件未確認のため単品計算。サービス料未確認。",
+            "evidenceIds": [
+              "ev-8",
+              "ev-9",
+              "ev-10",
+              "ev-13",
+              "ev-14"
+            ]
+          },
+          {
+            "criterionId": "alt",
+            "status": "unknown",
+            "explanation": "対象外",
+            "evidenceIds": []
+          }
+        ],
+        "score": 0,
+        "eligible": false
+      }
+    ],
+    "limitations": [
+      "2026年11月17日閲覧。未来の空席・当日提供・臨時変更は確約しない。予約購入問い合わせ未実行。",
+      "サービス料・ドリンクセット適用条件・注文配膳方式・席予約方法・休憩室固有利用時間は追加取得後も未確認。全条件確認済みの正式版ではない。",
+      "主案4620円は公開中の2026年3月メニューの単品税込掲載額。追加サービス料ゼロとは断定しない。季節品・別店舗・持帰り価格不使用。",
+      "同施設の館内案内・休憩室・予定を科学館候補に統合。料金等のない補助ページはverifiedの候補詳細で補完。",
+      "時刻・徒歩は提案見積、座標は施設代表点で経路入口未確認。伏見駅座標・Google共有地図未取得。",
+      "条件付き代替店は実写真がなく地図の主要体験地点にせず分岐に表示。代替店単価未掲載、入館込み4000円以内の別シナリオ。",
+      "追加確認しても未確認の項目: 展示室のみの大人料金・利用時間・伏見駅からのアクセス・2026年11月21日の開館予定を公式カレンダーで確認・休憩所の具体的位置と利用時間・対象店の住所・現行営業時間・利用方式・各自食事1皿・飲物1杯・甘味1品の掲載単価、セット条件、税・サービス料 / 休憩所の具体的位置と利用時間・対象店の住所・現行営業時間・利用方式・各自食事1皿・飲物1杯・甘味1品の掲載単価、セット条件、税・サービス料・名古屋伏見ATビル店の住所・営業時間・価格条件を確認し条件付き代替とする / 展示室のみの大人料金・利用時間・伏見駅からのアクセス・2026年11月21日の開館予定を公式カレンダーで確認・休憩所の具体的位置と利用時間・対象店の住所・現行営業時間・利用方式・各自食事1皿・飲物1杯・甘味1品の掲載単価、セット条件、税・サービス料・名古屋伏見ATビル店の住所・営業時間・価格条件を確認し条件付き代替とする"
+    ]
+  },
+  "metrics": {
+    "elapsedMs": 371434,
+    "tokenAccounting": "provider-reported",
+    "tokens": {
+      "inputTokens": 2851627,
+      "outputTokens": 10576,
+      "cachedInputTokens": 2690688,
+      "reasoningOutputTokens": 616,
+      "totalTokens": 2862203,
+      "cacheWriteInputTokens": 0,
+      "source": "codex-thread-total"
+    },
+    "billing": {
+      "mode": "chatgpt-subscription",
+      "additionalApiUsd": 0,
+      "subscriptionAllocationUsd": null,
+      "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+    }
+  },
+  "answerPhotos": {
+    "museum": {
+      "file": "f4e50ecc318021afba972284cc25ade13c1e65170b19c43784d144d632ae103f.webp",
+      "pageId": "page-1",
+      "imageIndex": 2,
+      "sourceUrl": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe2.jpg",
+      "type": "image/webp",
+      "capturedAt": "2026-11-17T00:53:55.512Z"
+    },
+    "cafe": {
+      "file": "9460ec3209b3d4a550821fac19e055c189394518a556593faf1409772c68c1f4.webp",
+      "pageId": "page-1",
+      "imageIndex": 1,
+      "sourceUrl": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/fuji_cafe1.jpg",
+      "type": "image/webp",
+      "capturedAt": "2026-11-17T00:53:55.513Z"
+    }
+  },
+  "evaluation": {
+    "mode": "frozen-replay",
+    "caseId": "nagoya-e2e-display",
+    "fixtureSha256": "df54a2b725962ff462650b7b1898b617b4888e2f66380ebbb7016c33791dc2ae"
+  },
+  "snapshotNote": "無編集のライブ生成回答。未確認を残したpartialをそのまま公開。表示再生のため本文は引用のみ。ライブ記録はnagoya-itinerary-e2e.json。"
+}

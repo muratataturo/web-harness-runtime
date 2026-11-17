@@ -1,0 +1,713 @@
+{
+  "runtimeRevision": "8ffe0f6d361299f40cd6919209a22c12388f8763cf780ee00e3fbce828acf07a",
+  "caseId": "hamamatsu",
+  "label": "静岡県浜松市",
+  "version": 1,
+  "mode": "live-unattended",
+  "startedAt": "2026-11-17T00:39:47.042Z",
+  "passed": false,
+  "answerEdited": false,
+  "humanResponses": 0,
+  "taskId": "6cbd1027-861c-442f-bee3-5335c15b623e",
+  "status": "partial",
+  "model": "gpt-6.1-sol",
+  "steps": 78,
+  "elapsedMs": 334618,
+  "failure": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'partial'\n- 'succeeded'\n",
+  "finishedAt": "2026-11-17T00:45:21.713Z",
+  "events": [
+    {
+      "at": "2026-11-17T00:39:48.844Z",
+      "type": "codex_auth"
+    },
+    {
+      "at": "2026-11-17T00:39:48.923Z",
+      "type": "codex_thread"
+    },
+    {
+      "at": "2026-11-17T00:39:48.924Z",
+      "type": "model_turn"
+    },
+    {
+      "at": "2026-11-17T00:39:59.774Z",
+      "type": "plan_task"
+    },
+    {
+      "at": "2026-11-17T00:39:59.797Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:04.824Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:04.843Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:04.861Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:04.879Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:10.756Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:10.775Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:10.797Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:10.817Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:20.640Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:20.659Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:20.681Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:20.699Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:20.716Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:20.737Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T00:40:20.755Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:26.273Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:26.293Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:26.314Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:33.105Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:33.123Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:38.325Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:38.343Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:38.363Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:45.068Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:45.086Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:45.105Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:45.124Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T00:40:45.144Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:51.632Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:40:51.654Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:40:51.971Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:41:00.759Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:41:00.783Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:41:00.806Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T00:41:00.828Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T00:41:00.855Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:41:05.623Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:41:05.651Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:41:10.936Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:41:11.260Z",
+      "type": "read_task_state"
+    },
+    {
+      "at": "2026-11-17T00:41:21.701Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:41:22.973Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:41:23.213Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:41:23.856Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:41:32.999Z",
+      "type": "read_page"
+    },
+    {
+      "at": "2026-11-17T00:41:33.023Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:41:33.297Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T00:41:34.525Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T00:41:43.200Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T00:41:43.223Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T00:41:43.243Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T00:41:44.042Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T00:41:44.062Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T00:41:44.940Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T00:41:56.245Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:41:56.269Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:41:56.290Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:41:56.326Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:41:56.349Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:41:58.025Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "PDFに抽出できる本文がありません。画像のみの文書は文字を推測しません"
+      }
+    },
+    {
+      "at": "2026-11-17T00:41:58.036Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:42:00.117Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:42:08.333Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:42:08.785Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:42:19.538Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:42:19.639Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:42:19.768Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:42:20.142Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T00:42:20.730Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "PDFに抽出できる本文がありません。画像のみの文書は文字を推測しません"
+      }
+    },
+    {
+      "at": "2026-11-17T00:43:23.894Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-17T00:43:35.214Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:43:35.241Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T00:43:36.139Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:44:13.702Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-17T00:44:22.947Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-17T00:44:22.953Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "stage_visual",
+        "error": "比較案には対象地点の根拠が必要です"
+      }
+    },
+    {
+      "at": "2026-11-17T00:44:29.841Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-17T00:45:01.940Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-17T00:45:01.959Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-17T00:45:14.096Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T00:45:14.116Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-17T00:45:21.612Z",
+      "type": "codex_agent_message"
+    },
+    {
+      "at": "2026-11-17T00:45:21.665Z",
+      "type": "task_end"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "museum",
+      "description": "楽器博物館の11月21日開館予定・時間・大人料金・アクセス",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/"
+      ]
+    },
+    {
+      "id": "cafe",
+      "description": "主カフェの営業時間・所在地・利用方式と食事飲物甘味の公式掲載価格、税サービス料",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.act-okura.co.jp/restaurant/cafe/"
+      ]
+    },
+    {
+      "id": "rest",
+      "description": "無料休憩所の具体的な位置と利用時間",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://www.actcity.jp/visitor/act/"
+      ]
+    },
+    {
+      "id": "backup",
+      "description": "代替店の住所営業時間利用条件を確認。価格未掲載なら2人3000円の店頭確認条件とし主案価格条件は適用しない",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://store.starbucks.co.jp/detail-4544/"
+      ]
+    }
+  ],
+  "evidenceCount": 30,
+  "pages": [
+    {
+      "url": "https://www.gakkihaku.jp/guide/",
+      "capturedAt": "2026-11-17T00:40:00.054Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "capturedAt": "2026-11-17T00:40:05.057Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "capturedAt": "2026-11-17T00:40:13.109Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/",
+      "capturedAt": "2026-11-17T00:40:21.698Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/visitor/act/",
+      "capturedAt": "2026-11-17T00:40:26.553Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/faq/",
+      "capturedAt": "2026-11-17T00:40:33.456Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://store.starbucks.co.jp/detail-4544/",
+      "capturedAt": "2026-11-17T00:40:38.850Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/calendar/",
+      "capturedAt": "2026-11-17T00:40:46.089Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/access/",
+      "capturedAt": "2026-11-17T00:40:51.944Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/access/",
+      "capturedAt": "2026-11-17T00:40:52.457Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "capturedAt": "2026-11-17T00:41:06.349Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/sitemap.html",
+      "capturedAt": "2026-11-17T00:41:23.831Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/user/act/",
+      "capturedAt": "2026-11-17T00:41:24.155Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/user/act/outside/",
+      "capturedAt": "2026-11-17T00:41:33.273Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8+%E6%B5%9C%E6%9D%BE%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E4%B8%AD%E5%A4%AE3-9-1&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T00:41:34.524Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8+%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T00:41:44.041Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T00:41:44.933Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/",
+      "capturedAt": "2026-11-17T00:42:08.761Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/access/",
+      "capturedAt": "2026-11-17T00:42:09.086Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/en/",
+      "capturedAt": "2026-11-17T00:45:02.761Z",
+      "kind": "public-html"
+    }
+  ],
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "passed",
+    "issues": [],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": []
+      },
+      {
+        "number": 2,
+        "issues": []
+      }
+    ]
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "budget": {
+    "scenario": "主案：大人2人・常設展＋ザ・シーズンカフェ店内。交通費除外、追加購入なし。代替店の3000円枠は含めない。",
+    "totalYen": 6800,
+    "items": [
+      {
+        "id": "admission",
+        "label": "博物館大人個人券（税区分未記載の掲載額）",
+        "quantity": 2,
+        "unitYen": 800,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-1"
+        ]
+      },
+      {
+        "id": "curry",
+        "label": "国産ビーフカレー&ライス（サラダ・コーヒー付、税サ込）",
+        "quantity": 1,
+        "unitYen": 2000,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-7",
+          "ev-11"
+        ]
+      },
+      {
+        "id": "hash",
+        "label": "ハッシュ ド ビーフ&ライス（サラダ・コーヒー付、税サ込）",
+        "quantity": 1,
+        "unitYen": 2000,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-8",
+          "ev-11"
+        ]
+      },
+      {
+        "id": "pudding",
+        "label": "プリン（税サ込）",
+        "quantity": 2,
+        "unitYen": 600,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-9",
+          "ev-11"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "date": "2026-11-21",
+    "checks": [
+      {
+        "kind": "opening",
+        "status": "published",
+        "detail": "11/17取得。博物館9:30～17:00・11/21催し掲載で開館予定。カフェ土曜11～17時、食事L.O.14時。臨時変更は出発前に公式を再確認。",
+        "evidenceIds": [
+          "ev-2",
+          "ev-20",
+          "ev-5",
+          "ev-10"
+        ],
+        "stepIds": [
+          "s2",
+          "s5"
+        ]
+      },
+      {
+        "kind": "prices",
+        "status": "published",
+        "detail": "大人800円×2、食事コーヒー付2000円×2、プリン600円×2＝6800円。カフェは税サービス料込み。PDF未取得、公開HTMLの掲載額による。",
+        "evidenceIds": [
+          "ev-1",
+          "ev-7",
+          "ev-8",
+          "ev-9",
+          "ev-11"
+        ],
+        "stepIds": [
+          "s2",
+          "s5"
+        ]
+      },
+      {
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "当日入口で2人店内利用を申告し席・80分利用・提供品を確認。公式レストラン予約窓口9～18時掲載はあるがカフェ個別予約可否は未確認。予約操作は行わず、20分未入店ならメイワン店へ切替。",
+        "evidenceIds": [
+          "ev-4",
+          "ev-28",
+          "ev-17"
+        ],
+        "stepIds": [
+          "s4",
+          "s5"
+        ]
+      },
+      {
+        "kind": "comparison",
+        "status": "published",
+        "detail": "主店は食事コーヒー付の具体額と税サービス料確認済で優先。代替店は8～21時・駅側だが商品単価未確認のため店頭3000円条件。博物館は鑑賞、屋外広場は無料休憩という別役割。",
+        "evidenceIds": [
+          "ev-7",
+          "ev-8",
+          "ev-11",
+          "ev-17",
+          "ev-18",
+          "ev-15"
+        ],
+        "stepIds": [
+          "s2",
+          "s5",
+          "s7"
+        ]
+      },
+      {
+        "kind": "rest",
+        "status": "published",
+        "detail": "アクトの森ショパンの丘、板屋町111-1の屋外公園。無料6～19時、ベンチの案内あり。正確な入口階と当日の席は未確認。",
+        "evidenceIds": [
+          "ev-14",
+          "ev-15",
+          "ev-25",
+          "ev-26"
+        ],
+        "stepIds": [
+          "s6",
+          "s7"
+        ]
+      }
+    ]
+  },
+  "improvementDiagnosis": {
+    "complete": false,
+    "verifiedDetails": 4,
+    "supportedRequired": 3,
+    "supportedOptional": 0,
+    "gaps": [
+      {
+        "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "fields": [
+          "主カフェの営業時間・所在地・利用方式と食事飲物甘味の公式掲載価格、税サービス料"
+        ]
+      }
+    ],
+    "causes": [
+      "required_unknown"
+    ],
+    "achievements": [
+      "detail:official-visit:hamamatsu-gakkihaku",
+      "official-visit:hamamatsu-gakkihaku:museum",
+      "detail:official-public-space:hamamatsu-actcity-gardens",
+      "official-public-space:hamamatsu-actcity-gardens:rest",
+      "detail:official-coffee:4544",
+      "official-coffee:4544:backup",
+      "detail:official-cafe:okura-hamamatsu-season",
+      "answer:interactive-visual-artifact",
+      "answer:concrete-action-plan"
+    ]
+  },
+  "publication": {
+    "source": "saved-live-run",
+    "answerEdited": false,
+    "answerSha256": "67f6f062976bc73f25a3d8f18f77a777ba6b88c5327b04c1ecadf9343aaee4a9",
+    "taskStatusPreserved": true,
+    "originalStrictVerdictPreserved": true
+  }
+}
