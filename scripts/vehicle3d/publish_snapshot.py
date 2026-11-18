@@ -23,6 +23,16 @@ def publish(run, destination):
         (destination / ("index.html" if name == "report.html" else name)).write_bytes(
             source.read_bytes()
         )
+    for source_name, target_name in [
+        ("image-audit.html", "image-audit.html"),
+        ("image-metrics.json", "image-metrics.json"),
+        ("render-checks.json", "image-render-checks.json"),
+    ]:
+        source = run / "image-audit" / source_name
+        if source.is_file():
+            if source.stat().st_size > 750_000:
+                raise ValueError(f"Image audit review file too large: {source_name}")
+            (destination / target_name).write_bytes(source.read_bytes())
     for relative, name in [
         ("baseline/preview.png", "before.jpg"),
         ("reconstructed.png", "after.jpg"),
@@ -37,7 +47,9 @@ def publish(run, destination):
         status=result["status"],
         precisionStatus="not-certified",
         physicalAccuracyCertified=False,
-        exitCode=0 if result["status"] == "improved" else 2,
+        exitCode=0
+        if result.get("deliverable_accepted", result["status"] == "improved")
+        else 2,
         sourceFiles={
             str(p.relative_to(ROOT)): sha(p)
             for p in sorted(scripts.iterdir())

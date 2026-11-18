@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "improved-incomplete",
+  "status": "image-match-failed",
   "profile": "Japan 2026 KICKS G e-4ORCE / YBU official 360 viewer",
   "baseline": {
     "mean_iou": 0.834217482509607,
@@ -185,7 +185,8 @@
       "independent physical measurements or OEM CAD",
       "surface and hidden-part tolerances"
     ],
-    "appearance_gate": false
+    "appearance_gate": false,
+    "original_image_gate": false
   },
   "voxel_size_mm": 32.28125,
   "training_views": [
@@ -251,5 +252,30 @@
     0.06936279317181913
   ],
   "same_camera_baseline_iou": 0.834217482509607,
-  "duration_s": 45.107
+  "duration_s": 92.789,
+  "image_audit": {
+    "status": "image-match-failed",
+    "primary_region": "reference_roi",
+    "metrics": {
+      "pooled_psnr_db": 12.022964840059615,
+      "pooled_mse": 0.06276297424716862,
+      "perfect_match": false,
+      "mean_ssim": 0.4522973191419896,
+      "worst_psnr_db": 10.304742765806843,
+      "worst_ssim": 0.30264285932541435,
+      "views": 12,
+      "pixels": 2738435
+    },
+    "original_input": {
+      "psnr_db": 11.718773315560686,
+      "perfect_match": false,
+      "mse": 0.06731667684374788,
+      "ssim": 0.3273435937318086,
+      "mae_8bit": 40.971200980392155,
+      "pixels": 32640,
+      "ssim_pixels": 28980
+    },
+    "source": "actual Blender render; not software projection or silhouette"
+  },
+  "deliverable_accepted": false
 }

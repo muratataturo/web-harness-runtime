@@ -1,10 +1,10 @@
 # web-harness-runtime
 
-[写真から3Dを復元・検証した実行レポート](docs/vehicle3d/index.html) — [処理・結果・限界](docs/vehicle3d/README.md) / [実行方法](scripts/vehicle3d/README.md)。
+[実レンダリングのPSNR・SSIMと差分を見る](docs/vehicle3d/image-audit.html) — [処理・計測結果](docs/vehicle3d/README.md) / [実行方法](scripts/vehicle3d/README.md) / [輪郭・3Dの補助資料](docs/vehicle3d/index.html)。
 
-車の画像を `gpt-6.2-astra` でBlenderコード・概略三面図・Python走行デモにした試作を整理し、公式36方向の画像で復元・選択・最終テストを分ける自律3D runtimeを追加しました。最終テスト12方向の輪郭IoUは **0.832 → 0.905**。一方、写真の色の再投影は **14.1 dB（設定閾値20 dB未達）** で、表面・実車精度も未認証です。runtimeは「改善したが未達あり」として終了コード2を返します。近似モデルが精密CADになったとは扱いません。
+車の画像を `gpt-6.2-astra` でBlenderコードにした試作と、公式36方向で復元する自律runtimeです。**画像としては一致していません。** 実際のBlenderレンダーでは、元の指定画像に対して **PSNR 11.72 dB・SSIM 0.327**、未使用12視点の車体固定ROIでは **PSNR 12.02 dB・SSIM 0.452**。輪郭IoU 0.905を画像品質の根拠にはしません。白背景を含むSSIM約0.84と車体周辺の値を区別し、欠落部分も誤差に含めます。runtimeはPSNR・SSIMの基準未達で `image-match-failed`・終了コード2となり、モデルの最終採用を拒否します。
 
-大きな3Dモデル・原寸写真・格子データ・ZIPはGitに含めず、再生成用コードと小さなHTML・JSON・縮小画像を掲載しています。HTMLでは縮小した実メッシュを回して確認できます。実行は `VEHICLE3D_PYTHON=.venv/bin/python npm run vehicle3d -- --blender /path/to/blender`。Python環境とBlenderを用意してください。既存の調査Chat/MCPにこの3D処理を接続する機能は未実装です。
+大きなモデル・原寸写真・格子・ZIPはGit対象外です。READMEと小さなHTML・JSON・縮小画像、図面・走行デモの再現コードを保存しています。実行は `VEHICLE3D_PYTHON=.venv/bin/python npm run vehicle3d -- --blender /path/to/blender`。Python環境とBlenderが必要です。既存の調査Chat/MCPへの接続は未実装です。
 
 [背景地図の403画像対策](docs/map-background-fix.md) — ファイル直開き対応、HTTP状態検査、失敗時の概略表示を実装。
 

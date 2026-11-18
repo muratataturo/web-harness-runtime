@@ -93,6 +93,55 @@ try {
   );
   assert.deepEqual(errors, []);
   assert.deepEqual(requests, [], "Report must work offline");
+  const imageMetrics = JSON.parse(
+    await readFile(resolve("docs/vehicle3d/image-metrics.json"), "utf8"),
+  );
+  assert.equal(imageMetrics.primary_metric, "reference_roi PSNR + SSIM");
+  assert.equal(result.deliverable_accepted, false);
+  await page.goto(
+    pathToFileURL(resolve("docs/vehicle3d/image-audit.html")).href,
+  );
+  await page.waitForFunction(() =>
+    [...document.images].every((i) => i.complete && i.naturalWidth > 0),
+  );
+  const input = imageMetrics.variants.delivered.input_target_fit.reference_roi;
+  assert.ok(
+    (await page.locator("body").innerText()).includes(
+      `PSNR ${input.psnr_db.toFixed(2)} dB / SSIM ${input.ssim.toFixed(3)}`,
+    ),
+  );
+  const score = imageMetrics.variants.delivered.aggregate.reference_roi;
+  assert.ok(
+    (await page.locator("body").innerText()).includes(
+      score.pooled_psnr_db.toFixed(2),
+    ),
+  );
+  assert.ok(
+    (await page.locator("body").innerText()).includes(
+      score.mean_ssim.toFixed(3),
+    ),
+  );
+  assert.equal(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+    true,
+  );
+  await page.screenshot({
+    path: `${out}/image-audit-mobile.jpg`,
+    fullPage: true,
+    type: "jpeg",
+    quality: 75,
+  });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.screenshot({
+    path: `${out}/image-audit-desktop.jpg`,
+    fullPage: true,
+    type: "jpeg",
+    quality: 75,
+  });
+  assert.deepEqual(errors, []);
+  assert.deepEqual(requests, []);
   const receipt = JSON.parse(
     await readFile(resolve("docs/vehicle3d/receipt.json"), "utf8"),
   );
@@ -124,6 +173,7 @@ try {
         meshRotates: true,
         desktop: true,
         mobile: true,
+        actualRenderImageMetrics: true,
         errors,
       },
       null,

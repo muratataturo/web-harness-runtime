@@ -28,7 +28,8 @@
     "minValidationIoU": 0.9,
     "minImprovement": 0.01,
     "maxDimensionErrorMm": 5,
-    "minAppearancePSNR": 20
+    "minAppearancePSNR": 20,
+    "minAppearanceSSIM": 0.8
   },
   "physicalCertification": false
 }

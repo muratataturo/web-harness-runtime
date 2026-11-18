@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 import numpy as np
 from PIL import Image
-from quality import assess_precision, choose_candidate
+from quality import assess_precision, choose_candidate, apply_image_audit
 from reconstruction import (
     foreground,
     calibrate,
@@ -487,6 +487,39 @@ def run(args):
         colors=base64.b64encode(preview_colors[pf].tobytes()).decode(),
         count=int(len(pf) * 3),
     )
+    result["status"] = "image-audit-pending"
+    (out / "result.json").write_text(json.dumps(result, indent=2))
+    event(
+        "audit_actual_rendered_images",
+        primary_metrics=["PSNR", "SSIM"],
+        region="reference_roi",
+    )
+    with (out / "image-audit.log").open("w") as log:
+        rendered_audit = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT / "audit_images.py"),
+                "--run",
+                str(out),
+                "--cache-dir",
+                str(cache),
+                "--output",
+                str(out / "image-audit"),
+                "--blender",
+                args.blender,
+            ],
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            timeout=400,
+        )
+    if rendered_audit.returncode not in (0, 2):
+        raise RuntimeError("Actual-render image audit failed; see image-audit.log")
+    apply_image_audit(
+        result,
+        json.loads((out / "image-audit/image-metrics.json").read_text()),
+        config["quality"],
+    )
+    result["duration_s"] = round(time.monotonic() - started, 3)
     (out / "result.json").write_text(json.dumps(result, indent=2))
     from report import write_report
 
@@ -499,13 +532,7 @@ def run(args):
         appearance_gate=assessment["appearance_gate"],
         physical_accuracy_certified=False,
     )
-    return (
-        0
-        if assessment["visual_gate"]
-        and assessment["dimension_gate"]
-        and assessment["appearance_gate"]
-        else 2
-    )
+    return 0 if result["deliverable_accepted"] else 2
 
 
 def main():

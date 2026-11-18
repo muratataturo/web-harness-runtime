@@ -1,34 +1,38 @@
 {
   "schemaVersion": 1,
-  "status": "improved-incomplete",
+  "status": "image-match-failed",
   "precisionStatus": "not-certified",
   "physicalAccuracyCertified": false,
   "exitCode": 2,
   "sourceFiles": {
-    "scripts/vehicle3d/README.md": "9614373c35fcf316ef3c418ca9e47a47aa90a6a4034db36e780d978abcef7084",
+    "scripts/vehicle3d/README.md": "9da3adf2cac8e38a8bf46c3064370bb9db137db9d942a64ac23420be0157623d",
     "scripts/vehicle3d/animate_scene.py": "5f030c9f114340cab04b1d4de78c6bc062690593361b8bd0fa9180183fd65041",
+    "scripts/vehicle3d/audit_images.py": "996f511907d575b680640dc5fae894472a1e424238d86d23e2e8d27dd7cbf628",
     "scripts/vehicle3d/build_scene.py": "1e2bad2ad52d401ed5c8da14da91f6acf9c18a4771868c83efcb9456c5086b03",
     "scripts/vehicle3d/check_animation.py": "be5b5b6f6058a6cd5fb597eec4b172fd8fda5865c88b1a83310291d68df0bb17",
     "scripts/vehicle3d/cli.mjs": "981bd233e924eac840245a6b2c24fe57ac70817546c1573764ab1684095150cc",
     "scripts/vehicle3d/export_dxf.py": "bf504156b0764fe004d42bbdfd6e9bef5f269917c5c5cbc188836c3cdd44397a",
     "scripts/vehicle3d/export_reconstruction.py": "069d351c029615fdead00f50eee822acaa1394e41e07add00f2bc1baf3a300f1",
+    "scripts/vehicle3d/image_metrics.py": "6fd7896a8ea6233af783ff8ae6af1e28553caaff8f3ca0fbfc0a2b8a583f2c99",
     "scripts/vehicle3d/make_drawing.py": "d4dcdc025548df358fa5a7c4f3d85f4f492846f40c526b5441a7753c0f991ea6",
-    "scripts/vehicle3d/publish_snapshot.py": "44f40e1df0553f751e286680ada7d86b88c4597d8bf2abdd34746d0d2f6203e3",
-    "scripts/vehicle3d/quality.py": "fe89847dc7d2b4c263da83b7a75e59f78f06325ff3dc71adf6bb6e177ba6b60d",
+    "scripts/vehicle3d/publish_snapshot.py": "62421b8526f7fa0e1458ed13263b6e82afb62707ddad157671f2137b152f7ac9",
+    "scripts/vehicle3d/quality.py": "94e12b1b9e31106f9d0d98fe0cc19af7c7040ff9b49237b8f57618377c30fcef",
     "scripts/vehicle3d/reconstruction.py": "084f2b3320ac69bff7cbd9a1585509ccdd122d23eaf15c7c1178cf349c4f550e",
-    "scripts/vehicle3d/report.py": "ab071cd493a59f1e92544d128efbd51b31ec4ce1c94416cb7d17063ce2955533",
+    "scripts/vehicle3d/render_image_audit.py": "9df1e7f0b40ce4426d614bafe67620c1fb3402c6c7e9227a11dc4153f7b7bd17",
+    "scripts/vehicle3d/report.py": "3eb4923ebde2f0f5c30603e9c701c4ef92a024edf3ee609f35e66681cb0ba74c",
     "scripts/vehicle3d/requirements.txt": "d122ac4b19be9bdbed59f1d187820a09c290bc7aa6e31bc6cc4732e8b019e267",
-    "scripts/vehicle3d/runtime.py": "ffd8eb5eda06bd84fc2735508bdcaf4040d32941665ed3aea2c083baec8843c4",
+    "scripts/vehicle3d/runtime.py": "8787c30319c9976a2d64d8b2af3c7d34564f2914edb16583730e48a1e31fd360",
     "scripts/vehicle3d/simulate.py": "b014ed824955ce678dc188f265136ae87654b3ea66f6b4f3890a00291fc00a98",
+    "scripts/vehicle3d/test_image_metrics.py": "575611dadbda56c02f2fc11afaddb57d0c74ab4a555d8b767adb7c29e7a6857c",
     "scripts/vehicle3d/test_runtime.py": "a27b2fd51290c1f4867f247220c94ef6c6cd10c1804c6f9069733155b9f03354",
-    "scripts/vehicle3d/verify-report.mjs": "cb55013a4ce834de4ea9fe6def192c00a91a51b779850b2a04bf9b4362929392",
+    "scripts/vehicle3d/verify-report.mjs": "dde4900accf16f3eb24cc3e05486c155a4f174af8eb80406036cc7f67682f273",
     "scripts/vehicle3d/verify_outputs.py": "4eae75017b9533b2f1b2ba182a612fb39ed8303d69d825945b8349bfd4bb1032"
   },
-  "configSha256": "6f6f65fa3768ce9c199f3a91be698e03df3e387b9c68a64e74163019ad0c53f9",
+  "configSha256": "362e16f41d703b2ac0a108a228dd532ce774b660b1c7d3343bc31671084e0a69",
   "generatedFiles": {
     "reconstructed.blend": {
       "bytes": 7326324,
-      "sha256": "40da4217e3a6057a909d84fce0d9695570a4098b9e373a75788f12540cd70ec2",
+      "sha256": "6429ec0008388ac216978ea7f0bcb0cb8ba54d83dcddb39235841b5c162f2e1b",
       "includedInGit": false
     },
     "reconstructed.glb": {
@@ -49,8 +53,8 @@
   },
   "reviewFiles": {
     "README.md": {
-      "bytes": 6284,
-      "sha256": "1755ffc0eb1478669bccd9258601f46276d2109c0654ef37ad9779620e66aeca"
+      "bytes": 9102,
+      "sha256": "9d25dab480f9daefa0c9c646163e2983c0d75685b96bbf2a460e25096b383149"
     },
     "after.jpg": {
       "bytes": 29126,
@@ -61,16 +65,28 @@
       "sha256": "244418aca6a64ed57ceda5050a21faa8eed5ed2d5332164a60698e61e8b365e3"
     },
     "events.jsonl": {
-      "bytes": 3473,
-      "sha256": "2a41f61711b3eb5813923b61928d029bc1eac60053f5f4f23406143b3b2175c1"
+      "bytes": 3612,
+      "sha256": "5fe797f56d8bee4108879e939d08e6f81df46daa705dde5cf9408151cb281c55"
     },
     "evidence.json": {
       "bytes": 11108,
       "sha256": "7c9586a06952a3eeecb3d81b0e53b2b64d9fb659bcae1aea972ee86729f5af37"
     },
+    "image-audit.html": {
+      "bytes": 373950,
+      "sha256": "da80276e86fd91737d34f23b9a68c6f762017787c43a2296aae3b311e97877b7"
+    },
+    "image-metrics.json": {
+      "bytes": 60511,
+      "sha256": "0393751da14c24b22944a5a45e300294e4bf91b579d966053fda851006984e0e"
+    },
+    "image-render-checks.json": {
+      "bytes": 10428,
+      "sha256": "c4d76a55bcbbcf6d5b4dd00d81513a512ac5bf79387f1627e60e488dc4a4580a"
+    },
     "index.html": {
-      "bytes": 378895,
-      "sha256": "164c611ddc6a4486a778f5da4a87e41a3fe6ada2507b515ddc1769ca7b1dc620"
+      "bytes": 379272,
+      "sha256": "87bc42d33d91c7aee3edabcd4fc4cbafeb3af731dc20172a52cf258bfdff8d2d"
     },
     "prior-drawing.pdf": {
       "bytes": 71524,
@@ -85,8 +101,8 @@
       "sha256": "c4146da14e0e288bbce6b6e9eea1b776ebf8e7a2f4c76f9db093600fc4cac898"
     },
     "result.json": {
-      "bytes": 6523,
-      "sha256": "771cbebee2385d2085b2a52244b073935544492165fd3076b83815af4cd04510"
+      "bytes": 7324,
+      "sha256": "94d77f622a54075a2f7dab34b09a9e5d080bea6a0c072c145449af05f0edeb89"
     },
     "test-overlays.jpg": {
       "bytes": 26276,
