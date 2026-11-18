@@ -185,6 +185,13 @@ const prior: Record<string, [number, number, number]> = {
   meal: [40, 60, 90],
   rest: [10, 15, 30],
 };
+const routeModeWords: Record<string, RegExp> = {
+  walk: /徒歩|\bwalk(?:ing)?\b/i,
+  transit: /電車|鉄道|地下鉄|バス|公共交通|\b(?:train|bus|transit|subway)\b/i,
+  car: /自動車|タクシー|(?<![電列汽客貨乗転])車(?!椅子)|\b(?:car|taxi|driv(?:e|ing))\b/i,
+  indoor:
+    /館内|建物内|エレベーター|エスカレーター|階段|\b(?:indoor|elevator|stairs)\b/i,
+};
 function q(values: number[], p: number) {
   const a = [...values].sort((a, b) => a - b);
   return a[Math.max(0, Math.ceil(a.length * p) - 1)]!;
@@ -409,7 +416,7 @@ export function assessJourneyState(task: Task, plan: ActionPlan) {
             [...quote.matchAll(/(\d+(?:\.\d+)?)\s*分/g)].some(
               (m) => Number(m[1]) === l.publishedMinutes,
             ) &&
-            (l.mode !== "walk" || /徒歩|walk/i.test(quote))
+            !!routeModeWords[l.mode]?.test(quote)
           );
         });
         if (!supported) throw Error();

@@ -402,13 +402,13 @@ test("floor-specific route history is distinct from venue-level dwell history", 
   assert.equal(assessJourneyState(task, plan).legs[0]!.recommendedMinutes, 18);
 });
 
-test("published durations require the exact amount and direction in the same quotation", () => {
+test("published durations require the exact amount, mode and direction in the same quotation", () => {
   const { task, plan } = fixture();
   task.pages.push({
     id: "route",
     url,
     title: "経路案内",
-    text: "駅Aから博物館Bへ徒歩25分。博物館Bから駅Aへ徒歩35分。",
+    text: "駅Aから博物館Bへ徒歩25分。博物館Bから駅Aへ徒歩35分。駅Aから博物館Bへ車で25分。駅Aから博物館Bへ電車で25分。",
     links: [],
     capturedAt: task.createdAt,
     truncated: false,
@@ -422,6 +422,37 @@ test("published durations require the exact amount and direction in the same quo
       s.includes("掲載移動時間"),
     ),
   );
+  leg.mode = "car";
+  assert.ok(
+    assessJourneyState(task, plan).issues.some((s) =>
+      s.includes("掲載移動時間"),
+    ),
+  );
+  addEvidence(task, "route", "駅Aから博物館Bへ車で25分。");
+  leg.evidenceIds = ["ev-4"];
+  assert.ok(
+    !assessJourneyState(task, plan).issues.some((s) =>
+      s.includes("掲載移動時間"),
+    ),
+  );
+  leg.mode = "walk";
+  leg.evidenceIds = ["ev-3"];
+  addEvidence(task, "route", "駅Aから博物館Bへ電車で25分。");
+  leg.evidenceIds = ["ev-5"];
+  leg.mode = "car";
+  assert.ok(
+    assessJourneyState(task, plan).issues.some((s) =>
+      s.includes("掲載移動時間"),
+    ),
+  );
+  leg.mode = "transit";
+  assert.ok(
+    !assessJourneyState(task, plan).issues.some((s) =>
+      s.includes("掲載移動時間"),
+    ),
+  );
+  leg.mode = "walk";
+  leg.evidenceIds = ["ev-3"];
   leg.publishedMinutes = 35;
   assert.ok(
     assessJourneyState(task, plan).issues.some((s) =>
