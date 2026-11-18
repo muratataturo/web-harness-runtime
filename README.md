@@ -1,5 +1,11 @@
 # web-harness-runtime
 
+[写真との一致を比較する：改善版・実レンダー・差分](docs/vehicle3d/photometric-refinement.html) — [計測結果と制限](docs/vehicle3d/README.md) / [再実行方法](scripts/vehicle3d/README.md)。
+
+車の画像からBlenderモデルを作る自律runtimeを改善しました。車体固定ROIで、元画像への適合は **SSIM 0.909・PSNR 23.80 dB**（目標0.85・20 dBを達成）、未使用12視点は **SSIM 0.714・PSNR 17.87 dB**（未達）です。元画像を含む25枚の写真を固定3D表面へ投影する外観再現であり、元画像の高得点だけで未知視点の精度や精密CADを保証しません。総合ゲートは `novel-view-target-unmet`・終了コード2。輪郭IoUや白背景全体のSSIMを合格根拠にしません。
+
+大きなモデル・原寸写真・格子はGit対象外です。小さな比較画像・HTML・計測JSON、Blender再現コードを保存しています。元の `gpt-6.2-astra` による試作と [旧モデルの画像監査](docs/vehicle3d/image-audit.html) も残しています。今回の写真復元はCOLMAP/OpenCVとローカルBlenderを使用し、新たなMCP接続は追加していません。
+
 [背景地図の403画像対策](docs/map-background-fix.md) — ファイル直開き対応、HTTP状態検査、失敗時の概略表示を実装。
 
 [3案比較と10秒レビューの改善ループ](docs/proposal-comparison-runtime.md) — [旅行の実生成](docs/comparison-travel.html#proposal-comparison) / [人生計画の実生成](docs/comparison-life.html#proposal-comparison)。

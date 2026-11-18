@@ -1,0 +1,98 @@
+{
+  "checks": [
+    {
+      "frame": 3,
+      "max_projection_error_px": 0.0005233461973711517,
+      "sha256": "5bf836ce177a2c485288d4130b9c2430648b012cceafc8661a2b7c457bfa2058"
+    },
+    {
+      "frame": 6,
+      "max_projection_error_px": 0.00020344946117102392,
+      "sha256": "fb82c4adabe28e866299adff486b1c3f4b19ab5d7a82e8d988810f4cf12309aa"
+    },
+    {
+      "frame": 9,
+      "max_projection_error_px": 0.00019011499998295182,
+      "sha256": "9b51fa196f52dbbcfd40beb7aa21654bf072a866d81044e2dcc0a74a765ac024"
+    },
+    {
+      "frame": 12,
+      "max_projection_error_px": 0.00018464950491917234,
+      "sha256": "4956a89602dca6dd69e343f3d5b5a7b2455080f232f99eebf41f6fc27a8d50be"
+    },
+    {
+      "frame": 15,
+      "max_projection_error_px": 0.00020265015708451788,
+      "sha256": "39ff6ffe8bd1c76df172d00fc53360af61346c8e88520a913ac62c3014b12ed0"
+    },
+    {
+      "frame": 18,
+      "max_projection_error_px": 0.00031728345822341263,
+      "sha256": "60d1dbc95e62de6dadc53cd628a5853be7c8eb4cfc83f0715be85007bf91ef05"
+    },
+    {
+      "frame": 21,
+      "max_projection_error_px": 0.00021133531418984113,
+      "sha256": "1079bc928dcedbdf516044e15b67d0ad8d5dc07f5952451ccd1cbdd2a6b0dc83"
+    },
+    {
+      "frame": 24,
+      "max_projection_error_px": 0.0002794002823028098,
+      "sha256": "b2181d7e08b4d84c3e2880dc0df946417fd645269b4de082ec59ae4a19123ded"
+    },
+    {
+      "frame": 27,
+      "max_projection_error_px": 0.0004992937235054458,
+      "sha256": "9ce75225b90f9a1815ad7f9ef50db67cb3c8003c8dbfa30b829ad6cca52446fd"
+    },
+    {
+      "frame": 30,
+      "max_projection_error_px": 0.00017740168521346896,
+      "sha256": "46c6432f24d16f188ca60060c34035fcef62127a866122e129d579449ea621f9"
+    },
+    {
+      "frame": 33,
+      "max_projection_error_px": 0.00020022295320244938,
+      "sha256": "1067b26e2e7b50d18001613c1d5af372c6428351c8ce534ac04e767d6243c185"
+    },
+    {
+      "frame": 36,
+      "max_projection_error_px": 0.0005066057024848408,
+      "sha256": "85f32c2a3cd61a19fd0a570feeceb7f97cfca73dd893487733a0242e46c2668e"
+    },
+    {
+      "frame": "input",
+      "max_projection_error_px": 9.946076451622745e-05,
+      "sha256": "b1125b75522e08762e4c1292870cb64f292e279caee8059c8c7641ba58c6b26a"
+    }
+  ],
+  "source_frames": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    11,
+    13,
+    14,
+    16,
+    17,
+    19,
+    20,
+    22,
+    23,
+    25,
+    26,
+    28,
+    29,
+    31,
+    32,
+    34,
+    35,
+    "input"
+  ],
+  "source_image_count": 25,
+  "renderer": "4.5.3 LTS"
+}

@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "model_requested": "gpt-6.2-astra",
+  "code_generator_evidence": "generation.log",
+  "blender_version": "4.5.3 LTS",
+  "render_engine": "Cycles CPU",
+  "mesh_count": 93,
+  "glb_meshes": 93,
+  "glb_nodes": 100,
+  "vehicle_only_export": true,
+  "simulation_samples": 481,
+  "limitations": [
+    "approximate appearance",
+    "assumed dimensions",
+    "not a manufacturing drawing",
+    "kinematic motion only"
+  ],
+  "files": {
+    "vehicle.blend": {
+      "bytes": 1631642,
+      "sha256": "dccea5b71e227e8551b53386b97c63be2a5b72421900236639d369572782e3c1"
+    },
+    "driving.blend": {
+      "bytes": 2110631,
+      "sha256": "c951adac7bc981b748f259b37a681a17adf477e19552d48f7ee10e75ce6d6691"
+    },
+    "vehicle.glb": {
+      "bytes": 1913828,
+      "sha256": "c38b822ee96fd1c575d575ca7fc1a77be6312e69842c1704c8e5430515f04d2e"
+    },
+    "vehicle.stl": {
+      "bytes": 1808084,
+      "sha256": "6ad5f67379170e720a4be17a1b42f949fc379589207511301c9fa5d510125a70"
+    },
+    "preview.png": {
+      "bytes": 1510086,
+      "sha256": "aa6e59d8e32569edec1a171d5195292c9e1059f0889d8c6ae9cefdca9fd0b0dc"
+    },
+    "front.png": {
+      "bytes": 856340,
+      "sha256": "7075d51b4863cafb0bc4fdd0dd693bdc4a3a83e33f1ec3169b013ff5137626de"
+    },
+    "side.png": {
+      "bytes": 897830,
+      "sha256": "9892b9a089cfca0af68e06b945bfa2c1fdd6f00ba87d1418d3ab83b2c6c8b190"
+    },
+    "top.png": {
+      "bytes": 860499,
+      "sha256": "471f5a393c85e606911fa056930ce26efc547a90911da48f6ea2540886d928fd"
+    },
+    "drawing.pdf": {
+      "bytes": 71524,
+      "sha256": "fbd1609840c8d9eaa202bef1b24b09dd266cef0c0785c62e626bca71ec08eaee"
+    },
+    "drawing.png": {
+      "bytes": 211718,
+      "sha256": "529665ce8b2755eb957339f14a7c6a525a59f1fcedaaef8b64a0506e74444132"
+    },
+    "drawing.dxf": {
+      "bytes": 441186,
+      "sha256": "a4a33eb8550782acf9f486a62fb0add4dafc2fbc89c013368407a4f4fef20964"
+    },
+    "motion.gif": {
+      "bytes": 1305916,
+      "sha256": "78680e7b91f73f1b7c0a291c8c55a768eddede8cd71f4057d8fac8e2b4533d18"
+    },
+    "trajectory.csv": {
+      "bytes": 110821,
+      "sha256": "58510a285e45489e927952b7c718a4554448fa7c956aa7c3d21b0fce014d37a3"
+    },
+    "trajectory.json": {
+      "bytes": 209333,
+      "sha256": "89af9eb9f0609000f544563b53e0439c1f9898418093913799adc6c803835a07"
+    },
+    "simulation-checks.json": {
+      "bytes": 448,
+      "sha256": "9633a7a9d31283940ff75bcdee73d034384bf59d4ea437d36af55e84ec69a3d3"
+    },
+    "geometry.json": {
+      "bytes": 2987,
+      "sha256": "58193c29e2af542f486737b1206aa72827cc4cc96a655e866780a76a344058ed"
+    },
+    "animation-checks.json": {
+      "bytes": 1215,
+      "sha256": "1b7785c9f20d809b8a2dacd62cef58394273284c168aaf7ad680a5f68d60621b"
+    }
+  },
+  "scope": "Prior procedural 93-part model and motion experiment; not multi-view or physical-accuracy validation."
+}

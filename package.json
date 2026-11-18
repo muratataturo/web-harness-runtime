@@ -8,6 +8,7 @@
     "web-harness": "dist/cli.js"
   },
   "scripts": {
+    "vehicle3d": "node scripts/vehicle3d/cli.mjs",
     "dev": "node --import tsx src/cli.ts",
     "build": "node scripts/build-artifact.mjs && tsc",
     "start": "node dist/cli.js",

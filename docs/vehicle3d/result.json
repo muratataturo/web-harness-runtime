@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "status": "image-match-failed",
+  "profile": "Japan 2026 KICKS G e-4ORCE / YBU official 360 viewer",
+  "baseline": {
+    "mean_iou": 0.834217482509607,
+    "per_view_iou": {
+      "2": 0.8217016373983173,
+      "5": 0.8551533930334707,
+      "8": 0.8474031583676008,
+      "11": 0.8620121172155133,
+      "14": 0.7973103880562995,
+      "17": 0.8513405362144858,
+      "20": 0.8374841293095029,
+      "23": 0.850092456800357,
+      "26": 0.8241412119820204,
+      "29": 0.8300624442462088,
+      "32": 0.8147783251231527,
+      "35": 0.8191299923683542
+    }
+  },
+  "rounds": [
+    {
+      "resolution": 96,
+      "voxel_size_mm": 53.802085876464844,
+      "occupied_voxels": 61830,
+      "grid_shape": [
+        97,
+        54,
+        40
+      ],
+      "boundary_voxels": 0,
+      "mean_iou": 0.9005301393097157,
+      "per_view_iou": {
+        "2": 0.934107823561445,
+        "5": 0.9245078806737469,
+        "8": 0.9190897597977244,
+        "11": 0.920756774897223,
+        "14": 0.7989415189203493,
+        "17": 0.9121920927344235,
+        "20": 0.911660539009006,
+        "23": 0.9341407038447765,
+        "26": 0.9020811190729249,
+        "29": 0.9188888888888889,
+        "32": 0.813423545331529,
+        "35": 0.9165710249845502
+      },
+      "adopted": true,
+      "triangles": 38116
+    },
+    {
+      "resolution": 160,
+      "voxel_size_mm": 32.28125,
+      "occupied_voxels": 286480,
+      "grid_shape": [
+        161,
+        90,
+        66
+      ],
+      "boundary_voxels": 0,
+      "mean_iou": 0.9031113532785188,
+      "per_view_iou": {
+        "2": 0.9360828488372093,
+        "5": 0.9294113660239249,
+        "8": 0.9250123161376592,
+        "11": 0.9255917408091321,
+        "14": 0.8015044763468772,
+        "17": 0.9164011091337996,
+        "20": 0.9168383718966391,
+        "23": 0.9347216790509711,
+        "26": 0.9047569981109393,
+        "29": 0.9170650503670821,
+        "32": 0.8135739760077813,
+        "35": 0.9163763066202091
+      },
+      "adopted": true,
+      "triangles": 119554
+    },
+    {
+      "resolution": 224,
+      "voxel_size_mm": 23.05803680419922,
+      "occupied_voxels": 786148,
+      "grid_shape": [
+        225,
+        126,
+        93
+      ],
+      "boundary_voxels": 0,
+      "mean_iou": 0.903456801119286,
+      "per_view_iou": {
+        "2": 0.937218099810854,
+        "5": 0.9292960135708227,
+        "8": 0.925056322162771,
+        "11": 0.9263113722198909,
+        "14": 0.8003172924378635,
+        "17": 0.9155908639523337,
+        "20": 0.9166920139240934,
+        "23": 0.9372572062808083,
+        "26": 0.9061361918504776,
+        "29": 0.91550496653451,
+        "32": 0.8151369455999136,
+        "35": 0.9169643250870927
+      },
+      "adopted": false,
+      "triangles": 246870
+    }
+  ],
+  "appearance": {
+    "mean_psnr_db": 14.103404579769714,
+    "per_view_psnr_db": {
+      "3": 15.008785296358106,
+      "6": 14.095405500750811,
+      "9": 13.349515166322641,
+      "12": 14.067491025182282,
+      "15": 14.271003692564395,
+      "18": 14.393960394955876,
+      "21": 16.12210536422616,
+      "24": 15.493777617509677,
+      "27": 13.049075683102307,
+      "30": 13.322838423205067,
+      "33": 12.783938992244293,
+      "36": 13.282957800814968
+    },
+    "domain": "sRGB, foreground intersection, held-out cameras",
+    "rendering": "flat triangle vertex-color averages, depth sorted"
+  },
+  "final_test": {
+    "baseline": {
+      "mean_iou": 0.8324150458508807,
+      "per_view_iou": {
+        "3": 0.8322457857531267,
+        "6": 0.8328437827070462,
+        "9": 0.8472002303152439,
+        "12": 0.855727781344584,
+        "15": 0.7929295476322558,
+        "18": 0.8449468472404252,
+        "21": 0.836801821747106,
+        "24": 0.8320463928897853,
+        "27": 0.8280879166236714,
+        "30": 0.8613594890510949,
+        "33": 0.8062816188870152,
+        "36": 0.8185093360192144
+      }
+    },
+    "reconstructed": {
+      "mean_iou": 0.9054991083633515,
+      "per_view_iou": {
+        "3": 0.9452300548754748,
+        "6": 0.9130804269494867,
+        "9": 0.9140987681397814,
+        "12": 0.9302915082382763,
+        "15": 0.8287062329277378,
+        "18": 0.9178030303030303,
+        "21": 0.9188171338747707,
+        "24": 0.9237798886341304,
+        "27": 0.9043101893597836,
+        "30": 0.9201478224259718,
+        "33": 0.8272774060730829,
+        "36": 0.9224468385586895
+      }
+    },
+    "used_for_selection": false
+  },
+  "test_improvement_pp": 7.30840625124708,
+  "selected_resolution": 160,
+  "selected_validation_iou": 0.9031113532785188,
+  "improvement_pp": 6.889387076891174,
+  "dimensions_m": {
+    "lengthM": 4.364999771118164,
+    "widthM": 1.7999999523162842,
+    "heightM": 1.6100000143051147
+  },
+  "constraint_residual_mm": {
+    "lengthM": 0.00022888183615066282,
+    "widthM": 4.768371586472142e-05,
+    "heightM": 1.4305114648394124e-05
+  },
+  "assessment": {
+    "visual_gate": true,
+    "dimension_gate": true,
+    "physical_accuracy_certified": false,
+    "precision_status": "not-certified",
+    "missing_evidence": [
+      "calibrated camera intrinsics/extrinsics",
+      "independent physical measurements or OEM CAD",
+      "surface and hidden-part tolerances"
+    ],
+    "appearance_gate": false,
+    "original_image_gate": false
+  },
+  "voxel_size_mm": 32.28125,
+  "training_views": [
+    1,
+    4,
+    7,
+    10,
+    13,
+    16,
+    19,
+    22,
+    25,
+    28,
+    31,
+    34
+  ],
+  "validation_views": [
+    2,
+    5,
+    8,
+    11,
+    14,
+    17,
+    20,
+    23,
+    26,
+    29,
+    32,
+    35
+  ],
+  "test_views": [
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24,
+    27,
+    30,
+    33,
+    36
+  ],
+  "method": "multi-view silhouette visual hull; fused projected photographic vertex colors",
+  "limitations": [
+    "estimated affine cameras, not calibrated perspective",
+    "foreground mask may include contact shadows",
+    "silhouette visual hull does not recover concavities or hidden parts",
+    "projected photographic textures contain lighting",
+    "dimension residual is constraint satisfaction, not independently measured accuracy",
+    "wheelbase and mechanisms are not reconstructed as separate engineering parts"
+  ],
+  "baseline_generator": "gpt-6.2-astra (prior experiment, not called by this deterministic run)",
+  "affine_gauge_scale": [
+    0.9590149353882402,
+    0.7870924607622575,
+    0.9197046252727192
+  ],
+  "affine_gauge_translation": [
+    0.0,
+    0.0,
+    0.06936279317181913
+  ],
+  "same_camera_baseline_iou": 0.834217482509607,
+  "duration_s": 92.789,
+  "image_audit": {
+    "status": "image-match-failed",
+    "primary_region": "reference_roi",
+    "metrics": {
+      "pooled_psnr_db": 12.022964840059615,
+      "pooled_mse": 0.06276297424716862,
+      "perfect_match": false,
+      "mean_ssim": 0.4522973191419896,
+      "worst_psnr_db": 10.304742765806843,
+      "worst_ssim": 0.30264285932541435,
+      "views": 12,
+      "pixels": 2738435
+    },
+    "original_input": {
+      "psnr_db": 11.718773315560686,
+      "perfect_match": false,
+      "mse": 0.06731667684374788,
+      "ssim": 0.3273435937318086,
+      "mae_8bit": 40.971200980392155,
+      "pixels": 32640,
+      "ssim_pixels": 28980
+    },
+    "source": "actual Blender render; not software projection or silhouette"
+  },
+  "deliverable_accepted": false
+}

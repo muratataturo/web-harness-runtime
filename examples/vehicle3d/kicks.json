@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "profile": "Japan 2026 KICKS G e-4ORCE / YBU official 360 viewer",
+  "identity": "official viewer profile; exact grade of user thumbnail unverified",
+  "thumbnailUrl": "https://img1.kakaku.k-img.com/images/smartphone/icv/240x180_K0001791382.jpg",
+  "specification": {
+    "url": "https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/kicks/2606/pdf/kicks_2606_specsheet_01_v1.pdf",
+    "page": 2,
+    "reviewedOn": "2026-11-19",
+    "lengthM": 4.365,
+    "widthM": 1.8,
+    "heightM": 1.61,
+    "wheelbaseM": 2.655,
+    "frontTrackM": 1.565,
+    "rearTrackM": 1.555,
+    "tire": "225/45R19",
+    "note": "Manually reviewed from source PDF, not automatically parsed. Tire nominal geometry is not loaded rolling radius."
+  },
+  "spinManifestUrl": "https://www3.nissan.co.jp/content/nissan_prod/ja_JP/index/vehicles/new/kicks/exterior/jcr:content/freeEditorial/contentzone_e6ef/columns/columns12_7850/col1-par/vehicle360_b267.vehicle360_images.json",
+  "imageOrigin": "https://www-asia.nissan-cdn.net",
+  "colour": "YBU",
+  "trainingFrames": [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34],
+  "validationFrames": [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35],
+  "testFrames": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36],
+  "camera": { "initialAzimuthDeg": 55, "frameStepDeg": 10, "elevationDeg": 7 },
+  "voxelResolutions": [96, 160, 224],
+  "quality": {
+    "minValidationIoU": 0.9,
+    "minImprovement": 0.01,
+    "maxDimensionErrorMm": 5,
+    "minAppearancePSNR": 20,
+    "minAppearanceSSIM": 0.8
+  },
+  "physicalCertification": false
+}

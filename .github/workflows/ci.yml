@@ -6,6 +6,18 @@ on:
 permissions:
   contents: read
 jobs:
+  vehicle3d:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: scripts/vehicle3d/requirements.txt
+      - run: pip install -r scripts/vehicle3d/requirements.txt
+      - run: python -m unittest discover -s scripts/vehicle3d -p 'test_*.py'
+      # Blender/live image downloads require an explicitly selected local executable.
   runtime:
     runs-on: ubuntu-24.04
     strategy:
@@ -38,6 +50,7 @@ jobs:
       - run: npm run test:ui
       - run: npm run test:chat
       - run: npm run test:chat:runtime
+      - run: node scripts/vehicle3d/verify-report.mjs
       - run: npm run eval:visual
       - run: node scripts/eval-autonomous-itinerary.mjs
       - run: node scripts/eval-autonomous-itinerary.mjs --case hamamatsu
@@ -49,6 +62,7 @@ jobs:
         with:
           name: ux-screenshots
           path: |
+            .runtime/vehicle3d/report-qa
             .runtime/ui-qa
             .runtime/chat-qa
             .runtime/chat-runtime-fixture
