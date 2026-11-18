@@ -1,0 +1,373 @@
+{
+  "scope": "independent state + immutable answer + display; original live/factual verdict preserved",
+  "originalStatus": "partial",
+  "livePassed": false,
+  "specificity": "needs_detail",
+  "assessment": {
+    "version": 1,
+    "required": true,
+    "planHash": "77c06a0ab450726c0dc9fa323e750a5fa59bc56b514b8b298e058b1d12710148",
+    "status": "passed",
+    "issues": [],
+    "warnings": [
+      "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+    ],
+    "legs": [
+      {
+        "stepId": "a1",
+        "mode": "walk",
+        "from": "浜松駅",
+        "to": "浜松城",
+        "straightLineMeters": 1111,
+        "estimatedMeters": 1445,
+        "recommendedMinutes": 29,
+        "allocatedMinutes": 40,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a3",
+        "mode": "walk",
+        "from": "浜松城",
+        "to": "浜松城",
+        "straightLineMeters": 0,
+        "estimatedMeters": 0,
+        "recommendedMinutes": 0,
+        "allocatedMinutes": 8,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a5",
+        "mode": "indoor",
+        "from": "浜松城",
+        "to": "浜松城",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 8,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a7",
+        "mode": "walk",
+        "from": "浜松城",
+        "to": "浜松城",
+        "straightLineMeters": 0,
+        "estimatedMeters": 0,
+        "recommendedMinutes": 0,
+        "allocatedMinutes": 8,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a9",
+        "mode": "walk",
+        "from": "浜松城",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 1312,
+        "estimatedMeters": 1707,
+        "recommendedMinutes": 35,
+        "allocatedMinutes": 40,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a11",
+        "mode": "walk",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 143,
+        "estimatedMeters": 187,
+        "recommendedMinutes": 4,
+        "allocatedMinutes": 12,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a14",
+        "mode": "indoor",
+        "from": "浜松市楽器博物館",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 9,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a16",
+        "mode": "indoor",
+        "from": "浜松市楽器博物館",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 9,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a17",
+        "mode": "walk",
+        "from": "浜松市楽器博物館",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 143,
+        "estimatedMeters": 187,
+        "recommendedMinutes": 4,
+        "allocatedMinutes": 12,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a20",
+        "mode": "indoor",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 10,
+        "allocatedMinutes": 15,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a22",
+        "mode": "indoor",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 10,
+        "allocatedMinutes": 15,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a25",
+        "mode": "walk",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "浜松駅",
+        "straightLineMeters": 277,
+        "estimatedMeters": 360,
+        "recommendedMinutes": 8,
+        "allocatedMinutes": 20,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      }
+    ],
+    "stays": [
+      {
+        "place": "浜松城",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松城",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "meal",
+        "minutes": 60,
+        "minimumMinutes": 40,
+        "suggestedRange": [
+          60,
+          90
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松市楽器博物館",
+        "category": "museum",
+        "minutes": 95,
+        "minimumMinutes": 60,
+        "suggestedRange": [
+          90,
+          150
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松市楽器博物館",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "cafe",
+        "minutes": 34,
+        "minimumMinutes": 30,
+        "suggestedRange": [
+          45,
+          75
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "viewpoint",
+        "minutes": 35,
+        "minimumMinutes": 25,
+        "suggestedRange": [
+          35,
+          60
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "meal",
+        "minutes": 75,
+        "minimumMinutes": 40,
+        "suggestedRange": [
+          60,
+          90
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "rest",
+        "minutes": 20,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松城",
+        "category": "museum",
+        "minutes": 60,
+        "minimumMinutes": 60,
+        "suggestedRange": [
+          90,
+          150
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松城",
+        "category": "viewpoint",
+        "minutes": 25,
+        "minimumMinutes": 25,
+        "suggestedRange": [
+          35,
+          60
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      }
+    ],
+    "walkingMetersEstimate": 3886,
+    "walkingMinutes": 105,
+    "historySamples": 0
+  },
+  "displays": [
+    {
+      "scheme": "light",
+      "width": 320,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "scheme": "light",
+      "width": 390,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "scheme": "light",
+      "width": 768,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "scheme": "light",
+      "width": 1280,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "scheme": "dark",
+      "width": 320,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "scheme": "dark",
+      "width": 390,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "scheme": "dark",
+      "width": 768,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "scheme": "dark",
+      "width": 1280,
+      "photos": 5,
+      "allSteps": 25,
+      "noOverflow": true,
+      "noPageErrors": true
+    }
+  ],
+  "passed": true
+}

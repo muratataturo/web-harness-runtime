@@ -1,3 +1,4 @@
+import { JourneyMemoryStore } from "../dist/journey-memory.js";
 // Account-bound, actual inference + public sources. No final-answer fixture is supplied to the model.
 import { config } from "dotenv";
 config({ quiet: true });
@@ -58,6 +59,13 @@ await writeFile(
   JSON.stringify({ attempt, ...receipt }, null, 2),
 );
 const store = new Store(join(attempt, "store"));
+if (selected.id.startsWith("hamamatsu-state")) {
+  const previous = JSON.parse(
+    await readFile("examples/visual-hamamatsu-full-answer.json", "utf8"),
+  );
+  delete previous.evaluation;
+  await new JourneyMemoryStore(store).rememberPlan(previous);
+}
 const task = await runTask(
   {
     agent: "codex",
@@ -65,7 +73,7 @@ const task = await runTask(
     interactionMode: "auto",
     query: selected.query,
     urls: selected.urls,
-    maxSteps: selected.id === "hamamatsu-full" ? 300 : 240,
+    maxSteps: selected.id.startsWith("hamamatsu-") ? 320 : 240,
     maxPages: 36,
     timeoutSeconds: 1200,
     deepenRounds: 3,
@@ -82,6 +90,7 @@ Object.assign(receipt, {
   model: task.model,
   tripBrief: task.tripBrief,
   stepVerification: task.stepVerification,
+  journeyAssessment: task.journeyAssessment,
   steps: task.steps,
   elapsedMs: task.metrics?.elapsedMs,
   store: store.root,
@@ -273,6 +282,7 @@ receipt.events = events.map((e) => ({
     "specificity_revision",
     "visual_revision",
     "step_verification",
+    "journey_verification",
     "step_deepresearch",
   ].includes(e.type)
     ? {

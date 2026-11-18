@@ -1,3 +1,4 @@
+import { journeyPolicy, assessJourneyState } from "./journey-state.js";
 import { tripBrief } from "./trip-brief.js";
 import { verifyStepPlan } from "./step-verifier.js";
 import {
@@ -289,6 +290,7 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     agent: raw.agent,
     query: raw.query,
     tripBrief: options.benchmark ? undefined : tripBrief(options.query),
+    journeyPolicy: options.benchmark ? undefined : journeyPolicy(options.query),
     urls: [...raw.urls],
     status: raw.status,
     createdAt: raw.createdAt,
@@ -413,6 +415,8 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     );
   if (task.answer?.actionPlan)
     task.stepVerification = verifyStepPlan(task, task.answer.actionPlan);
+  if (task.answer?.actionPlan)
+    task.journeyAssessment = assessJourneyState(task, task.answer.actionPlan);
   if (task.answer) task.visualReview = assessVisualArtifact(task, task.answer);
   if (task.answer)
     task.specificity = {

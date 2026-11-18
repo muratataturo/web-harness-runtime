@@ -420,6 +420,34 @@
       "width": 1280,
       "inspected": 94,
       "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-experience-state.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 1620,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-experience-state.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 1660,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-experience-state.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 1620,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-experience-state.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 1660,
+      "failures": []
     }
   ],
   "passed": true

@@ -37,6 +37,7 @@ try {
     "docs/hamamatsu-full-day.html",
     "docs/nagoya-afternoon.html",
     "docs/experience-cases.html",
+    "docs/hamamatsu-experience-state.html",
   ])
     for (const scheme of ["light", "dark"])
       for (const width of [390, 1280]) {

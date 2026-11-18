@@ -1,5 +1,7 @@
 /** Versioned source identities. A corporate domain is never a single venue by default. */
 export const regionalVisitHosts = [
+  "www.city.hamamatsu.shizuoka.jp",
+  "hamamatsu-daisuki.net",
   "www.gakkihaku.jp",
   "www.ncsm.city.nagoya.jp",
 ];
@@ -10,6 +12,14 @@ export const regionalCafeHosts = [
 ];
 export function regionalVenue(value: string): string | undefined {
   const u = new URL(value);
+  if (
+    (u.hostname === "www.city.hamamatsu.shizuoka.jp" &&
+      ["/maps/c-castle.html", "/documents/172795/1003.pdf"].includes(
+        u.pathname,
+      )) ||
+    (u.hostname === "hamamatsu-daisuki.net" && u.pathname === "/pickup/7915/")
+  )
+    return "official-visit:hamamatsu-castle";
   if (
     u.hostname === "www.actcity.jp" &&
     ["/visitor/act/", "/faq/"].includes(u.pathname)

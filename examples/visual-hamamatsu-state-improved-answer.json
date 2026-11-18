@@ -1,0 +1,4446 @@
+{
+  "security": {
+    "profileId": "public-research",
+    "profileVersion": 1,
+    "mode": "hardened",
+    "policyHash": "85220a7b3350e903a681276e3ef7c97f92f9e66174458a8f94eba8a98e7981b1"
+  },
+  "interactionMode": "auto",
+  "execution": {
+    "target": "local",
+    "isolation": "host-process"
+  },
+  "id": "c2c2059c-9b31-4b5d-977a-14636325f798",
+  "agent": "codex",
+  "parentId": "22b14f87-42cd-445e-8a96-be11ebe1735b",
+  "query": "2026年11月21日（土）大人2人、浜松駅発着で09:00〜20:00の一日をゆっくり遊ぶ計画を作ってください。午前と午後の具体的な体験、昼食、カフェ、正味15分以上の休憩、夕食、帰路まで含めます。楽器博物館、展望回廊、ザ・シーズンカフェ＆ラウンジ、アクトの森が候補です。公式資料を比較して採否を決め、営業時間に合わない・取得できない候補は不採用の理由を明記して別の確認できた候補へ切り替えられます。現地入館飲食は2人合計20000円以内、交通費別。資料の明確な定番商品単価から計算し、セットを重複加算しません。写真と地図付きHTMLで見たいです。移動距離と滞在時間のstateを保存し、read_journey_stateで距離・方向・ペース・正味滞在・疲労と休憩を検査してから最終化してください。館内の上下移動にも時間を取り、移動本体・待ち・乗降・余裕を区別。徒歩の各端点はlocate_placeで引用座標を取得、同一建物の別階は同じ代表点を使ってfloorを分けられます。少ない地点であっても観察・会話・休憩の中身を具体化し、時間埋めの待機や長すぎる滞在で11時間を装わない。新しい実績を創作せず、過去の生成案は実際の移動・滞在と区別。全ての移動と正味滞在をjourneyStateへ結び付け、stepChecksで営業時間を照合。未来の空席・営業は確約しません。予約・購入・問い合わせ・SNS調査は行いません。 市街地の別候補として浜松城も比較してください。市や観光協会の案内は運営者の当日情報と区別し、採用するかは営業時間・移動距離・残り時間から判断します。公園へ出る区間をindoorに置き換えず、徒歩の座標や経路時間が取れなければ未確認にして不採用にもできます。",
+  "tripBrief": {
+    "version": 1,
+    "mode": "custom",
+    "timeRange": [
+      "09:00",
+      "20:00"
+    ],
+    "timeBasis": "user-specified",
+    "pacing": "relaxed",
+    "requiredMeals": [],
+    "requiresStepResearch": true,
+    "assumptions": [],
+    "policy": "明示時刻を優先。一日は午前の体験・昼食・午後の体験やカフェ・休憩・夕食・夜の帰路をつなぐ。午後だけや寄り道を一日へ膨らませない。移動で埋めず、体力と気分に合わせて訪問数を絞り、雨・満席・疲労の切替を用意する。"
+  },
+  "journeyPolicy": {
+    "version": 1,
+    "pacing": "relaxed",
+    "fullDay": true,
+    "walkMetersPerMinute": 50,
+    "detourFactor": 1.3,
+    "restAfterMinutes": 120,
+    "restMinutes": 15,
+    "basis": "初期の計画仮定。道路経路・人の実績を表す数値ではない。実績は同じ場所・方向・手段・ペースの記録だけを参照する"
+  },
+  "urls": [
+    "https://www.gakkihaku.jp/guide/",
+    "https://www.gakkihaku.jp/",
+    "https://www.act-okura.co.jp/restaurant/cafe/",
+    "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+    "https://www.actcity.jp/visitor/act/",
+    "https://www.actcity.jp/faq/",
+    "https://nominatim.openstreetmap.org/",
+    "https://www.act-okura.co.jp/facilities/gallery/",
+    "https://www.act-okura.co.jp/restaurant/lounge/",
+    "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+    "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+    "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+    "https://hamamatsu-daisuki.net/pickup/7915/"
+  ],
+  "status": "partial",
+  "createdAt": "2026-11-18T22:47:44.094Z",
+  "updatedAt": "2026-11-18T22:56:42.340Z",
+  "sources": [
+    {
+      "id": "source-1",
+      "kind": "official-visit",
+      "url": "https://www.gakkihaku.jp/guide/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-2",
+      "kind": "official-visit",
+      "url": "https://www.gakkihaku.jp/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-3",
+      "kind": "official-cafe",
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-4",
+      "kind": "official-cafe",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-5",
+      "kind": "official-public-space",
+      "url": "https://www.actcity.jp/visitor/act/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の利用条件・所在地・利用時間を確認する。無料の屋外広場と有料ホール・展望施設を混同せず、席・ベンチの利用可否は当日判断。登録済みの屋外広場の案内だけを個別対象とする。"
+    },
+    {
+      "id": "source-6",
+      "kind": "official-public-space",
+      "url": "https://www.actcity.jp/faq/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の利用条件・所在地・利用時間を確認する。無料の屋外広場と有料ホール・展望施設を混同せず、席・ベンチの利用可否は当日判断。登録済みの屋外広場の案内だけを個別対象とする。"
+    },
+    {
+      "id": "source-8",
+      "kind": "official-cafe",
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-9",
+      "kind": "official-cafe",
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-10",
+      "kind": "official-cafe",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "店舗公式の住所・営業時間・メニュー・写真・休業告知を確認。複数店を運営する企業サイトでは登録済みの店舗別パスと対応するメニューだけを同じ対象とする。/数字/は個別店舗で、別番号は別店舗。平均予算と商品の価格を区別する。満席・当日メニュー・テラス席を確約しない。"
+    },
+    {
+      "id": "source-11",
+      "kind": "official-visit",
+      "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-12",
+      "kind": "official-visit",
+      "url": "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-13",
+      "kind": "official-visit",
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "score": 10,
+      "reason": "クエリの分野と URL の分野が一致",
+      "guidance": "公式の個別施設案内から料金・開場条件・休館告知を確認。通常営業時間より対象日の臨時休館告知を優先。施設ごとのアクセス・年齢別料金を区別し、当日の空き・混雑を確約しない。営業時間・料金・アクセスが別ページなら実在リンクを辿る。"
+    },
+    {
+      "id": "source-7",
+      "kind": "generic",
+      "url": "https://nominatim.openstreetmap.org/",
+      "score": 0,
+      "reason": "汎用サイト。内容を読んで適合性を確認",
+      "guidance": "ページを読んで対象分野と検索方法を確認し、候補の詳細ページで条件を検証する。"
+    }
+  ],
+  "improvement": {
+    "minimumCandidates": 5,
+    "allowReplacements": false,
+    "loopId": "8aad385c-afa3-44b1-9b72-f6cd7df2bbff",
+    "iteration": 1,
+    "criteria": [
+      {
+        "id": "hours",
+        "description": "営業時間・対象日の告知を確認し行程への採否を判断",
+        "required": true,
+        "weight": 3,
+        "appliesTo": [
+          "https://www.gakkihaku.jp/guide/",
+          "https://www.act-okura.co.jp/facilities/gallery/",
+          "https://www.act-okura.co.jp/restaurant/cafe/",
+          "https://www.act-okura.co.jp/restaurant/lounge/",
+          "https://www.actcity.jp/visitor/act/",
+          "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html"
+        ]
+      },
+      {
+        "id": "price",
+        "description": "入場または飲食の掲載定番単価を確認（広場は無料利用条件）",
+        "required": true,
+        "weight": 3,
+        "appliesTo": [
+          "https://www.gakkihaku.jp/guide/",
+          "https://www.act-okura.co.jp/facilities/gallery/",
+          "https://www.act-okura.co.jp/restaurant/cafe/",
+          "https://www.act-okura.co.jp/restaurant/lounge/",
+          "https://www.actcity.jp/visitor/act/",
+          "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html"
+        ]
+      },
+      {
+        "id": "place",
+        "description": "所在地・アクセスと具体的な体験・休憩場所",
+        "required": true,
+        "weight": 2,
+        "appliesTo": [
+          "https://www.gakkihaku.jp/guide/",
+          "https://www.act-okura.co.jp/facilities/gallery/",
+          "https://www.act-okura.co.jp/restaurant/cafe/",
+          "https://www.act-okura.co.jp/restaurant/lounge/",
+          "https://www.actcity.jp/visitor/act/",
+          "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html"
+        ]
+      }
+    ],
+    "candidateUrls": [
+      "https://www.gakkihaku.jp/guide/",
+      "https://www.act-okura.co.jp/restaurant/cafe/",
+      "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+      "https://www.actcity.jp/visitor/act/",
+      "https://www.act-okura.co.jp/facilities/gallery/"
+    ],
+    "gaps": [
+      {
+        "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "fields": [
+          "個別詳細の必須項目"
+        ]
+      },
+      {
+        "url": "https://www.actcity.jp/visitor/act/",
+        "fields": [
+          "個別詳細の必須項目",
+          "所在地・アクセスと具体的な体験・休憩場所"
+        ]
+      },
+      {
+        "url": "https://www.act-okura.co.jp/facilities/gallery/",
+        "fields": [
+          "個別詳細の必須項目",
+          "営業時間・対象日の告知を確認し行程への採否を判断"
+        ]
+      },
+      {
+        "url": "https://www.gakkihaku.jp/guide/",
+        "fields": [
+          "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+          "a9: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+          "提案した09:00〜20:00の開始から帰路までを構成してください。短い計画を一日と呼ばないでください"
+        ]
+      }
+    ],
+    "priorityUrls": [
+      "https://www.gakkihaku.jp/calendar/",
+      "https://www.gakkihaku.jp/en/",
+      "https://www.gakkihaku.jp/pt/",
+      "https://www.gakkihaku.jp/zh/",
+      "https://www.gakkihaku.jp/ko/",
+      "https://www.gakkihaku.jp/group/",
+      "https://www.gakkihaku.jp/event/",
+      "https://www.gakkihaku.jp/about/"
+    ],
+    "visitedUrls": [
+      "https://www.gakkihaku.jp/guide/",
+      "https://www.act-okura.co.jp/facilities/gallery/",
+      "https://www.act-okura.co.jp/restaurant/cafe/",
+      "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "https://www.act-okura.co.jp/restaurant/lounge/",
+      "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "https://www.actcity.jp/visitor/act/",
+      "https://www.actcity.jp/faq/",
+      "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+      "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+      "https://www.gakkihaku.jp/",
+      "https://hamamatsu-daisuki.net/pickup/7915/",
+      "https://www.gakkihaku.jp/about/equipment/",
+      "https://www.gakkihaku.jp/news/%e3%80%90%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e3%81%ae%e3%81%94%e6%a1%88%e5%86%85%e3%80%91%e4%bc%91%e9%a4%a8%e6%97%a5%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6/",
+      "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E9%A7%85+%E6%B5%9C%E6%9D%BE%E5%B8%82&format=jsonv2&limit=3",
+      "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E9%A7%85+JR+railway+station&format=jsonv2&limit=3",
+      "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8+%E4%B8%AD%E5%A4%AE3-9-1&format=jsonv2&limit=3",
+      "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE+%E6%9D%BF%E5%B1%8B%E7%94%BA111-2&format=jsonv2&limit=3",
+      "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8&format=jsonv2&limit=3",
+      "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "https://nominatim.openstreetmap.org/search?q=%E3%82%A2%E3%82%AF%E3%83%88%E3%81%AE%E6%A3%AE+%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%9F%8E&format=jsonv2&limit=3",
+      "https://www.gakkihaku.jp/access/",
+      "https://www.gakkihaku.jp/collection/"
+    ],
+    "workspace": {
+      "belief": {
+        "verifiedDetails": 2,
+        "supportedRequired": 13,
+        "reusableFacts": false
+      },
+      "progress": {
+        "unresolvedTargets": 4,
+        "attemptedPages": 25,
+        "causes": [
+          "detail_missing",
+          "required_unknown",
+          "insufficient_specificity"
+        ]
+      },
+      "experience": {
+        "proceduralOnly": true
+      }
+    },
+    "strategy": "targeted-links"
+  },
+  "criteria": [
+    {
+      "id": "hours",
+      "description": "営業時間・対象日の告知を確認し行程への採否を判断",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/",
+        "https://www.act-okura.co.jp/facilities/gallery/",
+        "https://www.act-okura.co.jp/restaurant/cafe/",
+        "https://www.act-okura.co.jp/restaurant/lounge/",
+        "https://www.actcity.jp/visitor/act/",
+        "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html"
+      ]
+    },
+    {
+      "id": "price",
+      "description": "入場または飲食の掲載定番単価を確認（広場は無料利用条件）",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/",
+        "https://www.act-okura.co.jp/facilities/gallery/",
+        "https://www.act-okura.co.jp/restaurant/cafe/",
+        "https://www.act-okura.co.jp/restaurant/lounge/",
+        "https://www.actcity.jp/visitor/act/",
+        "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html"
+      ]
+    },
+    {
+      "id": "place",
+      "description": "所在地・アクセスと具体的な体験・休憩場所",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/",
+        "https://www.act-okura.co.jp/facilities/gallery/",
+        "https://www.act-okura.co.jp/restaurant/cafe/",
+        "https://www.act-okura.co.jp/restaurant/lounge/",
+        "https://www.actcity.jp/visitor/act/",
+        "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://www.gakkihaku.jp/calendar/",
+      "title": "イベントスケジュール | 浜松市楽器博物館",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.gakkihaku.jp/images/calendar/head_bg.jpg",
+          "alt": "イベントスケジュール | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/calendar/head_bg.jpg",
+          "alt": "イベントスケジュール | 浜松市楽器博物館"
+        }
+      ],
+      "text": "イベントスケジュール | 浜松市楽器博物館\n\n2026年11月21日 (4件のイベント)\n11:00 AM: 篳篥[Hichiriki]\n12:30 PM: ジャワガムラン[Javanese Gamelan]\n\n2:00 PM: サックバット[Sackbut]\n3:30 PM: テルミン[Theremin]",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:47:47.281Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-1"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/en/",
+      "title": "the Hamamatsu Museum of Musical Instruments",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.gakkihaku.jp/en/mgr/wp-content/uploads/2020/03/02_pc.jpg",
+          "alt": "01"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/en/mgr/wp-content/uploads/2020/03/02_sp.jpg",
+          "alt": "01"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/en/mgr/wp-content/uploads/2020/03/01_pc.jpg",
+          "alt": "02"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/en/mgr/wp-content/uploads/2020/03/01_sp.jpg",
+          "alt": "02"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/en/mgr/wp-content/uploads/2020/03/03_pc.jpg",
+          "alt": "03"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/en/mgr/wp-content/uploads/2020/03/03_sp.jpg",
+          "alt": "03"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/en/mgr/wp-content/uploads/2022/11/%E3%83%90%E3%83%8A%E3%83%BC%E8%B3%87%E6%96%99%E6%A4%9C%E7%B4%A2%E8%8B%B1HP%E7%94%A8-01-690x172.jpg",
+          "alt": "資料検索"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/images/about/ph01.jpg",
+          "alt": "the Hamamatsu Museum of Musical Instruments"
+        }
+      ],
+      "text": "the Hamamatsu Museum of Musical Instruments",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:47:48.314Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-2"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/guide/",
+      "title": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.gakkihaku.jp/images/guide/head_bg.jpg",
+          "alt": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/guide/head_bg.jpg",
+          "alt": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/images/guide/ph01.jpg",
+          "alt": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/guide/ph01.jpg",
+          "alt": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/images/guide/ph02.jpg",
+          "alt": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/guide/ph02.jpg",
+          "alt": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館"
+        }
+      ],
+      "text": "ご利用案内（観覧料・開館時間） | 浜松市楽器博物館\n\n個人\n800円\n400円\n無料\n無料\n\n開館時間\n9:30～17:00\n\n〒430-7790 浜松市中央区中央3-9-1",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:47:53.529Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-3"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "title": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.act-okura.co.jp/media/OT_observatorygallery-gw_wide2304.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/southcorridor_202301.JPG",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/South_202212.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/45FN.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/Northeast_202212.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC9870.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        }
+      ],
+      "text": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松\n\n11:00 〜 18:00（最終入場17：30）\n\n大人（中学生以上）￥1,200\n\nこちらの展示では楽器製造のまちから音楽の都・浜松に至る軌跡をご紹介いたします。\n\n45階展望回廊入口にある券売機にて、入場券をお買い求めいただけます。\n\n〒430-7733静岡県浜松市中央区板屋町111-2",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:47:53.933Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-4"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "title": "ザ・シーズンカフェ&ラウンジ（カフェ） | レストラン・バー | 【公式】オークラアクトシティホテル浜松",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ザ・シーズンカフェ&ラウンジ（カフェ） | レストラン・バー | 【公式】オークラアクトシティホテル浜松\n\nザ・シーズンカフェ＆ラウンジ（カフェ）\nロビーを見おろすホテル2階にあるカフェレストラン。\n\n土・日・祝 11：00～17：00\n（L.O 16：30）\n\n〒430-7733静岡県浜松市中央区板屋町111-2",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:00.253Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-5"
+    },
+    {
+      "url": "https://www.actcity.jp/visitor/act/",
+      "title": "アクトの森｜ご来場の方へ｜アクトシティ浜松",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.actcity.jp/images/visitor/act/img01.jpg",
+          "alt": "ショパンの丘"
+        },
+        {
+          "url": "https://www.actcity.jp/sp/images/visitor/act/img01.jpg",
+          "alt": "ショパンの丘"
+        },
+        {
+          "url": "https://www.actcity.jp/images/visitor/act/img02.jpg",
+          "alt": "森のスロープ"
+        },
+        {
+          "url": "https://www.actcity.jp/sp/images/visitor/act/img02.jpg",
+          "alt": "森のスロープ"
+        },
+        {
+          "url": "https://www.actcity.jp/images/visitor/act/img03.jpg",
+          "alt": "音楽広場"
+        },
+        {
+          "url": "https://www.actcity.jp/sp/images/visitor/act/img03.jpg",
+          "alt": "音楽広場"
+        },
+        {
+          "url": "https://www.actcity.jp/images/visitor/act/img04.jpg",
+          "alt": "いこいの広場"
+        },
+        {
+          "url": "https://www.actcity.jp/sp/images/visitor/act/img04.jpg",
+          "alt": "いこいの広場"
+        }
+      ],
+      "text": "アクトの森｜ご来場の方へ｜アクトシティ浜松\n\nいこいの広場\n陽射しをあびて、のんびりくつろぐのに最高\n\n〒430-7790 静岡県浜松市中央区板屋町111-1",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:07.888Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-6"
+    },
+    {
+      "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+      "title": "浜松城／浜松市",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.city.hamamatsu.shizuoka.jp/shared/images/ogp.png",
+          "alt": "浜松城／浜松市"
+        }
+      ],
+      "text": "浜松城／浜松市\n\n〒430-0946 浜松市中央区元城町100-2",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:08.348Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-7"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "title": "ザ・シーズンカフェ&ラウンジ（ラウンジ） | レストラン・バー | 【公式】オークラアクトシティホテル浜松",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "ザ・シーズンカフェ&ラウンジ（ラウンジ） | レストラン・バー | 【公式】オークラアクトシティホテル浜松\n\nカクテルタイム 17：00～22：30（ラストオーダー22：00）\n定休日\n月曜日\n\n・洋食メニュー：17:00～21:30\n・中国料理メニュー：17:30～21:30\n・新フードメニュー：20:00～21:30\n\n〒430-7733静岡県浜松市中央区板屋町111-2\n\n場所\n2階\nジャンル\nラウンジ\n\nザ・シーズンカフェ＆ラウンジ（ラウンジ）\nお食事前のアペリティフ、食後の団らん",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:14.261Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-8"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "title": "【ザ・シーズンカフェ】ティータイム | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC1912.jpg",
+          "alt": "柚子茶・柚子ティー"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/10_05_Black_tea.jpg",
+          "alt": "ロンネフェルト（イメージ）"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/EinschenkszeneLeonardo-Kanne300dpi.jpg",
+          "alt": "ロンネフェルト（イメージ）"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/Img608_chocolate.jpg",
+          "alt": "【ザ・シーズンカフェ】ティータイム | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/Img610_roll.jpg",
+          "alt": "【ザ・シーズンカフェ】ティータイム | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/Img612_merry.jpg",
+          "alt": "【ザ・シーズンカフェ】ティータイム | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC5681_montblanc.jpg",
+          "alt": "【ザ・シーズンカフェ】ティータイム | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC5702_muscat.jpg",
+          "alt": "【ザ・シーズンカフェ】ティータイム | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        }
+      ],
+      "text": "【ザ・シーズンカフェ】ティータイム | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松\n\nお食事（11：00～14：00 L.O.）\n\n茄子とチキンのミートソースドリア\n（サラダ・日替わりスープ、コーヒー付）\n1,800円\n\nプリン\n600円\n\nケーキ + 750円\n\n※表示価格はサービス料・消費税を含む金額です（テイクアウトは消費税のみ）。\n\nショコラマンダリン\n750円\n\nコーヒー付き\n※「ブレンドコーヒ（ホット・アイス）」「アメリカンコーヒー」「エスプレッソ」よりお選びください\nケーキ + 750円",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:14.480Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-9"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "title": "【ザ・シーズンカフェ】カクテルタイム 17:00～22:30 （L.O 22:00）※月曜を除く | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.act-okura.co.jp/media/seasoncafe.jpg",
+          "alt": "【ザ・シーズンカフェ】カクテルタイム 17:00～22:30 （L.O 22:00）※月曜を除く | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/DSC0023.JPG",
+          "alt": "「余市10年」と「宮城峡10年」"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/DSC0029_2.jpg",
+          "alt": "【ザ・シーズンカフェ】カクテルタイム 17:00～22:30 （L.O 22:00）※月曜を除く | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/white.jpg",
+          "alt": "【ザ・シーズンカフェ】カクテルタイム 17:00～22:30 （L.O 22:00）※月曜を除く | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC5757.lounge-202609autumn.jpg",
+          "alt": "【ザ・シーズンカフェ】カクテルタイム 17:00～22:30 （L.O 22:00）※月曜を除く | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC5109.jpg",
+          "alt": "バスクチーズケーキ 紹興酒レーズンを添えて"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC5136.jpg",
+          "alt": "花島 旭"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/Img5135_lounge_pizza.jpg",
+          "alt": "ミックスピザ"
+        }
+      ],
+      "text": "【ザ・シーズンカフェ】カクテルタイム 17:00～22:30 （L.O 22:00）※月曜を除く | レストランメニュー＆プラン | 【公式】オークラアクトシティホテル浜松\n\n五目あんかけ焼きそば\n2,000円\n\nアップルジュース\n700円\n\n※表示価格はすべて消費税・サービス料を含む金額です。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:24.340Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-10"
+    },
+    {
+      "url": "https://www.actcity.jp/faq/",
+      "title": "よくある質問｜アクトシティ浜松",
+      "mapEmbeds": [],
+      "images": [],
+      "text": "よくある質問｜アクトシティ浜松\n\n屋外広場は無料でご利用いただけます。（6:00～19:00）",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:36.454Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-11"
+    },
+    {
+      "url": "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+      "title": "1003.pdf",
+      "text": "1003.pdf\n\n令和   8   年   3   月   20   日（金）～ 5   月   10   日（日）",
+      "pdf": {
+        "sha256": "f6aec5e0661725a7d936186c44ca83562f0a3b22577ddeaa744439ccce3d24a8",
+        "pages": 2
+      },
+      "truncated": false,
+      "links": [],
+      "capturedAt": "2026-11-18T22:48:48.651Z",
+      "acquisition": {
+        "kind": "public-pdf",
+        "status": 200,
+        "contentType": "application/pdf"
+      },
+      "id": "page-12"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/about/equipment/",
+      "title": "フロアマップ | 楽器博物館とは | 浜松市楽器博物館",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.gakkihaku.jp/images/about/head_bg.jpg",
+          "alt": "フロアマップ | 楽器博物館とは | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/about/head_bg.jpg",
+          "alt": "フロアマップ | 楽器博物館とは | 浜松市楽器博物館"
+        }
+      ],
+      "text": "フロアマップ | 楽器博物館とは | 浜松市楽器博物館\n\n持ち運び可能な小型椅子を用意しています。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:49.350Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-13"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E9%A7%85+%E6%B5%9C%E6%9D%BE%E5%B8%82&format=jsonv2&limit=3",
+      "title": "浜松駅 浜松市 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "浜松駅 浜松市 — OpenStreetMap地理検索（施設代表点・入口未確認）\n\n\"lat\":\"34.7052750\",\"lon\":\"137.7342440\",\"category\":\"highway\",\"type\":\"bus_stop\",\"place_rank\":30,\"importance\":6.606622415498615e-05,\"addresstype\":\"highway\",\"name\":\"浜松駅\"",
+      "links": [],
+      "capturedAt": "2026-11-18T22:31:18.043Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-1"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E9%A7%85+JR+railway+station&format=jsonv2&limit=3",
+      "title": "浜松駅 JR railway station — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "浜松駅 JR railway station — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "links": [],
+      "capturedAt": "2026-11-18T22:31:25.524Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-2"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8&format=jsonv2&limit=3",
+      "title": "浜松市楽器博物館 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "浜松市楽器博物館 — OpenStreetMap地理検索（施設代表点・入口未確認）\n\n\"lat\":\"34.7066154\",\"lon\":\"137.7382244\",\"category\":\"tourism\",\"type\":\"museum\",\"place_rank\":30,\"importance\":0.07194870560319186,\"addresstype\":\"tourism\",\"name\":\"浜松市楽器博物館\"",
+      "links": [],
+      "capturedAt": "2026-11-18T22:31:33.230Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-3"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "title": "オークラアクトシティホテル浜松 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "オークラアクトシティホテル浜松 — OpenStreetMap地理検索（施設代表点・入口未確認）\n\n\"lat\":\"34.7056106\",\"lon\":\"137.7372416\",\"category\":\"tourism\",\"type\":\"hotel\",\"place_rank\":30,\"importance\":0.1570394422394589,\"addresstype\":\"tourism\",\"name\":\"オークラアクトシティホテル浜松\"",
+      "links": [],
+      "capturedAt": "2026-11-18T22:31:34.294Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-4"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%A2%E3%82%AF%E3%83%88%E3%81%AE%E6%A3%AE+%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "title": "アクトの森 浜松 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "アクトの森 浜松 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "links": [],
+      "capturedAt": "2026-11-18T22:31:35.397Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-5"
+    },
+    {
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "title": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image1.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        },
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image34-e1763711380167.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        },
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image10.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        },
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image32.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        },
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image13.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        },
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image22.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        },
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image1-1.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        },
+        {
+          "url": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image23.jpg",
+          "alt": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～"
+        }
+      ],
+      "text": "【浜松城】歴史と見どころ、観光ガイド！浜松城公園の魅力を紹介｜浜松市中央区元城町 | 編集部ピックアップ｜公式/浜松・浜名湖観光情報サイト～浜松・浜名湖だいすきネット～\n\n営業時間（浜松城）：8:30～16:30（最終入場は10分前まで）\n休館日（浜松城）：12月29日・30日・31日\n\n大人（高校生以上）200円\n\nベンチに腰掛けてゆっくりと天守閣を眺めたり\n\n浜松城天守閣の地下1階、1階、2階は、歴史資料館として一般公開されています。\n\n公園内は坂道や石段が多く、高低差があるため、歩きやすい靴での観光がおすすめ。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:48:57.120Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-14"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%9F%8E&format=jsonv2&limit=3",
+      "title": "浜松城 — OpenStreetMap地理検索（施設代表点・入口未確認）",
+      "text": "浜松城 — OpenStreetMap地理検索（施設代表点・入口未確認）\n\n\"lat\":\"34.7117306\",\"lon\":\"137.7249641\",\"category\":\"historic\",\"type\":\"castle\",\"place_rank\":30,\"importance\":0.4486184215818616,\"addresstype\":\"historic\",\"name\":\"浜松城\"",
+      "links": [],
+      "capturedAt": "2026-11-18T22:31:36.777Z",
+      "truncated": false,
+      "acquisition": {
+        "kind": "public-json",
+        "status": 200,
+        "contentType": "application/json"
+      },
+      "id": "geo-6"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/collection/",
+      "title": "常設展 | 浜松市楽器博物館",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.gakkihaku.jp/images/collection/head_bg.jpg",
+          "alt": "常設展 | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/collection/head_bg.jpg",
+          "alt": "常設展 | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/mgr/wp-content/uploads/2020/03/syurui-623x250.jpg",
+          "alt": "所蔵資料の検索はこちら"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/images/about/ph01.jpg",
+          "alt": "常設展 | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/about/ph01.jpg",
+          "alt": "常設展 | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/images/collection/index_ph03.jpg",
+          "alt": "常設展 | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/sp/images/collection/index_ph03.jpg",
+          "alt": "常設展 | 浜松市楽器博物館"
+        },
+        {
+          "url": "https://www.gakkihaku.jp/images/collection/index_ph04.jpg",
+          "alt": "常設展 | 浜松市楽器博物館"
+        }
+      ],
+      "text": "常設展 | 浜松市楽器博物館\n\n展示室は第1展示室(1F872ｍ2)、第2展示室(BF 738ｍ2)、第3展示室(BF 550ｍ2)、第4展示室(1F 657ｍ2)の4つです。\n\nヘッドフォンで約70種の音を楽しむことができます。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:49:15.788Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "id": "page-15"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "title": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.act-okura.co.jp/media/OT_observatorygallery-gw_wide2304.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/southcorridor_202301.JPG",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/South_202212.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/45FN.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/Northeast_202212.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        },
+        {
+          "url": "https://www.act-okura.co.jp/media/_DSC9870.jpg",
+          "alt": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松"
+        }
+      ],
+      "text": "展望回廊 | 館内施設 | 【公式】オークラアクトシティホテル浜松",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:53:14.910Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-16"
+    },
+    {
+      "url": "https://www.city.hamamatsu.shizuoka.jp/shisetsu-annai/sport/index.html",
+      "title": "公園・スポーツ・レジャー／浜松市",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.city.hamamatsu.shizuoka.jp/shared/images/ogp.png",
+          "alt": "公園・スポーツ・レジャー／浜松市"
+        }
+      ],
+      "text": "公園・スポーツ・レジャー／浜松市",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:56:15.917Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-17"
+    },
+    {
+      "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle_pk.html",
+      "title": "浜松城公園／浜松市",
+      "mapEmbeds": [],
+      "images": [
+        {
+          "url": "https://www.city.hamamatsu.shizuoka.jp/shared/images/ogp.png",
+          "alt": "浜松城公園／浜松市"
+        },
+        {
+          "url": "https://www.city.hamamatsu.shizuoka.jp/images/23640/hamamatsujyo_p.jpg",
+          "alt": "浜松城公園"
+        }
+      ],
+      "text": "浜松城公園／浜松市\n\n浜松城天守閣がある浜松市のセントラルパーク、浜松随一の桜の名所。",
+      "links": [],
+      "truncated": false,
+      "capturedAt": "2026-11-18T22:56:20.248Z",
+      "acquisition": {
+        "kind": "public-html",
+        "status": 200,
+        "charset": "utf-8",
+        "contentType": "text/html"
+      },
+      "id": "page-18"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-1",
+      "pageId": "page-1",
+      "url": "https://www.gakkihaku.jp/calendar/",
+      "quote": "2026年11月21日 (4件のイベント)\n11:00 AM: 篳篥[Hichiriki]\n12:30 PM: ジャワガムラン[Javanese Gamelan]",
+      "capturedAt": "2026-11-18T22:47:47.281Z"
+    },
+    {
+      "id": "ev-2",
+      "pageId": "page-3",
+      "url": "https://www.gakkihaku.jp/guide/",
+      "quote": "個人\n800円\n400円\n無料\n無料",
+      "capturedAt": "2026-11-18T22:47:53.529Z"
+    },
+    {
+      "id": "ev-3",
+      "pageId": "page-3",
+      "url": "https://www.gakkihaku.jp/guide/",
+      "quote": "開館時間\n9:30～17:00",
+      "capturedAt": "2026-11-18T22:47:53.529Z"
+    },
+    {
+      "id": "ev-4",
+      "pageId": "page-3",
+      "url": "https://www.gakkihaku.jp/guide/",
+      "quote": "〒430-7790 浜松市中央区中央3-9-1",
+      "capturedAt": "2026-11-18T22:47:53.529Z"
+    },
+    {
+      "id": "ev-5",
+      "pageId": "page-4",
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "quote": "11:00 〜 18:00（最終入場17：30）",
+      "capturedAt": "2026-11-18T22:47:53.933Z"
+    },
+    {
+      "id": "ev-6",
+      "pageId": "page-4",
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "quote": "大人（中学生以上）￥1,200",
+      "capturedAt": "2026-11-18T22:47:53.933Z"
+    },
+    {
+      "id": "ev-7",
+      "pageId": "page-5",
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "quote": "ザ・シーズンカフェ＆ラウンジ（カフェ）\nロビーを見おろすホテル2階にあるカフェレストラン。",
+      "capturedAt": "2026-11-18T22:48:00.253Z"
+    },
+    {
+      "id": "ev-8",
+      "pageId": "page-5",
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "quote": "土・日・祝 11：00～17：00\n（L.O 16：30）",
+      "capturedAt": "2026-11-18T22:48:00.253Z"
+    },
+    {
+      "id": "ev-9",
+      "pageId": "page-5",
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "quote": "〒430-7733静岡県浜松市中央区板屋町111-2",
+      "capturedAt": "2026-11-18T22:48:00.253Z"
+    },
+    {
+      "id": "ev-10",
+      "pageId": "page-6",
+      "url": "https://www.actcity.jp/visitor/act/",
+      "quote": "いこいの広場\n陽射しをあびて、のんびりくつろぐのに最高",
+      "capturedAt": "2026-11-18T22:48:07.888Z"
+    },
+    {
+      "id": "ev-11",
+      "pageId": "page-7",
+      "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+      "quote": "〒430-0946 浜松市中央区元城町100-2",
+      "capturedAt": "2026-11-18T22:48:08.348Z"
+    },
+    {
+      "id": "ev-12",
+      "pageId": "page-8",
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "quote": "カクテルタイム 17：00～22：30（ラストオーダー22：00）\n定休日\n月曜日",
+      "capturedAt": "2026-11-18T22:48:14.261Z"
+    },
+    {
+      "id": "ev-13",
+      "pageId": "page-8",
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "quote": "・洋食メニュー：17:00～21:30\n・中国料理メニュー：17:30～21:30\n・新フードメニュー：20:00～21:30",
+      "capturedAt": "2026-11-18T22:48:14.261Z"
+    },
+    {
+      "id": "ev-14",
+      "pageId": "page-9",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "quote": "お食事（11：00～14：00 L.O.）",
+      "capturedAt": "2026-11-18T22:48:14.480Z"
+    },
+    {
+      "id": "ev-15",
+      "pageId": "page-9",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "quote": "茄子とチキンのミートソースドリア\n（サラダ・日替わりスープ、コーヒー付）\n1,800円",
+      "capturedAt": "2026-11-18T22:48:14.480Z"
+    },
+    {
+      "id": "ev-16",
+      "pageId": "page-9",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "quote": "プリン\n600円",
+      "capturedAt": "2026-11-18T22:48:14.480Z"
+    },
+    {
+      "id": "ev-17",
+      "pageId": "page-9",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "quote": "ケーキ + 750円",
+      "capturedAt": "2026-11-18T22:48:14.480Z"
+    },
+    {
+      "id": "ev-18",
+      "pageId": "page-9",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "quote": "※表示価格はサービス料・消費税を含む金額です（テイクアウトは消費税のみ）。",
+      "capturedAt": "2026-11-18T22:48:14.480Z"
+    },
+    {
+      "id": "ev-19",
+      "pageId": "page-10",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "quote": "五目あんかけ焼きそば\n2,000円",
+      "capturedAt": "2026-11-18T22:48:24.340Z"
+    },
+    {
+      "id": "ev-20",
+      "pageId": "page-10",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "quote": "アップルジュース\n700円",
+      "capturedAt": "2026-11-18T22:48:24.340Z"
+    },
+    {
+      "id": "ev-21",
+      "pageId": "page-10",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "quote": "※表示価格はすべて消費税・サービス料を含む金額です。",
+      "capturedAt": "2026-11-18T22:48:24.340Z"
+    },
+    {
+      "id": "ev-22",
+      "pageId": "page-11",
+      "url": "https://www.actcity.jp/faq/",
+      "quote": "屋外広場は無料でご利用いただけます。（6:00～19:00）",
+      "capturedAt": "2026-11-18T22:48:36.454Z"
+    },
+    {
+      "id": "ev-23",
+      "pageId": "page-12",
+      "url": "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+      "quote": "令和   8   年   3   月   20   日（金）～ 5   月   10   日（日）",
+      "capturedAt": "2026-11-18T22:48:48.651Z"
+    },
+    {
+      "id": "ev-24",
+      "pageId": "page-13",
+      "url": "https://www.gakkihaku.jp/about/equipment/",
+      "quote": "持ち運び可能な小型椅子を用意しています。",
+      "capturedAt": "2026-11-18T22:48:49.350Z"
+    },
+    {
+      "id": "ev-25",
+      "pageId": "page-14",
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "quote": "営業時間（浜松城）：8:30～16:30（最終入場は10分前まで）\n休館日（浜松城）：12月29日・30日・31日",
+      "capturedAt": "2026-11-18T22:48:57.120Z"
+    },
+    {
+      "id": "ev-26",
+      "pageId": "page-14",
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "quote": "大人（高校生以上）200円",
+      "capturedAt": "2026-11-18T22:48:57.120Z"
+    },
+    {
+      "id": "ev-27",
+      "pageId": "page-14",
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "quote": "ベンチに腰掛けてゆっくりと天守閣を眺めたり",
+      "capturedAt": "2026-11-18T22:48:57.120Z"
+    },
+    {
+      "id": "ev-28",
+      "pageId": "geo-1",
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E9%A7%85+%E6%B5%9C%E6%9D%BE%E5%B8%82&format=jsonv2&limit=3",
+      "quote": "\"lat\":\"34.7052750\",\"lon\":\"137.7342440\",\"category\":\"highway\",\"type\":\"bus_stop\",\"place_rank\":30,\"importance\":6.606622415498615e-05,\"addresstype\":\"highway\",\"name\":\"浜松駅\"",
+      "capturedAt": "2026-11-18T22:31:18.043Z"
+    },
+    {
+      "id": "ev-29",
+      "pageId": "geo-3",
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8&format=jsonv2&limit=3",
+      "quote": "\"lat\":\"34.7066154\",\"lon\":\"137.7382244\",\"category\":\"tourism\",\"type\":\"museum\",\"place_rank\":30,\"importance\":0.07194870560319186,\"addresstype\":\"tourism\",\"name\":\"浜松市楽器博物館\"",
+      "capturedAt": "2026-11-18T22:31:33.230Z"
+    },
+    {
+      "id": "ev-30",
+      "pageId": "geo-4",
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "quote": "\"lat\":\"34.7056106\",\"lon\":\"137.7372416\",\"category\":\"tourism\",\"type\":\"hotel\",\"place_rank\":30,\"importance\":0.1570394422394589,\"addresstype\":\"tourism\",\"name\":\"オークラアクトシティホテル浜松\"",
+      "capturedAt": "2026-11-18T22:31:34.294Z"
+    },
+    {
+      "id": "ev-31",
+      "pageId": "geo-6",
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%9F%8E&format=jsonv2&limit=3",
+      "quote": "\"lat\":\"34.7117306\",\"lon\":\"137.7249641\",\"category\":\"historic\",\"type\":\"castle\",\"place_rank\":30,\"importance\":0.4486184215818616,\"addresstype\":\"historic\",\"name\":\"浜松城\"",
+      "capturedAt": "2026-11-18T22:31:36.777Z"
+    },
+    {
+      "id": "ev-32",
+      "pageId": "page-15",
+      "url": "https://www.gakkihaku.jp/collection/",
+      "quote": "展示室は第1展示室(1F872ｍ2)、第2展示室(BF 738ｍ2)、第3展示室(BF 550ｍ2)、第4展示室(1F 657ｍ2)の4つです。",
+      "capturedAt": "2026-11-18T22:49:15.788Z"
+    },
+    {
+      "id": "ev-33",
+      "pageId": "page-15",
+      "url": "https://www.gakkihaku.jp/collection/",
+      "quote": "ヘッドフォンで約70種の音を楽しむことができます。",
+      "capturedAt": "2026-11-18T22:49:15.788Z"
+    },
+    {
+      "id": "ev-34",
+      "pageId": "page-1",
+      "url": "https://www.gakkihaku.jp/calendar/",
+      "quote": "2:00 PM: サックバット[Sackbut]\n3:30 PM: テルミン[Theremin]",
+      "capturedAt": "2026-11-18T22:47:47.281Z"
+    },
+    {
+      "id": "ev-35",
+      "pageId": "page-4",
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "quote": "こちらの展示では楽器製造のまちから音楽の都・浜松に至る軌跡をご紹介いたします。",
+      "capturedAt": "2026-11-18T22:47:53.933Z"
+    },
+    {
+      "id": "ev-36",
+      "pageId": "page-14",
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "quote": "浜松城天守閣の地下1階、1階、2階は、歴史資料館として一般公開されています。",
+      "capturedAt": "2026-11-18T22:48:57.120Z"
+    },
+    {
+      "id": "ev-37",
+      "pageId": "page-4",
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "quote": "45階展望回廊入口にある券売機にて、入場券をお買い求めいただけます。",
+      "capturedAt": "2026-11-18T22:47:53.933Z"
+    },
+    {
+      "id": "ev-38",
+      "pageId": "page-4",
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "quote": "〒430-7733静岡県浜松市中央区板屋町111-2",
+      "capturedAt": "2026-11-18T22:47:53.933Z"
+    },
+    {
+      "id": "ev-39",
+      "pageId": "page-8",
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "quote": "〒430-7733静岡県浜松市中央区板屋町111-2",
+      "capturedAt": "2026-11-18T22:48:14.261Z"
+    },
+    {
+      "id": "ev-40",
+      "pageId": "page-9",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "quote": "ショコラマンダリン\n750円",
+      "capturedAt": "2026-11-18T22:48:14.480Z"
+    },
+    {
+      "id": "ev-41",
+      "pageId": "page-9",
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "quote": "コーヒー付き\n※「ブレンドコーヒ（ホット・アイス）」「アメリカンコーヒー」「エスプレッソ」よりお選びください\nケーキ + 750円",
+      "capturedAt": "2026-11-18T22:48:14.480Z"
+    },
+    {
+      "id": "ev-42",
+      "pageId": "page-14",
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "quote": "公園内は坂道や石段が多く、高低差があるため、歩きやすい靴での観光がおすすめ。",
+      "capturedAt": "2026-11-18T22:48:57.120Z"
+    },
+    {
+      "id": "ev-43",
+      "pageId": "page-8",
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "quote": "場所\n2階\nジャンル\nラウンジ",
+      "capturedAt": "2026-11-18T22:48:14.261Z"
+    },
+    {
+      "id": "ev-44",
+      "pageId": "page-8",
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "quote": "ザ・シーズンカフェ＆ラウンジ（ラウンジ）\nお食事前のアペリティフ、食後の団らん",
+      "capturedAt": "2026-11-18T22:48:14.261Z"
+    },
+    {
+      "id": "ev-45",
+      "pageId": "page-6",
+      "url": "https://www.actcity.jp/visitor/act/",
+      "quote": "〒430-7790 静岡県浜松市中央区板屋町111-1",
+      "capturedAt": "2026-11-18T22:48:07.888Z"
+    },
+    {
+      "id": "ev-46",
+      "pageId": "page-18",
+      "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle_pk.html",
+      "quote": "浜松城天守閣がある浜松市のセントラルパーク、浜松随一の桜の名所。",
+      "capturedAt": "2026-11-18T22:56:20.248Z"
+    }
+  ],
+  "steps": 105,
+  "limits": {
+    "maxSteps": 160,
+    "timeoutSeconds": 1200,
+    "maxPages": 32
+  },
+  "uxLearningContext": {
+    "scope": "self-reported-human-ux-review",
+    "sourceTaskId": "22b14f87-42cd-445e-8a96-be11ebe1735b",
+    "artifactRevision": "143b81d5eb20157935b409c64a4181ab7ac0960acf45ecf0ad79dc57973e0265",
+    "responses": 0,
+    "uniqueBrowserReviewers": 0,
+    "independentHumansVerified": false,
+    "humanAppealStatus": "unrated",
+    "issues": {
+      "too_dense": 0,
+      "unclear_difference": 0,
+      "not_for_me": 0,
+      "unrealistic": 0,
+      "hard_to_read": 0
+    },
+    "guidance": [],
+    "variants": [],
+    "note": "同じ版・ブラウザ識別子・案の最新回答だけを使用。本人性・独立した人間の人数は未検証。新しい生成物の評価点として転用しない。"
+  },
+  "journeyMemory": {
+    "version": 1,
+    "observations": [],
+    "priorPlans": [
+      {
+        "taskId": "22b14f87-42cd-445e-8a96-be11ebe1735b",
+        "status": "partial",
+        "steps": 24,
+        "minutes": 610,
+        "visits": [
+          {
+            "place": "浜松城 天守付近の公園ベンチ",
+            "kind": "rest",
+            "minutes": 15
+          },
+          {
+            "place": "浜松城天守閣 資料展示",
+            "kind": "activity",
+            "minutes": 47
+          },
+          {
+            "place": "浜松城 展望階",
+            "kind": "activity",
+            "minutes": 25
+          },
+          {
+            "place": "浜松城 天守付近の公園ベンチ",
+            "kind": "rest",
+            "minutes": 15
+          },
+          {
+            "place": "ザ・シーズンカフェ＆ラウンジ（カフェ）2階",
+            "kind": "lunch",
+            "minutes": 66
+          },
+          {
+            "place": "浜松市楽器博物館 1階",
+            "kind": "activity",
+            "minutes": 60
+          },
+          {
+            "place": "楽器博物館 1階",
+            "kind": "rest",
+            "minutes": 15
+          },
+          {
+            "place": "楽器博物館 地下1階",
+            "kind": "activity",
+            "minutes": 37
+          },
+          {
+            "place": "ザ・シーズンカフェ＆ラウンジ（カフェ）2階",
+            "kind": "cafe",
+            "minutes": 46
+          },
+          {
+            "place": "ザ・シーズンカフェ＆ラウンジ（ラウンジ）2階",
+            "kind": "rest",
+            "minutes": 22
+          },
+          {
+            "place": "ザ・シーズンカフェ＆ラウンジ（ラウンジ）2階",
+            "kind": "dinner",
+            "minutes": 80
+          }
+        ],
+        "distanceEstimateMeters": 3907,
+        "travel": [
+          {
+            "from": "浜松駅",
+            "to": "浜松城",
+            "mode": "walk",
+            "minutes": 40,
+            "estimateMeters": 1456
+          },
+          {
+            "from": "浜松城",
+            "to": "浜松城",
+            "mode": "walk",
+            "minutes": 8,
+            "estimateMeters": 0
+          },
+          {
+            "from": "浜松城",
+            "to": "浜松城",
+            "mode": "indoor",
+            "minutes": 8
+          },
+          {
+            "from": "浜松城",
+            "to": "浜松城",
+            "mode": "indoor",
+            "minutes": 8
+          },
+          {
+            "from": "浜松城",
+            "to": "浜松城",
+            "mode": "walk",
+            "minutes": 8,
+            "estimateMeters": 0
+          },
+          {
+            "from": "浜松城",
+            "to": "オークラアクトシティホテル浜松",
+            "mode": "walk",
+            "minutes": 40,
+            "estimateMeters": 1717
+          },
+          {
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松市楽器博物館",
+            "mode": "walk",
+            "minutes": 12,
+            "estimateMeters": 187
+          },
+          {
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "mode": "indoor",
+            "minutes": 9
+          },
+          {
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "mode": "indoor",
+            "minutes": 9
+          },
+          {
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "mode": "walk",
+            "minutes": 12,
+            "estimateMeters": 187
+          },
+          {
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "mode": "indoor",
+            "minutes": 8
+          },
+          {
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "mode": "indoor",
+            "minutes": 9
+          }
+        ]
+      },
+      {
+        "taskId": "46052a3f-5047-496c-9223-2e0f56ca7e34",
+        "status": "partial",
+        "steps": 18,
+        "minutes": 660,
+        "visits": [
+          {
+            "place": "アクトの森の広場／雨はB1市民ロビー",
+            "kind": "rest",
+            "minutes": 10
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "kind": "activity",
+            "minutes": 150
+          },
+          {
+            "place": "ザ・シーズンカフェ",
+            "kind": "lunch",
+            "minutes": 70
+          },
+          {
+            "place": "45階 展望回廊",
+            "kind": "activity",
+            "minutes": 80
+          },
+          {
+            "place": "ザ・シーズンカフェ",
+            "kind": "cafe",
+            "minutes": 60
+          },
+          {
+            "place": "アクトの森・いこいの広場／雨天はB1市民ロビー",
+            "kind": "rest",
+            "minutes": 45
+          },
+          {
+            "place": "ザ・シーズンカフェ＆ラウンジ（ラウンジ）入口",
+            "kind": "rest",
+            "minutes": 20
+          },
+          {
+            "place": "ザ・シーズンカフェ＆ラウンジ（ラウンジ）",
+            "kind": "dinner",
+            "minutes": 75
+          }
+        ]
+      }
+    ]
+  },
+  "research": {
+    "rounds": 3,
+    "maxRounds": 3,
+    "pagesOpened": 0,
+    "maxPages": 6,
+    "attempts": []
+  },
+  "model": "gpt-6.1-sol",
+  "retrieval": {
+    "status": "verified",
+    "verifiedDetailUrls": [
+      "https://www.gakkihaku.jp/guide/",
+      "https://www.act-okura.co.jp/restaurant/cafe/",
+      "https://www.act-okura.co.jp/restaurant/lounge/",
+      "https://www.actcity.jp/faq/",
+      "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+      "https://hamamatsu-daisuki.net/pickup/7915/"
+    ],
+    "checkedPages": 24
+  },
+  "photoInspections": [
+    {
+      "pageId": "page-15",
+      "imageIndex": 3,
+      "file": "85ddd53b546d6e3a846ad74169176845f0be98dcf814a84ed9201794c838be30.jpg",
+      "sourceUrl": "https://www.gakkihaku.jp/images/about/ph01.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-18T22:49:41.350Z"
+    },
+    {
+      "pageId": "page-9",
+      "imageIndex": 3,
+      "file": "e305dcfe088c3090e38ee3ab419b9ef06995f50b594d1c7bcde55720d6932186.jpg",
+      "sourceUrl": "https://www.act-okura.co.jp/media/Img608_chocolate.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-18T22:49:42.110Z"
+    },
+    {
+      "pageId": "page-4",
+      "imageIndex": 1,
+      "file": "3217c3e9e2536e6d585e81be480031e39a6b2f6bfbbfe052ac39277199ea1f8e.jpg",
+      "sourceUrl": "https://www.act-okura.co.jp/media/southcorridor_202301.JPG",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-18T22:49:43.259Z"
+    },
+    {
+      "pageId": "page-14",
+      "imageIndex": 0,
+      "file": "61b8f18679e2890c1b8f2a282b7c0d4894ff76afbd24f3682d2673dae5c17bad.jpg",
+      "sourceUrl": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image1.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-18T22:49:44.421Z"
+    },
+    {
+      "pageId": "page-10",
+      "imageIndex": 0,
+      "file": "eb2f8f65c45cc15b74b232e3f06965e28e2184e776630083f2f736dbfc59cdc8.jpg",
+      "sourceUrl": "https://www.act-okura.co.jp/media/seasoncafe.jpg",
+      "type": "image/jpeg",
+      "shownAt": "2026-11-18T22:54:38.910Z"
+    }
+  ],
+  "stepVerification": {
+    "version": 1,
+    "planHash": "77c06a0ab450726c0dc9fa323e750a5fa59bc56b514b8b298e058b1d12710148",
+    "required": true,
+    "ready": false,
+    "checks": [
+      {
+        "stepId": "a1",
+        "evidenceIds": [],
+        "id": "a1-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a2",
+        "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "evidenceIds": [],
+        "id": "a2-opening",
+        "kind": "opening",
+        "status": "unknown",
+        "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+        "needsResearch": true
+      },
+      {
+        "stepId": "a2",
+        "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "evidenceIds": [
+          "ev-27"
+        ],
+        "id": "fact-a2",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "a3",
+        "evidenceIds": [],
+        "id": "a3-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a4",
+        "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "evidenceIds": [
+          "ev-25"
+        ],
+        "id": "check-a4",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある08:30〜16:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a4",
+        "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "evidenceIds": [
+          "ev-26"
+        ],
+        "id": "a4-price-castle",
+        "kind": "price",
+        "status": "passed",
+        "detail": "浜松城 大人：2×掲載単価200円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a5",
+        "evidenceIds": [],
+        "id": "a5-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a6",
+        "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "evidenceIds": [
+          "ev-25"
+        ],
+        "id": "check-a6",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある08:30〜16:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a7",
+        "evidenceIds": [],
+        "id": "a7-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a8",
+        "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "evidenceIds": [],
+        "id": "a8-opening",
+        "kind": "opening",
+        "status": "unknown",
+        "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+        "needsResearch": true
+      },
+      {
+        "stepId": "a8",
+        "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "evidenceIds": [
+          "ev-27"
+        ],
+        "id": "fact-a8",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "a9",
+        "evidenceIds": [],
+        "id": "a9-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a10",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-7",
+          "ev-8",
+          "ev-9",
+          "ev-14",
+          "ev-15",
+          "ev-18"
+        ],
+        "id": "check-a10",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a10",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-15",
+          "ev-18"
+        ],
+        "id": "a10-price-lunch",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ドリア（サラダ・スープ・コーヒー込）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a10",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "a10-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a11",
+        "evidenceIds": [],
+        "id": "a11-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a12",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-3",
+          "ev-4",
+          "ev-2",
+          "ev-32",
+          "ev-33",
+          "ev-34"
+        ],
+        "id": "check-a12",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a12",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "a12-price-museum",
+        "kind": "price",
+        "status": "passed",
+        "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a13",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-3",
+          "ev-24",
+          "ev-4"
+        ],
+        "id": "check-a13",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a14",
+        "evidenceIds": [],
+        "id": "a14-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a15",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-3",
+          "ev-4",
+          "ev-32",
+          "ev-33"
+        ],
+        "id": "check-a15",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a16",
+        "evidenceIds": [],
+        "id": "a16-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a17",
+        "evidenceIds": [],
+        "id": "a17-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a18",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-7",
+          "ev-8",
+          "ev-9",
+          "ev-17",
+          "ev-18"
+        ],
+        "id": "check-a18",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a18",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-40",
+          "ev-18"
+        ],
+        "id": "a18-price-cake",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ショコラマンダリン：2×掲載単価750円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a18",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-41",
+          "ev-18"
+        ],
+        "id": "a18-price-coffee",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ケーキにコーヒー付き追加（単品コーヒーは加算しない）：2×掲載単価750円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a18",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "a18-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a19",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-7",
+          "ev-8",
+          "ev-9"
+        ],
+        "id": "check-a19",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a19",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-41",
+          "ev-18"
+        ],
+        "id": "a19-price-coffee",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ケーキにコーヒー付き追加（単品コーヒーは加算しない）：2×掲載単価750円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a20",
+        "evidenceIds": [],
+        "id": "a20-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a21",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [
+          "ev-5",
+          "ev-6",
+          "ev-35",
+          "ev-37",
+          "ev-38"
+        ],
+        "id": "check-a21",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a21",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [
+          "ev-6"
+        ],
+        "id": "a21-price-gallery",
+        "kind": "price",
+        "status": "passed",
+        "detail": "展望回廊 大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a22",
+        "evidenceIds": [],
+        "id": "a22-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a23",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-12",
+          "ev-13",
+          "ev-19",
+          "ev-20",
+          "ev-21",
+          "ev-39"
+        ],
+        "id": "check-a23",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a23",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-19",
+          "ev-21"
+        ],
+        "id": "a23-price-dinner",
+        "kind": "price",
+        "status": "passed",
+        "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a23",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-20",
+          "ev-21"
+        ],
+        "id": "a23-price-drink",
+        "kind": "price",
+        "status": "passed",
+        "detail": "夕食アップルジュース：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a23",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [],
+        "id": "a23-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "a24",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-12",
+          "ev-39"
+        ],
+        "id": "check-a24",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "a25",
+        "evidenceIds": [],
+        "id": "a25-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      }
+    ],
+    "unknown": 2,
+    "failed": 0,
+    "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+  },
+  "journeyAssessment": {
+    "version": 1,
+    "required": true,
+    "planHash": "77c06a0ab450726c0dc9fa323e750a5fa59bc56b514b8b298e058b1d12710148",
+    "status": "passed",
+    "issues": [],
+    "warnings": [
+      "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+    ],
+    "legs": [
+      {
+        "stepId": "a1",
+        "mode": "walk",
+        "from": "浜松駅",
+        "to": "浜松城",
+        "straightLineMeters": 1111,
+        "estimatedMeters": 1445,
+        "recommendedMinutes": 29,
+        "allocatedMinutes": 40,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a3",
+        "mode": "walk",
+        "from": "浜松城",
+        "to": "浜松城",
+        "straightLineMeters": 0,
+        "estimatedMeters": 0,
+        "recommendedMinutes": 0,
+        "allocatedMinutes": 8,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a5",
+        "mode": "indoor",
+        "from": "浜松城",
+        "to": "浜松城",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 8,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a7",
+        "mode": "walk",
+        "from": "浜松城",
+        "to": "浜松城",
+        "straightLineMeters": 0,
+        "estimatedMeters": 0,
+        "recommendedMinutes": 0,
+        "allocatedMinutes": 8,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a9",
+        "mode": "walk",
+        "from": "浜松城",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 1312,
+        "estimatedMeters": 1707,
+        "recommendedMinutes": 35,
+        "allocatedMinutes": 40,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a11",
+        "mode": "walk",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 143,
+        "estimatedMeters": 187,
+        "recommendedMinutes": 4,
+        "allocatedMinutes": 12,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a14",
+        "mode": "indoor",
+        "from": "浜松市楽器博物館",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 9,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a16",
+        "mode": "indoor",
+        "from": "浜松市楽器博物館",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 9,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a17",
+        "mode": "walk",
+        "from": "浜松市楽器博物館",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 143,
+        "estimatedMeters": 187,
+        "recommendedMinutes": 4,
+        "allocatedMinutes": 12,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "a20",
+        "mode": "indoor",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 10,
+        "allocatedMinutes": 15,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a22",
+        "mode": "indoor",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 10,
+        "allocatedMinutes": 15,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "a25",
+        "mode": "walk",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "浜松駅",
+        "straightLineMeters": 277,
+        "estimatedMeters": 360,
+        "recommendedMinutes": 8,
+        "allocatedMinutes": 20,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      }
+    ],
+    "stays": [
+      {
+        "place": "浜松城",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松城",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "meal",
+        "minutes": 60,
+        "minimumMinutes": 40,
+        "suggestedRange": [
+          60,
+          90
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松市楽器博物館",
+        "category": "museum",
+        "minutes": 95,
+        "minimumMinutes": 60,
+        "suggestedRange": [
+          90,
+          150
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松市楽器博物館",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "cafe",
+        "minutes": 34,
+        "minimumMinutes": 30,
+        "suggestedRange": [
+          45,
+          75
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "viewpoint",
+        "minutes": 35,
+        "minimumMinutes": 25,
+        "suggestedRange": [
+          35,
+          60
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "meal",
+        "minutes": 75,
+        "minimumMinutes": 40,
+        "suggestedRange": [
+          60,
+          90
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "rest",
+        "minutes": 20,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松城",
+        "category": "museum",
+        "minutes": 60,
+        "minimumMinutes": 60,
+        "suggestedRange": [
+          90,
+          150
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松城",
+        "category": "viewpoint",
+        "minutes": 25,
+        "minimumMinutes": 25,
+        "suggestedRange": [
+          35,
+          60
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      }
+    ],
+    "walkingMetersEstimate": 3886,
+    "walkingMinutes": 105,
+    "historySamples": 0
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "needs_detail",
+    "issues": [
+      "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+      "a8: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+    ],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": [
+          "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+          "a8: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ]
+      },
+      {
+        "number": 2,
+        "issues": [
+          "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+          "a8: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ]
+      },
+      {
+        "number": 3,
+        "issues": [
+          "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+          "a8: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ]
+      },
+      {
+        "number": 4,
+        "issues": [
+          "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+          "a8: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ]
+      }
+    ]
+  },
+  "answer": {
+    "actionPlan": {
+      "steps": [
+        {
+          "id": "a1",
+          "when": "09:00",
+          "durationMinutes": 40,
+          "where": "浜松駅 → 浜松城",
+          "action": "次の場所へ移動",
+          "how": "浜松駅北口バス停付近を09:00発。北西方向へ、現地の歩道・信号を確認して浜松城へ。代表点間の計画見積で経路の実測ではない。坂で息が上がれば手前で立ち止まり以後の見学を短縮。",
+          "doneWhen": "09:40に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-28",
+            "ev-31",
+            "ev-11"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a2",
+          "when": "09:40",
+          "durationMinutes": 15,
+          "where": "浜松城 天守付近の公園ベンチ",
+          "action": "歩行後に座って休む",
+          "how": "空いたベンチで水分補給。会話は今日見たいものを一つずつ。歩行・撮影を含めず正味15分。空きや位置は当日確認、座れなければ入館を急がず安全な休める場所を確認し見学を削る。",
+          "doneWhen": "呼吸が落ち着き、15分の着席を終える",
+          "kind": "rest",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-27",
+            "ev-25",
+            "ev-31"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a3",
+          "when": "09:55",
+          "durationMinutes": 8,
+          "where": "浜松城 → 浜松城",
+          "action": "次の場所へ移動",
+          "how": "公園から天守入口へ屋外徒歩。代表点は同一だが園路・入口は未測定のため5分＋余裕3分を確保。入館券は現地で扱い、列が長ければ見学時間を削り昼食を守る。",
+          "doneWhen": "10:03に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-31",
+            "ev-25",
+            "ev-26"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a4",
+          "when": "10:03",
+          "durationMinutes": 60,
+          "where": "浜松城天守閣 資料展示",
+          "action": "家康と城下町の歴史を読み比べる",
+          "how": "展示の説明を二人で分担して読み、家康の浜松時代と城下町の変遷から各一つ発見を持ち寄る。全展示制覇は狙わず、運営者当日告知が掲示されていればそちらを優先。",
+          "doneWhen": "二人で発見を一つずつ説明できる",
+          "kind": "activity",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-11",
+            "ev-25",
+            "ev-26",
+            "ev-36"
+          ],
+          "costItemIds": [
+            "castle"
+          ]
+        },
+        {
+          "id": "a5",
+          "when": "11:03",
+          "durationMinutes": 8,
+          "where": "浜松城 → 浜松城",
+          "action": "次の場所へ移動",
+          "how": "天守館内を展望階へ。階段の上下に5分、余裕3分。通行が難しければ上階を省略。",
+          "doneWhen": "11:11に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-36",
+            "ev-25"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a6",
+          "when": "11:11",
+          "durationMinutes": 25,
+          "where": "浜松城 展望階",
+          "action": "城下町と現代の街を見比べる",
+          "how": "窓から見える街の広がりを先ほどの展示と照合。二人で気づく違いを一つずつ言葉にする。遠景や晴天は保証せず、見えない日は館内の歴史の振り返りへ。",
+          "doneWhen": "街と歴史のつながりを一文にする",
+          "kind": "activity",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-25",
+            "ev-36",
+            "ev-31"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a7",
+          "when": "11:36",
+          "durationMinutes": 8,
+          "where": "浜松城 → 浜松城",
+          "action": "次の場所へ移動",
+          "how": "展望階から階段を下り、屋外公園ベンチへ。館内外の退出を含む徒歩5分＋余裕3分。公園への区間をindoor扱いにしない。",
+          "doneWhen": "11:44に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-25",
+            "ev-27",
+            "ev-31"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a8",
+          "when": "11:44",
+          "durationMinutes": 15,
+          "where": "浜松城 天守付近の公園ベンチ",
+          "action": "昼食へ歩く前に脚を休める",
+          "how": "正味15分座り、足首を軽く動かし水分補給。坂の疲れが残るなら徒歩移動を中止して現地で帰路を選ぶ。",
+          "doneWhen": "疲労を二人で確認してから出発",
+          "kind": "rest",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-27",
+            "ev-25",
+            "ev-31"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a9",
+          "when": "11:59",
+          "durationMinutes": 40,
+          "where": "浜松城 → オークラアクトシティホテル浜松",
+          "action": "次の場所へ移動",
+          "how": "南東方向へホテル板屋町111-2を目指す。代表点間の初期見積35分＋信号・入館・2階到着の余裕5分。歩道の実経路は未確認、無理に最短路を取らない。",
+          "doneWhen": "12:39に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-31",
+            "ev-30",
+            "ev-9"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a10",
+          "when": "12:39",
+          "durationMinutes": 60,
+          "where": "ザ・シーズンカフェ＆ラウンジ（カフェ）2階",
+          "action": "ドリアの昼食",
+          "how": "茄子とチキンのミートソースドリアを各1食（1,800円×2）。サラダ・日替わりスープ・コーヒー込みなので飲み物を重複加算しない。入店時に価格・提供可否を確認し、13:39までに会計。満席なら14時L.O.を超えて待たず分岐へ。",
+          "doneWhen": "食事・会計を終え博物館へ出発",
+          "kind": "lunch",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-14",
+            "ev-15",
+            "ev-18"
+          ],
+          "costItemIds": [
+            "lunch"
+          ]
+        },
+        {
+          "id": "a11",
+          "when": "13:39",
+          "durationMinutes": 12,
+          "where": "オークラアクトシティホテル浜松 → 浜松市楽器博物館",
+          "action": "次の場所へ移動",
+          "how": "ホテルを出て北東方向の中央3-9-1へ。屋外徒歩と建物出入りを8分、余裕4分。",
+          "doneWhen": "13:51に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-30",
+            "ev-29",
+            "ev-4"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a12",
+          "when": "13:51",
+          "durationMinutes": 55,
+          "where": "浜松市楽器博物館 1階",
+          "action": "アジア・日本の楽器と音を比較",
+          "how": "形や素材の異なる楽器を二人で各2点選び、音源を聴き、見た目から予想した音との違いをメモ。14時サックバットの当日案内が合えば解説を聞く（変更・場所は現地確認）。",
+          "doneWhen": "二人で計4点の形・音の違いを一つずつ残す",
+          "kind": "activity",
+          "venueUrl": "https://www.gakkihaku.jp/guide/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-3",
+            "ev-4",
+            "ev-2",
+            "ev-32",
+            "ev-33",
+            "ev-34"
+          ],
+          "costItemIds": [
+            "museum"
+          ]
+        },
+        {
+          "id": "a13",
+          "when": "14:46",
+          "durationMinutes": 15,
+          "where": "浜松市楽器博物館 1階",
+          "action": "展示を止めて正味15分休む",
+          "how": "公式の持ち運び可能な小型椅子を使える位置を入口で確認。展示鑑賞や音源操作は止め、15分座って耳と脚を休める。椅子の空き・固定休憩室の存在は未確認、使えなければ地下見学を削ってカフェへ早く移る。",
+          "doneWhen": "正味15分の着席を終える",
+          "kind": "rest",
+          "venueUrl": "https://www.gakkihaku.jp/guide/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-3",
+            "ev-24",
+            "ev-4"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a14",
+          "when": "15:01",
+          "durationMinutes": 9,
+          "where": "浜松市楽器博物館 → 浜松市楽器博物館",
+          "action": "次の場所へ移動",
+          "how": "館内エレベーター等で地下へ。移動5分・乗降1分・余裕3分、実際の待ちが出れば地下の鑑賞を同じ分だけ短縮。",
+          "doneWhen": "15:10に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-32",
+            "ev-3",
+            "ev-24"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a15",
+          "when": "15:10",
+          "durationMinutes": 40,
+          "where": "浜松市楽器博物館 地下1階",
+          "action": "鍵盤楽器を時代と音で比べる",
+          "how": "第3展示室の鍵盤楽器から形の違う2点を選び、解説と試聴で鍵盤・胴の形と音色の関係を比較。最後に今日もう一度聴きたい音を各1点選ぶ。展示品を自由に演奏できるとは扱わない。",
+          "doneWhen": "比較メモ2点とお気に入り各1点を決める",
+          "kind": "activity",
+          "venueUrl": "https://www.gakkihaku.jp/guide/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-3",
+            "ev-4",
+            "ev-32",
+            "ev-33"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a16",
+          "when": "15:50",
+          "durationMinutes": 9,
+          "where": "浜松市楽器博物館 → 浜松市楽器博物館",
+          "action": "次の場所へ移動",
+          "how": "地下から1階出口へ戻る。移動5分・乗降1分・余裕3分を確保。",
+          "doneWhen": "15:59に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-32",
+            "ev-3"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a17",
+          "when": "15:59",
+          "durationMinutes": 12,
+          "where": "浜松市楽器博物館 → オークラアクトシティホテル浜松",
+          "action": "次の場所へ移動",
+          "how": "南西方向へホテルへ戻り2階カフェへ。屋外区間はwalk、建物出入り込み8分＋余裕4分。",
+          "doneWhen": "16:11に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-29",
+            "ev-30",
+            "ev-9"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a18",
+          "when": "16:11",
+          "durationMinutes": 34,
+          "where": "ザ・シーズンカフェ＆ラウンジ（カフェ）2階",
+          "action": "甘味とコーヒーで音の余韻を話す",
+          "how": "ショコラマンダリン750円＋コーヒー付き追加750円＝1,500円を各1組。ブレンドを選び単品850円は加算しない。注文は16:11予定、16:30L.O.前。博物館で意外だった音を一つずつ交換。満席・売切れは分岐へ。",
+          "doneWhen": "一組ずつ味わいメモを一行残す",
+          "kind": "cafe",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-17",
+            "ev-18",
+            "ev-40",
+            "ev-41"
+          ],
+          "costItemIds": [
+            "cake",
+            "coffee"
+          ]
+        },
+        {
+          "id": "a19",
+          "when": "16:45",
+          "durationMinutes": 15,
+          "where": "ザ・シーズンカフェ＆ラウンジ（カフェ）2階",
+          "action": "飲食を終え着席休憩",
+          "how": "店側の利用案内に従い、正味15分は写真整理や追加注文をせず静かに座って目を休める。継続利用できない時は展望回廊を省略し早めの帰路に切り替える。費用は直前のコーヒー付き追加に含み、再注文・再加算しない。",
+          "doneWhen": "17:00に立ち上がれるか確認",
+          "kind": "rest",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-41"
+          ],
+          "costItemIds": [
+            "coffee"
+          ]
+        },
+        {
+          "id": "a20",
+          "when": "17:00",
+          "durationMinutes": 15,
+          "where": "オークラアクトシティホテル浜松 → オークラアクトシティホテル浜松",
+          "action": "次の場所へ移動",
+          "how": "2階から45階展望回廊へ。移動10分・乗降2分・余裕3分。営業変更・入場制限を入口で確認、入場不可なら購入せず夕食側へ。",
+          "doneWhen": "17:15に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-30",
+            "ev-37",
+            "ev-5"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a21",
+          "when": "17:15",
+          "durationMinutes": 35,
+          "where": "45階 展望回廊",
+          "action": "音楽の都のパネルと眺望を照合",
+          "how": "北側の楽器製造・音楽の都に至る展示を読み、午後に見た楽器とつながる話を一つ選ぶ。南側が開いていれば街の広がりも比較。暗さ・天候・南側制限で見え方は変わる。",
+          "doneWhen": "パネルの発見を一つと街の印象を一つ共有",
+          "kind": "activity",
+          "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-5",
+            "ev-6",
+            "ev-35",
+            "ev-37",
+            "ev-38"
+          ],
+          "costItemIds": [
+            "gallery"
+          ]
+        },
+        {
+          "id": "a22",
+          "when": "17:50",
+          "durationMinutes": 15,
+          "where": "オークラアクトシティホテル浜松 → オークラアクトシティホテル浜松",
+          "action": "次の場所へ移動",
+          "how": "45階から2階ラウンジへ。移動10分・乗降2分・余裕3分。カフェの17時閉店とラウンジの営業を区別して入店。",
+          "doneWhen": "18:05に目的階・到着地点へ着く",
+          "kind": "move",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-30",
+            "ev-12",
+            "ev-39"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a23",
+          "when": "18:05",
+          "durationMinutes": 75,
+          "where": "ザ・シーズンカフェ＆ラウンジ（ラウンジ）2階",
+          "action": "五目あんかけ焼きそばの夕食",
+          "how": "入店時に中国料理の提供を確認し、五目あんかけ焼きそば2,000円とアップルジュース700円を各1つ注文（2人5,400円）。食事を味わった後、城の歴史・楽器の音・回廊の展示から発見を各一つ交換。夜限定の新フードは注文しない。",
+          "doneWhen": "食事を終え、二人の発見3項目がまとまる",
+          "kind": "dinner",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-12",
+            "ev-13",
+            "ev-19",
+            "ev-20",
+            "ev-21",
+            "ev-39",
+            "ev-44",
+            "ev-43"
+          ],
+          "costItemIds": [
+            "dinner",
+            "drink"
+          ]
+        },
+        {
+          "id": "a24",
+          "when": "19:20",
+          "durationMinutes": 20,
+          "where": "ザ・シーズンカフェ＆ラウンジ（ラウンジ）2階",
+          "action": "帰路前に着席して一日を整理",
+          "how": "店の利用案内に従い脚を休め、会計と荷物確認。うち15分以上は操作や歩行を止める。混雑で継続着席できなければ19:20に会計して駅へ早帰りし、20時まで無理に埋めない。",
+          "doneWhen": "19:40までに会計・荷物確認を終える",
+          "kind": "rest",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-12",
+            "ev-39",
+            "ev-44",
+            "ev-43"
+          ],
+          "costItemIds": []
+        },
+        {
+          "id": "a25",
+          "when": "19:40",
+          "durationMinutes": 20,
+          "where": "オークラアクトシティホテル浜松 → 浜松駅",
+          "action": "浜松駅北口へ戻る",
+          "how": "2階から出口へ下り、浜松駅北口バス停付近へ南西方向に戻る。館内下降と屋外徒歩12分＋信号・道確認の余裕8分。20:00駅北口着を目安に、駅構内移動は別途。",
+          "doneWhen": "20:00に目的階・到着地点へ着く",
+          "kind": "return",
+          "locationStatus": "evidence-linked",
+          "evidenceIds": [
+            "ev-30",
+            "ev-28",
+            "ev-9"
+          ],
+          "costItemIds": []
+        }
+      ],
+      "branches": [
+        {
+          "trigger": "雨・坂の疲労・浜松城が臨時休館",
+          "action": "浜松城の徒歩往復と入館を中止する",
+          "how": "当日掲示を優先。朝は9:30以降の楽器博物館へ切替え、途中15分休憩を必ず設ける。主案の午後をそのまま重複実施せず短縮、確認できたカフェ・昼食以降に接続。早終了なら20時まで待機せず帰る。変更案は11時間を保証しない。",
+          "evidenceIds": [
+            "ev-3",
+            "ev-25",
+            "ev-24"
+          ]
+        },
+        {
+          "trigger": "カフェ満席・注文品売切れ・掲載価格と異なる",
+          "action": "長い入店待ちは作らず当日価格で再判断",
+          "how": "昼は14時L.O.前、午後は16:30L.O.前に入店できないなら不採用。主案と別の食事は合計20,000円から実支出を引いた残額を上限に店頭表示を見て選ぶが、未確認店舗を予約済み・価格確認済みとは扱わない。必要な食事・休憩を確保できなければ観光を打ち切って駅へ戻る。",
+          "evidenceIds": [
+            "ev-8",
+            "ev-14",
+            "ev-15"
+          ]
+        },
+        {
+          "trigger": "展望回廊の臨時休業・入場制限、またはカフェで着席休憩不可",
+          "action": "45階入場を省略する",
+          "how": "通常営業のみ確認済みで対象日カレンダーは取得できていないため入場前掲示を確認。券を買わず17時以降のラウンジへ。空席を保証せず、入れなければ駅へ帰る。夜の時間を待機で埋めない。",
+          "evidenceIds": [
+            "ev-5",
+            "ev-12",
+            "ev-37"
+          ]
+        }
+      ],
+      "budget": {
+        "scenario": "晴天・通常営業で全主案を利用する大人2人。入館・飲食のみ、交通費別。割引なし。",
+        "items": [
+          {
+            "id": "castle",
+            "label": "浜松城 大人",
+            "unitYen": 200,
+            "quantity": 2,
+            "evidenceIds": [
+              "ev-26"
+            ],
+            "basis": "published"
+          },
+          {
+            "id": "museum",
+            "label": "楽器博物館 大人",
+            "unitYen": 800,
+            "quantity": 2,
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "basis": "published"
+          },
+          {
+            "id": "gallery",
+            "label": "展望回廊 大人",
+            "unitYen": 1200,
+            "quantity": 2,
+            "evidenceIds": [
+              "ev-6"
+            ],
+            "basis": "published"
+          },
+          {
+            "id": "lunch",
+            "label": "ドリア（サラダ・スープ・コーヒー込）",
+            "unitYen": 1800,
+            "quantity": 2,
+            "evidenceIds": [
+              "ev-15",
+              "ev-18"
+            ],
+            "basis": "published"
+          },
+          {
+            "id": "cake",
+            "label": "ショコラマンダリン",
+            "unitYen": 750,
+            "quantity": 2,
+            "basis": "published",
+            "evidenceIds": [
+              "ev-40",
+              "ev-18"
+            ]
+          },
+          {
+            "id": "coffee",
+            "label": "ケーキにコーヒー付き追加（単品コーヒーは加算しない）",
+            "unitYen": 750,
+            "quantity": 2,
+            "basis": "published",
+            "evidenceIds": [
+              "ev-41",
+              "ev-18"
+            ]
+          },
+          {
+            "id": "dinner",
+            "label": "五目あんかけ焼きそば",
+            "unitYen": 2000,
+            "quantity": 2,
+            "evidenceIds": [
+              "ev-19",
+              "ev-21"
+            ],
+            "basis": "published"
+          },
+          {
+            "id": "drink",
+            "label": "夕食アップルジュース",
+            "unitYen": 700,
+            "quantity": 2,
+            "evidenceIds": [
+              "ev-20",
+              "ev-21"
+            ],
+            "basis": "published"
+          }
+        ],
+        "totalYen": 16400
+      },
+      "journeyState": {
+        "version": 1,
+        "places": [
+          {
+            "id": "s",
+            "label": "浜松駅",
+            "lat": 34.705275,
+            "lon": 137.734244,
+            "evidenceIds": [
+              "ev-28"
+            ]
+          },
+          {
+            "id": "kp",
+            "label": "浜松城",
+            "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+            "floor": 0,
+            "lat": 34.7117306,
+            "lon": 137.7249641,
+            "evidenceIds": [
+              "ev-31",
+              "ev-11"
+            ]
+          },
+          {
+            "id": "k1",
+            "label": "浜松城",
+            "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+            "floor": 1,
+            "lat": 34.7117306,
+            "lon": 137.7249641,
+            "evidenceIds": [
+              "ev-31",
+              "ev-11"
+            ]
+          },
+          {
+            "id": "k3",
+            "label": "浜松城",
+            "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+            "floor": 3,
+            "lat": 34.7117306,
+            "lon": 137.7249641,
+            "evidenceIds": [
+              "ev-31",
+              "ev-11"
+            ]
+          },
+          {
+            "id": "h2",
+            "label": "オークラアクトシティホテル浜松",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "floor": 2,
+            "lat": 34.7056106,
+            "lon": 137.7372416,
+            "evidenceIds": [
+              "ev-30",
+              "ev-9"
+            ]
+          },
+          {
+            "id": "h45",
+            "label": "オークラアクトシティホテル浜松",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "floor": 45,
+            "lat": 34.7056106,
+            "lon": 137.7372416,
+            "evidenceIds": [
+              "ev-30",
+              "ev-9"
+            ]
+          },
+          {
+            "id": "m1",
+            "label": "浜松市楽器博物館",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "floor": 1,
+            "lat": 34.7066154,
+            "lon": 137.7382244,
+            "evidenceIds": [
+              "ev-29",
+              "ev-4",
+              "ev-32"
+            ]
+          },
+          {
+            "id": "mb",
+            "label": "浜松市楽器博物館",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "floor": -1,
+            "lat": 34.7066154,
+            "lon": 137.7382244,
+            "evidenceIds": [
+              "ev-29",
+              "ev-4",
+              "ev-32"
+            ]
+          }
+        ],
+        "legs": [
+          {
+            "stepId": "a1",
+            "fromPlaceId": "s",
+            "toPlaceId": "kp",
+            "mode": "walk",
+            "movementMinutes": 32,
+            "bufferMinutes": 8,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-28",
+              "ev-31",
+              "ev-11"
+            ]
+          },
+          {
+            "stepId": "a3",
+            "fromPlaceId": "kp",
+            "toPlaceId": "k1",
+            "mode": "walk",
+            "movementMinutes": 5,
+            "bufferMinutes": 3,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-31",
+              "ev-25",
+              "ev-26"
+            ]
+          },
+          {
+            "stepId": "a5",
+            "fromPlaceId": "k1",
+            "toPlaceId": "k3",
+            "mode": "indoor",
+            "movementMinutes": 5,
+            "bufferMinutes": 3,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-36",
+              "ev-25"
+            ]
+          },
+          {
+            "stepId": "a7",
+            "fromPlaceId": "k3",
+            "toPlaceId": "kp",
+            "mode": "walk",
+            "movementMinutes": 5,
+            "bufferMinutes": 3,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-25",
+              "ev-27",
+              "ev-31"
+            ]
+          },
+          {
+            "stepId": "a9",
+            "fromPlaceId": "kp",
+            "toPlaceId": "h2",
+            "mode": "walk",
+            "movementMinutes": 35,
+            "bufferMinutes": 5,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-31",
+              "ev-30",
+              "ev-9"
+            ]
+          },
+          {
+            "stepId": "a11",
+            "fromPlaceId": "h2",
+            "toPlaceId": "m1",
+            "mode": "walk",
+            "movementMinutes": 8,
+            "bufferMinutes": 4,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-30",
+              "ev-29",
+              "ev-4"
+            ]
+          },
+          {
+            "stepId": "a14",
+            "fromPlaceId": "m1",
+            "toPlaceId": "mb",
+            "mode": "indoor",
+            "movementMinutes": 5,
+            "bufferMinutes": 3,
+            "waitMinutes": 0,
+            "boardingMinutes": 1,
+            "evidenceIds": [
+              "ev-32",
+              "ev-3",
+              "ev-24"
+            ]
+          },
+          {
+            "stepId": "a16",
+            "fromPlaceId": "mb",
+            "toPlaceId": "m1",
+            "mode": "indoor",
+            "movementMinutes": 5,
+            "bufferMinutes": 3,
+            "waitMinutes": 0,
+            "boardingMinutes": 1,
+            "evidenceIds": [
+              "ev-32",
+              "ev-3"
+            ]
+          },
+          {
+            "stepId": "a17",
+            "fromPlaceId": "m1",
+            "toPlaceId": "h2",
+            "mode": "walk",
+            "movementMinutes": 8,
+            "bufferMinutes": 4,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-29",
+              "ev-30",
+              "ev-9"
+            ]
+          },
+          {
+            "stepId": "a20",
+            "fromPlaceId": "h2",
+            "toPlaceId": "h45",
+            "mode": "indoor",
+            "movementMinutes": 10,
+            "bufferMinutes": 3,
+            "waitMinutes": 0,
+            "boardingMinutes": 2,
+            "evidenceIds": [
+              "ev-30",
+              "ev-37",
+              "ev-5"
+            ]
+          },
+          {
+            "stepId": "a22",
+            "fromPlaceId": "h45",
+            "toPlaceId": "h2",
+            "mode": "indoor",
+            "movementMinutes": 10,
+            "bufferMinutes": 3,
+            "waitMinutes": 0,
+            "boardingMinutes": 2,
+            "evidenceIds": [
+              "ev-30",
+              "ev-12",
+              "ev-39"
+            ]
+          },
+          {
+            "stepId": "a25",
+            "fromPlaceId": "h2",
+            "toPlaceId": "s",
+            "mode": "walk",
+            "movementMinutes": 12,
+            "bufferMinutes": 8,
+            "waitMinutes": 0,
+            "boardingMinutes": 0,
+            "evidenceIds": [
+              "ev-30",
+              "ev-28",
+              "ev-9"
+            ]
+          }
+        ],
+        "stays": [
+          {
+            "id": "stay-a2",
+            "placeId": "kp",
+            "stepIds": [
+              "a2"
+            ],
+            "category": "rest"
+          },
+          {
+            "id": "stay-a8",
+            "placeId": "kp",
+            "stepIds": [
+              "a8"
+            ],
+            "category": "rest"
+          },
+          {
+            "id": "stay-a10",
+            "placeId": "h2",
+            "stepIds": [
+              "a10"
+            ],
+            "category": "meal"
+          },
+          {
+            "id": "stay-a12",
+            "placeId": "m1",
+            "stepIds": [
+              "a12"
+            ],
+            "category": "museum"
+          },
+          {
+            "id": "stay-a13",
+            "placeId": "m1",
+            "stepIds": [
+              "a13"
+            ],
+            "category": "rest"
+          },
+          {
+            "id": "stay-a15",
+            "placeId": "mb",
+            "stepIds": [
+              "a15"
+            ],
+            "category": "museum"
+          },
+          {
+            "id": "stay-a18",
+            "placeId": "h2",
+            "stepIds": [
+              "a18"
+            ],
+            "category": "cafe"
+          },
+          {
+            "id": "stay-a19",
+            "placeId": "h2",
+            "stepIds": [
+              "a19"
+            ],
+            "category": "rest"
+          },
+          {
+            "id": "stay-a21",
+            "placeId": "h45",
+            "stepIds": [
+              "a21"
+            ],
+            "category": "viewpoint"
+          },
+          {
+            "id": "stay-a23",
+            "placeId": "h2",
+            "stepIds": [
+              "a23"
+            ],
+            "category": "meal"
+          },
+          {
+            "id": "stay-a24",
+            "placeId": "h2",
+            "stepIds": [
+              "a24"
+            ],
+            "category": "rest"
+          },
+          {
+            "id": "stay-a4",
+            "placeId": "k1",
+            "stepIds": [
+              "a4"
+            ],
+            "category": "museum"
+          },
+          {
+            "id": "stay-a6",
+            "placeId": "k3",
+            "stepIds": [
+              "a6"
+            ],
+            "category": "viewpoint"
+          }
+        ]
+      },
+      "stepChecks": [
+        {
+          "id": "check-a4",
+          "stepId": "a4",
+          "kind": "opening",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "opens": "08:30",
+          "closes": "16:30",
+          "evidenceIds": [
+            "ev-25"
+          ]
+        },
+        {
+          "id": "check-a6",
+          "stepId": "a6",
+          "kind": "opening",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "opens": "08:30",
+          "closes": "16:30",
+          "evidenceIds": [
+            "ev-25"
+          ]
+        },
+        {
+          "id": "check-a10",
+          "stepId": "a10",
+          "kind": "opening",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+          "opens": "11:00",
+          "closes": "17:00",
+          "lastEntry": "14:00",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-14",
+            "ev-15",
+            "ev-18"
+          ]
+        },
+        {
+          "id": "check-a12",
+          "stepId": "a12",
+          "kind": "opening",
+          "venueUrl": "https://www.gakkihaku.jp/guide/",
+          "opens": "09:30",
+          "closes": "17:00",
+          "evidenceIds": [
+            "ev-3",
+            "ev-4",
+            "ev-2",
+            "ev-32",
+            "ev-33",
+            "ev-34"
+          ]
+        },
+        {
+          "id": "check-a13",
+          "stepId": "a13",
+          "kind": "opening",
+          "venueUrl": "https://www.gakkihaku.jp/guide/",
+          "opens": "09:30",
+          "closes": "17:00",
+          "evidenceIds": [
+            "ev-3",
+            "ev-24",
+            "ev-4"
+          ]
+        },
+        {
+          "id": "check-a15",
+          "stepId": "a15",
+          "kind": "opening",
+          "venueUrl": "https://www.gakkihaku.jp/guide/",
+          "opens": "09:30",
+          "closes": "17:00",
+          "evidenceIds": [
+            "ev-3",
+            "ev-4",
+            "ev-32",
+            "ev-33"
+          ]
+        },
+        {
+          "id": "check-a18",
+          "stepId": "a18",
+          "kind": "opening",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+          "opens": "11:00",
+          "closes": "17:00",
+          "lastEntry": "16:30",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-17",
+            "ev-18"
+          ]
+        },
+        {
+          "id": "check-a19",
+          "stepId": "a19",
+          "kind": "opening",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+          "opens": "11:00",
+          "closes": "17:00",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9"
+          ]
+        },
+        {
+          "id": "check-a21",
+          "stepId": "a21",
+          "kind": "opening",
+          "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+          "opens": "11:00",
+          "closes": "18:00",
+          "lastEntry": "17:30",
+          "evidenceIds": [
+            "ev-5",
+            "ev-6",
+            "ev-35",
+            "ev-37",
+            "ev-38"
+          ]
+        },
+        {
+          "id": "check-a23",
+          "stepId": "a23",
+          "kind": "opening",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+          "opens": "17:00",
+          "closes": "22:30",
+          "lastEntry": "22:00",
+          "evidenceIds": [
+            "ev-12",
+            "ev-13",
+            "ev-19",
+            "ev-20",
+            "ev-21",
+            "ev-39"
+          ]
+        },
+        {
+          "id": "check-a24",
+          "stepId": "a24",
+          "kind": "opening",
+          "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+          "opens": "17:00",
+          "closes": "22:30",
+          "evidenceIds": [
+            "ev-12",
+            "ev-39"
+          ]
+        },
+        {
+          "id": "fact-a2",
+          "stepId": "a2",
+          "kind": "fact",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "terms": [
+            "ベンチ"
+          ],
+          "evidenceIds": [
+            "ev-27"
+          ]
+        },
+        {
+          "id": "fact-a8",
+          "stepId": "a8",
+          "kind": "fact",
+          "venueUrl": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+          "terms": [
+            "ベンチ"
+          ],
+          "evidenceIds": [
+            "ev-27"
+          ]
+        }
+      ],
+      "verification": {
+        "date": "2026-11-21",
+        "checks": [
+          {
+            "kind": "opening",
+            "status": "published",
+            "detail": "楽器博物館は対象日カレンダーあり。カフェ土曜11-17時、食事14時L.O.。展望回廊は通常11-18時のみ確認、当日カレンダー未取得。浜松城は市・観光協会の通常案内で運営者の当日情報ではない。",
+            "evidenceIds": [
+              "ev-1",
+              "ev-3",
+              "ev-8",
+              "ev-14",
+              "ev-5",
+              "ev-25"
+            ],
+            "stepIds": [
+              "a4",
+              "a10",
+              "a12",
+              "a21",
+              "a23"
+            ]
+          },
+          {
+            "kind": "prices",
+            "status": "published",
+            "detail": "大人2人の掲載定番単価合計16,400円。昼のコーヒーを再加算せず、カフェもケーキ＋セット追加のみ。飲食は税・サービス料込み、交通費別。",
+            "evidenceIds": [
+              "ev-2",
+              "ev-6",
+              "ev-15",
+              "ev-17",
+              "ev-18",
+              "ev-19",
+              "ev-20",
+              "ev-21",
+              "ev-26"
+            ],
+            "stepIds": [
+              "a4",
+              "a10",
+              "a12",
+              "a18",
+              "a21",
+              "a23"
+            ]
+          },
+          {
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "予約せず当日入口で利用方法と空席・継続着席可否を確認。将来の空席は未確認。待ちが長い時は観光を削り、必要な食事・休憩が取れなければ早帰り。",
+            "evidenceIds": [
+              "ev-7",
+              "ev-8",
+              "ev-12",
+              "ev-37"
+            ],
+            "stepIds": [
+              "a10",
+              "a18",
+              "a19",
+              "a23",
+              "a24"
+            ]
+          },
+          {
+            "kind": "comparison",
+            "status": "published",
+            "detail": "浜松城は朝枠なら通常時間内、座標から徒歩余裕を取り条件付き採用。展望回廊は午後遅めの通常時間内に限定。アクトの森は無料6-19時が確認できるが座標候補なしのため経路と距離を検査できず主案不採用。",
+            "evidenceIds": [
+              "ev-25",
+              "ev-31",
+              "ev-5",
+              "ev-22",
+              "ev-10"
+            ],
+            "stepIds": [
+              "a1",
+              "a4",
+              "a21"
+            ]
+          },
+          {
+            "kind": "rest",
+            "status": "published",
+            "detail": "城公園のベンチ（観光協会案内）と博物館の持ち運び可能な小型椅子、ホテル2階カフェ／ラウンジで独立休憩。空き・指定位置は当日確認。待ち行列は休憩に含めない。",
+            "evidenceIds": [
+              "ev-27",
+              "ev-24",
+              "ev-7",
+              "ev-12"
+            ],
+            "stepIds": [
+              "a2",
+              "a8",
+              "a13",
+              "a19",
+              "a24"
+            ]
+          }
+        ]
+      }
+    },
+    "visualArtifact": {
+      "kind": "journey-map",
+      "title": "浜松の歴史・音・街をつなぐ一日｜11月21日・大人2人",
+      "description": "09:00浜松駅北口発→20:00帰着の条件付き提案。写真は公式・観光協会資料、地図は引用座標の代表点で道路ルートではない。主案16,400円。未確認の公園休憩時間と当日営業・空席は別記。",
+      "stops": [
+        {
+          "id": "station",
+          "label": "浜松駅",
+          "stepIds": [
+            "a1",
+            "a25"
+          ],
+          "primaryStepId": "a1",
+          "evidenceIds": [
+            "ev-28"
+          ],
+          "optional": false,
+          "coordinates": {
+            "lat": 34.705275,
+            "lon": 137.734244,
+            "evidenceId": "ev-28"
+          }
+        },
+        {
+          "id": "castle",
+          "label": "歴史から街を読む",
+          "stepIds": [
+            "a2",
+            "a3",
+            "a4",
+            "a5",
+            "a6",
+            "a7",
+            "a8",
+            "a9"
+          ],
+          "primaryStepId": "a4",
+          "evidenceIds": [
+            "ev-11",
+            "ev-25",
+            "ev-26",
+            "ev-27",
+            "ev-36"
+          ],
+          "optional": false,
+          "coordinates": {
+            "lat": 34.7117306,
+            "lon": 137.7249641,
+            "evidenceId": "ev-31"
+          },
+          "experience": {
+            "headline": "家康の時代と今の浜松をつなぐ",
+            "why": "朝の通常営業時間に入り、昼食前に余裕を持って戻す。市・観光協会資料での条件付き採用。",
+            "highlights": [
+              "歴史資料60分＋展望25分",
+              "坂道の前後に15分ずつ休憩を提案",
+              "公園休憩場所の利用時間は未確認"
+            ],
+            "photoPageId": "page-14",
+            "photoIndex": 0,
+            "photoCaption": "観光協会掲載の浜松城。訪問当日の天候ではありません。",
+            "photoDescription": "石垣の上に白壁と黒い下見板の天守。青空と手前の木の枝が写る。"
+          }
+        },
+        {
+          "id": "cafe",
+          "label": "昼食・午後のコーヒー",
+          "stepIds": [
+            "a10",
+            "a17",
+            "a18",
+            "a19"
+          ],
+          "primaryStepId": "a18",
+          "evidenceIds": [
+            "ev-7",
+            "ev-8",
+            "ev-9",
+            "ev-15",
+            "ev-40",
+            "ev-41"
+          ],
+          "optional": false,
+          "coordinates": {
+            "lat": 34.7056106,
+            "lon": 137.7372416,
+            "evidenceId": "ev-30"
+          },
+          "experience": {
+            "headline": "音の発見をケーキと一緒に持ち帰る",
+            "why": "昼食と独立したカフェ滞在を確保。セットの飲み物を二重計上しない。",
+            "highlights": [
+              "昼はドリア1,800円／人",
+              "午後はケーキ750円＋コーヒー追加750円／人",
+              "L.O.前の注文と正味15分休憩"
+            ],
+            "photoPageId": "page-9",
+            "photoIndex": 3,
+            "photoCaption": "公式メニュー写真・ショコラマンダリン。売切れや当日の仕上がりは保証しません。",
+            "photoDescription": "黒い丸皿に長方形のチョコレート系ケーキ2個。白いクリーム、薄いチョコと橙色の飾りが載る。"
+          }
+        },
+        {
+          "id": "museum",
+          "label": "見る・聴く・比べる楽器",
+          "stepIds": [
+            "a11",
+            "a12",
+            "a13",
+            "a14",
+            "a15",
+            "a16"
+          ],
+          "primaryStepId": "a12",
+          "evidenceIds": [
+            "ev-3",
+            "ev-4",
+            "ev-32",
+            "ev-33",
+            "ev-34",
+            "ev-24"
+          ],
+          "optional": false,
+          "coordinates": {
+            "lat": 34.7066154,
+            "lon": 137.7382244,
+            "evidenceId": "ev-29"
+          },
+          "experience": {
+            "headline": "見た目と音の予想を確かめる",
+            "why": "1階55分と地下40分の正味95分。上下移動と休憩を別計上。",
+            "highlights": [
+              "1階のアジア・日本から4点",
+              "地下の鍵盤楽器2点を比較",
+              "14時サックバットは当日案内優先"
+            ],
+            "photoPageId": "page-15",
+            "photoIndex": 3,
+            "photoCaption": "公式常設展写真。すべてを触ったり演奏したりできるわけではありません。",
+            "photoDescription": "木の床の展示室に蓋を開けた歴史的な鍵盤楽器が並ぶ。手前の黒い楽器には金色の装飾。"
+          }
+        },
+        {
+          "id": "gallery",
+          "label": "45階の音楽史と眺望",
+          "stepIds": [
+            "a20",
+            "a21",
+            "a22"
+          ],
+          "primaryStepId": "a21",
+          "evidenceIds": [
+            "ev-5",
+            "ev-6",
+            "ev-35",
+            "ev-37",
+            "ev-38"
+          ],
+          "optional": false,
+          "coordinates": {
+            "lat": 34.7056106,
+            "lon": 137.7372416,
+            "evidenceId": "ev-30"
+          },
+          "experience": {
+            "headline": "地上の楽器から音楽の都へ",
+            "why": "館内の上下移動を各15分取り、通常営業時間内で35分。対象日のカレンダーは未取得。",
+            "highlights": [
+              "音楽の都のパネルを1枚選ぶ",
+              "見える街と博物館の発見を照合",
+              "南側制限・営業変更時は入場を省略"
+            ],
+            "photoPageId": "page-4",
+            "photoIndex": 1,
+            "photoCaption": "公式の昼間の回廊写真。計画の訪問時刻の明るさとは異なります。",
+            "photoDescription": "大きな窓が並ぶ明るい回廊。窓沿いの金属製ベンチと植物の装飾、窓外に街が写る。"
+          }
+        },
+        {
+          "id": "lounge",
+          "label": "夕食と帰る前のひと息",
+          "stepIds": [
+            "a23",
+            "a24"
+          ],
+          "primaryStepId": "a23",
+          "evidenceIds": [
+            "ev-12",
+            "ev-13",
+            "ev-19",
+            "ev-20",
+            "ev-39",
+            "ev-44"
+          ],
+          "optional": false,
+          "coordinates": {
+            "lat": 34.7056106,
+            "lon": 137.7372416,
+            "evidenceId": "ev-30"
+          },
+          "experience": {
+            "headline": "一日の発見を三つにまとめる夕食",
+            "why": "中国料理の提供開始後に入店。夜限定フードを避け、帰路まで余裕を確保。",
+            "highlights": [
+              "五目あんかけ焼きそば＋アップルジュース2,700円／人",
+              "夕食75分＋独立休憩20分",
+              "19:40に駅へ出発"
+            ],
+            "photoPageId": "page-10",
+            "photoIndex": 0,
+            "photoCaption": "公式掲載のラウンジ内観。未来の空席や当日の照明は保証しません。",
+            "photoDescription": "暖色の照明で照らされたラウンジ。曲面の仕切りの奥にカウンターと椅子、ボトル棚が見える。"
+          }
+        }
+      ],
+      "moments": [
+        {
+          "stepId": "a1",
+          "kind": "move",
+          "title": "09:00 次の場所へ移動",
+          "invitation": "浜松駅北口バス停付近を09:00発。北西方向へ、現地の歩道・信号を確認して浜松城へ。代表点間の計画見積で経路の実測ではない。坂で息が上がれば手前で立ち止まり以後の見学を短縮。"
+        },
+        {
+          "stepId": "a2",
+          "kind": "rest",
+          "title": "09:40 歩行後に座って休む",
+          "invitation": "空いたベンチで水分補給。会話は今日見たいものを一つずつ。歩行・撮影を含めず正味15分。空きや位置は当日確認、座れなければ入館を急がず安全な休める場所を確認し見学を削る。"
+        },
+        {
+          "stepId": "a3",
+          "kind": "move",
+          "title": "09:55 次の場所へ移動",
+          "invitation": "公園から天守入口へ屋外徒歩。代表点は同一だが園路・入口は未測定のため5分＋余裕3分を確保。入館券は現地で扱い、列が長ければ見学時間を削り昼食を守る。"
+        },
+        {
+          "stepId": "a4",
+          "kind": "experience",
+          "title": "10:03 家康と城下町の歴史を読み比べる",
+          "invitation": "展示の説明を二人で分担して読み、家康の浜松時代と城下町の変遷から各一つ発見を持ち寄る。全展示制覇は狙わず、運営者当日告知が掲示されていればそちらを優先。"
+        },
+        {
+          "stepId": "a5",
+          "kind": "move",
+          "title": "11:03 次の場所へ移動",
+          "invitation": "天守館内を展望階へ。階段の上下に5分、余裕3分。通行が難しければ上階を省略。"
+        },
+        {
+          "stepId": "a6",
+          "kind": "experience",
+          "title": "11:11 城下町と現代の街を見比べる",
+          "invitation": "窓から見える街の広がりを先ほどの展示と照合。二人で気づく違いを一つずつ言葉にする。遠景や晴天は保証せず、見えない日は館内の歴史の振り返りへ。"
+        },
+        {
+          "stepId": "a7",
+          "kind": "move",
+          "title": "11:36 次の場所へ移動",
+          "invitation": "展望階から階段を下り、屋外公園ベンチへ。館内外の退出を含む徒歩5分＋余裕3分。公園への区間をindoor扱いにしない。"
+        },
+        {
+          "stepId": "a8",
+          "kind": "rest",
+          "title": "11:44 昼食へ歩く前に脚を休める",
+          "invitation": "正味15分座り、足首を軽く動かし水分補給。坂の疲れが残るなら徒歩移動を中止して現地で帰路を選ぶ。"
+        },
+        {
+          "stepId": "a9",
+          "kind": "move",
+          "title": "11:59 次の場所へ移動",
+          "invitation": "南東方向へホテル板屋町111-2を目指す。代表点間の初期見積35分＋信号・入館・2階到着の余裕5分。歩道の実経路は未確認、無理に最短路を取らない。"
+        },
+        {
+          "stepId": "a10",
+          "kind": "meal",
+          "title": "12:39 ドリアの昼食",
+          "invitation": "茄子とチキンのミートソースドリアを各1食（1,800円×2）。サラダ・日替わりスープ・コーヒー込みなので飲み物を重複加算しない。入店時に価格・提供可否を確認し、13:39までに会計。満席なら14時L.O.を超えて待たず分岐へ。"
+        },
+        {
+          "stepId": "a11",
+          "kind": "move",
+          "title": "13:39 次の場所へ移動",
+          "invitation": "ホテルを出て北東方向の中央3-9-1へ。屋外徒歩と建物出入りを8分、余裕4分。"
+        },
+        {
+          "stepId": "a12",
+          "kind": "experience",
+          "title": "13:51 アジア・日本の楽器と音を比較",
+          "invitation": "形や素材の異なる楽器を二人で各2点選び、音源を聴き、見た目から予想した音との違いをメモ。14時サックバットの当日案内が合えば解説を聞く（変更・場所は現地確認）。"
+        },
+        {
+          "stepId": "a13",
+          "kind": "rest",
+          "title": "14:46 展示を止めて正味15分休む",
+          "invitation": "公式の持ち運び可能な小型椅子を使える位置を入口で確認。展示鑑賞や音源操作は止め、15分座って耳と脚を休める。椅子の空き・固定休憩室の存在は未確認、使えなければ地下見学を削ってカフェへ早く移る。"
+        },
+        {
+          "stepId": "a14",
+          "kind": "move",
+          "title": "15:01 次の場所へ移動",
+          "invitation": "館内エレベーター等で地下へ。移動5分・乗降1分・余裕3分、実際の待ちが出れば地下の鑑賞を同じ分だけ短縮。"
+        },
+        {
+          "stepId": "a15",
+          "kind": "experience",
+          "title": "15:10 鍵盤楽器を時代と音で比べる",
+          "invitation": "第3展示室の鍵盤楽器から形の違う2点を選び、解説と試聴で鍵盤・胴の形と音色の関係を比較。最後に今日もう一度聴きたい音を各1点選ぶ。展示品を自由に演奏できるとは扱わない。"
+        },
+        {
+          "stepId": "a16",
+          "kind": "move",
+          "title": "15:50 次の場所へ移動",
+          "invitation": "地下から1階出口へ戻る。移動5分・乗降1分・余裕3分を確保。"
+        },
+        {
+          "stepId": "a17",
+          "kind": "move",
+          "title": "15:59 次の場所へ移動",
+          "invitation": "南西方向へホテルへ戻り2階カフェへ。屋外区間はwalk、建物出入り込み8分＋余裕4分。"
+        },
+        {
+          "stepId": "a18",
+          "kind": "experience",
+          "title": "16:11 甘味とコーヒーで音の余韻を話す",
+          "invitation": "ショコラマンダリン750円＋コーヒー付き追加750円＝1,500円を各1組。ブレンドを選び単品850円は加算しない。注文は16:11予定、16:30L.O.前。博物館で意外だった音を一つずつ交換。満席・売切れは分岐へ。"
+        },
+        {
+          "stepId": "a19",
+          "kind": "rest",
+          "title": "16:45 飲食を終え着席休憩",
+          "invitation": "店側の利用案内に従い、正味15分は写真整理や追加注文をせず静かに座って目を休める。継続利用できない時は展望回廊を省略し早めの帰路に切り替える。費用は直前のコーヒー付き追加に含み、再注文・再加算しない。"
+        },
+        {
+          "stepId": "a20",
+          "kind": "move",
+          "title": "17:00 次の場所へ移動",
+          "invitation": "2階から45階展望回廊へ。移動10分・乗降2分・余裕3分。営業変更・入場制限を入口で確認、入場不可なら購入せず夕食側へ。"
+        },
+        {
+          "stepId": "a21",
+          "kind": "experience",
+          "title": "17:15 音楽の都のパネルと眺望を照合",
+          "invitation": "北側の楽器製造・音楽の都に至る展示を読み、午後に見た楽器とつながる話を一つ選ぶ。南側が開いていれば街の広がりも比較。暗さ・天候・南側制限で見え方は変わる。"
+        },
+        {
+          "stepId": "a22",
+          "kind": "move",
+          "title": "17:50 次の場所へ移動",
+          "invitation": "45階から2階ラウンジへ。移動10分・乗降2分・余裕3分。カフェの17時閉店とラウンジの営業を区別して入店。"
+        },
+        {
+          "stepId": "a23",
+          "kind": "meal",
+          "title": "18:05 五目あんかけ焼きそばの夕食",
+          "invitation": "入店時に中国料理の提供を確認し、五目あんかけ焼きそば2,000円とアップルジュース700円を各1つ注文（2人5,400円）。食事を味わった後、城の歴史・楽器の音・回廊の展示から発見を各一つ交換。夜限定の新フードは注文しない。"
+        },
+        {
+          "stepId": "a24",
+          "kind": "rest",
+          "title": "19:20 帰路前に着席して一日を整理",
+          "invitation": "店の利用案内に従い脚を休め、会計と荷物確認。うち15分以上は操作や歩行を止める。混雑で継続着席できなければ19:20に会計して駅へ早帰りし、20時まで無理に埋めない。"
+        },
+        {
+          "stepId": "a25",
+          "kind": "return",
+          "title": "19:40 浜松駅北口へ戻る",
+          "invitation": "2階から出口へ下り、浜松駅北口バス停付近へ南西方向に戻る。館内下降と屋外徒歩12分＋信号・道確認の余裕8分。20:00駅北口着を目安に、駅構内移動は別途。"
+        }
+      ],
+      "proposalSet": {
+        "options": [
+          {
+            "id": "discover",
+            "theme": "discovery",
+            "anchorId": "museum",
+            "stepId": "a12",
+            "title": "音の予想を答え合わせ",
+            "activity": "4点の楽器を形だけで音を予想し、試聴後の違いを比べる",
+            "deliverable": "二人分の予想→実感メモ4行",
+            "benefit": "知らない音を言葉にできる",
+            "difference": "複数の楽器を横並びで比較する",
+            "tradeoff": "詳しく読む対象は絞る",
+            "mechanism": "compare",
+            "minutes": 25,
+            "evidenceIds": [
+              "ev-32",
+              "ev-33"
+            ]
+          },
+          {
+            "id": "relax",
+            "theme": "relax",
+            "anchorId": "cafe",
+            "stepId": "a18",
+            "title": "一つの音を会話にする",
+            "activity": "コーヒーとケーキを味わい、今日いちばん意外だった音を一人一つ話す",
+            "deliverable": "もう一度聴きたい音を一つずつ",
+            "benefit": "移動を増やさず余韻を共有",
+            "difference": "一つの印象に集中して対話する",
+            "tradeoff": "新しい展示の数は増やさない",
+            "mechanism": "focus",
+            "minutes": 20,
+            "evidenceIds": [
+              "ev-7",
+              "ev-40",
+              "ev-41"
+            ]
+          },
+          {
+            "id": "photo",
+            "theme": "photo",
+            "anchorId": "gallery",
+            "stepId": "a21",
+            "title": "街の印象を一枚に残す",
+            "activity": "撮影可否を現地表示で確認し、可能なら見える街の印象を写真一枚と一文にする。不可なら文章のみ",
+            "deliverable": "一枚＋一文、または短い景色メモ",
+            "benefit": "歴史と音の発見を街の記憶につなぐ",
+            "difference": "街の印象を一つの記録にまとめる",
+            "tradeoff": "天候・反射・撮影制限に左右される",
+            "mechanism": "capture",
+            "minutes": 15,
+            "evidenceIds": [
+              "ev-35",
+              "ev-5"
+            ]
+          }
+        ]
+      }
+    },
+    "summary": "## 推奨：歴史・楽器・眺望をつなぐ条件付き一日案\n午前は浜松城、午後は楽器博物館、夕方は展望回廊とし、昼食・独立したカフェ・夕食を同ホテル2階でつなぐ案です。[ev-25][ev-3][ev-5][ev-8][ev-12]\n掲載単価の2人合計は16,400円（交通費別）；城の運営者当日告知・公園休憩時間と回廊の対象日カレンダーが未確認のため、全工程確認済みの正式版とはせず、利用不可なら省略・早帰りへ切り替えます。[ev-26][ev-2][ev-6][ev-15][ev-40][ev-41][ev-19][ev-20]\n\n## 具体的な実行手順（時刻・行動は提案）\n09:00 浜松駅 → 浜松城 — 次の場所へ移動（40分の見積）。浜松駅北口バス停付近を09:00発。北西方向へ、現地の歩道・信号を確認して浜松城へ。代表点間の計画見積で経路の実測ではない。坂で息が上がれば手前で立ち止まり以後の見学を短縮。 完了の目安：09:40に目的階・到着地点へ着く。[ev-28][ev-31][ev-11]\n09:40 浜松城 天守付近の公園ベンチ — 歩行後に座って休む（15分の見積）。空いたベンチで水分補給。会話は今日見たいものを一つずつ。歩行・撮影を含めず正味15分。空きや位置は当日確認、座れなければ入館を急がず安全な休める場所を確認し見学を削る。 完了の目安：呼吸が落ち着き、15分の着席を終える。[ev-27][ev-25][ev-31]\n09:55 浜松城 → 浜松城 — 次の場所へ移動（8分の見積）。公園から天守入口へ屋外徒歩。代表点は同一だが園路・入口は未測定のため5分＋余裕3分を確保。入館券は現地で扱い、列が長ければ見学時間を削り昼食を守る。 完了の目安：10:03に目的階・到着地点へ着く。[ev-31][ev-25][ev-26]\n10:03 浜松城天守閣 資料展示 — 家康と城下町の歴史を読み比べる（60分の見積）。展示の説明を二人で分担して読み、家康の浜松時代と城下町の変遷から各一つ発見を持ち寄る。全展示制覇は狙わず、運営者当日告知が掲示されていればそちらを優先。 完了の目安：二人で発見を一つずつ説明できる。[ev-11][ev-25][ev-26][ev-36]\n11:03 浜松城 → 浜松城 — 次の場所へ移動（8分の見積）。天守館内を展望階へ。階段の上下に5分、余裕3分。通行が難しければ上階を省略。 完了の目安：11:11に目的階・到着地点へ着く。[ev-36][ev-25]\n11:11 浜松城 展望階 — 城下町と現代の街を見比べる（25分の見積）。窓から見える街の広がりを先ほどの展示と照合。二人で気づく違いを一つずつ言葉にする。遠景や晴天は保証せず、見えない日は館内の歴史の振り返りへ。 完了の目安：街と歴史のつながりを一文にする。[ev-25][ev-36][ev-31]\n11:36 浜松城 → 浜松城 — 次の場所へ移動（8分の見積）。展望階から階段を下り、屋外公園ベンチへ。館内外の退出を含む徒歩5分＋余裕3分。公園への区間をindoor扱いにしない。 完了の目安：11:44に目的階・到着地点へ着く。[ev-25][ev-27][ev-31]\n11:44 浜松城 天守付近の公園ベンチ — 昼食へ歩く前に脚を休める（15分の見積）。正味15分座り、足首を軽く動かし水分補給。坂の疲れが残るなら徒歩移動を中止して現地で帰路を選ぶ。 完了の目安：疲労を二人で確認してから出発。[ev-27][ev-25][ev-31]\n11:59 浜松城 → オークラアクトシティホテル浜松 — 次の場所へ移動（40分の見積）。南東方向へホテル板屋町111-2を目指す。代表点間の初期見積35分＋信号・入館・2階到着の余裕5分。歩道の実経路は未確認、無理に最短路を取らない。 完了の目安：12:39に目的階・到着地点へ着く。[ev-31][ev-30][ev-9]\n12:39 ザ・シーズンカフェ＆ラウンジ（カフェ）2階 — ドリアの昼食（60分の見積）。茄子とチキンのミートソースドリアを各1食（1,800円×2）。サラダ・日替わりスープ・コーヒー込みなので飲み物を重複加算しない。入店時に価格・提供可否を確認し、13:39までに会計。満席なら14時L.O.を超えて待たず分岐へ。 完了の目安：食事・会計を終え博物館へ出発。[ev-7][ev-8][ev-9][ev-14][ev-15][ev-18]\n13:39 オークラアクトシティホテル浜松 → 浜松市楽器博物館 — 次の場所へ移動（12分の見積）。ホテルを出て北東方向の中央3-9-1へ。屋外徒歩と建物出入りを8分、余裕4分。 完了の目安：13:51に目的階・到着地点へ着く。[ev-30][ev-29][ev-4]\n13:51 浜松市楽器博物館 1階 — アジア・日本の楽器と音を比較（55分の見積）。形や素材の異なる楽器を二人で各2点選び、音源を聴き、見た目から予想した音との違いをメモ。14時サックバットの当日案内が合えば解説を聞く（変更・場所は現地確認）。 完了の目安：二人で計4点の形・音の違いを一つずつ残す。[ev-3][ev-4][ev-2][ev-32][ev-33][ev-34]\n14:46 浜松市楽器博物館 1階 — 展示を止めて正味15分休む（15分の見積）。公式の持ち運び可能な小型椅子を使える位置を入口で確認。展示鑑賞や音源操作は止め、15分座って耳と脚を休める。椅子の空き・固定休憩室の存在は未確認、使えなければ地下見学を削ってカフェへ早く移る。 完了の目安：正味15分の着席を終える。[ev-3][ev-24][ev-4]\n15:01 浜松市楽器博物館 → 浜松市楽器博物館 — 次の場所へ移動（9分の見積）。館内エレベーター等で地下へ。移動5分・乗降1分・余裕3分、実際の待ちが出れば地下の鑑賞を同じ分だけ短縮。 完了の目安：15:10に目的階・到着地点へ着く。[ev-32][ev-3][ev-24]\n15:10 浜松市楽器博物館 地下1階 — 鍵盤楽器を時代と音で比べる（40分の見積）。第3展示室の鍵盤楽器から形の違う2点を選び、解説と試聴で鍵盤・胴の形と音色の関係を比較。最後に今日もう一度聴きたい音を各1点選ぶ。展示品を自由に演奏できるとは扱わない。 完了の目安：比較メモ2点とお気に入り各1点を決める。[ev-3][ev-4][ev-32][ev-33]\n15:50 浜松市楽器博物館 → 浜松市楽器博物館 — 次の場所へ移動（9分の見積）。地下から1階出口へ戻る。移動5分・乗降1分・余裕3分を確保。 完了の目安：15:59に目的階・到着地点へ着く。[ev-32][ev-3]\n15:59 浜松市楽器博物館 → オークラアクトシティホテル浜松 — 次の場所へ移動（12分の見積）。南西方向へホテルへ戻り2階カフェへ。屋外区間はwalk、建物出入り込み8分＋余裕4分。 完了の目安：16:11に目的階・到着地点へ着く。[ev-29][ev-30][ev-9]\n16:11 ザ・シーズンカフェ＆ラウンジ（カフェ）2階 — 甘味とコーヒーで音の余韻を話す（34分の見積）。ショコラマンダリン750円＋コーヒー付き追加750円＝1,500円を各1組。ブレンドを選び単品850円は加算しない。注文は16:11予定、16:30L.O.前。博物館で意外だった音を一つずつ交換。満席・売切れは分岐へ。 完了の目安：一組ずつ味わいメモを一行残す。[ev-7][ev-8][ev-9][ev-17][ev-18][ev-40][ev-41]\n16:45 ザ・シーズンカフェ＆ラウンジ（カフェ）2階 — 飲食を終え着席休憩（15分の見積）。店側の利用案内に従い、正味15分は写真整理や追加注文をせず静かに座って目を休める。継続利用できない時は展望回廊を省略し早めの帰路に切り替える。費用は直前のコーヒー付き追加に含み、再注文・再加算しない。 完了の目安：17:00に立ち上がれるか確認。[ev-7][ev-8][ev-9][ev-41]\n17:00 オークラアクトシティホテル浜松 → オークラアクトシティホテル浜松 — 次の場所へ移動（15分の見積）。2階から45階展望回廊へ。移動10分・乗降2分・余裕3分。営業変更・入場制限を入口で確認、入場不可なら購入せず夕食側へ。 完了の目安：17:15に目的階・到着地点へ着く。[ev-30][ev-37][ev-5]\n17:15 45階 展望回廊 — 音楽の都のパネルと眺望を照合（35分の見積）。北側の楽器製造・音楽の都に至る展示を読み、午後に見た楽器とつながる話を一つ選ぶ。南側が開いていれば街の広がりも比較。暗さ・天候・南側制限で見え方は変わる。 完了の目安：パネルの発見を一つと街の印象を一つ共有。[ev-5][ev-6][ev-35][ev-37][ev-38]\n17:50 オークラアクトシティホテル浜松 → オークラアクトシティホテル浜松 — 次の場所へ移動（15分の見積）。45階から2階ラウンジへ。移動10分・乗降2分・余裕3分。カフェの17時閉店とラウンジの営業を区別して入店。 完了の目安：18:05に目的階・到着地点へ着く。[ev-30][ev-12][ev-39]\n18:05 ザ・シーズンカフェ＆ラウンジ（ラウンジ）2階 — 五目あんかけ焼きそばの夕食（75分の見積）。入店時に中国料理の提供を確認し、五目あんかけ焼きそば2,000円とアップルジュース700円を各1つ注文（2人5,400円）。食事を味わった後、城の歴史・楽器の音・回廊の展示から発見を各一つ交換。夜限定の新フードは注文しない。 完了の目安：食事を終え、二人の発見3項目がまとまる。[ev-12][ev-13][ev-19][ev-20][ev-21][ev-39][ev-44][ev-43]\n19:20 ザ・シーズンカフェ＆ラウンジ（ラウンジ）2階 — 帰路前に着席して一日を整理（20分の見積）。店の利用案内に従い脚を休め、会計と荷物確認。うち15分以上は操作や歩行を止める。混雑で継続着席できなければ19:20に会計して駅へ早帰りし、20時まで無理に埋めない。 完了の目安：19:40までに会計・荷物確認を終える。[ev-12][ev-39][ev-44][ev-43]\n19:40 オークラアクトシティホテル浜松 → 浜松駅 — 浜松駅北口へ戻る（20分の見積）。2階から出口へ下り、浜松駅北口バス停付近へ南西方向に戻る。館内下降と屋外徒歩12分＋信号・道確認の余裕8分。20:00駅北口着を目安に、駅構内移動は別途。 完了の目安：20:00に目的階・到着地点へ着く。[ev-30][ev-28][ev-9]\n\n## 予算（晴天・通常営業で全主案を利用する大人2人。入館・飲食のみ、交通費別。割引なし。・掲載料金と未確認の見積）\n| 内訳 | 人数・数量 | 単価 | 小計 | 区分 |\n| --- | ---: | ---: | ---: | --- |\n| 浜松城 大人 | 2 | 200円 | 400円 | 掲載額[ev-26] |\n| 楽器博物館 大人 | 2 | 800円 | 1,600円 | 掲載額[ev-2] |\n| 展望回廊 大人 | 2 | 1,200円 | 2,400円 | 掲載額[ev-6] |\n| ドリア（サラダ・スープ・コーヒー込） | 2 | 1,800円 | 3,600円 | 掲載額[ev-15][ev-18] |\n| ショコラマンダリン | 2 | 750円 | 1,500円 | 掲載額[ev-40][ev-18] |\n| ケーキにコーヒー付き追加（単品コーヒーは加算しない） | 2 | 750円 | 1,500円 | 掲載額[ev-41][ev-18] |\n| 五目あんかけ焼きそば | 2 | 2,000円 | 4,000円 | 掲載額[ev-19][ev-21] |\n| 夕食アップルジュース | 2 | 700円 | 1,400円 | 掲載額[ev-20][ev-21] |\n合計16,400円。指定上限20,000円との差額3,600円。見積を含み、実際の支払額を保証しません。\n\n## 状況が変わった時の行動\n- 雨・坂の疲労・浜松城が臨時休館 → 浜松城の徒歩往復と入館を中止する。当日掲示を優先。朝は9:30以降の楽器博物館へ切替え、途中15分休憩を必ず設ける。主案の午後をそのまま重複実施せず短縮、確認できたカフェ・昼食以降に接続。早終了なら20時まで待機せず帰る。変更案は11時間を保証しない。[ev-3][ev-25][ev-24]\n- カフェ満席・注文品売切れ・掲載価格と異なる → 長い入店待ちは作らず当日価格で再判断。昼は14時L.O.前、午後は16:30L.O.前に入店できないなら不採用。主案と別の食事は合計20,000円から実支出を引いた残額を上限に店頭表示を見て選ぶが、未確認店舗を予約済み・価格確認済みとは扱わない。必要な食事・休憩を確保できなければ観光を打ち切って駅へ戻る。[ev-8][ev-14][ev-15]\n- 展望回廊の臨時休業・入場制限、またはカフェで着席休憩不可 → 45階入場を省略する。通常営業のみ確認済みで対象日カレンダーは取得できていないため入場前掲示を確認。券を買わず17時以降のラウンジへ。空席を保証せず、入れなければ駅へ帰る。夜の時間を待機で埋めない。[ev-5][ev-12][ev-37]",
+    "candidates": [
+      {
+        "name": "浜松市楽器博物館｜採用",
+        "url": "https://www.gakkihaku.jp/guide/",
+        "matches": [
+          {
+            "criterionId": "hours",
+            "status": "supported",
+            "explanation": "9:30〜17:00。11/21カレンダーに14時サックバット等あり。午後13:51〜15:59（休憩・上下移動別）を採用。変更は当日案内優先。",
+            "evidenceIds": [
+              "ev-3",
+              "ev-1",
+              "ev-34"
+            ]
+          },
+          {
+            "criterionId": "price",
+            "status": "supported",
+            "explanation": "大人個人800円×2＝1,600円。常設展を主案とし特別展別料金は含めない。",
+            "evidenceIds": [
+              "ev-2"
+            ]
+          },
+          {
+            "criterionId": "place",
+            "status": "supported",
+            "explanation": "中央3-9-1。1階と地下の展示を正味95分、持ち運び可能な小型椅子で独立15分休憩を提案。",
+            "evidenceIds": [
+              "ev-4",
+              "ev-32",
+              "ev-33",
+              "ev-24"
+            ]
+          }
+        ],
+        "score": 100,
+        "eligible": true
+      },
+      {
+        "name": "ザ・シーズンカフェ＆ラウンジ｜昼食・カフェ・夕食採用",
+        "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "matches": [
+          {
+            "criterionId": "hours",
+            "status": "supported",
+            "explanation": "土曜11〜17時、L.O.16:30。食事11〜14時L.O.。昼12:39、カフェ16:11入店提案は枠内。 ラウンジ：土曜は通常17〜22:30、定休月曜。中国料理17:30〜21:30で、18:05夕食は提供枠内。20時以降限定の新フードは主案不採用。",
+            "evidenceIds": [
+              "ev-8",
+              "ev-14",
+              "ev-12",
+              "ev-13"
+            ]
+          },
+          {
+            "criterionId": "price",
+            "status": "supported",
+            "explanation": "昼ドリア1,800円／人（コーヒー等込）、午後ショコラマンダリン750円＋コーヒー追加750円／人。セット重複なし、税・サービス料込。 ラウンジ：五目あんかけ焼きそば2,000円＋アップルジュース700円を各2＝5,400円、税・サービス料込。",
+            "evidenceIds": [
+              "ev-15",
+              "ev-40",
+              "ev-41",
+              "ev-18",
+              "ev-19",
+              "ev-20",
+              "ev-21"
+            ]
+          },
+          {
+            "criterionId": "place",
+            "status": "supported",
+            "explanation": "板屋町111-2ホテル2階。昼食と午後カフェを別滞在にする。 ラウンジ：同ホテル板屋町111-2の2階。夕食75分と帰路前の休憩20分を別計上。カフェ昼営業と混同しない。",
+            "evidenceIds": [
+              "ev-7",
+              "ev-9",
+              "ev-39",
+              "ev-43",
+              "ev-44"
+            ]
+          }
+        ],
+        "score": 100,
+        "eligible": true
+      },
+      {
+        "name": "アクトの森｜不採用（座標・経路未確認）",
+        "url": "https://www.actcity.jp/visitor/act/",
+        "matches": [
+          {
+            "criterionId": "hours",
+            "status": "supported",
+            "explanation": "屋外広場6:00〜19:00、当日の占用や天候による利用可否は未確認。",
+            "evidenceIds": [
+              "ev-22"
+            ]
+          },
+          {
+            "criterionId": "price",
+            "status": "supported",
+            "explanation": "屋外広場は無料。多人数・演奏・機材持込などは別条件。通常の2人散策と区別。",
+            "evidenceIds": [
+              "ev-22"
+            ]
+          },
+          {
+            "criterionId": "place",
+            "status": "supported",
+            "explanation": "アクトシティ板屋町111-1、いこいの広場等を確認。ただしlocate_placeは候補なしで、徒歩端点の座標を検証できず主案から外す。屋外区間をindoorにはしない。",
+            "evidenceIds": [
+              "ev-45",
+              "ev-10"
+            ]
+          }
+        ],
+        "score": 100,
+        "eligible": true
+      },
+      {
+        "name": "浜松城｜朝の条件付き採用",
+        "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "matches": [
+          {
+            "criterionId": "hours",
+            "status": "unknown",
+            "explanation": "市の施設ページは住所のみ。観光協会案内では8:30〜16:30、最終入場10分前で朝枠に入るが、運営者の対象日臨時告知と公園ベンチの利用時間は未確認。資料と当日情報を区別し、現地で利用不可なら中止。",
+            "evidenceIds": [
+              "ev-25"
+            ]
+          },
+          {
+            "criterionId": "price",
+            "status": "supported",
+            "explanation": "観光協会の通常案内は大人200円、2人400円。春の市PDFも200円だが期間外のピアノ展示は11月へ流用しない。税区分明記なし。",
+            "evidenceIds": [
+              "ev-26",
+              "ev-23"
+            ]
+          },
+          {
+            "criterionId": "place",
+            "status": "supported",
+            "explanation": "元城町100-2。歴史資料60分と展望25分。代表座標に基づく駅→城約1.45km、城→ホテル約1.71kmの計画推定を置き朝枠で戻す。公園ベンチの具体位置・利用時間は未確認。",
+            "evidenceIds": [
+              "ev-11",
+              "ev-36",
+              "ev-27"
+            ]
+          }
+        ],
+        "score": 63,
+        "eligible": false
+      },
+      {
+        "name": "展望回廊｜通常営業時間に基づく条件付き採用",
+        "url": "https://www.act-okura.co.jp/facilities/gallery/",
+        "matches": [
+          {
+            "criterionId": "hours",
+            "status": "unknown",
+            "explanation": "公式通常11〜18時・最終入場17:30。17:15〜17:50に提案するが、営業時間カレンダーの対象日情報は本文・同対象追加探索でも取得できず未確認。入口で営業変更・入場制限があれば不採用。",
+            "evidenceIds": [
+              "ev-5"
+            ]
+          },
+          {
+            "criterionId": "price",
+            "status": "supported",
+            "explanation": "一般大人1,200円×2＝2,400円。本文で掲載額確認済みだが取得検査にはadmission不足が残る。",
+            "evidenceIds": [
+              "ev-6"
+            ]
+          },
+          {
+            "criterionId": "place",
+            "status": "supported",
+            "explanation": "板屋町111-2ホテル45階、音楽の都の展示と眺望。2階との上下移動は各15分を別枠に確保。",
+            "evidenceIds": [
+              "ev-37",
+              "ev-38",
+              "ev-35"
+            ]
+          }
+        ],
+        "score": 63,
+        "eligible": false
+      }
+    ],
+    "limitations": [
+      "具体的な手順に未解消の不足があります: a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください / a8: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+      "浜松城・アクトの森・展望回廊の本体ページはdetailVerificationに必須項目不足が残る。城は市PDFと観光協会、広場は公式FAQで補完。回廊はadmissionが機械検査で不足のままだが、公式本文の大人1,200円を引用保存。追加リンク探索も実施したが、回廊の対象日カレンダーを取得できなかった。",
+      "浜松城は市・観光協会の案内であり運営者の2026年11月21日の営業確認ではない。公園ベンチの具体位置・利用時間は未確認で、a2・a8の営業時間検査はunknown。天守の8:30〜16:30を公園全体の時間に転用していない。このため全工程確認済みの正式版ではなく条件付き案。",
+      "位置はlocate_placeで取得した施設代表点。浜松駅は鉄道駅舎中心ではなく北口バス停の点。浜松城公園内の休憩点・入口は天守代表点を流用し、別位置の正確な座標ではない。徒歩の道路経路・入口・坂・横断箇所は未確認。約3.89kmは引用座標の直線距離×仮の迂回係数による推定で道路実測でなく、同施設の園路・館内歩行は別途加わる。",
+      "read_journey_stateで移動方向・手段・階数・移動本体・乗降・余裕・正味滞在と疲労／休憩を検査し、修正版の距離滞在検査はpassed。実績サンプル0件。過去の2案は生成案であり移動実績として利用していない。",
+      "アクトの森は公式の無料6〜19時・場所の説明を確認したがlocate_placeでは座標候補なし。徒歩端点・移動距離を検査できないため主案不採用。候補の不存在を意味しない。",
+      "公開HTMLの取得で、ブラウザ描画や未来の営業・空席・売切れ・椅子・公園ベンチ・継続着席は未確認。満席時の代替飲食店は価格と営業を新たに確認していないため、確約できる別店名を補っていない。分岐実行時は11時間案を維持できない場合があり早帰りを優先。",
+      "主案は通常営業・晴天・体調良好・掲載商品提供を前提にした09:00〜20:00。入店・入館列が出たら待機は休憩とせず、体験時間を削るか中止。予約・購入・問い合わせ・SNS取得は実施していない。",
+      "HTML用の写真付き地図草案を保存。Google共有地図は取得できていないのでpreviewPageIdは設定せず引用座標の地図にする。写真は当日の天候・料理・照明や空席の保証ではない。",
+      "掲載入館料は税区分の明記を確認できず掲載額として扱う。飲食は税・サービス料込み。交通費、特別展追加料金、任意の追加注文・土産は主案16,400円に含めない。残額3,600円は未使用の余裕で支出を強制しない。",
+      "追加修正でも市の公園・スポーツ施設一覧から浜松城公園の個別ページを確認したが、公園およびベンチの利用時間を取得できなかった。市役所の開庁時間を公園の営業時間として代用しない。公園休憩2手順のunknownを維持する。",
+      "追加確認しても未確認の項目: public-use・hours / opening-conditions・admission・営業時間・対象日の告知を確認し行程への採否を判断 / admission・営業時間・対象日の告知を確認し行程への採否を判断",
+      "詳細取得の必須項目を確認できていない候補があります: https://www.actcity.jp/visitor/act/, https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html, https://www.act-okura.co.jp/facilities/gallery/"
+    ]
+  },
+  "metrics": {
+    "elapsedMs": 538240,
+    "tokenAccounting": "provider-reported",
+    "tokens": {
+      "inputTokens": 4288535,
+      "outputTokens": 19636,
+      "cachedInputTokens": 4088320,
+      "reasoningOutputTokens": 3948,
+      "totalTokens": 4308171,
+      "cacheWriteInputTokens": 0,
+      "source": "codex-thread-total"
+    },
+    "billing": {
+      "mode": "chatgpt-subscription",
+      "additionalApiUsd": 0,
+      "subscriptionAllocationUsd": null,
+      "note": "サブスクの固定費配賦・追加クレジットのタスク別消費額は取得していません。API単価換算は請求額ではありません"
+    }
+  },
+  "answerPhotos": {
+    "castle": {
+      "file": "61b8f18679e2890c1b8f2a282b7c0d4894ff76afbd24f3682d2673dae5c17bad.jpg",
+      "pageId": "page-14",
+      "imageIndex": 0,
+      "sourceUrl": "https://hamamatsu-daisuki.net/pickup/wp-content/uploads/2025/11/image1.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-18T22:56:42.335Z"
+    },
+    "cafe": {
+      "file": "e305dcfe088c3090e38ee3ab419b9ef06995f50b594d1c7bcde55720d6932186.jpg",
+      "pageId": "page-9",
+      "imageIndex": 3,
+      "sourceUrl": "https://www.act-okura.co.jp/media/Img608_chocolate.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-18T22:56:42.336Z"
+    },
+    "museum": {
+      "file": "85ddd53b546d6e3a846ad74169176845f0be98dcf814a84ed9201794c838be30.jpg",
+      "pageId": "page-15",
+      "imageIndex": 3,
+      "sourceUrl": "https://www.gakkihaku.jp/images/about/ph01.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-18T22:56:42.337Z"
+    },
+    "gallery": {
+      "file": "3217c3e9e2536e6d585e81be480031e39a6b2f6bfbbfe052ac39277199ea1f8e.jpg",
+      "pageId": "page-4",
+      "imageIndex": 1,
+      "sourceUrl": "https://www.act-okura.co.jp/media/southcorridor_202301.JPG",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-18T22:56:42.338Z"
+    },
+    "lounge": {
+      "file": "eb2f8f65c45cc15b74b232e3f06965e28e2184e776630083f2f736dbfc59cdc8.jpg",
+      "pageId": "page-10",
+      "imageIndex": 0,
+      "sourceUrl": "https://www.act-okura.co.jp/media/seasoncafe.jpg",
+      "type": "image/jpeg",
+      "capturedAt": "2026-11-18T22:56:42.339Z"
+    }
+  },
+  "evaluation": {
+    "mode": "frozen-replay",
+    "caseId": "hamamatsu-state-improved-e2e-display",
+    "fixtureSha256": "168b3b7efe89685448e6b6e956888999c9c75d8fa7a7eafff56f5bf40ada203b"
+  },
+  "snapshotNote": "無編集のライブ生成回答。未確認を残したpartialをそのまま公開。表示再生のため本文は引用のみ。ライブ記録はhamamatsu-state-improved-e2e.json。"
+}

@@ -85,3 +85,45 @@ itineraryCases["nagoya-afternoon"] = {
     "2026年11月21日（土）大人2人で名古屋の伏見あたりを、午後だけちょっとゆっくり遊ぶプランを作ってください。伏見駅発着、FUJIなごや科学館の展示室のみと同館カフェレストランを中心に、写真と地図を見て行きたくなるものに。プラネタリウムや有料特別展は含めません。カフェで各自甘味1品と飲物1杯を楽しみ、疲れない休憩も確保。半日なので夕食や夜の観光は加えず、体験を詰め込みすぎないでください。2人合計10000円以内、交通費は別。公式の具体的な掲載商品価格で合算。移動、満席待ち上限20分、雨・疲労の切替も具体化してください。各手順にkindとvenueUrlを付け、stepChecksの営業時間・締切・価格の引用を検査。不足はverify_stepsの追加調査で確認してから最終化。公開予定と対象日未確認を区別し、空席や未来の営業は確約しません。予約・購入・問い合わせは実行しません。SNS調査は不要です。",
   urls: itineraryCases.nagoya.urls,
 };
+
+itineraryCases["hamamatsu-state"] = {
+  id: "hamamatsu-state",
+  label: "浜松・距離と滞在を考える一日",
+  output: "hamamatsu-experience-state",
+  snapshot: "visual-hamamatsu-state-answer",
+  receipt: "hamamatsu-state-itinerary-e2e",
+  budgetCap: 20000,
+  query:
+    "2026年11月21日（土）大人2人、浜松駅発着で09:00〜20:00の一日をゆっくり遊ぶ計画を作ってください。午前と午後の具体的な体験、昼食、カフェ、正味15分以上の休憩、夕食、帰路まで含めます。楽器博物館、展望回廊、ザ・シーズンカフェ＆ラウンジ、アクトの森が候補です。公式資料を比較して採否を決め、営業時間に合わない・取得できない候補は不採用の理由を明記して別の確認できた候補へ切り替えられます。現地入館飲食は2人合計20000円以内、交通費別。資料の明確な定番商品単価から計算し、セットを重複加算しません。写真と地図付きHTMLで見たいです。移動距離と滞在時間のstateを保存し、read_journey_stateで距離・方向・ペース・正味滞在・疲労と休憩を検査してから最終化してください。館内の上下移動にも時間を取り、移動本体・待ち・乗降・余裕を区別。徒歩の各端点はlocate_placeで引用座標を取得、同一建物の別階は同じ代表点を使ってfloorを分けられます。少ない地点であっても観察・会話・休憩の中身を具体化し、時間埋めの待機や長すぎる滞在で11時間を装わない。新しい実績を創作せず、過去の生成案は実際の移動・滞在と区別。全ての移動と正味滞在をjourneyStateへ結び付け、stepChecksで営業時間を照合。未来の空席・営業は確約しません。予約・購入・問い合わせ・SNS調査は行いません。",
+  urls: [
+    ...itineraryCases["hamamatsu-full"].urls.filter(
+      (u) => !u.includes("mutsugiku"),
+    ),
+    "https://www.act-okura.co.jp/restaurant/lounge/",
+    "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+  ],
+};
+
+itineraryCases["hamamatsu-state-city"] = {
+  ...itineraryCases["hamamatsu-state"],
+  id: "hamamatsu-state-city",
+  output: "hamamatsu-experience-state",
+  snapshot: "visual-hamamatsu-state-city-answer",
+  receipt: "hamamatsu-state-city-itinerary-e2e",
+  query:
+    itineraryCases["hamamatsu-state"].query +
+    " 市街地の別候補として浜松城も比較してください。市や観光協会の案内は運営者の当日情報と区別し、採用するかは営業時間・移動距離・残り時間から判断します。公園へ出る区間をindoorに置き換えず、徒歩の座標や経路時間が取れなければ未確認にして不採用にもできます。",
+  urls: [
+    ...itineraryCases["hamamatsu-state"].urls,
+    "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+    "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+    "https://hamamatsu-daisuki.net/pickup/7915/",
+  ],
+};
+
+itineraryCases["hamamatsu-state-improved"] = {
+  ...itineraryCases["hamamatsu-state-city"],
+  id: "hamamatsu-state-improved",
+  snapshot: "visual-hamamatsu-state-improved-answer",
+  receipt: "hamamatsu-state-improved-e2e",
+};
