@@ -43,3 +43,11 @@ credentials*.json
 __pycache__/
 *.py[cod]
 .venv/
+
+# Vehicle reconstruction outputs, references, and earlier local experiments
+artifacts/
+*.blend
+*.blend1
+*.glb
+*.stl
+*.npz

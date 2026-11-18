@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "status": "improved-incomplete",
+  "precisionStatus": "not-certified",
+  "physicalAccuracyCertified": false,
+  "exitCode": 2,
+  "sourceFiles": {
+    "scripts/vehicle3d/README.md": "9614373c35fcf316ef3c418ca9e47a47aa90a6a4034db36e780d978abcef7084",
+    "scripts/vehicle3d/animate_scene.py": "5f030c9f114340cab04b1d4de78c6bc062690593361b8bd0fa9180183fd65041",
+    "scripts/vehicle3d/build_scene.py": "1e2bad2ad52d401ed5c8da14da91f6acf9c18a4771868c83efcb9456c5086b03",
+    "scripts/vehicle3d/check_animation.py": "be5b5b6f6058a6cd5fb597eec4b172fd8fda5865c88b1a83310291d68df0bb17",
+    "scripts/vehicle3d/cli.mjs": "981bd233e924eac840245a6b2c24fe57ac70817546c1573764ab1684095150cc",
+    "scripts/vehicle3d/export_dxf.py": "bf504156b0764fe004d42bbdfd6e9bef5f269917c5c5cbc188836c3cdd44397a",
+    "scripts/vehicle3d/export_reconstruction.py": "069d351c029615fdead00f50eee822acaa1394e41e07add00f2bc1baf3a300f1",
+    "scripts/vehicle3d/make_drawing.py": "d4dcdc025548df358fa5a7c4f3d85f4f492846f40c526b5441a7753c0f991ea6",
+    "scripts/vehicle3d/publish_snapshot.py": "44f40e1df0553f751e286680ada7d86b88c4597d8bf2abdd34746d0d2f6203e3",
+    "scripts/vehicle3d/quality.py": "fe89847dc7d2b4c263da83b7a75e59f78f06325ff3dc71adf6bb6e177ba6b60d",
+    "scripts/vehicle3d/reconstruction.py": "084f2b3320ac69bff7cbd9a1585509ccdd122d23eaf15c7c1178cf349c4f550e",
+    "scripts/vehicle3d/report.py": "ab071cd493a59f1e92544d128efbd51b31ec4ce1c94416cb7d17063ce2955533",
+    "scripts/vehicle3d/requirements.txt": "d122ac4b19be9bdbed59f1d187820a09c290bc7aa6e31bc6cc4732e8b019e267",
+    "scripts/vehicle3d/runtime.py": "ffd8eb5eda06bd84fc2735508bdcaf4040d32941665ed3aea2c083baec8843c4",
+    "scripts/vehicle3d/simulate.py": "b014ed824955ce678dc188f265136ae87654b3ea66f6b4f3890a00291fc00a98",
+    "scripts/vehicle3d/test_runtime.py": "a27b2fd51290c1f4867f247220c94ef6c6cd10c1804c6f9069733155b9f03354",
+    "scripts/vehicle3d/verify-report.mjs": "cb55013a4ce834de4ea9fe6def192c00a91a51b779850b2a04bf9b4362929392",
+    "scripts/vehicle3d/verify_outputs.py": "4eae75017b9533b2f1b2ba182a612fb39ed8303d69d825945b8349bfd4bb1032"
+  },
+  "configSha256": "6f6f65fa3768ce9c199f3a91be698e03df3e387b9c68a64e74163019ad0c53f9",
+  "generatedFiles": {
+    "reconstructed.blend": {
+      "bytes": 7326324,
+      "sha256": "40da4217e3a6057a909d84fce0d9695570a4098b9e373a75788f12540cd70ec2",
+      "includedInGit": false
+    },
+    "reconstructed.glb": {
+      "bytes": 2840464,
+      "sha256": "8c4e1c1e1d504bb1533d5b0e5952970ce6e4befa348a287b44903d3b55308f48",
+      "includedInGit": false
+    },
+    "reconstructed.stl": {
+      "bytes": 5976584,
+      "sha256": "f5750cf9f0f24604c7110291c3dace1c42422347a358e1c7f693ad47d7365c81",
+      "includedInGit": false
+    },
+    "selected-mesh.npz": {
+      "bytes": 2614279,
+      "sha256": "0083f549b8bb18898da5df5ae7712af756ae808adebbae260a5d1b52dcf963d0",
+      "includedInGit": false
+    }
+  },
+  "reviewFiles": {
+    "README.md": {
+      "bytes": 6284,
+      "sha256": "1755ffc0eb1478669bccd9258601f46276d2109c0654ef37ad9779620e66aeca"
+    },
+    "after.jpg": {
+      "bytes": 29126,
+      "sha256": "9347e474d7c26396efa15d03958f0b8fcc2f4c37f9b5694d2583e5789fb4a59e"
+    },
+    "before.jpg": {
+      "bytes": 29167,
+      "sha256": "244418aca6a64ed57ceda5050a21faa8eed5ed2d5332164a60698e61e8b365e3"
+    },
+    "events.jsonl": {
+      "bytes": 3473,
+      "sha256": "2a41f61711b3eb5813923b61928d029bc1eac60053f5f4f23406143b3b2175c1"
+    },
+    "evidence.json": {
+      "bytes": 11108,
+      "sha256": "7c9586a06952a3eeecb3d81b0e53b2b64d9fb659bcae1aea972ee86729f5af37"
+    },
+    "index.html": {
+      "bytes": 378895,
+      "sha256": "164c611ddc6a4486a778f5da4a87e41a3fe6ada2507b515ddc1769ca7b1dc620"
+    },
+    "prior-drawing.pdf": {
+      "bytes": 71524,
+      "sha256": "fbd1609840c8d9eaa202bef1b24b09dd266cef0c0785c62e626bca71ec08eaee"
+    },
+    "prior-motion.jpg": {
+      "bytes": 38054,
+      "sha256": "28154566e6accbe013b42ec42019b5ff942b1fdf2fbc3c558758dad83dfca140"
+    },
+    "prior-verification.json": {
+      "bytes": 2873,
+      "sha256": "c4146da14e0e288bbce6b6e9eea1b776ebf8e7a2f4c76f9db093600fc4cac898"
+    },
+    "result.json": {
+      "bytes": 6523,
+      "sha256": "771cbebee2385d2085b2a52244b073935544492165fd3076b83815af4cd04510"
+    },
+    "test-overlays.jpg": {
+      "bytes": 26276,
+      "sha256": "33ccdcc618fd23a64f6460791c294cc0fa4801bcbc9e1da6aad4e58c2045eb44"
+    }
+  }
+}

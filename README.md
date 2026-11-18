@@ -1,5 +1,11 @@
 # web-harness-runtime
 
+[写真から3Dを復元・検証した実行レポート](docs/vehicle3d/index.html) — [処理・結果・限界](docs/vehicle3d/README.md) / [実行方法](scripts/vehicle3d/README.md)。
+
+車の画像を `gpt-6.2-astra` でBlenderコード・概略三面図・Python走行デモにした試作を整理し、公式36方向の画像で復元・選択・最終テストを分ける自律3D runtimeを追加しました。最終テスト12方向の輪郭IoUは **0.832 → 0.905**。一方、写真の色の再投影は **14.1 dB（設定閾値20 dB未達）** で、表面・実車精度も未認証です。runtimeは「改善したが未達あり」として終了コード2を返します。近似モデルが精密CADになったとは扱いません。
+
+大きな3Dモデル・原寸写真・格子データ・ZIPはGitに含めず、再生成用コードと小さなHTML・JSON・縮小画像を掲載しています。HTMLでは縮小した実メッシュを回して確認できます。実行は `VEHICLE3D_PYTHON=.venv/bin/python npm run vehicle3d -- --blender /path/to/blender`。Python環境とBlenderを用意してください。既存の調査Chat/MCPにこの3D処理を接続する機能は未実装です。
+
 [背景地図の403画像対策](docs/map-background-fix.md) — ファイル直開き対応、HTTP状態検査、失敗時の概略表示を実装。
 
 [3案比較と10秒レビューの改善ループ](docs/proposal-comparison-runtime.md) — [旅行の実生成](docs/comparison-travel.html#proposal-comparison) / [人生計画の実生成](docs/comparison-life.html#proposal-comparison)。
