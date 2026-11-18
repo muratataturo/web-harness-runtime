@@ -1,3 +1,4 @@
+import { assessJourneyState } from "./journey-state.js";
 import { verifyStepPlan } from "./step-verifier.js";
 import type { Task } from "./types.js";
 import type { ActionPlan } from "./answer-plan.js";
@@ -28,6 +29,8 @@ export function finalizationState(
   ];
   return {
     tripBrief: task.tripBrief,
+    journeyPolicy: task.journeyPolicy,
+    journeyAssessment: plan ? assessJourneyState(task, plan) : undefined,
     stepVerification: plan ? verifyStepPlan(task, plan) : undefined,
     complete: !!task.answer,
     pending,

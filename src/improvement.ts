@@ -1,3 +1,5 @@
+import { assessJourneyState } from "./journey-state.js";
+import { tripRhythmIssues } from "./trip-brief.js";
 import { UxFeedbackStore } from "./ux-feedback.js";
 import { criterionApplies, uncoveredCriteria } from "./criteria.js";
 import {
@@ -333,13 +335,40 @@ export function diagnose(
       });
     } else if (visual.status === "passed")
       d.achievements.push("answer:interactive-visual-artifact");
+    const journey = answer.actionPlan
+      ? assessJourneyState(task, answer.actionPlan)
+      : undefined;
+    if (journey?.required && journey.status === "passed")
+      d.achievements.push("journey:consistent-plan-state");
+    if (
+      journey?.required &&
+      task.tripBrief?.requiresStepResearch &&
+      answer.actionPlan &&
+      !tripRhythmIssues(task.query, answer.actionPlan).length
+    )
+      d.achievements.push("journey:covered-day-window");
     const specificity = assessSpecificity(task, answer);
     if (specificity.status === "needs_detail") {
       d.causes.push("insufficient_specificity");
-      d.gaps.push({
-        url: candidateUrls[0] ?? task.urls[0]!,
-        fields: specificity.issues,
-      });
+      for (const issue of specificity.issues) {
+        const step = answer.actionPlan?.steps.find((s) =>
+          issue.startsWith(s.id + ":"),
+        );
+        const leg = answer.actionPlan?.journeyState?.legs.find(
+          (l) => l.stepId === step?.id,
+        );
+        const destination = answer.actionPlan?.journeyState?.places.find(
+          (p) => p.id === leg?.toPlaceId,
+        );
+        d.gaps.push({
+          url:
+            step?.venueUrl ??
+            destination?.venueUrl ??
+            candidateUrls[0] ??
+            task.urls[0]!,
+          fields: [issue],
+        });
+      }
     } else if (specificity.status === "passed")
       d.achievements.push("answer:concrete-action-plan");
   }
@@ -1089,3 +1118,5 @@ export async function decideImprovement(
     await rmdir(lock);
   }
 }
+
+export { improves as improvementAdvances };

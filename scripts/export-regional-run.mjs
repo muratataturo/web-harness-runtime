@@ -24,7 +24,7 @@ if (
 const run = JSON.parse(
   await readFile(`.runtime/regional-itinerary/${id}/latest.json`, "utf8"),
 );
-assert.equal(run.mode, "live-unattended");
+assert.ok(["live-unattended", "live-self-improvement"].includes(run.mode));
 assert.equal(run.answerEdited, false);
 const store = new Store(run.store);
 const task = await store.get(run.taskId);
@@ -86,6 +86,7 @@ receipt.events = receipt.events?.map((e) =>
 Object.assign(receipt, {
   tripBrief: task.tripBrief,
   stepVerification: task.stepVerification,
+  journeyAssessment: task.journeyAssessment,
   criteria: task.criteria,
   evidenceCount: task.evidence.length,
   pages: task.pages.map((p) => ({

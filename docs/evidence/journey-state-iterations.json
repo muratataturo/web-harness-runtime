@@ -1,0 +1,339 @@
+{
+  "scope": "Iterative live development, not a controlled performance benchmark",
+  "attempts": [
+    {
+      "taskId": "44603665-ecf1-49e9-a24d-8ac93d0f50a6",
+      "runtimeRevision": "e127ca65da16d0f3faf16e82bc690c0e1456e8b1d33981c4a031af54747b35c8",
+      "inputSha256": "45260a39f6127218b3d22e324c64dbdaa0318df658b984db709671334d1bfc27",
+      "status": "partial",
+      "strictPassed": false,
+      "answerEdited": false,
+      "initialReport": {
+        "version": 1,
+        "required": true,
+        "planHash": "b60e538134241c21564bd7c22228ec0c075222bcf29883aeec2456548812f4bd",
+        "status": "passed",
+        "issues": [],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 393,
+            "estimatedMeters": 512,
+            "recommendedMinutes": 11,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s2",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s9",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s11",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "アクトの森いこいの広場（座標未取得、地図未配置）",
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "アクトの森いこいの広場（座標未取得、地図未配置）",
+            "to": "オークラアクトシティホテル浜松",
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s18",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s20",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 70,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "アクトの森いこいの広場（座標未取得、地図未配置）",
+            "category": "rest",
+            "minutes": 40,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "アクトの森いこいの広場（座標未取得、地図未配置）",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 70,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 70,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 90,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 120,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1059,
+        "walkingMinutes": 39,
+        "historySamples": 0
+      },
+      "finding": "Indoor transfers to outdoor ActCity gardens were allowed without distance; floor-level museum visits each got a separate minimum. Subsequent runtime fixes group venue visits and reject outdoor transfers disguised as indoor."
+    },
+    {
+      "taskId": "22b14f87-42cd-445e-8a96-be11ebe1735b",
+      "caseId": "hamamatsu-state-city",
+      "mode": "live-unattended",
+      "runtimeRevision": "5cf6611b0a651f3cf9f0e8fbdfdc05b2cdc0214a5936e7b7163db7d8a17c2e3e",
+      "status": "partial",
+      "strictPassed": false,
+      "answerEdited": false,
+      "range": [
+        "09:00",
+        "18:59",
+        11
+      ],
+      "planSteps": 24,
+      "stateStatus": "passed",
+      "walkingMetersEstimate": 3907,
+      "walkingMinutes": 106,
+      "historySamples": 0,
+      "priorPlans": 1,
+      "trajectory": [
+        {
+          "issues": 8,
+          "walkingMetersEstimate": 4493,
+          "walkingMinutes": 102
+        },
+        {
+          "issues": 1,
+          "walkingMetersEstimate": 3907,
+          "walkingMinutes": 106
+        },
+        {
+          "issues": 1,
+          "walkingMetersEstimate": 3907,
+          "walkingMinutes": 106
+        },
+        {
+          "issues": 0,
+          "walkingMetersEstimate": 3907,
+          "walkingMinutes": 106
+        },
+        {
+          "issues": 0,
+          "walkingMetersEstimate": 3907,
+          "walkingMinutes": 106
+        },
+        {
+          "issues": 0,
+          "walkingMetersEstimate": 3907,
+          "walkingMinutes": 106
+        }
+      ],
+      "remainingSpecificityIssues": [
+        "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+        "a9: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+        "提案した09:00〜20:00の開始から帰路までを構成してください。短い計画を一日と呼ばないでください",
+        "短くゆっくり過ごす依頼です。主な観光体験は2枠以内に絞ってください"
+      ]
+    },
+    {
+      "taskId": "c2c2059c-9b31-4b5d-977a-14636325f798",
+      "caseId": "hamamatsu-state-improved",
+      "mode": "live-self-improvement",
+      "runtimeRevision": "298b08755f65f1b82ebec6f4066cbb9732e43fbfad18de3d35e67f7fc522c096",
+      "status": "partial",
+      "strictPassed": false,
+      "answerEdited": false,
+      "range": [
+        "09:00",
+        "19:40",
+        20
+      ],
+      "planSteps": 25,
+      "stateStatus": "passed",
+      "walkingMetersEstimate": 3886,
+      "walkingMinutes": 105,
+      "historySamples": 0,
+      "priorPlans": 2,
+      "trajectory": [
+        {
+          "issues": 4,
+          "walkingMetersEstimate": 3886,
+          "walkingMinutes": 102
+        },
+        {
+          "issues": 2,
+          "walkingMetersEstimate": 3886,
+          "walkingMinutes": 105
+        },
+        {
+          "issues": 0,
+          "walkingMetersEstimate": 3886,
+          "walkingMinutes": 105
+        }
+      ],
+      "remainingSpecificityIssues": [
+        "a2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+        "a8: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+      ]
+    }
+  ]
+}

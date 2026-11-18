@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { placeKey, endpointKey } from "./journey-state.js";
+import { JourneyMemoryStore } from "./journey-memory.js";
 import { copyAnswerMedia } from "./answer-media.js";
 import { visualRefinementRunner } from "./visual-refinement.js";
 import { config } from "dotenv";
@@ -727,6 +729,46 @@ improvements
       opts.json ? JSON.stringify(loop, null, 2) : renderImprovement(loop),
     );
   });
+const journeyHistory = program
+  .command("journey-history")
+  .description(
+    "本人の移動・滞在記録と提供元の経路見積を保存。生成案を実績へ昇格しない",
+  );
+journeyHistory
+  .command("import <file>")
+  .action(async (file) =>
+    console.log(
+      JSON.stringify(
+        await new JourneyMemoryStore(new Store()).importObservations(
+          JSON.parse(await readFile(file, "utf8")),
+        ),
+        null,
+        2,
+      ),
+    ),
+  );
+journeyHistory
+  .command("show")
+  .action(async () =>
+    console.log(
+      JSON.stringify(await new JourneyMemoryStore(new Store()).read(), null, 2),
+    ),
+  );
+journeyHistory.command("places <taskId>").action(async (taskId) => {
+  const task = await new Store().get(taskId);
+  console.log(
+    JSON.stringify(
+      task.answer?.actionPlan?.journeyState?.places.map((p) => ({
+        id: p.id,
+        label: p.label,
+        venueKey: placeKey(p),
+        endpointKey: endpointKey(p),
+      })) ?? [],
+      null,
+      2,
+    ),
+  );
+});
 const benchmark = program
   .command("benchmark")
   .description("正解ラベル付き凍結資料による限定的な意味判定ベンチマーク");

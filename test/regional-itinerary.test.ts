@@ -138,3 +138,21 @@ test("season cafe and cocktail lounge share the named business, while the observ
   );
   assert.equal(result.service, "official-visit");
 });
+
+test("castle references join only the registered city and tourism pages", () => {
+  const city = "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html";
+  assert.equal(
+    entityKey(city),
+    entityKey("https://hamamatsu-daisuki.net/pickup/7915/"),
+  );
+  assert.equal(
+    entityKey(city),
+    entityKey(
+      "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+    ),
+  );
+  assert.notEqual(
+    entityKey(city),
+    entityKey("https://www.city.hamamatsu.shizuoka.jp/artmuse/"),
+  );
+});

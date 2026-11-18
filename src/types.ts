@@ -69,6 +69,11 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  journeyPolicy?: ReturnType<typeof import("./journey-state.js").journeyPolicy>;
+  journeyMemory?: import("./journey-state.js").JourneyMemory;
+  journeyAssessment?: ReturnType<
+    typeof import("./journey-state.js").assessJourneyState
+  >;
   tripBrief?: ReturnType<typeof import("./trip-brief.js").tripBrief>;
   stepVerification?: ReturnType<
     typeof import("./step-verifier.js").verifyStepPlan

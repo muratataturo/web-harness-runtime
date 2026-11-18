@@ -1,3 +1,4 @@
+import { journeyStateSchema, assessJourneyState } from "./journey-state.js";
 import { stepChecksSchema, verifyStepPlan } from "./step-verifier.js";
 import { fullDayIntent, tripBrief, tripRhythmIssues } from "./trip-brief.js";
 import { Type, type Static } from "@sinclair/typebox";
@@ -11,6 +12,7 @@ const ids = Type.Array(Type.String({ maxLength: 100 }), { maxItems: 20 });
 export const actionPlanSchema = Type.Object(
   {
     stepChecks: Type.Optional(stepChecksSchema),
+    journeyState: Type.Optional(journeyStateSchema),
     verification: Type.Optional(
       Type.Object(
         {
@@ -53,6 +55,7 @@ export const actionPlanSchema = Type.Object(
               "dinner",
               "cafe",
               "move",
+              "wait",
               "rest",
               "evening",
               "return",
@@ -284,6 +287,7 @@ export function assessSpecificity(
       ],
     };
   validateActionPlan(task, p);
+  if (task.journeyPolicy) issues.push(...assessJourneyState(task, p).issues);
   if (task.tripBrief?.requiresStepResearch || p.stepChecks?.length)
     issues.push(
       ...verifyStepPlan(task, p)

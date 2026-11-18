@@ -44,6 +44,12 @@ export function tripBrief(query: string) {
         : mode === "short"
           ? ["14:00", "16:00"]
           : undefined;
+  const span = range
+    ? Number(range[1]!.split(":")[0]) * 60 +
+      Number(range[1]!.split(":")[1]) -
+      Number(range[0]!.split(":")[0]) * 60 -
+      Number(range[0]!.split(":")[1])
+    : 0;
   return {
     version: 1 as const,
     mode: mode as "custom" | "afternoon" | "short" | "full-day" | "flexible",
@@ -55,7 +61,8 @@ export function tripBrief(query: string) {
         ? ("active" as const)
         : ("balanced" as const),
     requiredMeals: mode === "full-day" ? ["lunch", "dinner"] : [],
-    requiresStepResearch: ["full-day", "afternoon", "short"].includes(mode),
+    requiresStepResearch:
+      ["full-day", "afternoon", "short"].includes(mode) || span >= 480,
     assumptions:
       !explicit && range
         ? [
@@ -101,7 +108,13 @@ export function tripRhythmIssues(
   const meaningful = plan.steps.filter((s) =>
     ["activity", "cafe", "lunch", "dinner", "evening"].includes(s.kind ?? ""),
   );
-  if (b.mode === "full-day") {
+  if (
+    b.mode === "full-day" ||
+    (b.mode === "custom" &&
+      b.timeRange &&
+      clock(b.timeRange[0]!) <= 10 * 60 &&
+      clock(b.timeRange[1]!) >= 19 * 60)
+  ) {
     if (
       !meaningful.some(
         (s) =>
@@ -111,7 +124,7 @@ export function tripRhythmIssues(
       )
     )
       issues.push("朝から夜の一日には午前の具体的な体験が必要です");
-    for (const meal of b.requiredMeals)
+    for (const meal of ["lunch", "dinner"])
       if (
         !plan.steps.some(
           (s) =>
@@ -143,7 +156,7 @@ export function tripRhythmIssues(
     issues.push("疲れをためない休憩またはカフェの枠が必要です");
   if (
     b.pacing === "relaxed" &&
-    b.mode !== "full-day" &&
+    ["short", "afternoon"].includes(b.mode) &&
     plan.steps.filter((s) => s.kind === "activity").length > 2
   )
     issues.push(

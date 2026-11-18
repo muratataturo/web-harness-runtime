@@ -213,7 +213,7 @@ export function publicUrl(value: string): URL {
 }
 export function publicSocialRequested(query: string): boolean {
   if (
-    /(?:SNS|ソーシャル|social media).{0,8}(?:不要|使わ|参照しな|除外|含めな)|(?:no|without|avoid)\s+(?:social|SNS)/i.test(
+    /(?:SNS|ソーシャル|social media).{0,8}(?:不要|使わ|参照しな|除外|含めな|行わな|行いま[せ]ん|実施しな|しな|しま[せ]ん)|(?:no|without|avoid)\s+(?:social|SNS)/i.test(
       query,
     )
   )
