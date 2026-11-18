@@ -1,5 +1,5 @@
 import { stepChecksSchema, verifyStepPlan } from "./step-verifier.js";
-import { tripBrief, tripRhythmIssues } from "./trip-brief.js";
+import { fullDayIntent, tripBrief, tripRhythmIssues } from "./trip-brief.js";
 import { Type, type Static } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import { assertEvidenceIntegrity } from "./provenance.js";
@@ -114,7 +114,8 @@ export interface SpecificityReview {
 }
 export function specificityContract(query: string) {
   const mode =
-    /一日|1日|日帰り|お出かけ|行程|旅程|午後だけ|午後から|午後に|寄り道|itinerary|day trip|day out/i.test(
+    fullDayIntent(query) ||
+    /お出かけ|行程|旅程|午後だけ|午後から|午後に|半日|寄り道|itinerary|day out/i.test(
       query,
     ) ||
     (/旅行/.test(query) && /計画|過ご|スケジュール|回り|プラン/.test(query))

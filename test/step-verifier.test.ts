@@ -4,7 +4,7 @@ import { tripBrief, tripRhythmIssues } from "../src/trip-brief.js";
 import { verifyStepPlan } from "../src/step-verifier.js";
 import { newTask } from "../src/runtime.js";
 import { addEvidence } from "../src/evidence.js";
-import type { ActionPlan } from "../src/answer-plan.js";
+import { specificityContract, type ActionPlan } from "../src/answer-plan.js";
 import { deepeningActions } from "../src/research.js";
 import { renderTripRhythm } from "../src/trip-rhythm-html.js";
 const url = "https://www.act-okura.co.jp/facilities/gallery/";
@@ -343,4 +343,16 @@ test("step verifier rejects invalid clock values and missing duration instead of
   const { task, plan } = fixture();
   delete plan.steps[0]!.durationMinutes;
   assert.equal(verifyStepPlan(task, plan).failed, 1);
+});
+
+test("calendar dates do not turn factual lookups or short visits into a full-day request", () => {
+  assert.equal(tripBrief("2026年11月21日に2時間だけ寄り道")?.mode, "short");
+  assert.equal(tripBrief("2026年11月1日に午後から遊ぶ")?.mode, "afternoon");
+  assert.equal(tripBrief("2026年11月21日の営業時間を調べて"), undefined);
+  assert.equal(
+    specificityContract("2026年11月21日の営業時間を調べて").mode,
+    "facts",
+  );
+  assert.equal(tripBrief("朝から夜まで楽しむプラン")?.mode, "full-day");
+  assert.equal(tripBrief("１日遊ぶ")?.mode, "full-day");
 });

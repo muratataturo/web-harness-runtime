@@ -1,7 +1,14 @@
 /** User intent first; a suggested window is never presented as a user-specified time. */
+export function fullDayIntent(query: string) {
+  return /朝から夜|午前中から夜|朝.{0,6}夜まで|丸一日|(?<![〇零一二三四五六七八九十百\d月])(?:一|1)日|日帰り|day trip|full[ -]day/i.test(
+    query.normalize("NFKC"),
+  );
+}
 export function tripBrief(query: string) {
+  query = query.normalize("NFKC");
   if (
-    !/一日|1日|日帰り|お出かけ|行程|旅程|旅行|遊ぶ|遊び|午後|寄り道|day trip|itinerary/i.test(
+    !fullDayIntent(query) &&
+    !/お出かけ|行程|旅程|旅行|遊ぶ|遊び|午後|半日|短時間|寄り道|afternoon|day out|itinerary/i.test(
       query,
     )
   )
@@ -16,10 +23,7 @@ export function tripBrief(query: string) {
     /寄り道|短時間|[12１２]時間(?:だけ|程度|ほど)|さくっと|サクッと/i.test(
       query,
     );
-  const full =
-    /朝から夜|午前中から夜|朝.{0,6}夜まで|丸一日|一日|1日|日帰り|day trip|full.day/i.test(
-      query,
-    );
+  const full = fullDayIntent(query);
   const mode = explicit
     ? "custom"
     : afternoon && /午後だけ|半日|昼から|afternoon/i.test(query)
