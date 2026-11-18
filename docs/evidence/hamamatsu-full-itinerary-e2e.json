@@ -1,0 +1,2286 @@
+{
+  "runtimeRevision": "0448ef7a0fe04a040c1f4b4085f6448d82678a228ee4134c1dac69bff2d3e7dc",
+  "caseId": "hamamatsu-full",
+  "label": "浜松・朝から夜まで",
+  "inputSha256": "e1f9752105a62845200b1ec5084220e5f8eeaa11ff5ca214b8e8e64552da5a70",
+  "version": 1,
+  "mode": "live-unattended",
+  "startedAt": "2026-11-17T23:52:22.180Z",
+  "passed": false,
+  "answerEdited": false,
+  "humanResponses": 0,
+  "taskId": "46052a3f-5047-496c-9223-2e0f56ca7e34",
+  "status": "partial",
+  "model": "gpt-6.1-sol",
+  "tripBrief": {
+    "version": 1,
+    "mode": "full-day",
+    "timeRange": [
+      "09:00",
+      "20:00"
+    ],
+    "timeBasis": "suggested",
+    "pacing": "relaxed",
+    "requiredMeals": [
+      "lunch",
+      "dinner"
+    ],
+    "requiresStepResearch": true,
+    "assumptions": [
+      "時刻の指定がないため09:00〜20:00を提案。出発地までの交通は別途。"
+    ],
+    "policy": "明示時刻を優先。一日は午前の体験・昼食・午後の体験やカフェ・休憩・夕食・夜の帰路をつなぐ。午後だけや寄り道を一日へ膨らませない。移動で埋めず、体力と気分に合わせて訪問数を絞り、雨・満席・疲労の切替を用意する。"
+  },
+  "stepVerification": {
+    "version": 1,
+    "planHash": "bb031efc8110b27c32f0007006c4e3bdfafa3590d1ddd0a2f62acb2d3c8b7a26",
+    "required": true,
+    "ready": true,
+    "checks": [
+      {
+        "stepId": "s1",
+        "venueUrl": "https://www.actcity.jp/visitor/act/",
+        "evidenceIds": [],
+        "id": "s1-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s2",
+        "venueUrl": "https://www.actcity.jp/visitor/act/",
+        "evidenceIds": [
+          "ev-19"
+        ],
+        "id": "o0",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある06:00〜19:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s2b",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [],
+        "id": "s2b-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s3",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-1"
+        ],
+        "id": "o1",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s3",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "s3-price-museum",
+        "kind": "price",
+        "status": "passed",
+        "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s4",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "s4-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s5",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-5"
+        ],
+        "id": "open-s5",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s6",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-5",
+          "ev-7"
+        ],
+        "id": "o2",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s6",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-8",
+          "ev-11"
+        ],
+        "id": "s6-price-lunch",
+        "kind": "price",
+        "status": "passed",
+        "detail": "国産ビーフカレー&ライス（コーヒー込み）：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s6",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "s6-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s7",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [],
+        "id": "s7-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [
+          "ev-12"
+        ],
+        "id": "o3",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [
+          "ev-13"
+        ],
+        "id": "s8-price-gallery",
+        "kind": "price",
+        "status": "passed",
+        "detail": "展望回廊 大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s9",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "s9-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s10",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-5"
+        ],
+        "id": "open-s10",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s11",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-5"
+        ],
+        "id": "o4",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s11",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-25",
+          "ev-11"
+        ],
+        "id": "s11-price-cake",
+        "kind": "price",
+        "status": "passed",
+        "detail": "モーモーロール：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s11",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-10",
+          "ev-11"
+        ],
+        "id": "s11-price-coffee",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ケーキセットのコーヒー追加分：2×掲載単価750円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s11",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "s11-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s12",
+        "venueUrl": "https://www.actcity.jp/visitor/act/",
+        "evidenceIds": [],
+        "id": "s12-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s13",
+        "venueUrl": "https://www.actcity.jp/visitor/act/",
+        "evidenceIds": [
+          "ev-19"
+        ],
+        "id": "o5",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある06:00〜19:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s14",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [],
+        "id": "s14-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s15",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-28"
+        ],
+        "id": "open-s15",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s16",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-28"
+        ],
+        "id": "open-s16",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s16",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-29"
+        ],
+        "id": "food-s16",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:30〜21:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s16",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-30",
+          "ev-32"
+        ],
+        "id": "s16-price-dinnerfood",
+        "kind": "price",
+        "status": "passed",
+        "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s16",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-31",
+          "ev-32"
+        ],
+        "id": "s16-price-dinnerdrink",
+        "kind": "price",
+        "status": "passed",
+        "detail": "アップルジュース（夕食）：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s16",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [],
+        "id": "s16-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s17",
+        "venueUrl": "https://www.actcity.jp/visitor/act/",
+        "evidenceIds": [],
+        "id": "s17-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      }
+    ],
+    "unknown": 0,
+    "failed": 0,
+    "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+  },
+  "steps": 93,
+  "elapsedMs": 445291,
+  "failure": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'partial'\n- 'succeeded'\n",
+  "finishedAt": "2026-11-17T23:59:47.506Z",
+  "events": [
+    {
+      "at": "2026-11-17T23:52:24.058Z",
+      "type": "codex_auth"
+    },
+    {
+      "at": "2026-11-17T23:52:27.595Z",
+      "type": "codex_thread"
+    },
+    {
+      "at": "2026-11-17T23:52:27.597Z",
+      "type": "model_turn"
+    },
+    {
+      "at": "2026-11-17T23:52:39.538Z",
+      "type": "plan_task"
+    },
+    {
+      "at": "2026-11-17T23:52:39.556Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:52:45.760Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:52:45.779Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:52:45.796Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:52:45.815Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:52:53.256Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:52:53.310Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:52:53.361Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:52:53.403Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:01.990Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:02.008Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:02.024Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:02.042Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:02.058Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:02.075Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:09.390Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:09.409Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:09.427Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:09.446Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:09.464Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T23:53:09.518Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:09.808Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "connect ECONNREFUSED 116.80.22.245:443"
+      }
+    },
+    {
+      "at": "2026-11-17T23:53:12.144Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:13.809Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:22.413Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:22.433Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:22.451Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:22.469Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:25.654Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:26.052Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "connect ECONNREFUSED 116.80.22.245:443"
+      }
+    },
+    {
+      "at": "2026-11-17T23:53:33.207Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:33.225Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:33.244Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:36.757Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:43.316Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:43.336Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:46.095Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:53:47.551Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T23:53:48.034Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T23:53:54.859Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:54.881Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:53:54.901Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T23:53:54.918Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-17T23:53:54.935Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:54:02.391Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:54:02.412Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:54:03.251Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:54:06.220Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:54:13.169Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:54:16.424Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:54:16.448Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:54:16.476Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:54:51.161Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:54:51.182Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T23:54:52.630Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T23:54:52.649Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T23:54:53.444Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T23:54:53.463Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:56:03.389Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:56:03.410Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:56:03.431Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-17T23:56:03.437Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "stage_plan",
+        "error": "tea: 掲載単価1350円が根拠引用で確認できません。単価の引用を追加するか未確認の見積と区別してください"
+      }
+    },
+    {
+      "at": "2026-11-17T23:56:03.447Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-17T23:56:08.678Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-17T23:56:08.707Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-17T23:56:08.709Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "7f3d64f67a2c9491e7170e36782fe25a31c284824af1f49cfe42c3af8687f34f",
+        "required": true,
+        "ready": false,
+        "checks": [
+          {
+            "stepId": "s1",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s2-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "o1",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "s3-price-museum",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s4-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s5-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5",
+              "ev-7"
+            ],
+            "id": "o2",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-8",
+              "ev-11"
+            ],
+            "id": "s6-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "国産ビーフカレー&ライス（コーヒー込み）：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s6-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-12"
+            ],
+            "id": "o3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-13"
+            ],
+            "id": "s8-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s9-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s10",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s10-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5"
+            ],
+            "id": "o4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-25",
+              "ev-11"
+            ],
+            "id": "s11-price-cake",
+            "kind": "price",
+            "status": "passed",
+            "detail": "モーモーロール：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-11"
+            ],
+            "id": "s11-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ケーキセットのコーヒー追加分：2×掲載単価750円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s12-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [
+              "ev-19"
+            ],
+            "id": "o5",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある06:00〜19:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s15-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s16-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s16-price-dinner",
+            "kind": "price",
+            "status": "unknown",
+            "detail": "この手順で使う商品単価の同一施設の引用が不足、または見積です。掲載額と混同しないでください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s16-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s17-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 6,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-17T23:56:08.711Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-17T23:56:10.186Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-17T23:56:12.101Z",
+      "type": "step_deepresearch",
+      "data": {
+        "stepIds": [
+          "s2",
+          "s5",
+          "s10",
+          "s15",
+          "s16",
+          "s16"
+        ],
+        "pagesOpened": 2,
+        "rounds": 1,
+        "additionalCount": 2
+      }
+    },
+    {
+      "at": "2026-11-17T23:56:28.635Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:56:28.656Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T23:56:29.762Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T23:56:29.780Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-17T23:56:31.352Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-17T23:56:31.376Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:56:51.291Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-17T23:56:51.324Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-17T23:56:51.326Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "5a2d70753b855dbbb5aedd6732a5d88adbe913703538b3e6665507046f1cb6ce",
+        "required": true,
+        "ready": false,
+        "checks": [
+          {
+            "stepId": "s1",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [
+              "ev-19"
+            ],
+            "id": "o0",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある06:00〜19:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s2b",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s2b-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "o1",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "s3-price-museum",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s4-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5"
+            ],
+            "id": "open-s5",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5",
+              "ev-7"
+            ],
+            "id": "o2",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-8",
+              "ev-11"
+            ],
+            "id": "s6-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "国産ビーフカレー&ライス（コーヒー込み）：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s6-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-12"
+            ],
+            "id": "o3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-13"
+            ],
+            "id": "s8-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s9-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s10",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5"
+            ],
+            "id": "open-s10",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5"
+            ],
+            "id": "o4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-25",
+              "ev-11"
+            ],
+            "id": "s11-price-cake",
+            "kind": "price",
+            "status": "passed",
+            "detail": "モーモーロール：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-11"
+            ],
+            "id": "s11-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ケーキセットのコーヒー追加分：2×掲載単価750円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s12-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [
+              "ev-19"
+            ],
+            "id": "o5",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある06:00〜19:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s15-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s16-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s16-price-dinner",
+            "kind": "price",
+            "status": "unknown",
+            "detail": "この手順で使う商品単価の同一施設の引用が不足、または見積です。掲載額と混同しないでください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.mutsugiku.jp/",
+            "evidenceIds": [],
+            "id": "s16-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s17-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 3,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-17T23:56:51.326Z",
+      "type": "step_deepresearch",
+      "data": {
+        "stepIds": [
+          "s15",
+          "s16",
+          "s16"
+        ],
+        "pagesOpened": 2,
+        "rounds": 2,
+        "additionalCount": 0
+      }
+    },
+    {
+      "at": "2026-11-17T23:56:55.679Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:56:55.681Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "許可対象外のドメインです: mutsugiku.jp"
+      }
+    },
+    {
+      "at": "2026-11-17T23:56:55.692Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:57:02.369Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:57:17.092Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:57:17.113Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:57:17.130Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:57:17.147Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:57:17.165Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:57:17.184Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-17T23:57:52.137Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-17T23:57:52.177Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-17T23:57:52.180Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "4c3b4003c9e08779e03b61ffe6700f4cae0f23b664785a7903db4d40377280df",
+        "required": true,
+        "ready": true,
+        "checks": [
+          {
+            "stepId": "s1",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [
+              "ev-19"
+            ],
+            "id": "o0",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある06:00〜19:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s2b",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s2b-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "o1",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "s3-price-museum",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s4-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5"
+            ],
+            "id": "open-s5",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5",
+              "ev-7"
+            ],
+            "id": "o2",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-8",
+              "ev-11"
+            ],
+            "id": "s6-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "国産ビーフカレー&ライス（コーヒー込み）：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s6-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-12"
+            ],
+            "id": "o3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-13"
+            ],
+            "id": "s8-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s9-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s10",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5"
+            ],
+            "id": "open-s10",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-5"
+            ],
+            "id": "o4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-25",
+              "ev-11"
+            ],
+            "id": "s11-price-cake",
+            "kind": "price",
+            "status": "passed",
+            "detail": "モーモーロール：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-11"
+            ],
+            "id": "s11-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ケーキセットのコーヒー追加分：2×掲載単価750円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s12-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [
+              "ev-19"
+            ],
+            "id": "o5",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある06:00〜19:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-28"
+            ],
+            "id": "open-s15",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-28"
+            ],
+            "id": "open-s16",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-29"
+            ],
+            "id": "food-s16",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:30〜21:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-30",
+              "ev-32"
+            ],
+            "id": "s16-price-dinnerfood",
+            "kind": "price",
+            "status": "passed",
+            "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-31",
+              "ev-32"
+            ],
+            "id": "s16-price-dinnerdrink",
+            "kind": "price",
+            "status": "passed",
+            "detail": "アップルジュース（夕食）：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s16-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.actcity.jp/visitor/act/",
+            "evidenceIds": [],
+            "id": "s17-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 0,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-17T23:58:36.708Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:58:36.733Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:58:36.753Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-17T23:58:36.775Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-17T23:58:36.809Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-17T23:58:40.193Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-17T23:58:40.219Z",
+      "type": "read_task_state"
+    },
+    {
+      "at": "2026-11-17T23:59:09.489Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-17T23:59:09.498Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "finish_task",
+        "error": "候補 URL は閲覧済みのページが必要です: https://www.mutsugiku.jp/"
+      }
+    },
+    {
+      "at": "2026-11-17T23:59:14.125Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-17T23:59:14.134Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "finish_task",
+        "error": "別候補の根拠を流用できません: ev-23"
+      }
+    },
+    {
+      "at": "2026-11-17T23:59:19.596Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-17T23:59:19.620Z",
+      "type": "specificity_revision",
+      "data": {
+        "issues": [
+          "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+        ],
+        "repair": 1
+      }
+    },
+    {
+      "at": "2026-11-17T23:59:22.893Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-17T23:59:23.038Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "connect ECONNREFUSED 116.80.22.245:443"
+      }
+    },
+    {
+      "at": "2026-11-17T23:59:23.054Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-17T23:59:23.071Z",
+      "type": "specificity_revision",
+      "data": {
+        "issues": [
+          "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+        ],
+        "repair": 2
+      }
+    },
+    {
+      "at": "2026-11-17T23:59:28.517Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-17T23:59:47.438Z",
+      "type": "codex_agent_message"
+    },
+    {
+      "at": "2026-11-17T23:59:47.467Z",
+      "type": "task_end"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "museum",
+      "description": "楽器博物館の所在地・通常開館枠・大人料金と対象日の告知",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/"
+      ]
+    },
+    {
+      "id": "cafe",
+      "description": "ザ・シーズンカフェの所在地・提供時間・具体的な昼食とカフェ商品の価格",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.act-okura.co.jp/restaurant/cafe/"
+      ]
+    },
+    {
+      "id": "gallery",
+      "description": "展望回廊の営業枠・入場料金・対象日公開予定",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://www.act-okura.co.jp/facilities/gallery/"
+      ]
+    },
+    {
+      "id": "dinner",
+      "description": "むつぎくの所在地・夕食営業時間・具体的な食事価格",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.mutsugiku.jp/"
+      ]
+    },
+    {
+      "id": "rest",
+      "description": "アクトシティの休憩場所・利用条件と位置",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://www.actcity.jp/visitor/act/"
+      ]
+    }
+  ],
+  "evidenceCount": 36,
+  "pages": [
+    {
+      "url": "https://www.gakkihaku.jp/guide/",
+      "capturedAt": "2026-11-17T23:52:41.740Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "capturedAt": "2026-11-17T23:52:47.773Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "capturedAt": "2026-11-17T23:52:56.561Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "capturedAt": "2026-11-17T23:53:04.678Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/visitor/act/",
+      "capturedAt": "2026-11-17T23:53:13.787Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/calendar/",
+      "capturedAt": "2026-11-17T23:53:16.245Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/faq/",
+      "capturedAt": "2026-11-17T23:53:25.629Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "capturedAt": "2026-11-17T23:53:36.730Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/access/",
+      "capturedAt": "2026-11-17T23:53:38.331Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/figaro/",
+      "capturedAt": "2026-11-17T23:53:46.073Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/visitor/info_center/",
+      "capturedAt": "2026-11-17T23:53:47.531Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8+%E6%B5%9C%E6%9D%BE%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E4%B8%AD%E5%A4%AE3-9-1&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T23:53:48.034Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/collection/",
+      "capturedAt": "2026-11-17T23:53:55.754Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8+%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T23:54:52.630Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T23:54:53.443Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/scene-plan/",
+      "capturedAt": "2026-11-17T23:54:56.278Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/en/",
+      "capturedAt": "2026-11-17T23:56:10.185Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "capturedAt": "2026-11-17T23:56:12.101Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E9%A7%85+%E6%B5%9C%E6%9D%BE%E5%B8%82&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T23:56:29.761Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E6%B5%9C%E6%9D%BE+%E6%B5%9C%E6%9D%BE%E5%B8%82+%E6%9D%BF%E5%B1%8B%E7%94%BA&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-17T23:56:31.351Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/news/",
+      "capturedAt": "2026-11-17T23:56:33.326Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/",
+      "capturedAt": "2026-11-17T23:56:59.316Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "capturedAt": "2026-11-17T23:57:07.499Z",
+      "kind": "public-html"
+    }
+  ],
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "needs_detail",
+    "issues": [
+      "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+    ],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": [
+          "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+        ]
+      },
+      {
+        "number": 2,
+        "issues": [
+          "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+        ]
+      },
+      {
+        "number": 3,
+        "issues": [
+          "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+        ]
+      }
+    ]
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "budget": {
+    "scenario": "大人2人・博物館＋昼食＋展望回廊＋カフェ＋同ホテルのラウンジ夕食。交通費別、むつぎくは公式未取得で主案不採用。",
+    "totalYen": 16100,
+    "items": [
+      {
+        "id": "museum",
+        "label": "楽器博物館 大人",
+        "basis": "published",
+        "quantity": 2,
+        "unitYen": 800,
+        "evidenceIds": [
+          "ev-2"
+        ]
+      },
+      {
+        "id": "lunch",
+        "label": "国産ビーフカレー&ライス（コーヒー込み）",
+        "basis": "published",
+        "quantity": 2,
+        "unitYen": 2000,
+        "evidenceIds": [
+          "ev-8",
+          "ev-11"
+        ]
+      },
+      {
+        "id": "gallery",
+        "label": "展望回廊 大人",
+        "basis": "published",
+        "quantity": 2,
+        "unitYen": 1200,
+        "evidenceIds": [
+          "ev-13"
+        ]
+      },
+      {
+        "id": "cake",
+        "label": "モーモーロール",
+        "basis": "published",
+        "quantity": 2,
+        "unitYen": 600,
+        "evidenceIds": [
+          "ev-25",
+          "ev-11"
+        ]
+      },
+      {
+        "id": "coffee",
+        "label": "ケーキセットのコーヒー追加分",
+        "basis": "published",
+        "quantity": 2,
+        "unitYen": 750,
+        "evidenceIds": [
+          "ev-10",
+          "ev-11"
+        ]
+      },
+      {
+        "id": "dinnerfood",
+        "label": "五目あんかけ焼きそば",
+        "basis": "published",
+        "unitYen": 2000,
+        "quantity": 2,
+        "evidenceIds": [
+          "ev-30",
+          "ev-32"
+        ]
+      },
+      {
+        "id": "dinnerdrink",
+        "label": "アップルジュース（夕食）",
+        "basis": "published",
+        "unitYen": 700,
+        "quantity": 2,
+        "evidenceIds": [
+          "ev-31",
+          "ev-32"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "date": "2026-11-21",
+    "checks": [
+      {
+        "kind": "opening",
+        "status": "published",
+        "stepIds": [
+          "s3",
+          "s6",
+          "s8",
+          "s11"
+        ],
+        "detail": "博物館は対象日11:00篳篥予定あり。他施設は土曜通常枠・メニュー提供枠を照合、対象日臨時変更は未確認。むつぎくは接続失敗で不採用。",
+        "evidenceIds": [
+          "ev-1",
+          "ev-5",
+          "ev-7",
+          "ev-12",
+          "ev-18",
+          "ev-28",
+          "ev-29"
+        ]
+      },
+      {
+        "kind": "prices",
+        "status": "published",
+        "stepIds": [
+          "s3",
+          "s6",
+          "s8",
+          "s11",
+          "s16"
+        ],
+        "detail": "全て掲載単価で2人合計16,100円。昼食セットのコーヒー、ケーキセットのドリンクは重複加算なし。予算残3,900円は注文追加しない限り未使用。",
+        "evidenceIds": [
+          "ev-2",
+          "ev-8",
+          "ev-13",
+          "ev-25",
+          "ev-10",
+          "ev-30",
+          "ev-31",
+          "ev-32"
+        ]
+      },
+      {
+        "kind": "seating",
+        "status": "arrival-check",
+        "stepIds": [
+          "s5",
+          "s10",
+          "s15"
+        ],
+        "detail": "予約・問い合わせは実行しない。夕食ラウンジの公式予約案内はあるが予約方法の詳細は未確認。当日受付で提供と席を確認し20分で離脱。券売機での展望入場も現地判断。",
+        "evidenceIds": [
+          "ev-5",
+          "ev-12",
+          "ev-36",
+          "ev-28",
+          "ev-33"
+        ]
+      },
+      {
+        "kind": "comparison",
+        "status": "published",
+        "stepIds": [
+          "s3",
+          "s8",
+          "s11"
+        ],
+        "detail": "午前は9:30開館の博物館、11:00営業開始の展望は午後へ、カフェ注文は16:30前。",
+        "evidenceIds": [
+          "ev-1",
+          "ev-5",
+          "ev-12"
+        ]
+      },
+      {
+        "kind": "rest",
+        "status": "published",
+        "stepIds": [
+          "s13"
+        ],
+        "detail": "いこいの広場のベンチ、雨はアクトB1市民ロビー。座席利用可否は当日判断。",
+        "evidenceIds": [
+          "ev-16",
+          "ev-19",
+          "ev-23"
+        ]
+      }
+    ]
+  },
+  "improvementDiagnosis": {
+    "complete": false,
+    "verifiedDetails": 2,
+    "supportedRequired": 3,
+    "supportedOptional": 0,
+    "gaps": [
+      {
+        "url": "https://www.actcity.jp/visitor/act/",
+        "fields": [
+          "個別詳細の必須項目"
+        ]
+      },
+      {
+        "url": "https://www.act-okura.co.jp/facilities/gallery/",
+        "fields": [
+          "個別詳細の必須項目",
+          "展望回廊の営業枠・入場料金・対象日公開予定"
+        ]
+      },
+      {
+        "url": "https://www.mutsugiku.jp/",
+        "fields": [
+          "必須条件の対象候補を省略できません: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+        ]
+      },
+      {
+        "url": "https://www.gakkihaku.jp/guide/",
+        "fields": [
+          "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+        ]
+      }
+    ],
+    "causes": [
+      "detail_missing",
+      "required_unknown",
+      "required_scope_missing",
+      "insufficient_specificity"
+    ],
+    "achievements": [
+      "detail:official-visit:hamamatsu-gakkihaku",
+      "official-visit:hamamatsu-gakkihaku:museum",
+      "detail:official-cafe:okura-hamamatsu-season",
+      "official-cafe:okura-hamamatsu-season:cafe",
+      "official-public-space:hamamatsu-actcity-gardens:rest",
+      "answer:interactive-visual-artifact"
+    ]
+  },
+  "publication": {
+    "source": "saved-live-run",
+    "displayOnly": true,
+    "renderRevision": "0240ee79562ed8d0753197da5a4a32380d1af1342187c0545344a4b6b138e64e",
+    "answerEdited": false,
+    "answerSha256": "b8c6ce22ea625378ca79c190e526e478216228fa9a1108c29c99f286f2e1406f",
+    "taskStatusPreserved": true,
+    "originalStrictVerdictPreserved": true
+  }
+}

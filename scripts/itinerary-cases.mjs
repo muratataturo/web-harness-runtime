@@ -56,3 +56,32 @@ export const itineraryCases = {
     ],
   },
 };
+
+// Intent regression cases: no clock range is supplied, so the runtime must infer the requested scope.
+itineraryCases["hamamatsu-full"] = {
+  id: "hamamatsu-full",
+  label: "浜松・朝から夜まで",
+  output: "hamamatsu-full-day",
+  snapshot: "visual-hamamatsu-full-answer",
+  receipt: "hamamatsu-full-itinerary-e2e",
+  budgetCap: 20000,
+  query:
+    "2026年11月21日（土）大人2人で浜松を朝から夜まで丸一日、ゆっくり楽しむ旅行プランを作ってください。JR浜松駅を出発・帰着にし、午前の体験、昼食、午後の体験とカフェ、休憩、夕食、夜の帰路までトータルコーディネートしてください。楽器博物館、ザ・シーズンカフェ、展望回廊、むつぎくを候補にし、公式の開館・提供枠に合わなければ時間配分や採否を変えてください。現地の入館・飲食は2人合計20000円以内、交通費は別。具体的な掲載商品・食事の単価で合算し、飲物込みのセットを重複加算しないでください。満席待ち20分を上限に、雨・疲労時の切替と休憩場所も示してください。写真と地図を載せ、時間帯ごとに行きたくなる見どころと小さな楽しみ方を提案してください。各手順にkindとvenueUrlを付け、stepChecksの営業時間・締切の引用を検査し、不足はverify_stepsの追加調査で確認してから最終化。現地の空席や未来の営業は確約せず、通常の公開予定と対象日未確認を区別してください。予約・購入・問い合わせは実行しません。SNS調査は不要です。",
+  urls: [
+    ...itineraryCases.hamamatsu.urls.filter((u) => !u.includes("starbucks")),
+    "https://www.act-okura.co.jp/facilities/gallery/",
+    "https://www.mutsugiku.jp/",
+  ],
+};
+itineraryCases["nagoya-afternoon"] = {
+  id: "nagoya-afternoon",
+  label: "名古屋・午後だけ",
+  minimumCandidates: 2,
+  output: "nagoya-afternoon",
+  snapshot: "visual-nagoya-afternoon-answer",
+  receipt: "nagoya-afternoon-itinerary-e2e",
+  budgetCap: 10000,
+  query:
+    "2026年11月21日（土）大人2人で名古屋の伏見あたりを、午後だけちょっとゆっくり遊ぶプランを作ってください。伏見駅発着、FUJIなごや科学館の展示室のみと同館カフェレストランを中心に、写真と地図を見て行きたくなるものに。プラネタリウムや有料特別展は含めません。カフェで各自甘味1品と飲物1杯を楽しみ、疲れない休憩も確保。半日なので夕食や夜の観光は加えず、体験を詰め込みすぎないでください。2人合計10000円以内、交通費は別。公式の具体的な掲載商品価格で合算。移動、満席待ち上限20分、雨・疲労の切替も具体化してください。各手順にkindとvenueUrlを付け、stepChecksの営業時間・締切・価格の引用を検査。不足はverify_stepsの追加調査で確認してから最終化。公開予定と対象日未確認を区別し、空席や未来の営業は確約しません。予約・購入・問い合わせは実行しません。SNS調査は不要です。",
+  urls: itineraryCases.nagoya.urls,
+};

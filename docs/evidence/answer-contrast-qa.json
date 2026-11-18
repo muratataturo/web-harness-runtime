@@ -336,6 +336,90 @@
       "width": 1280,
       "inspected": 52,
       "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-full-day.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 1143,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-full-day.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 1147,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-full-day.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 1143,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-full-day.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 1147,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-afternoon.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 738,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-afternoon.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 743,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-afternoon.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 738,
+      "failures": []
+    },
+    {
+      "file": "docs/nagoya-afternoon.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 743,
+      "failures": []
+    },
+    {
+      "file": "docs/experience-cases.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 94,
+      "failures": []
+    },
+    {
+      "file": "docs/experience-cases.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 94,
+      "failures": []
+    },
+    {
+      "file": "docs/experience-cases.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 94,
+      "failures": []
+    },
+    {
+      "file": "docs/experience-cases.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 94,
+      "failures": []
     }
   ],
   "passed": true

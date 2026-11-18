@@ -1,0 +1,43 @@
+{
+  "scope": "two unedited source-seeded live outputs; no human appeal score",
+  "cases": [
+    {
+      "id": "hamamatsu-full",
+      "taskId": "46052a3f-5047-496c-9223-2e0f56ca7e34",
+      "status": "partial",
+      "livePassed": false,
+      "mode": "full-day",
+      "timeRange": [
+        "09:00",
+        "20:00"
+      ],
+      "steps": 18,
+      "photos": 5,
+      "totalYen": 16100,
+      "verifier": {
+        "unknown": 0,
+        "failed": 0
+      },
+      "answerEdited": false
+    },
+    {
+      "id": "nagoya-afternoon",
+      "taskId": "455ae670-d0b4-416f-be88-8b8ed2886006",
+      "status": "succeeded",
+      "livePassed": false,
+      "mode": "afternoon",
+      "timeRange": [
+        "13:00",
+        "17:00"
+      ],
+      "steps": 9,
+      "photos": 2,
+      "totalYen": 3080,
+      "verifier": {
+        "unknown": 0,
+        "failed": 0
+      },
+      "answerEdited": false
+    }
+  ]
+}

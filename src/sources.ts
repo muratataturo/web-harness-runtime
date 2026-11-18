@@ -83,7 +83,7 @@ export const adapters: Adapter[] = [
   },
   {
     id: "official-dining",
-    hosts: ["www.maruka.net", "maruka.net"],
+    hosts: ["www.maruka.net", "maruka.net", "www.mutsugiku.jp"],
     keywords: /食|ランチ|蕎麦|浅草/,
     guidance:
       "店舗公式の所在地、営業時間、メニューの税込価格を確認。当日の空席・営業の確約はしない。",

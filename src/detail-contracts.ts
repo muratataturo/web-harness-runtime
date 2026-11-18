@@ -1,3 +1,4 @@
+import { regionalVenue } from "./regional-venues.js";
 import {
   enrichmentFields,
   verificationLevel,
@@ -176,6 +177,7 @@ function verifyDetailBase(
   expectedService?: string,
 ): DetailVerification {
   const service =
+    regionalVenue(page.url)?.split(":")[0] ??
     adapters.find((a) => a.hosts.includes(new URL(page.url).hostname))?.id ??
     "generic";
   const entityId = entityKey(page.url),

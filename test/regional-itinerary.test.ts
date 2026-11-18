@@ -122,3 +122,19 @@ test("regional public details verify admission tables, cafe information and free
   );
   assert.equal(missing.status, "insufficient_detail");
 });
+
+test("season cafe and cocktail lounge share the named business, while the observatory uses a distinct visit contract", () => {
+  const lounge = "https://www.act-okura.co.jp/restaurant/lounge/";
+  const menu = "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/";
+  assert.equal(entityKey(lounge), entityKey(cafe));
+  assert.equal(entityKey(menu), entityKey(lounge));
+  const gallery = "https://www.act-okura.co.jp/facilities/gallery/";
+  assert.notEqual(entityKey(gallery), entityKey(cafe));
+  const result = verifyDetail(
+    page(
+      gallery,
+      "営業時間 11:00〜18:00。料金 大人1200円。住所 静岡県浜松市中央区板屋町111-2。",
+    ),
+  );
+  assert.equal(result.service, "official-visit");
+});

@@ -1,3 +1,4 @@
+import { verifyStepPlan } from "./step-verifier.js";
 import type { Task } from "./types.js";
 import type { ActionPlan } from "./answer-plan.js";
 import { specificityContract } from "./answer-plan.js";
@@ -26,6 +27,8 @@ export function finalizationState(
     ...(!task.answer ? ["finish_taskで全対象の候補比較と結論を提出"] : []),
   ];
   return {
+    tripBrief: task.tripBrief,
+    stepVerification: plan ? verifyStepPlan(task, plan) : undefined,
     complete: !!task.answer,
     pending,
     lastError,

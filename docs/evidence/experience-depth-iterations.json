@@ -1,0 +1,143 @@
+{
+  "scope": "Observed live failure followed by a code correction; not a controlled aggregate benchmark",
+  "iterations": [
+    {
+      "phase": "before-intent-and-venue-fix",
+      "taskId": "9fa22c8e-7026-4657-8a6a-ef2c8ab3ea27",
+      "runtimeRevision": "329d3ae213d3cd8b6fcf35afea4056764d284c632a8a26743d4047909f8bda57",
+      "status": "partial",
+      "livePassed": false,
+      "elapsedMs": 627098,
+      "assignedMode": "afternoon",
+      "stepUnknown": 2,
+      "stepFailed": 2,
+      "specificityIssues": [
+        "w3: 検査対象が手順の施設と一致しません",
+        "d1: 検査対象が手順の施設と一致しません",
+        "d1: この手順で使う商品単価の同一施設の引用が不足、または見積です。掲載額と混同しないでください",
+        "d1: この手順で使う商品単価の同一施設の引用が不足、または見積です。掲載額と混同しないでください",
+        "d1: カフェの店舗名・住所・営業時間を同一店舗の引用で確認してください。他店の情報や施設一覧を混ぜないでください",
+        "提案した13:00〜17:00の開始から帰路までを構成してください。短い計画を一日と呼ばないでください",
+        "集合/開始は指定の13:00から具体化してください",
+        "指定終了17:00を越えています"
+      ],
+      "answerEdited": false,
+      "finding": "Full day query containing 午後の体験 incorrectly selected afternoon; official cafe/lounge evening menu lacked registered identity.",
+      "inputSha256": "e1f9752105a62845200b1ec5084220e5f8eeaa11ff5ca214b8e8e64552da5a70"
+    },
+    {
+      "caseId": "nagoya-afternoon",
+      "taskId": "aad71ef9-dd00-4619-a7e5-24d7abdfbfeb",
+      "runtimeRevision": "4fd5cd6ccd383ff2dcac7aa35784dee5cb7e752ef05b6665d92f515439b56845",
+      "inputSha256": "9368bac8172676f82024f5f85a7bbfda718a60e45da3604ce6b5747fc92ba2c3",
+      "status": "failed",
+      "error": "workspace routing discovery failed",
+      "steps": 0,
+      "elapsedMs": 174883,
+      "answerEdited": false
+    },
+    {
+      "caseId": "nagoya-afternoon",
+      "taskId": "7f7c4518-752d-4321-8894-518f4ed73411",
+      "runtimeRevision": "4fd5cd6ccd383ff2dcac7aa35784dee5cb7e752ef05b6665d92f515439b56845",
+      "inputSha256": "9368bac8172676f82024f5f85a7bbfda718a60e45da3604ce6b5747fc92ba2c3",
+      "status": "timed_out",
+      "error": "Codex実行を中断しました",
+      "steps": 1,
+      "elapsedMs": 1842716,
+      "answerEdited": false
+    },
+    {
+      "caseId": "hamamatsu-full",
+      "taskId": "46052a3f-5047-496c-9223-2e0f56ca7e34",
+      "runtimeRevision": "0448ef7a0fe04a040c1f4b4085f6448d82678a228ee4134c1dac69bff2d3e7dc",
+      "inputSha256": "e1f9752105a62845200b1ec5084220e5f8eeaa11ff5ca214b8e8e64552da5a70",
+      "status": "partial",
+      "steps": 93,
+      "elapsedMs": 445291,
+      "passed": false,
+      "answerEdited": false,
+      "phase": "after-intent-and-venue-fix",
+      "assignedMode": "full-day",
+      "timeRange": [
+        "09:00",
+        "20:00"
+      ],
+      "planSteps": 18,
+      "totalYen": 16100,
+      "specificity": "needs_detail",
+      "specificityIssues": [
+        "必須条件の対象候補が不足しています: むつぎくの所在地・夕食営業時間・具体的な食事価格"
+      ],
+      "stepChecks": [
+        {
+          "unknown": 6,
+          "failed": 0
+        },
+        {
+          "unknown": 3,
+          "failed": 0
+        },
+        {
+          "unknown": 0,
+          "failed": 0
+        }
+      ],
+      "stepDeepresearch": [
+        {
+          "round": 1,
+          "pagesOpened": 2,
+          "stepIds": [
+            "s2",
+            "s5",
+            "s10",
+            "s15",
+            "s16",
+            "s16"
+          ]
+        },
+        {
+          "round": 2,
+          "pagesOpened": 2,
+          "stepIds": [
+            "s15",
+            "s16",
+            "s16"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "nagoya-afternoon",
+      "taskId": "455ae670-d0b4-416f-be88-8b8ed2886006",
+      "runtimeRevision": "4fd5cd6ccd383ff2dcac7aa35784dee5cb7e752ef05b6665d92f515439b56845",
+      "inputSha256": "9368bac8172676f82024f5f85a7bbfda718a60e45da3604ce6b5747fc92ba2c3",
+      "status": "succeeded",
+      "steps": 67,
+      "elapsedMs": 322360,
+      "passed": false,
+      "answerEdited": false,
+      "phase": "after-intent-and-venue-fix",
+      "assignedMode": "afternoon",
+      "timeRange": [
+        "13:00",
+        "17:00"
+      ],
+      "planSteps": 9,
+      "totalYen": 3080,
+      "specificity": "passed",
+      "specificityIssues": [],
+      "stepChecks": [
+        {
+          "unknown": 0,
+          "failed": 1
+        },
+        {
+          "unknown": 0,
+          "failed": 0
+        }
+      ],
+      "stepDeepresearch": []
+    }
+  ]
+}

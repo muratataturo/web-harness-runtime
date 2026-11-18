@@ -44,6 +44,17 @@ export function deepeningActions(
       score += 10;
     if (/管理|家賃|費用/.test(terms) && /詳細|取扱|費用|設備/.test(value))
       score += 5;
+    if (
+      /営業|開館|休館|締切|opening/.test(terms) &&
+      /営業|時間|開館|休館|カレンダー|calendar|hours|guide|faq/i.test(value)
+    )
+      score += 12;
+    if (
+      /価格|料金|メニュー|price/.test(terms) &&
+      /メニュー|menu|料金|price|\.pdf/i.test(value)
+    )
+      score += 12;
+    if (/休憩/.test(terms) && /休憩|施設|facilit|faq/i.test(value)) score += 10;
     return score;
   };
   const links = page.links.filter(

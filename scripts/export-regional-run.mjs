@@ -1,3 +1,4 @@
+import { acceptanceRevision } from "./chat-acceptance.mjs";
 // Package a saved live run without editing its answer or changing its factual verdict.
 import assert from "node:assert/strict";
 import { readFile, writeFile } from "node:fs/promises";
@@ -13,7 +14,12 @@ import { exportPortableAnswer } from "./portable-answer.mjs";
 import { itineraryCases } from "./itinerary-cases.mjs";
 const id = process.argv[2];
 const c = itineraryCases[id];
-if (!c || id === "ueno" || process.argv.length !== 3)
+const displayOnly = process.argv[3] === "--include-incomplete";
+if (
+  !c ||
+  id === "ueno" ||
+  (process.argv.length !== 3 && !(displayOnly && process.argv.length === 4))
+)
   throw Error("Use hamamatsu or nagoya");
 const run = JSON.parse(
   await readFile(`.runtime/regional-itinerary/${id}/latest.json`, "utf8"),
@@ -27,9 +33,11 @@ assert.equal(task.evaluation, undefined);
 assert.ok(task.answer);
 assert.ok(["succeeded", "partial"].includes(task.status));
 for (const e of task.evidence) assertEvidenceIntegrity(task, e.id);
-assert.equal(assessSpecificity(task, task.answer).status, "passed");
-assert.equal(assessVisualArtifact(task, task.answer).status, "passed");
-assert.deepEqual(cafePlanIssues(task, task.answer), []);
+if (!displayOnly) {
+  assert.equal(assessSpecificity(task, task.answer).status, "passed");
+  assert.equal(assessVisualArtifact(task, task.answer).status, "passed");
+  assert.deepEqual(cafePlanIssues(task, task.answer), []);
+}
 const answerSha256 = createHash("sha256")
   .update(JSON.stringify(task.answer))
   .digest("hex");
@@ -49,7 +57,7 @@ snapshot.evaluation = {
     .update(JSON.stringify(snapshot.pages))
     .digest("hex"),
 };
-snapshot.snapshotNote = `無編集のライブ生成回答。${task.status === "partial" ? "未確認を残したpartialをそのまま公開。" : "正式判定を通過。"}表示再生のため本文は引用のみ。ライブ記録は${c.receipt}.json。`;
+snapshot.snapshotNote = `無編集のライブ生成回答。${task.status === "partial" ? "未確認を残したpartialをそのまま公開。" : "生成時の品質条件を通過。"}表示再生のため本文は引用のみ。ライブ記録は${c.receipt}.json。`;
 assert.equal(
   createHash("sha256").update(JSON.stringify(snapshot.answer)).digest("hex"),
   answerSha256,
@@ -61,7 +69,23 @@ await writeFile(
   JSON.stringify(snapshot, null, 2) + "\n",
 );
 const { store: privateStore, attempt: privateAttempt, ...receipt } = run;
+receipt.events = receipt.events?.map((e) =>
+  e.type === "step_deepresearch" && e.data
+    ? {
+        ...e,
+        data: {
+          stepIds: e.data.stepIds,
+          pagesOpened: e.data.pagesOpened,
+          rounds: e.data.rounds,
+          additionalCount:
+            e.data.additionalCount ?? e.data.additional?.length ?? 0,
+        },
+      }
+    : e,
+);
 Object.assign(receipt, {
+  tripBrief: task.tripBrief,
+  stepVerification: task.stepVerification,
   criteria: task.criteria,
   evidenceCount: task.evidence.length,
   pages: task.pages.map((p) => ({
@@ -78,10 +102,12 @@ Object.assign(receipt, {
     task.criteria,
     task.answer.candidates.map((c) => c.url),
     false,
-    3,
+    c.minimumCandidates ?? 3,
   ),
   publication: {
     source: "saved-live-run",
+    displayOnly,
+    renderRevision: await acceptanceRevision(),
     answerEdited: false,
     answerSha256,
     taskStatusPreserved: true,

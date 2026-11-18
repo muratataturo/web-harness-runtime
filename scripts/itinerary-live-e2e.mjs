@@ -65,10 +65,10 @@ const task = await runTask(
     interactionMode: "auto",
     query: selected.query,
     urls: selected.urls,
-    maxSteps: 200,
-    maxPages: 24,
+    maxSteps: selected.id === "hamamatsu-full" ? 300 : 240,
+    maxPages: 36,
     timeoutSeconds: 1200,
-    deepenRounds: 1,
+    deepenRounds: 3,
     onProgress: (m) => {
       if (!m.startsWith("\u001e")) process.stderr.write(m + "\n");
     },
@@ -80,6 +80,8 @@ Object.assign(receipt, {
   status: task.status,
   error: task.error,
   model: task.model,
+  tripBrief: task.tripBrief,
+  stepVerification: task.stepVerification,
   steps: task.steps,
   elapsedMs: task.metrics?.elapsedMs,
   store: store.root,
@@ -110,24 +112,28 @@ try {
     [],
   );
   assert.ok(
-    task.answer.candidates.length >= 3 &&
+    task.answer.candidates.length >= (selected.minimumCandidates ?? 3) &&
       task.answer.candidates.every((c) => c.eligible),
   );
   for (const e of task.evidence) assertEvidenceIntegrity(task, e.id);
   const plan = task.answer.actionPlan;
+  if (task.tripBrief?.requiresStepResearch)
+    assert.equal(task.stepVerification?.ready, true);
   assert.ok(plan.budget.items.every((i) => i.basis === "published"));
-  assert.ok(plan.budget.totalYen <= 10000);
-  assert.equal(
-    plan.verification.checks.find((c) => c.kind === "seating").status,
-    "arrival-check",
-  );
-  assert.equal(plan.verification.date, "2026-11-21");
+  assert.ok(plan.budget.totalYen <= (selected.budgetCap ?? 10000));
+  if (!task.tripBrief?.requiresStepResearch) {
+    assert.equal(
+      plan.verification.checks.find((c) => c.kind === "seating").status,
+      "arrival-check",
+    );
+    assert.equal(plan.verification.date, "2026-11-21");
+  }
   const diagnosis = diagnose(
     task,
     task.criteria,
     task.answer.candidates.map((c) => c.url),
     false,
-    3,
+    selected.minimumCandidates ?? 3,
   );
   assert.equal(diagnosis.complete, true);
   const engine = new GoalEngine(
@@ -158,18 +164,29 @@ try {
         `${base}/api/tasks/${task.id}/answer.html`,
       );
       assert.equal(response.status(), 200);
-      assert.equal(await page.locator(".hero-tags .verified").count(), 1);
-      assert.ok(
-        (await page.locator("#candidate-comparison tbody tr").count()) >= 3,
-      );
-      assert.equal(await page.locator("#verification .branch").count(), 5);
+      if (!task.tripBrief?.requiresStepResearch) {
+        assert.equal(await page.locator(".hero-tags .verified").count(), 1);
+        assert.ok(
+          (await page.locator("#candidate-comparison tbody tr").count()) >= 3,
+        );
+        assert.equal(await page.locator("#verification .branch").count(), 5);
+      } else {
+        assert.equal(await page.locator("#day-rhythm").count(), 1);
+      }
       const photos = page.locator(".experience-card img");
       assert.ok((await photos.count()) >= 2);
       for (const img of await photos.all()) {
         await img.scrollIntoViewIfNeeded();
         await img.evaluate((i) => i.decode());
       }
-      await page.locator('#verification a[href^="#step-"]').first().click();
+      await page
+        .locator(
+          task.tripBrief?.requiresStepResearch
+            ? '#day-rhythm a[href^="#step-"]'
+            : '#verification a[href^="#step-"]',
+        )
+        .first()
+        .click();
       assert.equal(await page.locator(".journey-story[open]").count(), 1);
       assert.equal(
         await page.locator(".journey-moment").count(),
@@ -255,8 +272,20 @@ receipt.events = events.map((e) => ({
     "finalization_continuation",
     "specificity_revision",
     "visual_revision",
+    "step_verification",
+    "step_deepresearch",
   ].includes(e.type)
-    ? { data: e.data }
+    ? {
+        data:
+          e.type === "step_deepresearch"
+            ? {
+                stepIds: e.data.stepIds,
+                pagesOpened: e.data.pagesOpened,
+                rounds: e.data.rounds,
+                additionalCount: e.data.additional.length,
+              }
+            : e.data,
+      }
     : {}),
 }));
 await writeFile(join(attempt, "report.json"), JSON.stringify(receipt, null, 2));

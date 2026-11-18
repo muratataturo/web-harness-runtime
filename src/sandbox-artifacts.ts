@@ -1,3 +1,5 @@
+import { tripBrief } from "./trip-brief.js";
+import { verifyStepPlan } from "./step-verifier.js";
 import {
   socialSignalSchema,
   socialAttemptSchema,
@@ -286,6 +288,7 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
     id: raw.id,
     agent: raw.agent,
     query: raw.query,
+    tripBrief: options.benchmark ? undefined : tripBrief(options.query),
     urls: [...raw.urls],
     status: raw.status,
     createdAt: raw.createdAt,
@@ -408,6 +411,8 @@ export function validateSandboxTask(value: unknown, options: RunOptions): Task {
       raw.answer.actionPlan,
       raw.answer.visualArtifact,
     );
+  if (task.answer?.actionPlan)
+    task.stepVerification = verifyStepPlan(task, task.answer.actionPlan);
   if (task.answer) task.visualReview = assessVisualArtifact(task, task.answer);
   if (task.answer)
     task.specificity = {
