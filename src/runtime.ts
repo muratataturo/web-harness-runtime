@@ -1,8 +1,14 @@
+import { verifyStepPlan } from "./step-verifier.js";
+import { tripBrief } from "./trip-brief.js";
 import { inspectPdfPage } from "./pdf-reader.js";
 import { UxFeedbackStore } from "./ux-feedback.js";
 import { finalizationState, continuationPrompt } from "./finalization.js";
 import { CAFE_GUIDANCE } from "./cafe.js";
-import { criterionSchema, uncoveredCriteria } from "./criteria.js";
+import {
+  criterionSchema,
+  uncoveredCriteria,
+  criterionApplies,
+} from "./criteria.js";
 import { captureSocial } from "./social.js";
 import { prepareAnswerMedia, inspectAnswerPhoto } from "./answer-media.js";
 import { locatePlace } from "./geocoding.js";
@@ -143,6 +149,7 @@ export function newTask(options: RunOptions): Task {
     parentId: options.parentId,
     goalId: options.goalId,
     query: options.query,
+    tripBrief: options.benchmark ? undefined : tripBrief(options.query),
     urls: options.urls,
     status: "queued",
     createdAt: new Date().toISOString(),
@@ -199,6 +206,11 @@ export async function runTask(
   }
   const instructions =
     SYSTEM_PROMPT +
+    (task.tripBrief
+      ? "\n過ごし方の契約: " +
+        JSON.stringify(task.tripBrief) +
+        "。これは時刻未指定時の提案。steps.kindはactivity/breakfast/lunch/dinner/cafe/move/rest/evening/return。営業を確認する実施設のsteps.venueUrlに取得済み個別URLを指定。stepChecksにid/stepId/kind=opening/venueUrl/evidenceIds/opens=09:00/closes=17:00/lastEntry=16:30のように実引用の営業枠を宣言。各手順のevidenceIdsにもその根拠を含める。verify_stepsで検査し不足ならdeepResearch:trueで追加調査して再提出。数字が引用にあっても曜日・対象日・臨時休業・提供時間の意味を読み分ける。時間は例なので流用しない。朝から夜の一日に昼食・夕食・帰路を作り、午後だけは短く絞る。事実の評価条件は住所・営業・価格などに分け、予約方式非公開と確認済み価格を一つのunknownにまとめない。未確認の運用は当日判断として分離し、未公開の予約方式を新たな必須事実にしない。"
+      : "") +
     "\n旅行はstage_planでactionPlan、stage_visualでvisualArtifactを先に提出してからfinish_taskで候補比較と結論を確定できる。finish_taskで省略してもstageした行程・写真は保持される。plan_taskの各条件には、役割が異なる施設へ条件を誤適用しないためappliesToに対象の個別URL配列を指定できる。対象外の条件はunknown・根拠なし・explanationは対象外とし、適用条件の確認率だけを集計する。必須条件を持つ対象候補そのものは省略できない。正式版を求められた旅程ではverification.dateとchecksをactionPlanに作る。checksのkindはopening/prices/seating/comparison/restを全て含め、detail/evidenceIds/stepIds、statusはpublished。ただしseatingだけarrival-checkとし、公式の予約・利用方法と満席時の判断を示す。空席あり・予約完了を作文しない。価格はPDFもopen_pageで読み、具体的な商品と資料の掲載単価だけで主案を作る。休憩は公式に確認できる施設名と位置を示す。" +
     "\n作業は取得→引用保存→行程→視覚→比較の順で小さく確定する。各主要ページを読んだ直後にrecord_evidenceを呼び、全ページ取得後まで引用保存を延期しない。read_task_stateで保存状態・直近エラー・次工程を確認できる。同じentityKeyの施設案内と休憩所ページは1候補にまとめる。主案の購入価格と、代替店の店頭確認付き支出上限は別の条件で扱う。代替店に主案の商品価格条件を課さない。税区分の明記がなければ掲載額と税区分未記載を示し、税込と補わない。PDF本文の後半はread_pageのterms/offsetで読む。カレンダーの色・価格の配置はinspect_pdf_pageで実画像を確認する。色を見ずに休園日と断定しない。季節品の価格対応が不明なら明確な定番を選び、取得済みの事実を全てunknownへ戻して放棄しない。\n" +
     CAFE_GUIDANCE +
@@ -502,6 +514,87 @@ export async function runTask(
         : "追加取得できる同一対象リンク・予算がありません。未確認を明記してください",
     };
   };
+  const verifySteps = async (
+    plan: ActionPlan,
+    research: boolean,
+    count = 2,
+  ) => {
+    const report = verifyStepPlan(task, plan);
+    task.stepVerification = report;
+    await store.event(task.id, "step_verification", report);
+    const gaps = report.checks.filter(
+      (c) => c.status === "unknown" && c.needsResearch && c.venueUrl,
+    );
+    const venues = [
+      ...new Set(
+        gaps
+          .map((c) => entityKey(c.venueUrl!))
+          .filter((key): key is string => !!key),
+      ),
+    ];
+    const contexts = venues.slice(0, 3).flatMap((key) =>
+      task.pages
+        .filter((p) => entityKey(p.url) === key)
+        .slice(-3)
+        .map((p) =>
+          readPageContext(p, {
+            terms: [
+              "営業時間",
+              "開館",
+              "休館",
+              "料金",
+              "メニュー",
+              "ラストオーダー",
+              "休憩",
+            ],
+            maxChars: 2400,
+          }),
+        ),
+    );
+    const additional = [];
+    if (
+      research &&
+      gaps.length &&
+      !options.benchmark &&
+      task.research!.rounds < task.research!.maxRounds &&
+      task.research!.pagesOpened < task.research!.maxPages
+    ) {
+      task.research!.rounds++;
+      // Existing pages first; fetch only discovered links for the same venue.
+      for (const key of venues.slice(0, Math.min(count, 2))) {
+        const pages = task.pages.filter((p) => entityKey(p.url) === key);
+        const fields = [
+          "営業時間",
+          "開館",
+          "休館日",
+          "入場締切",
+          "価格",
+          "メニュー",
+          "休憩",
+        ];
+        const page = pages.find((p) =>
+          deepeningActions(p, fields, attempted).some(
+            (a) => task.security?.mode !== "hardened" || a.mode !== "render",
+          ),
+        );
+        if (page) additional.push(await deepen(page.id, fields, 1));
+      }
+      await store.event(task.id, "step_deepresearch", {
+        stepIds: gaps.map((c) => c.stepId),
+        pagesOpened: task.research!.pagesOpened,
+        rounds: task.research!.rounds,
+        additional,
+      });
+    }
+    return {
+      report,
+      contexts,
+      additional,
+      remainingRounds: task.research!.maxRounds - task.research!.rounds,
+      instruction:
+        "引用をrecord_evidenceで保存し、stepChecksとsteps.evidenceIdsを直してstage_planを再提出。営業時間の数値照合だけでは曜日・休業・商品提供の意味は保証できません。取得できないものはunknown。",
+    };
+  };
   let specificityRepairs = 0;
   let visualRepairs = 0;
   let geoLookups = 0;
@@ -725,10 +818,12 @@ export async function runTask(
       execute: wrap("stage_plan", (p) => {
         validateActionPlan(task, p.actionPlan);
         stagedPlan = structuredClone(p.actionPlan);
+        task.stepVerification = verifyStepPlan(task, p.actionPlan);
         stagedVisual = undefined;
         return {
           staged: true,
           steps: p.actionPlan.steps.length,
+          stepVerification: task.stepVerification,
           specificity: assessSpecificity(task, {
             summary: "",
             candidates: [],
@@ -737,6 +832,24 @@ export async function runTask(
           }),
           next: "写真をinspect_photoで確認しstage_visualで視覚成果物を保存してから、finish_taskへ要約・全候補の比較・制約を提出してください",
         };
+      }),
+    }),
+    defineTool({
+      name: "verify_steps",
+      label: "Verify itinerary and deepen research",
+      description:
+        "stage_planの手順ごとに施設・引用・営業時間・締切・価格を検査。不足施設の取得済み本文を返し、deepResearch=trueなら共通の回数・ページ予算内で同一施設の既存リンクを追加取得する。結果から引用を保存して再提出する。",
+      parameters: Type.Object({
+        deepResearch: Type.Optional(Type.Boolean()),
+        maxPages: Type.Optional(Type.Integer({ minimum: 1, maximum: 2 })),
+      }),
+      execute: wrap("verify_steps", (p) => {
+        if (!stagedPlan) throw Error("先にstage_planで行程を保存してください");
+        return verifySteps(
+          stagedPlan,
+          p.deepResearch ?? false,
+          p.maxPages ?? 2,
+        );
       }),
     }),
     defineTool({
@@ -813,6 +926,8 @@ export async function runTask(
           p.actionPlan ?? stagedPlan,
           p.visualArtifact ?? stagedVisual,
         );
+        if (answer.actionPlan)
+          task.stepVerification = verifyStepPlan(task, answer.actionPlan);
         lastValidatedDraft = structuredClone(answer);
         task.visualReview = assessVisualArtifact(task, answer);
         const assessment = assessSpecificity(task, answer);
@@ -824,6 +939,22 @@ export async function runTask(
             { number: history.length + 1, issues: [...assessment.issues] },
           ],
         };
+        if (
+          answer.actionPlan &&
+          task.stepVerification?.checks.some(
+            (c) => c.status === "unknown" && c.needsResearch,
+          ) &&
+          task.research!.rounds < task.research!.maxRounds &&
+          task.research!.pagesOpened < task.research!.maxPages &&
+          task.limits.maxSteps - task.steps >= 4
+        ) {
+          const verification = await verifySteps(answer.actionPlan, true);
+          return {
+            accepted: false,
+            qualityGate: "step-deepresearch",
+            ...verification,
+          };
+        }
         if (
           assessment.status === "needs_detail" &&
           specificityRepairs < 2 &&
@@ -911,7 +1042,12 @@ export async function runTask(
               .filter(
                 (m) =>
                   m.status === "unknown" &&
-                  task.criteria.find((x) => x.id === m.criterionId)?.required,
+                  task.criteria.some(
+                    (x) =>
+                      x.id === m.criterionId &&
+                      x.required &&
+                      criterionApplies(x, c.url),
+                  ),
               )
               .map(
                 (m) =>

@@ -1,0 +1,154 @@
+{
+  "scope": "saved live output intent + integrity + display, not live factual acceptance or human appeal",
+  "cases": [
+    {
+      "id": "hamamatsu-full",
+      "livePassed": false,
+      "taskStatus": "partial",
+      "specificity": "needs_detail",
+      "stepUnknown": 0,
+      "stepFailed": 0,
+      "displays": [
+        {
+          "scheme": "light",
+          "width": 320,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "light",
+          "width": 390,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "light",
+          "width": 768,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "light",
+          "width": 1280,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 320,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 390,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 768,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 1280,
+          "photos": 5,
+          "allSteps": 18,
+          "noOverflow": true,
+          "noPageErrors": true
+        }
+      ]
+    },
+    {
+      "id": "nagoya-afternoon",
+      "livePassed": false,
+      "taskStatus": "succeeded",
+      "specificity": "passed",
+      "stepUnknown": 0,
+      "stepFailed": 0,
+      "displays": [
+        {
+          "scheme": "light",
+          "width": 320,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "light",
+          "width": 390,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "light",
+          "width": 768,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "light",
+          "width": 1280,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 320,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 390,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 768,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        },
+        {
+          "scheme": "dark",
+          "width": 1280,
+          "photos": 2,
+          "allSteps": 9,
+          "noOverflow": true,
+          "noPageErrors": true
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

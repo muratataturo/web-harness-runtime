@@ -1,0 +1,1277 @@
+{
+  "runtimeRevision": "4fd5cd6ccd383ff2dcac7aa35784dee5cb7e752ef05b6665d92f515439b56845",
+  "caseId": "nagoya-afternoon",
+  "label": "名古屋・午後だけ",
+  "inputSha256": "9368bac8172676f82024f5f85a7bbfda718a60e45da3604ce6b5747fc92ba2c3",
+  "version": 1,
+  "mode": "live-unattended",
+  "startedAt": "2026-11-18T12:26:20.241Z",
+  "passed": false,
+  "answerEdited": false,
+  "humanResponses": 0,
+  "taskId": "455ae670-d0b4-416f-be88-8b8ed2886006",
+  "status": "succeeded",
+  "model": "gpt-6.1-sol",
+  "tripBrief": {
+    "version": 1,
+    "mode": "afternoon",
+    "timeRange": [
+      "13:00",
+      "17:00"
+    ],
+    "timeBasis": "suggested",
+    "pacing": "relaxed",
+    "requiredMeals": [],
+    "requiresStepResearch": true,
+    "assumptions": [
+      "時刻の指定がないため13:00〜17:00を提案。出発地までの交通は別途。"
+    ],
+    "policy": "明示時刻を優先。一日は午前の体験・昼食・午後の体験やカフェ・休憩・夕食・夜の帰路をつなぐ。午後だけや寄り道を一日へ膨らませない。移動で埋めず、体力と気分に合わせて訪問数を絞り、雨・満席・疲労の切替を用意する。"
+  },
+  "stepVerification": {
+    "version": 1,
+    "planHash": "8504eb06bfc1b7a3658e9da36ab809a2679a70fc478483c5dc4cee1c5c5d56f5",
+    "required": true,
+    "ready": true,
+    "checks": [
+      {
+        "stepId": "s1",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [],
+        "id": "s1-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s2",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [
+          "ev-1",
+          "ev-2",
+          "ev-25",
+          "ev-11",
+          "ev-18",
+          "ev-12"
+        ],
+        "id": "ck1",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s2",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "priceMuseum",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "s2",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "s2-price-admission",
+        "kind": "price",
+        "status": "passed",
+        "detail": "展示室のみ・一般：2×掲載単価500円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s3",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [
+          "ev-1",
+          "ev-11",
+          "ev-13",
+          "ev-14",
+          "ev-22"
+        ],
+        "id": "ck2",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s4",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [],
+        "id": "s4-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s5",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [
+          "ev-1",
+          "ev-6",
+          "ev-11"
+        ],
+        "id": "ck4",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s6",
+        "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "evidenceIds": [],
+        "id": "s6-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s7",
+        "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "evidenceIds": [
+          "ev-4"
+        ],
+        "id": "ck6",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "evidenceIds": [
+          "ev-3",
+          "ev-4",
+          "ev-21",
+          "ev-15",
+          "ev-16",
+          "ev-17",
+          "ev-20"
+        ],
+        "id": "ck7",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "evidenceIds": [
+          "ev-15",
+          "ev-16",
+          "ev-17"
+        ],
+        "id": "priceCafe",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "evidenceIds": [
+          "ev-15",
+          "ev-17"
+        ],
+        "id": "s8-price-sweet",
+        "kind": "price",
+        "status": "passed",
+        "detail": "バニラソフトクリーム（税込）：2×掲載単価620円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "evidenceIds": [
+          "ev-16",
+          "ev-17"
+        ],
+        "id": "s8-price-coffee",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ホットコーヒー単品（税込）：2×掲載単価420円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+        "evidenceIds": [],
+        "id": "s8-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s9",
+        "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+        "evidenceIds": [],
+        "id": "s9-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      }
+    ],
+    "unknown": 0,
+    "failed": 0,
+    "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+  },
+  "steps": 67,
+  "elapsedMs": 322360,
+  "failure": "The expression evaluated to a falsy value:\n\n  assert.ok(\n",
+  "finishedAt": "2026-11-18T12:31:42.654Z",
+  "events": [
+    {
+      "at": "2026-11-18T12:26:21.789Z",
+      "type": "codex_auth"
+    },
+    {
+      "at": "2026-11-18T12:26:21.925Z",
+      "type": "codex_thread"
+    },
+    {
+      "at": "2026-11-18T12:26:21.927Z",
+      "type": "model_turn"
+    },
+    {
+      "at": "2026-11-18T12:26:33.099Z",
+      "type": "plan_task"
+    },
+    {
+      "at": "2026-11-18T12:26:33.119Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:26:33.477Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:26:41.191Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:41.214Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:41.234Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:41.251Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:41.267Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:26:41.756Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-18T12:26:41.765Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:26:51.497Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:51.519Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:51.538Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:51.555Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:26:51.571Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-18T12:26:51.588Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:26:52.077Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:00.223Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:00.247Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:00.266Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:00.284Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-18T12:27:00.285Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-18T12:27:01.646Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:02.025Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:02.542Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:10.203Z",
+      "type": "inspect_pdf_page"
+    },
+    {
+      "at": "2026-11-18T12:27:11.177Z",
+      "type": "inspect_pdf_page"
+    },
+    {
+      "at": "2026-11-18T12:27:11.327Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:11.528Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:15.827Z",
+      "type": "inspect_pdf_page"
+    },
+    {
+      "at": "2026-11-18T12:27:24.515Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-18T12:27:25.083Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:25.102Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:25.119Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:36.129Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:36.152Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:36.170Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:36.186Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:36.202Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:36.637Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:27:36.868Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-18T12:27:37.784Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-18T12:27:37.806Z",
+      "type": "read_page"
+    },
+    {
+      "at": "2026-11-18T12:27:49.365Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:49.388Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:49.407Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:49.423Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:27:49.439Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-18T12:27:50.537Z",
+      "type": "inspect_pdf_page"
+    },
+    {
+      "at": "2026-11-18T12:27:50.687Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-18T12:27:51.851Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-18T12:27:51.886Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-18T12:28:07.172Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:28:07.197Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:28:07.216Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-18T12:28:07.233Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-18T12:28:07.995Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-18T12:28:08.021Z",
+      "type": "inspect_pdf_page"
+    },
+    {
+      "at": "2026-11-18T12:28:08.250Z",
+      "type": "read_task_state"
+    },
+    {
+      "at": "2026-11-18T12:29:19.101Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-18T12:29:19.134Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-18T12:29:19.136Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "c01dfa4f13493cfe9e0cf163e70179d30e5a2d69cf479feb013a2b0978ef679b",
+        "required": true,
+        "ready": false,
+        "checks": [
+          {
+            "stepId": "s1",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-1",
+              "ev-2",
+              "ev-25",
+              "ev-11",
+              "ev-18",
+              "ev-12"
+            ],
+            "id": "ck1",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "priceMuseum",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "s2-price-admission",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展示室のみ・一般：2×掲載単価500円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-1",
+              "ev-11",
+              "ev-13",
+              "ev-14",
+              "ev-22"
+            ],
+            "id": "ck2",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [],
+            "id": "s4-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-1",
+              "ev-6",
+              "ev-11"
+            ],
+            "id": "ck4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [],
+            "id": "s6-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-3",
+              "ev-4",
+              "ev-5",
+              "ev-19",
+              "ev-21"
+            ],
+            "id": "ck6",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "failed",
+            "detail": "手順・検査・引用の対象が一致しないか、引用の完全性を確認できません"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-3",
+              "ev-4",
+              "ev-21",
+              "ev-15",
+              "ev-16",
+              "ev-17",
+              "ev-20"
+            ],
+            "id": "ck7",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-16",
+              "ev-17"
+            ],
+            "id": "priceCafe",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-17"
+            ],
+            "id": "s8-price-sweet",
+            "kind": "price",
+            "status": "passed",
+            "detail": "バニラソフトクリーム（税込）：2×掲載単価620円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-16",
+              "ev-17"
+            ],
+            "id": "s8-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ホットコーヒー単品（税込）：2×掲載単価420円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [],
+            "id": "s8-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [],
+            "id": "s9-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 0,
+        "failed": 1,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-18T12:29:37.515Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-18T12:29:37.543Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-18T12:29:37.545Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "8504eb06bfc1b7a3658e9da36ab809a2679a70fc478483c5dc4cee1c5c5d56f5",
+        "required": true,
+        "ready": true,
+        "checks": [
+          {
+            "stepId": "s1",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-1",
+              "ev-2",
+              "ev-25",
+              "ev-11",
+              "ev-18",
+              "ev-12"
+            ],
+            "id": "ck1",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "priceMuseum",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "s2-price-admission",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展示室のみ・一般：2×掲載単価500円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-1",
+              "ev-11",
+              "ev-13",
+              "ev-14",
+              "ev-22"
+            ],
+            "id": "ck2",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [],
+            "id": "s4-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [
+              "ev-1",
+              "ev-6",
+              "ev-11"
+            ],
+            "id": "ck4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [],
+            "id": "s6-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "ck6",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-3",
+              "ev-4",
+              "ev-21",
+              "ev-15",
+              "ev-16",
+              "ev-17",
+              "ev-20"
+            ],
+            "id": "ck7",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-16",
+              "ev-17"
+            ],
+            "id": "priceCafe",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-17"
+            ],
+            "id": "s8-price-sweet",
+            "kind": "price",
+            "status": "passed",
+            "detail": "バニラソフトクリーム（税込）：2×掲載単価620円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [
+              "ev-16",
+              "ev-17"
+            ],
+            "id": "s8-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ホットコーヒー単品（税込）：2×掲載単価420円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.nomura-medias.co.jp/shop_list/1083/",
+            "evidenceIds": [],
+            "id": "s8-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+            "evidenceIds": [],
+            "id": "s9-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 0,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-18T12:30:09.210Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-18T12:30:12.777Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-18T12:30:12.781Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "stage_visual",
+        "error": "museum: 地点名には場所だけを書き、時刻や行動説明はstepIdsに紐づく手順に分けてください"
+      }
+    },
+    {
+      "at": "2026-11-18T12:30:18.312Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-18T12:30:18.313Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "stage_visual",
+        "error": "museum: 写真と地点の出典対応がありません"
+      }
+    },
+    {
+      "at": "2026-11-18T12:30:22.561Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-18T12:30:57.457Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-18T12:30:57.463Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "finish_task",
+        "error": "別候補の根拠を流用できません: ev-5"
+      }
+    },
+    {
+      "at": "2026-11-18T12:31:30.674Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-18T12:31:42.566Z",
+      "type": "codex_agent_message"
+    },
+    {
+      "at": "2026-11-18T12:31:42.610Z",
+      "type": "task_end"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "exhibit",
+      "description": "FUJIなごや科学館の展示室のみ、大人料金。プラネタリウム・有料特別展は除外",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html"
+      ]
+    },
+    {
+      "id": "opening",
+      "description": "2026年11月21日の公開予定と通常開館時間・入館締切を区別して確認",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html"
+      ]
+    },
+    {
+      "id": "access_rest",
+      "description": "伏見駅アクセスと館内で疲労を軽減できる休憩場所",
+      "required": true,
+      "weight": 4,
+      "appliesTo": [
+        "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html"
+      ]
+    },
+    {
+      "id": "cafe",
+      "description": "同館カフェの住所・営業時間・利用方法と対象日の告知",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.nomura-medias.co.jp/shop_list/1083/"
+      ]
+    },
+    {
+      "id": "prices",
+      "description": "大人各自甘味1品・飲物1杯を具体的な公式掲載単価で合算",
+      "required": true,
+      "weight": 5,
+      "appliesTo": [
+        "https://www.nomura-medias.co.jp/shop_list/1083/"
+      ]
+    }
+  ],
+  "evidenceCount": 25,
+  "pages": [
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html",
+      "capturedAt": "2026-11-18T12:26:33.452Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/shop_list/1083/",
+      "capturedAt": "2026-11-18T12:26:33.766Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/facilities.html",
+      "capturedAt": "2026-11-18T12:26:41.723Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/calender.html",
+      "capturedAt": "2026-11-18T12:26:42.622Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/news/774/",
+      "capturedAt": "2026-11-18T12:26:52.049Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/access.html",
+      "capturedAt": "2026-11-18T12:26:52.387Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/wordpress/wp-content/uploads/2026/09/774.pdf",
+      "capturedAt": "2026-11-18T12:27:01.627Z",
+      "kind": "public-pdf"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/",
+      "capturedAt": "2026-11-18T12:27:01.996Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/event_calendarR8_20261101.pdf",
+      "capturedAt": "2026-11-18T12:27:02.522Z",
+      "kind": "public-pdf"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/",
+      "capturedAt": "2026-11-18T12:27:03.775Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/information/2026/11101111.html",
+      "capturedAt": "2026-11-18T12:27:11.505Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/exhibition_guide/floormap/life_2f.html",
+      "capturedAt": "2026-11-18T12:27:11.798Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.nomura-medias.co.jp/works/228/",
+      "capturedAt": "2026-11-18T12:27:36.610Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/cgi-bin/visit/exhibition_guide/exhibit.cgi?id=L210",
+      "capturedAt": "2026-11-18T12:27:36.838Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=FUJI%E3%81%AA%E3%81%94%E3%82%84%E7%A7%91%E5%AD%A6%E9%A4%A8+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%8C%BA%E6%A0%842-17-1&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-18T12:27:37.784Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E7%A7%91%E5%AD%A6%E9%A4%A8+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%8C%BA%E6%A0%84&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-18T12:27:51.849Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/dl/ncsm_map01_fuji.pdf",
+      "capturedAt": "2026-11-18T12:27:53.004Z",
+      "kind": "public-pdf"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E4%BC%8F%E8%A6%8B%E9%A7%85+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E5%8C%BA&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-18T12:28:07.994Z",
+      "kind": "public-json"
+    }
+  ],
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "passed",
+    "issues": [],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": []
+      }
+    ]
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "budget": {
+    "scenario": "主案：2026年11月21日、大人2人、展示室のみ＋各自バニラソフトクリーム1品・ホットコーヒー1杯。交通費・物販・代替時の支出は対象外",
+    "totalYen": 3080,
+    "items": [
+      {
+        "id": "admission",
+        "label": "展示室のみ・一般",
+        "quantity": 2,
+        "unitYen": 500,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-2"
+        ]
+      },
+      {
+        "id": "sweet",
+        "label": "バニラソフトクリーム（税込）",
+        "quantity": 2,
+        "unitYen": 620,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-15",
+          "ev-17"
+        ]
+      },
+      {
+        "id": "coffee",
+        "label": "ホットコーヒー単品（税込）",
+        "quantity": 2,
+        "unitYen": 420,
+        "basis": "published",
+        "evidenceIds": [
+          "ev-16",
+          "ev-17"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "date": "2026-11-21",
+    "checks": [
+      {
+        "kind": "opening",
+        "status": "published",
+        "stepIds": [
+          "s2",
+          "s3",
+          "s5",
+          "s8"
+        ],
+        "detail": "11/18閲覧。11/21は公表カレンダー上休館日表示なし、PDF実画像確認済。11/17に通常運用再開告知。将来の営業保証ではない。科学館9:30〜17:00、入館16:30まで。カフェ同時間、フードLO16:30・飲物LO16:45。",
+        "evidenceIds": [
+          "ev-1",
+          "ev-4",
+          "ev-7",
+          "ev-8",
+          "ev-18",
+          "ev-12",
+          "ev-19"
+        ]
+      },
+      {
+        "kind": "prices",
+        "status": "published",
+        "stepIds": [
+          "s2",
+          "s8"
+        ],
+        "detail": "展示室500円×2＋ソフト620円×2＋コーヒー420円×2＝3080円。PDF実画像で商品と価格対応確認。飲食は税込。メニュー資料は2026年3月現在で対象日の販売・価格は未確約。",
+        "evidenceIds": [
+          "ev-2",
+          "ev-15",
+          "ev-16",
+          "ev-17",
+          "ev-20"
+        ]
+      },
+      {
+        "kind": "seating",
+        "status": "arrival-check",
+        "stepIds": [
+          "s7",
+          "s8"
+        ],
+        "detail": "公式60席・観覧券なしでも利用可。個人席の予約方式は未確認、団体弁当予約を個人席予約と解釈しない。当日店頭で案内を確認、待ち上限20分、15:50打切りで休憩室へ戻る。予約・問い合わせは実行しない。",
+        "evidenceIds": [
+          "ev-5",
+          "ev-19"
+        ]
+      },
+      {
+        "kind": "comparison",
+        "status": "published",
+        "stepIds": [
+          "s3",
+          "s8"
+        ],
+        "detail": "展示室のみ一般500円とプラネタリウム込み1000円を区別。追加料金のプラネタリウム・有料特別展・夕食は主案から除外。移動を増やす別店舗より同館カフェを中心にする。",
+        "evidenceIds": [
+          "ev-2",
+          "ev-3"
+        ]
+      },
+      {
+        "kind": "rest",
+        "status": "published",
+        "stepIds": [
+          "s4",
+          "s5"
+        ],
+        "detail": "生命館1階170席を主休憩場所とし30分確保。満席時は理工館3階84席へ。座席の空きを保証しない。",
+        "evidenceIds": [
+          "ev-6"
+        ]
+      }
+    ]
+  },
+  "improvementDiagnosis": {
+    "complete": true,
+    "verifiedDetails": 2,
+    "supportedRequired": 5,
+    "supportedOptional": 0,
+    "gaps": [],
+    "causes": [],
+    "achievements": [
+      "detail:official-visit:nagoya-science",
+      "official-visit:nagoya-science:exhibit",
+      "official-visit:nagoya-science:opening",
+      "official-visit:nagoya-science:access_rest",
+      "detail:official-cafe:nagoya-science-cafe",
+      "official-cafe:nagoya-science-cafe:cafe",
+      "official-cafe:nagoya-science-cafe:prices",
+      "answer:interactive-visual-artifact",
+      "answer:concrete-action-plan"
+    ]
+  },
+  "publication": {
+    "source": "saved-live-run",
+    "displayOnly": false,
+    "renderRevision": "bd60b3dccfd851b6a78184c69003b99bb1332c747e38b57aefe08daaa5fa53b1",
+    "answerEdited": false,
+    "answerSha256": "7f95217bca467d60cfd23c0596041417524eb9349fe6f96587f836662b4dde52",
+    "taskStatusPreserved": true,
+    "originalStrictVerdictPreserved": true
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "scope": "local HTTP preview with external requests blocked; not a public availability test",
+  "passed": true,
+  "cases": [
+    {
+      "file": "experience-cases.html",
+      "width": 390,
+      "httpStatus": 200,
+      "photos": 2,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "file": "experience-cases.html",
+      "width": 1280,
+      "httpStatus": 200,
+      "photos": 2,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "file": "hamamatsu-full-day.html",
+      "width": 390,
+      "httpStatus": 200,
+      "photos": 5,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "file": "hamamatsu-full-day.html",
+      "width": 1280,
+      "httpStatus": 200,
+      "photos": 5,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "file": "nagoya-afternoon.html",
+      "width": 390,
+      "httpStatus": 200,
+      "photos": 2,
+      "noOverflow": true,
+      "noPageErrors": true
+    },
+    {
+      "file": "nagoya-afternoon.html",
+      "width": 1280,
+      "httpStatus": 200,
+      "photos": 2,
+      "noOverflow": true,
+      "noPageErrors": true
+    }
+  ]
+}

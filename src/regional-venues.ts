@@ -15,6 +15,13 @@ export function regionalVenue(value: string): string | undefined {
     ["/visitor/act/", "/faq/"].includes(u.pathname)
   )
     return "official-public-space:hamamatsu-actcity-gardens";
+  if (u.hostname === "www.mutsugiku.jp")
+    return "official-dining:hamamatsu-mutsugiku";
+  if (
+    u.hostname === "www.act-okura.co.jp" &&
+    u.pathname === "/facilities/gallery/"
+  )
+    return "official-visit:okura-hamamatsu-observatory";
   if (u.hostname === "www.gakkihaku.jp")
     return "official-visit:hamamatsu-gakkihaku";
   if (u.hostname === "www.ncsm.city.nagoya.jp")
@@ -23,6 +30,9 @@ export function regionalVenue(value: string): string | undefined {
     u.hostname === "www.act-okura.co.jp" &&
     [
       "/restaurant/cafe/",
+      "/restaurant/lounge/",
+      "/restaurant-plan/cafe_cocktailtime/",
+      "/restaurant-plan/cafe_cocktailtime/index.html",
       "/restaurant-plan/cafemenu202303/",
       "/restaurant-plan/javabali20260711/",
     ].includes(u.pathname)

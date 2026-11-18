@@ -34,6 +34,9 @@ try {
     "docs/hamamatsu-day.html",
     "docs/nagoya-day.html",
     "docs/regional-cases.html",
+    "docs/hamamatsu-full-day.html",
+    "docs/nagoya-afternoon.html",
+    "docs/experience-cases.html",
   ])
     for (const scheme of ["light", "dark"])
       for (const width of [390, 1280]) {
@@ -44,7 +47,11 @@ try {
         });
         await page.route(/^https?:/, (r) => r.abort());
         await page.goto(pathToFileURL(resolve(file)).href);
-        if (file !== "docs/regional-cases.html")
+        if (
+          !["docs/regional-cases.html", "docs/experience-cases.html"].includes(
+            file,
+          )
+        )
           await page.locator("[data-artifact-kind]").waitFor();
         await page
           .locator("details")

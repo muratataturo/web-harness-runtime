@@ -45,7 +45,7 @@ export const visualArtifactSchema = Type.Union([
             },
             { additionalProperties: false },
           ),
-          { minItems: 1, maxItems: 16 },
+          { minItems: 1, maxItems: 32 },
         ),
       ),
       stops: Type.Array(

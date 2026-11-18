@@ -69,6 +69,10 @@ export interface Answer {
   limitations: string[];
 }
 export interface Task {
+  tripBrief?: ReturnType<typeof import("./trip-brief.js").tripBrief>;
+  stepVerification?: ReturnType<
+    typeof import("./step-verifier.js").verifyStepPlan
+  >;
   pdfInspections?: {
     pageId: string;
     pageNumber: number;

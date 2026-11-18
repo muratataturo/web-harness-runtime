@@ -4,6 +4,8 @@
 
 [3案比較と10秒レビューの改善ループ](docs/proposal-comparison-runtime.md) — [旅行の実生成](docs/comparison-travel.html#proposal-comparison) / [人生計画の実生成](docs/comparison-life.html#proposal-comparison)。
 
+[朝から夜の一日／午後だけの実生成を比較する](docs/experience-cases.html) — [時間帯・手順検査・追加調査のruntime](docs/experience-depth-runtime.md) — [実生成と検証結果](docs/experience-depth-results.md)。
+
 [浜松・名古屋の実生成を比較する](docs/regional-cases.html) — [地域対応と未確認事項](docs/regional-itinerary-e2e.md)。
 
 [無人生成のE2Eと改善内容](docs/autonomous-finalization.md) — [回答を編集せず生成した正式版](docs/autonomous-cafe-day.html#itinerary)。

@@ -1,3 +1,5 @@
+import { stepChecksSchema, verifyStepPlan } from "./step-verifier.js";
+import { tripBrief, tripRhythmIssues } from "./trip-brief.js";
 import { Type, type Static } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import { assertEvidenceIntegrity } from "./provenance.js";
@@ -8,6 +10,7 @@ const text = Type.String({ maxLength: 600 });
 const ids = Type.Array(Type.String({ maxLength: 100 }), { maxItems: 20 });
 export const actionPlanSchema = Type.Object(
   {
+    stepChecks: Type.Optional(stepChecksSchema),
     verification: Type.Optional(
       Type.Object(
         {
@@ -41,6 +44,22 @@ export const actionPlanSchema = Type.Object(
     steps: Type.Array(
       Type.Object({
         id: Type.String({ maxLength: 100 }),
+        kind: Type.Optional(
+          Type.Union(
+            [
+              "activity",
+              "breakfast",
+              "lunch",
+              "dinner",
+              "cafe",
+              "move",
+              "rest",
+              "evening",
+              "return",
+            ].map((s) => Type.Literal(s)),
+          ),
+        ),
+        venueUrl: Type.Optional(Type.String({ maxLength: 2048 })),
         when: text,
         where: text,
         action: text,
@@ -56,7 +75,7 @@ export const actionPlanSchema = Type.Object(
         evidenceIds: ids,
         costItemIds: ids,
       }),
-      { maxItems: 16 },
+      { maxItems: 32 },
     ),
     budget: Type.Optional(
       Type.Object({
@@ -95,7 +114,7 @@ export interface SpecificityReview {
 }
 export function specificityContract(query: string) {
   const mode =
-    /一日|1日|日帰り|お出かけ|行程|旅程|itinerary|day trip|day out/i.test(
+    /一日|1日|日帰り|お出かけ|行程|旅程|午後だけ|午後から|午後に|寄り道|itinerary|day trip|day out/i.test(
       query,
     ) ||
     (/旅行/.test(query) && /計画|過ご|スケジュール|回り|プラン/.test(query))
@@ -117,7 +136,7 @@ export function specificityContract(query: string) {
     minimumSteps: mode === "itinerary" ? 4 : 2,
     timeRange: range
       ? [range[1]!.replace("：", ":"), range[2]!.replace("：", ":")]
-      : undefined,
+      : tripBrief(query)?.timeRange,
     budgetRequired:
       mode !== "facts" && /予算|総額|合計.{0,15}円|費用/.test(query),
     ceilingYen: cap
@@ -264,6 +283,12 @@ export function assessSpecificity(
       ],
     };
   validateActionPlan(task, p);
+  if (task.tripBrief?.requiresStepResearch || p.stepChecks?.length)
+    issues.push(
+      ...verifyStepPlan(task, p)
+        .checks.filter((c) => c.status === "failed" || c.status === "unknown")
+        .map((c) => `${c.stepId}: ${c.detail}`),
+    );
   issues.push(
     ...uncoveredCriteria(task.criteria, answer.candidates).map(
       (c) => `必須条件の対象候補が不足しています: ${c.description}`,
@@ -291,7 +316,11 @@ export function assessSpecificity(
     if (!answer.candidates.length)
       issues.push("正式版の候補比較を省略できません");
   }
-  if (c.mode === "itinerary") issues.push(...cafePlanIssues(task, answer));
+  if (c.mode === "itinerary")
+    issues.push(
+      ...cafePlanIssues(task, answer),
+      ...(task.tripBrief ? tripRhythmIssues(task.query, p) : []),
+    );
   if (p.steps.length < c.minimumSteps)
     issues.push(`具体的な手順を${c.minimumSteps}件以上にしてください`);
   for (const [i, s] of p.steps.entries()) {
