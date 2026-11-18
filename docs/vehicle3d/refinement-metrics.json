@@ -1,0 +1,747 @@
+{
+  "schema_version": 1,
+  "target": {
+    "psnr_db": 20.0,
+    "ssim": 0.85
+  },
+  "input_is_training_supervision": true,
+  "training_frames": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    11,
+    13,
+    14,
+    16,
+    17,
+    19,
+    20,
+    22,
+    23,
+    25,
+    26,
+    28,
+    29,
+    31,
+    32,
+    34,
+    35
+  ],
+  "input_training_images": 1,
+  "blind_test_frames": [
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24,
+    27,
+    30,
+    33,
+    36
+  ],
+  "method": "fixed perspective visual hull with view-dependent photographic radiance",
+  "physical_accuracy_certified": false,
+  "physical_albedo_recovered": false,
+  "evaluation": "frozen source-defined vehicle ROI; native RGB; white compositing; no post-render alignment",
+  "input": {
+    "psnr_db": 23.800986974432973,
+    "perfect_match": false,
+    "mse": 0.004167746568062058,
+    "ssim": 0.9086162984274123,
+    "mae_8bit": 7.998406862745098,
+    "pixels": 32640,
+    "ssim_pixels": 28980
+  },
+  "blind_test": {
+    "reference_roi": {
+      "pooled_psnr_db": 17.87201513356142,
+      "pooled_mse": 0.016322943848649914,
+      "perfect_match": false,
+      "mean_ssim": 0.7142264834446896,
+      "worst_psnr_db": 15.403160585215215,
+      "worst_ssim": 0.6487258263553379,
+      "views": 12,
+      "pixels": 2738435
+    },
+    "full_frame": {
+      "pooled_psnr_db": 23.04045170131627,
+      "pooled_mse": 0.004965406745264395,
+      "perfect_match": false,
+      "mean_ssim": 0.9162323189115026,
+      "worst_psnr_db": 21.530555662772816,
+      "worst_ssim": 0.8727100460843715,
+      "views": 12,
+      "pixels": 9075840
+    },
+    "reference_foreground": {
+      "pooled_psnr_db": 17.48486260829604,
+      "pooled_mse": 0.017844884410258922,
+      "perfect_match": false,
+      "mean_ssim": 0.6829765230684507,
+      "worst_psnr_db": 15.12574700226359,
+      "worst_ssim": 0.5609713647061723,
+      "views": 12,
+      "pixels": 1830053
+    },
+    "foreground_union": {
+      "pooled_psnr_db": 16.809881101099037,
+      "pooled_mse": 0.020845479519936462,
+      "perfect_match": false,
+      "mean_ssim": 0.6688891427119782,
+      "worst_psnr_db": 14.970128561349123,
+      "worst_ssim": 0.5556825330875478,
+      "views": 12,
+      "pixels": 2022931
+    }
+  },
+  "rows": [
+    {
+      "frame": "input",
+      "source_sha256": "fae470f3e9f8c51f00ad4c9e981c15163ddf6cbe7a1f6a50cd4d6153b99c5d9c",
+      "render_sha256": "b1125b75522e08762e4c1292870cb64f292e279caee8059c8c7641ba58c6b26a",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 23.800986974432973,
+          "perfect_match": false,
+          "mse": 0.004167746568062058,
+          "ssim": 0.9086162984274123,
+          "mae_8bit": 7.998406862745098,
+          "pixels": 32640,
+          "ssim_pixels": 28980
+        },
+        "full_frame": {
+          "psnr_db": 25.018306248910424,
+          "perfect_match": false,
+          "mse": 0.0031489761772537624,
+          "ssim": 0.927913730021186,
+          "mae_8bit": 6.044027777777777,
+          "pixels": 43200,
+          "ssim_pixels": 39100
+        },
+        "reference_foreground": {
+          "psnr_db": 23.653675398358665,
+          "perfect_match": false,
+          "mse": 0.004311540402798048,
+          "ssim": 0.9175122942502089,
+          "mae_8bit": 9.323380726698261,
+          "pixels": 21100,
+          "ssim_pixels": 18135
+        },
+        "foreground_union": {
+          "psnr_db": 23.699183845682484,
+          "perfect_match": false,
+          "mse": 0.004266596919206021,
+          "ssim": 0.9182061501051801,
+          "mae_8bit": 9.498469517898137,
+          "pixels": 23522,
+          "ssim_pixels": 20643
+        },
+        "reference_roi_xyxy": [
+          0,
+          30,
+          240,
+          166
+        ]
+      }
+    },
+    {
+      "frame": 3,
+      "source_sha256": "1455be0ec5f5bf25a0d6571d970ca55ced957acd71f2c4529c348119587b7f1c",
+      "render_sha256": "5bf836ce177a2c485288d4130b9c2430648b012cceafc8661a2b7c457bfa2058",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 16.98382716504304,
+          "perfect_match": false,
+          "mse": 0.020027063898995313,
+          "ssim": 0.7269365496286199,
+          "mae_8bit": 16.078784659700197,
+          "pixels": 265462,
+          "ssim_pixels": 254232
+        },
+        "full_frame": {
+          "psnr_db": 21.530555662772816,
+          "perfect_match": false,
+          "mse": 0.007029823702897951,
+          "ssim": 0.9059030565162738,
+          "mae_8bit": 5.646975266201255,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 16.403064037195357,
+          "perfect_match": false,
+          "mse": 0.02289251968378375,
+          "ssim": 0.6896508410645193,
+          "mae_8bit": 19.420378730802103,
+          "pixels": 171221,
+          "ssim_pixels": 161150
+        },
+        "foreground_union": {
+          "psnr_db": 15.582536429953349,
+          "perfect_match": false,
+          "mse": 0.027653261276147974,
+          "ssim": 0.6648737910495456,
+          "mae_8bit": 22.006422727063335,
+          "pixels": 188134,
+          "ssim_pixels": 178141
+        },
+        "reference_roi_xyxy": [
+          159,
+          88,
+          961,
+          419
+        ]
+      }
+    },
+    {
+      "frame": 6,
+      "source_sha256": "0bd68d7834aced6b414499e38bb3176f23985cbe19cb90d38b3dfd9f7480867c",
+      "render_sha256": "fb82c4adabe28e866299adff486b1c3f4b19ab5d7a82e8d988810f4cf12309aa",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 17.7346676441617,
+          "perfect_match": false,
+          "mse": 0.016847413513224347,
+          "ssim": 0.7511553790378597,
+          "mae_8bit": 14.023085284578924,
+          "pixels": 261884,
+          "ssim_pixels": 250734
+        },
+        "full_frame": {
+          "psnr_db": 22.340519669353224,
+          "perfect_match": false,
+          "mse": 0.005833752944066552,
+          "ssim": 0.9154370635488372,
+          "mae_8bit": 4.85747787532614,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 17.45106861767032,
+          "perfect_match": false,
+          "mse": 0.0179842834243988,
+          "ssim": 0.7211298541878587,
+          "mae_8bit": 16.114303617727032,
+          "pixels": 173949,
+          "ssim_pixels": 163398
+        },
+        "foreground_union": {
+          "psnr_db": 16.427566340000606,
+          "perfect_match": false,
+          "mse": 0.022763726864953805,
+          "ssim": 0.7035088505812768,
+          "mae_8bit": 18.806971082269282,
+          "pixels": 190310,
+          "ssim_pixels": 180245
+        },
+        "reference_roi_xyxy": [
+          163,
+          87,
+          959,
+          416
+        ]
+      }
+    },
+    {
+      "frame": 9,
+      "source_sha256": "2a1f0294a433f590019096822f6452505f4ecb6d61233585450246b48fe9397e",
+      "render_sha256": "9b51fa196f52dbbcfd40beb7aa21654bf072a866d81044e2dcc0a74a765ac024",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 18.272671268763684,
+          "perfect_match": false,
+          "mse": 0.014884452796536746,
+          "ssim": 0.7660457514280682,
+          "mae_8bit": 12.99130717992325,
+          "pixels": 244608,
+          "ssim_pixels": 234068
+        },
+        "full_frame": {
+          "psnr_db": 23.174791052232276,
+          "perfect_match": false,
+          "mse": 0.004814164153502769,
+          "ssim": 0.9257566277913905,
+          "mae_8bit": 4.203782349622736,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 17.18483707218244,
+          "perfect_match": false,
+          "mse": 0.01912125057617923,
+          "ssim": 0.7204446340285308,
+          "mae_8bit": 16.452032539892656,
+          "pixels": 166196,
+          "ssim_pixels": 156514
+        },
+        "foreground_union": {
+          "psnr_db": 17.068570136556016,
+          "perfect_match": false,
+          "mse": 0.01964006796512506,
+          "ssim": 0.721218934272882,
+          "mae_8bit": 16.992325720928484,
+          "pixels": 177780,
+          "ssim_pixels": 168763
+        },
+        "reference_roi_xyxy": [
+          229,
+          90,
+          957,
+          426
+        ]
+      }
+    },
+    {
+      "frame": 12,
+      "source_sha256": "341f8ae76467a496f00f834d7232e615dfe127e8c992777854267aca0f8bdae9",
+      "render_sha256": "4956a89602dca6dd69e343f3d5b5a7b2455080f232f99eebf41f6fc27a8d50be",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 15.670207928620133,
+          "perfect_match": false,
+          "mse": 0.027100618782467285,
+          "ssim": 0.6541773557998222,
+          "mae_8bit": 21.475390021624957,
+          "pixels": 172640,
+          "ssim_pixels": 164220
+        },
+        "full_frame": {
+          "psnr_db": 22.083679887311675,
+          "perfect_match": false,
+          "mse": 0.006189164292448964,
+          "ssim": 0.9217237282569091,
+          "mae_8bit": 4.914737148297017,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 15.12574700226359,
+          "perfect_match": false,
+          "mse": 0.03072028919703015,
+          "ssim": 0.6393692660760438,
+          "mae_8bit": 24.337452992124952,
+          "pixels": 127195,
+          "ssim_pixels": 120447
+        },
+        "foreground_union": {
+          "psnr_db": 15.102079141290886,
+          "perfect_match": false,
+          "mse": 0.030888163386366966,
+          "ssim": 0.6314901690756133,
+          "mae_8bit": 24.95471543765338,
+          "pixels": 136912,
+          "ssim_pixels": 130026
+        },
+        "reference_roi_xyxy": [
+          345,
+          98,
+          865,
+          430
+        ]
+      }
+    },
+    {
+      "frame": 15,
+      "source_sha256": "f15db4ced97a7284742a6cd1c49dfb7003dd0e573f75760a67b79911b8c8c8da",
+      "render_sha256": "39ff6ffe8bd1c76df172d00fc53360af61346c8e88520a913ac62c3014b12ed0",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 15.403160585215215,
+          "perfect_match": false,
+          "mse": 0.028819334080085874,
+          "ssim": 0.6785749057686284,
+          "mae_8bit": 21.066840207347308,
+          "pixels": 147900,
+          "ssim_pixels": 140250
+        },
+        "full_frame": {
+          "psnr_db": 22.48350286434245,
+          "perfect_match": false,
+          "mse": 0.005644815005137214,
+          "ssim": 0.936439439967525,
+          "mae_8bit": 4.151102267117975,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 17.381033209481018,
+          "perfect_match": false,
+          "mse": 0.018276653531884363,
+          "ssim": 0.733797807630779,
+          "mae_8bit": 17.214073729863696,
+          "pixels": 107600,
+          "ssim_pixels": 99309
+        },
+        "foreground_union": {
+          "psnr_db": 14.970128561349123,
+          "perfect_match": false,
+          "mse": 0.03184103263408944,
+          "ssim": 0.6824786834355673,
+          "mae_8bit": 23.252180761501272,
+          "pixels": 122740,
+          "ssim_pixels": 116016
+        },
+        "reference_roi_xyxy": [
+          343,
+          96,
+          778,
+          436
+        ]
+      }
+    },
+    {
+      "frame": 18,
+      "source_sha256": "98051f2c42e5a44a4c8acfc254dc1764d8b41c87d6930f444446cf4ae8006725",
+      "render_sha256": "60d1dbc95e62de6dadc53cd628a5853be7c8eb4cfc83f0715be85007bf91ef05",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 20.114454342374795,
+          "perfect_match": false,
+          "mse": 0.009739901520152045,
+          "ssim": 0.7756412905325636,
+          "mae_8bit": 11.401934096835635,
+          "pixels": 244662,
+          "ssim_pixels": 234392
+        },
+        "full_frame": {
+          "psnr_db": 25.014521135479562,
+          "perfect_match": false,
+          "mse": 0.003151721878191442,
+          "ssim": 0.928187048419596,
+          "mae_8bit": 3.69663766659615,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 19.45677996883312,
+          "perfect_match": false,
+          "mse": 0.011332402810168346,
+          "ssim": 0.7295270038008527,
+          "mae_8bit": 14.002583179621764,
+          "pixels": 161558,
+          "ssim_pixels": 151188
+        },
+        "foreground_union": {
+          "psnr_db": 19.36357902692946,
+          "perfect_match": false,
+          "mse": 0.011578227994870034,
+          "ssim": 0.7386909974852782,
+          "mae_8bit": 14.031109676006176,
+          "pixels": 176526,
+          "ssim_pixels": 168320
+        },
+        "reference_roi_xyxy": [
+          219,
+          92,
+          893,
+          455
+        ]
+      }
+    },
+    {
+      "frame": 21,
+      "source_sha256": "993c755a662e2458d058515807c0e2d5d035c45eb425aec404cdcf176562698e",
+      "render_sha256": "1079bc928dcedbdf516044e15b67d0ad8d5dc07f5952451ccd1cbdd2a6b0dc83",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 18.435688160893974,
+          "perfect_match": false,
+          "mse": 0.014336105354410116,
+          "ssim": 0.663991887958105,
+          "mae_8bit": 14.856702886092197,
+          "pixels": 290820,
+          "ssim_pixels": 279360
+        },
+        "full_frame": {
+          "psnr_db": 22.586363015423323,
+          "perfect_match": false,
+          "mse": 0.005512691616631803,
+          "ssim": 0.8727100460843715,
+          "mae_8bit": 5.7158521966010865,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 17.84768833745989,
+          "perfect_match": false,
+          "mse": 0.01641463258724405,
+          "ssim": 0.5820321929028933,
+          "mae_8bit": 17.494179876814687,
+          "pixels": 182814,
+          "ssim_pixels": 169431
+        },
+        "foreground_union": {
+          "psnr_db": 17.48269241566723,
+          "perfect_match": false,
+          "mse": 0.017853803822279628,
+          "ssim": 0.5812742106570471,
+          "mae_8bit": 18.84017025648072,
+          "pixels": 203771,
+          "ssim_pixels": 194518
+        },
+        "reference_roi_xyxy": [
+          193,
+          84,
+          979,
+          454
+        ]
+      }
+    },
+    {
+      "frame": 24,
+      "source_sha256": "6294f7461caad68a7b387ea4409a6426d3b7264c6cb27d86068380422094ab71",
+      "render_sha256": "b2181d7e08b4d84c3e2880dc0df946417fd645269b4de082ec59ae4a19123ded",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 20.589207441196052,
+          "perfect_match": false,
+          "mse": 0.008731306944463876,
+          "ssim": 0.783179050182469,
+          "mae_8bit": 10.688284933012838,
+          "pixels": 286224,
+          "ssim_pixels": 274724
+        },
+        "full_frame": {
+          "psnr_db": 24.80749604250218,
+          "perfect_match": false,
+          "mse": 0.0033056007300138234,
+          "ssim": 0.9192220588428788,
+          "mae_8bit": 4.053665996756224,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 20.39371718524325,
+          "perfect_match": false,
+          "mse": 0.009133311743149474,
+          "ssim": 0.7667716954350802,
+          "mae_8bit": 11.841513103902066,
+          "pixels": 184398,
+          "ssim_pixels": 172479
+        },
+        "foreground_union": {
+          "psnr_db": 19.64637203256445,
+          "perfect_match": false,
+          "mse": 0.010848327727633108,
+          "ssim": 0.7533464961031441,
+          "mae_8bit": 13.36495240835311,
+          "pixels": 208545,
+          "ssim_pixels": 199060
+        },
+        "reference_roi_xyxy": [
+          191,
+          83,
+          995,
+          439
+        ]
+      }
+    },
+    {
+      "frame": 27,
+      "source_sha256": "5dd5738f7688723f12e77be5e09daa460f0115999bd68c03c2cc32cb3f5104b5",
+      "render_sha256": "9ce75225b90f9a1815ad7f9ef50db67cb3c8003c8dbfa30b829ad6cca52446fd",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 20.540485410978082,
+          "perfect_match": false,
+          "mse": 0.0088298120408659,
+          "ssim": 0.7541984984621888,
+          "mae_8bit": 11.568939727771248,
+          "pixels": 272320,
+          "ssim_pixels": 261340
+        },
+        "full_frame": {
+          "psnr_db": 24.976237934937664,
+          "perfect_match": false,
+          "mse": 0.0031796272221326187,
+          "ssim": 0.9126420484857724,
+          "mae_8bit": 4.170427420492207,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 19.76343317289664,
+          "perfect_match": false,
+          "mse": 0.010559824068427629,
+          "ssim": 0.6948100035403068,
+          "mae_8bit": 14.265127295661644,
+          "pixels": 168597,
+          "ssim_pixels": 157153
+        },
+        "foreground_union": {
+          "psnr_db": 19.415089039134795,
+          "perfect_match": false,
+          "mse": 0.011441714217529224,
+          "ssim": 0.6895175312695185,
+          "mae_8bit": 15.116971309518187,
+          "pixels": 190551,
+          "ssim_pixels": 181651
+        },
+        "reference_roi_xyxy": [
+          238,
+          85,
+          978,
+          453
+        ]
+      }
+    },
+    {
+      "frame": 30,
+      "source_sha256": "05de7d58cb6128703661542c0469474509d668c1f25cc450c356e365533ac7f1",
+      "render_sha256": "46c6432f24d16f188ca60060c34035fcef62127a866122e129d579449ea621f9",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 17.29173961300697,
+          "perfect_match": false,
+          "mse": 0.018656322421927243,
+          "ssim": 0.6718170019560996,
+          "mae_8bit": 18.1965114515956,
+          "pixels": 180266,
+          "ssim_pixels": 171696
+        },
+        "full_frame": {
+          "psnr_db": 23.51427860221459,
+          "perfect_match": false,
+          "mse": 0.004452174109424698,
+          "ssim": 0.9222986133938647,
+          "mae_8bit": 4.358812848177138,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 16.77983885045881,
+          "perfect_match": false,
+          "mse": 0.0209901776844335,
+          "ssim": 0.6325423925000649,
+          "mae_8bit": 20.928811374505333,
+          "pixels": 129295,
+          "ssim_pixels": 121502
+        },
+        "foreground_union": {
+          "psnr_db": 16.392657091163997,
+          "perfect_match": false,
+          "mse": 0.022947442530428516,
+          "ssim": 0.6281195632322178,
+          "mae_8bit": 22.041499235446818,
+          "pixels": 140605,
+          "ssim_pixels": 133656
+        },
+        "reference_roi_xyxy": [
+          349,
+          95,
+          870,
+          441
+        ]
+      }
+    },
+    {
+      "frame": 33,
+      "source_sha256": "4cabbfbb3b72dc414943735554ab6678f7d1bcae6108f490d3d9f45eedc9f647",
+      "render_sha256": "1067b26e2e7b50d18001613c1d5af372c6428351c8ce534ac04e767d6243c185",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 16.681250391825547,
+          "perfect_match": false,
+          "mse": 0.021472121740594586,
+          "ssim": 0.6962743042265144,
+          "mae_8bit": 19.210883678968784,
+          "pixels": 141141,
+          "ssim_pixels": 133661
+        },
+        "full_frame": {
+          "psnr_db": 23.498059794058193,
+          "perfect_match": false,
+          "mse": 0.004468831921490872,
+          "ssim": 0.9394711123025979,
+          "mae_8bit": 3.880810150906142,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 17.619843848144743,
+          "perfect_match": false,
+          "mse": 0.01729878556388005,
+          "ssim": 0.7246712209483055,
+          "mae_8bit": 17.7765150439854,
+          "pixels": 105679,
+          "ssim_pixels": 98121
+        },
+        "foreground_union": {
+          "psnr_db": 15.669716416945153,
+          "perfect_match": false,
+          "mse": 0.027103686061669154,
+          "ssim": 0.676467952294098,
+          "mae_8bit": 23.13996360797766,
+          "pixels": 121272,
+          "ssim_pixels": 114931
+        },
+        "reference_roi_xyxy": [
+          337,
+          98,
+          766,
+          427
+        ]
+      }
+    },
+    {
+      "frame": 36,
+      "source_sha256": "7466094acff879de1c30b07910be2c9d83686d8de124bea569474d8639fa4519",
+      "render_sha256": "85f32c2a3cd61a19fd0a570feeceb7f97cfca73dd893487733a0242e46c2668e",
+      "metrics": {
+        "reference_roi": {
+          "psnr_db": 17.056884693367998,
+          "perfect_match": false,
+          "mse": 0.019692984118494603,
+          "ssim": 0.6487258263553379,
+          "mae_8bit": 20.272049849318318,
+          "pixels": 230508,
+          "ssim_pixels": 220398
+        },
+        "full_frame": {
+          "psnr_db": 22.216668641223272,
+          "perfect_match": false,
+          "mse": 0.006002513367234037,
+          "ssim": 0.8949969833280143,
+          "mae_8bit": 6.182947253367181,
+          "pixels": 756320,
+          "ssim_pixels": 738300
+        },
+        "reference_foreground": {
+          "psnr_db": 16.101421899987848,
+          "perfect_match": false,
+          "mse": 0.024539053643145247,
+          "ssim": 0.5609713647061723,
+          "mae_8bit": 25.93002575590615,
+          "pixels": 151551,
+          "ssim_pixels": 142179
+        },
+        "foreground_union": {
+          "psnr_db": 15.793063873831866,
+          "perfect_match": false,
+          "mse": 0.026344721546995138,
+          "ssim": 0.5556825330875478,
+          "mae_8bit": 27.141267304038365,
+          "pixels": 165785,
+          "ssim_pixels": 157552
+        },
+        "reference_roi_xyxy": [
+          203,
+          91,
+          887,
+          428
+        ]
+      }
+    }
+  ],
+  "input_target_met": true,
+  "blind_target_met": false,
+  "accepted": false,
+  "status": "novel-view-target-unmet"
+}

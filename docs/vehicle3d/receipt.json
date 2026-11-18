@@ -5,7 +5,7 @@
   "physicalAccuracyCertified": false,
   "exitCode": 2,
   "sourceFiles": {
-    "scripts/vehicle3d/README.md": "9da3adf2cac8e38a8bf46c3064370bb9db137db9d942a64ac23420be0157623d",
+    "scripts/vehicle3d/README.md": "4c7ea09af911c3ced05832934715d18430fa163db64c6589678ae5d616fa4ae6",
     "scripts/vehicle3d/animate_scene.py": "5f030c9f114340cab04b1d4de78c6bc062690593361b8bd0fa9180183fd65041",
     "scripts/vehicle3d/audit_images.py": "996f511907d575b680640dc5fae894472a1e424238d86d23e2e8d27dd7cbf628",
     "scripts/vehicle3d/build_scene.py": "1e2bad2ad52d401ed5c8da14da91f6acf9c18a4771868c83efcb9456c5086b03",
@@ -14,18 +14,26 @@
     "scripts/vehicle3d/export_dxf.py": "bf504156b0764fe004d42bbdfd6e9bef5f269917c5c5cbc188836c3cdd44397a",
     "scripts/vehicle3d/export_reconstruction.py": "069d351c029615fdead00f50eee822acaa1394e41e07add00f2bc1baf3a300f1",
     "scripts/vehicle3d/image_metrics.py": "6fd7896a8ea6233af783ff8ae6af1e28553caaff8f3ca0fbfc0a2b8a583f2c99",
+    "scripts/vehicle3d/localize_input.py": "0a509d5d21664194596e43c2b7964d8250786709221a75b8766deea7614b02f0",
     "scripts/vehicle3d/make_drawing.py": "d4dcdc025548df358fa5a7c4f3d85f4f492846f40c526b5441a7753c0f991ea6",
+    "scripts/vehicle3d/perspective_model.py": "b2709d1b0622fdeea549baacfb7f8fafcb3bbef33e8d20527200a80fb6f03816",
+    "scripts/vehicle3d/publish_refinement.py": "94105ba9db37b3dc23766d2263ff81bc3bbfff3c223c0f9cec8347c8ba7f1628",
     "scripts/vehicle3d/publish_snapshot.py": "62421b8526f7fa0e1458ed13263b6e82afb62707ddad157671f2137b152f7ac9",
     "scripts/vehicle3d/quality.py": "94e12b1b9e31106f9d0d98fe0cc19af7c7040ff9b49237b8f57618377c30fcef",
     "scripts/vehicle3d/reconstruction.py": "084f2b3320ac69bff7cbd9a1585509ccdd122d23eaf15c7c1178cf349c4f550e",
+    "scripts/vehicle3d/refine_photometric.py": "63446f7c8428364c172291bd6968ff5f05ccbd314420a64cd41b6cf19b788c14",
     "scripts/vehicle3d/render_image_audit.py": "9df1e7f0b40ce4426d614bafe67620c1fb3402c6c7e9227a11dc4153f7b7bd17",
+    "scripts/vehicle3d/render_projective.py": "1a1391e62ba5147b3a6e268de7c7195dc105455f7a962004de3f3a108cf12d2e",
     "scripts/vehicle3d/report.py": "3eb4923ebde2f0f5c30603e9c701c4ef92a024edf3ee609f35e66681cb0ba74c",
+    "scripts/vehicle3d/requirements-photometric.txt": "a8d58b86ac4b9b229d14d7004985c420efe728b93164a1b10fbbfe41b47e5d5f",
     "scripts/vehicle3d/requirements.txt": "d122ac4b19be9bdbed59f1d187820a09c290bc7aa6e31bc6cc4732e8b019e267",
     "scripts/vehicle3d/runtime.py": "8787c30319c9976a2d64d8b2af3c7d34564f2914edb16583730e48a1e31fd360",
+    "scripts/vehicle3d/sfm_refine.py": "bd3b3feada053e14216b8474b2e7c2b165315f4b3d7911c17c1ad8df0062f887",
     "scripts/vehicle3d/simulate.py": "b014ed824955ce678dc188f265136ae87654b3ea66f6b4f3890a00291fc00a98",
     "scripts/vehicle3d/test_image_metrics.py": "575611dadbda56c02f2fc11afaddb57d0c74ab4a555d8b767adb7c29e7a6857c",
+    "scripts/vehicle3d/test_photometric.py": "8098827d243986704d6c4ac2f9b4eca60f749a3ec22c8fd7aad97b3f1814bde6",
     "scripts/vehicle3d/test_runtime.py": "a27b2fd51290c1f4867f247220c94ef6c6cd10c1804c6f9069733155b9f03354",
-    "scripts/vehicle3d/verify-report.mjs": "dde4900accf16f3eb24cc3e05486c155a4f174af8eb80406036cc7f67682f273",
+    "scripts/vehicle3d/verify-report.mjs": "bc1e142640483f4d0581d6ee319a70169d8e6c2cac551fd3cd61b6ed3698680c",
     "scripts/vehicle3d/verify_outputs.py": "4eae75017b9533b2f1b2ba182a612fb39ed8303d69d825945b8349bfd4bb1032"
   },
   "configSha256": "362e16f41d703b2ac0a108a228dd532ce774b660b1c7d3343bc31671084e0a69",
@@ -53,8 +61,8 @@
   },
   "reviewFiles": {
     "README.md": {
-      "bytes": 9102,
-      "sha256": "9d25dab480f9daefa0c9c646163e2983c0d75685b96bbf2a460e25096b383149"
+      "bytes": 11586,
+      "sha256": "e9c51db61fb03a79aa03fe13dc34686c6cc8681db876c20fe4ec1647eeb44d8f"
     },
     "after.jpg": {
       "bytes": 29126,
@@ -88,6 +96,10 @@
       "bytes": 379272,
       "sha256": "87bc42d33d91c7aee3edabcd4fc4cbafeb3af731dc20172a52cf258bfdff8d2d"
     },
+    "photometric-refinement.html": {
+      "bytes": 6251,
+      "sha256": "2f57cdd0dc1a93224a7ddd52f244ed8560dba8330bdd2965c9b2ae3e9755e8bf"
+    },
     "prior-drawing.pdf": {
       "bytes": 71524,
       "sha256": "fbd1609840c8d9eaa202bef1b24b09dd266cef0c0785c62e626bca71ec08eaee"
@@ -99,6 +111,66 @@
     "prior-verification.json": {
       "bytes": 2873,
       "sha256": "c4146da14e0e288bbce6b6e9eea1b776ebf8e7a2f4c76f9db093600fc4cac898"
+    },
+    "refinement-12-diff.jpg": {
+      "bytes": 11463,
+      "sha256": "7c9ca117070bce76e41f44b688a0a6af98a5db5f08f47bb656e4ece1aa55828c"
+    },
+    "refinement-12-reference.jpg": {
+      "bytes": 8643,
+      "sha256": "f274205c4696a790a9f4dbe312ca27d36bad3c76fcbc56ea9277731b7e84f36a"
+    },
+    "refinement-12-render.jpg": {
+      "bytes": 8174,
+      "sha256": "4bdfc43abe4474b39a87492e42393747229690bcd20373e23b57bccfbf5e1803"
+    },
+    "refinement-18-diff.jpg": {
+      "bytes": 13376,
+      "sha256": "1b26f4bfed1abd2440e629068f7135059ad37dd86aa65e3954c6fa6a330974cc"
+    },
+    "refinement-18-reference.jpg": {
+      "bytes": 10444,
+      "sha256": "8c199e27956893949a50939cdf60aba1c13869a4f894f05ec4d87d103aff9f53"
+    },
+    "refinement-18-render.jpg": {
+      "bytes": 9749,
+      "sha256": "3e63d472e63d5335e55de4c619d02ec4e9e67c0af91f6f0e2b416da049cc2960"
+    },
+    "refinement-24-diff.jpg": {
+      "bytes": 14597,
+      "sha256": "d36aa760f6ee673cb58e826e154676485c417dd7625a43e6d19662f47cd696d3"
+    },
+    "refinement-24-reference.jpg": {
+      "bytes": 11112,
+      "sha256": "7b3ae1bc65140cdfb0e4ccb5076d1efa90e9d31c50ff89b3a4f58793d9dc9504"
+    },
+    "refinement-24-render.jpg": {
+      "bytes": 10647,
+      "sha256": "1dc2b4533e2a840db5a208910a6da5e821250e2b19fa45b3db2bc1bbddb6746d"
+    },
+    "refinement-input-diff.jpg": {
+      "bytes": 11380,
+      "sha256": "f5989c84fbf7bc832b879b750da120c281e251d91c5086a25fddad83502707c9"
+    },
+    "refinement-input-reference.jpg": {
+      "bytes": 9348,
+      "sha256": "9f769228d3e4c1ee13e3ccc2b2ae82c8889df6111bb54d5f68afa6e445c9e4c6"
+    },
+    "refinement-input-render.jpg": {
+      "bytes": 7844,
+      "sha256": "f1c35986d456714b61248728e5a056a95dd09942829ed89fa9ffd5984a6d70d7"
+    },
+    "refinement-metrics.json": {
+      "bytes": 22028,
+      "sha256": "8950fbdc412e21df2d6979c2fd98ce323c402516edd0412a3ea646d9d548b4dd"
+    },
+    "refinement-receipt.json": {
+      "bytes": 5864,
+      "sha256": "4029ff683b58130e8413de876490ab60e1dfe666b7bb00248f57a9bb44be876c"
+    },
+    "refinement-render-checks.json": {
+      "bytes": 2532,
+      "sha256": "1f81466667a59aa8124a9ef81611903d31471a9293bd33d9c50e32fa30d645e0"
     },
     "result.json": {
       "bytes": 7324,

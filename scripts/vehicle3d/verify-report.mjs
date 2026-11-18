@@ -142,6 +142,28 @@ try {
   });
   assert.deepEqual(errors, []);
   assert.deepEqual(requests, []);
+  const refinement = JSON.parse(await readFile(resolve("docs/vehicle3d/refinement-metrics.json"), "utf8"));
+  assert.equal(refinement.target.ssim, 0.85);
+  assert.equal(refinement.target.psnr_db, 20);
+  assert.equal(refinement.input_is_training_supervision, true);
+  assert.equal(refinement.input_target_met, true);
+  assert.equal(refinement.blind_target_met, false);
+  assert.equal(refinement.accepted, false);
+  assert.deepEqual(refinement.blind_test_frames, Array.from({length:12}, (_,i)=>(i+1)*3));
+  await page.goto(pathToFileURL(resolve("docs/vehicle3d/photometric-refinement.html")).href);
+  await page.waitForFunction(() => [...document.images].every(i=>i.complete && i.naturalWidth>0));
+  const body = await page.locator("body").innerText();
+  for (const value of [refinement.input.psnr_db.toFixed(2), refinement.input.ssim.toFixed(3),
+    refinement.blind_test.reference_roi.pooled_psnr_db.toFixed(2), refinement.blind_test.reference_roi.mean_ssim.toFixed(3)]) {
+    assert.ok(body.includes(value), `Refinement report missing ${value}`);
+  }
+  for (const [label,width,height] of [["desktop",1280,900],["mobile",390,844]]) {
+    await page.setViewportSize({width,height});
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+    await page.screenshot({path:`${out}/refinement-${label}.jpg`,fullPage:true,type:"jpeg",quality:75});
+  }
+  assert.deepEqual(errors, []);
+  assert.deepEqual(requests, [], "Refinement must work offline");
   const receipt = JSON.parse(
     await readFile(resolve("docs/vehicle3d/receipt.json"), "utf8"),
   );
@@ -174,6 +196,7 @@ try {
         desktop: true,
         mobile: true,
         actualRenderImageMetrics: true,
+        photometricRefinement: true,
         errors,
       },
       null,

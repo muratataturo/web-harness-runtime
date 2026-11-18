@@ -74,3 +74,36 @@ blender --background --factory-startup --python-exit-code 1 --python scripts/veh
 旧モデル、提示済みモデル、照明なし診断を、最終テスト12方向と元画像用に各13枚レンダリングします。全画面・参照車体の固定ROI・参照前景・前景の和集合についてPSNR/SSIMを併記。主指標は固定ROIで、白背景や共通領域の切り詰めで良く見せません。元画像への枠合わせはターゲットフィットと明記し、独立テストに混ぜません。既存PNGを再集計する `--skip-render` は、元モデルとPNGのハッシュ照合を通った場合だけ使用できます。レンダー後の位置合わせ・色補正は行いません。
 
 アフィン行列は実メッシュ座標へ適用します。BlenderオブジェクトのLRS分解でshearが落ちることを避け、実際の頂点の投影で0.01px以内の一致を検査します。物理カメラの較正ではなく、既存の推定投影の再現です。参照写真の照明と異なることも誤差に残し、照明なし診断を別表示して原因を切り分けます。
+
+
+## 写真投影による改善runtime
+
+目標は固定車体ROIでSSIM≥0.85、PSNR≥20 dB。元画像の学習適合と未使用12方向を別ゲートで判定します。今回、元画像23.80 dB/0.909、未使用17.87 dB/0.714。総合採用は拒否し終了コード2です。
+
+既存の取得runtimeが保存したcache（reference.jpg・references/spin-01.jpg〜36.jpg）とローカルBlenderが必要です。追加依存は任意です。SfM・格子復元はCPUとメモリを使用し、機種により十数分以上かかります。M4 Pro/24 GBで実行しました。
+
+```sh
+python3 -m venv .venv-vehicle3d
+.venv-vehicle3d/bin/pip install -r scripts/vehicle3d/requirements-photometric.txt
+.venv-vehicle3d/bin/python scripts/vehicle3d/refine_photometric.py \
+  --cache-dir .runtime/vehicle3d/cache \
+  --output .runtime/vehicle3d/photometric-replay \
+  --blender /path/to/Blender
+# 既存レンダーの再計測のみ（未達なら終了コード2）
+.venv-vehicle3d/bin/python scripts/vehicle3d/refine_photometric.py \
+  --cache-dir .runtime/vehicle3d/cache \
+  --output .runtime/vehicle3d/photometric-replay \
+  --evaluate-only .runtime/vehicle3d/photometric-replay/render
+# 小さい資料だけを生成
+.venv-vehicle3d/bin/python scripts/vehicle3d/publish_refinement.py \
+  --cache-dir .runtime/vehicle3d/cache \
+  --render .runtime/vehicle3d/photometric-replay/render
+```
+
+実行段階は `events.jsonl`、ログ・モデル・RGBA写真は出力ディレクトリに残ります。キャッシュ済みSfMを再利用する場合は入力cacheを変更しないでください。変更した場合は新しい出力ディレクトリを使います。数値はライブラリ・OS・SfM解の違いで変わり得ます。
+
+`sfm_refine.py` は公式24枚の近隣フレームだけを特徴点対応付けし、`perspective_model.py` が透視投影の占有格子を作成。灰色のガラスを保持する学習用マスクを使用しますが、評価関数・ROIは変更していません。`localize_input.py` は元画像をSfM点群へ対応付け、`render_projective.py` は固定メッシュと学習写真だけで視線に応じた投影色を計算します。レンダーごとにカメラ投影の誤差が0.02 px未満か検査します。`refine_photometric.py` が元解像度PNGを再採点します。元画像も投影元に含めるため、その高得点は学習への適合です。元画像のコピーや2D変形を独立3D再現の証拠として扱いません。
+
+3,6,…,36の写真を表面・外観学習に混ぜず、学習姿勢からSLERP/並進補間で予測します。これは固定分割での反復評価であり、完全に新しいデータでの性能保証ではありません。写真投影の視線依存外観で、物理的材質・CAD寸法の精密復元は未達です。
+
+技術資料：[COLMAP](https://colmap.github.io/pycolmap/index.html)、[OpenCV姿勢推定](https://docs.opencv.org/doc/doxygen/html/d5/d1f/calib3d_solvePnP.html)、[scikit-image指標](https://scikit-image.org/docs/stable/api/skimage.metrics.html)。

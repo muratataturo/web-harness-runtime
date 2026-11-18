@@ -1,10 +1,10 @@
 # web-harness-runtime
 
-[実レンダリングのPSNR・SSIMと差分を見る](docs/vehicle3d/image-audit.html) — [処理・計測結果](docs/vehicle3d/README.md) / [実行方法](scripts/vehicle3d/README.md) / [輪郭・3Dの補助資料](docs/vehicle3d/index.html)。
+[写真との一致を比較する：改善版・実レンダー・差分](docs/vehicle3d/photometric-refinement.html) — [計測結果と制限](docs/vehicle3d/README.md) / [再実行方法](scripts/vehicle3d/README.md)。
 
-車の画像を `gpt-6.2-astra` でBlenderコードにした試作と、公式36方向で復元する自律runtimeです。**画像としては一致していません。** 実際のBlenderレンダーでは、元の指定画像に対して **PSNR 11.72 dB・SSIM 0.327**、未使用12視点の車体固定ROIでは **PSNR 12.02 dB・SSIM 0.452**。輪郭IoU 0.905を画像品質の根拠にはしません。白背景を含むSSIM約0.84と車体周辺の値を区別し、欠落部分も誤差に含めます。runtimeはPSNR・SSIMの基準未達で `image-match-failed`・終了コード2となり、モデルの最終採用を拒否します。
+車の画像からBlenderモデルを作る自律runtimeを改善しました。車体固定ROIで、元画像への適合は **SSIM 0.909・PSNR 23.80 dB**（目標0.85・20 dBを達成）、未使用12視点は **SSIM 0.714・PSNR 17.87 dB**（未達）です。元画像を含む25枚の写真を固定3D表面へ投影する外観再現であり、元画像の高得点だけで未知視点の精度や精密CADを保証しません。総合ゲートは `novel-view-target-unmet`・終了コード2。輪郭IoUや白背景全体のSSIMを合格根拠にしません。
 
-大きなモデル・原寸写真・格子・ZIPはGit対象外です。READMEと小さなHTML・JSON・縮小画像、図面・走行デモの再現コードを保存しています。実行は `VEHICLE3D_PYTHON=.venv/bin/python npm run vehicle3d -- --blender /path/to/blender`。Python環境とBlenderが必要です。既存の調査Chat/MCPへの接続は未実装です。
+大きなモデル・原寸写真・格子はGit対象外です。小さな比較画像・HTML・計測JSON、Blender再現コードを保存しています。元の `gpt-6.2-astra` による試作と [旧モデルの画像監査](docs/vehicle3d/image-audit.html) も残しています。今回の写真復元はCOLMAP/OpenCVとローカルBlenderを使用し、新たなMCP接続は追加していません。
 
 [背景地図の403画像対策](docs/map-background-fix.md) — ファイル直開き対応、HTTP状態検査、失敗時の概略表示を実装。
 
