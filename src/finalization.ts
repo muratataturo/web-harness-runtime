@@ -29,6 +29,7 @@ export function finalizationState(
   ];
   return {
     tripBrief: task.tripBrief,
+    reviewContext: task.reviewContext,
     journeyPolicy: task.journeyPolicy,
     journeyAssessment: plan ? assessJourneyState(task, plan) : undefined,
     stepVerification: plan ? verifyStepPlan(task, plan) : undefined,

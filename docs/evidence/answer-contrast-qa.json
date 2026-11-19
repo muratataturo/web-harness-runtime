@@ -448,6 +448,34 @@
       "width": 1280,
       "inspected": 1660,
       "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-rest-confirmed.html",
+      "scheme": "light",
+      "width": 390,
+      "inspected": 1485,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-rest-confirmed.html",
+      "scheme": "light",
+      "width": 1280,
+      "inspected": 1513,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-rest-confirmed.html",
+      "scheme": "dark",
+      "width": 390,
+      "inspected": 1485,
+      "failures": []
+    },
+    {
+      "file": "docs/hamamatsu-rest-confirmed.html",
+      "scheme": "dark",
+      "width": 1280,
+      "inspected": 1513,
+      "failures": []
     }
   ],
   "passed": true

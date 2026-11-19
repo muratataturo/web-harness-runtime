@@ -1,4 +1,5 @@
 import { JourneyMemoryStore } from "./journey-memory.js";
+import { ReviewPerspectiveStore } from "./review-perspectives.js";
 import {
   journeyPolicy,
   assessJourneyState,
@@ -214,8 +215,14 @@ export async function runTask(
   }
   if (task.journeyPolicy)
     task.journeyMemory = await new JourneyMemoryStore(store).read(task);
+  if (!options.benchmark)
+    task.reviewContext = await new ReviewPerspectiveStore(store).context(task);
   const instructions =
     SYSTEM_PROMPT +
+    (task.reviewContext?.perspectives.length
+      ? "\n過去の修正から保存したメタ認知の観点。生成前にquestionへ答えるための調査を計画し、最終化前に再確認する。これは手順の知識で、営業時間など今回の事実や証拠ではない。休憩場所の引用を別施設・駐車場・受付へ流用しない。公開された24時間開放はstepChecksのaccess:always-openで同一公園の引用を検査できる。" +
+        JSON.stringify(task.reviewContext)
+      : "") +
     (task.journeyPolicy
       ? "\n距離と滞在の状態契約: " +
         JSON.stringify(task.journeyPolicy) +
@@ -609,6 +616,16 @@ export async function runTask(
       journeyAssessment: task.journeyAssessment,
       contexts,
       additional,
+      replacementReview: gaps
+        .filter((c) =>
+          plan.steps.some((s) => s.id === c.stepId && s.kind === "rest"),
+        )
+        .map((c) => ({
+          stepId: c.stepId,
+          venueUrl: c.venueUrl,
+          nextAction:
+            "同一の休憩場所の公開利用時間と場所を調べ直す。資料が無ければ確認できる休憩場所へ差し替え、移動・時刻・予算を再計算する。駐車場や受付の時間を流用しない。24時間開放の公園は同一公園の引用でaccess:always-openを検査する。",
+        })),
       remainingRounds: task.research!.maxRounds - task.research!.rounds,
       instruction:
         "引用をrecord_evidenceで保存し、stepChecksとsteps.evidenceIdsを直してstage_planを再提出。営業時間の数値照合だけでは曜日・休業・商品提供の意味は保証できません。取得できないものはunknown。",
@@ -1547,6 +1564,18 @@ export async function runTask(
         await new JourneyMemoryStore(store).rememberPlan(task);
       } catch (error) {
         await store.event(task.id, "journey_memory_warning", {
+          error: redact(String(error)),
+        });
+      }
+    }
+    if (task.reviewContext) {
+      try {
+        const reflection = await new ReviewPerspectiveStore(store).reflect(
+          task,
+        );
+        await store.event(task.id, "review_reflection", reflection);
+      } catch (error) {
+        await store.event(task.id, "review_reflection_warning", {
           error: redact(String(error)),
         });
       }

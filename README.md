@@ -4,6 +4,8 @@
 
 [3案比較と10秒レビューの改善ループ](docs/proposal-comparison-runtime.md) — [旅行の実生成](docs/comparison-travel.html#proposal-comparison) / [人生計画の実生成](docs/comparison-life.html#proposal-comparison)。
 
+[休憩場所の確認を修正した実生成](docs/hamamatsu-rest-confirmed.html#review-perspectives) — [修正観点を次回へ引き継ぐ仕組み](docs/review-perspectives-runtime.md) — [検証結果](docs/rest-review-results.md)。
+
 [移動距離・滞在stateを反映した浜松の実生成](docs/hamamatsu-experience-state.html#journey-state) — [仕組みと履歴の扱い](docs/journey-state-runtime.md) — [実生成・自己改善の検証結果](docs/journey-state-results.md)。
 
 [朝から夜の一日／午後だけの実生成を比較する](docs/experience-cases.html) — [時間帯・手順検査・追加調査のruntime](docs/experience-depth-runtime.md) — [実生成と検証結果](docs/experience-depth-results.md)。

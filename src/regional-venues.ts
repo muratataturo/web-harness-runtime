@@ -5,13 +5,25 @@ export const regionalVisitHosts = [
   "www.gakkihaku.jp",
   "www.ncsm.city.nagoya.jp",
 ];
-export const regionalSpaceHosts = ["www.actcity.jp"];
+export const regionalSpaceHosts = [
+  "www.actcity.jp",
+  "mice-hamamatsu.jp",
+  "www.entetsuassist-dms.com",
+];
 export const regionalCafeHosts = [
   "www.act-okura.co.jp",
   "www.nomura-medias.co.jp",
 ];
 export function regionalVenue(value: string): string | undefined {
   const u = new URL(value);
+  if (
+    (u.hostname === "mice-hamamatsu.jp" && u.pathname === "/castlepark/") ||
+    (u.hostname === "www.entetsuassist-dms.com" &&
+      u.pathname === "/hamamatsu-jyo/news/detail/363") ||
+    (u.hostname === "www.city.hamamatsu.shizuoka.jp" &&
+      u.pathname === "/documents/118767/010.pdf")
+  )
+    return "official-public-space:hamamatsu-castle-park";
   if (
     (u.hostname === "www.city.hamamatsu.shizuoka.jp" &&
       ["/maps/c-castle.html", "/documents/172795/1003.pdf"].includes(

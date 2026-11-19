@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "perspectives": [
+    {
+      "id": "rest-opening-scope",
+      "domain": "trip",
+      "origin": "user-correction",
+      "concern": "休憩場所の営業時間が未確認のまま残った",
+      "question": "実際に休む場所と、その場所の利用可能時間を確認したか。城・公園・駐車場・受付を混同していないか。",
+      "action": "各休憩に具体的な場所のfact検査とopening検査を付ける。公園の24時間開放は同一公園の明示引用がある場合だけaccess:always-openを使い、座れることや建物の開館には流用しない。"
+    },
+    {
+      "id": "unknown-replace",
+      "domain": "trip",
+      "origin": "user-correction",
+      "concern": "追加調査後も未確認を繰り返すだけで行程を確定できなかった",
+      "question": "追加調査しても確認できない場所を、確認できる場所に差し替えられるか。",
+      "action": "verify_stepsで本文と同一対象リンクを調べ直す。公開情報がなければ同じ地域の確認できる場所へ変更し、時間・移動距離・価格・写真を再検査する。古い回答や学習観点を今回の根拠にしない。当日の空席や臨時規制の確約はしない。"
+    },
+    {
+      "id": "journey-pace",
+      "domain": "trip",
+      "origin": "user-correction",
+      "concern": "一日の行程が短く、移動と滞在の積み上げが不十分だった",
+      "question": "指定した朝から夜の枠を、距離・移動・正味滞在・休憩のstateで説明できるか。",
+      "action": "read_journey_stateで区間のつながり・ペース・疲労・休憩を確認し、時刻と予算を再配分する。過去の生成案と本人の実績は分ける。長い待機で一日を埋めない。"
+    },
+    {
+      "id": "visual-appeal",
+      "domain": "trip",
+      "origin": "user-correction",
+      "concern": "文章だけで、行きたくなる写真や地図と具体的な体験が不足していた",
+      "question": "10秒で行く場所と過ごし方が伝わり、写真・地図・時間帯から魅力が伝わるか。",
+      "action": "実際の施設写真と引用地点の地図、午前・午後・夜の具体的な楽しみ方を用意する。観点を参照しただけで人間の魅力度評価に合格したとは扱わない。"
+    },
+    {
+      "id": "adopted-candidate-scope",
+      "domain": "trip",
+      "origin": "host-verifier",
+      "sourceTaskId": "aaf14575-7e4d-49e4-b3c9-b9d6d8d63ee2",
+      "concern": "不採用の任意候補の未確認が主案の最終化を妨げた",
+      "question": "ユーザーの必須訪問先と、検討したが不採用にできる任意候補を分けたか",
+      "action": "必須の訪問先・比較先は保持する。任意候補を取得不能で不採用としたら理由をlimitationsに残し、主案や必須比較に使わない対象を最終candidatesや必須criteriaへ無条件で含めない。今回の根拠を得た採用先については住所・営業・価格・体験を必須検査し、未確認のものをsupportedへ変更しない。既存改善タスクのcriteriaは変更しない。"
+    },
+    {
+      "id": "published-currency-format",
+      "domain": "trip",
+      "origin": "host-verifier",
+      "sourceTaskId": "aaf14575-7e4d-49e4-b3c9-b9d6d8d63ee2",
+      "concern": "公式掲載の￥1,200という入館料を円表記の検出器が見逃した",
+      "question": "未確認は資料不足なのか、通貨記号や文字表記を検出器が読み取れない不具合なのか",
+      "action": "公式の料金ラベルと金額・対象者・通常料金と団体料金を読み分ける。引用があるのに検査で不足となる場合は検出器の原因を記録する。検査を迂回したり未取得の価格を作らない。"
+    }
+  ]
+}

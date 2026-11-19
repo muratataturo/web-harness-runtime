@@ -127,3 +127,27 @@ itineraryCases["hamamatsu-state-improved"] = {
   snapshot: "visual-hamamatsu-state-improved-answer",
   receipt: "hamamatsu-state-improved-e2e",
 };
+itineraryCases["hamamatsu-rest-confirmed"] = {
+  ...itineraryCases["hamamatsu-state-city"],
+  id: "hamamatsu-rest-confirmed",
+  output: "hamamatsu-rest-confirmed",
+  snapshot: "visual-hamamatsu-rest-confirmed-answer",
+  receipt: "hamamatsu-rest-confirmed-e2e",
+  query:
+    itineraryCases["hamamatsu-state-city"].query +
+    " 前の生成では城周辺の休憩所の営業時間が未確認でした。休憩は天守閣と公園を別の施設として扱い、浜松城公園の時計台広場等の具体的なベンチの場所と公園の公開利用条件を調査してください。浜松・浜名湖ツーリズムビューローのMICE公園案内は公園は24時間開放と記載し、駐車場の時間とは別です。今回取得した同一公園の引用で確認できた場合のみstepChecksのopeningにaccess:always-openを使えます。ベンチは公式設置記事の年月も明記し、空席・当日のイベント規制は当日判断とします。公園と天守閣の間もwalkで場所と移動を分けます。全てのrestには具体的な場所のfactとopeningの検査を付けてverify_stepsでunknown/failedを解消してから最終化してください。解消できなければ確認できる別の場所へ差し替えて時刻・距離を再計算してください。通常公開案内と対象日・席の当日判断を分離し、対象日の確約を作るために未知の情報を捏造しません。比較の個別候補は詳細検査を通る本文を持つURLを選び、同一施設の別ページを重複候補にしません。",
+  urls: [
+    ...itineraryCases["hamamatsu-state-city"].urls,
+    "https://mice-hamamatsu.jp/castlepark/",
+    "https://www.entetsuassist-dms.com/hamamatsu-jyo/news/detail/363",
+    "https://www.city.hamamatsu.shizuoka.jp/documents/118767/010.pdf",
+  ],
+};
+
+itineraryCases["hamamatsu-rest-final"] = {
+  ...itineraryCases["hamamatsu-rest-confirmed"],
+  id: "hamamatsu-rest-final",
+  query:
+    itineraryCases["hamamatsu-rest-confirmed"].query +
+    " 任意候補は調査して不採用にできます。不採用の公園・広場等はlimitationsに確認できない理由を残し、最終candidatesは主案に採用する場所と必須比較に必要な確認済み対象に絞ってください。新しい調査のcriteria.appliesToもそれらの対象に限定し、住所・営業・価格・体験の必須性は保持してください。明示的な必須訪問先を削除したり未確認をsupportedに変更してはいけません。展望回廊の一般料金は公式の￥記号による表記も引用で確認してください。",
+};

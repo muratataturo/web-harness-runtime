@@ -1,0 +1,118 @@
+{
+  "scope": "host next-context read after actual generation; no second inference or model weight update",
+  "taskId": "8e368af1-31fb-4f8b-a0be-6eea47091429",
+  "generationRevision": "ca5882b71b512ca06aedd43e481e0d1c8d68f55d21db3c1e1dd3bf9adddce4ce",
+  "answerSha256": "fedd36782738d0bd20554617b593acbee5440edd2db15169bb08941fbb36974b",
+  "before": [
+    {
+      "id": "rest-opening-scope",
+      "needsAttentionCount": 1,
+      "checkedCount": 1
+    },
+    {
+      "id": "unknown-replace",
+      "needsAttentionCount": 1,
+      "checkedCount": 1
+    },
+    {
+      "id": "journey-pace",
+      "needsAttentionCount": 0,
+      "checkedCount": 2
+    },
+    {
+      "id": "visual-appeal",
+      "needsAttentionCount": 0,
+      "checkedCount": 0
+    },
+    {
+      "id": "adopted-candidate-scope",
+      "needsAttentionCount": 0,
+      "checkedCount": 0
+    },
+    {
+      "id": "published-currency-format",
+      "needsAttentionCount": 0,
+      "checkedCount": 0
+    }
+  ],
+  "reflection": {
+    "version": 1,
+    "scope": "host-procedural-reflection",
+    "createdAt": "2026-11-19T04:33:52.930Z",
+    "taskId": "8e368af1-31fb-4f8b-a0be-6eea47091429",
+    "contextRevision": "4a5143a9955e64e36dca5202dffbdd191e7c6a78bcfb3907628453aa510d40d5",
+    "answerSha256": "fedd36782738d0bd20554617b593acbee5440edd2db15169bb08941fbb36974b",
+    "results": [
+      {
+        "id": "rest-opening-scope",
+        "status": "checked",
+        "issues": [],
+        "scope": "declared rest opening/source/fact checks; not proof of seats or all semantic claims"
+      },
+      {
+        "id": "unknown-replace",
+        "status": "checked",
+        "issues": [],
+        "scope": "host step checks; human appeal is not evaluated"
+      },
+      {
+        "id": "journey-pace",
+        "status": "checked",
+        "issues": [],
+        "scope": "host journey contract"
+      },
+      {
+        "id": "visual-appeal",
+        "status": "not-evaluated",
+        "issues": [],
+        "scope": "host step checks; human appeal is not evaluated"
+      },
+      {
+        "id": "adopted-candidate-scope",
+        "status": "not-evaluated",
+        "issues": [],
+        "scope": "host step checks; human appeal is not evaluated"
+      },
+      {
+        "id": "published-currency-format",
+        "status": "not-evaluated",
+        "issues": [],
+        "scope": "host step checks; human appeal is not evaluated"
+      }
+    ],
+    "autoPromoted": false,
+    "modelWeightsUpdated": false
+  },
+  "after": [
+    {
+      "id": "rest-opening-scope",
+      "needsAttentionCount": 1,
+      "checkedCount": 2
+    },
+    {
+      "id": "unknown-replace",
+      "needsAttentionCount": 1,
+      "checkedCount": 2
+    },
+    {
+      "id": "journey-pace",
+      "needsAttentionCount": 0,
+      "checkedCount": 3
+    },
+    {
+      "id": "visual-appeal",
+      "needsAttentionCount": 0,
+      "checkedCount": 0
+    },
+    {
+      "id": "adopted-candidate-scope",
+      "needsAttentionCount": 0,
+      "checkedCount": 0
+    },
+    {
+      "id": "published-currency-format",
+      "needsAttentionCount": 0,
+      "checkedCount": 0
+    }
+  ]
+}

@@ -94,6 +94,11 @@ export interface Task {
   uxLearningContext?: Awaited<
     ReturnType<import("./ux-feedback.js").UxFeedbackStore["learningContext"]>
   >;
+  reviewContext?: Awaited<
+    ReturnType<
+      import("./review-perspectives.js").ReviewPerspectiveStore["context"]
+    >
+  >;
   socialSignals?: import("./social.js").SocialSignal[];
   socialResearch?: import("./social.js").SocialAttempt[];
   photoInspections?: {

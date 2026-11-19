@@ -17,6 +17,7 @@ export const stepChecksSchema = Type.Array(
       }),
       opens: Type.Optional(time),
       closes: Type.Optional(time),
+      access: Type.Optional(Type.Literal("always-open")),
       lastEntry: Type.Optional(time),
       terms: Type.Optional(
         Type.Array(Type.String({ minLength: 2, maxLength: 100 }), {
@@ -209,6 +210,36 @@ export function verifyStepPlan(task: Task, plan: ActionPlan) {
             ? "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
             : "確認したいtermsが引用内に揃っていません",
           needsResearch: !supported,
+        });
+        continue;
+      }
+      if (c.access === "always-open") {
+        const supported =
+          !c.opens &&
+          !c.closes &&
+          !c.lastEntry &&
+          entityKey(c.venueUrl)?.startsWith("official-public-space:") &&
+          quotes.some((q) => {
+            const n = q.normalize("NFKC");
+            return n
+              .split(/[\n。]/)
+              .some(
+                (clause) =>
+                  /(?:公園|広場|園路)[^\n。]{0,30}(?:24時間(?:開放|開園|利用可能)|終日開放|常時開園)/.test(
+                    clause,
+                  ) &&
+                  !/していません|されていません|ではありません|ではない|していない/.test(
+                    clause,
+                  ),
+              );
+          });
+        push({
+          ...r,
+          status: supported ? "passed" : "unknown",
+          needsResearch: !supported,
+          detail: supported
+            ? "同一の屋外公共空間について24時間・常時開放の公開案内を確認。建物・駐車場・ベンチの空きや臨時規制には適用しません"
+            : "同一の屋外公共空間が24時間・常時開放される引用が必要です。駐車場や受付の時間は代用できません",
         });
         continue;
       }

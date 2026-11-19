@@ -1,0 +1,31 @@
+{
+  "scope": "live development iterations; second query clarifies optional candidate scope, not a controlled benchmark",
+  "runs": [
+    {
+      "caseId": "hamamatsu-rest-confirmed",
+      "taskId": "aaf14575-7e4d-49e4-b3c9-b9d6d8d63ee2",
+      "runtimeRevision": "de2850985c672a0e9532afa00c9f16436196604c1705e3ffe6e6220a74886fa3",
+      "inputSha256": "a98c7827b204a3c81603d6d8b44e4af0b7a89d5c82eb8d5d472900bbcd4aebed",
+      "status": "partial",
+      "strictLivePassed": false,
+      "answerEdited": false,
+      "stepReady": true,
+      "restCount": 6,
+      "restUnknown": 0,
+      "journey": "passed"
+    },
+    {
+      "caseId": "hamamatsu-rest-final",
+      "taskId": "8e368af1-31fb-4f8b-a0be-6eea47091429",
+      "runtimeRevision": "ca5882b71b512ca06aedd43e481e0d1c8d68f55d21db3c1e1dd3bf9adddce4ce",
+      "inputSha256": "312908f8b69f1310e610137aaa25932b1732af6b6d2b861850a67ceea83036d4",
+      "status": "partial",
+      "strictLivePassed": false,
+      "answerEdited": false,
+      "stepReady": true,
+      "restCount": 5,
+      "restUnknown": 0,
+      "journey": "passed"
+    }
+  ]
+}
