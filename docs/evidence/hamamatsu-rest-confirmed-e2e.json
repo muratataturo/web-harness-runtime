@@ -1,0 +1,6239 @@
+{
+  "runtimeRevision": "ca5882b71b512ca06aedd43e481e0d1c8d68f55d21db3c1e1dd3bf9adddce4ce",
+  "caseId": "hamamatsu-rest-final",
+  "label": "浜松・距離と滞在を考える一日",
+  "inputSha256": "312908f8b69f1310e610137aaa25932b1732af6b6d2b861850a67ceea83036d4",
+  "version": 1,
+  "mode": "live-unattended",
+  "startedAt": "2026-11-19T04:26:27.785Z",
+  "passed": false,
+  "answerEdited": false,
+  "humanResponses": 0,
+  "taskId": "8e368af1-31fb-4f8b-a0be-6eea47091429",
+  "status": "partial",
+  "model": "gpt-6.1-sol",
+  "tripBrief": {
+    "version": 1,
+    "mode": "custom",
+    "timeRange": [
+      "09:00",
+      "20:00"
+    ],
+    "timeBasis": "user-specified",
+    "pacing": "relaxed",
+    "requiredMeals": [],
+    "requiresStepResearch": true,
+    "assumptions": [],
+    "policy": "明示時刻を優先。一日は午前の体験・昼食・午後の体験やカフェ・休憩・夕食・夜の帰路をつなぐ。午後だけや寄り道を一日へ膨らませない。移動で埋めず、体力と気分に合わせて訪問数を絞り、雨・満席・疲労の切替を用意する。"
+  },
+  "stepVerification": {
+    "version": 1,
+    "planHash": "f5091f3c12ebcd921fc5df02afa5250b552f512656900ff27e93192ca2a9ecf7",
+    "required": true,
+    "ready": true,
+    "checks": [
+      {
+        "stepId": "s1",
+        "evidenceIds": [],
+        "id": "s1-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s2",
+        "evidenceIds": [],
+        "id": "s2-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s3",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "open-s3",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s3",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-1"
+        ],
+        "id": "s3-price-admission",
+        "kind": "price",
+        "status": "passed",
+        "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s4",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "open-s4",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s4",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2",
+          "ev-3",
+          "ev-28"
+        ],
+        "id": "fact-s4",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "s5",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [],
+        "id": "s5-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s6",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "open-s6",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s7",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [],
+        "id": "s7-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "open-s8",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s8",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2",
+          "ev-3",
+          "ev-28"
+        ],
+        "id": "fact-s8",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "s9",
+        "venueUrl": "https://www.gakkihaku.jp/guide/",
+        "evidenceIds": [
+          "ev-2"
+        ],
+        "id": "open-s9",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s10",
+        "evidenceIds": [],
+        "id": "s10-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s11",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-4"
+        ],
+        "id": "open-s11",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s11",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-12",
+          "ev-16"
+        ],
+        "id": "s11-price-lunch",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s11",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "s11-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s12",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-4"
+        ],
+        "id": "open-s12",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s12",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-4",
+          "ev-5",
+          "ev-6",
+          "ev-36"
+        ],
+        "id": "fact-s12",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "s12",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-12",
+          "ev-16"
+        ],
+        "id": "s12-price-lunch",
+        "kind": "price",
+        "status": "passed",
+        "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s13",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-4"
+        ],
+        "id": "open-s13",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s13",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-15",
+          "ev-16"
+        ],
+        "id": "s13-price-pudding",
+        "kind": "price",
+        "status": "passed",
+        "detail": "プリン：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s13",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [
+          "ev-14",
+          "ev-16"
+        ],
+        "id": "s13-price-coffee",
+        "kind": "price",
+        "status": "passed",
+        "detail": "午後の単品ブレンド：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s13",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+        "evidenceIds": [],
+        "id": "s13-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s14",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [],
+        "id": "s14-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s15",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [
+          "ev-7"
+        ],
+        "id": "open-s15",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s15",
+        "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+        "evidenceIds": [
+          "ev-8"
+        ],
+        "id": "s15-price-gallery",
+        "kind": "price",
+        "status": "passed",
+        "detail": "展望回廊 一般大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s16",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [],
+        "id": "s16-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s17",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-10"
+        ],
+        "id": "open-s17",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s17",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-10",
+          "ev-23",
+          "ev-24",
+          "ev-37",
+          "ev-6"
+        ],
+        "id": "fact-s17",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "s17",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-23",
+          "ev-24"
+        ],
+        "id": "s17-price-juice",
+        "kind": "price",
+        "status": "passed",
+        "detail": "アップルジュース：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s18",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-10"
+        ],
+        "id": "open-s18",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s18",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-22",
+          "ev-24"
+        ],
+        "id": "s18-price-dinner",
+        "kind": "price",
+        "status": "passed",
+        "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s18",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [],
+        "id": "s18-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s19",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-10"
+        ],
+        "id": "open-s19",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s19",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-38",
+          "ev-24"
+        ],
+        "id": "s19-price-evening",
+        "kind": "price",
+        "status": "passed",
+        "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s19",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [],
+        "id": "s19-seating",
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s20",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-10"
+        ],
+        "id": "open-s20",
+        "kind": "opening",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+      },
+      {
+        "stepId": "s20",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-10",
+          "ev-37",
+          "ev-6"
+        ],
+        "id": "fact-s20",
+        "kind": "fact",
+        "needsResearch": false,
+        "status": "passed",
+        "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+      },
+      {
+        "stepId": "s20",
+        "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+        "evidenceIds": [
+          "ev-38",
+          "ev-24"
+        ],
+        "id": "s20-price-evening",
+        "kind": "price",
+        "status": "passed",
+        "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+        "needsResearch": false
+      },
+      {
+        "stepId": "s21",
+        "evidenceIds": [],
+        "id": "s21-travel",
+        "kind": "access",
+        "status": "proposal",
+        "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+        "needsResearch": false
+      }
+    ],
+    "unknown": 0,
+    "failed": 0,
+    "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+  },
+  "journeyAssessment": {
+    "version": 1,
+    "required": true,
+    "planHash": "f5091f3c12ebcd921fc5df02afa5250b552f512656900ff27e93192ca2a9ecf7",
+    "status": "passed",
+    "issues": [],
+    "warnings": [
+      "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+    ],
+    "legs": [
+      {
+        "stepId": "s1",
+        "mode": "walk",
+        "from": "浜松駅",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 277,
+        "estimatedMeters": 360,
+        "recommendedMinutes": 8,
+        "allocatedMinutes": 15,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "s2",
+        "mode": "walk",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 143,
+        "estimatedMeters": 187,
+        "recommendedMinutes": 4,
+        "allocatedMinutes": 15,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "s5",
+        "mode": "indoor",
+        "from": "浜松市楽器博物館",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 10,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "s7",
+        "mode": "indoor",
+        "from": "浜松市楽器博物館",
+        "to": "浜松市楽器博物館",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 5,
+        "allocatedMinutes": 10,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "s10",
+        "mode": "walk",
+        "from": "浜松市楽器博物館",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 143,
+        "estimatedMeters": 187,
+        "recommendedMinutes": 4,
+        "allocatedMinutes": 15,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      },
+      {
+        "stepId": "s14",
+        "mode": "indoor",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 10,
+        "allocatedMinutes": 20,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "s16",
+        "mode": "indoor",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "オークラアクトシティホテル浜松",
+        "straightLineMeters": 0,
+        "recommendedMinutes": 10,
+        "allocatedMinutes": 20,
+        "historySamples": 0,
+        "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+      },
+      {
+        "stepId": "s21",
+        "mode": "walk",
+        "from": "オークラアクトシティホテル浜松",
+        "to": "浜松駅",
+        "straightLineMeters": 277,
+        "estimatedMeters": 360,
+        "recommendedMinutes": 8,
+        "allocatedMinutes": 20,
+        "historySamples": 0,
+        "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+      }
+    ],
+    "stays": [
+      {
+        "place": "浜松市楽器博物館",
+        "category": "museum",
+        "minutes": 150,
+        "minimumMinutes": 60,
+        "suggestedRange": [
+          90,
+          150
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松市楽器博物館",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "浜松市楽器博物館",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "meal",
+        "minutes": 65,
+        "minimumMinutes": 40,
+        "suggestedRange": [
+          60,
+          90
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "cafe",
+        "minutes": 45,
+        "minimumMinutes": 30,
+        "suggestedRange": [
+          45,
+          75
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "viewpoint",
+        "minutes": 80,
+        "minimumMinutes": 25,
+        "suggestedRange": [
+          35,
+          60
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "rest",
+        "minutes": 20,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "meal",
+        "minutes": 85,
+        "minimumMinutes": 40,
+        "suggestedRange": [
+          60,
+          90
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "cafe",
+        "minutes": 30,
+        "minimumMinutes": 30,
+        "suggestedRange": [
+          45,
+          75
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      },
+      {
+        "place": "オークラアクトシティホテル浜松",
+        "category": "rest",
+        "minutes": 15,
+        "minimumMinutes": 10,
+        "suggestedRange": [
+          15,
+          30
+        ],
+        "historySamples": 0,
+        "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+      }
+    ],
+    "walkingMetersEstimate": 1094,
+    "walkingMinutes": 32,
+    "historySamples": 0
+  },
+  "steps": 114,
+  "elapsedMs": 445121,
+  "failure": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'partial'\n- 'succeeded'\n",
+  "finishedAt": "2026-11-19T04:33:52.993Z",
+  "events": [
+    {
+      "at": "2026-11-19T04:26:29.331Z",
+      "type": "codex_auth"
+    },
+    {
+      "at": "2026-11-19T04:26:32.891Z",
+      "type": "codex_thread"
+    },
+    {
+      "at": "2026-11-19T04:26:32.893Z",
+      "type": "model_turn"
+    },
+    {
+      "at": "2026-11-19T04:26:46.407Z",
+      "type": "plan_task"
+    },
+    {
+      "at": "2026-11-19T04:26:46.427Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:26:51.441Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:51.462Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:51.479Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:51.495Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:26:52.008Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:26:59.442Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:59.463Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:59.485Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:59.503Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:59.520Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:59.540Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:26:59.561Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:00.907Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:12.288Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:12.309Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:12.328Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:12.344Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:12.360Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:12.375Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:12.390Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:12.405Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:13.502Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:20.250Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:20.272Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:20.291Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-19T04:27:20.301Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:20.317Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:20.950Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "公開 HTTPS URL のみ利用できます"
+      }
+    },
+    {
+      "at": "2026-11-19T04:27:20.961Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:21.150Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "公開 HTTPS URL のみ利用できます"
+      }
+    },
+    {
+      "at": "2026-11-19T04:27:21.163Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:28.172Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:28.195Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-19T04:27:28.215Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-19T04:27:28.232Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-19T04:27:28.234Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-19T04:27:29.748Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:37.054Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:37.077Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:37.096Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:37.113Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:37.129Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:38.691Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:39.086Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:51.273Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:51.294Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:51.312Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:27:51.329Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:51.773Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "open_page",
+        "error": "公開 HTTPS URL のみ利用できます"
+      }
+    },
+    {
+      "at": "2026-11-19T04:27:51.793Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:52.854Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:27:54.539Z",
+      "type": "read_task_state"
+    },
+    {
+      "at": "2026-11-19T04:28:10.064Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:10.087Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:10.107Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:28:11.083Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:11.751Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:11.774Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:12.873Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:12.896Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:14.058Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:14.083Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:15.538Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:21.240Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:21.378Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:21.400Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:22.702Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:22.722Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:24.578Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:24.608Z",
+      "type": "locate_place"
+    },
+    {
+      "at": "2026-11-19T04:28:25.686Z",
+      "type": "geographic_capture"
+    },
+    {
+      "at": "2026-11-19T04:28:25.716Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:25.739Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.851Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.872Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.890Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.906Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.922Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.939Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.955Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:28:45.972Z",
+      "type": "deepen_details"
+    },
+    {
+      "at": "2026-11-19T04:28:45.988Z",
+      "type": "open_page"
+    },
+    {
+      "at": "2026-11-19T04:28:53.240Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:28:53.848Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:28:55.210Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:28:55.928Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:29:02.270Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:29:05.872Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:29:05.898Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:29:05.924Z",
+      "type": "inspect_photo"
+    },
+    {
+      "at": "2026-11-19T04:30:43.145Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-19T04:30:43.160Z",
+      "type": "read_journey_state"
+    },
+    {
+      "at": "2026-11-19T04:30:43.180Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-19T04:30:43.181Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "verify_steps",
+        "error": "先にstage_planで行程を保存してください"
+      }
+    },
+    {
+      "at": "2026-11-19T04:30:49.209Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-19T04:30:49.223Z",
+      "type": "read_journey_state"
+    },
+    {
+      "at": "2026-11-19T04:30:49.244Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-19T04:30:49.245Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "verify_steps",
+        "error": "先にstage_planで行程を保存してください"
+      }
+    },
+    {
+      "at": "2026-11-19T04:30:53.864Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-19T04:30:53.870Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "stage_plan",
+        "error": "cafe: 掲載単価1450円が根拠引用で確認できません。単価の引用を追加するか未確認の見積と区別してください"
+      }
+    },
+    {
+      "at": "2026-11-19T04:30:53.881Z",
+      "type": "read_journey_state"
+    },
+    {
+      "at": "2026-11-19T04:30:53.899Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-19T04:30:53.901Z",
+      "type": "tool_error",
+      "data": {
+        "tool": "verify_steps",
+        "error": "先にstage_planで行程を保存してください"
+      }
+    },
+    {
+      "at": "2026-11-19T04:31:00.031Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-19T04:31:00.041Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "38a50de68667455a3f2e24953b389b3c813da70517c25bf8bfa90fc5a55358b9",
+        "status": "needs_detail",
+        "issues": [
+          "s14: オークラアクトシティホテル浜松→オークラアクトシティホテル浜松は移動本体を10分以上見積もる基準です（現在5分）。行程を再配分してください",
+          "s16: オークラアクトシティホテル浜松→オークラアクトシティホテル浜松は移動本体を10分以上見積もる基準です（現在5分）。行程を再配分してください",
+          "s19: 待ちや移動をcafeの滞在時間へ混ぜられません",
+          "オークラアクトシティホテル浜松の正味滞在25分は基準30分未満です。入場・待ち・移動を除いて体験時間を確保してください"
+        ],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 393,
+            "estimatedMeters": 512,
+            "recommendedMinutes": 11,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 90,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 90,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 25,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1059,
+        "walkingMinutes": 28,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:31:00.073Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-19T04:31:00.076Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "38a50de68667455a3f2e24953b389b3c813da70517c25bf8bfa90fc5a55358b9",
+        "status": "needs_detail",
+        "issues": [
+          "s14: オークラアクトシティホテル浜松→オークラアクトシティホテル浜松は移動本体を10分以上見積もる基準です（現在5分）。行程を再配分してください",
+          "s16: オークラアクトシティホテル浜松→オークラアクトシティホテル浜松は移動本体を10分以上見積もる基準です（現在5分）。行程を再配分してください",
+          "s19: 待ちや移動をcafeの滞在時間へ混ぜられません",
+          "オークラアクトシティホテル浜松の正味滞在25分は基準30分未満です。入場・待ち・移動を除いて体験時間を確保してください"
+        ],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 393,
+            "estimatedMeters": 512,
+            "recommendedMinutes": 11,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 90,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 90,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 25,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1059,
+        "walkingMinutes": 28,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:31:00.076Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "38a50de68667455a3f2e24953b389b3c813da70517c25bf8bfa90fc5a55358b9",
+        "required": true,
+        "ready": false,
+        "checks": [
+          {
+            "stepId": "s1",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "evidenceIds": [],
+            "id": "s2-venue",
+            "kind": "source",
+            "status": "unknown",
+            "detail": "実施設のvenueUrlが必要です。場所・営業時間を照合する対象を指定してください",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "s3-price-admission",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s4",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s5-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s6",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s8",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s8",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s9",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s10",
+            "evidenceIds": [],
+            "id": "s10-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s11",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s11-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s12",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4",
+              "ev-5",
+              "ev-6",
+              "ev-36"
+            ],
+            "id": "fact-s12",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s13",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-16"
+            ],
+            "id": "s13-price-pudding",
+            "kind": "price",
+            "status": "passed",
+            "detail": "プリン：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-14",
+              "ev-16"
+            ],
+            "id": "s13-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "午後の単品ブレンド：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s13-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-7"
+            ],
+            "id": "open-s15",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-8"
+            ],
+            "id": "s15-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 一般大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s16-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s17",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-23",
+              "ev-24",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s17",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-23",
+              "ev-24"
+            ],
+            "id": "s17-price-juice",
+            "kind": "price",
+            "status": "passed",
+            "detail": "アップルジュース：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s18",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-22",
+              "ev-24"
+            ],
+            "id": "s18-price-dinner",
+            "kind": "price",
+            "status": "passed",
+            "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s18-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s19",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s19-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s20",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s20",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s21",
+            "evidenceIds": [],
+            "id": "s21-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 1,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-19T04:31:00.095Z",
+      "type": "read_journey_state"
+    },
+    {
+      "at": "2026-11-19T04:31:22.650Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:31:22.671Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:31:22.689Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:31:22.709Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-19T04:31:22.717Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "ddab94b2aad1788900a1f0a4c7f623498075d33e83f91d5065c59276510cf5e1",
+        "status": "passed",
+        "issues": [],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 393,
+            "estimatedMeters": 512,
+            "recommendedMinutes": 11,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 80,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 85,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 30,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1059,
+        "walkingMinutes": 28,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:31:57.767Z",
+      "type": "read_journey_state"
+    },
+    {
+      "at": "2026-11-19T04:31:57.794Z",
+      "type": "invalid_tool_call"
+    },
+    {
+      "at": "2026-11-19T04:31:57.805Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-19T04:31:57.809Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "ddab94b2aad1788900a1f0a4c7f623498075d33e83f91d5065c59276510cf5e1",
+        "status": "passed",
+        "issues": [],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 393,
+            "estimatedMeters": 512,
+            "recommendedMinutes": 11,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 80,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 85,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 30,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1059,
+        "walkingMinutes": 28,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:31:57.809Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "ddab94b2aad1788900a1f0a4c7f623498075d33e83f91d5065c59276510cf5e1",
+        "required": true,
+        "ready": false,
+        "checks": [
+          {
+            "stepId": "s1",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s2-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "waitfact",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "s3-price-admission",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s4",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s5-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s6",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s8",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s8",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s9",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s10",
+            "evidenceIds": [],
+            "id": "s10-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s11",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s11-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s12",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4",
+              "ev-5",
+              "ev-6",
+              "ev-36"
+            ],
+            "id": "fact-s12",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s12-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s13",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-16"
+            ],
+            "id": "s13-price-pudding",
+            "kind": "price",
+            "status": "passed",
+            "detail": "プリン：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-14",
+              "ev-16"
+            ],
+            "id": "s13-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "午後の単品ブレンド：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s13-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-7"
+            ],
+            "id": "open-s15",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-8"
+            ],
+            "id": "s15-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 一般大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s16-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s17",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-23",
+              "ev-24",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s17",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-23",
+              "ev-24"
+            ],
+            "id": "s17-price-juice",
+            "kind": "price",
+            "status": "passed",
+            "detail": "アップルジュース：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s18",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-22",
+              "ev-24"
+            ],
+            "id": "s18-price-dinner",
+            "kind": "price",
+            "status": "passed",
+            "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s18-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s19",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s19-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s19-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s20",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s20",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s20-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s21",
+            "evidenceIds": [],
+            "id": "s21-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 1,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-19T04:31:57.810Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-19T04:31:58.877Z",
+      "type": "step_deepresearch",
+      "data": {
+        "stepIds": [
+          "s2"
+        ],
+        "pagesOpened": 2,
+        "rounds": 1,
+        "additionalCount": 1
+      }
+    },
+    {
+      "at": "2026-11-19T04:32:44.891Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-19T04:32:44.923Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-19T04:32:44.944Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "ddab94b2aad1788900a1f0a4c7f623498075d33e83f91d5065c59276510cf5e1",
+        "status": "passed",
+        "issues": [],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 393,
+            "estimatedMeters": 512,
+            "recommendedMinutes": 11,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 80,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 85,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 30,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1059,
+        "walkingMinutes": 28,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:32:44.944Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "ddab94b2aad1788900a1f0a4c7f623498075d33e83f91d5065c59276510cf5e1",
+        "required": true,
+        "ready": false,
+        "checks": [
+          {
+            "stepId": "s1",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s2-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "waitfact",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "s3-price-admission",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s4",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s5-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s6",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s8",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s8",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s9",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s10",
+            "evidenceIds": [],
+            "id": "s10-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s11",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s11-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s12",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4",
+              "ev-5",
+              "ev-6",
+              "ev-36"
+            ],
+            "id": "fact-s12",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s12-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s13",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-16"
+            ],
+            "id": "s13-price-pudding",
+            "kind": "price",
+            "status": "passed",
+            "detail": "プリン：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-14",
+              "ev-16"
+            ],
+            "id": "s13-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "午後の単品ブレンド：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s13-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-7"
+            ],
+            "id": "open-s15",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-8"
+            ],
+            "id": "s15-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 一般大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s16-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s17",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-23",
+              "ev-24",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s17",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-23",
+              "ev-24"
+            ],
+            "id": "s17-price-juice",
+            "kind": "price",
+            "status": "passed",
+            "detail": "アップルジュース：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s18",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-22",
+              "ev-24"
+            ],
+            "id": "s18-price-dinner",
+            "kind": "price",
+            "status": "passed",
+            "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s18-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s19",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s19-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s19-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s20",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s20",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s20-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s21",
+            "evidenceIds": [],
+            "id": "s21-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 1,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-19T04:32:44.945Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-19T04:32:45.776Z",
+      "type": "step_deepresearch",
+      "data": {
+        "stepIds": [
+          "s2"
+        ],
+        "pagesOpened": 3,
+        "rounds": 2,
+        "additionalCount": 1
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:00.999Z",
+      "type": "record_evidence"
+    },
+    {
+      "at": "2026-11-19T04:33:01.024Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-19T04:33:01.043Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "ddab94b2aad1788900a1f0a4c7f623498075d33e83f91d5065c59276510cf5e1",
+        "status": "passed",
+        "issues": [],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 393,
+            "estimatedMeters": 512,
+            "recommendedMinutes": 11,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 80,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 85,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 30,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1059,
+        "walkingMinutes": 28,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:01.043Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "ddab94b2aad1788900a1f0a4c7f623498075d33e83f91d5065c59276510cf5e1",
+        "required": true,
+        "ready": false,
+        "checks": [
+          {
+            "stepId": "s1",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s2-opening",
+            "kind": "opening",
+            "status": "unknown",
+            "detail": "訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください",
+            "needsResearch": true
+          },
+          {
+            "stepId": "s2",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "waitfact",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "s3-price-admission",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s4",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s5-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s6",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s8",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s8",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s9",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s10",
+            "evidenceIds": [],
+            "id": "s10-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s11",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s11-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s12",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4",
+              "ev-5",
+              "ev-6",
+              "ev-36"
+            ],
+            "id": "fact-s12",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s12-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s13",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-16"
+            ],
+            "id": "s13-price-pudding",
+            "kind": "price",
+            "status": "passed",
+            "detail": "プリン：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-14",
+              "ev-16"
+            ],
+            "id": "s13-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "午後の単品ブレンド：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s13-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-7"
+            ],
+            "id": "open-s15",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-8"
+            ],
+            "id": "s15-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 一般大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s16-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s17",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-23",
+              "ev-24",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s17",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-23",
+              "ev-24"
+            ],
+            "id": "s17-price-juice",
+            "kind": "price",
+            "status": "passed",
+            "detail": "アップルジュース：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s18",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-22",
+              "ev-24"
+            ],
+            "id": "s18-price-dinner",
+            "kind": "price",
+            "status": "passed",
+            "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s18-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s19",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s19-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s19-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s20",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s20",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s20-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s21",
+            "evidenceIds": [],
+            "id": "s21-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 1,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:01.044Z",
+      "type": "deepen_page"
+    },
+    {
+      "at": "2026-11-19T04:33:02.768Z",
+      "type": "step_deepresearch",
+      "data": {
+        "stepIds": [
+          "s2"
+        ],
+        "pagesOpened": 4,
+        "rounds": 3,
+        "additionalCount": 1
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:09.946Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-19T04:33:09.965Z",
+      "type": "specificity_revision",
+      "data": {
+        "issues": [
+          "s2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ],
+        "repair": 1
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:47.428Z",
+      "type": "stage_plan"
+    },
+    {
+      "at": "2026-11-19T04:33:47.438Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "f5091f3c12ebcd921fc5df02afa5250b552f512656900ff27e93192ca2a9ecf7",
+        "status": "passed",
+        "issues": [],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s2",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 80,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 85,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 30,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1094,
+        "walkingMinutes": 32,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:47.466Z",
+      "type": "read_journey_state"
+    },
+    {
+      "at": "2026-11-19T04:33:47.485Z",
+      "type": "verify_steps"
+    },
+    {
+      "at": "2026-11-19T04:33:47.488Z",
+      "type": "journey_verification",
+      "data": {
+        "version": 1,
+        "required": true,
+        "planHash": "f5091f3c12ebcd921fc5df02afa5250b552f512656900ff27e93192ca2a9ecf7",
+        "status": "passed",
+        "issues": [],
+        "warnings": [
+          "参照できる同条件・期限内の実績はありません。過去に生成した計画を実績として学習していません"
+        ],
+        "legs": [
+          {
+            "stepId": "s1",
+            "mode": "walk",
+            "from": "浜松駅",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s2",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s5",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s7",
+            "mode": "indoor",
+            "from": "浜松市楽器博物館",
+            "to": "浜松市楽器博物館",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 5,
+            "allocatedMinutes": 10,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s10",
+            "mode": "walk",
+            "from": "浜松市楽器博物館",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 143,
+            "estimatedMeters": 187,
+            "recommendedMinutes": 4,
+            "allocatedMinutes": 15,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          },
+          {
+            "stepId": "s14",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s16",
+            "mode": "indoor",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "オークラアクトシティホテル浜松",
+            "straightLineMeters": 0,
+            "recommendedMinutes": 10,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "館内・上下移動の初期見積。エレベーター待ち等は別内訳"
+          },
+          {
+            "stepId": "s21",
+            "mode": "walk",
+            "from": "オークラアクトシティホテル浜松",
+            "to": "浜松駅",
+            "straightLineMeters": 277,
+            "estimatedMeters": 360,
+            "recommendedMinutes": 8,
+            "allocatedMinutes": 20,
+            "historySamples": 0,
+            "basis": "引用座標の直線距離×仮の迂回係数と歩速。道路距離は未確認"
+          }
+        ],
+        "stays": [
+          {
+            "place": "浜松市楽器博物館",
+            "category": "museum",
+            "minutes": 150,
+            "minimumMinutes": 60,
+            "suggestedRange": [
+              90,
+              150
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "浜松市楽器博物館",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 65,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 45,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "viewpoint",
+            "minutes": 80,
+            "minimumMinutes": 25,
+            "suggestedRange": [
+              35,
+              60
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 20,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "meal",
+            "minutes": 85,
+            "minimumMinutes": 40,
+            "suggestedRange": [
+              60,
+              90
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "cafe",
+            "minutes": 30,
+            "minimumMinutes": 30,
+            "suggestedRange": [
+              45,
+              75
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          },
+          {
+            "place": "オークラアクトシティホテル浜松",
+            "category": "rest",
+            "minutes": 15,
+            "minimumMinutes": 10,
+            "suggestedRange": [
+              15,
+              30
+            ],
+            "historySamples": 0,
+            "basis": "カテゴリ別の初期計画仮定。過去の実測ではない"
+          }
+        ],
+        "walkingMetersEstimate": 1094,
+        "walkingMinutes": 32,
+        "historySamples": 0
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:47.488Z",
+      "type": "step_verification",
+      "data": {
+        "version": 1,
+        "planHash": "f5091f3c12ebcd921fc5df02afa5250b552f512656900ff27e93192ca2a9ecf7",
+        "required": true,
+        "ready": true,
+        "checks": [
+          {
+            "stepId": "s1",
+            "evidenceIds": [],
+            "id": "s1-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s2",
+            "evidenceIds": [],
+            "id": "s2-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s3",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s3",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-1"
+            ],
+            "id": "s3-price-admission",
+            "kind": "price",
+            "status": "passed",
+            "detail": "楽器博物館 大人：2×掲載単価800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s4",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s4",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s4",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s5",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s5-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s6",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s6",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s7",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [],
+            "id": "s7-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s8",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s8",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2",
+              "ev-3",
+              "ev-28"
+            ],
+            "id": "fact-s8",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s9",
+            "venueUrl": "https://www.gakkihaku.jp/guide/",
+            "evidenceIds": [
+              "ev-2"
+            ],
+            "id": "open-s9",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある09:30〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s10",
+            "evidenceIds": [],
+            "id": "s10-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s11",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s11-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s11",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s11-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s12",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4",
+              "ev-5",
+              "ev-6",
+              "ev-36"
+            ],
+            "id": "fact-s12",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s12",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-12",
+              "ev-16"
+            ],
+            "id": "s12-price-lunch",
+            "kind": "price",
+            "status": "passed",
+            "detail": "ドリア（付属品込み）：2×掲載単価1800円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-4"
+            ],
+            "id": "open-s13",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜17:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-15",
+              "ev-16"
+            ],
+            "id": "s13-price-pudding",
+            "kind": "price",
+            "status": "passed",
+            "detail": "プリン：2×掲載単価600円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [
+              "ev-14",
+              "ev-16"
+            ],
+            "id": "s13-price-coffee",
+            "kind": "price",
+            "status": "passed",
+            "detail": "午後の単品ブレンド：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s13",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/cafe/",
+            "evidenceIds": [],
+            "id": "s13-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s14",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [],
+            "id": "s14-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-7"
+            ],
+            "id": "open-s15",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある11:00〜18:00の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s15",
+            "venueUrl": "https://www.act-okura.co.jp/facilities/gallery/",
+            "evidenceIds": [
+              "ev-8"
+            ],
+            "id": "s15-price-gallery",
+            "kind": "price",
+            "status": "passed",
+            "detail": "展望回廊 一般大人：2×掲載単価1200円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s16",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s16-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s17",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-23",
+              "ev-24",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s17",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s17",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-23",
+              "ev-24"
+            ],
+            "id": "s17-price-juice",
+            "kind": "price",
+            "status": "passed",
+            "detail": "アップルジュース：2×掲載単価700円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s18",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-22",
+              "ev-24"
+            ],
+            "id": "s18-price-dinner",
+            "kind": "price",
+            "status": "passed",
+            "detail": "五目あんかけ焼きそば：2×掲載単価2000円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s18",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s18-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s19",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s19-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s19",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [],
+            "id": "s19-seating",
+            "kind": "seating",
+            "status": "arrival-check",
+            "detail": "席・提供・当日の受付は現地判断。予約完了や空席確約として扱いません",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10"
+            ],
+            "id": "open-s20",
+            "kind": "opening",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "予定が引用にある17:00〜22:30の数値枠に収まります。曜日・提供枠・臨時変更の意味解釈は別途必要です"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-10",
+              "ev-37",
+              "ev-6"
+            ],
+            "id": "fact-s20",
+            "kind": "fact",
+            "needsResearch": false,
+            "status": "passed",
+            "detail": "指定した語句が同施設の引用内にあります。意味全体の含意を証明する判定ではありません"
+          },
+          {
+            "stepId": "s20",
+            "venueUrl": "https://www.act-okura.co.jp/restaurant/lounge/",
+            "evidenceIds": [
+              "ev-38",
+              "ev-24"
+            ],
+            "id": "s20-price-evening",
+            "kind": "price",
+            "status": "passed",
+            "detail": "夜のブレンドコーヒー：2×掲載単価850円。合算と引用内数値は共通の予算検査で照合します",
+            "needsResearch": false
+          },
+          {
+            "stepId": "s21",
+            "evidenceIds": [],
+            "id": "s21-travel",
+            "kind": "access",
+            "status": "proposal",
+            "detail": "移動時間は提案の見積。道路経路・当日の交通状況を確認済みにはしません",
+            "needsResearch": false
+          }
+        ],
+        "unknown": 0,
+        "failed": 0,
+        "scope": "引用・対象・数値・時間枠の契約検査。自然言語の意味全体、当日の営業・席・道路経路を証明するものではない"
+      }
+    },
+    {
+      "at": "2026-11-19T04:33:47.509Z",
+      "type": "stage_visual"
+    },
+    {
+      "at": "2026-11-19T04:33:47.531Z",
+      "type": "finish_task"
+    },
+    {
+      "at": "2026-11-19T04:33:52.891Z",
+      "type": "codex_agent_message"
+    },
+    {
+      "at": "2026-11-19T04:33:52.930Z",
+      "type": "review_reflection"
+    },
+    {
+      "at": "2026-11-19T04:33:52.931Z",
+      "type": "task_end"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "address",
+      "description": "所在地・アクセスを公式本文で確認",
+      "required": true,
+      "weight": 1,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/",
+        "https://www.act-okura.co.jp/facilities/gallery/",
+        "https://www.act-okura.co.jp/restaurant/cafe/",
+        "https://www.act-okura.co.jp/restaurant/lounge/",
+        "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "https://mice-hamamatsu.jp/castlepark/"
+      ]
+    },
+    {
+      "id": "opening",
+      "description": "通常公開時間と対象日告知を区別し行程に適合",
+      "required": true,
+      "weight": 3,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/",
+        "https://www.act-okura.co.jp/facilities/gallery/",
+        "https://www.act-okura.co.jp/restaurant/cafe/",
+        "https://www.act-okura.co.jp/restaurant/lounge/",
+        "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "https://mice-hamamatsu.jp/castlepark/"
+      ]
+    },
+    {
+      "id": "price",
+      "description": "入館料または具体的定番商品単価・無料条件",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/",
+        "https://www.act-okura.co.jp/facilities/gallery/",
+        "https://www.act-okura.co.jp/restaurant/cafe/",
+        "https://www.act-okura.co.jp/restaurant/lounge/",
+        "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "https://mice-hamamatsu.jp/castlepark/"
+      ]
+    },
+    {
+      "id": "experience",
+      "description": "展示・景色・食事・具体的休憩場所の内容",
+      "required": true,
+      "weight": 2,
+      "appliesTo": [
+        "https://www.gakkihaku.jp/guide/",
+        "https://www.act-okura.co.jp/facilities/gallery/",
+        "https://www.act-okura.co.jp/restaurant/cafe/",
+        "https://www.act-okura.co.jp/restaurant/lounge/",
+        "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+        "https://mice-hamamatsu.jp/castlepark/"
+      ]
+    }
+  ],
+  "evidenceCount": 42,
+  "pages": [
+    {
+      "url": "https://www.gakkihaku.jp/guide/",
+      "capturedAt": "2026-11-19T04:26:47.137Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/cafe/",
+      "capturedAt": "2026-11-19T04:26:51.984Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/facilities/gallery/",
+      "capturedAt": "2026-11-19T04:26:53.395Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant/lounge/",
+      "capturedAt": "2026-11-19T04:27:00.886Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafemenu202303/",
+      "capturedAt": "2026-11-19T04:27:02.230Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.city.hamamatsu.shizuoka.jp/maps/c-castle.html",
+      "capturedAt": "2026-11-19T04:27:13.478Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://mice-hamamatsu.jp/castlepark/",
+      "capturedAt": "2026-11-19T04:27:14.838Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/visitor/act/",
+      "capturedAt": "2026-11-19T04:27:22.770Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.actcity.jp/faq/",
+      "capturedAt": "2026-11-19T04:27:29.720Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.act-okura.co.jp/restaurant-plan/cafe_cocktailtime/",
+      "capturedAt": "2026-11-19T04:27:31.498Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.city.hamamatsu.shizuoka.jp/documents/172795/1003.pdf",
+      "capturedAt": "2026-11-19T04:27:38.673Z",
+      "kind": "public-pdf"
+    },
+    {
+      "url": "https://hamamatsu-daisuki.net/pickup/7915/",
+      "capturedAt": "2026-11-19T04:27:39.061Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.city.hamamatsu.shizuoka.jp/documents/118767/010.pdf",
+      "capturedAt": "2026-11-19T04:27:39.462Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/about/equipment/",
+      "capturedAt": "2026-11-19T04:27:52.832Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/calendar/",
+      "capturedAt": "2026-11-19T04:27:54.512Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/collection/",
+      "capturedAt": "2026-11-19T04:28:11.058Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E9%A7%85+%E6%B5%9C%E6%9D%BE%E5%B8%82&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:11.750Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8+%E6%B5%9C%E6%9D%BE%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E4%B8%AD%E5%A4%AE3-9-1&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:12.873Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE+%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%9D%BF%E5%B1%8B%E7%94%BA111-2&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:14.057Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E6%B5%9C%E6%9D%BE+%E9%9F%B3%E6%A5%BD%E5%BA%83%E5%A0%B4+%E6%B5%9C%E6%9D%BE%E5%B8%82&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:15.536Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%A5%BD%E5%99%A8%E5%8D%9A%E7%89%A9%E9%A4%A8&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:21.377Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A2%E3%82%AF%E3%83%88%E3%82%B7%E3%83%86%E3%82%A3%E3%83%9B%E3%83%86%E3%83%AB%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:22.701Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E9%9F%B3%E6%A5%BD%E5%BA%83%E5%A0%B4+%E6%B5%9C%E6%9D%BE&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:24.577Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://nominatim.openstreetmap.org/search?q=%E6%B5%9C%E6%9D%BE%E5%9F%8E&format=jsonv2&limit=3",
+      "capturedAt": "2026-11-19T04:28:25.684Z",
+      "kind": "public-json"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/news/",
+      "capturedAt": "2026-11-19T04:28:46.905Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/en/",
+      "capturedAt": "2026-11-19T04:31:58.876Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/pt/",
+      "capturedAt": "2026-11-19T04:32:45.774Z",
+      "kind": "public-html"
+    },
+    {
+      "url": "https://www.gakkihaku.jp/zh/",
+      "capturedAt": "2026-11-19T04:33:02.767Z",
+      "kind": "public-html"
+    }
+  ],
+  "specificity": {
+    "version": 1,
+    "mode": "itinerary",
+    "status": "passed",
+    "issues": [],
+    "attempts": [
+      {
+        "number": 1,
+        "issues": [
+          "s2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ]
+      },
+      {
+        "number": 2,
+        "issues": [
+          "s2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ]
+      },
+      {
+        "number": 3,
+        "issues": [
+          "s2: 訪問時間に対応する営業時間の引用とopens/closesが必要です。休憩所も施設全体と区別して確認してください"
+        ]
+      },
+      {
+        "number": 4,
+        "issues": []
+      }
+    ]
+  },
+  "visualReview": {
+    "version": 1,
+    "status": "passed",
+    "issues": []
+  },
+  "budget": {
+    "scenario": "主案：大人2人、入館2施設・昼食・午後カフェ・夕食と夜の飲物。交通費別、割引・土産なし",
+    "totalYen": 17600,
+    "items": [
+      {
+        "id": "admission",
+        "label": "楽器博物館 大人",
+        "unitYen": 800,
+        "quantity": 2,
+        "subtotalYen": 1600,
+        "basis": "published",
+        "stepIds": [
+          "s3"
+        ],
+        "evidenceIds": [
+          "ev-1"
+        ]
+      },
+      {
+        "id": "gallery",
+        "label": "展望回廊 一般大人",
+        "unitYen": 1200,
+        "quantity": 2,
+        "subtotalYen": 2400,
+        "basis": "published",
+        "stepIds": [
+          "s15"
+        ],
+        "evidenceIds": [
+          "ev-8"
+        ]
+      },
+      {
+        "id": "lunch",
+        "label": "ドリア（付属品込み）",
+        "unitYen": 1800,
+        "quantity": 2,
+        "subtotalYen": 3600,
+        "basis": "published",
+        "stepIds": [
+          "s11"
+        ],
+        "evidenceIds": [
+          "ev-12",
+          "ev-16"
+        ]
+      },
+      {
+        "id": "juice",
+        "label": "アップルジュース",
+        "unitYen": 700,
+        "quantity": 2,
+        "subtotalYen": 1400,
+        "basis": "published",
+        "stepIds": [
+          "s17"
+        ],
+        "evidenceIds": [
+          "ev-23",
+          "ev-24"
+        ]
+      },
+      {
+        "id": "dinner",
+        "label": "五目あんかけ焼きそば",
+        "unitYen": 2000,
+        "quantity": 2,
+        "subtotalYen": 4000,
+        "basis": "published",
+        "stepIds": [
+          "s18"
+        ],
+        "evidenceIds": [
+          "ev-22",
+          "ev-24"
+        ]
+      },
+      {
+        "id": "evening",
+        "label": "夜のブレンドコーヒー",
+        "unitYen": 850,
+        "quantity": 2,
+        "subtotalYen": 1700,
+        "basis": "published",
+        "stepIds": [
+          "s19"
+        ],
+        "evidenceIds": [
+          "ev-38",
+          "ev-24"
+        ]
+      },
+      {
+        "id": "pudding",
+        "label": "プリン",
+        "unitYen": 600,
+        "quantity": 2,
+        "subtotalYen": 1200,
+        "basis": "published",
+        "stepIds": [
+          "s13"
+        ],
+        "evidenceIds": [
+          "ev-15",
+          "ev-16"
+        ]
+      },
+      {
+        "id": "coffee",
+        "label": "午後の単品ブレンド",
+        "unitYen": 850,
+        "quantity": 2,
+        "subtotalYen": 1700,
+        "basis": "published",
+        "stepIds": [
+          "s13"
+        ],
+        "evidenceIds": [
+          "ev-14",
+          "ev-16"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "date": "2026-11-19",
+    "checks": [
+      {
+        "kind": "opening",
+        "status": "published",
+        "detail": "通常営業枠を全採用施設へ適用、対象日の未来営業保証ではない",
+        "evidenceIds": [
+          "ev-2",
+          "ev-4",
+          "ev-7",
+          "ev-10"
+        ],
+        "stepIds": [
+          "s3",
+          "s4",
+          "s5",
+          "s6",
+          "s7",
+          "s8",
+          "s9",
+          "s11",
+          "s12",
+          "s13",
+          "s14",
+          "s15",
+          "s16",
+          "s17",
+          "s18",
+          "s19",
+          "s20"
+        ]
+      },
+      {
+        "kind": "prices",
+        "status": "published",
+        "detail": "2人17600円。ドリア付属コーヒーを重複計上せず、午後と夜の飲物だけ別注文。",
+        "evidenceIds": [
+          "ev-1",
+          "ev-8",
+          "ev-12",
+          "ev-14",
+          "ev-15",
+          "ev-22",
+          "ev-23",
+          "ev-38"
+        ],
+        "stepIds": [
+          "s3",
+          "s11",
+          "s13",
+          "s15",
+          "s17",
+          "s18",
+          "s19"
+        ]
+      },
+      {
+        "kind": "seating",
+        "status": "arrival-check",
+        "detail": "カフェ28席・ラウンジ48席。予約実行なし。入店時に継続着席・席利用を確認、満席なら観光を減らし帰路へ。入館は券売機、未来空席は未確認。",
+        "evidenceIds": [
+          "ev-36",
+          "ev-37"
+        ],
+        "stepIds": [
+          "s11",
+          "s12",
+          "s13",
+          "s17",
+          "s18",
+          "s19",
+          "s20"
+        ]
+      },
+      {
+        "kind": "comparison",
+        "status": "published",
+        "detail": "浜松城は観光協会通常8:30〜16:30・大人200円。公園は24時間開放だが時計台広場ベンチ公式設置記事取得不能で未採用。アクトの森は無料6〜19時だが座標未取得のため不採用。",
+        "evidenceIds": [
+          "ev-25",
+          "ev-26",
+          "ev-18",
+          "ev-21"
+        ],
+        "stepIds": [
+          "s3",
+          "s15"
+        ]
+      },
+      {
+        "kind": "rest",
+        "status": "published",
+        "detail": "小型椅子とカフェ・ラウンジ客席で各15〜20分。観察・待機・飲食時間とは別計上。",
+        "evidenceIds": [
+          "ev-28",
+          "ev-2",
+          "ev-36",
+          "ev-4",
+          "ev-37",
+          "ev-10"
+        ],
+        "stepIds": [
+          "s4",
+          "s8",
+          "s12",
+          "s17",
+          "s20"
+        ]
+      }
+    ]
+  },
+  "improvementDiagnosis": {
+    "complete": false,
+    "verifiedDetails": 5,
+    "supportedRequired": 18,
+    "supportedOptional": 0,
+    "gaps": [
+      {
+        "url": "https://mice-hamamatsu.jp/castlepark/",
+        "fields": [
+          "入館料または具体的定番商品単価・無料条件",
+          "展示・景色・食事・具体的休憩場所の内容"
+        ]
+      }
+    ],
+    "causes": [
+      "required_unknown"
+    ],
+    "achievements": [
+      "detail:official-visit:hamamatsu-gakkihaku",
+      "official-visit:hamamatsu-gakkihaku:address",
+      "official-visit:hamamatsu-gakkihaku:opening",
+      "official-visit:hamamatsu-gakkihaku:price",
+      "official-visit:hamamatsu-gakkihaku:experience",
+      "detail:official-visit:okura-hamamatsu-observatory",
+      "official-visit:okura-hamamatsu-observatory:address",
+      "official-visit:okura-hamamatsu-observatory:opening",
+      "official-visit:okura-hamamatsu-observatory:price",
+      "official-visit:okura-hamamatsu-observatory:experience",
+      "detail:official-cafe:okura-hamamatsu-season",
+      "official-cafe:okura-hamamatsu-season:address",
+      "official-cafe:okura-hamamatsu-season:opening",
+      "official-cafe:okura-hamamatsu-season:price",
+      "official-cafe:okura-hamamatsu-season:experience",
+      "detail:official-visit:hamamatsu-castle",
+      "official-visit:hamamatsu-castle:address",
+      "official-visit:hamamatsu-castle:opening",
+      "official-visit:hamamatsu-castle:price",
+      "official-visit:hamamatsu-castle:experience",
+      "detail:official-public-space:hamamatsu-castle-park",
+      "official-public-space:hamamatsu-castle-park:address",
+      "official-public-space:hamamatsu-castle-park:opening",
+      "answer:interactive-visual-artifact",
+      "journey:consistent-plan-state",
+      "journey:covered-day-window",
+      "answer:concrete-action-plan"
+    ]
+  },
+  "publication": {
+    "source": "saved-live-run",
+    "displayOnly": true,
+    "renderRevision": "96902474f7623158bc5c3f9b183770201d49817c07aed1abda59e01ea9cdf371",
+    "answerEdited": false,
+    "answerSha256": "fedd36782738d0bd20554617b593acbee5440edd2db15169bb08941fbb36974b",
+    "taskStatusPreserved": true,
+    "originalStrictVerdictPreserved": true
+  }
+}

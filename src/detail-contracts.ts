@@ -37,11 +37,11 @@ const hotel = [
 ];
 export const detailContracts: Record<string, DetailField[]> = {
   "official-public-space": [
-    { id: "public-use", pattern: /屋外広場[\s\S]{0,40}無料/ },
+    { id: "public-use", pattern: /屋外広場[\s\S]{0,40}無料|公園は24時間開放/ },
     {
       id: "hours",
       pattern:
-        /(?:利用時間|開園時間|屋外広場)[\s\S]{0,100}\d{1,2}[:：]\d{2}[\s\S]{0,10}\d{1,2}[:：]\d{2}/,
+        /(?:利用時間|開園時間|屋外広場)[\s\S]{0,100}\d{1,2}[:：]\d{2}[\s\S]{0,10}\d{1,2}[:：]\d{2}|公園は24時間開放/,
     },
   ],
   "official-coffee": [
@@ -65,7 +65,7 @@ export const detailContracts: Record<string, DetailField[]> = {
     {
       id: "admission",
       pattern:
-        /(?:入園料|入館料|一般料金|大人|一般)[\s\S]{0,45}[0-9,]+\s*円|観覧料[\s\S]{0,180}[0-9,]+\s*円/,
+        /(?:入園料|入館料|一般料金|大人|一般)[\s\S]{0,45}(?:[0-9,]+\s*円|[¥￥]\s*[0-9,]+)|観覧料[\s\S]{0,180}(?:[0-9,]+\s*円|[¥￥]\s*[0-9,]+)/,
     },
   ],
   "official-dining": [

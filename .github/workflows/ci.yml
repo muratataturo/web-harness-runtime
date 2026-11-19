@@ -44,6 +44,7 @@ jobs:
       - run: node scripts/eval-autonomous-itinerary.mjs --case nagoya
       - run: node scripts/eval-experience-cases.mjs
       - run: node scripts/eval-journey-state.mjs
+      - run: node scripts/eval-rest-review.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -62,3 +63,4 @@ jobs:
             .runtime/regional-itinerary/gallery-qa
             .runtime/experience-cases/qa
             .runtime/journey-state/qa
+            .runtime/rest-review/qa

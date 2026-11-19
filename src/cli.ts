@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { placeKey, endpointKey } from "./journey-state.js";
 import { JourneyMemoryStore } from "./journey-memory.js";
+import { ReviewPerspectiveStore } from "./review-perspectives.js";
 import { copyAnswerMedia } from "./answer-media.js";
 import { visualRefinementRunner } from "./visual-refinement.js";
 import { config } from "dotenv";
@@ -729,6 +730,24 @@ improvements
       opts.json ? JSON.stringify(loop, null, 2) : renderImprovement(loop),
     );
   });
+program
+  .command("review-perspectives")
+  .description("修正観点の記録")
+  .command("import <file>")
+  .description(
+    "本人が指定した再利用可能な修正観点を保存する。モデルは観点を承認・登録しない",
+  )
+  .action(async (file) =>
+    console.log(
+      JSON.stringify(
+        await new ReviewPerspectiveStore(new Store()).add(
+          JSON.parse(await readFile(file, "utf8")),
+        ),
+        null,
+        2,
+      ),
+    ),
+  );
 const journeyHistory = program
   .command("journey-history")
   .description(

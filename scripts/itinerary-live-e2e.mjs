@@ -1,4 +1,5 @@
 import { JourneyMemoryStore } from "../dist/journey-memory.js";
+import { ReviewPerspectiveStore } from "../dist/review-perspectives.js";
 // Account-bound, actual inference + public sources. No final-answer fixture is supplied to the model.
 import { config } from "dotenv";
 config({ quiet: true });
@@ -59,6 +60,37 @@ await writeFile(
   JSON.stringify({ attempt, ...receipt }, null, 2),
 );
 const store = new Store(join(attempt, "store"));
+if (selected.id.startsWith("hamamatsu-rest-")) {
+  const previous = JSON.parse(
+    await readFile(
+      "examples/visual-hamamatsu-state-improved-answer.json",
+      "utf8",
+    ),
+  );
+  const original = JSON.parse(
+    await readFile("docs/evidence/hamamatsu-state-improved-e2e.json", "utf8"),
+  );
+  assert.equal(
+    createHash("sha256").update(JSON.stringify(previous.answer)).digest("hex"),
+    original.publication.answerSha256,
+  );
+  delete previous.evaluation;
+  const perspectives = new ReviewPerspectiveStore(store);
+  previous.reviewContext = await perspectives.context(previous);
+  await perspectives.reflect(previous);
+  await new JourneyMemoryStore(store).rememberPlan(previous);
+  if (selected.id === "hamamatsu-rest-final") {
+    const recent = JSON.parse(
+      await readFile(
+        ".runtime/regional-itinerary/hamamatsu-rest-confirmed/latest.json",
+        "utf8",
+      ),
+    );
+    const recentTask = await new Store(recent.store).get(recent.taskId);
+    await perspectives.reflect(recentTask);
+    await new JourneyMemoryStore(store).rememberPlan(recentTask);
+  }
+}
 if (selected.id.startsWith("hamamatsu-state")) {
   const previous = JSON.parse(
     await readFile("examples/visual-hamamatsu-full-answer.json", "utf8"),
